@@ -16,7 +16,6 @@
 
 import {describe, it, afterEach} from 'mocha';
 import * as path from 'path';
-import * as is from 'is';
 import * as sinon from 'sinon';
 import * as prototypes from '../protos/protos';
 import * as assert from 'assert';
@@ -236,7 +235,7 @@ describe('Vision helper methods', () => {
       };
       client.annotateImage(request, (err: {}, response: {}) => {
         // Establish that we got the expected response.
-        assert(is.undefined(err));
+        assert(!err);
         assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });

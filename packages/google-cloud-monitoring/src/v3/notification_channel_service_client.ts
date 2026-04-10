@@ -17,27 +17,19 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
-import * as path from 'path';
-
+import type * as gax from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/notification_channel_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './notification_channel_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
@@ -49,10 +41,15 @@ const version = require('../../../package.json').version;
 export class NotificationChannelServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('monitoring');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -60,6 +57,7 @@ export class NotificationChannelServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   notificationChannelServiceStub?: Promise<{[name: string]: Function}>;
@@ -69,7 +67,7 @@ export class NotificationChannelServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -86,38 +84,54 @@ export class NotificationChannelServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new NotificationChannelServiceClient({fallback: true}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof NotificationChannelServiceClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const staticMembers = this.constructor as typeof NotificationChannelServiceClient;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    }
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    this._servicePath = 'monitoring.' + this._universeDomain;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -126,43 +140,39 @@ export class NotificationChannelServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -186,42 +196,36 @@ export class NotificationChannelServiceClient {
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
+      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-        ),
-      organizationChannelDescriptorPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-        ),
+      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
+      ),
+      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
+      ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/notificationChannels/{notification_channel}'
-        ),
+      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/notificationChannels/{notification_channel}'
+      ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
-      organizationUptimeCheckConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-        ),
+      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
+      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -243,12 +247,14 @@ export class NotificationChannelServiceClient {
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
+      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
+      ),
+      snoozePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/snoozes/{snooze}'
       ),
     };
 
@@ -256,30 +262,24 @@ export class NotificationChannelServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listNotificationChannelDescriptors: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'channelDescriptors'
-      ),
-      listNotificationChannels: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'notificationChannels'
-      ),
+      listNotificationChannelDescriptors:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'channelDescriptors'),
+      listNotificationChannels:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'notificationChannels')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.monitoring.v3.NotificationChannelService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.monitoring.v3.NotificationChannelService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -302,49 +302,37 @@ export class NotificationChannelServiceClient {
     // Put together the "service stub" for
     // google.monitoring.v3.NotificationChannelService.
     this.notificationChannelServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.monitoring.v3.NotificationChannelService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.monitoring.v3.NotificationChannelService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.NotificationChannelService,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const notificationChannelServiceStubMethods = [
-      'listNotificationChannelDescriptors',
-      'getNotificationChannelDescriptor',
-      'listNotificationChannels',
-      'getNotificationChannel',
-      'createNotificationChannel',
-      'updateNotificationChannel',
-      'deleteNotificationChannel',
-      'sendNotificationChannelVerificationCode',
-      'getNotificationChannelVerificationCode',
-      'verifyNotificationChannel',
-    ];
+    const notificationChannelServiceStubMethods =
+        ['listNotificationChannelDescriptors', 'getNotificationChannelDescriptor', 'listNotificationChannels', 'getNotificationChannel', 'createNotificationChannel', 'updateNotificationChannel', 'deleteNotificationChannel', 'sendNotificationChannelVerificationCode', 'getNotificationChannelVerificationCode', 'verifyNotificationChannel'];
     for (const methodName of notificationChannelServiceStubMethods) {
       const callPromise = this.notificationChannelServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -355,19 +343,38 @@ export class NotificationChannelServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
     return 'monitoring.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
     return 'monitoring.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -387,7 +394,7 @@ export class NotificationChannelServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/monitoring',
-      'https://www.googleapis.com/auth/monitoring.read',
+      'https://www.googleapis.com/auth/monitoring.read'
     ];
   }
 
@@ -397,9 +404,8 @@ export class NotificationChannelServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -410,1362 +416,1359 @@ export class NotificationChannelServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+/**
+ * Gets a single channel descriptor. The descriptor indicates which fields
+ * are expected / permitted for a notification channel of the given type.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The channel type for which to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[CHANNEL_TYPE]
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.NotificationChannelDescriptor|NotificationChannelDescriptor}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.get_notification_channel_descriptor.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_GetNotificationChannelDescriptor_async
+ */
   getNotificationChannelDescriptor(
-    request: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannelDescriptor,
-      (
-        | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannelDescriptor,
+        protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|undefined, {}|undefined
+      ]>;
   getNotificationChannelDescriptor(
-    request: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannelDescriptor,
-      | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNotificationChannelDescriptor(
-    request: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannelDescriptor,
-      | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets a single channel descriptor. The descriptor indicates which fields
-   * are expected / permitted for a notification channel of the given type.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The channel type for which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[CHANNEL_TYPE]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationChannelDescriptor]{@link google.monitoring.v3.NotificationChannelDescriptor}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getNotificationChannelDescriptor(request);
-   */
-  getNotificationChannelDescriptor(
-    request: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.monitoring.v3.INotificationChannelDescriptor,
-          | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.INotificationChannelDescriptor,
-      | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannelDescriptor,
-      (
-        | protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationChannelDescriptor(
+      request: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.INotificationChannelDescriptor,
+          protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationChannelDescriptor(
+      request?: protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.INotificationChannelDescriptor,
+          protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.INotificationChannelDescriptor,
+          protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannelDescriptor,
+        protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getNotificationChannelDescriptor request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.INotificationChannelDescriptor,
+        protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotificationChannelDescriptor response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getNotificationChannelDescriptor(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.INotificationChannelDescriptor,
+        protos.google.monitoring.v3.IGetNotificationChannelDescriptorRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNotificationChannelDescriptor response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.getNotificationChannelDescriptor(
-      request,
-      options,
-      callback
-    );
   }
+/**
+ * Gets a single notification channel. The channel includes the relevant
+ * configuration details with which the channel was created. However, the
+ * response may truncate or omit passwords, API keys, or other private key
+ * matter and thus the response may not be 100% identical to the information
+ * that was supplied in the call to the create method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The channel for which to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.NotificationChannel|NotificationChannel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.get_notification_channel.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_GetNotificationChannel_async
+ */
   getNotificationChannel(
-    request: protos.google.monitoring.v3.IGetNotificationChannelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.IGetNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IGetNotificationChannelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IGetNotificationChannelRequest|undefined, {}|undefined
+      ]>;
   getNotificationChannel(
-    request: protos.google.monitoring.v3.IGetNotificationChannelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IGetNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNotificationChannel(
-    request: protos.google.monitoring.v3.IGetNotificationChannelRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IGetNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets a single notification channel. The channel includes the relevant
-   * configuration details with which the channel was created. However, the
-   * response may truncate or omit passwords, API keys, or other private key
-   * matter and thus the response may not be 100% identical to the information
-   * that was supplied in the call to the create method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The channel for which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getNotificationChannel(request);
-   */
-  getNotificationChannel(
-    request: protos.google.monitoring.v3.IGetNotificationChannelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IGetNotificationChannelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.monitoring.v3.INotificationChannel,
-          | protos.google.monitoring.v3.IGetNotificationChannelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IGetNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.IGetNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getNotificationChannel(
-      request,
-      options,
-      callback
-    );
-  }
-  createNotificationChannel(
-    request: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.ICreateNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  createNotificationChannel(
-    request: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.ICreateNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createNotificationChannel(
-    request: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.ICreateNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates a new notification channel, representing a single notification
-   * endpoint such as an email address, SMS number, or PagerDuty service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   This names the container into which the channel will be
-   *   written, this does not name the newly created channel. The resulting
-   *   channel's name will have a normalized version of this field as a prefix,
-   *   but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
-   * @param {google.monitoring.v3.NotificationChannel} request.notificationChannel
-   *   Required. The definition of the `NotificationChannel` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createNotificationChannel(request);
-   */
-  createNotificationChannel(
-    request: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.monitoring.v3.IGetNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationChannel(
+      request: protos.google.monitoring.v3.IGetNotificationChannelRequest,
+      callback: Callback<
           protos.google.monitoring.v3.INotificationChannel,
-          | protos.google.monitoring.v3.ICreateNotificationChannelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.ICreateNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.ICreateNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createNotificationChannel(
-      request,
-      options,
-      callback
-    );
-  }
-  updateNotificationChannel(
-    request: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.IUpdateNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateNotificationChannel(
-    request: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IUpdateNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateNotificationChannel(
-    request: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IUpdateNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates a notification channel. Fields not specified in the field mask
-   * remain unchanged.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   The fields to update.
-   * @param {google.monitoring.v3.NotificationChannel} request.notificationChannel
-   *   Required. A description of the changes to be applied to the specified
-   *   notification channel. The description must provide a definition for
-   *   fields to be updated; the names of these fields should also be
-   *   included in the `update_mask`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateNotificationChannel(request);
-   */
-  updateNotificationChannel(
-    request: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.monitoring.v3.IGetNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationChannel(
+      request?: protos.google.monitoring.v3.IGetNotificationChannelRequest,
+      optionsOrCallback?: CallOptions|Callback<
           protos.google.monitoring.v3.INotificationChannel,
-          | protos.google.monitoring.v3.IUpdateNotificationChannelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IUpdateNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.IUpdateNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IGetNotificationChannelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IGetNotificationChannelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IGetNotificationChannelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'notification_channel.name': request.notificationChannel!.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getNotificationChannel request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IGetNotificationChannelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotificationChannel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getNotificationChannel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IGetNotificationChannelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNotificationChannel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.updateNotificationChannel(
-      request,
-      options,
-      callback
-    );
   }
+/**
+ * Creates a new notification channel, representing a single notification
+ * endpoint such as an email address, SMS number, or PagerDuty service.
+ *
+ * Design your application to single-thread API calls that modify the state of
+ * notification channels in a single project. This includes calls to
+ * CreateNotificationChannel, DeleteNotificationChannel and
+ * UpdateNotificationChannel.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+ *   to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ *
+ *   This names the container into which the channel will be
+ *   written, this does not name the newly created channel. The resulting
+ *   channel's name will have a normalized version of this field as a prefix,
+ *   but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
+ * @param {google.monitoring.v3.NotificationChannel} request.notificationChannel
+ *   Required. The definition of the `NotificationChannel` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.NotificationChannel|NotificationChannel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.create_notification_channel.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_CreateNotificationChannel_async
+ */
+  createNotificationChannel(
+      request?: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.ICreateNotificationChannelRequest|undefined, {}|undefined
+      ]>;
+  createNotificationChannel(
+      request: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.ICreateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNotificationChannel(
+      request: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.ICreateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  createNotificationChannel(
+      request?: protos.google.monitoring.v3.ICreateNotificationChannelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.ICreateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.ICreateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.ICreateNotificationChannelRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createNotificationChannel request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.ICreateNotificationChannelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createNotificationChannel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createNotificationChannel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.ICreateNotificationChannelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createNotificationChannel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates a notification channel. Fields not specified in the field mask
+ * remain unchanged.
+ *
+ * Design your application to single-thread API calls that modify the state of
+ * notification channels in a single project. This includes calls to
+ * CreateNotificationChannel, DeleteNotificationChannel and
+ * UpdateNotificationChannel.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The fields to update.
+ * @param {google.monitoring.v3.NotificationChannel} request.notificationChannel
+ *   Required. A description of the changes to be applied to the specified
+ *   notification channel. The description must provide a definition for
+ *   fields to be updated; the names of these fields should also be
+ *   included in the `update_mask`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.NotificationChannel|NotificationChannel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.update_notification_channel.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_UpdateNotificationChannel_async
+ */
+  updateNotificationChannel(
+      request?: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IUpdateNotificationChannelRequest|undefined, {}|undefined
+      ]>;
+  updateNotificationChannel(
+      request: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IUpdateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNotificationChannel(
+      request: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IUpdateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateNotificationChannel(
+      request?: protos.google.monitoring.v3.IUpdateNotificationChannelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IUpdateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IUpdateNotificationChannelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IUpdateNotificationChannelRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'notification_channel.name': request.notificationChannel!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateNotificationChannel request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IUpdateNotificationChannelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateNotificationChannel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateNotificationChannel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IUpdateNotificationChannelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateNotificationChannel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a notification channel.
+ *
+ * Design your application to single-thread API calls that modify the state of
+ * notification channels in a single project. This includes calls to
+ * CreateNotificationChannel, DeleteNotificationChannel and
+ * UpdateNotificationChannel.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The channel for which to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
+ * @param {boolean} request.force
+ *   If true, the notification channel will be deleted regardless of its
+ *   use in alert policies (the policies will be updated to remove the
+ *   channel). If false, this operation will fail if the notification channel
+ *   is referenced by existing alerting policies.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.delete_notification_channel.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_DeleteNotificationChannel_async
+ */
   deleteNotificationChannel(
-    request: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.monitoring.v3.IDeleteNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteNotificationChannelRequest|undefined, {}|undefined
+      ]>;
   deleteNotificationChannel(
-    request: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.monitoring.v3.IDeleteNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteNotificationChannel(
-    request: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.monitoring.v3.IDeleteNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes a notification channel.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The channel for which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
-   * @param {boolean} request.force
-   *   If true, the notification channel will be deleted regardless of its
-   *   use in alert policies (the policies will be updated to remove the
-   *   channel). If false, channels that are still referenced by an existing
-   *   alerting policy will fail to be deleted in a delete operation.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteNotificationChannel(request);
-   */
-  deleteNotificationChannel(
-    request: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.monitoring.v3.IDeleteNotificationChannelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.monitoring.v3.IDeleteNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.monitoring.v3.IDeleteNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteNotificationChannel(
-      request,
-      options,
-      callback
-    );
-  }
-  sendNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  sendNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  sendNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Causes a verification code to be delivered to the channel. The code
-   * can then be supplied in `VerifyNotificationChannel` to verify the channel.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The notification channel to which to send a verification code.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.sendNotificationChannelVerificationCode(request);
-   */
-  sendNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+          protos.google.monitoring.v3.IDeleteNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNotificationChannel(
+      request: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IDeleteNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteNotificationChannel(
+      request?: protos.google.monitoring.v3.IDeleteNotificationChannelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteNotificationChannelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteNotificationChannelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteNotificationChannelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteNotificationChannel request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteNotificationChannelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteNotificationChannel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteNotificationChannel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteNotificationChannelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteNotificationChannel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.sendNotificationChannelVerificationCode(
-      request,
-      options,
-      callback
-    );
   }
+/**
+ * Causes a verification code to be delivered to the channel. The code
+ * can then be supplied in `VerifyNotificationChannel` to verify the channel.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The notification channel to which to send a verification code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.send_notification_channel_verification_code.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_SendNotificationChannelVerificationCode_async
+ */
+  sendNotificationChannelVerificationCode(
+      request?: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|undefined, {}|undefined
+      ]>;
+  sendNotificationChannelVerificationCode(
+      request: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendNotificationChannelVerificationCode(
+      request: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  sendNotificationChannelVerificationCode(
+      request?: protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('sendNotificationChannelVerificationCode request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('sendNotificationChannelVerificationCode response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.sendNotificationChannelVerificationCode(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.ISendNotificationChannelVerificationCodeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('sendNotificationChannelVerificationCode response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Requests a verification code for an already verified channel that can then
+ * be used in a call to VerifyNotificationChannel() on a different channel
+ * with an equivalent identity in the same or in a different project. This
+ * makes it possible to copy a channel between projects without requiring
+ * manual reverification of the channel. If the channel is not in the
+ * verified state, this method will fail (in other words, this may only be
+ * used if the SendNotificationChannelVerificationCode and
+ * VerifyNotificationChannel paths have already been used to put the given
+ * channel into the verified state).
+ *
+ * There is no guarantee that the verification codes returned by this method
+ * will be of a similar structure or form as the ones that are delivered
+ * to the channel via SendNotificationChannelVerificationCode; while
+ * VerifyNotificationChannel() will recognize both the codes delivered via
+ * SendNotificationChannelVerificationCode() and returned from
+ * GetNotificationChannelVerificationCode(), it is typically the case that
+ * the verification codes delivered via
+ * SendNotificationChannelVerificationCode() will be shorter and also
+ * have a shorter expiration (e.g. codes such as "G-123456") whereas
+ * GetVerificationCode() will typically return a much longer, websafe base
+ * 64 encoded string that has a longer expiration time.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The notification channel for which a verification code is to be
+ *   generated and retrieved. This must name a channel that is already verified;
+ *   if the specified channel is not verified, the request will fail.
+ * @param {google.protobuf.Timestamp} request.expireTime
+ *   The desired expiration time. If specified, the API will guarantee that
+ *   the returned code will not be valid after the specified timestamp;
+ *   however, the API cannot guarantee that the returned code will be
+ *   valid for at least as long as the requested time (the API puts an upper
+ *   bound on the amount of time for which a code may be valid). If omitted,
+ *   a default expiration will be used, which may be less than the max
+ *   permissible expiration (so specifying an expiration may extend the
+ *   code's lifetime over omitting an expiration, even though the API does
+ *   impose an upper limit on the maximum expiration that is permitted).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.GetNotificationChannelVerificationCodeResponse|GetNotificationChannelVerificationCodeResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.get_notification_channel_verification_code.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_GetNotificationChannelVerificationCode_async
+ */
   getNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
-      (
-        | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|undefined, {}|undefined
+      ]>;
   getNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
-      | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
-      | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Requests a verification code for an already verified channel that can then
-   * be used in a call to VerifyNotificationChannel() on a different channel
-   * with an equivalent identity in the same or in a different project. This
-   * makes it possible to copy a channel between projects without requiring
-   * manual reverification of the channel. If the channel is not in the
-   * verified state, this method will fail (in other words, this may only be
-   * used if the SendNotificationChannelVerificationCode and
-   * VerifyNotificationChannel paths have already been used to put the given
-   * channel into the verified state).
-   *
-   * There is no guarantee that the verification codes returned by this method
-   * will be of a similar structure or form as the ones that are delivered
-   * to the channel via SendNotificationChannelVerificationCode; while
-   * VerifyNotificationChannel() will recognize both the codes delivered via
-   * SendNotificationChannelVerificationCode() and returned from
-   * GetNotificationChannelVerificationCode(), it is typically the case that
-   * the verification codes delivered via
-   * SendNotificationChannelVerificationCode() will be shorter and also
-   * have a shorter expiration (e.g. codes such as "G-123456") whereas
-   * GetVerificationCode() will typically return a much longer, websafe base
-   * 64 encoded string that has a longer expiration time.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The notification channel for which a verification code is to be generated
-   *   and retrieved. This must name a channel that is already verified; if
-   *   the specified channel is not verified, the request will fail.
-   * @param {google.protobuf.Timestamp} request.expireTime
-   *   The desired expiration time. If specified, the API will guarantee that
-   *   the returned code will not be valid after the specified timestamp;
-   *   however, the API cannot guarantee that the returned code will be
-   *   valid for at least as long as the requested time (the API puts an upper
-   *   bound on the amount of time for which a code may be valid). If omitted,
-   *   a default expiration will be used, which may be less than the max
-   *   permissible expiration (so specifying an expiration may extend the
-   *   code's lifetime over omitting an expiration, even though the API does
-   *   impose an upper limit on the maximum expiration that is permitted).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [GetNotificationChannelVerificationCodeResponse]{@link google.monitoring.v3.GetNotificationChannelVerificationCodeResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getNotificationChannelVerificationCode(request);
-   */
-  getNotificationChannelVerificationCode(
-    request: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
-          | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
-      | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
-      (
-        | protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationChannelVerificationCode(
+      request: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
+          protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getNotificationChannelVerificationCode(
+      request?: protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
+          protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
+          protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getNotificationChannelVerificationCode request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotificationChannelVerificationCode response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getNotificationChannelVerificationCode(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeResponse,
+        protos.google.monitoring.v3.IGetNotificationChannelVerificationCodeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getNotificationChannelVerificationCode response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.getNotificationChannelVerificationCode(
-      request,
-      options,
-      callback
-    );
   }
+/**
+ * Verifies a `NotificationChannel` by proving receipt of the code
+ * delivered to the channel as a result of calling
+ * `SendNotificationChannelVerificationCode`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The notification channel to verify.
+ * @param {string} request.code
+ *   Required. The verification code that was delivered to the channel as
+ *   a result of invoking the `SendNotificationChannelVerificationCode` API
+ *   method or that was retrieved from a verified channel via
+ *   `GetNotificationChannelVerificationCode`. For example, one might have
+ *   "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv" (in general, one is only
+ *   guaranteed that the code is valid UTF-8; one should not
+ *   make any assumptions regarding the structure or format of the code).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.NotificationChannel|NotificationChannel}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.verify_notification_channel.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_VerifyNotificationChannel_async
+ */
   verifyNotificationChannel(
-    request: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.IVerifyNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IVerifyNotificationChannelRequest|undefined, {}|undefined
+      ]>;
   verifyNotificationChannel(
-    request: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IVerifyNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  verifyNotificationChannel(
-    request: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IVerifyNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Verifies a `NotificationChannel` by proving receipt of the code
-   * delivered to the channel as a result of calling
-   * `SendNotificationChannelVerificationCode`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The notification channel to verify.
-   * @param {string} request.code
-   *   Required. The verification code that was delivered to the channel as
-   *   a result of invoking the `SendNotificationChannelVerificationCode` API
-   *   method or that was retrieved from a verified channel via
-   *   `GetNotificationChannelVerificationCode`. For example, one might have
-   *   "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv" (in general, one is only
-   *   guaranteed that the code is valid UTF-8; one should not
-   *   make any assumptions regarding the structure or format of the code).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.verifyNotificationChannel(request);
-   */
-  verifyNotificationChannel(
-    request: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.monitoring.v3.INotificationChannel,
-          | protos.google.monitoring.v3.IVerifyNotificationChannelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.INotificationChannel,
-      | protos.google.monitoring.v3.IVerifyNotificationChannelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel,
-      protos.google.monitoring.v3.IVerifyNotificationChannelRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IVerifyNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyNotificationChannel(
+      request: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IVerifyNotificationChannelRequest|null|undefined,
+          {}|null|undefined>): void;
+  verifyNotificationChannel(
+      request?: protos.google.monitoring.v3.IVerifyNotificationChannelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IVerifyNotificationChannelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.INotificationChannel,
+          protos.google.monitoring.v3.IVerifyNotificationChannelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IVerifyNotificationChannelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('verifyNotificationChannel request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IVerifyNotificationChannelRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyNotificationChannel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.verifyNotificationChannel(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.INotificationChannel,
+        protos.google.monitoring.v3.IVerifyNotificationChannelRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('verifyNotificationChannel response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.verifyNotificationChannel(
-      request,
-      options,
-      callback
-    );
   }
 
+ /**
+ * Lists the descriptors for supported channel types. The use of descriptors
+ * makes it possible for new channel types to be dynamically added.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The REST resource name of the parent from which to retrieve
+ *   the notification channel descriptors. The expected syntax is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ *
+ *   Note that this
+ *   [names](https://cloud.google.com/monitoring/api/v3#project_name) the parent
+ *   container in which to look for the descriptors; to retrieve a single
+ *   descriptor by name, use the
+ *   {@link protos.google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor|GetNotificationChannelDescriptor}
+ *   operation, instead.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. If
+ *   not set to a positive number, a reasonable value will be chosen by the
+ *   service.
+ * @param {string} request.pageToken
+ *   If non-empty, `page_token` must contain a value returned as the
+ *   `next_page_token` in a previous response to request the next set
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.monitoring.v3.NotificationChannelDescriptor|NotificationChannelDescriptor}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNotificationChannelDescriptorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationChannelDescriptors(
-    request: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannelDescriptor[],
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannelDescriptor[],
+        protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest|null,
+        protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
+      ]>;
   listNotificationChannelDescriptors(
-    request: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-      | protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
-      | null
-      | undefined,
-      protos.google.monitoring.v3.INotificationChannelDescriptor
-    >
-  ): void;
-  listNotificationChannelDescriptors(
-    request: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-      | protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
-      | null
-      | undefined,
-      protos.google.monitoring.v3.INotificationChannelDescriptor
-    >
-  ): void;
-  /**
-   * Lists the descriptors for supported channel types. The use of descriptors
-   * makes it possible for new channel types to be dynamically added.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The REST resource name of the parent from which to retrieve
-   *   the notification channel descriptors. The expected syntax is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   Note that this names the parent container in which to look for the
-   *   descriptors; to retrieve a single descriptor by name, use the
-   *   {@link google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor|GetNotificationChannelDescriptor}
-   *   operation, instead.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. If
-   *   not set to a positive number, a reasonable value will be chosen by the
-   *   service.
-   * @param {string} request.pageToken
-   *   If non-empty, `page_token` must contain a value returned as the
-   *   `next_page_token` in a previous response to request the next set
-   *   of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [NotificationChannelDescriptor]{@link google.monitoring.v3.NotificationChannelDescriptor}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNotificationChannelDescriptorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listNotificationChannelDescriptors(
-    request: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-          | protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
-          | null
-          | undefined,
-          protos.google.monitoring.v3.INotificationChannelDescriptor
-        >,
-    callback?: PaginationCallback<
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-      | protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
-      | null
-      | undefined,
-      protos.google.monitoring.v3.INotificationChannelDescriptor
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannelDescriptor[],
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannelDescriptor>): void;
+  listNotificationChannelDescriptors(
+      request: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+      callback: PaginationCallback<
+          protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+          protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannelDescriptor>): void;
+  listNotificationChannelDescriptors(
+      request?: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+          protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannelDescriptor>,
+      callback?: PaginationCallback<
+          protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+          protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannelDescriptor>):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannelDescriptor[],
+        protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest|null,
+        protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+      protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse|null|undefined,
+      protos.google.monitoring.v3.INotificationChannelDescriptor>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotificationChannelDescriptors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotificationChannelDescriptors request %j', request);
+    return this.innerApiCalls
+      .listNotificationChannelDescriptors(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.monitoring.v3.INotificationChannelDescriptor[],
+        protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest|null,
+        protos.google.monitoring.v3.IListNotificationChannelDescriptorsResponse
+      ]) => {
+        this._log.info('listNotificationChannelDescriptors values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listNotificationChannelDescriptors(
-      request,
-      options,
-      callback
-    );
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The REST resource name of the parent from which to retrieve
-   *   the notification channel descriptors. The expected syntax is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   Note that this names the parent container in which to look for the
-   *   descriptors; to retrieve a single descriptor by name, use the
-   *   {@link google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor|GetNotificationChannelDescriptor}
-   *   operation, instead.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. If
-   *   not set to a positive number, a reasonable value will be chosen by the
-   *   service.
-   * @param {string} request.pageToken
-   *   If non-empty, `page_token` must contain a value returned as the
-   *   `next_page_token` in a previous response to request the next set
-   *   of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [NotificationChannelDescriptor]{@link google.monitoring.v3.NotificationChannelDescriptor} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNotificationChannelDescriptorsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNotificationChannelDescriptors`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The REST resource name of the parent from which to retrieve
+ *   the notification channel descriptors. The expected syntax is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ *
+ *   Note that this
+ *   [names](https://cloud.google.com/monitoring/api/v3#project_name) the parent
+ *   container in which to look for the descriptors; to retrieve a single
+ *   descriptor by name, use the
+ *   {@link protos.google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor|GetNotificationChannelDescriptor}
+ *   operation, instead.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. If
+ *   not set to a positive number, a reasonable value will be chosen by the
+ *   service.
+ * @param {string} request.pageToken
+ *   If non-empty, `page_token` must contain a value returned as the
+ *   `next_page_token` in a previous response to request the next set
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.monitoring.v3.NotificationChannelDescriptor|NotificationChannelDescriptor} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNotificationChannelDescriptorsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationChannelDescriptorsStream(
-    request?: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listNotificationChannelDescriptors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listNotificationChannelDescriptors stream %j', request);
     return this.descriptors.page.listNotificationChannelDescriptors.createStream(
-      this.innerApiCalls.listNotificationChannelDescriptors as gax.GaxCall,
+      this.innerApiCalls.listNotificationChannelDescriptors as GaxCall,
       request,
       callSettings
     );
   }
 
-  /**
-   * Equivalent to `listNotificationChannelDescriptors`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The REST resource name of the parent from which to retrieve
-   *   the notification channel descriptors. The expected syntax is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   Note that this names the parent container in which to look for the
-   *   descriptors; to retrieve a single descriptor by name, use the
-   *   {@link google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor|GetNotificationChannelDescriptor}
-   *   operation, instead.
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. If
-   *   not set to a positive number, a reasonable value will be chosen by the
-   *   service.
-   * @param {string} request.pageToken
-   *   If non-empty, `page_token` must contain a value returned as the
-   *   `next_page_token` in a previous response to request the next set
-   *   of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [NotificationChannelDescriptor]{@link google.monitoring.v3.NotificationChannelDescriptor}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listNotificationChannelDescriptorsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listNotificationChannelDescriptors`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The REST resource name of the parent from which to retrieve
+ *   the notification channel descriptors. The expected syntax is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ *
+ *   Note that this
+ *   [names](https://cloud.google.com/monitoring/api/v3#project_name) the parent
+ *   container in which to look for the descriptors; to retrieve a single
+ *   descriptor by name, use the
+ *   {@link protos.google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor|GetNotificationChannelDescriptor}
+ *   operation, instead.
+ * @param {number} request.pageSize
+ *   The maximum number of results to return in a single response. If
+ *   not set to a positive number, a reasonable value will be chosen by the
+ *   service.
+ * @param {string} request.pageToken
+ *   If non-empty, `page_token` must contain a value returned as the
+ *   `next_page_token` in a previous response to request the next set
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.monitoring.v3.NotificationChannelDescriptor|NotificationChannelDescriptor}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.list_notification_channel_descriptors.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_ListNotificationChannelDescriptors_async
+ */
   listNotificationChannelDescriptorsAsync(
-    request?: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.monitoring.v3.INotificationChannelDescriptor> {
+      request?: protos.google.monitoring.v3.IListNotificationChannelDescriptorsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.monitoring.v3.INotificationChannelDescriptor>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listNotificationChannelDescriptors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listNotificationChannelDescriptors iterate %j', request);
     return this.descriptors.page.listNotificationChannelDescriptors.asyncIterate(
       this.innerApiCalls['listNotificationChannelDescriptors'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.INotificationChannelDescriptor>;
   }
+ /**
+ * Lists the notification channels that have been created for the project.
+ * To list the types of notification channels that are supported, use
+ * the `ListNotificationChannelDescriptors` method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+ *   to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ *
+ *   This names the container
+ *   in which to look for the notification channels; it does not name a
+ *   specific channel. To query a specific channel by REST resource name, use
+ *   the
+ *   {@link protos.google.monitoring.v3.NotificationChannelService.GetNotificationChannel|`GetNotificationChannel`}
+ *   operation.
+ * @param {string} [request.filter]
+ *   Optional. If provided, this field specifies the criteria that must be met
+ *   by notification channels to be included in the response.
+ *
+ *   For more details, see [sorting and
+ *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields by which to sort the result.
+ *   Supports the same set of fields as in `filter`. Entries can be prefixed
+ *   with a minus sign to sort in descending rather than ascending order.
+ *
+ *   For more details, see [sorting and
+ *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return in a single response. If
+ *   not set to a positive number, a reasonable value will be chosen by the
+ *   service.
+ * @param {string} [request.pageToken]
+ *   Optional. If non-empty, `page_token` must contain a value returned as the
+ *   `next_page_token` in a previous response to request the next set
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.monitoring.v3.NotificationChannel|NotificationChannel}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listNotificationChannelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationChannels(
-    request: protos.google.monitoring.v3.IListNotificationChannelsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel[],
-      protos.google.monitoring.v3.IListNotificationChannelsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelsResponse,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IListNotificationChannelsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel[],
+        protos.google.monitoring.v3.IListNotificationChannelsRequest|null,
+        protos.google.monitoring.v3.IListNotificationChannelsResponse
+      ]>;
   listNotificationChannels(
-    request: protos.google.monitoring.v3.IListNotificationChannelsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListNotificationChannelsRequest,
-      | protos.google.monitoring.v3.IListNotificationChannelsResponse
-      | null
-      | undefined,
-      protos.google.monitoring.v3.INotificationChannel
-    >
-  ): void;
-  listNotificationChannels(
-    request: protos.google.monitoring.v3.IListNotificationChannelsRequest,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListNotificationChannelsRequest,
-      | protos.google.monitoring.v3.IListNotificationChannelsResponse
-      | null
-      | undefined,
-      protos.google.monitoring.v3.INotificationChannel
-    >
-  ): void;
-  /**
-   * Lists the notification channels that have been created for the project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   This names the container
-   *   in which to look for the notification channels; it does not name a
-   *   specific channel. To query a specific channel by REST resource name, use
-   *   the
-   *   {@link google.monitoring.v3.NotificationChannelService.GetNotificationChannel|`GetNotificationChannel`}
-   *   operation.
-   * @param {string} request.filter
-   *   If provided, this field specifies the criteria that must be met by
-   *   notification channels to be included in the response.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields by which to sort the result. Supports
-   *   the same set of fields as in `filter`. Entries can be prefixed with
-   *   a minus sign to sort in descending rather than ascending order.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. If
-   *   not set to a positive number, a reasonable value will be chosen by the
-   *   service.
-   * @param {string} request.pageToken
-   *   If non-empty, `page_token` must contain a value returned as the
-   *   `next_page_token` in a previous response to request the next set
-   *   of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listNotificationChannelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listNotificationChannels(
-    request: protos.google.monitoring.v3.IListNotificationChannelsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.monitoring.v3.IListNotificationChannelsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.monitoring.v3.IListNotificationChannelsRequest,
-          | protos.google.monitoring.v3.IListNotificationChannelsResponse
-          | null
-          | undefined,
-          protos.google.monitoring.v3.INotificationChannel
-        >,
-    callback?: PaginationCallback<
-      protos.google.monitoring.v3.IListNotificationChannelsRequest,
-      | protos.google.monitoring.v3.IListNotificationChannelsResponse
-      | null
-      | undefined,
-      protos.google.monitoring.v3.INotificationChannel
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.INotificationChannel[],
-      protos.google.monitoring.v3.IListNotificationChannelsRequest | null,
-      protos.google.monitoring.v3.IListNotificationChannelsResponse,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IListNotificationChannelsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannel>): void;
+  listNotificationChannels(
+      request: protos.google.monitoring.v3.IListNotificationChannelsRequest,
+      callback: PaginationCallback<
+          protos.google.monitoring.v3.IListNotificationChannelsRequest,
+          protos.google.monitoring.v3.IListNotificationChannelsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannel>): void;
+  listNotificationChannels(
+      request?: protos.google.monitoring.v3.IListNotificationChannelsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.monitoring.v3.IListNotificationChannelsRequest,
+          protos.google.monitoring.v3.IListNotificationChannelsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannel>,
+      callback?: PaginationCallback<
+          protos.google.monitoring.v3.IListNotificationChannelsRequest,
+          protos.google.monitoring.v3.IListNotificationChannelsResponse|null|undefined,
+          protos.google.monitoring.v3.INotificationChannel>):
+      Promise<[
+        protos.google.monitoring.v3.INotificationChannel[],
+        protos.google.monitoring.v3.IListNotificationChannelsRequest|null,
+        protos.google.monitoring.v3.IListNotificationChannelsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.monitoring.v3.IListNotificationChannelsRequest,
+      protos.google.monitoring.v3.IListNotificationChannelsResponse|null|undefined,
+      protos.google.monitoring.v3.INotificationChannel>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotificationChannels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotificationChannels request %j', request);
+    return this.innerApiCalls
+      .listNotificationChannels(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.monitoring.v3.INotificationChannel[],
+        protos.google.monitoring.v3.IListNotificationChannelsRequest|null,
+        protos.google.monitoring.v3.IListNotificationChannelsResponse
+      ]) => {
+        this._log.info('listNotificationChannels values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listNotificationChannels(
-      request,
-      options,
-      callback
-    );
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   This names the container
-   *   in which to look for the notification channels; it does not name a
-   *   specific channel. To query a specific channel by REST resource name, use
-   *   the
-   *   {@link google.monitoring.v3.NotificationChannelService.GetNotificationChannel|`GetNotificationChannel`}
-   *   operation.
-   * @param {string} request.filter
-   *   If provided, this field specifies the criteria that must be met by
-   *   notification channels to be included in the response.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields by which to sort the result. Supports
-   *   the same set of fields as in `filter`. Entries can be prefixed with
-   *   a minus sign to sort in descending rather than ascending order.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. If
-   *   not set to a positive number, a reasonable value will be chosen by the
-   *   service.
-   * @param {string} request.pageToken
-   *   If non-empty, `page_token` must contain a value returned as the
-   *   `next_page_token` in a previous response to request the next set
-   *   of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [NotificationChannel]{@link google.monitoring.v3.NotificationChannel} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listNotificationChannelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listNotificationChannels`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+ *   to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ *
+ *   This names the container
+ *   in which to look for the notification channels; it does not name a
+ *   specific channel. To query a specific channel by REST resource name, use
+ *   the
+ *   {@link protos.google.monitoring.v3.NotificationChannelService.GetNotificationChannel|`GetNotificationChannel`}
+ *   operation.
+ * @param {string} [request.filter]
+ *   Optional. If provided, this field specifies the criteria that must be met
+ *   by notification channels to be included in the response.
+ *
+ *   For more details, see [sorting and
+ *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields by which to sort the result.
+ *   Supports the same set of fields as in `filter`. Entries can be prefixed
+ *   with a minus sign to sort in descending rather than ascending order.
+ *
+ *   For more details, see [sorting and
+ *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return in a single response. If
+ *   not set to a positive number, a reasonable value will be chosen by the
+ *   service.
+ * @param {string} [request.pageToken]
+ *   Optional. If non-empty, `page_token` must contain a value returned as the
+ *   `next_page_token` in a previous response to request the next set
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.monitoring.v3.NotificationChannel|NotificationChannel} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listNotificationChannelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listNotificationChannelsStream(
-    request?: protos.google.monitoring.v3.IListNotificationChannelsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.monitoring.v3.IListNotificationChannelsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listNotificationChannels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listNotificationChannels stream %j', request);
     return this.descriptors.page.listNotificationChannels.createStream(
-      this.innerApiCalls.listNotificationChannels as gax.GaxCall,
+      this.innerApiCalls.listNotificationChannels as GaxCall,
       request,
       callSettings
     );
   }
 
-  /**
-   * Equivalent to `listNotificationChannels`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   *
-   *   This names the container
-   *   in which to look for the notification channels; it does not name a
-   *   specific channel. To query a specific channel by REST resource name, use
-   *   the
-   *   {@link google.monitoring.v3.NotificationChannelService.GetNotificationChannel|`GetNotificationChannel`}
-   *   operation.
-   * @param {string} request.filter
-   *   If provided, this field specifies the criteria that must be met by
-   *   notification channels to be included in the response.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields by which to sort the result. Supports
-   *   the same set of fields as in `filter`. Entries can be prefixed with
-   *   a minus sign to sort in descending rather than ascending order.
-   *
-   *   For more details, see [sorting and
-   *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
-   * @param {number} request.pageSize
-   *   The maximum number of results to return in a single response. If
-   *   not set to a positive number, a reasonable value will be chosen by the
-   *   service.
-   * @param {string} request.pageToken
-   *   If non-empty, `page_token` must contain a value returned as the
-   *   `next_page_token` in a previous response to request the next set
-   *   of results.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listNotificationChannelsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listNotificationChannels`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+ *   to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ *
+ *   This names the container
+ *   in which to look for the notification channels; it does not name a
+ *   specific channel. To query a specific channel by REST resource name, use
+ *   the
+ *   {@link protos.google.monitoring.v3.NotificationChannelService.GetNotificationChannel|`GetNotificationChannel`}
+ *   operation.
+ * @param {string} [request.filter]
+ *   Optional. If provided, this field specifies the criteria that must be met
+ *   by notification channels to be included in the response.
+ *
+ *   For more details, see [sorting and
+ *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+ * @param {string} [request.orderBy]
+ *   Optional. A comma-separated list of fields by which to sort the result.
+ *   Supports the same set of fields as in `filter`. Entries can be prefixed
+ *   with a minus sign to sort in descending rather than ascending order.
+ *
+ *   For more details, see [sorting and
+ *   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of results to return in a single response. If
+ *   not set to a positive number, a reasonable value will be chosen by the
+ *   service.
+ * @param {string} [request.pageToken]
+ *   Optional. If non-empty, `page_token` must contain a value returned as the
+ *   `next_page_token` in a previous response to request the next set
+ *   of results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.monitoring.v3.NotificationChannel|NotificationChannel}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/notification_channel_service.list_notification_channels.js</caption>
+ * region_tag:monitoring_v3_generated_NotificationChannelService_ListNotificationChannels_async
+ */
   listNotificationChannelsAsync(
-    request?: protos.google.monitoring.v3.IListNotificationChannelsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.monitoring.v3.INotificationChannel> {
+      request?: protos.google.monitoring.v3.IListNotificationChannelsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.monitoring.v3.INotificationChannel>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listNotificationChannels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listNotificationChannels iterate %j', request);
     return this.descriptors.page.listNotificationChannels.asyncIterate(
       this.innerApiCalls['listNotificationChannels'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.INotificationChannel>;
   }
@@ -1780,7 +1783,7 @@ export class NotificationChannelServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyPath(folder: string, alertPolicy: string) {
+  folderAlertPolicyPath(folder:string,alertPolicy:string) {
     return this.pathTemplates.folderAlertPolicyPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1795,9 +1798,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
-      folderAlertPolicyName
-    ).folder;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).folder;
   }
 
   /**
@@ -1808,9 +1809,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
-      folderAlertPolicyName
-    ).alert_policy;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).alert_policy;
   }
 
   /**
@@ -1821,11 +1820,7 @@ export class NotificationChannelServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyConditionPath(
-    folder: string,
-    alertPolicy: string,
-    condition: string
-  ) {
+  folderAlertPolicyConditionPath(folder:string,alertPolicy:string,condition:string) {
     return this.pathTemplates.folderAlertPolicyConditionPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1840,12 +1835,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).folder;
+  matchFolderFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).folder;
   }
 
   /**
@@ -1855,12 +1846,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -1870,12 +1857,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).condition;
+  matchConditionFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).condition;
   }
 
   /**
@@ -1885,7 +1868,7 @@ export class NotificationChannelServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  folderChannelDescriptorPath(folder: string, channelDescriptor: string) {
+  folderChannelDescriptorPath(folder:string,channelDescriptor:string) {
     return this.pathTemplates.folderChannelDescriptorPathTemplate.render({
       folder: folder,
       channel_descriptor: channelDescriptor,
@@ -1899,12 +1882,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderChannelDescriptorName(
-    folderChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
-      folderChannelDescriptorName
-    ).folder;
+  matchFolderFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).folder;
   }
 
   /**
@@ -1914,12 +1893,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromFolderChannelDescriptorName(
-    folderChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
-      folderChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -1929,7 +1904,7 @@ export class NotificationChannelServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  folderGroupPath(folder: string, group: string) {
+  folderGroupPath(folder:string,group:string) {
     return this.pathTemplates.folderGroupPathTemplate.render({
       folder: folder,
       group: group,
@@ -1944,8 +1919,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
-      .folder;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).folder;
   }
 
   /**
@@ -1956,8 +1930,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
-      .group;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).group;
   }
 
   /**
@@ -1967,7 +1940,7 @@ export class NotificationChannelServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  folderNotificationChannelPath(folder: string, notificationChannel: string) {
+  folderNotificationChannelPath(folder:string,notificationChannel:string) {
     return this.pathTemplates.folderNotificationChannelPathTemplate.render({
       folder: folder,
       notification_channel: notificationChannel,
@@ -1981,12 +1954,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderNotificationChannelName(
-    folderNotificationChannelName: string
-  ) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
-      folderNotificationChannelName
-    ).folder;
+  matchFolderFromFolderNotificationChannelName(folderNotificationChannelName: string) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).folder;
   }
 
   /**
@@ -1996,12 +1965,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromFolderNotificationChannelName(
-    folderNotificationChannelName: string
-  ) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
-      folderNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromFolderNotificationChannelName(folderNotificationChannelName: string) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).notification_channel;
   }
 
   /**
@@ -2011,7 +1976,7 @@ export class NotificationChannelServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  folderServicePath(folder: string, service: string) {
+  folderServicePath(folder:string,service:string) {
     return this.pathTemplates.folderServicePathTemplate.render({
       folder: folder,
       service: service,
@@ -2026,8 +1991,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
-      .folder;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).folder;
   }
 
   /**
@@ -2038,8 +2002,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
-      .service;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).service;
   }
 
   /**
@@ -2050,18 +2013,12 @@ export class NotificationChannelServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  folderServiceServiceLevelObjectivePath(
-    folder: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
-      {
-        folder: folder,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  folderServiceServiceLevelObjectivePath(folder:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render({
+      folder: folder,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -2071,12 +2028,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).folder;
+  matchFolderFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).folder;
   }
 
   /**
@@ -2086,12 +2039,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -2101,12 +2050,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -2116,7 +2061,7 @@ export class NotificationChannelServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  folderUptimeCheckConfigPath(folder: string, uptimeCheckConfig: string) {
+  folderUptimeCheckConfigPath(folder:string,uptimeCheckConfig:string) {
     return this.pathTemplates.folderUptimeCheckConfigPathTemplate.render({
       folder: folder,
       uptime_check_config: uptimeCheckConfig,
@@ -2130,12 +2075,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderUptimeCheckConfigName(
-    folderUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
-      folderUptimeCheckConfigName
-    ).folder;
+  matchFolderFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).folder;
   }
 
   /**
@@ -2145,12 +2086,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
-    folderUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
-      folderUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).uptime_check_config;
   }
 
   /**
@@ -2160,7 +2097,7 @@ export class NotificationChannelServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyPath(organization: string, alertPolicy: string) {
+  organizationAlertPolicyPath(organization:string,alertPolicy:string) {
     return this.pathTemplates.organizationAlertPolicyPathTemplate.render({
       organization: organization,
       alert_policy: alertPolicy,
@@ -2174,12 +2111,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyName(
-    organizationAlertPolicyName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
-      organizationAlertPolicyName
-    ).organization;
+  matchOrganizationFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).organization;
   }
 
   /**
@@ -2189,12 +2122,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyName(
-    organizationAlertPolicyName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
-      organizationAlertPolicyName
-    ).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).alert_policy;
   }
 
   /**
@@ -2205,18 +2134,12 @@ export class NotificationChannelServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyConditionPath(
-    organization: string,
-    alertPolicy: string,
-    condition: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
-      {
-        organization: organization,
-        alert_policy: alertPolicy,
-        condition: condition,
-      }
-    );
+  organizationAlertPolicyConditionPath(organization:string,alertPolicy:string,condition:string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render({
+      organization: organization,
+      alert_policy: alertPolicy,
+      condition: condition,
+    });
   }
 
   /**
@@ -2226,12 +2149,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).organization;
+  matchOrganizationFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).organization;
   }
 
   /**
@@ -2241,12 +2160,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -2256,12 +2171,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).condition;
+  matchConditionFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).condition;
   }
 
   /**
@@ -2271,10 +2182,7 @@ export class NotificationChannelServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  organizationChannelDescriptorPath(
-    organization: string,
-    channelDescriptor: string
-  ) {
+  organizationChannelDescriptorPath(organization:string,channelDescriptor:string) {
     return this.pathTemplates.organizationChannelDescriptorPathTemplate.render({
       organization: organization,
       channel_descriptor: channelDescriptor,
@@ -2288,12 +2196,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationChannelDescriptorName(
-    organizationChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
-      organizationChannelDescriptorName
-    ).organization;
+  matchOrganizationFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).organization;
   }
 
   /**
@@ -2303,12 +2207,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromOrganizationChannelDescriptorName(
-    organizationChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
-      organizationChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -2318,7 +2218,7 @@ export class NotificationChannelServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  organizationGroupPath(organization: string, group: string) {
+  organizationGroupPath(organization:string,group:string) {
     return this.pathTemplates.organizationGroupPathTemplate.render({
       organization: organization,
       group: group,
@@ -2333,9 +2233,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(
-      organizationGroupName
-    ).organization;
+    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).organization;
   }
 
   /**
@@ -2346,9 +2244,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(
-      organizationGroupName
-    ).group;
+    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).group;
   }
 
   /**
@@ -2358,16 +2254,11 @@ export class NotificationChannelServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  organizationNotificationChannelPath(
-    organization: string,
-    notificationChannel: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.render(
-      {
-        organization: organization,
-        notification_channel: notificationChannel,
-      }
-    );
+  organizationNotificationChannelPath(organization:string,notificationChannel:string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.render({
+      organization: organization,
+      notification_channel: notificationChannel,
+    });
   }
 
   /**
@@ -2377,12 +2268,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationNotificationChannelName(
-    organizationNotificationChannelName: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
-      organizationNotificationChannelName
-    ).organization;
+  matchOrganizationFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).organization;
   }
 
   /**
@@ -2392,12 +2279,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromOrganizationNotificationChannelName(
-    organizationNotificationChannelName: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
-      organizationNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).notification_channel;
   }
 
   /**
@@ -2407,7 +2290,7 @@ export class NotificationChannelServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  organizationServicePath(organization: string, service: string) {
+  organizationServicePath(organization:string,service:string) {
     return this.pathTemplates.organizationServicePathTemplate.render({
       organization: organization,
       service: service,
@@ -2421,12 +2304,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_service resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceName(
-    organizationServiceName: string
-  ) {
-    return this.pathTemplates.organizationServicePathTemplate.match(
-      organizationServiceName
-    ).organization;
+  matchOrganizationFromOrganizationServiceName(organizationServiceName: string) {
+    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).organization;
   }
 
   /**
@@ -2437,9 +2316,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromOrganizationServiceName(organizationServiceName: string) {
-    return this.pathTemplates.organizationServicePathTemplate.match(
-      organizationServiceName
-    ).service;
+    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).service;
   }
 
   /**
@@ -2450,18 +2327,12 @@ export class NotificationChannelServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  organizationServiceServiceLevelObjectivePath(
-    organization: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
-      {
-        organization: organization,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  organizationServiceServiceLevelObjectivePath(organization:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render({
+      organization: organization,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -2471,12 +2342,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).organization;
+  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).organization;
   }
 
   /**
@@ -2486,12 +2353,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -2501,12 +2364,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -2516,10 +2375,7 @@ export class NotificationChannelServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  organizationUptimeCheckConfigPath(
-    organization: string,
-    uptimeCheckConfig: string
-  ) {
+  organizationUptimeCheckConfigPath(organization:string,uptimeCheckConfig:string) {
     return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.render({
       organization: organization,
       uptime_check_config: uptimeCheckConfig,
@@ -2533,12 +2389,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationUptimeCheckConfigName(
-    organizationUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
-      organizationUptimeCheckConfigName
-    ).organization;
+  matchOrganizationFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).organization;
   }
 
   /**
@@ -2548,12 +2400,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
-    organizationUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
-      organizationUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).uptime_check_config;
   }
 
   /**
@@ -2562,7 +2410,7 @@ export class NotificationChannelServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2586,7 +2434,7 @@ export class NotificationChannelServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyPath(project: string, alertPolicy: string) {
+  projectAlertPolicyPath(project:string,alertPolicy:string) {
     return this.pathTemplates.projectAlertPolicyPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -2601,9 +2449,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
-      projectAlertPolicyName
-    ).project;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).project;
   }
 
   /**
@@ -2614,9 +2460,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
-      projectAlertPolicyName
-    ).alert_policy;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).alert_policy;
   }
 
   /**
@@ -2627,11 +2471,7 @@ export class NotificationChannelServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyConditionPath(
-    project: string,
-    alertPolicy: string,
-    condition: string
-  ) {
+  projectAlertPolicyConditionPath(project:string,alertPolicy:string,condition:string) {
     return this.pathTemplates.projectAlertPolicyConditionPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -2646,12 +2486,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).project;
+  matchProjectFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).project;
   }
 
   /**
@@ -2661,12 +2497,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -2676,12 +2508,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).condition;
+  matchConditionFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).condition;
   }
 
   /**
@@ -2691,7 +2519,7 @@ export class NotificationChannelServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  projectChannelDescriptorPath(project: string, channelDescriptor: string) {
+  projectChannelDescriptorPath(project:string,channelDescriptor:string) {
     return this.pathTemplates.projectChannelDescriptorPathTemplate.render({
       project: project,
       channel_descriptor: channelDescriptor,
@@ -2705,12 +2533,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectChannelDescriptorName(
-    projectChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
-      projectChannelDescriptorName
-    ).project;
+  matchProjectFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).project;
   }
 
   /**
@@ -2720,12 +2544,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromProjectChannelDescriptorName(
-    projectChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
-      projectChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -2735,7 +2555,7 @@ export class NotificationChannelServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  projectGroupPath(project: string, group: string) {
+  projectGroupPath(project:string,group:string) {
     return this.pathTemplates.projectGroupPathTemplate.render({
       project: project,
       group: group,
@@ -2750,8 +2570,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
-      .project;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).project;
   }
 
   /**
@@ -2762,8 +2581,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
-      .group;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).group;
   }
 
   /**
@@ -2773,7 +2591,7 @@ export class NotificationChannelServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  projectNotificationChannelPath(project: string, notificationChannel: string) {
+  projectNotificationChannelPath(project:string,notificationChannel:string) {
     return this.pathTemplates.projectNotificationChannelPathTemplate.render({
       project: project,
       notification_channel: notificationChannel,
@@ -2787,12 +2605,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectNotificationChannelName(
-    projectNotificationChannelName: string
-  ) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
-      projectNotificationChannelName
-    ).project;
+  matchProjectFromProjectNotificationChannelName(projectNotificationChannelName: string) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).project;
   }
 
   /**
@@ -2802,12 +2616,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromProjectNotificationChannelName(
-    projectNotificationChannelName: string
-  ) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
-      projectNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromProjectNotificationChannelName(projectNotificationChannelName: string) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).notification_channel;
   }
 
   /**
@@ -2817,7 +2627,7 @@ export class NotificationChannelServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  projectServicePath(project: string, service: string) {
+  projectServicePath(project:string,service:string) {
     return this.pathTemplates.projectServicePathTemplate.render({
       project: project,
       service: service,
@@ -2832,9 +2642,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(
-      projectServiceName
-    ).project;
+    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).project;
   }
 
   /**
@@ -2845,9 +2653,7 @@ export class NotificationChannelServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(
-      projectServiceName
-    ).service;
+    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).service;
   }
 
   /**
@@ -2858,18 +2664,12 @@ export class NotificationChannelServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  projectServiceServiceLevelObjectivePath(
-    project: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
-      {
-        project: project,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  projectServiceServiceLevelObjectivePath(project:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render({
+      project: project,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -2879,12 +2679,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).project;
+  matchProjectFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).project;
   }
 
   /**
@@ -2894,12 +2690,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -2909,12 +2701,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -2924,7 +2712,7 @@ export class NotificationChannelServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  projectUptimeCheckConfigPath(project: string, uptimeCheckConfig: string) {
+  projectUptimeCheckConfigPath(project:string,uptimeCheckConfig:string) {
     return this.pathTemplates.projectUptimeCheckConfigPathTemplate.render({
       project: project,
       uptime_check_config: uptimeCheckConfig,
@@ -2938,12 +2726,8 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectUptimeCheckConfigName(
-    projectUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
-      projectUptimeCheckConfigName
-    ).project;
+  matchProjectFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).project;
   }
 
   /**
@@ -2953,12 +2737,44 @@ export class NotificationChannelServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
-    projectUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
-      projectUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).uptime_check_config;
+  }
+
+  /**
+   * Return a fully-qualified snooze resource name string.
+   *
+   * @param {string} project
+   * @param {string} snooze
+   * @returns {string} Resource name string.
+   */
+  snoozePath(project:string,snooze:string) {
+    return this.pathTemplates.snoozePathTemplate.render({
+      project: project,
+      snooze: snooze,
+    });
+  }
+
+  /**
+   * Parse the project from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).project;
+  }
+
+  /**
+   * Parse the snooze from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the snooze.
+   */
+  matchSnoozeFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).snooze;
   }
 
   /**
@@ -2968,9 +2784,9 @@ export class NotificationChannelServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.notificationChannelServiceStub!.then(stub => {
+    if (this.notificationChannelServiceStub && !this._terminated) {
+      return this.notificationChannelServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

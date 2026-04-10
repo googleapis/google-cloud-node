@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,13 @@ export namespace google {
 
             /** Namespace v1. */
             namespace v1 {
+
+                /** EnvoyHeaders enum. */
+                enum EnvoyHeaders {
+                    ENVOY_HEADERS_UNSPECIFIED = 0,
+                    NONE = 1,
+                    DEBUG_HEADERS = 2
+                }
 
                 /** Properties of an OperationMetadata. */
                 interface IOperationMetadata {
@@ -734,6 +741,146 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteLbRouteExtension(request: google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListLbEdgeExtensions.
+                     * @param request ListLbEdgeExtensionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListLbEdgeExtensionsResponse
+                     */
+                    public listLbEdgeExtensions(request: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest, callback: google.cloud.networkservices.v1.DepService.ListLbEdgeExtensionsCallback): void;
+
+                    /**
+                     * Calls ListLbEdgeExtensions.
+                     * @param request ListLbEdgeExtensionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listLbEdgeExtensions(request: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest): Promise<google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse>;
+
+                    /**
+                     * Calls GetLbEdgeExtension.
+                     * @param request GetLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and LbEdgeExtension
+                     */
+                    public getLbEdgeExtension(request: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.GetLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls GetLbEdgeExtension.
+                     * @param request GetLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getLbEdgeExtension(request: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest): Promise<google.cloud.networkservices.v1.LbEdgeExtension>;
+
+                    /**
+                     * Calls CreateLbEdgeExtension.
+                     * @param request CreateLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createLbEdgeExtension(request: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.CreateLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls CreateLbEdgeExtension.
+                     * @param request CreateLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createLbEdgeExtension(request: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateLbEdgeExtension.
+                     * @param request UpdateLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateLbEdgeExtension(request: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.UpdateLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls UpdateLbEdgeExtension.
+                     * @param request UpdateLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateLbEdgeExtension(request: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteLbEdgeExtension.
+                     * @param request DeleteLbEdgeExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteLbEdgeExtension(request: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest, callback: google.cloud.networkservices.v1.DepService.DeleteLbEdgeExtensionCallback): void;
+
+                    /**
+                     * Calls DeleteLbEdgeExtension.
+                     * @param request DeleteLbEdgeExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteLbEdgeExtension(request: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListAuthzExtensions.
+                     * @param request ListAuthzExtensionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAuthzExtensionsResponse
+                     */
+                    public listAuthzExtensions(request: google.cloud.networkservices.v1.IListAuthzExtensionsRequest, callback: google.cloud.networkservices.v1.DepService.ListAuthzExtensionsCallback): void;
+
+                    /**
+                     * Calls ListAuthzExtensions.
+                     * @param request ListAuthzExtensionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAuthzExtensions(request: google.cloud.networkservices.v1.IListAuthzExtensionsRequest): Promise<google.cloud.networkservices.v1.ListAuthzExtensionsResponse>;
+
+                    /**
+                     * Calls GetAuthzExtension.
+                     * @param request GetAuthzExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthzExtension
+                     */
+                    public getAuthzExtension(request: google.cloud.networkservices.v1.IGetAuthzExtensionRequest, callback: google.cloud.networkservices.v1.DepService.GetAuthzExtensionCallback): void;
+
+                    /**
+                     * Calls GetAuthzExtension.
+                     * @param request GetAuthzExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAuthzExtension(request: google.cloud.networkservices.v1.IGetAuthzExtensionRequest): Promise<google.cloud.networkservices.v1.AuthzExtension>;
+
+                    /**
+                     * Calls CreateAuthzExtension.
+                     * @param request CreateAuthzExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAuthzExtension(request: google.cloud.networkservices.v1.ICreateAuthzExtensionRequest, callback: google.cloud.networkservices.v1.DepService.CreateAuthzExtensionCallback): void;
+
+                    /**
+                     * Calls CreateAuthzExtension.
+                     * @param request CreateAuthzExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAuthzExtension(request: google.cloud.networkservices.v1.ICreateAuthzExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAuthzExtension.
+                     * @param request UpdateAuthzExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAuthzExtension(request: google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest, callback: google.cloud.networkservices.v1.DepService.UpdateAuthzExtensionCallback): void;
+
+                    /**
+                     * Calls UpdateAuthzExtension.
+                     * @param request UpdateAuthzExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAuthzExtension(request: google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAuthzExtension.
+                     * @param request DeleteAuthzExtensionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAuthzExtension(request: google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest, callback: google.cloud.networkservices.v1.DepService.DeleteAuthzExtensionCallback): void;
+
+                    /**
+                     * Calls DeleteAuthzExtension.
+                     * @param request DeleteAuthzExtensionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAuthzExtension(request: google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DepService {
@@ -807,6 +954,76 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteLbRouteExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|listLbEdgeExtensions}.
+                     * @param error Error, if any
+                     * @param [response] ListLbEdgeExtensionsResponse
+                     */
+                    type ListLbEdgeExtensionsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|getLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] LbEdgeExtension
+                     */
+                    type GetLbEdgeExtensionCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.LbEdgeExtension) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|createLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateLbEdgeExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|updateLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateLbEdgeExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|deleteLbEdgeExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteLbEdgeExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|listAuthzExtensions}.
+                     * @param error Error, if any
+                     * @param [response] ListAuthzExtensionsResponse
+                     */
+                    type ListAuthzExtensionsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListAuthzExtensionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|getAuthzExtension}.
+                     * @param error Error, if any
+                     * @param [response] AuthzExtension
+                     */
+                    type GetAuthzExtensionCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.AuthzExtension) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|createAuthzExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAuthzExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|updateAuthzExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAuthzExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.DepService|deleteAuthzExtension}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAuthzExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** EventType enum. */
@@ -825,6 +1042,12 @@ export namespace google {
                     LOAD_BALANCING_SCHEME_UNSPECIFIED = 0,
                     INTERNAL_MANAGED = 1,
                     EXTERNAL_MANAGED = 2
+                }
+
+                /** WireFormat enum. */
+                enum WireFormat {
+                    WIRE_FORMAT_UNSPECIFIED = 0,
+                    EXT_PROC_GRPC = 1
                 }
 
                 /** Properties of an ExtensionChain. */
@@ -1058,6 +1281,9 @@ export namespace google {
 
                         /** Extension forwardHeaders */
                         forwardHeaders?: (string[]|null);
+
+                        /** Extension metadata */
+                        metadata?: (google.protobuf.IStruct|null);
                     }
 
                     /** Represents an Extension. */
@@ -1089,6 +1315,9 @@ export namespace google {
 
                         /** Extension forwardHeaders. */
                         public forwardHeaders: string[];
+
+                        /** Extension metadata. */
+                        public metadata?: (google.protobuf.IStruct|null);
 
                         /**
                          * Creates a new Extension instance using the specified properties.
@@ -2767,6 +2996,1622 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a LbEdgeExtension. */
+                interface ILbEdgeExtension {
+
+                    /** LbEdgeExtension name */
+                    name?: (string|null);
+
+                    /** LbEdgeExtension createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension description */
+                    description?: (string|null);
+
+                    /** LbEdgeExtension labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** LbEdgeExtension forwardingRules */
+                    forwardingRules?: (string[]|null);
+
+                    /** LbEdgeExtension extensionChains */
+                    extensionChains?: (google.cloud.networkservices.v1.IExtensionChain[]|null);
+
+                    /** LbEdgeExtension loadBalancingScheme */
+                    loadBalancingScheme?: (google.cloud.networkservices.v1.LoadBalancingScheme|keyof typeof google.cloud.networkservices.v1.LoadBalancingScheme|null);
+                }
+
+                /** Represents a LbEdgeExtension. */
+                class LbEdgeExtension implements ILbEdgeExtension {
+
+                    /**
+                     * Constructs a new LbEdgeExtension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ILbEdgeExtension);
+
+                    /** LbEdgeExtension name. */
+                    public name: string;
+
+                    /** LbEdgeExtension createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LbEdgeExtension description. */
+                    public description: string;
+
+                    /** LbEdgeExtension labels. */
+                    public labels: { [k: string]: string };
+
+                    /** LbEdgeExtension forwardingRules. */
+                    public forwardingRules: string[];
+
+                    /** LbEdgeExtension extensionChains. */
+                    public extensionChains: google.cloud.networkservices.v1.IExtensionChain[];
+
+                    /** LbEdgeExtension loadBalancingScheme. */
+                    public loadBalancingScheme: (google.cloud.networkservices.v1.LoadBalancingScheme|keyof typeof google.cloud.networkservices.v1.LoadBalancingScheme);
+
+                    /**
+                     * Creates a new LbEdgeExtension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LbEdgeExtension instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ILbEdgeExtension): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Encodes the specified LbEdgeExtension message. Does not implicitly {@link google.cloud.networkservices.v1.LbEdgeExtension.verify|verify} messages.
+                     * @param message LbEdgeExtension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ILbEdgeExtension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LbEdgeExtension message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.LbEdgeExtension.verify|verify} messages.
+                     * @param message LbEdgeExtension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ILbEdgeExtension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LbEdgeExtension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LbEdgeExtension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Decodes a LbEdgeExtension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LbEdgeExtension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Verifies a LbEdgeExtension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LbEdgeExtension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LbEdgeExtension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.LbEdgeExtension;
+
+                    /**
+                     * Creates a plain object from a LbEdgeExtension message. Also converts values to other types if specified.
+                     * @param message LbEdgeExtension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.LbEdgeExtension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LbEdgeExtension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LbEdgeExtension
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListLbEdgeExtensionsRequest. */
+                interface IListLbEdgeExtensionsRequest {
+
+                    /** ListLbEdgeExtensionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListLbEdgeExtensionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListLbEdgeExtensionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListLbEdgeExtensionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListLbEdgeExtensionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListLbEdgeExtensionsRequest. */
+                class ListLbEdgeExtensionsRequest implements IListLbEdgeExtensionsRequest {
+
+                    /**
+                     * Constructs a new ListLbEdgeExtensionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest);
+
+                    /** ListLbEdgeExtensionsRequest parent. */
+                    public parent: string;
+
+                    /** ListLbEdgeExtensionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListLbEdgeExtensionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListLbEdgeExtensionsRequest filter. */
+                    public filter: string;
+
+                    /** ListLbEdgeExtensionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListLbEdgeExtensionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListLbEdgeExtensionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListLbEdgeExtensionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListLbEdgeExtensionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Verifies a ListLbEdgeExtensionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListLbEdgeExtensionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListLbEdgeExtensionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListLbEdgeExtensionsRequest message. Also converts values to other types if specified.
+                     * @param message ListLbEdgeExtensionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListLbEdgeExtensionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListLbEdgeExtensionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListLbEdgeExtensionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListLbEdgeExtensionsResponse. */
+                interface IListLbEdgeExtensionsResponse {
+
+                    /** ListLbEdgeExtensionsResponse lbEdgeExtensions */
+                    lbEdgeExtensions?: (google.cloud.networkservices.v1.ILbEdgeExtension[]|null);
+
+                    /** ListLbEdgeExtensionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListLbEdgeExtensionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListLbEdgeExtensionsResponse. */
+                class ListLbEdgeExtensionsResponse implements IListLbEdgeExtensionsResponse {
+
+                    /**
+                     * Constructs a new ListLbEdgeExtensionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse);
+
+                    /** ListLbEdgeExtensionsResponse lbEdgeExtensions. */
+                    public lbEdgeExtensions: google.cloud.networkservices.v1.ILbEdgeExtension[];
+
+                    /** ListLbEdgeExtensionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListLbEdgeExtensionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListLbEdgeExtensionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListLbEdgeExtensionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListLbEdgeExtensionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse.verify|verify} messages.
+                     * @param message ListLbEdgeExtensionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListLbEdgeExtensionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Decodes a ListLbEdgeExtensionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListLbEdgeExtensionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Verifies a ListLbEdgeExtensionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListLbEdgeExtensionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListLbEdgeExtensionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListLbEdgeExtensionsResponse message. Also converts values to other types if specified.
+                     * @param message ListLbEdgeExtensionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListLbEdgeExtensionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListLbEdgeExtensionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListLbEdgeExtensionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetLbEdgeExtensionRequest. */
+                interface IGetLbEdgeExtensionRequest {
+
+                    /** GetLbEdgeExtensionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetLbEdgeExtensionRequest. */
+                class GetLbEdgeExtensionRequest implements IGetLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new GetLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest);
+
+                    /** GetLbEdgeExtensionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified GetLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message GetLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message GetLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes a GetLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies a GetLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a GetLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message GetLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetLbEdgeExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateLbEdgeExtensionRequest. */
+                interface ICreateLbEdgeExtensionRequest {
+
+                    /** CreateLbEdgeExtensionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtensionId */
+                    lbEdgeExtensionId?: (string|null);
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtension */
+                    lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** CreateLbEdgeExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateLbEdgeExtensionRequest. */
+                class CreateLbEdgeExtensionRequest implements ICreateLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new CreateLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest);
+
+                    /** CreateLbEdgeExtensionRequest parent. */
+                    public parent: string;
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtensionId. */
+                    public lbEdgeExtensionId: string;
+
+                    /** CreateLbEdgeExtensionRequest lbEdgeExtension. */
+                    public lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** CreateLbEdgeExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified CreateLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message CreateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message CreateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes a CreateLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies a CreateLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message CreateLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.CreateLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateLbEdgeExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateLbEdgeExtensionRequest. */
+                interface IUpdateLbEdgeExtensionRequest {
+
+                    /** UpdateLbEdgeExtensionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateLbEdgeExtensionRequest lbEdgeExtension */
+                    lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** UpdateLbEdgeExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateLbEdgeExtensionRequest. */
+                class UpdateLbEdgeExtensionRequest implements IUpdateLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new UpdateLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest);
+
+                    /** UpdateLbEdgeExtensionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateLbEdgeExtensionRequest lbEdgeExtension. */
+                    public lbEdgeExtension?: (google.cloud.networkservices.v1.ILbEdgeExtension|null);
+
+                    /** UpdateLbEdgeExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified UpdateLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message UpdateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message UpdateLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes an UpdateLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies an UpdateLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.UpdateLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateLbEdgeExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteLbEdgeExtensionRequest. */
+                interface IDeleteLbEdgeExtensionRequest {
+
+                    /** DeleteLbEdgeExtensionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteLbEdgeExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteLbEdgeExtensionRequest. */
+                class DeleteLbEdgeExtensionRequest implements IDeleteLbEdgeExtensionRequest {
+
+                    /**
+                     * Constructs a new DeleteLbEdgeExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest);
+
+                    /** DeleteLbEdgeExtensionRequest name. */
+                    public name: string;
+
+                    /** DeleteLbEdgeExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteLbEdgeExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteLbEdgeExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Encodes the specified DeleteLbEdgeExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message DeleteLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteLbEdgeExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest.verify|verify} messages.
+                     * @param message DeleteLbEdgeExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteLbEdgeExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Decodes a DeleteLbEdgeExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteLbEdgeExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Verifies a DeleteLbEdgeExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteLbEdgeExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteLbEdgeExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteLbEdgeExtensionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteLbEdgeExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.DeleteLbEdgeExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteLbEdgeExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteLbEdgeExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AuthzExtension. */
+                interface IAuthzExtension {
+
+                    /** AuthzExtension name */
+                    name?: (string|null);
+
+                    /** AuthzExtension createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthzExtension updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthzExtension description */
+                    description?: (string|null);
+
+                    /** AuthzExtension labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AuthzExtension loadBalancingScheme */
+                    loadBalancingScheme?: (google.cloud.networkservices.v1.LoadBalancingScheme|keyof typeof google.cloud.networkservices.v1.LoadBalancingScheme|null);
+
+                    /** AuthzExtension authority */
+                    authority?: (string|null);
+
+                    /** AuthzExtension service */
+                    service?: (string|null);
+
+                    /** AuthzExtension timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+
+                    /** AuthzExtension failOpen */
+                    failOpen?: (boolean|null);
+
+                    /** AuthzExtension metadata */
+                    metadata?: (google.protobuf.IStruct|null);
+
+                    /** AuthzExtension forwardHeaders */
+                    forwardHeaders?: (string[]|null);
+
+                    /** AuthzExtension wireFormat */
+                    wireFormat?: (google.cloud.networkservices.v1.WireFormat|keyof typeof google.cloud.networkservices.v1.WireFormat|null);
+                }
+
+                /** Represents an AuthzExtension. */
+                class AuthzExtension implements IAuthzExtension {
+
+                    /**
+                     * Constructs a new AuthzExtension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IAuthzExtension);
+
+                    /** AuthzExtension name. */
+                    public name: string;
+
+                    /** AuthzExtension createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthzExtension updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthzExtension description. */
+                    public description: string;
+
+                    /** AuthzExtension labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AuthzExtension loadBalancingScheme. */
+                    public loadBalancingScheme: (google.cloud.networkservices.v1.LoadBalancingScheme|keyof typeof google.cloud.networkservices.v1.LoadBalancingScheme);
+
+                    /** AuthzExtension authority. */
+                    public authority: string;
+
+                    /** AuthzExtension service. */
+                    public service: string;
+
+                    /** AuthzExtension timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
+
+                    /** AuthzExtension failOpen. */
+                    public failOpen: boolean;
+
+                    /** AuthzExtension metadata. */
+                    public metadata?: (google.protobuf.IStruct|null);
+
+                    /** AuthzExtension forwardHeaders. */
+                    public forwardHeaders: string[];
+
+                    /** AuthzExtension wireFormat. */
+                    public wireFormat: (google.cloud.networkservices.v1.WireFormat|keyof typeof google.cloud.networkservices.v1.WireFormat);
+
+                    /**
+                     * Creates a new AuthzExtension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuthzExtension instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IAuthzExtension): google.cloud.networkservices.v1.AuthzExtension;
+
+                    /**
+                     * Encodes the specified AuthzExtension message. Does not implicitly {@link google.cloud.networkservices.v1.AuthzExtension.verify|verify} messages.
+                     * @param message AuthzExtension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IAuthzExtension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuthzExtension message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AuthzExtension.verify|verify} messages.
+                     * @param message AuthzExtension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IAuthzExtension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuthzExtension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuthzExtension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AuthzExtension;
+
+                    /**
+                     * Decodes an AuthzExtension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuthzExtension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AuthzExtension;
+
+                    /**
+                     * Verifies an AuthzExtension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuthzExtension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuthzExtension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AuthzExtension;
+
+                    /**
+                     * Creates a plain object from an AuthzExtension message. Also converts values to other types if specified.
+                     * @param message AuthzExtension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.AuthzExtension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuthzExtension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthzExtension
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAuthzExtensionsRequest. */
+                interface IListAuthzExtensionsRequest {
+
+                    /** ListAuthzExtensionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAuthzExtensionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAuthzExtensionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAuthzExtensionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAuthzExtensionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAuthzExtensionsRequest. */
+                class ListAuthzExtensionsRequest implements IListAuthzExtensionsRequest {
+
+                    /**
+                     * Constructs a new ListAuthzExtensionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListAuthzExtensionsRequest);
+
+                    /** ListAuthzExtensionsRequest parent. */
+                    public parent: string;
+
+                    /** ListAuthzExtensionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAuthzExtensionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAuthzExtensionsRequest filter. */
+                    public filter: string;
+
+                    /** ListAuthzExtensionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAuthzExtensionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthzExtensionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListAuthzExtensionsRequest): google.cloud.networkservices.v1.ListAuthzExtensionsRequest;
+
+                    /**
+                     * Encodes the specified ListAuthzExtensionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsRequest.verify|verify} messages.
+                     * @param message ListAuthzExtensionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListAuthzExtensionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthzExtensionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsRequest.verify|verify} messages.
+                     * @param message ListAuthzExtensionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListAuthzExtensionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthzExtensionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthzExtensionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListAuthzExtensionsRequest;
+
+                    /**
+                     * Decodes a ListAuthzExtensionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthzExtensionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListAuthzExtensionsRequest;
+
+                    /**
+                     * Verifies a ListAuthzExtensionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthzExtensionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthzExtensionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListAuthzExtensionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAuthzExtensionsRequest message. Also converts values to other types if specified.
+                     * @param message ListAuthzExtensionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListAuthzExtensionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthzExtensionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuthzExtensionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAuthzExtensionsResponse. */
+                interface IListAuthzExtensionsResponse {
+
+                    /** ListAuthzExtensionsResponse authzExtensions */
+                    authzExtensions?: (google.cloud.networkservices.v1.IAuthzExtension[]|null);
+
+                    /** ListAuthzExtensionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAuthzExtensionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAuthzExtensionsResponse. */
+                class ListAuthzExtensionsResponse implements IListAuthzExtensionsResponse {
+
+                    /**
+                     * Constructs a new ListAuthzExtensionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListAuthzExtensionsResponse);
+
+                    /** ListAuthzExtensionsResponse authzExtensions. */
+                    public authzExtensions: google.cloud.networkservices.v1.IAuthzExtension[];
+
+                    /** ListAuthzExtensionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAuthzExtensionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAuthzExtensionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthzExtensionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListAuthzExtensionsResponse): google.cloud.networkservices.v1.ListAuthzExtensionsResponse;
+
+                    /**
+                     * Encodes the specified ListAuthzExtensionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsResponse.verify|verify} messages.
+                     * @param message ListAuthzExtensionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListAuthzExtensionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthzExtensionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAuthzExtensionsResponse.verify|verify} messages.
+                     * @param message ListAuthzExtensionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListAuthzExtensionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthzExtensionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthzExtensionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListAuthzExtensionsResponse;
+
+                    /**
+                     * Decodes a ListAuthzExtensionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthzExtensionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListAuthzExtensionsResponse;
+
+                    /**
+                     * Verifies a ListAuthzExtensionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthzExtensionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthzExtensionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListAuthzExtensionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAuthzExtensionsResponse message. Also converts values to other types if specified.
+                     * @param message ListAuthzExtensionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListAuthzExtensionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthzExtensionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuthzExtensionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAuthzExtensionRequest. */
+                interface IGetAuthzExtensionRequest {
+
+                    /** GetAuthzExtensionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAuthzExtensionRequest. */
+                class GetAuthzExtensionRequest implements IGetAuthzExtensionRequest {
+
+                    /**
+                     * Constructs a new GetAuthzExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetAuthzExtensionRequest);
+
+                    /** GetAuthzExtensionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAuthzExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAuthzExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetAuthzExtensionRequest): google.cloud.networkservices.v1.GetAuthzExtensionRequest;
+
+                    /**
+                     * Encodes the specified GetAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetAuthzExtensionRequest.verify|verify} messages.
+                     * @param message GetAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetAuthzExtensionRequest.verify|verify} messages.
+                     * @param message GetAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAuthzExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetAuthzExtensionRequest;
+
+                    /**
+                     * Decodes a GetAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetAuthzExtensionRequest;
+
+                    /**
+                     * Verifies a GetAuthzExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAuthzExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetAuthzExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a GetAuthzExtensionRequest message. Also converts values to other types if specified.
+                     * @param message GetAuthzExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetAuthzExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAuthzExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAuthzExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAuthzExtensionRequest. */
+                interface ICreateAuthzExtensionRequest {
+
+                    /** CreateAuthzExtensionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAuthzExtensionRequest authzExtensionId */
+                    authzExtensionId?: (string|null);
+
+                    /** CreateAuthzExtensionRequest authzExtension */
+                    authzExtension?: (google.cloud.networkservices.v1.IAuthzExtension|null);
+
+                    /** CreateAuthzExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateAuthzExtensionRequest. */
+                class CreateAuthzExtensionRequest implements ICreateAuthzExtensionRequest {
+
+                    /**
+                     * Constructs a new CreateAuthzExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ICreateAuthzExtensionRequest);
+
+                    /** CreateAuthzExtensionRequest parent. */
+                    public parent: string;
+
+                    /** CreateAuthzExtensionRequest authzExtensionId. */
+                    public authzExtensionId: string;
+
+                    /** CreateAuthzExtensionRequest authzExtension. */
+                    public authzExtension?: (google.cloud.networkservices.v1.IAuthzExtension|null);
+
+                    /** CreateAuthzExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateAuthzExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAuthzExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ICreateAuthzExtensionRequest): google.cloud.networkservices.v1.CreateAuthzExtensionRequest;
+
+                    /**
+                     * Encodes the specified CreateAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateAuthzExtensionRequest.verify|verify} messages.
+                     * @param message CreateAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ICreateAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateAuthzExtensionRequest.verify|verify} messages.
+                     * @param message CreateAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ICreateAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAuthzExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.CreateAuthzExtensionRequest;
+
+                    /**
+                     * Decodes a CreateAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.CreateAuthzExtensionRequest;
+
+                    /**
+                     * Verifies a CreateAuthzExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAuthzExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.CreateAuthzExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAuthzExtensionRequest message. Also converts values to other types if specified.
+                     * @param message CreateAuthzExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.CreateAuthzExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAuthzExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAuthzExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAuthzExtensionRequest. */
+                interface IUpdateAuthzExtensionRequest {
+
+                    /** UpdateAuthzExtensionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuthzExtensionRequest authzExtension */
+                    authzExtension?: (google.cloud.networkservices.v1.IAuthzExtension|null);
+
+                    /** UpdateAuthzExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateAuthzExtensionRequest. */
+                class UpdateAuthzExtensionRequest implements IUpdateAuthzExtensionRequest {
+
+                    /**
+                     * Constructs a new UpdateAuthzExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest);
+
+                    /** UpdateAuthzExtensionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuthzExtensionRequest authzExtension. */
+                    public authzExtension?: (google.cloud.networkservices.v1.IAuthzExtension|null);
+
+                    /** UpdateAuthzExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateAuthzExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAuthzExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest): google.cloud.networkservices.v1.UpdateAuthzExtensionRequest;
+
+                    /**
+                     * Encodes the specified UpdateAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAuthzExtensionRequest.verify|verify} messages.
+                     * @param message UpdateAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAuthzExtensionRequest.verify|verify} messages.
+                     * @param message UpdateAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IUpdateAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAuthzExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.UpdateAuthzExtensionRequest;
+
+                    /**
+                     * Decodes an UpdateAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.UpdateAuthzExtensionRequest;
+
+                    /**
+                     * Verifies an UpdateAuthzExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAuthzExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.UpdateAuthzExtensionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAuthzExtensionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAuthzExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.UpdateAuthzExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAuthzExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAuthzExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAuthzExtensionRequest. */
+                interface IDeleteAuthzExtensionRequest {
+
+                    /** DeleteAuthzExtensionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAuthzExtensionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteAuthzExtensionRequest. */
+                class DeleteAuthzExtensionRequest implements IDeleteAuthzExtensionRequest {
+
+                    /**
+                     * Constructs a new DeleteAuthzExtensionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest);
+
+                    /** DeleteAuthzExtensionRequest name. */
+                    public name: string;
+
+                    /** DeleteAuthzExtensionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteAuthzExtensionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAuthzExtensionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest): google.cloud.networkservices.v1.DeleteAuthzExtensionRequest;
+
+                    /**
+                     * Encodes the specified DeleteAuthzExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAuthzExtensionRequest.verify|verify} messages.
+                     * @param message DeleteAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAuthzExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAuthzExtensionRequest.verify|verify} messages.
+                     * @param message DeleteAuthzExtensionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IDeleteAuthzExtensionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAuthzExtensionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.DeleteAuthzExtensionRequest;
+
+                    /**
+                     * Decodes a DeleteAuthzExtensionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAuthzExtensionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.DeleteAuthzExtensionRequest;
+
+                    /**
+                     * Verifies a DeleteAuthzExtensionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAuthzExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAuthzExtensionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.DeleteAuthzExtensionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAuthzExtensionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAuthzExtensionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.DeleteAuthzExtensionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAuthzExtensionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAuthzExtensionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an EndpointPolicy. */
                 interface IEndpointPolicy {
 
@@ -2945,6 +4790,9 @@ export namespace google {
 
                     /** ListEndpointPoliciesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListEndpointPoliciesRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListEndpointPoliciesRequest. */
@@ -2964,6 +4812,9 @@ export namespace google {
 
                     /** ListEndpointPoliciesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListEndpointPoliciesRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListEndpointPoliciesRequest instance using the specified properties.
@@ -3051,6 +4902,9 @@ export namespace google {
 
                     /** ListEndpointPoliciesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListEndpointPoliciesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListEndpointPoliciesResponse. */
@@ -3067,6 +4921,9 @@ export namespace google {
 
                     /** ListEndpointPoliciesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListEndpointPoliciesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListEndpointPoliciesResponse instance using the specified properties.
@@ -3552,6 +5409,1834 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** WasmPluginView enum. */
+                enum WasmPluginView {
+                    WASM_PLUGIN_VIEW_UNSPECIFIED = 0,
+                    WASM_PLUGIN_VIEW_BASIC = 1,
+                    WASM_PLUGIN_VIEW_FULL = 2
+                }
+
+                /** Properties of a WasmPlugin. */
+                interface IWasmPlugin {
+
+                    /** WasmPlugin name */
+                    name?: (string|null);
+
+                    /** WasmPlugin createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPlugin updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPlugin description */
+                    description?: (string|null);
+
+                    /** WasmPlugin labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** WasmPlugin mainVersionId */
+                    mainVersionId?: (string|null);
+
+                    /** WasmPlugin logConfig */
+                    logConfig?: (google.cloud.networkservices.v1.WasmPlugin.ILogConfig|null);
+
+                    /** WasmPlugin versions */
+                    versions?: ({ [k: string]: google.cloud.networkservices.v1.WasmPlugin.IVersionDetails }|null);
+
+                    /** WasmPlugin usedBy */
+                    usedBy?: (google.cloud.networkservices.v1.WasmPlugin.IUsedBy[]|null);
+                }
+
+                /** Represents a WasmPlugin. */
+                class WasmPlugin implements IWasmPlugin {
+
+                    /**
+                     * Constructs a new WasmPlugin.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IWasmPlugin);
+
+                    /** WasmPlugin name. */
+                    public name: string;
+
+                    /** WasmPlugin createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPlugin updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPlugin description. */
+                    public description: string;
+
+                    /** WasmPlugin labels. */
+                    public labels: { [k: string]: string };
+
+                    /** WasmPlugin mainVersionId. */
+                    public mainVersionId: string;
+
+                    /** WasmPlugin logConfig. */
+                    public logConfig?: (google.cloud.networkservices.v1.WasmPlugin.ILogConfig|null);
+
+                    /** WasmPlugin versions. */
+                    public versions: { [k: string]: google.cloud.networkservices.v1.WasmPlugin.IVersionDetails };
+
+                    /** WasmPlugin usedBy. */
+                    public usedBy: google.cloud.networkservices.v1.WasmPlugin.IUsedBy[];
+
+                    /**
+                     * Creates a new WasmPlugin instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WasmPlugin instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IWasmPlugin): google.cloud.networkservices.v1.WasmPlugin;
+
+                    /**
+                     * Encodes the specified WasmPlugin message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.verify|verify} messages.
+                     * @param message WasmPlugin message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IWasmPlugin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WasmPlugin message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.verify|verify} messages.
+                     * @param message WasmPlugin message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IWasmPlugin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WasmPlugin message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WasmPlugin
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.WasmPlugin;
+
+                    /**
+                     * Decodes a WasmPlugin message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WasmPlugin
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.WasmPlugin;
+
+                    /**
+                     * Verifies a WasmPlugin message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WasmPlugin message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WasmPlugin
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.WasmPlugin;
+
+                    /**
+                     * Creates a plain object from a WasmPlugin message. Also converts values to other types if specified.
+                     * @param message WasmPlugin
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.WasmPlugin, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WasmPlugin to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WasmPlugin
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace WasmPlugin {
+
+                    /** Properties of a VersionDetails. */
+                    interface IVersionDetails {
+
+                        /** VersionDetails pluginConfigData */
+                        pluginConfigData?: (Uint8Array|Buffer|string|null);
+
+                        /** VersionDetails pluginConfigUri */
+                        pluginConfigUri?: (string|null);
+
+                        /** VersionDetails createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** VersionDetails updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** VersionDetails description */
+                        description?: (string|null);
+
+                        /** VersionDetails labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** VersionDetails imageUri */
+                        imageUri?: (string|null);
+
+                        /** VersionDetails imageDigest */
+                        imageDigest?: (string|null);
+
+                        /** VersionDetails pluginConfigDigest */
+                        pluginConfigDigest?: (string|null);
+                    }
+
+                    /** Represents a VersionDetails. */
+                    class VersionDetails implements IVersionDetails {
+
+                        /**
+                         * Constructs a new VersionDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.WasmPlugin.IVersionDetails);
+
+                        /** VersionDetails pluginConfigData. */
+                        public pluginConfigData?: (Uint8Array|Buffer|string|null);
+
+                        /** VersionDetails pluginConfigUri. */
+                        public pluginConfigUri?: (string|null);
+
+                        /** VersionDetails createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** VersionDetails updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** VersionDetails description. */
+                        public description: string;
+
+                        /** VersionDetails labels. */
+                        public labels: { [k: string]: string };
+
+                        /** VersionDetails imageUri. */
+                        public imageUri: string;
+
+                        /** VersionDetails imageDigest. */
+                        public imageDigest: string;
+
+                        /** VersionDetails pluginConfigDigest. */
+                        public pluginConfigDigest: string;
+
+                        /** VersionDetails pluginConfigSource. */
+                        public pluginConfigSource?: ("pluginConfigData"|"pluginConfigUri");
+
+                        /**
+                         * Creates a new VersionDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VersionDetails instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.WasmPlugin.IVersionDetails): google.cloud.networkservices.v1.WasmPlugin.VersionDetails;
+
+                        /**
+                         * Encodes the specified VersionDetails message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.VersionDetails.verify|verify} messages.
+                         * @param message VersionDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.WasmPlugin.IVersionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VersionDetails message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.VersionDetails.verify|verify} messages.
+                         * @param message VersionDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.WasmPlugin.IVersionDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VersionDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VersionDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.WasmPlugin.VersionDetails;
+
+                        /**
+                         * Decodes a VersionDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VersionDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.WasmPlugin.VersionDetails;
+
+                        /**
+                         * Verifies a VersionDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VersionDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VersionDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.WasmPlugin.VersionDetails;
+
+                        /**
+                         * Creates a plain object from a VersionDetails message. Also converts values to other types if specified.
+                         * @param message VersionDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.WasmPlugin.VersionDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VersionDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VersionDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LogConfig. */
+                    interface ILogConfig {
+
+                        /** LogConfig enable */
+                        enable?: (boolean|null);
+
+                        /** LogConfig sampleRate */
+                        sampleRate?: (number|null);
+
+                        /** LogConfig minLogLevel */
+                        minLogLevel?: (google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel|keyof typeof google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel|null);
+                    }
+
+                    /** Represents a LogConfig. */
+                    class LogConfig implements ILogConfig {
+
+                        /**
+                         * Constructs a new LogConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.WasmPlugin.ILogConfig);
+
+                        /** LogConfig enable. */
+                        public enable: boolean;
+
+                        /** LogConfig sampleRate. */
+                        public sampleRate: number;
+
+                        /** LogConfig minLogLevel. */
+                        public minLogLevel: (google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel|keyof typeof google.cloud.networkservices.v1.WasmPlugin.LogConfig.LogLevel);
+
+                        /**
+                         * Creates a new LogConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LogConfig instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.WasmPlugin.ILogConfig): google.cloud.networkservices.v1.WasmPlugin.LogConfig;
+
+                        /**
+                         * Encodes the specified LogConfig message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.LogConfig.verify|verify} messages.
+                         * @param message LogConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.WasmPlugin.ILogConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LogConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.LogConfig.verify|verify} messages.
+                         * @param message LogConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.WasmPlugin.ILogConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LogConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LogConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.WasmPlugin.LogConfig;
+
+                        /**
+                         * Decodes a LogConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LogConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.WasmPlugin.LogConfig;
+
+                        /**
+                         * Verifies a LogConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LogConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LogConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.WasmPlugin.LogConfig;
+
+                        /**
+                         * Creates a plain object from a LogConfig message. Also converts values to other types if specified.
+                         * @param message LogConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.WasmPlugin.LogConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LogConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LogConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LogConfig {
+
+                        /** LogLevel enum. */
+                        enum LogLevel {
+                            LOG_LEVEL_UNSPECIFIED = 0,
+                            TRACE = 1,
+                            DEBUG = 2,
+                            INFO = 3,
+                            WARN = 4,
+                            ERROR = 5,
+                            CRITICAL = 6
+                        }
+                    }
+
+                    /** Properties of a UsedBy. */
+                    interface IUsedBy {
+
+                        /** UsedBy name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a UsedBy. */
+                    class UsedBy implements IUsedBy {
+
+                        /**
+                         * Constructs a new UsedBy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.WasmPlugin.IUsedBy);
+
+                        /** UsedBy name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new UsedBy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UsedBy instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.WasmPlugin.IUsedBy): google.cloud.networkservices.v1.WasmPlugin.UsedBy;
+
+                        /**
+                         * Encodes the specified UsedBy message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.UsedBy.verify|verify} messages.
+                         * @param message UsedBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.WasmPlugin.IUsedBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UsedBy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPlugin.UsedBy.verify|verify} messages.
+                         * @param message UsedBy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.WasmPlugin.IUsedBy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UsedBy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UsedBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.WasmPlugin.UsedBy;
+
+                        /**
+                         * Decodes a UsedBy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UsedBy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.WasmPlugin.UsedBy;
+
+                        /**
+                         * Verifies a UsedBy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UsedBy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UsedBy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.WasmPlugin.UsedBy;
+
+                        /**
+                         * Creates a plain object from a UsedBy message. Also converts values to other types if specified.
+                         * @param message UsedBy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.WasmPlugin.UsedBy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UsedBy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UsedBy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a WasmPluginVersion. */
+                interface IWasmPluginVersion {
+
+                    /** WasmPluginVersion pluginConfigData */
+                    pluginConfigData?: (Uint8Array|Buffer|string|null);
+
+                    /** WasmPluginVersion pluginConfigUri */
+                    pluginConfigUri?: (string|null);
+
+                    /** WasmPluginVersion name */
+                    name?: (string|null);
+
+                    /** WasmPluginVersion createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPluginVersion updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPluginVersion description */
+                    description?: (string|null);
+
+                    /** WasmPluginVersion labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** WasmPluginVersion imageUri */
+                    imageUri?: (string|null);
+
+                    /** WasmPluginVersion imageDigest */
+                    imageDigest?: (string|null);
+
+                    /** WasmPluginVersion pluginConfigDigest */
+                    pluginConfigDigest?: (string|null);
+                }
+
+                /** Represents a WasmPluginVersion. */
+                class WasmPluginVersion implements IWasmPluginVersion {
+
+                    /**
+                     * Constructs a new WasmPluginVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IWasmPluginVersion);
+
+                    /** WasmPluginVersion pluginConfigData. */
+                    public pluginConfigData?: (Uint8Array|Buffer|string|null);
+
+                    /** WasmPluginVersion pluginConfigUri. */
+                    public pluginConfigUri?: (string|null);
+
+                    /** WasmPluginVersion name. */
+                    public name: string;
+
+                    /** WasmPluginVersion createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPluginVersion updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WasmPluginVersion description. */
+                    public description: string;
+
+                    /** WasmPluginVersion labels. */
+                    public labels: { [k: string]: string };
+
+                    /** WasmPluginVersion imageUri. */
+                    public imageUri: string;
+
+                    /** WasmPluginVersion imageDigest. */
+                    public imageDigest: string;
+
+                    /** WasmPluginVersion pluginConfigDigest. */
+                    public pluginConfigDigest: string;
+
+                    /** WasmPluginVersion pluginConfigSource. */
+                    public pluginConfigSource?: ("pluginConfigData"|"pluginConfigUri");
+
+                    /**
+                     * Creates a new WasmPluginVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WasmPluginVersion instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IWasmPluginVersion): google.cloud.networkservices.v1.WasmPluginVersion;
+
+                    /**
+                     * Encodes the specified WasmPluginVersion message. Does not implicitly {@link google.cloud.networkservices.v1.WasmPluginVersion.verify|verify} messages.
+                     * @param message WasmPluginVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IWasmPluginVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WasmPluginVersion message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.WasmPluginVersion.verify|verify} messages.
+                     * @param message WasmPluginVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IWasmPluginVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WasmPluginVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WasmPluginVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.WasmPluginVersion;
+
+                    /**
+                     * Decodes a WasmPluginVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WasmPluginVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.WasmPluginVersion;
+
+                    /**
+                     * Verifies a WasmPluginVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WasmPluginVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WasmPluginVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.WasmPluginVersion;
+
+                    /**
+                     * Creates a plain object from a WasmPluginVersion message. Also converts values to other types if specified.
+                     * @param message WasmPluginVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.WasmPluginVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WasmPluginVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WasmPluginVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWasmPluginsRequest. */
+                interface IListWasmPluginsRequest {
+
+                    /** ListWasmPluginsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWasmPluginsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWasmPluginsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListWasmPluginsRequest. */
+                class ListWasmPluginsRequest implements IListWasmPluginsRequest {
+
+                    /**
+                     * Constructs a new ListWasmPluginsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListWasmPluginsRequest);
+
+                    /** ListWasmPluginsRequest parent. */
+                    public parent: string;
+
+                    /** ListWasmPluginsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWasmPluginsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListWasmPluginsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWasmPluginsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListWasmPluginsRequest): google.cloud.networkservices.v1.ListWasmPluginsRequest;
+
+                    /**
+                     * Encodes the specified ListWasmPluginsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsRequest.verify|verify} messages.
+                     * @param message ListWasmPluginsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListWasmPluginsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWasmPluginsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsRequest.verify|verify} messages.
+                     * @param message ListWasmPluginsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListWasmPluginsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWasmPluginsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWasmPluginsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListWasmPluginsRequest;
+
+                    /**
+                     * Decodes a ListWasmPluginsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWasmPluginsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListWasmPluginsRequest;
+
+                    /**
+                     * Verifies a ListWasmPluginsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWasmPluginsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWasmPluginsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListWasmPluginsRequest;
+
+                    /**
+                     * Creates a plain object from a ListWasmPluginsRequest message. Also converts values to other types if specified.
+                     * @param message ListWasmPluginsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListWasmPluginsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWasmPluginsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWasmPluginsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWasmPluginsResponse. */
+                interface IListWasmPluginsResponse {
+
+                    /** ListWasmPluginsResponse wasmPlugins */
+                    wasmPlugins?: (google.cloud.networkservices.v1.IWasmPlugin[]|null);
+
+                    /** ListWasmPluginsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListWasmPluginsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListWasmPluginsResponse. */
+                class ListWasmPluginsResponse implements IListWasmPluginsResponse {
+
+                    /**
+                     * Constructs a new ListWasmPluginsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListWasmPluginsResponse);
+
+                    /** ListWasmPluginsResponse wasmPlugins. */
+                    public wasmPlugins: google.cloud.networkservices.v1.IWasmPlugin[];
+
+                    /** ListWasmPluginsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListWasmPluginsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListWasmPluginsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWasmPluginsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListWasmPluginsResponse): google.cloud.networkservices.v1.ListWasmPluginsResponse;
+
+                    /**
+                     * Encodes the specified ListWasmPluginsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsResponse.verify|verify} messages.
+                     * @param message ListWasmPluginsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListWasmPluginsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWasmPluginsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginsResponse.verify|verify} messages.
+                     * @param message ListWasmPluginsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListWasmPluginsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWasmPluginsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWasmPluginsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListWasmPluginsResponse;
+
+                    /**
+                     * Decodes a ListWasmPluginsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWasmPluginsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListWasmPluginsResponse;
+
+                    /**
+                     * Verifies a ListWasmPluginsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWasmPluginsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWasmPluginsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListWasmPluginsResponse;
+
+                    /**
+                     * Creates a plain object from a ListWasmPluginsResponse message. Also converts values to other types if specified.
+                     * @param message ListWasmPluginsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListWasmPluginsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWasmPluginsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWasmPluginsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetWasmPluginRequest. */
+                interface IGetWasmPluginRequest {
+
+                    /** GetWasmPluginRequest name */
+                    name?: (string|null);
+
+                    /** GetWasmPluginRequest view */
+                    view?: (google.cloud.networkservices.v1.WasmPluginView|keyof typeof google.cloud.networkservices.v1.WasmPluginView|null);
+                }
+
+                /** Represents a GetWasmPluginRequest. */
+                class GetWasmPluginRequest implements IGetWasmPluginRequest {
+
+                    /**
+                     * Constructs a new GetWasmPluginRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetWasmPluginRequest);
+
+                    /** GetWasmPluginRequest name. */
+                    public name: string;
+
+                    /** GetWasmPluginRequest view. */
+                    public view: (google.cloud.networkservices.v1.WasmPluginView|keyof typeof google.cloud.networkservices.v1.WasmPluginView);
+
+                    /**
+                     * Creates a new GetWasmPluginRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWasmPluginRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetWasmPluginRequest): google.cloud.networkservices.v1.GetWasmPluginRequest;
+
+                    /**
+                     * Encodes the specified GetWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginRequest.verify|verify} messages.
+                     * @param message GetWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginRequest.verify|verify} messages.
+                     * @param message GetWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWasmPluginRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetWasmPluginRequest;
+
+                    /**
+                     * Decodes a GetWasmPluginRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetWasmPluginRequest;
+
+                    /**
+                     * Verifies a GetWasmPluginRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWasmPluginRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetWasmPluginRequest;
+
+                    /**
+                     * Creates a plain object from a GetWasmPluginRequest message. Also converts values to other types if specified.
+                     * @param message GetWasmPluginRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetWasmPluginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWasmPluginRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetWasmPluginRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateWasmPluginRequest. */
+                interface ICreateWasmPluginRequest {
+
+                    /** CreateWasmPluginRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateWasmPluginRequest wasmPluginId */
+                    wasmPluginId?: (string|null);
+
+                    /** CreateWasmPluginRequest wasmPlugin */
+                    wasmPlugin?: (google.cloud.networkservices.v1.IWasmPlugin|null);
+                }
+
+                /** Represents a CreateWasmPluginRequest. */
+                class CreateWasmPluginRequest implements ICreateWasmPluginRequest {
+
+                    /**
+                     * Constructs a new CreateWasmPluginRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ICreateWasmPluginRequest);
+
+                    /** CreateWasmPluginRequest parent. */
+                    public parent: string;
+
+                    /** CreateWasmPluginRequest wasmPluginId. */
+                    public wasmPluginId: string;
+
+                    /** CreateWasmPluginRequest wasmPlugin. */
+                    public wasmPlugin?: (google.cloud.networkservices.v1.IWasmPlugin|null);
+
+                    /**
+                     * Creates a new CreateWasmPluginRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWasmPluginRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ICreateWasmPluginRequest): google.cloud.networkservices.v1.CreateWasmPluginRequest;
+
+                    /**
+                     * Encodes the specified CreateWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginRequest.verify|verify} messages.
+                     * @param message CreateWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ICreateWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginRequest.verify|verify} messages.
+                     * @param message CreateWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ICreateWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWasmPluginRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.CreateWasmPluginRequest;
+
+                    /**
+                     * Decodes a CreateWasmPluginRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.CreateWasmPluginRequest;
+
+                    /**
+                     * Verifies a CreateWasmPluginRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWasmPluginRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.CreateWasmPluginRequest;
+
+                    /**
+                     * Creates a plain object from a CreateWasmPluginRequest message. Also converts values to other types if specified.
+                     * @param message CreateWasmPluginRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.CreateWasmPluginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWasmPluginRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateWasmPluginRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateWasmPluginRequest. */
+                interface IUpdateWasmPluginRequest {
+
+                    /** UpdateWasmPluginRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWasmPluginRequest wasmPlugin */
+                    wasmPlugin?: (google.cloud.networkservices.v1.IWasmPlugin|null);
+                }
+
+                /** Represents an UpdateWasmPluginRequest. */
+                class UpdateWasmPluginRequest implements IUpdateWasmPluginRequest {
+
+                    /**
+                     * Constructs a new UpdateWasmPluginRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IUpdateWasmPluginRequest);
+
+                    /** UpdateWasmPluginRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateWasmPluginRequest wasmPlugin. */
+                    public wasmPlugin?: (google.cloud.networkservices.v1.IWasmPlugin|null);
+
+                    /**
+                     * Creates a new UpdateWasmPluginRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateWasmPluginRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IUpdateWasmPluginRequest): google.cloud.networkservices.v1.UpdateWasmPluginRequest;
+
+                    /**
+                     * Encodes the specified UpdateWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateWasmPluginRequest.verify|verify} messages.
+                     * @param message UpdateWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IUpdateWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateWasmPluginRequest.verify|verify} messages.
+                     * @param message UpdateWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IUpdateWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateWasmPluginRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.UpdateWasmPluginRequest;
+
+                    /**
+                     * Decodes an UpdateWasmPluginRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.UpdateWasmPluginRequest;
+
+                    /**
+                     * Verifies an UpdateWasmPluginRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateWasmPluginRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.UpdateWasmPluginRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateWasmPluginRequest message. Also converts values to other types if specified.
+                     * @param message UpdateWasmPluginRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.UpdateWasmPluginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateWasmPluginRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateWasmPluginRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteWasmPluginRequest. */
+                interface IDeleteWasmPluginRequest {
+
+                    /** DeleteWasmPluginRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteWasmPluginRequest. */
+                class DeleteWasmPluginRequest implements IDeleteWasmPluginRequest {
+
+                    /**
+                     * Constructs a new DeleteWasmPluginRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IDeleteWasmPluginRequest);
+
+                    /** DeleteWasmPluginRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteWasmPluginRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteWasmPluginRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IDeleteWasmPluginRequest): google.cloud.networkservices.v1.DeleteWasmPluginRequest;
+
+                    /**
+                     * Encodes the specified DeleteWasmPluginRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginRequest.verify|verify} messages.
+                     * @param message DeleteWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IDeleteWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteWasmPluginRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginRequest.verify|verify} messages.
+                     * @param message DeleteWasmPluginRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IDeleteWasmPluginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteWasmPluginRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.DeleteWasmPluginRequest;
+
+                    /**
+                     * Decodes a DeleteWasmPluginRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteWasmPluginRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.DeleteWasmPluginRequest;
+
+                    /**
+                     * Verifies a DeleteWasmPluginRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteWasmPluginRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteWasmPluginRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.DeleteWasmPluginRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteWasmPluginRequest message. Also converts values to other types if specified.
+                     * @param message DeleteWasmPluginRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.DeleteWasmPluginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteWasmPluginRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteWasmPluginRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWasmPluginVersionsRequest. */
+                interface IListWasmPluginVersionsRequest {
+
+                    /** ListWasmPluginVersionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWasmPluginVersionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWasmPluginVersionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListWasmPluginVersionsRequest. */
+                class ListWasmPluginVersionsRequest implements IListWasmPluginVersionsRequest {
+
+                    /**
+                     * Constructs a new ListWasmPluginVersionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListWasmPluginVersionsRequest);
+
+                    /** ListWasmPluginVersionsRequest parent. */
+                    public parent: string;
+
+                    /** ListWasmPluginVersionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWasmPluginVersionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListWasmPluginVersionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWasmPluginVersionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListWasmPluginVersionsRequest): google.cloud.networkservices.v1.ListWasmPluginVersionsRequest;
+
+                    /**
+                     * Encodes the specified ListWasmPluginVersionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsRequest.verify|verify} messages.
+                     * @param message ListWasmPluginVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListWasmPluginVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWasmPluginVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsRequest.verify|verify} messages.
+                     * @param message ListWasmPluginVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListWasmPluginVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWasmPluginVersionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWasmPluginVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListWasmPluginVersionsRequest;
+
+                    /**
+                     * Decodes a ListWasmPluginVersionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWasmPluginVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListWasmPluginVersionsRequest;
+
+                    /**
+                     * Verifies a ListWasmPluginVersionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWasmPluginVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWasmPluginVersionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListWasmPluginVersionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListWasmPluginVersionsRequest message. Also converts values to other types if specified.
+                     * @param message ListWasmPluginVersionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListWasmPluginVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWasmPluginVersionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWasmPluginVersionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWasmPluginVersionsResponse. */
+                interface IListWasmPluginVersionsResponse {
+
+                    /** ListWasmPluginVersionsResponse wasmPluginVersions */
+                    wasmPluginVersions?: (google.cloud.networkservices.v1.IWasmPluginVersion[]|null);
+
+                    /** ListWasmPluginVersionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListWasmPluginVersionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListWasmPluginVersionsResponse. */
+                class ListWasmPluginVersionsResponse implements IListWasmPluginVersionsResponse {
+
+                    /**
+                     * Constructs a new ListWasmPluginVersionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListWasmPluginVersionsResponse);
+
+                    /** ListWasmPluginVersionsResponse wasmPluginVersions. */
+                    public wasmPluginVersions: google.cloud.networkservices.v1.IWasmPluginVersion[];
+
+                    /** ListWasmPluginVersionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListWasmPluginVersionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListWasmPluginVersionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWasmPluginVersionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListWasmPluginVersionsResponse): google.cloud.networkservices.v1.ListWasmPluginVersionsResponse;
+
+                    /**
+                     * Encodes the specified ListWasmPluginVersionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsResponse.verify|verify} messages.
+                     * @param message ListWasmPluginVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListWasmPluginVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWasmPluginVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListWasmPluginVersionsResponse.verify|verify} messages.
+                     * @param message ListWasmPluginVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListWasmPluginVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWasmPluginVersionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWasmPluginVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListWasmPluginVersionsResponse;
+
+                    /**
+                     * Decodes a ListWasmPluginVersionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWasmPluginVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListWasmPluginVersionsResponse;
+
+                    /**
+                     * Verifies a ListWasmPluginVersionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWasmPluginVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWasmPluginVersionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListWasmPluginVersionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListWasmPluginVersionsResponse message. Also converts values to other types if specified.
+                     * @param message ListWasmPluginVersionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListWasmPluginVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWasmPluginVersionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWasmPluginVersionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetWasmPluginVersionRequest. */
+                interface IGetWasmPluginVersionRequest {
+
+                    /** GetWasmPluginVersionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWasmPluginVersionRequest. */
+                class GetWasmPluginVersionRequest implements IGetWasmPluginVersionRequest {
+
+                    /**
+                     * Constructs a new GetWasmPluginVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetWasmPluginVersionRequest);
+
+                    /** GetWasmPluginVersionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWasmPluginVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWasmPluginVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetWasmPluginVersionRequest): google.cloud.networkservices.v1.GetWasmPluginVersionRequest;
+
+                    /**
+                     * Encodes the specified GetWasmPluginVersionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginVersionRequest.verify|verify} messages.
+                     * @param message GetWasmPluginVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetWasmPluginVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWasmPluginVersionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetWasmPluginVersionRequest.verify|verify} messages.
+                     * @param message GetWasmPluginVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetWasmPluginVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWasmPluginVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWasmPluginVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetWasmPluginVersionRequest;
+
+                    /**
+                     * Decodes a GetWasmPluginVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWasmPluginVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetWasmPluginVersionRequest;
+
+                    /**
+                     * Verifies a GetWasmPluginVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWasmPluginVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWasmPluginVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetWasmPluginVersionRequest;
+
+                    /**
+                     * Creates a plain object from a GetWasmPluginVersionRequest message. Also converts values to other types if specified.
+                     * @param message GetWasmPluginVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetWasmPluginVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWasmPluginVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetWasmPluginVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateWasmPluginVersionRequest. */
+                interface ICreateWasmPluginVersionRequest {
+
+                    /** CreateWasmPluginVersionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateWasmPluginVersionRequest wasmPluginVersionId */
+                    wasmPluginVersionId?: (string|null);
+
+                    /** CreateWasmPluginVersionRequest wasmPluginVersion */
+                    wasmPluginVersion?: (google.cloud.networkservices.v1.IWasmPluginVersion|null);
+                }
+
+                /** Represents a CreateWasmPluginVersionRequest. */
+                class CreateWasmPluginVersionRequest implements ICreateWasmPluginVersionRequest {
+
+                    /**
+                     * Constructs a new CreateWasmPluginVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest);
+
+                    /** CreateWasmPluginVersionRequest parent. */
+                    public parent: string;
+
+                    /** CreateWasmPluginVersionRequest wasmPluginVersionId. */
+                    public wasmPluginVersionId: string;
+
+                    /** CreateWasmPluginVersionRequest wasmPluginVersion. */
+                    public wasmPluginVersion?: (google.cloud.networkservices.v1.IWasmPluginVersion|null);
+
+                    /**
+                     * Creates a new CreateWasmPluginVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateWasmPluginVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest): google.cloud.networkservices.v1.CreateWasmPluginVersionRequest;
+
+                    /**
+                     * Encodes the specified CreateWasmPluginVersionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginVersionRequest.verify|verify} messages.
+                     * @param message CreateWasmPluginVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateWasmPluginVersionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateWasmPluginVersionRequest.verify|verify} messages.
+                     * @param message CreateWasmPluginVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateWasmPluginVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateWasmPluginVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.CreateWasmPluginVersionRequest;
+
+                    /**
+                     * Decodes a CreateWasmPluginVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateWasmPluginVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.CreateWasmPluginVersionRequest;
+
+                    /**
+                     * Verifies a CreateWasmPluginVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateWasmPluginVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateWasmPluginVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.CreateWasmPluginVersionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateWasmPluginVersionRequest message. Also converts values to other types if specified.
+                     * @param message CreateWasmPluginVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.CreateWasmPluginVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateWasmPluginVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateWasmPluginVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteWasmPluginVersionRequest. */
+                interface IDeleteWasmPluginVersionRequest {
+
+                    /** DeleteWasmPluginVersionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteWasmPluginVersionRequest. */
+                class DeleteWasmPluginVersionRequest implements IDeleteWasmPluginVersionRequest {
+
+                    /**
+                     * Constructs a new DeleteWasmPluginVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest);
+
+                    /** DeleteWasmPluginVersionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteWasmPluginVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteWasmPluginVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest): google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest;
+
+                    /**
+                     * Encodes the specified DeleteWasmPluginVersionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest.verify|verify} messages.
+                     * @param message DeleteWasmPluginVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteWasmPluginVersionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest.verify|verify} messages.
+                     * @param message DeleteWasmPluginVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteWasmPluginVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteWasmPluginVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest;
+
+                    /**
+                     * Decodes a DeleteWasmPluginVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteWasmPluginVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest;
+
+                    /**
+                     * Verifies a DeleteWasmPluginVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteWasmPluginVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteWasmPluginVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteWasmPluginVersionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteWasmPluginVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.DeleteWasmPluginVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteWasmPluginVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteWasmPluginVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Gateway. */
                 interface IGateway {
 
@@ -3576,6 +7261,9 @@ export namespace google {
                     /** Gateway type */
                     type?: (google.cloud.networkservices.v1.Gateway.Type|keyof typeof google.cloud.networkservices.v1.Gateway.Type|null);
 
+                    /** Gateway addresses */
+                    addresses?: (string[]|null);
+
                     /** Gateway ports */
                     ports?: (number[]|null);
 
@@ -3584,6 +7272,27 @@ export namespace google {
 
                     /** Gateway serverTlsPolicy */
                     serverTlsPolicy?: (string|null);
+
+                    /** Gateway certificateUrls */
+                    certificateUrls?: (string[]|null);
+
+                    /** Gateway gatewaySecurityPolicy */
+                    gatewaySecurityPolicy?: (string|null);
+
+                    /** Gateway network */
+                    network?: (string|null);
+
+                    /** Gateway subnetwork */
+                    subnetwork?: (string|null);
+
+                    /** Gateway ipVersion */
+                    ipVersion?: (google.cloud.networkservices.v1.Gateway.IpVersion|keyof typeof google.cloud.networkservices.v1.Gateway.IpVersion|null);
+
+                    /** Gateway envoyHeaders */
+                    envoyHeaders?: (google.cloud.networkservices.v1.EnvoyHeaders|keyof typeof google.cloud.networkservices.v1.EnvoyHeaders|null);
+
+                    /** Gateway routingMode */
+                    routingMode?: (google.cloud.networkservices.v1.Gateway.RoutingMode|keyof typeof google.cloud.networkservices.v1.Gateway.RoutingMode|null);
                 }
 
                 /** Represents a Gateway. */
@@ -3616,6 +7325,9 @@ export namespace google {
                     /** Gateway type. */
                     public type: (google.cloud.networkservices.v1.Gateway.Type|keyof typeof google.cloud.networkservices.v1.Gateway.Type);
 
+                    /** Gateway addresses. */
+                    public addresses: string[];
+
                     /** Gateway ports. */
                     public ports: number[];
 
@@ -3624,6 +7336,27 @@ export namespace google {
 
                     /** Gateway serverTlsPolicy. */
                     public serverTlsPolicy: string;
+
+                    /** Gateway certificateUrls. */
+                    public certificateUrls: string[];
+
+                    /** Gateway gatewaySecurityPolicy. */
+                    public gatewaySecurityPolicy: string;
+
+                    /** Gateway network. */
+                    public network: string;
+
+                    /** Gateway subnetwork. */
+                    public subnetwork: string;
+
+                    /** Gateway ipVersion. */
+                    public ipVersion: (google.cloud.networkservices.v1.Gateway.IpVersion|keyof typeof google.cloud.networkservices.v1.Gateway.IpVersion);
+
+                    /** Gateway envoyHeaders. */
+                    public envoyHeaders?: (google.cloud.networkservices.v1.EnvoyHeaders|keyof typeof google.cloud.networkservices.v1.EnvoyHeaders|null);
+
+                    /** Gateway routingMode. */
+                    public routingMode: (google.cloud.networkservices.v1.Gateway.RoutingMode|keyof typeof google.cloud.networkservices.v1.Gateway.RoutingMode);
 
                     /**
                      * Creates a new Gateway instance using the specified properties.
@@ -3710,6 +7443,19 @@ export namespace google {
                         TYPE_UNSPECIFIED = 0,
                         OPEN_MESH = 1,
                         SECURE_WEB_GATEWAY = 2
+                    }
+
+                    /** IpVersion enum. */
+                    enum IpVersion {
+                        IP_VERSION_UNSPECIFIED = 0,
+                        IPV4 = 1,
+                        IPV6 = 2
+                    }
+
+                    /** RoutingMode enum. */
+                    enum RoutingMode {
+                        EXPLICIT_ROUTING_MODE = 0,
+                        NEXT_HOP_ROUTING_MODE = 1
                     }
                 }
 
@@ -3830,6 +7576,9 @@ export namespace google {
 
                     /** ListGatewaysResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListGatewaysResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListGatewaysResponse. */
@@ -3846,6 +7595,9 @@ export namespace google {
 
                     /** ListGatewaysResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListGatewaysResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListGatewaysResponse instance using the specified properties.
@@ -4521,9 +8273,6 @@ export namespace google {
                         /** MethodMatch caseSensitive. */
                         public caseSensitive?: (boolean|null);
 
-                        /** MethodMatch _caseSensitive. */
-                        public _caseSensitive?: "caseSensitive";
-
                         /**
                          * Creates a new MethodMatch instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4756,9 +8505,6 @@ export namespace google {
                         /** RouteMatch headers. */
                         public headers: google.cloud.networkservices.v1.GrpcRoute.IHeaderMatch[];
 
-                        /** RouteMatch _method. */
-                        public _method?: "method";
-
                         /**
                          * Creates a new RouteMatch instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4865,9 +8611,6 @@ export namespace google {
                         /** Destination destinationType. */
                         public destinationType?: "serviceName";
 
-                        /** Destination _weight. */
-                        public _weight?: "weight";
-
                         /**
                          * Creates a new Destination instance using the specified properties.
                          * @param [properties] Properties to set
@@ -4970,12 +8713,6 @@ export namespace google {
 
                         /** FaultInjectionPolicy abort. */
                         public abort?: (google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.IAbort|null);
-
-                        /** FaultInjectionPolicy _delay. */
-                        public _delay?: "delay";
-
-                        /** FaultInjectionPolicy _abort. */
-                        public _abort?: "abort";
 
                         /**
                          * Creates a new FaultInjectionPolicy instance using the specified properties.
@@ -5082,12 +8819,6 @@ export namespace google {
                             /** Delay percentage. */
                             public percentage?: (number|null);
 
-                            /** Delay _fixedDelay. */
-                            public _fixedDelay?: "fixedDelay";
-
-                            /** Delay _percentage. */
-                            public _percentage?: "percentage";
-
                             /**
                              * Creates a new Delay instance using the specified properties.
                              * @param [properties] Properties to set
@@ -5191,12 +8922,6 @@ export namespace google {
                             /** Abort percentage. */
                             public percentage?: (number|null);
 
-                            /** Abort _httpStatus. */
-                            public _httpStatus?: "httpStatus";
-
-                            /** Abort _percentage. */
-                            public _percentage?: "percentage";
-
                             /**
                              * Creates a new Abort instance using the specified properties.
                              * @param [properties] Properties to set
@@ -5274,6 +8999,103 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** Properties of a StatefulSessionAffinityPolicy. */
+                    interface IStatefulSessionAffinityPolicy {
+
+                        /** StatefulSessionAffinityPolicy cookieTtl */
+                        cookieTtl?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a StatefulSessionAffinityPolicy. */
+                    class StatefulSessionAffinityPolicy implements IStatefulSessionAffinityPolicy {
+
+                        /**
+                         * Constructs a new StatefulSessionAffinityPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy);
+
+                        /** StatefulSessionAffinityPolicy cookieTtl. */
+                        public cookieTtl?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new StatefulSessionAffinityPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StatefulSessionAffinityPolicy instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy): google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Encodes the specified StatefulSessionAffinityPolicy message. Does not implicitly {@link google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                         * @param message StatefulSessionAffinityPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StatefulSessionAffinityPolicy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                         * @param message StatefulSessionAffinityPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StatefulSessionAffinityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StatefulSessionAffinityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Verifies a StatefulSessionAffinityPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StatefulSessionAffinityPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StatefulSessionAffinityPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Creates a plain object from a StatefulSessionAffinityPolicy message. Also converts values to other types if specified.
+                         * @param message StatefulSessionAffinityPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StatefulSessionAffinityPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StatefulSessionAffinityPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a RetryPolicy. */
@@ -5393,6 +9215,12 @@ export namespace google {
 
                         /** RouteAction retryPolicy */
                         retryPolicy?: (google.cloud.networkservices.v1.GrpcRoute.IRetryPolicy|null);
+
+                        /** RouteAction statefulSessionAffinity */
+                        statefulSessionAffinity?: (google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy|null);
+
+                        /** RouteAction idleTimeout */
+                        idleTimeout?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a RouteAction. */
@@ -5415,6 +9243,12 @@ export namespace google {
 
                         /** RouteAction retryPolicy. */
                         public retryPolicy?: (google.cloud.networkservices.v1.GrpcRoute.IRetryPolicy|null);
+
+                        /** RouteAction statefulSessionAffinity. */
+                        public statefulSessionAffinity?: (google.cloud.networkservices.v1.GrpcRoute.IStatefulSessionAffinityPolicy|null);
+
+                        /** RouteAction idleTimeout. */
+                        public idleTimeout?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new RouteAction instance using the specified properties.
@@ -5609,6 +9443,9 @@ export namespace google {
 
                     /** ListGrpcRoutesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListGrpcRoutesRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListGrpcRoutesRequest. */
@@ -5628,6 +9465,9 @@ export namespace google {
 
                     /** ListGrpcRoutesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListGrpcRoutesRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListGrpcRoutesRequest instance using the specified properties.
@@ -5715,6 +9555,9 @@ export namespace google {
 
                     /** ListGrpcRoutesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListGrpcRoutesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListGrpcRoutesResponse. */
@@ -5731,6 +9574,9 @@ export namespace google {
 
                     /** ListGrpcRoutesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListGrpcRoutesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListGrpcRoutesResponse instance using the specified properties.
@@ -6873,6 +10719,12 @@ export namespace google {
 
                         /** Destination weight */
                         weight?: (number|null);
+
+                        /** Destination requestHeaderModifier */
+                        requestHeaderModifier?: (google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null);
+
+                        /** Destination responseHeaderModifier */
+                        responseHeaderModifier?: (google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null);
                     }
 
                     /** Represents a Destination. */
@@ -6889,6 +10741,12 @@ export namespace google {
 
                         /** Destination weight. */
                         public weight: number;
+
+                        /** Destination requestHeaderModifier. */
+                        public requestHeaderModifier?: (google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null);
+
+                        /** Destination responseHeaderModifier. */
+                        public responseHeaderModifier?: (google.cloud.networkservices.v1.HttpRoute.IHeaderModifier|null);
 
                         /**
                          * Creates a new Destination instance using the specified properties.
@@ -7426,6 +11284,103 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a StatefulSessionAffinityPolicy. */
+                    interface IStatefulSessionAffinityPolicy {
+
+                        /** StatefulSessionAffinityPolicy cookieTtl */
+                        cookieTtl?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a StatefulSessionAffinityPolicy. */
+                    class StatefulSessionAffinityPolicy implements IStatefulSessionAffinityPolicy {
+
+                        /**
+                         * Constructs a new StatefulSessionAffinityPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy);
+
+                        /** StatefulSessionAffinityPolicy cookieTtl. */
+                        public cookieTtl?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new StatefulSessionAffinityPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StatefulSessionAffinityPolicy instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy): google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Encodes the specified StatefulSessionAffinityPolicy message. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                         * @param message StatefulSessionAffinityPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StatefulSessionAffinityPolicy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy.verify|verify} messages.
+                         * @param message StatefulSessionAffinityPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StatefulSessionAffinityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Decodes a StatefulSessionAffinityPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StatefulSessionAffinityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Verifies a StatefulSessionAffinityPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StatefulSessionAffinityPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StatefulSessionAffinityPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy;
+
+                        /**
+                         * Creates a plain object from a StatefulSessionAffinityPolicy message. Also converts values to other types if specified.
+                         * @param message StatefulSessionAffinityPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.HttpRoute.StatefulSessionAffinityPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StatefulSessionAffinityPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StatefulSessionAffinityPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a HeaderModifier. */
                     interface IHeaderModifier {
 
@@ -7752,6 +11707,9 @@ export namespace google {
 
                         /** RequestMirrorPolicy destination */
                         destination?: (google.cloud.networkservices.v1.HttpRoute.IDestination|null);
+
+                        /** RequestMirrorPolicy mirrorPercent */
+                        mirrorPercent?: (number|null);
                     }
 
                     /** Represents a RequestMirrorPolicy. */
@@ -7765,6 +11723,9 @@ export namespace google {
 
                         /** RequestMirrorPolicy destination. */
                         public destination?: (google.cloud.networkservices.v1.HttpRoute.IDestination|null);
+
+                        /** RequestMirrorPolicy mirrorPercent. */
+                        public mirrorPercent: number;
 
                         /**
                          * Creates a new RequestMirrorPolicy instance using the specified properties.
@@ -7983,6 +11944,118 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a HttpDirectResponse. */
+                    interface IHttpDirectResponse {
+
+                        /** HttpDirectResponse stringBody */
+                        stringBody?: (string|null);
+
+                        /** HttpDirectResponse bytesBody */
+                        bytesBody?: (Uint8Array|Buffer|string|null);
+
+                        /** HttpDirectResponse status */
+                        status?: (number|null);
+                    }
+
+                    /** Represents a HttpDirectResponse. */
+                    class HttpDirectResponse implements IHttpDirectResponse {
+
+                        /**
+                         * Constructs a new HttpDirectResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse);
+
+                        /** HttpDirectResponse stringBody. */
+                        public stringBody?: (string|null);
+
+                        /** HttpDirectResponse bytesBody. */
+                        public bytesBody?: (Uint8Array|Buffer|string|null);
+
+                        /** HttpDirectResponse status. */
+                        public status: number;
+
+                        /** HttpDirectResponse HttpBody. */
+                        public HttpBody?: ("stringBody"|"bytesBody");
+
+                        /**
+                         * Creates a new HttpDirectResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HttpDirectResponse instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse): google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse;
+
+                        /**
+                         * Encodes the specified HttpDirectResponse message. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.verify|verify} messages.
+                         * @param message HttpDirectResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HttpDirectResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse.verify|verify} messages.
+                         * @param message HttpDirectResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HttpDirectResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HttpDirectResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse;
+
+                        /**
+                         * Decodes a HttpDirectResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HttpDirectResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse;
+
+                        /**
+                         * Verifies a HttpDirectResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HttpDirectResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HttpDirectResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse;
+
+                        /**
+                         * Creates a plain object from a HttpDirectResponse message. Also converts values to other types if specified.
+                         * @param message HttpDirectResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.HttpRoute.HttpDirectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HttpDirectResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HttpDirectResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a RouteAction. */
                     interface IRouteAction {
 
@@ -8015,6 +12088,15 @@ export namespace google {
 
                         /** RouteAction corsPolicy */
                         corsPolicy?: (google.cloud.networkservices.v1.HttpRoute.ICorsPolicy|null);
+
+                        /** RouteAction statefulSessionAffinity */
+                        statefulSessionAffinity?: (google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy|null);
+
+                        /** RouteAction directResponse */
+                        directResponse?: (google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse|null);
+
+                        /** RouteAction idleTimeout */
+                        idleTimeout?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a RouteAction. */
@@ -8055,6 +12137,15 @@ export namespace google {
 
                         /** RouteAction corsPolicy. */
                         public corsPolicy?: (google.cloud.networkservices.v1.HttpRoute.ICorsPolicy|null);
+
+                        /** RouteAction statefulSessionAffinity. */
+                        public statefulSessionAffinity?: (google.cloud.networkservices.v1.HttpRoute.IStatefulSessionAffinityPolicy|null);
+
+                        /** RouteAction directResponse. */
+                        public directResponse?: (google.cloud.networkservices.v1.HttpRoute.IHttpDirectResponse|null);
+
+                        /** RouteAction idleTimeout. */
+                        public idleTimeout?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new RouteAction instance using the specified properties.
@@ -8249,6 +12340,9 @@ export namespace google {
 
                     /** ListHttpRoutesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListHttpRoutesRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListHttpRoutesRequest. */
@@ -8268,6 +12362,9 @@ export namespace google {
 
                     /** ListHttpRoutesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListHttpRoutesRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListHttpRoutesRequest instance using the specified properties.
@@ -8355,6 +12452,9 @@ export namespace google {
 
                     /** ListHttpRoutesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListHttpRoutesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListHttpRoutesResponse. */
@@ -8371,6 +12471,9 @@ export namespace google {
 
                     /** ListHttpRoutesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListHttpRoutesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListHttpRoutesResponse instance using the specified properties.
@@ -8879,6 +12982,9 @@ export namespace google {
 
                     /** Mesh interceptionPort */
                     interceptionPort?: (number|null);
+
+                    /** Mesh envoyHeaders */
+                    envoyHeaders?: (google.cloud.networkservices.v1.EnvoyHeaders|keyof typeof google.cloud.networkservices.v1.EnvoyHeaders|null);
                 }
 
                 /** Represents a Mesh. */
@@ -8910,6 +13016,9 @@ export namespace google {
 
                     /** Mesh interceptionPort. */
                     public interceptionPort: number;
+
+                    /** Mesh envoyHeaders. */
+                    public envoyHeaders?: (google.cloud.networkservices.v1.EnvoyHeaders|keyof typeof google.cloud.networkservices.v1.EnvoyHeaders|null);
 
                     /**
                      * Creates a new Mesh instance using the specified properties.
@@ -9000,6 +13109,9 @@ export namespace google {
 
                     /** ListMeshesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListMeshesRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListMeshesRequest. */
@@ -9019,6 +13131,9 @@ export namespace google {
 
                     /** ListMeshesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListMeshesRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListMeshesRequest instance using the specified properties.
@@ -9106,6 +13221,9 @@ export namespace google {
 
                     /** ListMeshesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListMeshesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListMeshesResponse. */
@@ -9122,6 +13240,9 @@ export namespace google {
 
                     /** ListMeshesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListMeshesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListMeshesResponse instance using the specified properties.
@@ -9698,6 +13819,132 @@ export namespace google {
                     public deleteEndpointPolicy(request: google.cloud.networkservices.v1.IDeleteEndpointPolicyRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ListWasmPluginVersions.
+                     * @param request ListWasmPluginVersionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWasmPluginVersionsResponse
+                     */
+                    public listWasmPluginVersions(request: google.cloud.networkservices.v1.IListWasmPluginVersionsRequest, callback: google.cloud.networkservices.v1.NetworkServices.ListWasmPluginVersionsCallback): void;
+
+                    /**
+                     * Calls ListWasmPluginVersions.
+                     * @param request ListWasmPluginVersionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWasmPluginVersions(request: google.cloud.networkservices.v1.IListWasmPluginVersionsRequest): Promise<google.cloud.networkservices.v1.ListWasmPluginVersionsResponse>;
+
+                    /**
+                     * Calls GetWasmPluginVersion.
+                     * @param request GetWasmPluginVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and WasmPluginVersion
+                     */
+                    public getWasmPluginVersion(request: google.cloud.networkservices.v1.IGetWasmPluginVersionRequest, callback: google.cloud.networkservices.v1.NetworkServices.GetWasmPluginVersionCallback): void;
+
+                    /**
+                     * Calls GetWasmPluginVersion.
+                     * @param request GetWasmPluginVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWasmPluginVersion(request: google.cloud.networkservices.v1.IGetWasmPluginVersionRequest): Promise<google.cloud.networkservices.v1.WasmPluginVersion>;
+
+                    /**
+                     * Calls CreateWasmPluginVersion.
+                     * @param request CreateWasmPluginVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWasmPluginVersion(request: google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest, callback: google.cloud.networkservices.v1.NetworkServices.CreateWasmPluginVersionCallback): void;
+
+                    /**
+                     * Calls CreateWasmPluginVersion.
+                     * @param request CreateWasmPluginVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWasmPluginVersion(request: google.cloud.networkservices.v1.ICreateWasmPluginVersionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteWasmPluginVersion.
+                     * @param request DeleteWasmPluginVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteWasmPluginVersion(request: google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest, callback: google.cloud.networkservices.v1.NetworkServices.DeleteWasmPluginVersionCallback): void;
+
+                    /**
+                     * Calls DeleteWasmPluginVersion.
+                     * @param request DeleteWasmPluginVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWasmPluginVersion(request: google.cloud.networkservices.v1.IDeleteWasmPluginVersionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListWasmPlugins.
+                     * @param request ListWasmPluginsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWasmPluginsResponse
+                     */
+                    public listWasmPlugins(request: google.cloud.networkservices.v1.IListWasmPluginsRequest, callback: google.cloud.networkservices.v1.NetworkServices.ListWasmPluginsCallback): void;
+
+                    /**
+                     * Calls ListWasmPlugins.
+                     * @param request ListWasmPluginsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWasmPlugins(request: google.cloud.networkservices.v1.IListWasmPluginsRequest): Promise<google.cloud.networkservices.v1.ListWasmPluginsResponse>;
+
+                    /**
+                     * Calls GetWasmPlugin.
+                     * @param request GetWasmPluginRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and WasmPlugin
+                     */
+                    public getWasmPlugin(request: google.cloud.networkservices.v1.IGetWasmPluginRequest, callback: google.cloud.networkservices.v1.NetworkServices.GetWasmPluginCallback): void;
+
+                    /**
+                     * Calls GetWasmPlugin.
+                     * @param request GetWasmPluginRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWasmPlugin(request: google.cloud.networkservices.v1.IGetWasmPluginRequest): Promise<google.cloud.networkservices.v1.WasmPlugin>;
+
+                    /**
+                     * Calls CreateWasmPlugin.
+                     * @param request CreateWasmPluginRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createWasmPlugin(request: google.cloud.networkservices.v1.ICreateWasmPluginRequest, callback: google.cloud.networkservices.v1.NetworkServices.CreateWasmPluginCallback): void;
+
+                    /**
+                     * Calls CreateWasmPlugin.
+                     * @param request CreateWasmPluginRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createWasmPlugin(request: google.cloud.networkservices.v1.ICreateWasmPluginRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateWasmPlugin.
+                     * @param request UpdateWasmPluginRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateWasmPlugin(request: google.cloud.networkservices.v1.IUpdateWasmPluginRequest, callback: google.cloud.networkservices.v1.NetworkServices.UpdateWasmPluginCallback): void;
+
+                    /**
+                     * Calls UpdateWasmPlugin.
+                     * @param request UpdateWasmPluginRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateWasmPlugin(request: google.cloud.networkservices.v1.IUpdateWasmPluginRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteWasmPlugin.
+                     * @param request DeleteWasmPluginRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteWasmPlugin(request: google.cloud.networkservices.v1.IDeleteWasmPluginRequest, callback: google.cloud.networkservices.v1.NetworkServices.DeleteWasmPluginCallback): void;
+
+                    /**
+                     * Calls DeleteWasmPlugin.
+                     * @param request DeleteWasmPluginRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteWasmPlugin(request: google.cloud.networkservices.v1.IDeleteWasmPluginRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListGateways.
                      * @param request ListGatewaysRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListGatewaysResponse
@@ -10090,6 +14337,20 @@ export namespace google {
                     public createServiceBinding(request: google.cloud.networkservices.v1.ICreateServiceBindingRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateServiceBinding.
+                     * @param request UpdateServiceBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateServiceBinding(request: google.cloud.networkservices.v1.IUpdateServiceBindingRequest, callback: google.cloud.networkservices.v1.NetworkServices.UpdateServiceBindingCallback): void;
+
+                    /**
+                     * Calls UpdateServiceBinding.
+                     * @param request UpdateServiceBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateServiceBinding(request: google.cloud.networkservices.v1.IUpdateServiceBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteServiceBinding.
                      * @param request DeleteServiceBindingRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -10172,6 +14433,132 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteMesh(request: google.cloud.networkservices.v1.IDeleteMeshRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListServiceLbPolicies.
+                     * @param request ListServiceLbPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListServiceLbPoliciesResponse
+                     */
+                    public listServiceLbPolicies(request: google.cloud.networkservices.v1.IListServiceLbPoliciesRequest, callback: google.cloud.networkservices.v1.NetworkServices.ListServiceLbPoliciesCallback): void;
+
+                    /**
+                     * Calls ListServiceLbPolicies.
+                     * @param request ListServiceLbPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listServiceLbPolicies(request: google.cloud.networkservices.v1.IListServiceLbPoliciesRequest): Promise<google.cloud.networkservices.v1.ListServiceLbPoliciesResponse>;
+
+                    /**
+                     * Calls GetServiceLbPolicy.
+                     * @param request GetServiceLbPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ServiceLbPolicy
+                     */
+                    public getServiceLbPolicy(request: google.cloud.networkservices.v1.IGetServiceLbPolicyRequest, callback: google.cloud.networkservices.v1.NetworkServices.GetServiceLbPolicyCallback): void;
+
+                    /**
+                     * Calls GetServiceLbPolicy.
+                     * @param request GetServiceLbPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getServiceLbPolicy(request: google.cloud.networkservices.v1.IGetServiceLbPolicyRequest): Promise<google.cloud.networkservices.v1.ServiceLbPolicy>;
+
+                    /**
+                     * Calls CreateServiceLbPolicy.
+                     * @param request CreateServiceLbPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createServiceLbPolicy(request: google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest, callback: google.cloud.networkservices.v1.NetworkServices.CreateServiceLbPolicyCallback): void;
+
+                    /**
+                     * Calls CreateServiceLbPolicy.
+                     * @param request CreateServiceLbPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createServiceLbPolicy(request: google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateServiceLbPolicy.
+                     * @param request UpdateServiceLbPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateServiceLbPolicy(request: google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest, callback: google.cloud.networkservices.v1.NetworkServices.UpdateServiceLbPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateServiceLbPolicy.
+                     * @param request UpdateServiceLbPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateServiceLbPolicy(request: google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteServiceLbPolicy.
+                     * @param request DeleteServiceLbPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteServiceLbPolicy(request: google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest, callback: google.cloud.networkservices.v1.NetworkServices.DeleteServiceLbPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteServiceLbPolicy.
+                     * @param request DeleteServiceLbPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteServiceLbPolicy(request: google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetGatewayRouteView.
+                     * @param request GetGatewayRouteViewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GatewayRouteView
+                     */
+                    public getGatewayRouteView(request: google.cloud.networkservices.v1.IGetGatewayRouteViewRequest, callback: google.cloud.networkservices.v1.NetworkServices.GetGatewayRouteViewCallback): void;
+
+                    /**
+                     * Calls GetGatewayRouteView.
+                     * @param request GetGatewayRouteViewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGatewayRouteView(request: google.cloud.networkservices.v1.IGetGatewayRouteViewRequest): Promise<google.cloud.networkservices.v1.GatewayRouteView>;
+
+                    /**
+                     * Calls GetMeshRouteView.
+                     * @param request GetMeshRouteViewRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MeshRouteView
+                     */
+                    public getMeshRouteView(request: google.cloud.networkservices.v1.IGetMeshRouteViewRequest, callback: google.cloud.networkservices.v1.NetworkServices.GetMeshRouteViewCallback): void;
+
+                    /**
+                     * Calls GetMeshRouteView.
+                     * @param request GetMeshRouteViewRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMeshRouteView(request: google.cloud.networkservices.v1.IGetMeshRouteViewRequest): Promise<google.cloud.networkservices.v1.MeshRouteView>;
+
+                    /**
+                     * Calls ListGatewayRouteViews.
+                     * @param request ListGatewayRouteViewsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGatewayRouteViewsResponse
+                     */
+                    public listGatewayRouteViews(request: google.cloud.networkservices.v1.IListGatewayRouteViewsRequest, callback: google.cloud.networkservices.v1.NetworkServices.ListGatewayRouteViewsCallback): void;
+
+                    /**
+                     * Calls ListGatewayRouteViews.
+                     * @param request ListGatewayRouteViewsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGatewayRouteViews(request: google.cloud.networkservices.v1.IListGatewayRouteViewsRequest): Promise<google.cloud.networkservices.v1.ListGatewayRouteViewsResponse>;
+
+                    /**
+                     * Calls ListMeshRouteViews.
+                     * @param request ListMeshRouteViewsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMeshRouteViewsResponse
+                     */
+                    public listMeshRouteViews(request: google.cloud.networkservices.v1.IListMeshRouteViewsRequest, callback: google.cloud.networkservices.v1.NetworkServices.ListMeshRouteViewsCallback): void;
+
+                    /**
+                     * Calls ListMeshRouteViews.
+                     * @param request ListMeshRouteViewsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMeshRouteViews(request: google.cloud.networkservices.v1.IListMeshRouteViewsRequest): Promise<google.cloud.networkservices.v1.ListMeshRouteViewsResponse>;
                 }
 
                 namespace NetworkServices {
@@ -10210,6 +14597,69 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteEndpointPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listWasmPluginVersions}.
+                     * @param error Error, if any
+                     * @param [response] ListWasmPluginVersionsResponse
+                     */
+                    type ListWasmPluginVersionsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListWasmPluginVersionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getWasmPluginVersion}.
+                     * @param error Error, if any
+                     * @param [response] WasmPluginVersion
+                     */
+                    type GetWasmPluginVersionCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.WasmPluginVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createWasmPluginVersion}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWasmPluginVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteWasmPluginVersion}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteWasmPluginVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listWasmPlugins}.
+                     * @param error Error, if any
+                     * @param [response] ListWasmPluginsResponse
+                     */
+                    type ListWasmPluginsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListWasmPluginsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getWasmPlugin}.
+                     * @param error Error, if any
+                     * @param [response] WasmPlugin
+                     */
+                    type GetWasmPluginCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.WasmPlugin) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createWasmPlugin}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateWasmPluginCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateWasmPlugin}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateWasmPluginCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteWasmPlugin}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteWasmPluginCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listGateways}.
@@ -10408,6 +14858,13 @@ export namespace google {
                     type CreateServiceBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateServiceBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateServiceBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteServiceBinding}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -10448,6 +14905,941 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteMeshCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listServiceLbPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListServiceLbPoliciesResponse
+                     */
+                    type ListServiceLbPoliciesCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListServiceLbPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getServiceLbPolicy}.
+                     * @param error Error, if any
+                     * @param [response] ServiceLbPolicy
+                     */
+                    type GetServiceLbPolicyCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ServiceLbPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createServiceLbPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateServiceLbPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateServiceLbPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateServiceLbPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteServiceLbPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteServiceLbPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getGatewayRouteView}.
+                     * @param error Error, if any
+                     * @param [response] GatewayRouteView
+                     */
+                    type GetGatewayRouteViewCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.GatewayRouteView) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getMeshRouteView}.
+                     * @param error Error, if any
+                     * @param [response] MeshRouteView
+                     */
+                    type GetMeshRouteViewCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.MeshRouteView) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listGatewayRouteViews}.
+                     * @param error Error, if any
+                     * @param [response] ListGatewayRouteViewsResponse
+                     */
+                    type ListGatewayRouteViewsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListGatewayRouteViewsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listMeshRouteViews}.
+                     * @param error Error, if any
+                     * @param [response] ListMeshRouteViewsResponse
+                     */
+                    type ListMeshRouteViewsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListMeshRouteViewsResponse) => void;
+                }
+
+                /** Properties of a GatewayRouteView. */
+                interface IGatewayRouteView {
+
+                    /** GatewayRouteView name */
+                    name?: (string|null);
+
+                    /** GatewayRouteView routeProjectNumber */
+                    routeProjectNumber?: (number|Long|string|null);
+
+                    /** GatewayRouteView routeLocation */
+                    routeLocation?: (string|null);
+
+                    /** GatewayRouteView routeType */
+                    routeType?: (string|null);
+
+                    /** GatewayRouteView routeId */
+                    routeId?: (string|null);
+                }
+
+                /** Represents a GatewayRouteView. */
+                class GatewayRouteView implements IGatewayRouteView {
+
+                    /**
+                     * Constructs a new GatewayRouteView.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGatewayRouteView);
+
+                    /** GatewayRouteView name. */
+                    public name: string;
+
+                    /** GatewayRouteView routeProjectNumber. */
+                    public routeProjectNumber: (number|Long|string);
+
+                    /** GatewayRouteView routeLocation. */
+                    public routeLocation: string;
+
+                    /** GatewayRouteView routeType. */
+                    public routeType: string;
+
+                    /** GatewayRouteView routeId. */
+                    public routeId: string;
+
+                    /**
+                     * Creates a new GatewayRouteView instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GatewayRouteView instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGatewayRouteView): google.cloud.networkservices.v1.GatewayRouteView;
+
+                    /**
+                     * Encodes the specified GatewayRouteView message. Does not implicitly {@link google.cloud.networkservices.v1.GatewayRouteView.verify|verify} messages.
+                     * @param message GatewayRouteView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGatewayRouteView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GatewayRouteView message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GatewayRouteView.verify|verify} messages.
+                     * @param message GatewayRouteView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGatewayRouteView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GatewayRouteView message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GatewayRouteView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GatewayRouteView;
+
+                    /**
+                     * Decodes a GatewayRouteView message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GatewayRouteView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GatewayRouteView;
+
+                    /**
+                     * Verifies a GatewayRouteView message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GatewayRouteView message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GatewayRouteView
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GatewayRouteView;
+
+                    /**
+                     * Creates a plain object from a GatewayRouteView message. Also converts values to other types if specified.
+                     * @param message GatewayRouteView
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GatewayRouteView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GatewayRouteView to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GatewayRouteView
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MeshRouteView. */
+                interface IMeshRouteView {
+
+                    /** MeshRouteView name */
+                    name?: (string|null);
+
+                    /** MeshRouteView routeProjectNumber */
+                    routeProjectNumber?: (number|Long|string|null);
+
+                    /** MeshRouteView routeLocation */
+                    routeLocation?: (string|null);
+
+                    /** MeshRouteView routeType */
+                    routeType?: (string|null);
+
+                    /** MeshRouteView routeId */
+                    routeId?: (string|null);
+                }
+
+                /** Represents a MeshRouteView. */
+                class MeshRouteView implements IMeshRouteView {
+
+                    /**
+                     * Constructs a new MeshRouteView.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IMeshRouteView);
+
+                    /** MeshRouteView name. */
+                    public name: string;
+
+                    /** MeshRouteView routeProjectNumber. */
+                    public routeProjectNumber: (number|Long|string);
+
+                    /** MeshRouteView routeLocation. */
+                    public routeLocation: string;
+
+                    /** MeshRouteView routeType. */
+                    public routeType: string;
+
+                    /** MeshRouteView routeId. */
+                    public routeId: string;
+
+                    /**
+                     * Creates a new MeshRouteView instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MeshRouteView instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IMeshRouteView): google.cloud.networkservices.v1.MeshRouteView;
+
+                    /**
+                     * Encodes the specified MeshRouteView message. Does not implicitly {@link google.cloud.networkservices.v1.MeshRouteView.verify|verify} messages.
+                     * @param message MeshRouteView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IMeshRouteView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MeshRouteView message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.MeshRouteView.verify|verify} messages.
+                     * @param message MeshRouteView message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IMeshRouteView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MeshRouteView message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MeshRouteView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.MeshRouteView;
+
+                    /**
+                     * Decodes a MeshRouteView message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MeshRouteView
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.MeshRouteView;
+
+                    /**
+                     * Verifies a MeshRouteView message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MeshRouteView message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MeshRouteView
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.MeshRouteView;
+
+                    /**
+                     * Creates a plain object from a MeshRouteView message. Also converts values to other types if specified.
+                     * @param message MeshRouteView
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.MeshRouteView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MeshRouteView to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MeshRouteView
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetGatewayRouteViewRequest. */
+                interface IGetGatewayRouteViewRequest {
+
+                    /** GetGatewayRouteViewRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGatewayRouteViewRequest. */
+                class GetGatewayRouteViewRequest implements IGetGatewayRouteViewRequest {
+
+                    /**
+                     * Constructs a new GetGatewayRouteViewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetGatewayRouteViewRequest);
+
+                    /** GetGatewayRouteViewRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGatewayRouteViewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGatewayRouteViewRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetGatewayRouteViewRequest): google.cloud.networkservices.v1.GetGatewayRouteViewRequest;
+
+                    /**
+                     * Encodes the specified GetGatewayRouteViewRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetGatewayRouteViewRequest.verify|verify} messages.
+                     * @param message GetGatewayRouteViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetGatewayRouteViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGatewayRouteViewRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetGatewayRouteViewRequest.verify|verify} messages.
+                     * @param message GetGatewayRouteViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetGatewayRouteViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGatewayRouteViewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGatewayRouteViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetGatewayRouteViewRequest;
+
+                    /**
+                     * Decodes a GetGatewayRouteViewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGatewayRouteViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetGatewayRouteViewRequest;
+
+                    /**
+                     * Verifies a GetGatewayRouteViewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGatewayRouteViewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGatewayRouteViewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetGatewayRouteViewRequest;
+
+                    /**
+                     * Creates a plain object from a GetGatewayRouteViewRequest message. Also converts values to other types if specified.
+                     * @param message GetGatewayRouteViewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetGatewayRouteViewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGatewayRouteViewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGatewayRouteViewRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMeshRouteViewRequest. */
+                interface IGetMeshRouteViewRequest {
+
+                    /** GetMeshRouteViewRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMeshRouteViewRequest. */
+                class GetMeshRouteViewRequest implements IGetMeshRouteViewRequest {
+
+                    /**
+                     * Constructs a new GetMeshRouteViewRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetMeshRouteViewRequest);
+
+                    /** GetMeshRouteViewRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMeshRouteViewRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMeshRouteViewRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetMeshRouteViewRequest): google.cloud.networkservices.v1.GetMeshRouteViewRequest;
+
+                    /**
+                     * Encodes the specified GetMeshRouteViewRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetMeshRouteViewRequest.verify|verify} messages.
+                     * @param message GetMeshRouteViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetMeshRouteViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMeshRouteViewRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetMeshRouteViewRequest.verify|verify} messages.
+                     * @param message GetMeshRouteViewRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetMeshRouteViewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMeshRouteViewRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMeshRouteViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetMeshRouteViewRequest;
+
+                    /**
+                     * Decodes a GetMeshRouteViewRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMeshRouteViewRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetMeshRouteViewRequest;
+
+                    /**
+                     * Verifies a GetMeshRouteViewRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMeshRouteViewRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMeshRouteViewRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetMeshRouteViewRequest;
+
+                    /**
+                     * Creates a plain object from a GetMeshRouteViewRequest message. Also converts values to other types if specified.
+                     * @param message GetMeshRouteViewRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetMeshRouteViewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMeshRouteViewRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMeshRouteViewRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGatewayRouteViewsRequest. */
+                interface IListGatewayRouteViewsRequest {
+
+                    /** ListGatewayRouteViewsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGatewayRouteViewsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGatewayRouteViewsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListGatewayRouteViewsRequest. */
+                class ListGatewayRouteViewsRequest implements IListGatewayRouteViewsRequest {
+
+                    /**
+                     * Constructs a new ListGatewayRouteViewsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListGatewayRouteViewsRequest);
+
+                    /** ListGatewayRouteViewsRequest parent. */
+                    public parent: string;
+
+                    /** ListGatewayRouteViewsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGatewayRouteViewsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListGatewayRouteViewsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGatewayRouteViewsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListGatewayRouteViewsRequest): google.cloud.networkservices.v1.ListGatewayRouteViewsRequest;
+
+                    /**
+                     * Encodes the specified ListGatewayRouteViewsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsRequest.verify|verify} messages.
+                     * @param message ListGatewayRouteViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListGatewayRouteViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGatewayRouteViewsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsRequest.verify|verify} messages.
+                     * @param message ListGatewayRouteViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListGatewayRouteViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGatewayRouteViewsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGatewayRouteViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListGatewayRouteViewsRequest;
+
+                    /**
+                     * Decodes a ListGatewayRouteViewsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGatewayRouteViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListGatewayRouteViewsRequest;
+
+                    /**
+                     * Verifies a ListGatewayRouteViewsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGatewayRouteViewsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGatewayRouteViewsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListGatewayRouteViewsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGatewayRouteViewsRequest message. Also converts values to other types if specified.
+                     * @param message ListGatewayRouteViewsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListGatewayRouteViewsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGatewayRouteViewsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGatewayRouteViewsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMeshRouteViewsRequest. */
+                interface IListMeshRouteViewsRequest {
+
+                    /** ListMeshRouteViewsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMeshRouteViewsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMeshRouteViewsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMeshRouteViewsRequest. */
+                class ListMeshRouteViewsRequest implements IListMeshRouteViewsRequest {
+
+                    /**
+                     * Constructs a new ListMeshRouteViewsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListMeshRouteViewsRequest);
+
+                    /** ListMeshRouteViewsRequest parent. */
+                    public parent: string;
+
+                    /** ListMeshRouteViewsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMeshRouteViewsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMeshRouteViewsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMeshRouteViewsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListMeshRouteViewsRequest): google.cloud.networkservices.v1.ListMeshRouteViewsRequest;
+
+                    /**
+                     * Encodes the specified ListMeshRouteViewsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsRequest.verify|verify} messages.
+                     * @param message ListMeshRouteViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListMeshRouteViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMeshRouteViewsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsRequest.verify|verify} messages.
+                     * @param message ListMeshRouteViewsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListMeshRouteViewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMeshRouteViewsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMeshRouteViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListMeshRouteViewsRequest;
+
+                    /**
+                     * Decodes a ListMeshRouteViewsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMeshRouteViewsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListMeshRouteViewsRequest;
+
+                    /**
+                     * Verifies a ListMeshRouteViewsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMeshRouteViewsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMeshRouteViewsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListMeshRouteViewsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMeshRouteViewsRequest message. Also converts values to other types if specified.
+                     * @param message ListMeshRouteViewsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListMeshRouteViewsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMeshRouteViewsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMeshRouteViewsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGatewayRouteViewsResponse. */
+                interface IListGatewayRouteViewsResponse {
+
+                    /** ListGatewayRouteViewsResponse gatewayRouteViews */
+                    gatewayRouteViews?: (google.cloud.networkservices.v1.IGatewayRouteView[]|null);
+
+                    /** ListGatewayRouteViewsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGatewayRouteViewsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGatewayRouteViewsResponse. */
+                class ListGatewayRouteViewsResponse implements IListGatewayRouteViewsResponse {
+
+                    /**
+                     * Constructs a new ListGatewayRouteViewsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListGatewayRouteViewsResponse);
+
+                    /** ListGatewayRouteViewsResponse gatewayRouteViews. */
+                    public gatewayRouteViews: google.cloud.networkservices.v1.IGatewayRouteView[];
+
+                    /** ListGatewayRouteViewsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGatewayRouteViewsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGatewayRouteViewsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGatewayRouteViewsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListGatewayRouteViewsResponse): google.cloud.networkservices.v1.ListGatewayRouteViewsResponse;
+
+                    /**
+                     * Encodes the specified ListGatewayRouteViewsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsResponse.verify|verify} messages.
+                     * @param message ListGatewayRouteViewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListGatewayRouteViewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGatewayRouteViewsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListGatewayRouteViewsResponse.verify|verify} messages.
+                     * @param message ListGatewayRouteViewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListGatewayRouteViewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGatewayRouteViewsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGatewayRouteViewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListGatewayRouteViewsResponse;
+
+                    /**
+                     * Decodes a ListGatewayRouteViewsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGatewayRouteViewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListGatewayRouteViewsResponse;
+
+                    /**
+                     * Verifies a ListGatewayRouteViewsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGatewayRouteViewsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGatewayRouteViewsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListGatewayRouteViewsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGatewayRouteViewsResponse message. Also converts values to other types if specified.
+                     * @param message ListGatewayRouteViewsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListGatewayRouteViewsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGatewayRouteViewsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGatewayRouteViewsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMeshRouteViewsResponse. */
+                interface IListMeshRouteViewsResponse {
+
+                    /** ListMeshRouteViewsResponse meshRouteViews */
+                    meshRouteViews?: (google.cloud.networkservices.v1.IMeshRouteView[]|null);
+
+                    /** ListMeshRouteViewsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMeshRouteViewsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMeshRouteViewsResponse. */
+                class ListMeshRouteViewsResponse implements IListMeshRouteViewsResponse {
+
+                    /**
+                     * Constructs a new ListMeshRouteViewsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListMeshRouteViewsResponse);
+
+                    /** ListMeshRouteViewsResponse meshRouteViews. */
+                    public meshRouteViews: google.cloud.networkservices.v1.IMeshRouteView[];
+
+                    /** ListMeshRouteViewsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMeshRouteViewsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMeshRouteViewsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMeshRouteViewsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListMeshRouteViewsResponse): google.cloud.networkservices.v1.ListMeshRouteViewsResponse;
+
+                    /**
+                     * Encodes the specified ListMeshRouteViewsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsResponse.verify|verify} messages.
+                     * @param message ListMeshRouteViewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListMeshRouteViewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMeshRouteViewsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListMeshRouteViewsResponse.verify|verify} messages.
+                     * @param message ListMeshRouteViewsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListMeshRouteViewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMeshRouteViewsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMeshRouteViewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListMeshRouteViewsResponse;
+
+                    /**
+                     * Decodes a ListMeshRouteViewsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMeshRouteViewsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListMeshRouteViewsResponse;
+
+                    /**
+                     * Verifies a ListMeshRouteViewsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMeshRouteViewsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMeshRouteViewsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListMeshRouteViewsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMeshRouteViewsResponse message. Also converts values to other types if specified.
+                     * @param message ListMeshRouteViewsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListMeshRouteViewsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMeshRouteViewsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMeshRouteViewsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ServiceBinding. */
@@ -10467,6 +15859,9 @@ export namespace google {
 
                     /** ServiceBinding service */
                     service?: (string|null);
+
+                    /** ServiceBinding serviceId */
+                    serviceId?: (string|null);
 
                     /** ServiceBinding labels */
                     labels?: ({ [k: string]: string }|null);
@@ -10495,6 +15890,9 @@ export namespace google {
 
                     /** ServiceBinding service. */
                     public service: string;
+
+                    /** ServiceBinding serviceId. */
+                    public serviceId: string;
 
                     /** ServiceBinding labels. */
                     public labels: { [k: string]: string };
@@ -10694,6 +16092,9 @@ export namespace google {
 
                     /** ListServiceBindingsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListServiceBindingsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListServiceBindingsResponse. */
@@ -10710,6 +16111,9 @@ export namespace google {
 
                     /** ListServiceBindingsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListServiceBindingsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListServiceBindingsResponse instance using the specified properties.
@@ -10995,6 +16399,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateServiceBindingRequest. */
+                interface IUpdateServiceBindingRequest {
+
+                    /** UpdateServiceBindingRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServiceBindingRequest serviceBinding */
+                    serviceBinding?: (google.cloud.networkservices.v1.IServiceBinding|null);
+                }
+
+                /** Represents an UpdateServiceBindingRequest. */
+                class UpdateServiceBindingRequest implements IUpdateServiceBindingRequest {
+
+                    /**
+                     * Constructs a new UpdateServiceBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IUpdateServiceBindingRequest);
+
+                    /** UpdateServiceBindingRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServiceBindingRequest serviceBinding. */
+                    public serviceBinding?: (google.cloud.networkservices.v1.IServiceBinding|null);
+
+                    /**
+                     * Creates a new UpdateServiceBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateServiceBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IUpdateServiceBindingRequest): google.cloud.networkservices.v1.UpdateServiceBindingRequest;
+
+                    /**
+                     * Encodes the specified UpdateServiceBindingRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceBindingRequest.verify|verify} messages.
+                     * @param message UpdateServiceBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IUpdateServiceBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateServiceBindingRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceBindingRequest.verify|verify} messages.
+                     * @param message UpdateServiceBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IUpdateServiceBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateServiceBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateServiceBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.UpdateServiceBindingRequest;
+
+                    /**
+                     * Decodes an UpdateServiceBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateServiceBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.UpdateServiceBindingRequest;
+
+                    /**
+                     * Verifies an UpdateServiceBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateServiceBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateServiceBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.UpdateServiceBindingRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateServiceBindingRequest message. Also converts values to other types if specified.
+                     * @param message UpdateServiceBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.UpdateServiceBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateServiceBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateServiceBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteServiceBindingRequest. */
                 interface IDeleteServiceBindingRequest {
 
@@ -11086,6 +16593,1097 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteServiceBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceLbPolicy. */
+                interface IServiceLbPolicy {
+
+                    /** ServiceLbPolicy name */
+                    name?: (string|null);
+
+                    /** ServiceLbPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServiceLbPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServiceLbPolicy labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ServiceLbPolicy description */
+                    description?: (string|null);
+
+                    /** ServiceLbPolicy loadBalancingAlgorithm */
+                    loadBalancingAlgorithm?: (google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm|keyof typeof google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm|null);
+
+                    /** ServiceLbPolicy autoCapacityDrain */
+                    autoCapacityDrain?: (google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain|null);
+
+                    /** ServiceLbPolicy failoverConfig */
+                    failoverConfig?: (google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig|null);
+
+                    /** ServiceLbPolicy isolationConfig */
+                    isolationConfig?: (google.cloud.networkservices.v1.ServiceLbPolicy.IIsolationConfig|null);
+                }
+
+                /** Represents a ServiceLbPolicy. */
+                class ServiceLbPolicy implements IServiceLbPolicy {
+
+                    /**
+                     * Constructs a new ServiceLbPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IServiceLbPolicy);
+
+                    /** ServiceLbPolicy name. */
+                    public name: string;
+
+                    /** ServiceLbPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServiceLbPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ServiceLbPolicy labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ServiceLbPolicy description. */
+                    public description: string;
+
+                    /** ServiceLbPolicy loadBalancingAlgorithm. */
+                    public loadBalancingAlgorithm: (google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm|keyof typeof google.cloud.networkservices.v1.ServiceLbPolicy.LoadBalancingAlgorithm);
+
+                    /** ServiceLbPolicy autoCapacityDrain. */
+                    public autoCapacityDrain?: (google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain|null);
+
+                    /** ServiceLbPolicy failoverConfig. */
+                    public failoverConfig?: (google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig|null);
+
+                    /** ServiceLbPolicy isolationConfig. */
+                    public isolationConfig?: (google.cloud.networkservices.v1.ServiceLbPolicy.IIsolationConfig|null);
+
+                    /**
+                     * Creates a new ServiceLbPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceLbPolicy instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IServiceLbPolicy): google.cloud.networkservices.v1.ServiceLbPolicy;
+
+                    /**
+                     * Encodes the specified ServiceLbPolicy message. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.verify|verify} messages.
+                     * @param message ServiceLbPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IServiceLbPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceLbPolicy message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.verify|verify} messages.
+                     * @param message ServiceLbPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IServiceLbPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceLbPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceLbPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ServiceLbPolicy;
+
+                    /**
+                     * Decodes a ServiceLbPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceLbPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ServiceLbPolicy;
+
+                    /**
+                     * Verifies a ServiceLbPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceLbPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceLbPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ServiceLbPolicy;
+
+                    /**
+                     * Creates a plain object from a ServiceLbPolicy message. Also converts values to other types if specified.
+                     * @param message ServiceLbPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ServiceLbPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceLbPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceLbPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ServiceLbPolicy {
+
+                    /** Properties of an AutoCapacityDrain. */
+                    interface IAutoCapacityDrain {
+
+                        /** AutoCapacityDrain enable */
+                        enable?: (boolean|null);
+                    }
+
+                    /** Represents an AutoCapacityDrain. */
+                    class AutoCapacityDrain implements IAutoCapacityDrain {
+
+                        /**
+                         * Constructs a new AutoCapacityDrain.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain);
+
+                        /** AutoCapacityDrain enable. */
+                        public enable: boolean;
+
+                        /**
+                         * Creates a new AutoCapacityDrain instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutoCapacityDrain instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain): google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain;
+
+                        /**
+                         * Encodes the specified AutoCapacityDrain message. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.verify|verify} messages.
+                         * @param message AutoCapacityDrain message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutoCapacityDrain message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain.verify|verify} messages.
+                         * @param message AutoCapacityDrain message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.ServiceLbPolicy.IAutoCapacityDrain, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutoCapacityDrain message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutoCapacityDrain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain;
+
+                        /**
+                         * Decodes an AutoCapacityDrain message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutoCapacityDrain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain;
+
+                        /**
+                         * Verifies an AutoCapacityDrain message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutoCapacityDrain message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutoCapacityDrain
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain;
+
+                        /**
+                         * Creates a plain object from an AutoCapacityDrain message. Also converts values to other types if specified.
+                         * @param message AutoCapacityDrain
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutoCapacityDrain to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutoCapacityDrain
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FailoverConfig. */
+                    interface IFailoverConfig {
+
+                        /** FailoverConfig failoverHealthThreshold */
+                        failoverHealthThreshold?: (number|null);
+                    }
+
+                    /** Represents a FailoverConfig. */
+                    class FailoverConfig implements IFailoverConfig {
+
+                        /**
+                         * Constructs a new FailoverConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig);
+
+                        /** FailoverConfig failoverHealthThreshold. */
+                        public failoverHealthThreshold: number;
+
+                        /**
+                         * Creates a new FailoverConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FailoverConfig instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig): google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig;
+
+                        /**
+                         * Encodes the specified FailoverConfig message. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.verify|verify} messages.
+                         * @param message FailoverConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FailoverConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig.verify|verify} messages.
+                         * @param message FailoverConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.ServiceLbPolicy.IFailoverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FailoverConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FailoverConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig;
+
+                        /**
+                         * Decodes a FailoverConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FailoverConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig;
+
+                        /**
+                         * Verifies a FailoverConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FailoverConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FailoverConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig;
+
+                        /**
+                         * Creates a plain object from a FailoverConfig message. Also converts values to other types if specified.
+                         * @param message FailoverConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FailoverConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FailoverConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IsolationConfig. */
+                    interface IIsolationConfig {
+
+                        /** IsolationConfig isolationGranularity */
+                        isolationGranularity?: (google.cloud.networkservices.v1.ServiceLbPolicy.IsolationGranularity|keyof typeof google.cloud.networkservices.v1.ServiceLbPolicy.IsolationGranularity|null);
+
+                        /** IsolationConfig isolationMode */
+                        isolationMode?: (google.cloud.networkservices.v1.ServiceLbPolicy.IsolationMode|keyof typeof google.cloud.networkservices.v1.ServiceLbPolicy.IsolationMode|null);
+                    }
+
+                    /** Represents an IsolationConfig. */
+                    class IsolationConfig implements IIsolationConfig {
+
+                        /**
+                         * Constructs a new IsolationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.ServiceLbPolicy.IIsolationConfig);
+
+                        /** IsolationConfig isolationGranularity. */
+                        public isolationGranularity: (google.cloud.networkservices.v1.ServiceLbPolicy.IsolationGranularity|keyof typeof google.cloud.networkservices.v1.ServiceLbPolicy.IsolationGranularity);
+
+                        /** IsolationConfig isolationMode. */
+                        public isolationMode: (google.cloud.networkservices.v1.ServiceLbPolicy.IsolationMode|keyof typeof google.cloud.networkservices.v1.ServiceLbPolicy.IsolationMode);
+
+                        /**
+                         * Creates a new IsolationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IsolationConfig instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.ServiceLbPolicy.IIsolationConfig): google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig;
+
+                        /**
+                         * Encodes the specified IsolationConfig message. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig.verify|verify} messages.
+                         * @param message IsolationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.ServiceLbPolicy.IIsolationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IsolationConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig.verify|verify} messages.
+                         * @param message IsolationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.ServiceLbPolicy.IIsolationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IsolationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IsolationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig;
+
+                        /**
+                         * Decodes an IsolationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IsolationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig;
+
+                        /**
+                         * Verifies an IsolationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IsolationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IsolationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig;
+
+                        /**
+                         * Creates a plain object from an IsolationConfig message. Also converts values to other types if specified.
+                         * @param message IsolationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IsolationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IsolationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** LoadBalancingAlgorithm enum. */
+                    enum LoadBalancingAlgorithm {
+                        LOAD_BALANCING_ALGORITHM_UNSPECIFIED = 0,
+                        SPRAY_TO_WORLD = 3,
+                        SPRAY_TO_REGION = 4,
+                        WATERFALL_BY_REGION = 5,
+                        WATERFALL_BY_ZONE = 6
+                    }
+
+                    /** IsolationGranularity enum. */
+                    enum IsolationGranularity {
+                        ISOLATION_GRANULARITY_UNSPECIFIED = 0,
+                        REGION = 1
+                    }
+
+                    /** IsolationMode enum. */
+                    enum IsolationMode {
+                        ISOLATION_MODE_UNSPECIFIED = 0,
+                        NEAREST = 1,
+                        STRICT = 2
+                    }
+                }
+
+                /** Properties of a ListServiceLbPoliciesRequest. */
+                interface IListServiceLbPoliciesRequest {
+
+                    /** ListServiceLbPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListServiceLbPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListServiceLbPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListServiceLbPoliciesRequest. */
+                class ListServiceLbPoliciesRequest implements IListServiceLbPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListServiceLbPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListServiceLbPoliciesRequest);
+
+                    /** ListServiceLbPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListServiceLbPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListServiceLbPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListServiceLbPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServiceLbPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListServiceLbPoliciesRequest): google.cloud.networkservices.v1.ListServiceLbPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListServiceLbPoliciesRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesRequest.verify|verify} messages.
+                     * @param message ListServiceLbPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListServiceLbPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServiceLbPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesRequest.verify|verify} messages.
+                     * @param message ListServiceLbPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListServiceLbPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServiceLbPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServiceLbPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListServiceLbPoliciesRequest;
+
+                    /**
+                     * Decodes a ListServiceLbPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServiceLbPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListServiceLbPoliciesRequest;
+
+                    /**
+                     * Verifies a ListServiceLbPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServiceLbPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServiceLbPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListServiceLbPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListServiceLbPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListServiceLbPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListServiceLbPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServiceLbPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServiceLbPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListServiceLbPoliciesResponse. */
+                interface IListServiceLbPoliciesResponse {
+
+                    /** ListServiceLbPoliciesResponse serviceLbPolicies */
+                    serviceLbPolicies?: (google.cloud.networkservices.v1.IServiceLbPolicy[]|null);
+
+                    /** ListServiceLbPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListServiceLbPoliciesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListServiceLbPoliciesResponse. */
+                class ListServiceLbPoliciesResponse implements IListServiceLbPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListServiceLbPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListServiceLbPoliciesResponse);
+
+                    /** ListServiceLbPoliciesResponse serviceLbPolicies. */
+                    public serviceLbPolicies: google.cloud.networkservices.v1.IServiceLbPolicy[];
+
+                    /** ListServiceLbPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListServiceLbPoliciesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListServiceLbPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListServiceLbPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListServiceLbPoliciesResponse): google.cloud.networkservices.v1.ListServiceLbPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListServiceLbPoliciesResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesResponse.verify|verify} messages.
+                     * @param message ListServiceLbPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListServiceLbPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListServiceLbPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListServiceLbPoliciesResponse.verify|verify} messages.
+                     * @param message ListServiceLbPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListServiceLbPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListServiceLbPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListServiceLbPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListServiceLbPoliciesResponse;
+
+                    /**
+                     * Decodes a ListServiceLbPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListServiceLbPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListServiceLbPoliciesResponse;
+
+                    /**
+                     * Verifies a ListServiceLbPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListServiceLbPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListServiceLbPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListServiceLbPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListServiceLbPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListServiceLbPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListServiceLbPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListServiceLbPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListServiceLbPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetServiceLbPolicyRequest. */
+                interface IGetServiceLbPolicyRequest {
+
+                    /** GetServiceLbPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetServiceLbPolicyRequest. */
+                class GetServiceLbPolicyRequest implements IGetServiceLbPolicyRequest {
+
+                    /**
+                     * Constructs a new GetServiceLbPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetServiceLbPolicyRequest);
+
+                    /** GetServiceLbPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetServiceLbPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetServiceLbPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetServiceLbPolicyRequest): google.cloud.networkservices.v1.GetServiceLbPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message GetServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message GetServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetServiceLbPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetServiceLbPolicyRequest;
+
+                    /**
+                     * Decodes a GetServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetServiceLbPolicyRequest;
+
+                    /**
+                     * Verifies a GetServiceLbPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetServiceLbPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetServiceLbPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetServiceLbPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetServiceLbPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetServiceLbPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetServiceLbPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetServiceLbPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateServiceLbPolicyRequest. */
+                interface ICreateServiceLbPolicyRequest {
+
+                    /** CreateServiceLbPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateServiceLbPolicyRequest serviceLbPolicyId */
+                    serviceLbPolicyId?: (string|null);
+
+                    /** CreateServiceLbPolicyRequest serviceLbPolicy */
+                    serviceLbPolicy?: (google.cloud.networkservices.v1.IServiceLbPolicy|null);
+                }
+
+                /** Represents a CreateServiceLbPolicyRequest. */
+                class CreateServiceLbPolicyRequest implements ICreateServiceLbPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateServiceLbPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest);
+
+                    /** CreateServiceLbPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateServiceLbPolicyRequest serviceLbPolicyId. */
+                    public serviceLbPolicyId: string;
+
+                    /** CreateServiceLbPolicyRequest serviceLbPolicy. */
+                    public serviceLbPolicy?: (google.cloud.networkservices.v1.IServiceLbPolicy|null);
+
+                    /**
+                     * Creates a new CreateServiceLbPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateServiceLbPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest): google.cloud.networkservices.v1.CreateServiceLbPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message CreateServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message CreateServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ICreateServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateServiceLbPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.CreateServiceLbPolicyRequest;
+
+                    /**
+                     * Decodes a CreateServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.CreateServiceLbPolicyRequest;
+
+                    /**
+                     * Verifies a CreateServiceLbPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateServiceLbPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.CreateServiceLbPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateServiceLbPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateServiceLbPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.CreateServiceLbPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateServiceLbPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateServiceLbPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateServiceLbPolicyRequest. */
+                interface IUpdateServiceLbPolicyRequest {
+
+                    /** UpdateServiceLbPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServiceLbPolicyRequest serviceLbPolicy */
+                    serviceLbPolicy?: (google.cloud.networkservices.v1.IServiceLbPolicy|null);
+                }
+
+                /** Represents an UpdateServiceLbPolicyRequest. */
+                class UpdateServiceLbPolicyRequest implements IUpdateServiceLbPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateServiceLbPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest);
+
+                    /** UpdateServiceLbPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateServiceLbPolicyRequest serviceLbPolicy. */
+                    public serviceLbPolicy?: (google.cloud.networkservices.v1.IServiceLbPolicy|null);
+
+                    /**
+                     * Creates a new UpdateServiceLbPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateServiceLbPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest): google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message UpdateServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message UpdateServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IUpdateServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateServiceLbPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateServiceLbPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateServiceLbPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateServiceLbPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateServiceLbPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.UpdateServiceLbPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateServiceLbPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateServiceLbPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteServiceLbPolicyRequest. */
+                interface IDeleteServiceLbPolicyRequest {
+
+                    /** DeleteServiceLbPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteServiceLbPolicyRequest. */
+                class DeleteServiceLbPolicyRequest implements IDeleteServiceLbPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteServiceLbPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest);
+
+                    /** DeleteServiceLbPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteServiceLbPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteServiceLbPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest): google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteServiceLbPolicyRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message DeleteServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteServiceLbPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest.verify|verify} messages.
+                     * @param message DeleteServiceLbPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IDeleteServiceLbPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteServiceLbPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteServiceLbPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteServiceLbPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteServiceLbPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteServiceLbPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteServiceLbPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteServiceLbPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteServiceLbPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.DeleteServiceLbPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteServiceLbPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteServiceLbPolicyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11453,6 +18051,9 @@ export namespace google {
 
                         /** RouteAction originalDestination */
                         originalDestination?: (boolean|null);
+
+                        /** RouteAction idleTimeout */
+                        idleTimeout?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a RouteAction. */
@@ -11469,6 +18070,9 @@ export namespace google {
 
                         /** RouteAction originalDestination. */
                         public originalDestination: boolean;
+
+                        /** RouteAction idleTimeout. */
+                        public idleTimeout?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new RouteAction instance using the specified properties.
@@ -11663,6 +18267,9 @@ export namespace google {
 
                     /** ListTcpRoutesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListTcpRoutesRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTcpRoutesRequest. */
@@ -11682,6 +18289,9 @@ export namespace google {
 
                     /** ListTcpRoutesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListTcpRoutesRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListTcpRoutesRequest instance using the specified properties.
@@ -11769,6 +18379,9 @@ export namespace google {
 
                     /** ListTcpRoutesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListTcpRoutesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListTcpRoutesResponse. */
@@ -11785,6 +18398,9 @@ export namespace google {
 
                     /** ListTcpRoutesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListTcpRoutesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListTcpRoutesResponse instance using the specified properties.
@@ -12296,6 +18912,9 @@ export namespace google {
 
                     /** TlsRoute gateways */
                     gateways?: (string[]|null);
+
+                    /** TlsRoute labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a TlsRoute. */
@@ -12330,6 +18949,9 @@ export namespace google {
 
                     /** TlsRoute gateways. */
                     public gateways: string[];
+
+                    /** TlsRoute labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new TlsRoute instance using the specified properties.
@@ -12622,6 +19244,9 @@ export namespace google {
 
                         /** RouteAction destinations */
                         destinations?: (google.cloud.networkservices.v1.TlsRoute.IRouteDestination[]|null);
+
+                        /** RouteAction idleTimeout */
+                        idleTimeout?: (google.protobuf.IDuration|null);
                     }
 
                     /** Represents a RouteAction. */
@@ -12635,6 +19260,9 @@ export namespace google {
 
                         /** RouteAction destinations. */
                         public destinations: google.cloud.networkservices.v1.TlsRoute.IRouteDestination[];
+
+                        /** RouteAction idleTimeout. */
+                        public idleTimeout?: (google.protobuf.IDuration|null);
 
                         /**
                          * Creates a new RouteAction instance using the specified properties.
@@ -12829,6 +19457,9 @@ export namespace google {
 
                     /** ListTlsRoutesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListTlsRoutesRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListTlsRoutesRequest. */
@@ -12848,6 +19479,9 @@ export namespace google {
 
                     /** ListTlsRoutesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListTlsRoutesRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListTlsRoutesRequest instance using the specified properties.
@@ -12935,6 +19569,9 @@ export namespace google {
 
                     /** ListTlsRoutesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListTlsRoutesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListTlsRoutesResponse. */
@@ -12951,6 +19588,9 @@ export namespace google {
 
                     /** ListTlsRoutesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListTlsRoutesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListTlsRoutesResponse instance using the specified properties.
@@ -17754,6 +24394,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -17794,6 +24437,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -22111,6 +28757,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -22362,7 +29011,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -22393,7 +29042,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -23635,7 +30284,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -23651,7 +30300,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,227 @@
                      * @namespace
                      */
                     var v1 = {};
+    
+                    v1.ResourceOwners = (function() {
+    
+                        /**
+                         * Properties of a ResourceOwners.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IResourceOwners
+                         * @property {Array.<string>|null} [resourceOwners] ResourceOwners resourceOwners
+                         */
+    
+                        /**
+                         * Constructs a new ResourceOwners.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a ResourceOwners.
+                         * @implements IResourceOwners
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IResourceOwners=} [properties] Properties to set
+                         */
+                        function ResourceOwners(properties) {
+                            this.resourceOwners = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceOwners resourceOwners.
+                         * @member {Array.<string>} resourceOwners
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @instance
+                         */
+                        ResourceOwners.prototype.resourceOwners = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ResourceOwners instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceOwners=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners instance
+                         */
+                        ResourceOwners.create = function create(properties) {
+                            return new ResourceOwners(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOwners message. Does not implicitly {@link google.cloud.asset.v1.ResourceOwners.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceOwners} message ResourceOwners message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOwners.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceOwners != null && message.resourceOwners.length)
+                                for (var i = 0; i < message.resourceOwners.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceOwners[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOwners message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ResourceOwners.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.IResourceOwners} message ResourceOwners message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOwners.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceOwners message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOwners.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ResourceOwners();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.resourceOwners && message.resourceOwners.length))
+                                            message.resourceOwners = [];
+                                        message.resourceOwners.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceOwners message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOwners.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceOwners message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceOwners.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceOwners != null && message.hasOwnProperty("resourceOwners")) {
+                                if (!Array.isArray(message.resourceOwners))
+                                    return "resourceOwners: array expected";
+                                for (var i = 0; i < message.resourceOwners.length; ++i)
+                                    if (!$util.isString(message.resourceOwners[i]))
+                                        return "resourceOwners: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceOwners message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.ResourceOwners} ResourceOwners
+                         */
+                        ResourceOwners.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.ResourceOwners)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.ResourceOwners();
+                            if (object.resourceOwners) {
+                                if (!Array.isArray(object.resourceOwners))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceOwners.resourceOwners: array expected");
+                                message.resourceOwners = [];
+                                for (var i = 0; i < object.resourceOwners.length; ++i)
+                                    message.resourceOwners[i] = String(object.resourceOwners[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceOwners message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {google.cloud.asset.v1.ResourceOwners} message ResourceOwners
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceOwners.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resourceOwners = [];
+                            if (message.resourceOwners && message.resourceOwners.length) {
+                                object.resourceOwners = [];
+                                for (var j = 0; j < message.resourceOwners.length; ++j)
+                                    object.resourceOwners[j] = message.resourceOwners[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceOwners to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceOwners.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceOwners
+                         * @function getTypeUrl
+                         * @memberof google.cloud.asset.v1.ResourceOwners
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceOwners.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.asset.v1.ResourceOwners";
+                        };
+    
+                        return ResourceOwners;
+                    })();
     
                     v1.AssetService = (function() {
     
@@ -945,12 +1166,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeIamPolicyLongrunningMetadata.decode = function decode(reader, length) {
+                        AnalyzeIamPolicyLongrunningMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -1212,12 +1435,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportAssetsRequest.decode = function decode(reader, length) {
+                        ExportAssetsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ExportAssetsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -1582,12 +1807,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportAssetsResponse.decode = function decode(reader, length) {
+                        ExportAssetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ExportAssetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -1895,12 +2122,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAssetsRequest.decode = function decode(reader, length) {
+                        ListAssetsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListAssetsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -2274,12 +2503,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAssetsResponse.decode = function decode(reader, length) {
+                        ListAssetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListAssetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -2575,12 +2806,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchGetAssetsHistoryRequest.decode = function decode(reader, length) {
+                        BatchGetAssetsHistoryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetAssetsHistoryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -2908,12 +3141,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchGetAssetsHistoryResponse.decode = function decode(reader, length) {
+                        BatchGetAssetsHistoryResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetAssetsHistoryResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.assets && message.assets.length))
@@ -3152,12 +3387,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFeedRequest.decode = function decode(reader, length) {
+                        CreateFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.CreateFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -3385,12 +3622,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFeedRequest.decode = function decode(reader, length) {
+                        GetFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.GetFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -3588,12 +3827,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFeedsRequest.decode = function decode(reader, length) {
+                        ListFeedsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListFeedsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -3793,12 +4034,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFeedsResponse.decode = function decode(reader, length) {
+                        ListFeedsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListFeedsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.feeds && message.feeds.length))
@@ -4026,12 +4269,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateFeedRequest.decode = function decode(reader, length) {
+                        UpdateFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.UpdateFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.feed = $root.google.cloud.asset.v1.Feed.decode(reader, reader.uint32());
@@ -4252,12 +4497,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteFeedRequest.decode = function decode(reader, length) {
+                        DeleteFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.DeleteFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4480,12 +4727,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutputConfig.decode = function decode(reader, length) {
+                        OutputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.OutputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsDestination = $root.google.cloud.asset.v1.GcsDestination.decode(reader, reader.uint32());
@@ -4731,12 +4980,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutputResult.decode = function decode(reader, length) {
+                        OutputResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.OutputResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsResult = $root.google.cloud.asset.v1.GcsOutputResult.decode(reader, reader.uint32());
@@ -4946,12 +5197,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsOutputResult.decode = function decode(reader, length) {
+                        GcsOutputResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.GcsOutputResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.uris && message.uris.length))
@@ -5188,12 +5441,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsDestination.decode = function decode(reader, length) {
+                        GcsDestination.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.GcsDestination();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -5457,12 +5712,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryDestination.decode = function decode(reader, length) {
+                        BigQueryDestination.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BigQueryDestination();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataset = reader.string();
@@ -5714,12 +5971,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PartitionSpec.decode = function decode(reader, length) {
+                        PartitionSpec.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.PartitionSpec();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partitionKey = reader.int32();
@@ -5957,12 +6216,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PubsubDestination.decode = function decode(reader, length) {
+                        PubsubDestination.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.PubsubDestination();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.topic = reader.string();
@@ -6174,12 +6435,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FeedOutputConfig.decode = function decode(reader, length) {
+                        FeedOutputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.FeedOutputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pubsubDestination = $root.google.cloud.asset.v1.PubsubDestination.decode(reader, reader.uint32());
@@ -6459,12 +6722,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Feed.decode = function decode(reader, length) {
+                        Feed.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.Feed();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -6901,12 +7166,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllResourcesRequest.decode = function decode(reader, length) {
+                        SearchAllResourcesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllResourcesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -7210,12 +7477,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllResourcesResponse.decode = function decode(reader, length) {
+                        SearchAllResourcesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllResourcesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.results && message.results.length))
@@ -7502,12 +7771,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllIamPoliciesRequest.decode = function decode(reader, length) {
+                        SearchAllIamPoliciesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllIamPoliciesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -7794,12 +8065,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllIamPoliciesResponse.decode = function decode(reader, length) {
+                        SearchAllIamPoliciesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SearchAllIamPoliciesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.results && message.results.length))
@@ -8084,12 +8357,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IamPolicyAnalysisQuery.decode = function decode(reader, length) {
+                        IamPolicyAnalysisQuery.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisQuery();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -8370,12 +8645,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ResourceSelector.decode = function decode(reader, length) {
+                            ResourceSelector.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.ResourceSelector();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fullResourceName = reader.string();
@@ -8573,12 +8850,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IdentitySelector.decode = function decode(reader, length) {
+                            IdentitySelector.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.IdentitySelector();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.identity = reader.string();
@@ -8791,12 +9070,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AccessSelector.decode = function decode(reader, length) {
+                            AccessSelector.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.AccessSelector();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.roles && message.roles.length))
@@ -9090,12 +9371,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Options.decode = function decode(reader, length) {
+                            Options.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.Options();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.expandGroups = reader.bool();
@@ -9368,12 +9651,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ConditionContext.decode = function decode(reader, length) {
+                            ConditionContext.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.accessTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -9606,12 +9891,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeIamPolicyRequest.decode = function decode(reader, length) {
+                        AnalyzeIamPolicyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
@@ -9868,12 +10155,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeIamPolicyResponse.decode = function decode(reader, length) {
+                        AnalyzeIamPolicyResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.mainAnalysis = $root.google.cloud.asset.v1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.decode(reader, reader.uint32());
@@ -10155,12 +10444,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IamPolicyAnalysis.decode = function decode(reader, length) {
+                            IamPolicyAnalysis.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyResponse.IamPolicyAnalysis();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
@@ -10468,12 +10759,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IamPolicyAnalysisOutputConfig.decode = function decode(reader, length) {
+                        IamPolicyAnalysisOutputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsDestination = $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.GcsDestination.decode(reader, reader.uint32());
@@ -10702,12 +10995,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GcsDestination.decode = function decode(reader, length) {
+                            GcsDestination.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.GcsDestination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.uri = reader.string();
@@ -10938,12 +11233,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BigQueryDestination.decode = function decode(reader, length) {
+                            BigQueryDestination.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.dataset = reader.string();
@@ -11236,12 +11533,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeIamPolicyLongrunningRequest.decode = function decode(reader, length) {
+                        AnalyzeIamPolicyLongrunningRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.analysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
@@ -11463,12 +11762,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeIamPolicyLongrunningResponse.decode = function decode(reader, length) {
+                        AnalyzeIamPolicyLongrunningResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -11728,12 +12029,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SavedQuery.decode = function decode(reader, length) {
+                        SavedQuery.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SavedQuery(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -12076,12 +12379,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            QueryContent.decode = function decode(reader, length) {
+                            QueryContent.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.SavedQuery.QueryContent();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.iamPolicyAnalysisQuery = $root.google.cloud.asset.v1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
@@ -12314,12 +12619,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateSavedQueryRequest.decode = function decode(reader, length) {
+                        CreateSavedQueryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.CreateSavedQueryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -12547,12 +12854,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetSavedQueryRequest.decode = function decode(reader, length) {
+                        GetSavedQueryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.GetSavedQueryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -12783,12 +13092,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSavedQueriesRequest.decode = function decode(reader, length) {
+                        ListSavedQueriesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListSavedQueriesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -13036,12 +13347,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListSavedQueriesResponse.decode = function decode(reader, length) {
+                        ListSavedQueriesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ListSavedQueriesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.savedQueries && message.savedQueries.length))
@@ -13282,12 +13595,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateSavedQueryRequest.decode = function decode(reader, length) {
+                        UpdateSavedQueryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.UpdateSavedQueryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.savedQuery = $root.google.cloud.asset.v1.SavedQuery.decode(reader, reader.uint32());
@@ -13508,12 +13823,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteSavedQueryRequest.decode = function decode(reader, length) {
+                        DeleteSavedQueryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.DeleteSavedQueryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -13733,12 +14050,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeMoveRequest.decode = function decode(reader, length) {
+                        AnalyzeMoveRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeMoveRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resource = reader.string();
@@ -14003,12 +14322,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeMoveResponse.decode = function decode(reader, length) {
+                        AnalyzeMoveResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeMoveResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.moveAnalysis && message.moveAnalysis.length))
@@ -14261,12 +14582,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MoveAnalysis.decode = function decode(reader, length) {
+                        MoveAnalysis.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.MoveAnalysis();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.displayName = reader.string();
@@ -14526,12 +14849,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MoveAnalysisResult.decode = function decode(reader, length) {
+                        MoveAnalysisResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.MoveAnalysisResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.blockers && message.blockers.length))
@@ -14780,12 +15105,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MoveImpact.decode = function decode(reader, length) {
+                        MoveImpact.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.MoveImpact();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.detail = reader.string();
@@ -14983,12 +15310,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryAssetsOutputConfig.decode = function decode(reader, length) {
+                        QueryAssetsOutputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsOutputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bigqueryDestination = $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination.decode(reader, reader.uint32());
@@ -15210,12 +15539,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BigQueryDestination.decode = function decode(reader, length) {
+                            BigQueryDestination.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.dataset = reader.string();
@@ -15554,12 +15885,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryAssetsRequest.decode = function decode(reader, length) {
+                        QueryAssetsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -15955,12 +16288,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryAssetsResponse.decode = function decode(reader, length) {
+                        QueryAssetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryAssetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.jobReference = reader.string();
@@ -16277,12 +16612,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QueryResult.decode = function decode(reader, length) {
+                        QueryResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.QueryResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.rows && message.rows.length))
@@ -16558,12 +16895,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TableSchema.decode = function decode(reader, length) {
+                        TableSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.TableSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.fields && message.fields.length))
@@ -16815,12 +17154,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TableFieldSchema.decode = function decode(reader, length) {
+                        TableFieldSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.TableFieldSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.field = reader.string();
@@ -17088,12 +17429,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchGetEffectiveIamPoliciesRequest.decode = function decode(reader, length) {
+                        BatchGetEffectiveIamPoliciesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -17320,12 +17663,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchGetEffectiveIamPoliciesResponse.decode = function decode(reader, length) {
+                        BatchGetEffectiveIamPoliciesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         if (!(message.policyResults && message.policyResults.length))
@@ -17552,12 +17897,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EffectiveIamPolicy.decode = function decode(reader, length) {
+                            EffectiveIamPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fullResourceName = reader.string();
@@ -17795,12 +18142,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PolicyInfo.decode = function decode(reader, length) {
+                                PolicyInfo.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.attachedResource = reader.string();
@@ -18068,12 +18417,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzerOrgPolicy.decode = function decode(reader, length) {
+                        AnalyzerOrgPolicy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.attachedResource = reader.string();
@@ -18406,12 +18757,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Rule.decode = function decode(reader, length) {
+                            Rule.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicy.Rule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 3: {
                                             message.values = $root.google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues.decode(reader, reader.uint32());
@@ -18721,12 +19074,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                StringValues.decode = function decode(reader, length) {
+                                StringValues.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.allowedValues && message.allowedValues.length))
@@ -18996,12 +19351,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzerOrgPolicyConstraint.decode = function decode(reader, length) {
+                        AnalyzerOrgPolicyConstraint.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicyConstraint();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.googleDefinedConstraint = $root.google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.decode(reader, reader.uint32());
@@ -19299,12 +19656,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Constraint.decode = function decode(reader, length) {
+                            Constraint.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -19634,12 +19993,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ListConstraint.decode = function decode(reader, length) {
+                                ListConstraint.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.ListConstraint();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.supportsIn = reader.bool();
@@ -19839,12 +20200,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                BooleanConstraint.decode = function decode(reader, length) {
+                                BooleanConstraint.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.Constraint.BooleanConstraint();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -20101,12 +20464,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CustomConstraint.decode = function decode(reader, length) {
+                            CustomConstraint.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzerOrgPolicyConstraint.CustomConstraint();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -20201,6 +20566,8 @@
                                         case 1:
                                         case 2:
                                         case 3:
+                                        case 4:
+                                        case 5:
                                             break;
                                         }
                                 }
@@ -20272,6 +20639,14 @@
                                         case "DELETE":
                                         case 3:
                                             message.methodTypes[i] = 3;
+                                            break;
+                                        case "REMOVE_GRANT":
+                                        case 4:
+                                            message.methodTypes[i] = 4;
+                                            break;
+                                        case "GOVERN_TAGS":
+                                        case 5:
+                                            message.methodTypes[i] = 5;
                                             break;
                                         }
                                 }
@@ -20385,6 +20760,8 @@
                              * @property {number} CREATE=1 CREATE value
                              * @property {number} UPDATE=2 UPDATE value
                              * @property {number} DELETE=3 DELETE value
+                             * @property {number} REMOVE_GRANT=4 REMOVE_GRANT value
+                             * @property {number} GOVERN_TAGS=5 GOVERN_TAGS value
                              */
                             CustomConstraint.MethodType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -20392,6 +20769,8 @@
                                 values[valuesById[1] = "CREATE"] = 1;
                                 values[valuesById[2] = "UPDATE"] = 2;
                                 values[valuesById[3] = "DELETE"] = 3;
+                                values[valuesById[4] = "REMOVE_GRANT"] = 4;
+                                values[valuesById[5] = "GOVERN_TAGS"] = 5;
                                 return values;
                             })();
     
@@ -20488,12 +20867,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AnalyzeOrgPoliciesRequest _pageSize.
-                         * @member {"pageSize"|undefined} _pageSize
-                         * @memberof google.cloud.asset.v1.AnalyzeOrgPoliciesRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AnalyzeOrgPoliciesRequest.prototype, "_pageSize", {
                             get: $util.oneOfGetter($oneOfFields = ["pageSize"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -20560,12 +20934,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeOrgPoliciesRequest.decode = function decode(reader, length) {
+                        AnalyzeOrgPoliciesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPoliciesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -20841,12 +21217,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeOrgPoliciesResponse.decode = function decode(reader, length) {
+                        AnalyzeOrgPoliciesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.orgPolicyResults && message.orgPolicyResults.length))
@@ -21139,12 +21517,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OrgPolicyResult.decode = function decode(reader, length) {
+                            OrgPolicyResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.consolidatedPolicy = $root.google.cloud.asset.v1.AnalyzerOrgPolicy.decode(reader, reader.uint32());
@@ -21420,12 +21800,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AnalyzeOrgPolicyGovernedContainersRequest _pageSize.
-                         * @member {"pageSize"|undefined} _pageSize
-                         * @memberof google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AnalyzeOrgPolicyGovernedContainersRequest.prototype, "_pageSize", {
                             get: $util.oneOfGetter($oneOfFields = ["pageSize"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -21492,12 +21867,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeOrgPolicyGovernedContainersRequest.decode = function decode(reader, length) {
+                        AnalyzeOrgPolicyGovernedContainersRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -21773,12 +22150,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeOrgPolicyGovernedContainersResponse.decode = function decode(reader, length) {
+                        AnalyzeOrgPolicyGovernedContainersResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.governedContainers && message.governedContainers.length))
@@ -22106,12 +22485,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GovernedContainer.decode = function decode(reader, length) {
+                            GovernedContainer.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fullResourceName = reader.string();
@@ -22442,12 +22823,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AnalyzeOrgPolicyGovernedAssetsRequest _pageSize.
-                         * @member {"pageSize"|undefined} _pageSize
-                         * @memberof google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AnalyzeOrgPolicyGovernedAssetsRequest.prototype, "_pageSize", {
                             get: $util.oneOfGetter($oneOfFields = ["pageSize"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -22514,12 +22890,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeOrgPolicyGovernedAssetsRequest.decode = function decode(reader, length) {
+                        AnalyzeOrgPolicyGovernedAssetsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -22795,12 +23173,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeOrgPolicyGovernedAssetsResponse.decode = function decode(reader, length) {
+                        AnalyzeOrgPolicyGovernedAssetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.governedAssets && message.governedAssets.length))
@@ -23115,12 +23495,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GovernedResource.decode = function decode(reader, length) {
+                            GovernedResource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fullResourceName = reader.string();
@@ -23483,12 +23865,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GovernedIamPolicy.decode = function decode(reader, length) {
+                            GovernedIamPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedIamPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.attachedResource = reader.string();
@@ -23816,12 +24200,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GovernedAsset.decode = function decode(reader, length) {
+                            GovernedAsset.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedAsset();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.governedResource = $root.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource.decode(reader, reader.uint32());
@@ -24174,12 +24560,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TemporalAsset.decode = function decode(reader, length) {
+                        TemporalAsset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.TemporalAsset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.window = $root.google.cloud.asset.v1.TimeWindow.decode(reader, reader.uint32());
@@ -24506,12 +24894,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TimeWindow.decode = function decode(reader, length) {
+                        TimeWindow.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.TimeWindow();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -24645,6 +25035,235 @@
                         };
     
                         return TimeWindow;
+                    })();
+    
+                    v1.AssetEnrichment = (function() {
+    
+                        /**
+                         * Properties of an AssetEnrichment.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IAssetEnrichment
+                         * @property {google.cloud.asset.v1.IResourceOwners|null} [resourceOwners] AssetEnrichment resourceOwners
+                         */
+    
+                        /**
+                         * Constructs a new AssetEnrichment.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an AssetEnrichment.
+                         * @implements IAssetEnrichment
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IAssetEnrichment=} [properties] Properties to set
+                         */
+                        function AssetEnrichment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AssetEnrichment resourceOwners.
+                         * @member {google.cloud.asset.v1.IResourceOwners|null|undefined} resourceOwners
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @instance
+                         */
+                        AssetEnrichment.prototype.resourceOwners = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AssetEnrichment EnrichmentData.
+                         * @member {"resourceOwners"|undefined} EnrichmentData
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @instance
+                         */
+                        Object.defineProperty(AssetEnrichment.prototype, "EnrichmentData", {
+                            get: $util.oneOfGetter($oneOfFields = ["resourceOwners"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AssetEnrichment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.IAssetEnrichment=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment instance
+                         */
+                        AssetEnrichment.create = function create(properties) {
+                            return new AssetEnrichment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AssetEnrichment message. Does not implicitly {@link google.cloud.asset.v1.AssetEnrichment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.IAssetEnrichment} message AssetEnrichment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssetEnrichment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceOwners != null && Object.hasOwnProperty.call(message, "resourceOwners"))
+                                $root.google.cloud.asset.v1.ResourceOwners.encode(message.resourceOwners, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AssetEnrichment message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AssetEnrichment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.IAssetEnrichment} message AssetEnrichment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssetEnrichment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AssetEnrichment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssetEnrichment.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AssetEnrichment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 7: {
+                                        message.resourceOwners = $root.google.cloud.asset.v1.ResourceOwners.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AssetEnrichment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssetEnrichment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AssetEnrichment message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AssetEnrichment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.resourceOwners != null && message.hasOwnProperty("resourceOwners")) {
+                                properties.EnrichmentData = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.ResourceOwners.verify(message.resourceOwners);
+                                    if (error)
+                                        return "resourceOwners." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AssetEnrichment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.AssetEnrichment} AssetEnrichment
+                         */
+                        AssetEnrichment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.AssetEnrichment)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.AssetEnrichment();
+                            if (object.resourceOwners != null) {
+                                if (typeof object.resourceOwners !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.AssetEnrichment.resourceOwners: object expected");
+                                message.resourceOwners = $root.google.cloud.asset.v1.ResourceOwners.fromObject(object.resourceOwners);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AssetEnrichment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {google.cloud.asset.v1.AssetEnrichment} message AssetEnrichment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AssetEnrichment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.resourceOwners != null && message.hasOwnProperty("resourceOwners")) {
+                                object.resourceOwners = $root.google.cloud.asset.v1.ResourceOwners.toObject(message.resourceOwners, options);
+                                if (options.oneofs)
+                                    object.EnrichmentData = "resourceOwners";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AssetEnrichment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AssetEnrichment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AssetEnrichment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.asset.v1.AssetEnrichment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AssetEnrichment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.asset.v1.AssetEnrichment";
+                        };
+    
+                        return AssetEnrichment;
                     })();
     
                     v1.Asset = (function() {
@@ -24882,12 +25501,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Asset.decode = function decode(reader, length) {
+                        Asset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.Asset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 11: {
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -25396,12 +26017,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Resource.decode = function decode(reader, length) {
+                        Resource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.Resource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.version = reader.string();
@@ -25690,12 +26313,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelatedAssets.decode = function decode(reader, length) {
+                        RelatedAssets.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedAssets();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.relationshipAttributes = $root.google.cloud.asset.v1.RelationshipAttributes.decode(reader, reader.uint32());
@@ -25963,12 +26588,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelationshipAttributes.decode = function decode(reader, length) {
+                        RelationshipAttributes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelationshipAttributes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.type = reader.string();
@@ -26238,12 +26865,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelatedAsset.decode = function decode(reader, length) {
+                        RelatedAsset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedAsset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.asset = reader.string();
@@ -26470,45 +27099,25 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * Tag _tagKey.
-                         * @member {"tagKey"|undefined} _tagKey
-                         * @memberof google.cloud.asset.v1.Tag
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Tag.prototype, "_tagKey", {
                             get: $util.oneOfGetter($oneOfFields = ["tagKey"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Tag _tagKeyId.
-                         * @member {"tagKeyId"|undefined} _tagKeyId
-                         * @memberof google.cloud.asset.v1.Tag
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Tag.prototype, "_tagKeyId", {
                             get: $util.oneOfGetter($oneOfFields = ["tagKeyId"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Tag _tagValue.
-                         * @member {"tagValue"|undefined} _tagValue
-                         * @memberof google.cloud.asset.v1.Tag
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Tag.prototype, "_tagValue", {
                             get: $util.oneOfGetter($oneOfFields = ["tagValue"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Tag _tagValueId.
-                         * @member {"tagValueId"|undefined} _tagValueId
-                         * @memberof google.cloud.asset.v1.Tag
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Tag.prototype, "_tagValueId", {
                             get: $util.oneOfGetter($oneOfFields = ["tagValueId"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -26573,12 +27182,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Tag.decode = function decode(reader, length) {
+                        Tag.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.Tag();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tagKey = reader.string();
@@ -26788,12 +27399,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * EffectiveTagDetails _attachedResource.
-                         * @member {"attachedResource"|undefined} _attachedResource
-                         * @memberof google.cloud.asset.v1.EffectiveTagDetails
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(EffectiveTagDetails.prototype, "_attachedResource", {
                             get: $util.oneOfGetter($oneOfFields = ["attachedResource"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -26855,12 +27461,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EffectiveTagDetails.decode = function decode(reader, length) {
+                        EffectiveTagDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.EffectiveTagDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.attachedResource = reader.string();
@@ -27040,6 +27648,7 @@
                          * @property {Array.<string>|null} [tagValueIds] ResourceSearchResult tagValueIds
                          * @property {Array.<google.cloud.asset.v1.ITag>|null} [tags] ResourceSearchResult tags
                          * @property {Array.<google.cloud.asset.v1.IEffectiveTagDetails>|null} [effectiveTags] ResourceSearchResult effectiveTags
+                         * @property {Array.<google.cloud.asset.v1.IAssetEnrichment>|null} [enrichments] ResourceSearchResult enrichments
                          * @property {string|null} [parentAssetType] ResourceSearchResult parentAssetType
                          * @property {Object.<string,string>|null} [sccSecurityMarks] ResourceSearchResult sccSecurityMarks
                          */
@@ -27065,6 +27674,7 @@
                             this.tagValueIds = [];
                             this.tags = [];
                             this.effectiveTags = [];
+                            this.enrichments = [];
                             this.sccSecurityMarks = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -27273,6 +27883,14 @@
                         ResourceSearchResult.prototype.effectiveTags = $util.emptyArray;
     
                         /**
+                         * ResourceSearchResult enrichments.
+                         * @member {Array.<google.cloud.asset.v1.IAssetEnrichment>} enrichments
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.enrichments = $util.emptyArray;
+    
+                        /**
                          * ResourceSearchResult parentAssetType.
                          * @member {string} parentAssetType
                          * @memberof google.cloud.asset.v1.ResourceSearchResult
@@ -27376,6 +27994,9 @@
                             if (message.effectiveTags != null && message.effectiveTags.length)
                                 for (var i = 0; i < message.effectiveTags.length; ++i)
                                     $root.google.cloud.asset.v1.EffectiveTagDetails.encode(message.effectiveTags[i], writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.enrichments != null && message.enrichments.length)
+                                for (var i = 0; i < message.enrichments.length; ++i)
+                                    $root.google.cloud.asset.v1.AssetEnrichment.encode(message.enrichments[i], writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
                             if (message.sccSecurityMarks != null && Object.hasOwnProperty.call(message, "sccSecurityMarks"))
                                 for (var keys = Object.keys(message.sccSecurityMarks), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 32, wireType 2 =*/258).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.sccSecurityMarks[keys[i]]).ldelim();
@@ -27408,12 +28029,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ResourceSearchResult.decode = function decode(reader, length) {
+                        ResourceSearchResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ResourceSearchResult(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -27571,6 +28194,12 @@
                                         if (!(message.effectiveTags && message.effectiveTags.length))
                                             message.effectiveTags = [];
                                         message.effectiveTags.push($root.google.cloud.asset.v1.EffectiveTagDetails.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 31: {
+                                        if (!(message.enrichments && message.enrichments.length))
+                                            message.enrichments = [];
+                                        message.enrichments.push($root.google.cloud.asset.v1.AssetEnrichment.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 103: {
@@ -27776,6 +28405,15 @@
                                         return "effectiveTags." + error;
                                 }
                             }
+                            if (message.enrichments != null && message.hasOwnProperty("enrichments")) {
+                                if (!Array.isArray(message.enrichments))
+                                    return "enrichments: array expected";
+                                for (var i = 0; i < message.enrichments.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.AssetEnrichment.verify(message.enrichments[i]);
+                                    if (error)
+                                        return "enrichments." + error;
+                                }
+                            }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 if (!$util.isString(message.parentAssetType))
                                     return "parentAssetType: string expected";
@@ -27936,6 +28574,16 @@
                                     message.effectiveTags[i] = $root.google.cloud.asset.v1.EffectiveTagDetails.fromObject(object.effectiveTags[i]);
                                 }
                             }
+                            if (object.enrichments) {
+                                if (!Array.isArray(object.enrichments))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.enrichments: array expected");
+                                message.enrichments = [];
+                                for (var i = 0; i < object.enrichments.length; ++i) {
+                                    if (typeof object.enrichments[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.enrichments: object expected");
+                                    message.enrichments[i] = $root.google.cloud.asset.v1.AssetEnrichment.fromObject(object.enrichments[i]);
+                                }
+                            }
                             if (object.parentAssetType != null)
                                 message.parentAssetType = String(object.parentAssetType);
                             if (object.sccSecurityMarks) {
@@ -27972,6 +28620,7 @@
                                 object.kmsKeys = [];
                                 object.tags = [];
                                 object.effectiveTags = [];
+                                object.enrichments = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
@@ -28080,6 +28729,11 @@
                                 object.effectiveTags = [];
                                 for (var j = 0; j < message.effectiveTags.length; ++j)
                                     object.effectiveTags[j] = $root.google.cloud.asset.v1.EffectiveTagDetails.toObject(message.effectiveTags[j], options);
+                            }
+                            if (message.enrichments && message.enrichments.length) {
+                                object.enrichments = [];
+                                for (var j = 0; j < message.enrichments.length; ++j)
+                                    object.enrichments[j] = $root.google.cloud.asset.v1.AssetEnrichment.toObject(message.enrichments[j], options);
                             }
                             if (message.sccSecurityMarks && (keys2 = Object.keys(message.sccSecurityMarks)).length) {
                                 object.sccSecurityMarks = {};
@@ -28216,12 +28870,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VersionedResource.decode = function decode(reader, length) {
+                        VersionedResource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.VersionedResource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.version = reader.string();
@@ -28450,12 +29106,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AttachedResource.decode = function decode(reader, length) {
+                        AttachedResource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AttachedResource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.assetType = reader.string();
@@ -28687,12 +29345,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelatedResources.decode = function decode(reader, length) {
+                        RelatedResources.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedResources();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.relatedResources && message.relatedResources.length))
@@ -28920,12 +29580,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelatedResource.decode = function decode(reader, length) {
+                        RelatedResource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedResource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.assetType = reader.string();
@@ -29204,12 +29866,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IamPolicySearchResult.decode = function decode(reader, length) {
+                        IamPolicySearchResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicySearchResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resource = reader.string();
@@ -29506,12 +30170,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Explanation.decode = function decode(reader, length) {
+                            Explanation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (message.matchedPermissions === $util.emptyObject)
@@ -29746,12 +30412,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Permissions.decode = function decode(reader, length) {
+                                Permissions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.permissions && message.permissions.length))
@@ -29980,12 +30648,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IamPolicyAnalysisState.decode = function decode(reader, length) {
+                        IamPolicyAnalysisState.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisState();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.code = reader.int32();
@@ -30290,12 +30960,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ConditionEvaluation.decode = function decode(reader, length) {
+                        ConditionEvaluation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.ConditionEvaluation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.evaluationValue = reader.int32();
@@ -30586,12 +31258,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IamPolicyAnalysisResult.decode = function decode(reader, length) {
+                        IamPolicyAnalysisResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.attachedResourceFullName = reader.string();
@@ -30876,12 +31550,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Resource.decode = function decode(reader, length) {
+                            Resource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisResult.Resource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fullResourceName = reader.string();
@@ -31133,12 +31809,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Access.decode = function decode(reader, length) {
+                            Access.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisResult.Access();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.role = reader.string();
@@ -31387,12 +32065,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Identity.decode = function decode(reader, length) {
+                            Identity.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisResult.Identity();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -31619,12 +32299,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Edge.decode = function decode(reader, length) {
+                            Edge.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisResult.Edge();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.sourceNode = reader.string();
@@ -31874,12 +32556,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AccessControlList.decode = function decode(reader, length) {
+                            AccessControlList.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisResult.AccessControlList();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.resources && message.resources.length))
@@ -32192,12 +32876,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IdentityList.decode = function decode(reader, length) {
+                            IdentityList.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.IamPolicyAnalysisResult.IdentityList();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.identities && message.identities.length))
@@ -32619,12 +33305,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllResourcesRequest.decode = function decode(reader, length) {
+                        SearchAllResourcesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -32911,12 +33599,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllResourcesResponse.decode = function decode(reader, length) {
+                        SearchAllResourcesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.SearchAllResourcesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.results && message.results.length))
@@ -33179,12 +33869,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllIamPoliciesRequest.decode = function decode(reader, length) {
+                        SearchAllIamPoliciesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scope = reader.string();
@@ -33432,12 +34124,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchAllIamPoliciesResponse.decode = function decode(reader, length) {
+                        SearchAllIamPoliciesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.results && message.results.length))
@@ -33761,12 +34455,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StandardResourceMetadata.decode = function decode(reader, length) {
+                        StandardResourceMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.StandardResourceMetadata(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -34158,12 +34854,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IamPolicySearchResult.decode = function decode(reader, length) {
+                        IamPolicySearchResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resource = reader.string();
@@ -34409,12 +35107,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Explanation.decode = function decode(reader, length) {
+                            Explanation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.IamPolicySearchResult.Explanation(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (message.matchedPermissions === $util.emptyObject)
@@ -34655,12 +35355,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Permissions.decode = function decode(reader, length) {
+                        Permissions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p1beta1.Permissions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.permissions && message.permissions.length))
@@ -35095,12 +35797,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportAssetsResponse.decode = function decode(reader, length) {
+                        ExportAssetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.ExportAssetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -35323,12 +36027,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchGetAssetsHistoryResponse.decode = function decode(reader, length) {
+                        BatchGetAssetsHistoryResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.assets && message.assets.length))
@@ -35567,12 +36273,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateFeedRequest.decode = function decode(reader, length) {
+                        CreateFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.CreateFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -35800,12 +36508,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFeedRequest.decode = function decode(reader, length) {
+                        GetFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.GetFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -36003,12 +36713,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFeedsRequest.decode = function decode(reader, length) {
+                        ListFeedsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.ListFeedsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -36208,12 +36920,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFeedsResponse.decode = function decode(reader, length) {
+                        ListFeedsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.ListFeedsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.feeds && message.feeds.length))
@@ -36441,12 +37155,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateFeedRequest.decode = function decode(reader, length) {
+                        UpdateFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.UpdateFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.feed = $root.google.cloud.asset.v1p2beta1.Feed.decode(reader, reader.uint32());
@@ -36667,12 +37383,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteFeedRequest.decode = function decode(reader, length) {
+                        DeleteFeedRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.DeleteFeedRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -36884,12 +37602,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutputConfig.decode = function decode(reader, length) {
+                        OutputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.OutputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsDestination = $root.google.cloud.asset.v1p2beta1.GcsDestination.decode(reader, reader.uint32());
@@ -37111,12 +37831,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsDestination.decode = function decode(reader, length) {
+                        GcsDestination.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.GcsDestination();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -37334,12 +38056,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PubsubDestination.decode = function decode(reader, length) {
+                        PubsubDestination.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.PubsubDestination();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.topic = reader.string();
@@ -37551,12 +38275,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FeedOutputConfig.decode = function decode(reader, length) {
+                        FeedOutputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.FeedOutputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pubsubDestination = $root.google.cloud.asset.v1p2beta1.PubsubDestination.decode(reader, reader.uint32());
@@ -37812,12 +38538,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Feed.decode = function decode(reader, length) {
+                        Feed.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.Feed();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -38145,12 +38873,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TemporalAsset.decode = function decode(reader, length) {
+                        TemporalAsset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.TemporalAsset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.window = $root.google.cloud.asset.v1p2beta1.TimeWindow.decode(reader, reader.uint32());
@@ -38394,12 +39124,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TimeWindow.decode = function decode(reader, length) {
+                        TimeWindow.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.TimeWindow();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -38726,12 +39458,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Asset.decode = function decode(reader, length) {
+                        Asset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.Asset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -39161,12 +39895,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Resource.decode = function decode(reader, length) {
+                        Resource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p2beta1.Resource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.version = reader.string();
@@ -39346,5678 +40082,6 @@
                     })();
     
                     return v1p2beta1;
-                })();
-    
-                asset.v1p4beta1 = (function() {
-    
-                    /**
-                     * Namespace v1p4beta1.
-                     * @memberof google.cloud.asset
-                     * @namespace
-                     */
-                    var v1p4beta1 = {};
-    
-                    v1p4beta1.AssetService = (function() {
-    
-                        /**
-                         * Constructs a new AssetService service.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an AssetService
-                         * @extends $protobuf.rpc.Service
-                         * @constructor
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        function AssetService(rpcImpl, requestDelimited, responseDelimited) {
-                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                        }
-    
-                        (AssetService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AssetService;
-    
-                        /**
-                         * Creates new AssetService service using the specified rpc implementation.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.AssetService
-                         * @static
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         * @returns {AssetService} RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        AssetService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                            return new this(rpcImpl, requestDelimited, responseDelimited);
-                        };
-    
-                        /**
-                         * Callback as used by {@link google.cloud.asset.v1p4beta1.AssetService|analyzeIamPolicy}.
-                         * @memberof google.cloud.asset.v1p4beta1.AssetService
-                         * @typedef AnalyzeIamPolicyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse} [response] AnalyzeIamPolicyResponse
-                         */
-    
-                        /**
-                         * Calls AnalyzeIamPolicy.
-                         * @function analyzeIamPolicy
-                         * @memberof google.cloud.asset.v1p4beta1.AssetService
-                         * @instance
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest} request AnalyzeIamPolicyRequest message or plain object
-                         * @param {google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicyCallback} callback Node-style callback called with the error, if any, and AnalyzeIamPolicyResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AssetService.prototype.analyzeIamPolicy = function analyzeIamPolicy(request, callback) {
-                            return this.rpcCall(analyzeIamPolicy, $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest, $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse, request, callback);
-                        }, "name", { value: "AnalyzeIamPolicy" });
-    
-                        /**
-                         * Calls AnalyzeIamPolicy.
-                         * @function analyzeIamPolicy
-                         * @memberof google.cloud.asset.v1p4beta1.AssetService
-                         * @instance
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest} request AnalyzeIamPolicyRequest message or plain object
-                         * @returns {Promise<google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.asset.v1p4beta1.AssetService|exportIamPolicyAnalysis}.
-                         * @memberof google.cloud.asset.v1p4beta1.AssetService
-                         * @typedef ExportIamPolicyAnalysisCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.longrunning.Operation} [response] Operation
-                         */
-    
-                        /**
-                         * Calls ExportIamPolicyAnalysis.
-                         * @function exportIamPolicyAnalysis
-                         * @memberof google.cloud.asset.v1p4beta1.AssetService
-                         * @instance
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest} request ExportIamPolicyAnalysisRequest message or plain object
-                         * @param {google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysisCallback} callback Node-style callback called with the error, if any, and Operation
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(AssetService.prototype.exportIamPolicyAnalysis = function exportIamPolicyAnalysis(request, callback) {
-                            return this.rpcCall(exportIamPolicyAnalysis, $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest, $root.google.longrunning.Operation, request, callback);
-                        }, "name", { value: "ExportIamPolicyAnalysis" });
-    
-                        /**
-                         * Calls ExportIamPolicyAnalysis.
-                         * @function exportIamPolicyAnalysis
-                         * @memberof google.cloud.asset.v1p4beta1.AssetService
-                         * @instance
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest} request ExportIamPolicyAnalysisRequest message or plain object
-                         * @returns {Promise<google.longrunning.Operation>} Promise
-                         * @variation 2
-                         */
-    
-                        return AssetService;
-                    })();
-    
-                    v1p4beta1.IamPolicyAnalysisQuery = (function() {
-    
-                        /**
-                         * Properties of an IamPolicyAnalysisQuery.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @interface IIamPolicyAnalysisQuery
-                         * @property {string|null} [parent] IamPolicyAnalysisQuery parent
-                         * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IResourceSelector|null} [resourceSelector] IamPolicyAnalysisQuery resourceSelector
-                         * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IIdentitySelector|null} [identitySelector] IamPolicyAnalysisQuery identitySelector
-                         * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IAccessSelector|null} [accessSelector] IamPolicyAnalysisQuery accessSelector
-                         */
-    
-                        /**
-                         * Constructs a new IamPolicyAnalysisQuery.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an IamPolicyAnalysisQuery.
-                         * @implements IIamPolicyAnalysisQuery
-                         * @constructor
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery=} [properties] Properties to set
-                         */
-                        function IamPolicyAnalysisQuery(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * IamPolicyAnalysisQuery parent.
-                         * @member {string} parent
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @instance
-                         */
-                        IamPolicyAnalysisQuery.prototype.parent = "";
-    
-                        /**
-                         * IamPolicyAnalysisQuery resourceSelector.
-                         * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IResourceSelector|null|undefined} resourceSelector
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @instance
-                         */
-                        IamPolicyAnalysisQuery.prototype.resourceSelector = null;
-    
-                        /**
-                         * IamPolicyAnalysisQuery identitySelector.
-                         * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IIdentitySelector|null|undefined} identitySelector
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @instance
-                         */
-                        IamPolicyAnalysisQuery.prototype.identitySelector = null;
-    
-                        /**
-                         * IamPolicyAnalysisQuery accessSelector.
-                         * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IAccessSelector|null|undefined} accessSelector
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @instance
-                         */
-                        IamPolicyAnalysisQuery.prototype.accessSelector = null;
-    
-                        /**
-                         * Creates a new IamPolicyAnalysisQuery instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery=} [properties] Properties to set
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} IamPolicyAnalysisQuery instance
-                         */
-                        IamPolicyAnalysisQuery.create = function create(properties) {
-                            return new IamPolicyAnalysisQuery(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified IamPolicyAnalysisQuery message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery} message IamPolicyAnalysisQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        IamPolicyAnalysisQuery.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
-                            if (message.resourceSelector != null && Object.hasOwnProperty.call(message, "resourceSelector"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.encode(message.resourceSelector, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.identitySelector != null && Object.hasOwnProperty.call(message, "identitySelector"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.encode(message.identitySelector, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.accessSelector != null && Object.hasOwnProperty.call(message, "accessSelector"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.encode(message.accessSelector, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified IamPolicyAnalysisQuery message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery} message IamPolicyAnalysisQuery message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        IamPolicyAnalysisQuery.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an IamPolicyAnalysisQuery message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} IamPolicyAnalysisQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        IamPolicyAnalysisQuery.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.resourceSelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.identitySelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 4: {
-                                        message.accessSelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an IamPolicyAnalysisQuery message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} IamPolicyAnalysisQuery
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        IamPolicyAnalysisQuery.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an IamPolicyAnalysisQuery message.
-                         * @function verify
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        IamPolicyAnalysisQuery.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.resourceSelector != null && message.hasOwnProperty("resourceSelector")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.verify(message.resourceSelector);
-                                if (error)
-                                    return "resourceSelector." + error;
-                            }
-                            if (message.identitySelector != null && message.hasOwnProperty("identitySelector")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.verify(message.identitySelector);
-                                if (error)
-                                    return "identitySelector." + error;
-                            }
-                            if (message.accessSelector != null && message.hasOwnProperty("accessSelector")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.verify(message.accessSelector);
-                                if (error)
-                                    return "accessSelector." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an IamPolicyAnalysisQuery message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} IamPolicyAnalysisQuery
-                         */
-                        IamPolicyAnalysisQuery.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery)
-                                return object;
-                            var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery();
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.resourceSelector != null) {
-                                if (typeof object.resourceSelector !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.resourceSelector: object expected");
-                                message.resourceSelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.fromObject(object.resourceSelector);
-                            }
-                            if (object.identitySelector != null) {
-                                if (typeof object.identitySelector !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.identitySelector: object expected");
-                                message.identitySelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.fromObject(object.identitySelector);
-                            }
-                            if (object.accessSelector != null) {
-                                if (typeof object.accessSelector !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.accessSelector: object expected");
-                                message.accessSelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.fromObject(object.accessSelector);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an IamPolicyAnalysisQuery message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery} message IamPolicyAnalysisQuery
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        IamPolicyAnalysisQuery.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.parent = "";
-                                object.resourceSelector = null;
-                                object.identitySelector = null;
-                                object.accessSelector = null;
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.resourceSelector != null && message.hasOwnProperty("resourceSelector"))
-                                object.resourceSelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.toObject(message.resourceSelector, options);
-                            if (message.identitySelector != null && message.hasOwnProperty("identitySelector"))
-                                object.identitySelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.toObject(message.identitySelector, options);
-                            if (message.accessSelector != null && message.hasOwnProperty("accessSelector"))
-                                object.accessSelector = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.toObject(message.accessSelector, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this IamPolicyAnalysisQuery to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        IamPolicyAnalysisQuery.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for IamPolicyAnalysisQuery
-                         * @function getTypeUrl
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        IamPolicyAnalysisQuery.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery";
-                        };
-    
-                        IamPolicyAnalysisQuery.ResourceSelector = (function() {
-    
-                            /**
-                             * Properties of a ResourceSelector.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                             * @interface IResourceSelector
-                             * @property {string|null} [fullResourceName] ResourceSelector fullResourceName
-                             */
-    
-                            /**
-                             * Constructs a new ResourceSelector.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                             * @classdesc Represents a ResourceSelector.
-                             * @implements IResourceSelector
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IResourceSelector=} [properties] Properties to set
-                             */
-                            function ResourceSelector(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * ResourceSelector fullResourceName.
-                             * @member {string} fullResourceName
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @instance
-                             */
-                            ResourceSelector.prototype.fullResourceName = "";
-    
-                            /**
-                             * Creates a new ResourceSelector instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IResourceSelector=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector} ResourceSelector instance
-                             */
-                            ResourceSelector.create = function create(properties) {
-                                return new ResourceSelector(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified ResourceSelector message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IResourceSelector} message ResourceSelector message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ResourceSelector.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.fullResourceName);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified ResourceSelector message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IResourceSelector} message ResourceSelector message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            ResourceSelector.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a ResourceSelector message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector} ResourceSelector
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ResourceSelector.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.fullResourceName = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a ResourceSelector message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector} ResourceSelector
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            ResourceSelector.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a ResourceSelector message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            ResourceSelector.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
-                                    if (!$util.isString(message.fullResourceName))
-                                        return "fullResourceName: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a ResourceSelector message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector} ResourceSelector
-                             */
-                            ResourceSelector.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector();
-                                if (object.fullResourceName != null)
-                                    message.fullResourceName = String(object.fullResourceName);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a ResourceSelector message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector} message ResourceSelector
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            ResourceSelector.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.fullResourceName = "";
-                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
-                                    object.fullResourceName = message.fullResourceName;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this ResourceSelector to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            ResourceSelector.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for ResourceSelector
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            ResourceSelector.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector";
-                            };
-    
-                            return ResourceSelector;
-                        })();
-    
-                        IamPolicyAnalysisQuery.IdentitySelector = (function() {
-    
-                            /**
-                             * Properties of an IdentitySelector.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                             * @interface IIdentitySelector
-                             * @property {string|null} [identity] IdentitySelector identity
-                             */
-    
-                            /**
-                             * Constructs a new IdentitySelector.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                             * @classdesc Represents an IdentitySelector.
-                             * @implements IIdentitySelector
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IIdentitySelector=} [properties] Properties to set
-                             */
-                            function IdentitySelector(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * IdentitySelector identity.
-                             * @member {string} identity
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @instance
-                             */
-                            IdentitySelector.prototype.identity = "";
-    
-                            /**
-                             * Creates a new IdentitySelector instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IIdentitySelector=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector} IdentitySelector instance
-                             */
-                            IdentitySelector.create = function create(properties) {
-                                return new IdentitySelector(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified IdentitySelector message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IIdentitySelector} message IdentitySelector message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            IdentitySelector.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.identity != null && Object.hasOwnProperty.call(message, "identity"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.identity);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified IdentitySelector message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IIdentitySelector} message IdentitySelector message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            IdentitySelector.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an IdentitySelector message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector} IdentitySelector
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            IdentitySelector.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.identity = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an IdentitySelector message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector} IdentitySelector
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            IdentitySelector.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an IdentitySelector message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            IdentitySelector.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.identity != null && message.hasOwnProperty("identity"))
-                                    if (!$util.isString(message.identity))
-                                        return "identity: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an IdentitySelector message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector} IdentitySelector
-                             */
-                            IdentitySelector.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector();
-                                if (object.identity != null)
-                                    message.identity = String(object.identity);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an IdentitySelector message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector} message IdentitySelector
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            IdentitySelector.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.identity = "";
-                                if (message.identity != null && message.hasOwnProperty("identity"))
-                                    object.identity = message.identity;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this IdentitySelector to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            IdentitySelector.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for IdentitySelector
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            IdentitySelector.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector";
-                            };
-    
-                            return IdentitySelector;
-                        })();
-    
-                        IamPolicyAnalysisQuery.AccessSelector = (function() {
-    
-                            /**
-                             * Properties of an AccessSelector.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                             * @interface IAccessSelector
-                             * @property {Array.<string>|null} [roles] AccessSelector roles
-                             * @property {Array.<string>|null} [permissions] AccessSelector permissions
-                             */
-    
-                            /**
-                             * Constructs a new AccessSelector.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery
-                             * @classdesc Represents an AccessSelector.
-                             * @implements IAccessSelector
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IAccessSelector=} [properties] Properties to set
-                             */
-                            function AccessSelector(properties) {
-                                this.roles = [];
-                                this.permissions = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * AccessSelector roles.
-                             * @member {Array.<string>} roles
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @instance
-                             */
-                            AccessSelector.prototype.roles = $util.emptyArray;
-    
-                            /**
-                             * AccessSelector permissions.
-                             * @member {Array.<string>} permissions
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @instance
-                             */
-                            AccessSelector.prototype.permissions = $util.emptyArray;
-    
-                            /**
-                             * Creates a new AccessSelector instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IAccessSelector=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector} AccessSelector instance
-                             */
-                            AccessSelector.create = function create(properties) {
-                                return new AccessSelector(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified AccessSelector message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IAccessSelector} message AccessSelector message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AccessSelector.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.roles != null && message.roles.length)
-                                    for (var i = 0; i < message.roles.length; ++i)
-                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.roles[i]);
-                                if (message.permissions != null && message.permissions.length)
-                                    for (var i = 0; i < message.permissions.length; ++i)
-                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.permissions[i]);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified AccessSelector message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IAccessSelector} message AccessSelector message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AccessSelector.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an AccessSelector message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector} AccessSelector
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AccessSelector.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.roles && message.roles.length))
-                                                message.roles = [];
-                                            message.roles.push(reader.string());
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (!(message.permissions && message.permissions.length))
-                                                message.permissions = [];
-                                            message.permissions.push(reader.string());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an AccessSelector message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector} AccessSelector
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AccessSelector.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an AccessSelector message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            AccessSelector.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.roles != null && message.hasOwnProperty("roles")) {
-                                    if (!Array.isArray(message.roles))
-                                        return "roles: array expected";
-                                    for (var i = 0; i < message.roles.length; ++i)
-                                        if (!$util.isString(message.roles[i]))
-                                            return "roles: string[] expected";
-                                }
-                                if (message.permissions != null && message.hasOwnProperty("permissions")) {
-                                    if (!Array.isArray(message.permissions))
-                                        return "permissions: array expected";
-                                    for (var i = 0; i < message.permissions.length; ++i)
-                                        if (!$util.isString(message.permissions[i]))
-                                            return "permissions: string[] expected";
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an AccessSelector message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector} AccessSelector
-                             */
-                            AccessSelector.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector();
-                                if (object.roles) {
-                                    if (!Array.isArray(object.roles))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.roles: array expected");
-                                    message.roles = [];
-                                    for (var i = 0; i < object.roles.length; ++i)
-                                        message.roles[i] = String(object.roles[i]);
-                                }
-                                if (object.permissions) {
-                                    if (!Array.isArray(object.permissions))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.permissions: array expected");
-                                    message.permissions = [];
-                                    for (var i = 0; i < object.permissions.length; ++i)
-                                        message.permissions[i] = String(object.permissions[i]);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an AccessSelector message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector} message AccessSelector
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            AccessSelector.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults) {
-                                    object.roles = [];
-                                    object.permissions = [];
-                                }
-                                if (message.roles && message.roles.length) {
-                                    object.roles = [];
-                                    for (var j = 0; j < message.roles.length; ++j)
-                                        object.roles[j] = message.roles[j];
-                                }
-                                if (message.permissions && message.permissions.length) {
-                                    object.permissions = [];
-                                    for (var j = 0; j < message.permissions.length; ++j)
-                                        object.permissions[j] = message.permissions[j];
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this AccessSelector to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            AccessSelector.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for AccessSelector
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            AccessSelector.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector";
-                            };
-    
-                            return AccessSelector;
-                        })();
-    
-                        return IamPolicyAnalysisQuery;
-                    })();
-    
-                    v1p4beta1.AnalyzeIamPolicyRequest = (function() {
-    
-                        /**
-                         * Properties of an AnalyzeIamPolicyRequest.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @interface IAnalyzeIamPolicyRequest
-                         * @property {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery|null} [analysisQuery] AnalyzeIamPolicyRequest analysisQuery
-                         * @property {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.IOptions|null} [options] AnalyzeIamPolicyRequest options
-                         */
-    
-                        /**
-                         * Constructs a new AnalyzeIamPolicyRequest.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an AnalyzeIamPolicyRequest.
-                         * @implements IAnalyzeIamPolicyRequest
-                         * @constructor
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest=} [properties] Properties to set
-                         */
-                        function AnalyzeIamPolicyRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * AnalyzeIamPolicyRequest analysisQuery.
-                         * @member {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery|null|undefined} analysisQuery
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @instance
-                         */
-                        AnalyzeIamPolicyRequest.prototype.analysisQuery = null;
-    
-                        /**
-                         * AnalyzeIamPolicyRequest options.
-                         * @member {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.IOptions|null|undefined} options
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @instance
-                         */
-                        AnalyzeIamPolicyRequest.prototype.options = null;
-    
-                        /**
-                         * Creates a new AnalyzeIamPolicyRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest=} [properties] Properties to set
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest} AnalyzeIamPolicyRequest instance
-                         */
-                        AnalyzeIamPolicyRequest.create = function create(properties) {
-                            return new AnalyzeIamPolicyRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified AnalyzeIamPolicyRequest message. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest} message AnalyzeIamPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnalyzeIamPolicyRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.analysisQuery != null && Object.hasOwnProperty.call(message, "analysisQuery"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.encode(message.analysisQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                                $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified AnalyzeIamPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest} message AnalyzeIamPolicyRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnalyzeIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an AnalyzeIamPolicyRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest} AnalyzeIamPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnalyzeIamPolicyRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.options = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an AnalyzeIamPolicyRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest} AnalyzeIamPolicyRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnalyzeIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an AnalyzeIamPolicyRequest message.
-                         * @function verify
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        AnalyzeIamPolicyRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.verify(message.analysisQuery);
-                                if (error)
-                                    return "analysisQuery." + error;
-                            }
-                            if (message.options != null && message.hasOwnProperty("options")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.verify(message.options);
-                                if (error)
-                                    return "options." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an AnalyzeIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest} AnalyzeIamPolicyRequest
-                         */
-                        AnalyzeIamPolicyRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest)
-                                return object;
-                            var message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest();
-                            if (object.analysisQuery != null) {
-                                if (typeof object.analysisQuery !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.analysisQuery: object expected");
-                                message.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.fromObject(object.analysisQuery);
-                            }
-                            if (object.options != null) {
-                                if (typeof object.options !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.options: object expected");
-                                message.options = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.fromObject(object.options);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an AnalyzeIamPolicyRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest} message AnalyzeIamPolicyRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        AnalyzeIamPolicyRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.analysisQuery = null;
-                                object.options = null;
-                            }
-                            if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery"))
-                                object.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.toObject(message.analysisQuery, options);
-                            if (message.options != null && message.hasOwnProperty("options"))
-                                object.options = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.toObject(message.options, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this AnalyzeIamPolicyRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        AnalyzeIamPolicyRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for AnalyzeIamPolicyRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        AnalyzeIamPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest";
-                        };
-    
-                        AnalyzeIamPolicyRequest.Options = (function() {
-    
-                            /**
-                             * Properties of an Options.
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                             * @interface IOptions
-                             * @property {boolean|null} [expandGroups] Options expandGroups
-                             * @property {boolean|null} [expandRoles] Options expandRoles
-                             * @property {boolean|null} [expandResources] Options expandResources
-                             * @property {boolean|null} [outputResourceEdges] Options outputResourceEdges
-                             * @property {boolean|null} [outputGroupEdges] Options outputGroupEdges
-                             * @property {boolean|null} [analyzeServiceAccountImpersonation] Options analyzeServiceAccountImpersonation
-                             * @property {google.protobuf.IDuration|null} [executionTimeout] Options executionTimeout
-                             */
-    
-                            /**
-                             * Constructs a new Options.
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest
-                             * @classdesc Represents an Options.
-                             * @implements IOptions
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.IOptions=} [properties] Properties to set
-                             */
-                            function Options(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Options expandGroups.
-                             * @member {boolean} expandGroups
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.expandGroups = false;
-    
-                            /**
-                             * Options expandRoles.
-                             * @member {boolean} expandRoles
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.expandRoles = false;
-    
-                            /**
-                             * Options expandResources.
-                             * @member {boolean} expandResources
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.expandResources = false;
-    
-                            /**
-                             * Options outputResourceEdges.
-                             * @member {boolean} outputResourceEdges
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.outputResourceEdges = false;
-    
-                            /**
-                             * Options outputGroupEdges.
-                             * @member {boolean} outputGroupEdges
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.outputGroupEdges = false;
-    
-                            /**
-                             * Options analyzeServiceAccountImpersonation.
-                             * @member {boolean} analyzeServiceAccountImpersonation
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.analyzeServiceAccountImpersonation = false;
-    
-                            /**
-                             * Options executionTimeout.
-                             * @member {google.protobuf.IDuration|null|undefined} executionTimeout
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.executionTimeout = null;
-    
-                            /**
-                             * Creates a new Options instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.IOptions=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options} Options instance
-                             */
-                            Options.create = function create(properties) {
-                                return new Options(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Options message. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.IOptions} message Options message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Options.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.expandGroups != null && Object.hasOwnProperty.call(message, "expandGroups"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.expandGroups);
-                                if (message.expandRoles != null && Object.hasOwnProperty.call(message, "expandRoles"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.expandRoles);
-                                if (message.expandResources != null && Object.hasOwnProperty.call(message, "expandResources"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.expandResources);
-                                if (message.outputResourceEdges != null && Object.hasOwnProperty.call(message, "outputResourceEdges"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.outputResourceEdges);
-                                if (message.outputGroupEdges != null && Object.hasOwnProperty.call(message, "outputGroupEdges"))
-                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.outputGroupEdges);
-                                if (message.analyzeServiceAccountImpersonation != null && Object.hasOwnProperty.call(message, "analyzeServiceAccountImpersonation"))
-                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.analyzeServiceAccountImpersonation);
-                                if (message.executionTimeout != null && Object.hasOwnProperty.call(message, "executionTimeout"))
-                                    $root.google.protobuf.Duration.encode(message.executionTimeout, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Options message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.IOptions} message Options message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Options.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an Options message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options} Options
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Options.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.expandGroups = reader.bool();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.expandRoles = reader.bool();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.expandResources = reader.bool();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.outputResourceEdges = reader.bool();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.outputGroupEdges = reader.bool();
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.analyzeServiceAccountImpersonation = reader.bool();
-                                            break;
-                                        }
-                                    case 7: {
-                                            message.executionTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an Options message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options} Options
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Options.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an Options message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Options.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.expandGroups != null && message.hasOwnProperty("expandGroups"))
-                                    if (typeof message.expandGroups !== "boolean")
-                                        return "expandGroups: boolean expected";
-                                if (message.expandRoles != null && message.hasOwnProperty("expandRoles"))
-                                    if (typeof message.expandRoles !== "boolean")
-                                        return "expandRoles: boolean expected";
-                                if (message.expandResources != null && message.hasOwnProperty("expandResources"))
-                                    if (typeof message.expandResources !== "boolean")
-                                        return "expandResources: boolean expected";
-                                if (message.outputResourceEdges != null && message.hasOwnProperty("outputResourceEdges"))
-                                    if (typeof message.outputResourceEdges !== "boolean")
-                                        return "outputResourceEdges: boolean expected";
-                                if (message.outputGroupEdges != null && message.hasOwnProperty("outputGroupEdges"))
-                                    if (typeof message.outputGroupEdges !== "boolean")
-                                        return "outputGroupEdges: boolean expected";
-                                if (message.analyzeServiceAccountImpersonation != null && message.hasOwnProperty("analyzeServiceAccountImpersonation"))
-                                    if (typeof message.analyzeServiceAccountImpersonation !== "boolean")
-                                        return "analyzeServiceAccountImpersonation: boolean expected";
-                                if (message.executionTimeout != null && message.hasOwnProperty("executionTimeout")) {
-                                    var error = $root.google.protobuf.Duration.verify(message.executionTimeout);
-                                    if (error)
-                                        return "executionTimeout." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an Options message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options} Options
-                             */
-                            Options.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options();
-                                if (object.expandGroups != null)
-                                    message.expandGroups = Boolean(object.expandGroups);
-                                if (object.expandRoles != null)
-                                    message.expandRoles = Boolean(object.expandRoles);
-                                if (object.expandResources != null)
-                                    message.expandResources = Boolean(object.expandResources);
-                                if (object.outputResourceEdges != null)
-                                    message.outputResourceEdges = Boolean(object.outputResourceEdges);
-                                if (object.outputGroupEdges != null)
-                                    message.outputGroupEdges = Boolean(object.outputGroupEdges);
-                                if (object.analyzeServiceAccountImpersonation != null)
-                                    message.analyzeServiceAccountImpersonation = Boolean(object.analyzeServiceAccountImpersonation);
-                                if (object.executionTimeout != null) {
-                                    if (typeof object.executionTimeout !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.executionTimeout: object expected");
-                                    message.executionTimeout = $root.google.protobuf.Duration.fromObject(object.executionTimeout);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an Options message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options} message Options
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Options.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.expandGroups = false;
-                                    object.expandRoles = false;
-                                    object.expandResources = false;
-                                    object.outputResourceEdges = false;
-                                    object.outputGroupEdges = false;
-                                    object.analyzeServiceAccountImpersonation = false;
-                                    object.executionTimeout = null;
-                                }
-                                if (message.expandGroups != null && message.hasOwnProperty("expandGroups"))
-                                    object.expandGroups = message.expandGroups;
-                                if (message.expandRoles != null && message.hasOwnProperty("expandRoles"))
-                                    object.expandRoles = message.expandRoles;
-                                if (message.expandResources != null && message.hasOwnProperty("expandResources"))
-                                    object.expandResources = message.expandResources;
-                                if (message.outputResourceEdges != null && message.hasOwnProperty("outputResourceEdges"))
-                                    object.outputResourceEdges = message.outputResourceEdges;
-                                if (message.outputGroupEdges != null && message.hasOwnProperty("outputGroupEdges"))
-                                    object.outputGroupEdges = message.outputGroupEdges;
-                                if (message.analyzeServiceAccountImpersonation != null && message.hasOwnProperty("analyzeServiceAccountImpersonation"))
-                                    object.analyzeServiceAccountImpersonation = message.analyzeServiceAccountImpersonation;
-                                if (message.executionTimeout != null && message.hasOwnProperty("executionTimeout"))
-                                    object.executionTimeout = $root.google.protobuf.Duration.toObject(message.executionTimeout, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Options to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Options.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Options
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Options.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options";
-                            };
-    
-                            return Options;
-                        })();
-    
-                        return AnalyzeIamPolicyRequest;
-                    })();
-    
-                    v1p4beta1.AnalyzeIamPolicyResponse = (function() {
-    
-                        /**
-                         * Properties of an AnalyzeIamPolicyResponse.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @interface IAnalyzeIamPolicyResponse
-                         * @property {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis|null} [mainAnalysis] AnalyzeIamPolicyResponse mainAnalysis
-                         * @property {Array.<google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis>|null} [serviceAccountImpersonationAnalysis] AnalyzeIamPolicyResponse serviceAccountImpersonationAnalysis
-                         * @property {boolean|null} [fullyExplored] AnalyzeIamPolicyResponse fullyExplored
-                         * @property {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState>|null} [nonCriticalErrors] AnalyzeIamPolicyResponse nonCriticalErrors
-                         */
-    
-                        /**
-                         * Constructs a new AnalyzeIamPolicyResponse.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an AnalyzeIamPolicyResponse.
-                         * @implements IAnalyzeIamPolicyResponse
-                         * @constructor
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse=} [properties] Properties to set
-                         */
-                        function AnalyzeIamPolicyResponse(properties) {
-                            this.serviceAccountImpersonationAnalysis = [];
-                            this.nonCriticalErrors = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * AnalyzeIamPolicyResponse mainAnalysis.
-                         * @member {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis|null|undefined} mainAnalysis
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @instance
-                         */
-                        AnalyzeIamPolicyResponse.prototype.mainAnalysis = null;
-    
-                        /**
-                         * AnalyzeIamPolicyResponse serviceAccountImpersonationAnalysis.
-                         * @member {Array.<google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis>} serviceAccountImpersonationAnalysis
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @instance
-                         */
-                        AnalyzeIamPolicyResponse.prototype.serviceAccountImpersonationAnalysis = $util.emptyArray;
-    
-                        /**
-                         * AnalyzeIamPolicyResponse fullyExplored.
-                         * @member {boolean} fullyExplored
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @instance
-                         */
-                        AnalyzeIamPolicyResponse.prototype.fullyExplored = false;
-    
-                        /**
-                         * AnalyzeIamPolicyResponse nonCriticalErrors.
-                         * @member {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState>} nonCriticalErrors
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @instance
-                         */
-                        AnalyzeIamPolicyResponse.prototype.nonCriticalErrors = $util.emptyArray;
-    
-                        /**
-                         * Creates a new AnalyzeIamPolicyResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse=} [properties] Properties to set
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse} AnalyzeIamPolicyResponse instance
-                         */
-                        AnalyzeIamPolicyResponse.create = function create(properties) {
-                            return new AnalyzeIamPolicyResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified AnalyzeIamPolicyResponse message. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse} message AnalyzeIamPolicyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnalyzeIamPolicyResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.mainAnalysis != null && Object.hasOwnProperty.call(message, "mainAnalysis"))
-                                $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.encode(message.mainAnalysis, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.serviceAccountImpersonationAnalysis != null && message.serviceAccountImpersonationAnalysis.length)
-                                for (var i = 0; i < message.serviceAccountImpersonationAnalysis.length; ++i)
-                                    $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.encode(message.serviceAccountImpersonationAnalysis[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.fullyExplored != null && Object.hasOwnProperty.call(message, "fullyExplored"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.fullyExplored);
-                            if (message.nonCriticalErrors != null && message.nonCriticalErrors.length)
-                                for (var i = 0; i < message.nonCriticalErrors.length; ++i)
-                                    $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.encode(message.nonCriticalErrors[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified AnalyzeIamPolicyResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyResponse} message AnalyzeIamPolicyResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        AnalyzeIamPolicyResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an AnalyzeIamPolicyResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse} AnalyzeIamPolicyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnalyzeIamPolicyResponse.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.mainAnalysis = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.serviceAccountImpersonationAnalysis && message.serviceAccountImpersonationAnalysis.length))
-                                            message.serviceAccountImpersonationAnalysis = [];
-                                        message.serviceAccountImpersonationAnalysis.push($root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 3: {
-                                        message.fullyExplored = reader.bool();
-                                        break;
-                                    }
-                                case 4: {
-                                        if (!(message.nonCriticalErrors && message.nonCriticalErrors.length))
-                                            message.nonCriticalErrors = [];
-                                        message.nonCriticalErrors.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an AnalyzeIamPolicyResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse} AnalyzeIamPolicyResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        AnalyzeIamPolicyResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an AnalyzeIamPolicyResponse message.
-                         * @function verify
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        AnalyzeIamPolicyResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.mainAnalysis != null && message.hasOwnProperty("mainAnalysis")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.verify(message.mainAnalysis);
-                                if (error)
-                                    return "mainAnalysis." + error;
-                            }
-                            if (message.serviceAccountImpersonationAnalysis != null && message.hasOwnProperty("serviceAccountImpersonationAnalysis")) {
-                                if (!Array.isArray(message.serviceAccountImpersonationAnalysis))
-                                    return "serviceAccountImpersonationAnalysis: array expected";
-                                for (var i = 0; i < message.serviceAccountImpersonationAnalysis.length; ++i) {
-                                    var error = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.verify(message.serviceAccountImpersonationAnalysis[i]);
-                                    if (error)
-                                        return "serviceAccountImpersonationAnalysis." + error;
-                                }
-                            }
-                            if (message.fullyExplored != null && message.hasOwnProperty("fullyExplored"))
-                                if (typeof message.fullyExplored !== "boolean")
-                                    return "fullyExplored: boolean expected";
-                            if (message.nonCriticalErrors != null && message.hasOwnProperty("nonCriticalErrors")) {
-                                if (!Array.isArray(message.nonCriticalErrors))
-                                    return "nonCriticalErrors: array expected";
-                                for (var i = 0; i < message.nonCriticalErrors.length; ++i) {
-                                    var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.verify(message.nonCriticalErrors[i]);
-                                    if (error)
-                                        return "nonCriticalErrors." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an AnalyzeIamPolicyResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse} AnalyzeIamPolicyResponse
-                         */
-                        AnalyzeIamPolicyResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse)
-                                return object;
-                            var message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse();
-                            if (object.mainAnalysis != null) {
-                                if (typeof object.mainAnalysis !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.mainAnalysis: object expected");
-                                message.mainAnalysis = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.fromObject(object.mainAnalysis);
-                            }
-                            if (object.serviceAccountImpersonationAnalysis) {
-                                if (!Array.isArray(object.serviceAccountImpersonationAnalysis))
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.serviceAccountImpersonationAnalysis: array expected");
-                                message.serviceAccountImpersonationAnalysis = [];
-                                for (var i = 0; i < object.serviceAccountImpersonationAnalysis.length; ++i) {
-                                    if (typeof object.serviceAccountImpersonationAnalysis[i] !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.serviceAccountImpersonationAnalysis: object expected");
-                                    message.serviceAccountImpersonationAnalysis[i] = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.fromObject(object.serviceAccountImpersonationAnalysis[i]);
-                                }
-                            }
-                            if (object.fullyExplored != null)
-                                message.fullyExplored = Boolean(object.fullyExplored);
-                            if (object.nonCriticalErrors) {
-                                if (!Array.isArray(object.nonCriticalErrors))
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.nonCriticalErrors: array expected");
-                                message.nonCriticalErrors = [];
-                                for (var i = 0; i < object.nonCriticalErrors.length; ++i) {
-                                    if (typeof object.nonCriticalErrors[i] !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.nonCriticalErrors: object expected");
-                                    message.nonCriticalErrors[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.fromObject(object.nonCriticalErrors[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an AnalyzeIamPolicyResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse} message AnalyzeIamPolicyResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        AnalyzeIamPolicyResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.serviceAccountImpersonationAnalysis = [];
-                                object.nonCriticalErrors = [];
-                            }
-                            if (options.defaults) {
-                                object.mainAnalysis = null;
-                                object.fullyExplored = false;
-                            }
-                            if (message.mainAnalysis != null && message.hasOwnProperty("mainAnalysis"))
-                                object.mainAnalysis = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.toObject(message.mainAnalysis, options);
-                            if (message.serviceAccountImpersonationAnalysis && message.serviceAccountImpersonationAnalysis.length) {
-                                object.serviceAccountImpersonationAnalysis = [];
-                                for (var j = 0; j < message.serviceAccountImpersonationAnalysis.length; ++j)
-                                    object.serviceAccountImpersonationAnalysis[j] = $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.toObject(message.serviceAccountImpersonationAnalysis[j], options);
-                            }
-                            if (message.fullyExplored != null && message.hasOwnProperty("fullyExplored"))
-                                object.fullyExplored = message.fullyExplored;
-                            if (message.nonCriticalErrors && message.nonCriticalErrors.length) {
-                                object.nonCriticalErrors = [];
-                                for (var j = 0; j < message.nonCriticalErrors.length; ++j)
-                                    object.nonCriticalErrors[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.toObject(message.nonCriticalErrors[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this AnalyzeIamPolicyResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        AnalyzeIamPolicyResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for AnalyzeIamPolicyResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        AnalyzeIamPolicyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse";
-                        };
-    
-                        AnalyzeIamPolicyResponse.IamPolicyAnalysis = (function() {
-    
-                            /**
-                             * Properties of an IamPolicyAnalysis.
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                             * @interface IIamPolicyAnalysis
-                             * @property {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery|null} [analysisQuery] IamPolicyAnalysis analysisQuery
-                             * @property {Array.<google.cloud.asset.v1p4beta1.IIamPolicyAnalysisResult>|null} [analysisResults] IamPolicyAnalysis analysisResults
-                             * @property {boolean|null} [fullyExplored] IamPolicyAnalysis fullyExplored
-                             */
-    
-                            /**
-                             * Constructs a new IamPolicyAnalysis.
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse
-                             * @classdesc Represents an IamPolicyAnalysis.
-                             * @implements IIamPolicyAnalysis
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis=} [properties] Properties to set
-                             */
-                            function IamPolicyAnalysis(properties) {
-                                this.analysisResults = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * IamPolicyAnalysis analysisQuery.
-                             * @member {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery|null|undefined} analysisQuery
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @instance
-                             */
-                            IamPolicyAnalysis.prototype.analysisQuery = null;
-    
-                            /**
-                             * IamPolicyAnalysis analysisResults.
-                             * @member {Array.<google.cloud.asset.v1p4beta1.IIamPolicyAnalysisResult>} analysisResults
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @instance
-                             */
-                            IamPolicyAnalysis.prototype.analysisResults = $util.emptyArray;
-    
-                            /**
-                             * IamPolicyAnalysis fullyExplored.
-                             * @member {boolean} fullyExplored
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @instance
-                             */
-                            IamPolicyAnalysis.prototype.fullyExplored = false;
-    
-                            /**
-                             * Creates a new IamPolicyAnalysis instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis} IamPolicyAnalysis instance
-                             */
-                            IamPolicyAnalysis.create = function create(properties) {
-                                return new IamPolicyAnalysis(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified IamPolicyAnalysis message. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis} message IamPolicyAnalysis message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            IamPolicyAnalysis.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.analysisQuery != null && Object.hasOwnProperty.call(message, "analysisQuery"))
-                                    $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.encode(message.analysisQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.analysisResults != null && message.analysisResults.length)
-                                    for (var i = 0; i < message.analysisResults.length; ++i)
-                                        $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.encode(message.analysisResults[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.fullyExplored != null && Object.hasOwnProperty.call(message, "fullyExplored"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.fullyExplored);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified IamPolicyAnalysis message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IIamPolicyAnalysis} message IamPolicyAnalysis message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            IamPolicyAnalysis.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an IamPolicyAnalysis message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis} IamPolicyAnalysis
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            IamPolicyAnalysis.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (!(message.analysisResults && message.analysisResults.length))
-                                                message.analysisResults = [];
-                                            message.analysisResults.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.fullyExplored = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an IamPolicyAnalysis message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis} IamPolicyAnalysis
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            IamPolicyAnalysis.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an IamPolicyAnalysis message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            IamPolicyAnalysis.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery")) {
-                                    var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.verify(message.analysisQuery);
-                                    if (error)
-                                        return "analysisQuery." + error;
-                                }
-                                if (message.analysisResults != null && message.hasOwnProperty("analysisResults")) {
-                                    if (!Array.isArray(message.analysisResults))
-                                        return "analysisResults: array expected";
-                                    for (var i = 0; i < message.analysisResults.length; ++i) {
-                                        var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.verify(message.analysisResults[i]);
-                                        if (error)
-                                            return "analysisResults." + error;
-                                    }
-                                }
-                                if (message.fullyExplored != null && message.hasOwnProperty("fullyExplored"))
-                                    if (typeof message.fullyExplored !== "boolean")
-                                        return "fullyExplored: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an IamPolicyAnalysis message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis} IamPolicyAnalysis
-                             */
-                            IamPolicyAnalysis.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis();
-                                if (object.analysisQuery != null) {
-                                    if (typeof object.analysisQuery !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysisQuery: object expected");
-                                    message.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.fromObject(object.analysisQuery);
-                                }
-                                if (object.analysisResults) {
-                                    if (!Array.isArray(object.analysisResults))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysisResults: array expected");
-                                    message.analysisResults = [];
-                                    for (var i = 0; i < object.analysisResults.length; ++i) {
-                                        if (typeof object.analysisResults[i] !== "object")
-                                            throw TypeError(".google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysisResults: object expected");
-                                        message.analysisResults[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.fromObject(object.analysisResults[i]);
-                                    }
-                                }
-                                if (object.fullyExplored != null)
-                                    message.fullyExplored = Boolean(object.fullyExplored);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an IamPolicyAnalysis message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis} message IamPolicyAnalysis
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            IamPolicyAnalysis.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults)
-                                    object.analysisResults = [];
-                                if (options.defaults) {
-                                    object.analysisQuery = null;
-                                    object.fullyExplored = false;
-                                }
-                                if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery"))
-                                    object.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.toObject(message.analysisQuery, options);
-                                if (message.analysisResults && message.analysisResults.length) {
-                                    object.analysisResults = [];
-                                    for (var j = 0; j < message.analysisResults.length; ++j)
-                                        object.analysisResults[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.toObject(message.analysisResults[j], options);
-                                }
-                                if (message.fullyExplored != null && message.hasOwnProperty("fullyExplored"))
-                                    object.fullyExplored = message.fullyExplored;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this IamPolicyAnalysis to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            IamPolicyAnalysis.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for IamPolicyAnalysis
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            IamPolicyAnalysis.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis";
-                            };
-    
-                            return IamPolicyAnalysis;
-                        })();
-    
-                        return AnalyzeIamPolicyResponse;
-                    })();
-    
-                    v1p4beta1.IamPolicyAnalysisOutputConfig = (function() {
-    
-                        /**
-                         * Properties of an IamPolicyAnalysisOutputConfig.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @interface IIamPolicyAnalysisOutputConfig
-                         * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.IGcsDestination|null} [gcsDestination] IamPolicyAnalysisOutputConfig gcsDestination
-                         */
-    
-                        /**
-                         * Constructs a new IamPolicyAnalysisOutputConfig.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an IamPolicyAnalysisOutputConfig.
-                         * @implements IIamPolicyAnalysisOutputConfig
-                         * @constructor
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig=} [properties] Properties to set
-                         */
-                        function IamPolicyAnalysisOutputConfig(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * IamPolicyAnalysisOutputConfig gcsDestination.
-                         * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.IGcsDestination|null|undefined} gcsDestination
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @instance
-                         */
-                        IamPolicyAnalysisOutputConfig.prototype.gcsDestination = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * IamPolicyAnalysisOutputConfig destination.
-                         * @member {"gcsDestination"|undefined} destination
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @instance
-                         */
-                        Object.defineProperty(IamPolicyAnalysisOutputConfig.prototype, "destination", {
-                            get: $util.oneOfGetter($oneOfFields = ["gcsDestination"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new IamPolicyAnalysisOutputConfig instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig=} [properties] Properties to set
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig} IamPolicyAnalysisOutputConfig instance
-                         */
-                        IamPolicyAnalysisOutputConfig.create = function create(properties) {
-                            return new IamPolicyAnalysisOutputConfig(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified IamPolicyAnalysisOutputConfig message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig} message IamPolicyAnalysisOutputConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        IamPolicyAnalysisOutputConfig.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.encode(message.gcsDestination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified IamPolicyAnalysisOutputConfig message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig} message IamPolicyAnalysisOutputConfig message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        IamPolicyAnalysisOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an IamPolicyAnalysisOutputConfig message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig} IamPolicyAnalysisOutputConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        IamPolicyAnalysisOutputConfig.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.gcsDestination = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an IamPolicyAnalysisOutputConfig message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig} IamPolicyAnalysisOutputConfig
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        IamPolicyAnalysisOutputConfig.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an IamPolicyAnalysisOutputConfig message.
-                         * @function verify
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        IamPolicyAnalysisOutputConfig.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            var properties = {};
-                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
-                                properties.destination = 1;
-                                {
-                                    var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.verify(message.gcsDestination);
-                                    if (error)
-                                        return "gcsDestination." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an IamPolicyAnalysisOutputConfig message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig} IamPolicyAnalysisOutputConfig
-                         */
-                        IamPolicyAnalysisOutputConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig)
-                                return object;
-                            var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig();
-                            if (object.gcsDestination != null) {
-                                if (typeof object.gcsDestination !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.gcsDestination: object expected");
-                                message.gcsDestination = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.fromObject(object.gcsDestination);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an IamPolicyAnalysisOutputConfig message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig} message IamPolicyAnalysisOutputConfig
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        IamPolicyAnalysisOutputConfig.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
-                                object.gcsDestination = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.toObject(message.gcsDestination, options);
-                                if (options.oneofs)
-                                    object.destination = "gcsDestination";
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this IamPolicyAnalysisOutputConfig to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        IamPolicyAnalysisOutputConfig.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for IamPolicyAnalysisOutputConfig
-                         * @function getTypeUrl
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        IamPolicyAnalysisOutputConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig";
-                        };
-    
-                        IamPolicyAnalysisOutputConfig.GcsDestination = (function() {
-    
-                            /**
-                             * Properties of a GcsDestination.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                             * @interface IGcsDestination
-                             * @property {string|null} [uri] GcsDestination uri
-                             */
-    
-                            /**
-                             * Constructs a new GcsDestination.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig
-                             * @classdesc Represents a GcsDestination.
-                             * @implements IGcsDestination
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.IGcsDestination=} [properties] Properties to set
-                             */
-                            function GcsDestination(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * GcsDestination uri.
-                             * @member {string} uri
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @instance
-                             */
-                            GcsDestination.prototype.uri = "";
-    
-                            /**
-                             * Creates a new GcsDestination instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.IGcsDestination=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination} GcsDestination instance
-                             */
-                            GcsDestination.create = function create(properties) {
-                                return new GcsDestination(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.IGcsDestination} message GcsDestination message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GcsDestination.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.IGcsDestination} message GcsDestination message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            GcsDestination.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a GcsDestination message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination} GcsDestination
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GcsDestination.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.uri = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination} GcsDestination
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            GcsDestination.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a GcsDestination message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            GcsDestination.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.uri != null && message.hasOwnProperty("uri"))
-                                    if (!$util.isString(message.uri))
-                                        return "uri: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination} GcsDestination
-                             */
-                            GcsDestination.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination();
-                                if (object.uri != null)
-                                    message.uri = String(object.uri);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination} message GcsDestination
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            GcsDestination.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.uri = "";
-                                if (message.uri != null && message.hasOwnProperty("uri"))
-                                    object.uri = message.uri;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this GcsDestination to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            GcsDestination.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for GcsDestination
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            GcsDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination";
-                            };
-    
-                            return GcsDestination;
-                        })();
-    
-                        return IamPolicyAnalysisOutputConfig;
-                    })();
-    
-                    v1p4beta1.ExportIamPolicyAnalysisRequest = (function() {
-    
-                        /**
-                         * Properties of an ExportIamPolicyAnalysisRequest.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @interface IExportIamPolicyAnalysisRequest
-                         * @property {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery|null} [analysisQuery] ExportIamPolicyAnalysisRequest analysisQuery
-                         * @property {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.IOptions|null} [options] ExportIamPolicyAnalysisRequest options
-                         * @property {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig|null} [outputConfig] ExportIamPolicyAnalysisRequest outputConfig
-                         */
-    
-                        /**
-                         * Constructs a new ExportIamPolicyAnalysisRequest.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an ExportIamPolicyAnalysisRequest.
-                         * @implements IExportIamPolicyAnalysisRequest
-                         * @constructor
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest=} [properties] Properties to set
-                         */
-                        function ExportIamPolicyAnalysisRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ExportIamPolicyAnalysisRequest analysisQuery.
-                         * @member {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisQuery|null|undefined} analysisQuery
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @instance
-                         */
-                        ExportIamPolicyAnalysisRequest.prototype.analysisQuery = null;
-    
-                        /**
-                         * ExportIamPolicyAnalysisRequest options.
-                         * @member {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.IOptions|null|undefined} options
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @instance
-                         */
-                        ExportIamPolicyAnalysisRequest.prototype.options = null;
-    
-                        /**
-                         * ExportIamPolicyAnalysisRequest outputConfig.
-                         * @member {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig|null|undefined} outputConfig
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @instance
-                         */
-                        ExportIamPolicyAnalysisRequest.prototype.outputConfig = null;
-    
-                        /**
-                         * Creates a new ExportIamPolicyAnalysisRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest=} [properties] Properties to set
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest} ExportIamPolicyAnalysisRequest instance
-                         */
-                        ExportIamPolicyAnalysisRequest.create = function create(properties) {
-                            return new ExportIamPolicyAnalysisRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ExportIamPolicyAnalysisRequest message. Does not implicitly {@link google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest} message ExportIamPolicyAnalysisRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ExportIamPolicyAnalysisRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.analysisQuery != null && Object.hasOwnProperty.call(message, "analysisQuery"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.encode(message.analysisQuery, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.options != null && Object.hasOwnProperty.call(message, "options"))
-                                $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.encode(message.outputConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ExportIamPolicyAnalysisRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest} message ExportIamPolicyAnalysisRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ExportIamPolicyAnalysisRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an ExportIamPolicyAnalysisRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest} ExportIamPolicyAnalysisRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ExportIamPolicyAnalysisRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        message.options = $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.outputConfig = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an ExportIamPolicyAnalysisRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest} ExportIamPolicyAnalysisRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ExportIamPolicyAnalysisRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an ExportIamPolicyAnalysisRequest message.
-                         * @function verify
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ExportIamPolicyAnalysisRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.verify(message.analysisQuery);
-                                if (error)
-                                    return "analysisQuery." + error;
-                            }
-                            if (message.options != null && message.hasOwnProperty("options")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.verify(message.options);
-                                if (error)
-                                    return "options." + error;
-                            }
-                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.verify(message.outputConfig);
-                                if (error)
-                                    return "outputConfig." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an ExportIamPolicyAnalysisRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest} ExportIamPolicyAnalysisRequest
-                         */
-                        ExportIamPolicyAnalysisRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest)
-                                return object;
-                            var message = new $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest();
-                            if (object.analysisQuery != null) {
-                                if (typeof object.analysisQuery !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.analysisQuery: object expected");
-                                message.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.fromObject(object.analysisQuery);
-                            }
-                            if (object.options != null) {
-                                if (typeof object.options !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.options: object expected");
-                                message.options = $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.fromObject(object.options);
-                            }
-                            if (object.outputConfig != null) {
-                                if (typeof object.outputConfig !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.outputConfig: object expected");
-                                message.outputConfig = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.fromObject(object.outputConfig);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an ExportIamPolicyAnalysisRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest} message ExportIamPolicyAnalysisRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ExportIamPolicyAnalysisRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.analysisQuery = null;
-                                object.options = null;
-                                object.outputConfig = null;
-                            }
-                            if (message.analysisQuery != null && message.hasOwnProperty("analysisQuery"))
-                                object.analysisQuery = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.toObject(message.analysisQuery, options);
-                            if (message.options != null && message.hasOwnProperty("options"))
-                                object.options = $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.toObject(message.options, options);
-                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
-                                object.outputConfig = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.toObject(message.outputConfig, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ExportIamPolicyAnalysisRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ExportIamPolicyAnalysisRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ExportIamPolicyAnalysisRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ExportIamPolicyAnalysisRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest";
-                        };
-    
-                        ExportIamPolicyAnalysisRequest.Options = (function() {
-    
-                            /**
-                             * Properties of an Options.
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                             * @interface IOptions
-                             * @property {boolean|null} [expandGroups] Options expandGroups
-                             * @property {boolean|null} [expandRoles] Options expandRoles
-                             * @property {boolean|null} [expandResources] Options expandResources
-                             * @property {boolean|null} [outputResourceEdges] Options outputResourceEdges
-                             * @property {boolean|null} [outputGroupEdges] Options outputGroupEdges
-                             * @property {boolean|null} [analyzeServiceAccountImpersonation] Options analyzeServiceAccountImpersonation
-                             */
-    
-                            /**
-                             * Constructs a new Options.
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest
-                             * @classdesc Represents an Options.
-                             * @implements IOptions
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.IOptions=} [properties] Properties to set
-                             */
-                            function Options(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Options expandGroups.
-                             * @member {boolean} expandGroups
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.expandGroups = false;
-    
-                            /**
-                             * Options expandRoles.
-                             * @member {boolean} expandRoles
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.expandRoles = false;
-    
-                            /**
-                             * Options expandResources.
-                             * @member {boolean} expandResources
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.expandResources = false;
-    
-                            /**
-                             * Options outputResourceEdges.
-                             * @member {boolean} outputResourceEdges
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.outputResourceEdges = false;
-    
-                            /**
-                             * Options outputGroupEdges.
-                             * @member {boolean} outputGroupEdges
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.outputGroupEdges = false;
-    
-                            /**
-                             * Options analyzeServiceAccountImpersonation.
-                             * @member {boolean} analyzeServiceAccountImpersonation
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @instance
-                             */
-                            Options.prototype.analyzeServiceAccountImpersonation = false;
-    
-                            /**
-                             * Creates a new Options instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.IOptions=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options} Options instance
-                             */
-                            Options.create = function create(properties) {
-                                return new Options(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Options message. Does not implicitly {@link google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.IOptions} message Options message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Options.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.expandGroups != null && Object.hasOwnProperty.call(message, "expandGroups"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.expandGroups);
-                                if (message.expandRoles != null && Object.hasOwnProperty.call(message, "expandRoles"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.expandRoles);
-                                if (message.expandResources != null && Object.hasOwnProperty.call(message, "expandResources"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.expandResources);
-                                if (message.outputResourceEdges != null && Object.hasOwnProperty.call(message, "outputResourceEdges"))
-                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.outputResourceEdges);
-                                if (message.outputGroupEdges != null && Object.hasOwnProperty.call(message, "outputGroupEdges"))
-                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.outputGroupEdges);
-                                if (message.analyzeServiceAccountImpersonation != null && Object.hasOwnProperty.call(message, "analyzeServiceAccountImpersonation"))
-                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.analyzeServiceAccountImpersonation);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Options message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.IOptions} message Options message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Options.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an Options message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options} Options
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Options.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.expandGroups = reader.bool();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.expandRoles = reader.bool();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.expandResources = reader.bool();
-                                            break;
-                                        }
-                                    case 4: {
-                                            message.outputResourceEdges = reader.bool();
-                                            break;
-                                        }
-                                    case 5: {
-                                            message.outputGroupEdges = reader.bool();
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.analyzeServiceAccountImpersonation = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an Options message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options} Options
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Options.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an Options message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Options.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.expandGroups != null && message.hasOwnProperty("expandGroups"))
-                                    if (typeof message.expandGroups !== "boolean")
-                                        return "expandGroups: boolean expected";
-                                if (message.expandRoles != null && message.hasOwnProperty("expandRoles"))
-                                    if (typeof message.expandRoles !== "boolean")
-                                        return "expandRoles: boolean expected";
-                                if (message.expandResources != null && message.hasOwnProperty("expandResources"))
-                                    if (typeof message.expandResources !== "boolean")
-                                        return "expandResources: boolean expected";
-                                if (message.outputResourceEdges != null && message.hasOwnProperty("outputResourceEdges"))
-                                    if (typeof message.outputResourceEdges !== "boolean")
-                                        return "outputResourceEdges: boolean expected";
-                                if (message.outputGroupEdges != null && message.hasOwnProperty("outputGroupEdges"))
-                                    if (typeof message.outputGroupEdges !== "boolean")
-                                        return "outputGroupEdges: boolean expected";
-                                if (message.analyzeServiceAccountImpersonation != null && message.hasOwnProperty("analyzeServiceAccountImpersonation"))
-                                    if (typeof message.analyzeServiceAccountImpersonation !== "boolean")
-                                        return "analyzeServiceAccountImpersonation: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an Options message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options} Options
-                             */
-                            Options.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options();
-                                if (object.expandGroups != null)
-                                    message.expandGroups = Boolean(object.expandGroups);
-                                if (object.expandRoles != null)
-                                    message.expandRoles = Boolean(object.expandRoles);
-                                if (object.expandResources != null)
-                                    message.expandResources = Boolean(object.expandResources);
-                                if (object.outputResourceEdges != null)
-                                    message.outputResourceEdges = Boolean(object.outputResourceEdges);
-                                if (object.outputGroupEdges != null)
-                                    message.outputGroupEdges = Boolean(object.outputGroupEdges);
-                                if (object.analyzeServiceAccountImpersonation != null)
-                                    message.analyzeServiceAccountImpersonation = Boolean(object.analyzeServiceAccountImpersonation);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an Options message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options} message Options
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Options.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.expandGroups = false;
-                                    object.expandRoles = false;
-                                    object.expandResources = false;
-                                    object.outputResourceEdges = false;
-                                    object.outputGroupEdges = false;
-                                    object.analyzeServiceAccountImpersonation = false;
-                                }
-                                if (message.expandGroups != null && message.hasOwnProperty("expandGroups"))
-                                    object.expandGroups = message.expandGroups;
-                                if (message.expandRoles != null && message.hasOwnProperty("expandRoles"))
-                                    object.expandRoles = message.expandRoles;
-                                if (message.expandResources != null && message.hasOwnProperty("expandResources"))
-                                    object.expandResources = message.expandResources;
-                                if (message.outputResourceEdges != null && message.hasOwnProperty("outputResourceEdges"))
-                                    object.outputResourceEdges = message.outputResourceEdges;
-                                if (message.outputGroupEdges != null && message.hasOwnProperty("outputGroupEdges"))
-                                    object.outputGroupEdges = message.outputGroupEdges;
-                                if (message.analyzeServiceAccountImpersonation != null && message.hasOwnProperty("analyzeServiceAccountImpersonation"))
-                                    object.analyzeServiceAccountImpersonation = message.analyzeServiceAccountImpersonation;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Options to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Options.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Options
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Options.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options";
-                            };
-    
-                            return Options;
-                        })();
-    
-                        return ExportIamPolicyAnalysisRequest;
-                    })();
-    
-                    v1p4beta1.ExportIamPolicyAnalysisResponse = (function() {
-    
-                        /**
-                         * Properties of an ExportIamPolicyAnalysisResponse.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @interface IExportIamPolicyAnalysisResponse
-                         * @property {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig|null} [outputConfig] ExportIamPolicyAnalysisResponse outputConfig
-                         */
-    
-                        /**
-                         * Constructs a new ExportIamPolicyAnalysisResponse.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an ExportIamPolicyAnalysisResponse.
-                         * @implements IExportIamPolicyAnalysisResponse
-                         * @constructor
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse=} [properties] Properties to set
-                         */
-                        function ExportIamPolicyAnalysisResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ExportIamPolicyAnalysisResponse outputConfig.
-                         * @member {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisOutputConfig|null|undefined} outputConfig
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @instance
-                         */
-                        ExportIamPolicyAnalysisResponse.prototype.outputConfig = null;
-    
-                        /**
-                         * Creates a new ExportIamPolicyAnalysisResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse=} [properties] Properties to set
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse} ExportIamPolicyAnalysisResponse instance
-                         */
-                        ExportIamPolicyAnalysisResponse.create = function create(properties) {
-                            return new ExportIamPolicyAnalysisResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ExportIamPolicyAnalysisResponse message. Does not implicitly {@link google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse} message ExportIamPolicyAnalysisResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ExportIamPolicyAnalysisResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.encode(message.outputConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ExportIamPolicyAnalysisResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisResponse} message ExportIamPolicyAnalysisResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ExportIamPolicyAnalysisResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an ExportIamPolicyAnalysisResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse} ExportIamPolicyAnalysisResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ExportIamPolicyAnalysisResponse.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.outputConfig = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an ExportIamPolicyAnalysisResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse} ExportIamPolicyAnalysisResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ExportIamPolicyAnalysisResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an ExportIamPolicyAnalysisResponse message.
-                         * @function verify
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ExportIamPolicyAnalysisResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.verify(message.outputConfig);
-                                if (error)
-                                    return "outputConfig." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an ExportIamPolicyAnalysisResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse} ExportIamPolicyAnalysisResponse
-                         */
-                        ExportIamPolicyAnalysisResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse)
-                                return object;
-                            var message = new $root.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse();
-                            if (object.outputConfig != null) {
-                                if (typeof object.outputConfig !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse.outputConfig: object expected");
-                                message.outputConfig = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.fromObject(object.outputConfig);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an ExportIamPolicyAnalysisResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse} message ExportIamPolicyAnalysisResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ExportIamPolicyAnalysisResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.outputConfig = null;
-                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
-                                object.outputConfig = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.toObject(message.outputConfig, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ExportIamPolicyAnalysisResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ExportIamPolicyAnalysisResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ExportIamPolicyAnalysisResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ExportIamPolicyAnalysisResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse";
-                        };
-    
-                        return ExportIamPolicyAnalysisResponse;
-                    })();
-    
-                    v1p4beta1.IamPolicyAnalysisResult = (function() {
-    
-                        /**
-                         * Properties of an IamPolicyAnalysisResult.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @interface IIamPolicyAnalysisResult
-                         * @property {string|null} [attachedResourceFullName] IamPolicyAnalysisResult attachedResourceFullName
-                         * @property {google.iam.v1.IBinding|null} [iamBinding] IamPolicyAnalysisResult iamBinding
-                         * @property {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccessControlList>|null} [accessControlLists] IamPolicyAnalysisResult accessControlLists
-                         * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentityList|null} [identityList] IamPolicyAnalysisResult identityList
-                         * @property {boolean|null} [fullyExplored] IamPolicyAnalysisResult fullyExplored
-                         */
-    
-                        /**
-                         * Constructs a new IamPolicyAnalysisResult.
-                         * @memberof google.cloud.asset.v1p4beta1
-                         * @classdesc Represents an IamPolicyAnalysisResult.
-                         * @implements IIamPolicyAnalysisResult
-                         * @constructor
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisResult=} [properties] Properties to set
-                         */
-                        function IamPolicyAnalysisResult(properties) {
-                            this.accessControlLists = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * IamPolicyAnalysisResult attachedResourceFullName.
-                         * @member {string} attachedResourceFullName
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @instance
-                         */
-                        IamPolicyAnalysisResult.prototype.attachedResourceFullName = "";
-    
-                        /**
-                         * IamPolicyAnalysisResult iamBinding.
-                         * @member {google.iam.v1.IBinding|null|undefined} iamBinding
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @instance
-                         */
-                        IamPolicyAnalysisResult.prototype.iamBinding = null;
-    
-                        /**
-                         * IamPolicyAnalysisResult accessControlLists.
-                         * @member {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccessControlList>} accessControlLists
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @instance
-                         */
-                        IamPolicyAnalysisResult.prototype.accessControlLists = $util.emptyArray;
-    
-                        /**
-                         * IamPolicyAnalysisResult identityList.
-                         * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentityList|null|undefined} identityList
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @instance
-                         */
-                        IamPolicyAnalysisResult.prototype.identityList = null;
-    
-                        /**
-                         * IamPolicyAnalysisResult fullyExplored.
-                         * @member {boolean} fullyExplored
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @instance
-                         */
-                        IamPolicyAnalysisResult.prototype.fullyExplored = false;
-    
-                        /**
-                         * Creates a new IamPolicyAnalysisResult instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisResult=} [properties] Properties to set
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult} IamPolicyAnalysisResult instance
-                         */
-                        IamPolicyAnalysisResult.create = function create(properties) {
-                            return new IamPolicyAnalysisResult(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified IamPolicyAnalysisResult message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisResult} message IamPolicyAnalysisResult message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        IamPolicyAnalysisResult.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.attachedResourceFullName != null && Object.hasOwnProperty.call(message, "attachedResourceFullName"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.attachedResourceFullName);
-                            if (message.iamBinding != null && Object.hasOwnProperty.call(message, "iamBinding"))
-                                $root.google.iam.v1.Binding.encode(message.iamBinding, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.accessControlLists != null && message.accessControlLists.length)
-                                for (var i = 0; i < message.accessControlLists.length; ++i)
-                                    $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.encode(message.accessControlLists[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.identityList != null && Object.hasOwnProperty.call(message, "identityList"))
-                                $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.encode(message.identityList, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.fullyExplored != null && Object.hasOwnProperty.call(message, "fullyExplored"))
-                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.fullyExplored);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified IamPolicyAnalysisResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IIamPolicyAnalysisResult} message IamPolicyAnalysisResult message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        IamPolicyAnalysisResult.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an IamPolicyAnalysisResult message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult} IamPolicyAnalysisResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        IamPolicyAnalysisResult.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.attachedResourceFullName = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.iamBinding = $root.google.iam.v1.Binding.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.accessControlLists && message.accessControlLists.length))
-                                            message.accessControlLists = [];
-                                        message.accessControlLists.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 4: {
-                                        message.identityList = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 5: {
-                                        message.fullyExplored = reader.bool();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an IamPolicyAnalysisResult message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult} IamPolicyAnalysisResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        IamPolicyAnalysisResult.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an IamPolicyAnalysisResult message.
-                         * @function verify
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        IamPolicyAnalysisResult.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.attachedResourceFullName != null && message.hasOwnProperty("attachedResourceFullName"))
-                                if (!$util.isString(message.attachedResourceFullName))
-                                    return "attachedResourceFullName: string expected";
-                            if (message.iamBinding != null && message.hasOwnProperty("iamBinding")) {
-                                var error = $root.google.iam.v1.Binding.verify(message.iamBinding);
-                                if (error)
-                                    return "iamBinding." + error;
-                            }
-                            if (message.accessControlLists != null && message.hasOwnProperty("accessControlLists")) {
-                                if (!Array.isArray(message.accessControlLists))
-                                    return "accessControlLists: array expected";
-                                for (var i = 0; i < message.accessControlLists.length; ++i) {
-                                    var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.verify(message.accessControlLists[i]);
-                                    if (error)
-                                        return "accessControlLists." + error;
-                                }
-                            }
-                            if (message.identityList != null && message.hasOwnProperty("identityList")) {
-                                var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.verify(message.identityList);
-                                if (error)
-                                    return "identityList." + error;
-                            }
-                            if (message.fullyExplored != null && message.hasOwnProperty("fullyExplored"))
-                                if (typeof message.fullyExplored !== "boolean")
-                                    return "fullyExplored: boolean expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an IamPolicyAnalysisResult message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult} IamPolicyAnalysisResult
-                         */
-                        IamPolicyAnalysisResult.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult)
-                                return object;
-                            var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult();
-                            if (object.attachedResourceFullName != null)
-                                message.attachedResourceFullName = String(object.attachedResourceFullName);
-                            if (object.iamBinding != null) {
-                                if (typeof object.iamBinding !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.iamBinding: object expected");
-                                message.iamBinding = $root.google.iam.v1.Binding.fromObject(object.iamBinding);
-                            }
-                            if (object.accessControlLists) {
-                                if (!Array.isArray(object.accessControlLists))
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.accessControlLists: array expected");
-                                message.accessControlLists = [];
-                                for (var i = 0; i < object.accessControlLists.length; ++i) {
-                                    if (typeof object.accessControlLists[i] !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.accessControlLists: object expected");
-                                    message.accessControlLists[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.fromObject(object.accessControlLists[i]);
-                                }
-                            }
-                            if (object.identityList != null) {
-                                if (typeof object.identityList !== "object")
-                                    throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.identityList: object expected");
-                                message.identityList = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.fromObject(object.identityList);
-                            }
-                            if (object.fullyExplored != null)
-                                message.fullyExplored = Boolean(object.fullyExplored);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an IamPolicyAnalysisResult message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult} message IamPolicyAnalysisResult
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        IamPolicyAnalysisResult.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.accessControlLists = [];
-                            if (options.defaults) {
-                                object.attachedResourceFullName = "";
-                                object.iamBinding = null;
-                                object.identityList = null;
-                                object.fullyExplored = false;
-                            }
-                            if (message.attachedResourceFullName != null && message.hasOwnProperty("attachedResourceFullName"))
-                                object.attachedResourceFullName = message.attachedResourceFullName;
-                            if (message.iamBinding != null && message.hasOwnProperty("iamBinding"))
-                                object.iamBinding = $root.google.iam.v1.Binding.toObject(message.iamBinding, options);
-                            if (message.accessControlLists && message.accessControlLists.length) {
-                                object.accessControlLists = [];
-                                for (var j = 0; j < message.accessControlLists.length; ++j)
-                                    object.accessControlLists[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.toObject(message.accessControlLists[j], options);
-                            }
-                            if (message.identityList != null && message.hasOwnProperty("identityList"))
-                                object.identityList = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.toObject(message.identityList, options);
-                            if (message.fullyExplored != null && message.hasOwnProperty("fullyExplored"))
-                                object.fullyExplored = message.fullyExplored;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this IamPolicyAnalysisResult to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        IamPolicyAnalysisResult.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for IamPolicyAnalysisResult
-                         * @function getTypeUrl
-                         * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        IamPolicyAnalysisResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult";
-                        };
-    
-                        IamPolicyAnalysisResult.AnalysisState = (function() {
-    
-                            /**
-                             * Properties of an AnalysisState.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @interface IAnalysisState
-                             * @property {google.rpc.Code|null} [code] AnalysisState code
-                             * @property {string|null} [cause] AnalysisState cause
-                             */
-    
-                            /**
-                             * Constructs a new AnalysisState.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @classdesc Represents an AnalysisState.
-                             * @implements IAnalysisState
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState=} [properties] Properties to set
-                             */
-                            function AnalysisState(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * AnalysisState code.
-                             * @member {google.rpc.Code} code
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @instance
-                             */
-                            AnalysisState.prototype.code = 0;
-    
-                            /**
-                             * AnalysisState cause.
-                             * @member {string} cause
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @instance
-                             */
-                            AnalysisState.prototype.cause = "";
-    
-                            /**
-                             * Creates a new AnalysisState instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState} AnalysisState instance
-                             */
-                            AnalysisState.create = function create(properties) {
-                                return new AnalysisState(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified AnalysisState message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState} message AnalysisState message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AnalysisState.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-                                if (message.cause != null && Object.hasOwnProperty.call(message, "cause"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.cause);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified AnalysisState message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState} message AnalysisState message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AnalysisState.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an AnalysisState message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState} AnalysisState
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AnalysisState.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.code = reader.int32();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.cause = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an AnalysisState message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState} AnalysisState
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AnalysisState.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an AnalysisState message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            AnalysisState.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.code != null && message.hasOwnProperty("code"))
-                                    switch (message.code) {
-                                    default:
-                                        return "code: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                    case 3:
-                                    case 4:
-                                    case 5:
-                                    case 6:
-                                    case 7:
-                                    case 16:
-                                    case 8:
-                                    case 9:
-                                    case 10:
-                                    case 11:
-                                    case 12:
-                                    case 13:
-                                    case 14:
-                                    case 15:
-                                        break;
-                                    }
-                                if (message.cause != null && message.hasOwnProperty("cause"))
-                                    if (!$util.isString(message.cause))
-                                        return "cause: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an AnalysisState message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState} AnalysisState
-                             */
-                            AnalysisState.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState();
-                                switch (object.code) {
-                                default:
-                                    if (typeof object.code === "number") {
-                                        message.code = object.code;
-                                        break;
-                                    }
-                                    break;
-                                case "OK":
-                                case 0:
-                                    message.code = 0;
-                                    break;
-                                case "CANCELLED":
-                                case 1:
-                                    message.code = 1;
-                                    break;
-                                case "UNKNOWN":
-                                case 2:
-                                    message.code = 2;
-                                    break;
-                                case "INVALID_ARGUMENT":
-                                case 3:
-                                    message.code = 3;
-                                    break;
-                                case "DEADLINE_EXCEEDED":
-                                case 4:
-                                    message.code = 4;
-                                    break;
-                                case "NOT_FOUND":
-                                case 5:
-                                    message.code = 5;
-                                    break;
-                                case "ALREADY_EXISTS":
-                                case 6:
-                                    message.code = 6;
-                                    break;
-                                case "PERMISSION_DENIED":
-                                case 7:
-                                    message.code = 7;
-                                    break;
-                                case "UNAUTHENTICATED":
-                                case 16:
-                                    message.code = 16;
-                                    break;
-                                case "RESOURCE_EXHAUSTED":
-                                case 8:
-                                    message.code = 8;
-                                    break;
-                                case "FAILED_PRECONDITION":
-                                case 9:
-                                    message.code = 9;
-                                    break;
-                                case "ABORTED":
-                                case 10:
-                                    message.code = 10;
-                                    break;
-                                case "OUT_OF_RANGE":
-                                case 11:
-                                    message.code = 11;
-                                    break;
-                                case "UNIMPLEMENTED":
-                                case 12:
-                                    message.code = 12;
-                                    break;
-                                case "INTERNAL":
-                                case 13:
-                                    message.code = 13;
-                                    break;
-                                case "UNAVAILABLE":
-                                case 14:
-                                    message.code = 14;
-                                    break;
-                                case "DATA_LOSS":
-                                case 15:
-                                    message.code = 15;
-                                    break;
-                                }
-                                if (object.cause != null)
-                                    message.cause = String(object.cause);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an AnalysisState message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState} message AnalysisState
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            AnalysisState.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.code = options.enums === String ? "OK" : 0;
-                                    object.cause = "";
-                                }
-                                if (message.code != null && message.hasOwnProperty("code"))
-                                    object.code = options.enums === String ? $root.google.rpc.Code[message.code] === undefined ? message.code : $root.google.rpc.Code[message.code] : message.code;
-                                if (message.cause != null && message.hasOwnProperty("cause"))
-                                    object.cause = message.cause;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this AnalysisState to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            AnalysisState.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for AnalysisState
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            AnalysisState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState";
-                            };
-    
-                            return AnalysisState;
-                        })();
-    
-                        IamPolicyAnalysisResult.Resource = (function() {
-    
-                            /**
-                             * Properties of a Resource.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @interface IResource
-                             * @property {string|null} [fullResourceName] Resource fullResourceName
-                             * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState|null} [analysisState] Resource analysisState
-                             */
-    
-                            /**
-                             * Constructs a new Resource.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @classdesc Represents a Resource.
-                             * @implements IResource
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IResource=} [properties] Properties to set
-                             */
-                            function Resource(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Resource fullResourceName.
-                             * @member {string} fullResourceName
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @instance
-                             */
-                            Resource.prototype.fullResourceName = "";
-    
-                            /**
-                             * Resource analysisState.
-                             * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState|null|undefined} analysisState
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @instance
-                             */
-                            Resource.prototype.analysisState = null;
-    
-                            /**
-                             * Creates a new Resource instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IResource=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource} Resource instance
-                             */
-                            Resource.create = function create(properties) {
-                                return new Resource(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Resource message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IResource} message Resource message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Resource.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.fullResourceName);
-                                if (message.analysisState != null && Object.hasOwnProperty.call(message, "analysisState"))
-                                    $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.encode(message.analysisState, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IResource} message Resource message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Resource.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a Resource message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource} Resource
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Resource.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.fullResourceName = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a Resource message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource} Resource
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Resource.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a Resource message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Resource.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
-                                    if (!$util.isString(message.fullResourceName))
-                                        return "fullResourceName: string expected";
-                                if (message.analysisState != null && message.hasOwnProperty("analysisState")) {
-                                    var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.verify(message.analysisState);
-                                    if (error)
-                                        return "analysisState." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a Resource message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource} Resource
-                             */
-                            Resource.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource();
-                                if (object.fullResourceName != null)
-                                    message.fullResourceName = String(object.fullResourceName);
-                                if (object.analysisState != null) {
-                                    if (typeof object.analysisState !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.analysisState: object expected");
-                                    message.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.fromObject(object.analysisState);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a Resource message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource} message Resource
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Resource.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.fullResourceName = "";
-                                    object.analysisState = null;
-                                }
-                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
-                                    object.fullResourceName = message.fullResourceName;
-                                if (message.analysisState != null && message.hasOwnProperty("analysisState"))
-                                    object.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.toObject(message.analysisState, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Resource to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Resource.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Resource
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Resource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource";
-                            };
-    
-                            return Resource;
-                        })();
-    
-                        IamPolicyAnalysisResult.Access = (function() {
-    
-                            /**
-                             * Properties of an Access.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @interface IAccess
-                             * @property {string|null} [role] Access role
-                             * @property {string|null} [permission] Access permission
-                             * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState|null} [analysisState] Access analysisState
-                             */
-    
-                            /**
-                             * Constructs a new Access.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @classdesc Represents an Access.
-                             * @implements IAccess
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccess=} [properties] Properties to set
-                             */
-                            function Access(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Access role.
-                             * @member {string|null|undefined} role
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @instance
-                             */
-                            Access.prototype.role = null;
-    
-                            /**
-                             * Access permission.
-                             * @member {string|null|undefined} permission
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @instance
-                             */
-                            Access.prototype.permission = null;
-    
-                            /**
-                             * Access analysisState.
-                             * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState|null|undefined} analysisState
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @instance
-                             */
-                            Access.prototype.analysisState = null;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * Access oneofAccess.
-                             * @member {"role"|"permission"|undefined} oneofAccess
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @instance
-                             */
-                            Object.defineProperty(Access.prototype, "oneofAccess", {
-                                get: $util.oneOfGetter($oneOfFields = ["role", "permission"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new Access instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccess=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access} Access instance
-                             */
-                            Access.create = function create(properties) {
-                                return new Access(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Access message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccess} message Access message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Access.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.role != null && Object.hasOwnProperty.call(message, "role"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.role);
-                                if (message.permission != null && Object.hasOwnProperty.call(message, "permission"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.permission);
-                                if (message.analysisState != null && Object.hasOwnProperty.call(message, "analysisState"))
-                                    $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.encode(message.analysisState, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Access message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccess} message Access message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Access.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an Access message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access} Access
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Access.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.role = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.permission = reader.string();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an Access message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access} Access
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Access.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an Access message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Access.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.role != null && message.hasOwnProperty("role")) {
-                                    properties.oneofAccess = 1;
-                                    if (!$util.isString(message.role))
-                                        return "role: string expected";
-                                }
-                                if (message.permission != null && message.hasOwnProperty("permission")) {
-                                    if (properties.oneofAccess === 1)
-                                        return "oneofAccess: multiple values";
-                                    properties.oneofAccess = 1;
-                                    if (!$util.isString(message.permission))
-                                        return "permission: string expected";
-                                }
-                                if (message.analysisState != null && message.hasOwnProperty("analysisState")) {
-                                    var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.verify(message.analysisState);
-                                    if (error)
-                                        return "analysisState." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an Access message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access} Access
-                             */
-                            Access.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access();
-                                if (object.role != null)
-                                    message.role = String(object.role);
-                                if (object.permission != null)
-                                    message.permission = String(object.permission);
-                                if (object.analysisState != null) {
-                                    if (typeof object.analysisState !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.analysisState: object expected");
-                                    message.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.fromObject(object.analysisState);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an Access message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access} message Access
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Access.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults)
-                                    object.analysisState = null;
-                                if (message.role != null && message.hasOwnProperty("role")) {
-                                    object.role = message.role;
-                                    if (options.oneofs)
-                                        object.oneofAccess = "role";
-                                }
-                                if (message.permission != null && message.hasOwnProperty("permission")) {
-                                    object.permission = message.permission;
-                                    if (options.oneofs)
-                                        object.oneofAccess = "permission";
-                                }
-                                if (message.analysisState != null && message.hasOwnProperty("analysisState"))
-                                    object.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.toObject(message.analysisState, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Access to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Access.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Access
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Access.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access";
-                            };
-    
-                            return Access;
-                        })();
-    
-                        IamPolicyAnalysisResult.Edge = (function() {
-    
-                            /**
-                             * Properties of an Edge.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @interface IEdge
-                             * @property {string|null} [sourceNode] Edge sourceNode
-                             * @property {string|null} [targetNode] Edge targetNode
-                             */
-    
-                            /**
-                             * Constructs a new Edge.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @classdesc Represents an Edge.
-                             * @implements IEdge
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge=} [properties] Properties to set
-                             */
-                            function Edge(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Edge sourceNode.
-                             * @member {string} sourceNode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @instance
-                             */
-                            Edge.prototype.sourceNode = "";
-    
-                            /**
-                             * Edge targetNode.
-                             * @member {string} targetNode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @instance
-                             */
-                            Edge.prototype.targetNode = "";
-    
-                            /**
-                             * Creates a new Edge instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge} Edge instance
-                             */
-                            Edge.create = function create(properties) {
-                                return new Edge(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Edge message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge} message Edge message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Edge.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.sourceNode != null && Object.hasOwnProperty.call(message, "sourceNode"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceNode);
-                                if (message.targetNode != null && Object.hasOwnProperty.call(message, "targetNode"))
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetNode);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Edge message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge} message Edge message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Edge.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an Edge message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge} Edge
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Edge.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.sourceNode = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.targetNode = reader.string();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an Edge message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge} Edge
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Edge.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an Edge message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Edge.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.sourceNode != null && message.hasOwnProperty("sourceNode"))
-                                    if (!$util.isString(message.sourceNode))
-                                        return "sourceNode: string expected";
-                                if (message.targetNode != null && message.hasOwnProperty("targetNode"))
-                                    if (!$util.isString(message.targetNode))
-                                        return "targetNode: string expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an Edge message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge} Edge
-                             */
-                            Edge.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge();
-                                if (object.sourceNode != null)
-                                    message.sourceNode = String(object.sourceNode);
-                                if (object.targetNode != null)
-                                    message.targetNode = String(object.targetNode);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an Edge message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge} message Edge
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Edge.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.sourceNode = "";
-                                    object.targetNode = "";
-                                }
-                                if (message.sourceNode != null && message.hasOwnProperty("sourceNode"))
-                                    object.sourceNode = message.sourceNode;
-                                if (message.targetNode != null && message.hasOwnProperty("targetNode"))
-                                    object.targetNode = message.targetNode;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Edge to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Edge.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Edge
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Edge.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge";
-                            };
-    
-                            return Edge;
-                        })();
-    
-                        IamPolicyAnalysisResult.Identity = (function() {
-    
-                            /**
-                             * Properties of an Identity.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @interface IIdentity
-                             * @property {string|null} [name] Identity name
-                             * @property {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState|null} [analysisState] Identity analysisState
-                             */
-    
-                            /**
-                             * Constructs a new Identity.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @classdesc Represents an Identity.
-                             * @implements IIdentity
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentity=} [properties] Properties to set
-                             */
-                            function Identity(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * Identity name.
-                             * @member {string} name
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @instance
-                             */
-                            Identity.prototype.name = "";
-    
-                            /**
-                             * Identity analysisState.
-                             * @member {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAnalysisState|null|undefined} analysisState
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @instance
-                             */
-                            Identity.prototype.analysisState = null;
-    
-                            /**
-                             * Creates a new Identity instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentity=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity} Identity instance
-                             */
-                            Identity.create = function create(properties) {
-                                return new Identity(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified Identity message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentity} message Identity message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Identity.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.analysisState != null && Object.hasOwnProperty.call(message, "analysisState"))
-                                    $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.encode(message.analysisState, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified Identity message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentity} message Identity message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            Identity.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an Identity message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity} Identity
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Identity.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an Identity message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity} Identity
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            Identity.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an Identity message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            Identity.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                if (message.analysisState != null && message.hasOwnProperty("analysisState")) {
-                                    var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.verify(message.analysisState);
-                                    if (error)
-                                        return "analysisState." + error;
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an Identity message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity} Identity
-                             */
-                            Identity.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                if (object.analysisState != null) {
-                                    if (typeof object.analysisState !== "object")
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.analysisState: object expected");
-                                    message.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.fromObject(object.analysisState);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an Identity message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity} message Identity
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            Identity.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.name = "";
-                                    object.analysisState = null;
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                if (message.analysisState != null && message.hasOwnProperty("analysisState"))
-                                    object.analysisState = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState.toObject(message.analysisState, options);
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this Identity to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            Identity.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for Identity
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            Identity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity";
-                            };
-    
-                            return Identity;
-                        })();
-    
-                        IamPolicyAnalysisResult.AccessControlList = (function() {
-    
-                            /**
-                             * Properties of an AccessControlList.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @interface IAccessControlList
-                             * @property {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IResource>|null} [resources] AccessControlList resources
-                             * @property {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccess>|null} [accesses] AccessControlList accesses
-                             * @property {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge>|null} [resourceEdges] AccessControlList resourceEdges
-                             */
-    
-                            /**
-                             * Constructs a new AccessControlList.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @classdesc Represents an AccessControlList.
-                             * @implements IAccessControlList
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccessControlList=} [properties] Properties to set
-                             */
-                            function AccessControlList(properties) {
-                                this.resources = [];
-                                this.accesses = [];
-                                this.resourceEdges = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * AccessControlList resources.
-                             * @member {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IResource>} resources
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @instance
-                             */
-                            AccessControlList.prototype.resources = $util.emptyArray;
-    
-                            /**
-                             * AccessControlList accesses.
-                             * @member {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccess>} accesses
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @instance
-                             */
-                            AccessControlList.prototype.accesses = $util.emptyArray;
-    
-                            /**
-                             * AccessControlList resourceEdges.
-                             * @member {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge>} resourceEdges
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @instance
-                             */
-                            AccessControlList.prototype.resourceEdges = $util.emptyArray;
-    
-                            /**
-                             * Creates a new AccessControlList instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccessControlList=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList} AccessControlList instance
-                             */
-                            AccessControlList.create = function create(properties) {
-                                return new AccessControlList(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified AccessControlList message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccessControlList} message AccessControlList message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AccessControlList.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.resources != null && message.resources.length)
-                                    for (var i = 0; i < message.resources.length; ++i)
-                                        $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.encode(message.resources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.accesses != null && message.accesses.length)
-                                    for (var i = 0; i < message.accesses.length; ++i)
-                                        $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.encode(message.accesses[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                if (message.resourceEdges != null && message.resourceEdges.length)
-                                    for (var i = 0; i < message.resourceEdges.length; ++i)
-                                        $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.encode(message.resourceEdges[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified AccessControlList message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IAccessControlList} message AccessControlList message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            AccessControlList.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an AccessControlList message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList} AccessControlList
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AccessControlList.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.resources && message.resources.length))
-                                                message.resources = [];
-                                            message.resources.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (!(message.accesses && message.accesses.length))
-                                                message.accesses = [];
-                                            message.accesses.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 3: {
-                                            if (!(message.resourceEdges && message.resourceEdges.length))
-                                                message.resourceEdges = [];
-                                            message.resourceEdges.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an AccessControlList message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList} AccessControlList
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            AccessControlList.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an AccessControlList message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            AccessControlList.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.resources != null && message.hasOwnProperty("resources")) {
-                                    if (!Array.isArray(message.resources))
-                                        return "resources: array expected";
-                                    for (var i = 0; i < message.resources.length; ++i) {
-                                        var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.verify(message.resources[i]);
-                                        if (error)
-                                            return "resources." + error;
-                                    }
-                                }
-                                if (message.accesses != null && message.hasOwnProperty("accesses")) {
-                                    if (!Array.isArray(message.accesses))
-                                        return "accesses: array expected";
-                                    for (var i = 0; i < message.accesses.length; ++i) {
-                                        var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.verify(message.accesses[i]);
-                                        if (error)
-                                            return "accesses." + error;
-                                    }
-                                }
-                                if (message.resourceEdges != null && message.hasOwnProperty("resourceEdges")) {
-                                    if (!Array.isArray(message.resourceEdges))
-                                        return "resourceEdges: array expected";
-                                    for (var i = 0; i < message.resourceEdges.length; ++i) {
-                                        var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.verify(message.resourceEdges[i]);
-                                        if (error)
-                                            return "resourceEdges." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an AccessControlList message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList} AccessControlList
-                             */
-                            AccessControlList.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList();
-                                if (object.resources) {
-                                    if (!Array.isArray(object.resources))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.resources: array expected");
-                                    message.resources = [];
-                                    for (var i = 0; i < object.resources.length; ++i) {
-                                        if (typeof object.resources[i] !== "object")
-                                            throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.resources: object expected");
-                                        message.resources[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.fromObject(object.resources[i]);
-                                    }
-                                }
-                                if (object.accesses) {
-                                    if (!Array.isArray(object.accesses))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.accesses: array expected");
-                                    message.accesses = [];
-                                    for (var i = 0; i < object.accesses.length; ++i) {
-                                        if (typeof object.accesses[i] !== "object")
-                                            throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.accesses: object expected");
-                                        message.accesses[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.fromObject(object.accesses[i]);
-                                    }
-                                }
-                                if (object.resourceEdges) {
-                                    if (!Array.isArray(object.resourceEdges))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.resourceEdges: array expected");
-                                    message.resourceEdges = [];
-                                    for (var i = 0; i < object.resourceEdges.length; ++i) {
-                                        if (typeof object.resourceEdges[i] !== "object")
-                                            throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList.resourceEdges: object expected");
-                                        message.resourceEdges[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.fromObject(object.resourceEdges[i]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an AccessControlList message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList} message AccessControlList
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            AccessControlList.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults) {
-                                    object.resources = [];
-                                    object.accesses = [];
-                                    object.resourceEdges = [];
-                                }
-                                if (message.resources && message.resources.length) {
-                                    object.resources = [];
-                                    for (var j = 0; j < message.resources.length; ++j)
-                                        object.resources[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Resource.toObject(message.resources[j], options);
-                                }
-                                if (message.accesses && message.accesses.length) {
-                                    object.accesses = [];
-                                    for (var j = 0; j < message.accesses.length; ++j)
-                                        object.accesses[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Access.toObject(message.accesses[j], options);
-                                }
-                                if (message.resourceEdges && message.resourceEdges.length) {
-                                    object.resourceEdges = [];
-                                    for (var j = 0; j < message.resourceEdges.length; ++j)
-                                        object.resourceEdges[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.toObject(message.resourceEdges[j], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this AccessControlList to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            AccessControlList.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for AccessControlList
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            AccessControlList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AccessControlList";
-                            };
-    
-                            return AccessControlList;
-                        })();
-    
-                        IamPolicyAnalysisResult.IdentityList = (function() {
-    
-                            /**
-                             * Properties of an IdentityList.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @interface IIdentityList
-                             * @property {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentity>|null} [identities] IdentityList identities
-                             * @property {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge>|null} [groupEdges] IdentityList groupEdges
-                             */
-    
-                            /**
-                             * Constructs a new IdentityList.
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult
-                             * @classdesc Represents an IdentityList.
-                             * @implements IIdentityList
-                             * @constructor
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentityList=} [properties] Properties to set
-                             */
-                            function IdentityList(properties) {
-                                this.identities = [];
-                                this.groupEdges = [];
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * IdentityList identities.
-                             * @member {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentity>} identities
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @instance
-                             */
-                            IdentityList.prototype.identities = $util.emptyArray;
-    
-                            /**
-                             * IdentityList groupEdges.
-                             * @member {Array.<google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IEdge>} groupEdges
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @instance
-                             */
-                            IdentityList.prototype.groupEdges = $util.emptyArray;
-    
-                            /**
-                             * Creates a new IdentityList instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentityList=} [properties] Properties to set
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList} IdentityList instance
-                             */
-                            IdentityList.create = function create(properties) {
-                                return new IdentityList(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified IdentityList message. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentityList} message IdentityList message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            IdentityList.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.identities != null && message.identities.length)
-                                    for (var i = 0; i < message.identities.length; ++i)
-                                        $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.encode(message.identities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                if (message.groupEdges != null && message.groupEdges.length)
-                                    for (var i = 0; i < message.groupEdges.length; ++i)
-                                        $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.encode(message.groupEdges[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified IdentityList message, length delimited. Does not implicitly {@link google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IIdentityList} message IdentityList message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            IdentityList.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes an IdentityList message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList} IdentityList
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            IdentityList.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            if (!(message.identities && message.identities.length))
-                                                message.identities = [];
-                                            message.identities.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    case 2: {
-                                            if (!(message.groupEdges && message.groupEdges.length))
-                                                message.groupEdges = [];
-                                            message.groupEdges.push($root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.decode(reader, reader.uint32()));
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes an IdentityList message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList} IdentityList
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            IdentityList.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies an IdentityList message.
-                             * @function verify
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            IdentityList.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.identities != null && message.hasOwnProperty("identities")) {
-                                    if (!Array.isArray(message.identities))
-                                        return "identities: array expected";
-                                    for (var i = 0; i < message.identities.length; ++i) {
-                                        var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.verify(message.identities[i]);
-                                        if (error)
-                                            return "identities." + error;
-                                    }
-                                }
-                                if (message.groupEdges != null && message.hasOwnProperty("groupEdges")) {
-                                    if (!Array.isArray(message.groupEdges))
-                                        return "groupEdges: array expected";
-                                    for (var i = 0; i < message.groupEdges.length; ++i) {
-                                        var error = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.verify(message.groupEdges[i]);
-                                        if (error)
-                                            return "groupEdges." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates an IdentityList message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList} IdentityList
-                             */
-                            IdentityList.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList)
-                                    return object;
-                                var message = new $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList();
-                                if (object.identities) {
-                                    if (!Array.isArray(object.identities))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.identities: array expected");
-                                    message.identities = [];
-                                    for (var i = 0; i < object.identities.length; ++i) {
-                                        if (typeof object.identities[i] !== "object")
-                                            throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.identities: object expected");
-                                        message.identities[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.fromObject(object.identities[i]);
-                                    }
-                                }
-                                if (object.groupEdges) {
-                                    if (!Array.isArray(object.groupEdges))
-                                        throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.groupEdges: array expected");
-                                    message.groupEdges = [];
-                                    for (var i = 0; i < object.groupEdges.length; ++i) {
-                                        if (typeof object.groupEdges[i] !== "object")
-                                            throw TypeError(".google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.groupEdges: object expected");
-                                        message.groupEdges[i] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.fromObject(object.groupEdges[i]);
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from an IdentityList message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList} message IdentityList
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            IdentityList.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.arrays || options.defaults) {
-                                    object.identities = [];
-                                    object.groupEdges = [];
-                                }
-                                if (message.identities && message.identities.length) {
-                                    object.identities = [];
-                                    for (var j = 0; j < message.identities.length; ++j)
-                                        object.identities[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Identity.toObject(message.identities[j], options);
-                                }
-                                if (message.groupEdges && message.groupEdges.length) {
-                                    object.groupEdges = [];
-                                    for (var j = 0; j < message.groupEdges.length; ++j)
-                                        object.groupEdges[j] = $root.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.toObject(message.groupEdges[j], options);
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this IdentityList to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            IdentityList.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for IdentityList
-                             * @function getTypeUrl
-                             * @memberof google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            IdentityList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList";
-                            };
-    
-                            return IdentityList;
-                        })();
-    
-                        return IamPolicyAnalysisResult;
-                    })();
-    
-                    return v1p4beta1;
                 })();
     
                 asset.v1p5beta1 = (function() {
@@ -45239,12 +40303,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAssetsRequest.decode = function decode(reader, length) {
+                        ListAssetsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p5beta1.ListAssetsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -45581,12 +40647,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListAssetsResponse.decode = function decode(reader, length) {
+                        ListAssetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p5beta1.ListAssetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -45960,12 +41028,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Asset.decode = function decode(reader, length) {
+                        Asset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p5beta1.Asset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -46395,12 +41465,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Resource.decode = function decode(reader, length) {
+                        Resource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p5beta1.Resource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.version = reader.string();
@@ -46803,12 +41875,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportAssetsRequest.decode = function decode(reader, length) {
+                        ExportAssetsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.ExportAssetsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -47168,12 +42242,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportAssetsResponse.decode = function decode(reader, length) {
+                        ExportAssetsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.ExportAssetsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -47436,12 +42512,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutputConfig.decode = function decode(reader, length) {
+                        OutputConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.OutputConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsDestination = $root.google.cloud.asset.v1p7beta1.GcsDestination.decode(reader, reader.uint32());
@@ -47687,12 +42765,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutputResult.decode = function decode(reader, length) {
+                        OutputResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.OutputResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsResult = $root.google.cloud.asset.v1p7beta1.GcsOutputResult.decode(reader, reader.uint32());
@@ -47902,12 +42982,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsOutputResult.decode = function decode(reader, length) {
+                        GcsOutputResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.GcsOutputResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.uris && message.uris.length))
@@ -48144,12 +43226,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsDestination.decode = function decode(reader, length) {
+                        GcsDestination.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.GcsDestination();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -48413,12 +43497,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryDestination.decode = function decode(reader, length) {
+                        BigQueryDestination.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.BigQueryDestination();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataset = reader.string();
@@ -48670,12 +43756,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PartitionSpec.decode = function decode(reader, length) {
+                        PartitionSpec.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.PartitionSpec();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partitionKey = reader.int32();
@@ -49063,12 +44151,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Asset.decode = function decode(reader, length) {
+                        Asset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.Asset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 11: {
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -49543,12 +44633,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Resource.decode = function decode(reader, length) {
+                        Resource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.Resource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.version = reader.string();
@@ -49837,12 +44929,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelatedAssets.decode = function decode(reader, length) {
+                        RelatedAssets.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.RelatedAssets();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.relationshipAttributes = $root.google.cloud.asset.v1p7beta1.RelationshipAttributes.decode(reader, reader.uint32());
@@ -50110,12 +45204,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelationshipAttributes.decode = function decode(reader, length) {
+                        RelationshipAttributes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.RelationshipAttributes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.type = reader.string();
@@ -50374,12 +45470,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelatedAsset.decode = function decode(reader, length) {
+                        RelatedAsset.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1p7beta1.RelatedAsset();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.asset = reader.string();
@@ -50721,12 +45819,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Policy.decode = function decode(reader, length) {
+                        Policy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.version = reader.int32();
@@ -51091,12 +46191,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListPolicy.decode = function decode(reader, length) {
+                            ListPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy.ListPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.allowedValues && message.allowedValues.length))
@@ -51413,12 +46515,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BooleanPolicy.decode = function decode(reader, length) {
+                            BooleanPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy.BooleanPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.enforced = reader.bool();
@@ -51605,12 +46709,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RestoreDefault.decode = function decode(reader, length) {
+                            RestoreDefault.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.orgpolicy.v1.Policy.RestoreDefault();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -51855,12 +46961,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Inventory.decode = function decode(reader, length) {
+                        Inventory.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.name = reader.string();
@@ -52218,12 +47326,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OsInfo.decode = function decode(reader, length) {
+                            OsInfo.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.OsInfo();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 9: {
                                             message.hostname = reader.string();
@@ -52586,12 +47696,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Item.decode = function decode(reader, length) {
+                            Item.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.Item();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.id = reader.string();
@@ -53070,12 +48182,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SoftwarePackage.decode = function decode(reader, length) {
+                            SoftwarePackage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.SoftwarePackage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.yumPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
@@ -53497,12 +48611,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            VersionedPackage.decode = function decode(reader, length) {
+                            VersionedPackage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.VersionedPackage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.packageName = reader.string();
@@ -53758,12 +48874,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ZypperPatch.decode = function decode(reader, length) {
+                            ZypperPatch.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.ZypperPatch();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 5: {
                                             message.patchName = reader.string();
@@ -54092,12 +49210,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            WindowsUpdatePackage.decode = function decode(reader, length) {
+                            WindowsUpdatePackage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.title = reader.string();
@@ -54454,12 +49574,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WindowsUpdateCategory.decode = function decode(reader, length) {
+                                WindowsUpdateCategory.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.id = reader.string();
@@ -54706,12 +49828,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            WindowsQuickFixEngineeringPackage.decode = function decode(reader, length) {
+                            WindowsQuickFixEngineeringPackage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.caption = reader.string();
@@ -54995,12 +50119,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            WindowsApplication.decode = function decode(reader, length) {
+                            WindowsApplication.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsApplication();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.displayName = reader.string();
@@ -55266,12 +50392,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetInventoryRequest.decode = function decode(reader, length) {
+                        GetInventoryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.GetInventoryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -55550,12 +50678,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInventoriesRequest.decode = function decode(reader, length) {
+                        ListInventoriesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListInventoriesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -55839,12 +50969,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInventoriesResponse.decode = function decode(reader, length) {
+                        ListInventoriesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.ListInventoriesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.inventories && message.inventories.length))
@@ -56121,12 +51253,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -56471,12 +51605,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -56855,12 +51991,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -57087,12 +52225,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -57456,12 +52596,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -57800,6 +52942,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -57901,6 +53044,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -57947,6 +53098,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -57974,12 +53127,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -58025,6 +53180,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -58119,6 +53278,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -58213,6 +53375,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -58242,6 +53406,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -58272,6 +53437,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -58413,12 +53580,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -58680,12 +53849,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -58888,12 +54059,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -59096,12 +54269,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -59304,12 +54479,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -59577,12 +54754,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -59956,12 +55135,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -60164,12 +55345,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -60396,12 +55579,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -60674,12 +55859,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -61101,12 +56288,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -61496,12 +56685,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -61726,12 +56917,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -62126,12 +57319,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62793,12 +57988,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63278,12 +58475,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -63522,12 +58721,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -63778,12 +58979,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -64123,12 +59326,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -64502,12 +59707,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -65027,12 +60234,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -65298,12 +60507,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -65617,12 +60828,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -65858,12 +61071,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -66115,12 +61330,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -66423,12 +61640,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -66927,12 +62146,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -67547,12 +62768,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -67995,12 +63218,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -68030,12 +63250,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -68761,12 +63983,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -69057,12 +64281,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -69343,12 +64569,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -69655,12 +64883,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -69846,6 +65076,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -69905,6 +65136,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -69939,6 +65178,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -69966,12 +65207,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -69993,6 +65236,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -70053,6 +65300,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -70089,6 +65339,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -70112,6 +65364,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -70126,6 +65379,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -70313,12 +65568,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -70747,12 +66004,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -71086,12 +66345,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -71362,12 +66623,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -71897,12 +67160,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -72281,12 +67546,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -72571,12 +67838,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -72846,12 +68115,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -73157,12 +68428,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -73425,12 +68698,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -73751,12 +69026,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -73992,12 +69269,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -74226,12 +69505,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Struct.decode = function decode(reader, length) {
+                Struct.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (message.fields === $util.emptyObject)
@@ -74536,12 +69817,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Value.decode = function decode(reader, length) {
+                Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.nullValue = reader.int32();
@@ -74873,12 +70156,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListValue.decode = function decode(reader, length) {
+                ListValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.values && message.values.length))
@@ -75106,12 +70391,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -75320,12 +70607,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -75508,12 +70797,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -75759,12 +71050,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Date.decode = function decode(reader, length) {
+                Date.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.year = reader.int32();
@@ -76020,12 +71313,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Expr.decode = function decode(reader, length) {
+                Expr.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Expr();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.expression = reader.string();
@@ -76318,12 +71613,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Policy.decode = function decode(reader, length) {
+                    Policy.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Policy();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.version = reader.int32();
@@ -76631,12 +71928,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Binding.decode = function decode(reader, length) {
+                    Binding.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Binding();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.role = reader.string();
@@ -76892,12 +72191,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuditConfig.decode = function decode(reader, length) {
+                    AuditConfig.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfig();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.service = reader.string();
@@ -77140,12 +72441,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuditLogConfig.decode = function decode(reader, length) {
+                    AuditLogConfig.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditLogConfig();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.logType = reader.int32();
@@ -77432,12 +72735,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    PolicyDelta.decode = function decode(reader, length) {
+                    PolicyDelta.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.PolicyDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.bindingDeltas && message.bindingDeltas.length))
@@ -77719,12 +73024,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BindingDelta.decode = function decode(reader, length) {
+                    BindingDelta.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.BindingDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.action = reader.int32();
@@ -78037,12 +73344,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuditConfigDelta.decode = function decode(reader, length) {
+                    AuditConfigDelta.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfigDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.action = reader.int32();
@@ -78430,12 +73739,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessLevel.decode = function decode(reader, length) {
+                        AccessLevel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.AccessLevel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -78752,12 +74063,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BasicLevel.decode = function decode(reader, length) {
+                        BasicLevel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.BasicLevel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.conditions && message.conditions.length))
@@ -79083,12 +74396,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Condition.decode = function decode(reader, length) {
+                        Condition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.Condition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.ipSubnetworks && message.ipSubnetworks.length))
@@ -79410,12 +74725,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomLevel.decode = function decode(reader, length) {
+                        CustomLevel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.CustomLevel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.expr = $root.google.type.Expr.decode(reader, reader.uint32());
@@ -79685,12 +75002,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DevicePolicy.decode = function decode(reader, length) {
+                        DevicePolicy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.DevicePolicy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.requireScreenlock = reader.bool();
@@ -80088,12 +75407,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OsConstraint.decode = function decode(reader, length) {
+                        OsConstraint.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.OsConstraint();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.osType = reader.int32();
@@ -80428,12 +75749,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessPolicy.decode = function decode(reader, length) {
+                        AccessPolicy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.AccessPolicy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -80817,12 +76140,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ServicePerimeter.decode = function decode(reader, length) {
+                        ServicePerimeter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -81235,12 +76560,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ServicePerimeterConfig.decode = function decode(reader, length) {
+                        ServicePerimeterConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.resources && message.resources.length))
@@ -81595,12 +76922,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            VpcAccessibleServices.decode = function decode(reader, length) {
+                            VpcAccessibleServices.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.VpcAccessibleServices();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.enableRestriction = reader.bool();
@@ -81868,12 +77197,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MethodSelector.decode = function decode(reader, length) {
+                            MethodSelector.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.method = reader.string();
@@ -82106,12 +77437,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ApiOperation.decode = function decode(reader, length) {
+                            ApiOperation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.serviceName = reader.string();
@@ -82366,12 +77699,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IngressSource.decode = function decode(reader, length) {
+                            IngressSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.accessLevel = reader.string();
@@ -82617,12 +77952,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IngressFrom.decode = function decode(reader, length) {
+                            IngressFrom.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.sources && message.sources.length))
@@ -82923,12 +78260,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IngressTo.decode = function decode(reader, length) {
+                            IngressTo.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.operations && message.operations.length))
@@ -83183,12 +78522,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            IngressPolicy.decode = function decode(reader, length) {
+                            IngressPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.ingressFrom = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom.decode(reader, reader.uint32());
@@ -83422,12 +78763,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EgressFrom.decode = function decode(reader, length) {
+                            EgressFrom.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.identities && message.identities.length))
@@ -83709,12 +79052,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EgressTo.decode = function decode(reader, length) {
+                            EgressTo.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.resources && message.resources.length))
@@ -83995,12 +79340,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EgressPolicy.decode = function decode(reader, length) {
+                            EgressPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.egressFrom = $root.google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom.decode(reader, reader.uint32());
@@ -84382,12 +79729,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();
@@ -84900,12 +80249,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -85180,12 +80531,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -85416,12 +80769,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -85669,12 +81024,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -85904,12 +81261,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -86107,12 +81466,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -86321,12 +81682,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -86553,12 +81916,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();

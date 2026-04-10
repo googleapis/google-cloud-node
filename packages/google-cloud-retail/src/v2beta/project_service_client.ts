@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,19 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,41 +102,20 @@ export class ProjectServiceClient {
    *     const client = new ProjectServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProjectServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -170,7 +141,7 @@ export class ProjectServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -186,9 +157,13 @@ export class ProjectServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -235,51 +210,29 @@ export class ProjectServiceClient {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
-          additional_bindings: [
-            {
-              get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',
-            },
-            {get: '/v2beta/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2beta/{name=projects/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',
-          additional_bindings: [
-            {get: '/v2beta/{name=projects/*/locations/*}/operations'},
-            {get: '/v2beta/{name=projects/*}/operations'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2beta/{name=projects/*/locations/*/operations/*}',},{get: '/v2beta/{name=projects/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*}/operations',},{get: '/v2beta/{name=projects/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.retail.v2beta.ProjectService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.retail.v2beta.ProjectService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -310,35 +263,31 @@ export class ProjectServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2beta.ProjectService.
     this.projectServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.retail.v2beta.ProjectService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2beta.ProjectService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2beta.ProjectService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const projectServiceStubMethods = ['getAlertConfig', 'updateAlertConfig'];
+    const projectServiceStubMethods =
+        ['getAlertConfig', 'updateAlertConfig'];
     for (const methodName of projectServiceStubMethods) {
       const callPromise = this.projectServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -358,14 +307,8 @@ export class ProjectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -376,14 +319,8 @@ export class ProjectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'retail.googleapis.com';
   }
@@ -414,7 +351,9 @@ export class ProjectServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -423,9 +362,8 @@ export class ProjectServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -436,261 +374,210 @@ export class ProjectServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Get the {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} of the
-   * requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Full AlertConfig resource name. Format:
-   *   projects/{project_number}/alertConfig
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/project_service.get_alert_config.js</caption>
-   * region_tag:retail_v2beta_generated_ProjectService_GetAlertConfig_async
-   */
+/**
+ * Get the {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} of the
+ * requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Full AlertConfig resource name. Format:
+ *   projects/{project_number}/alertConfig
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/project_service.get_alert_config.js</caption>
+ * region_tag:retail_v2beta_generated_ProjectService_GetAlertConfig_async
+ */
   getAlertConfig(
-    request?: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      protos.google.cloud.retail.v2beta.IGetAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|undefined, {}|undefined
+      ]>;
   getAlertConfig(
-    request: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      | protos.google.cloud.retail.v2beta.IGetAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAlertConfig(
-    request: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      | protos.google.cloud.retail.v2beta.IGetAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAlertConfig(
-    request?: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2beta.IAlertConfig,
-          | protos.google.cloud.retail.v2beta.IGetAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      | protos.google.cloud.retail.v2beta.IGetAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      protos.google.cloud.retail.v2beta.IGetAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAlertConfig(
+      request: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAlertConfig(
+      request?: protos.google.cloud.retail.v2beta.IGetAlertConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAlertConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2beta.IAlertConfig,
-          | protos.google.cloud.retail.v2beta.IGetAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAlertConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2beta.IAlertConfig,
-          protos.google.cloud.retail.v2beta.IGetAlertConfigRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getAlertConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAlertConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IGetAlertConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAlertConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update the alert config of the requested project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.retail.v2beta.AlertConfig} request.alertConfig
-   *   Required. The {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} to
-   *   update.
-   *
-   *   If the caller does not have permission to update the
-   *   {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig}, then a
-   *   PERMISSION_DENIED error is returned.
-   *
-   *   If the {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} to update does
-   *   not exist, a NOT_FOUND error is returned.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} to update. If not
-   *   set, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2beta/project_service.update_alert_config.js</caption>
-   * region_tag:retail_v2beta_generated_ProjectService_UpdateAlertConfig_async
-   */
+/**
+ * Update the alert config of the requested project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.retail.v2beta.AlertConfig} request.alertConfig
+ *   Required. The {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} to
+ *   update.
+ *
+ *   If the caller does not have permission to update the
+ *   {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig}, then a
+ *   PERMISSION_DENIED error is returned.
+ *
+ *   If the {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} to update does
+ *   not exist, a NOT_FOUND error is returned.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Indicates which fields in the provided
+ *   {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig} to update. If not
+ *   set, all supported fields are updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2beta.AlertConfig|AlertConfig}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2beta/project_service.update_alert_config.js</caption>
+ * region_tag:retail_v2beta_generated_ProjectService_UpdateAlertConfig_async
+ */
   updateAlertConfig(
-    request?: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|undefined, {}|undefined
+      ]>;
   updateAlertConfig(
-    request: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAlertConfig(
-    request: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
-    callback: Callback<
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateAlertConfig(
-    request?: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.retail.v2beta.IAlertConfig,
-          | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.retail.v2beta.IAlertConfig,
-      protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAlertConfig(
+      request: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
+      callback: Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateAlertConfig(
+      request?: protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'alert_config.name': request.alertConfig!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'alert_config.name': request.alertConfig!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateAlertConfig request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.retail.v2beta.IAlertConfig,
-          | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateAlertConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateAlertConfig(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.retail.v2beta.IAlertConfig,
-          (
-            | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAlertConfig response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateAlertConfig(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.retail.v2beta.IAlertConfig,
+        protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateAlertConfig response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -730,7 +617,7 @@ export class ProjectServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -768,7 +655,7 @@ export class ProjectServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -813,20 +700,20 @@ export class ProjectServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -863,13 +750,13 @@ export class ProjectServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -903,7 +790,7 @@ export class ProjectServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -918,20 +805,20 @@ export class ProjectServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -975,20 +862,20 @@ export class ProjectServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1002,7 +889,7 @@ export class ProjectServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project: string) {
+  alertConfigPath(project:string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -1016,8 +903,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
-      .project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
   }
 
   /**
@@ -1028,7 +914,7 @@ export class ProjectServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project: string, location: string, catalog: string) {
+  attributesConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1044,9 +930,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
   }
 
   /**
@@ -1057,9 +941,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
   }
 
   /**
@@ -1070,9 +952,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(
-      attributesConfigName
-    ).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
   }
 
   /**
@@ -1083,7 +963,7 @@ export class ProjectServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project: string, location: string, catalog: string) {
+  catalogPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1132,7 +1012,7 @@ export class ProjectServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project: string, location: string, catalog: string) {
+  completionConfigPath(project:string,location:string,catalog:string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1148,9 +1028,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
   }
 
   /**
@@ -1161,9 +1039,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
   }
 
   /**
@@ -1174,9 +1050,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(
-      completionConfigName
-    ).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
   }
 
   /**
@@ -1188,12 +1062,7 @@ export class ProjectServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(
-    project: string,
-    location: string,
-    catalog: string,
-    control: string
-  ) {
+  controlPath(project:string,location:string,catalog:string,control:string) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1255,7 +1124,7 @@ export class ProjectServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, catalog: string, model: string) {
+  modelPath(project:string,location:string,catalog:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1318,13 +1187,7 @@ export class ProjectServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(
-    project: string,
-    location: string,
-    catalog: string,
-    branch: string,
-    product: string
-  ) {
+  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -1398,12 +1261,7 @@ export class ProjectServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(
-    project: string,
-    location: string,
-    catalog: string,
-    servingConfig: string
-  ) {
+  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1420,8 +1278,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
   }
 
   /**
@@ -1432,8 +1289,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
   }
 
   /**
@@ -1444,8 +1300,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
   }
 
   /**
@@ -1456,8 +1311,7 @@ export class ProjectServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
-      .serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
   }
 
   /**
@@ -1472,8 +1326,8 @@ export class ProjectServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
-        this.operationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

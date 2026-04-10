@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,2514 @@
                      * @namespace
                      */
                     var notifications = {};
+    
+                    notifications.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.notifications
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.NotificationsApiService = (function() {
+    
+                            /**
+                             * Constructs a new NotificationsApiService service.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a NotificationsApiService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function NotificationsApiService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (NotificationsApiService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = NotificationsApiService;
+    
+                            /**
+                             * Creates new NotificationsApiService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {NotificationsApiService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            NotificationsApiService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|getNotificationSubscription}.
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @typedef GetNotificationSubscriptionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.notifications.v1.NotificationSubscription} [response] NotificationSubscription
+                             */
+    
+                            /**
+                             * Calls GetNotificationSubscription.
+                             * @function getNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest} request GetNotificationSubscriptionRequest message or plain object
+                             * @param {google.shopping.merchant.notifications.v1.NotificationsApiService.GetNotificationSubscriptionCallback} callback Node-style callback called with the error, if any, and NotificationSubscription
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(NotificationsApiService.prototype.getNotificationSubscription = function getNotificationSubscription(request, callback) {
+                                return this.rpcCall(getNotificationSubscription, $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest, $root.google.shopping.merchant.notifications.v1.NotificationSubscription, request, callback);
+                            }, "name", { value: "GetNotificationSubscription" });
+    
+                            /**
+                             * Calls GetNotificationSubscription.
+                             * @function getNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest} request GetNotificationSubscriptionRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.notifications.v1.NotificationSubscription>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|createNotificationSubscription}.
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @typedef CreateNotificationSubscriptionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.notifications.v1.NotificationSubscription} [response] NotificationSubscription
+                             */
+    
+                            /**
+                             * Calls CreateNotificationSubscription.
+                             * @function createNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest} request CreateNotificationSubscriptionRequest message or plain object
+                             * @param {google.shopping.merchant.notifications.v1.NotificationsApiService.CreateNotificationSubscriptionCallback} callback Node-style callback called with the error, if any, and NotificationSubscription
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(NotificationsApiService.prototype.createNotificationSubscription = function createNotificationSubscription(request, callback) {
+                                return this.rpcCall(createNotificationSubscription, $root.google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest, $root.google.shopping.merchant.notifications.v1.NotificationSubscription, request, callback);
+                            }, "name", { value: "CreateNotificationSubscription" });
+    
+                            /**
+                             * Calls CreateNotificationSubscription.
+                             * @function createNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest} request CreateNotificationSubscriptionRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.notifications.v1.NotificationSubscription>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|updateNotificationSubscription}.
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @typedef UpdateNotificationSubscriptionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.notifications.v1.NotificationSubscription} [response] NotificationSubscription
+                             */
+    
+                            /**
+                             * Calls UpdateNotificationSubscription.
+                             * @function updateNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest} request UpdateNotificationSubscriptionRequest message or plain object
+                             * @param {google.shopping.merchant.notifications.v1.NotificationsApiService.UpdateNotificationSubscriptionCallback} callback Node-style callback called with the error, if any, and NotificationSubscription
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(NotificationsApiService.prototype.updateNotificationSubscription = function updateNotificationSubscription(request, callback) {
+                                return this.rpcCall(updateNotificationSubscription, $root.google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest, $root.google.shopping.merchant.notifications.v1.NotificationSubscription, request, callback);
+                            }, "name", { value: "UpdateNotificationSubscription" });
+    
+                            /**
+                             * Calls UpdateNotificationSubscription.
+                             * @function updateNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest} request UpdateNotificationSubscriptionRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.notifications.v1.NotificationSubscription>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|deleteNotificationSubscription}.
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @typedef DeleteNotificationSubscriptionCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteNotificationSubscription.
+                             * @function deleteNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest} request DeleteNotificationSubscriptionRequest message or plain object
+                             * @param {google.shopping.merchant.notifications.v1.NotificationsApiService.DeleteNotificationSubscriptionCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(NotificationsApiService.prototype.deleteNotificationSubscription = function deleteNotificationSubscription(request, callback) {
+                                return this.rpcCall(deleteNotificationSubscription, $root.google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteNotificationSubscription" });
+    
+                            /**
+                             * Calls DeleteNotificationSubscription.
+                             * @function deleteNotificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest} request DeleteNotificationSubscriptionRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|listNotificationSubscriptions}.
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @typedef ListNotificationSubscriptionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse} [response] ListNotificationSubscriptionsResponse
+                             */
+    
+                            /**
+                             * Calls ListNotificationSubscriptions.
+                             * @function listNotificationSubscriptions
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest} request ListNotificationSubscriptionsRequest message or plain object
+                             * @param {google.shopping.merchant.notifications.v1.NotificationsApiService.ListNotificationSubscriptionsCallback} callback Node-style callback called with the error, if any, and ListNotificationSubscriptionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(NotificationsApiService.prototype.listNotificationSubscriptions = function listNotificationSubscriptions(request, callback) {
+                                return this.rpcCall(listNotificationSubscriptions, $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest, $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse, request, callback);
+                            }, "name", { value: "ListNotificationSubscriptions" });
+    
+                            /**
+                             * Calls ListNotificationSubscriptions.
+                             * @function listNotificationSubscriptions
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest} request ListNotificationSubscriptionsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.notifications.v1.NotificationsApiService|getNotificationSubscriptionHealthMetrics}.
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @typedef GetNotificationSubscriptionHealthMetricsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics} [response] NotificationSubscriptionHealthMetrics
+                             */
+    
+                            /**
+                             * Calls GetNotificationSubscriptionHealthMetrics.
+                             * @function getNotificationSubscriptionHealthMetrics
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest} request GetNotificationSubscriptionHealthMetricsRequest message or plain object
+                             * @param {google.shopping.merchant.notifications.v1.NotificationsApiService.GetNotificationSubscriptionHealthMetricsCallback} callback Node-style callback called with the error, if any, and NotificationSubscriptionHealthMetrics
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(NotificationsApiService.prototype.getNotificationSubscriptionHealthMetrics = function getNotificationSubscriptionHealthMetrics(request, callback) {
+                                return this.rpcCall(getNotificationSubscriptionHealthMetrics, $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest, $root.google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics, request, callback);
+                            }, "name", { value: "GetNotificationSubscriptionHealthMetrics" });
+    
+                            /**
+                             * Calls GetNotificationSubscriptionHealthMetrics.
+                             * @function getNotificationSubscriptionHealthMetrics
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationsApiService
+                             * @instance
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest} request GetNotificationSubscriptionHealthMetricsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics>} Promise
+                             * @variation 2
+                             */
+    
+                            return NotificationsApiService;
+                        })();
+    
+                        v1.GetNotificationSubscriptionRequest = (function() {
+    
+                            /**
+                             * Properties of a GetNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface IGetNotificationSubscriptionRequest
+                             * @property {string|null} [name] GetNotificationSubscriptionRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a GetNotificationSubscriptionRequest.
+                             * @implements IGetNotificationSubscriptionRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest=} [properties] Properties to set
+                             */
+                            function GetNotificationSubscriptionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetNotificationSubscriptionRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @instance
+                             */
+                            GetNotificationSubscriptionRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetNotificationSubscriptionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest} GetNotificationSubscriptionRequest instance
+                             */
+                            GetNotificationSubscriptionRequest.create = function create(properties) {
+                                return new GetNotificationSubscriptionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest} message GetNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetNotificationSubscriptionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionRequest} message GetNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetNotificationSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetNotificationSubscriptionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest} GetNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest} GetNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetNotificationSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetNotificationSubscriptionRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetNotificationSubscriptionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest} GetNotificationSubscriptionRequest
+                             */
+                            GetNotificationSubscriptionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest} message GetNotificationSubscriptionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetNotificationSubscriptionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetNotificationSubscriptionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetNotificationSubscriptionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetNotificationSubscriptionRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetNotificationSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.GetNotificationSubscriptionRequest";
+                            };
+    
+                            return GetNotificationSubscriptionRequest;
+                        })();
+    
+                        v1.CreateNotificationSubscriptionRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface ICreateNotificationSubscriptionRequest
+                             * @property {string|null} [parent] CreateNotificationSubscriptionRequest parent
+                             * @property {google.shopping.merchant.notifications.v1.INotificationSubscription|null} [notificationSubscription] CreateNotificationSubscriptionRequest notificationSubscription
+                             */
+    
+                            /**
+                             * Constructs a new CreateNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a CreateNotificationSubscriptionRequest.
+                             * @implements ICreateNotificationSubscriptionRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest=} [properties] Properties to set
+                             */
+                            function CreateNotificationSubscriptionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateNotificationSubscriptionRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @instance
+                             */
+                            CreateNotificationSubscriptionRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateNotificationSubscriptionRequest notificationSubscription.
+                             * @member {google.shopping.merchant.notifications.v1.INotificationSubscription|null|undefined} notificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @instance
+                             */
+                            CreateNotificationSubscriptionRequest.prototype.notificationSubscription = null;
+    
+                            /**
+                             * Creates a new CreateNotificationSubscriptionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest} CreateNotificationSubscriptionRequest instance
+                             */
+                            CreateNotificationSubscriptionRequest.create = function create(properties) {
+                                return new CreateNotificationSubscriptionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest} message CreateNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateNotificationSubscriptionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.notificationSubscription != null && Object.hasOwnProperty.call(message, "notificationSubscription"))
+                                    $root.google.shopping.merchant.notifications.v1.NotificationSubscription.encode(message.notificationSubscription, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.ICreateNotificationSubscriptionRequest} message CreateNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateNotificationSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateNotificationSubscriptionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest} CreateNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.notificationSubscription = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest} CreateNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateNotificationSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateNotificationSubscriptionRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateNotificationSubscriptionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.notificationSubscription != null && message.hasOwnProperty("notificationSubscription")) {
+                                    var error = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.verify(message.notificationSubscription);
+                                    if (error)
+                                        return "notificationSubscription." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest} CreateNotificationSubscriptionRequest
+                             */
+                            CreateNotificationSubscriptionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.notificationSubscription != null) {
+                                    if (typeof object.notificationSubscription !== "object")
+                                        throw TypeError(".google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest.notificationSubscription: object expected");
+                                    message.notificationSubscription = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.fromObject(object.notificationSubscription);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest} message CreateNotificationSubscriptionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateNotificationSubscriptionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.notificationSubscription = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.notificationSubscription != null && message.hasOwnProperty("notificationSubscription"))
+                                    object.notificationSubscription = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.toObject(message.notificationSubscription, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateNotificationSubscriptionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateNotificationSubscriptionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateNotificationSubscriptionRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateNotificationSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.CreateNotificationSubscriptionRequest";
+                            };
+    
+                            return CreateNotificationSubscriptionRequest;
+                        })();
+    
+                        v1.UpdateNotificationSubscriptionRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface IUpdateNotificationSubscriptionRequest
+                             * @property {google.shopping.merchant.notifications.v1.INotificationSubscription|null} [notificationSubscription] UpdateNotificationSubscriptionRequest notificationSubscription
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateNotificationSubscriptionRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents an UpdateNotificationSubscriptionRequest.
+                             * @implements IUpdateNotificationSubscriptionRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest=} [properties] Properties to set
+                             */
+                            function UpdateNotificationSubscriptionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateNotificationSubscriptionRequest notificationSubscription.
+                             * @member {google.shopping.merchant.notifications.v1.INotificationSubscription|null|undefined} notificationSubscription
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @instance
+                             */
+                            UpdateNotificationSubscriptionRequest.prototype.notificationSubscription = null;
+    
+                            /**
+                             * UpdateNotificationSubscriptionRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @instance
+                             */
+                            UpdateNotificationSubscriptionRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateNotificationSubscriptionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest} UpdateNotificationSubscriptionRequest instance
+                             */
+                            UpdateNotificationSubscriptionRequest.create = function create(properties) {
+                                return new UpdateNotificationSubscriptionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest} message UpdateNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateNotificationSubscriptionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.notificationSubscription != null && Object.hasOwnProperty.call(message, "notificationSubscription"))
+                                    $root.google.shopping.merchant.notifications.v1.NotificationSubscription.encode(message.notificationSubscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IUpdateNotificationSubscriptionRequest} message UpdateNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateNotificationSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateNotificationSubscriptionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest} UpdateNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.notificationSubscription = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest} UpdateNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateNotificationSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateNotificationSubscriptionRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateNotificationSubscriptionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.notificationSubscription != null && message.hasOwnProperty("notificationSubscription")) {
+                                    var error = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.verify(message.notificationSubscription);
+                                    if (error)
+                                        return "notificationSubscription." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest} UpdateNotificationSubscriptionRequest
+                             */
+                            UpdateNotificationSubscriptionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest();
+                                if (object.notificationSubscription != null) {
+                                    if (typeof object.notificationSubscription !== "object")
+                                        throw TypeError(".google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest.notificationSubscription: object expected");
+                                    message.notificationSubscription = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.fromObject(object.notificationSubscription);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest} message UpdateNotificationSubscriptionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateNotificationSubscriptionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.notificationSubscription = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.notificationSubscription != null && message.hasOwnProperty("notificationSubscription"))
+                                    object.notificationSubscription = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.toObject(message.notificationSubscription, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateNotificationSubscriptionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateNotificationSubscriptionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateNotificationSubscriptionRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateNotificationSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.UpdateNotificationSubscriptionRequest";
+                            };
+    
+                            return UpdateNotificationSubscriptionRequest;
+                        })();
+    
+                        v1.DeleteNotificationSubscriptionRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface IDeleteNotificationSubscriptionRequest
+                             * @property {string|null} [name] DeleteNotificationSubscriptionRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteNotificationSubscriptionRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a DeleteNotificationSubscriptionRequest.
+                             * @implements IDeleteNotificationSubscriptionRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest=} [properties] Properties to set
+                             */
+                            function DeleteNotificationSubscriptionRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteNotificationSubscriptionRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @instance
+                             */
+                            DeleteNotificationSubscriptionRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteNotificationSubscriptionRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest} DeleteNotificationSubscriptionRequest instance
+                             */
+                            DeleteNotificationSubscriptionRequest.create = function create(properties) {
+                                return new DeleteNotificationSubscriptionRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteNotificationSubscriptionRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest} message DeleteNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteNotificationSubscriptionRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteNotificationSubscriptionRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IDeleteNotificationSubscriptionRequest} message DeleteNotificationSubscriptionRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteNotificationSubscriptionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteNotificationSubscriptionRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest} DeleteNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteNotificationSubscriptionRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest} DeleteNotificationSubscriptionRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteNotificationSubscriptionRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteNotificationSubscriptionRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteNotificationSubscriptionRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteNotificationSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest} DeleteNotificationSubscriptionRequest
+                             */
+                            DeleteNotificationSubscriptionRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteNotificationSubscriptionRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest} message DeleteNotificationSubscriptionRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteNotificationSubscriptionRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteNotificationSubscriptionRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteNotificationSubscriptionRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteNotificationSubscriptionRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteNotificationSubscriptionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.DeleteNotificationSubscriptionRequest";
+                            };
+    
+                            return DeleteNotificationSubscriptionRequest;
+                        })();
+    
+                        v1.ListNotificationSubscriptionsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListNotificationSubscriptionsRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface IListNotificationSubscriptionsRequest
+                             * @property {string|null} [parent] ListNotificationSubscriptionsRequest parent
+                             * @property {number|null} [pageSize] ListNotificationSubscriptionsRequest pageSize
+                             * @property {string|null} [pageToken] ListNotificationSubscriptionsRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListNotificationSubscriptionsRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a ListNotificationSubscriptionsRequest.
+                             * @implements IListNotificationSubscriptionsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest=} [properties] Properties to set
+                             */
+                            function ListNotificationSubscriptionsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListNotificationSubscriptionsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @instance
+                             */
+                            ListNotificationSubscriptionsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListNotificationSubscriptionsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @instance
+                             */
+                            ListNotificationSubscriptionsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListNotificationSubscriptionsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @instance
+                             */
+                            ListNotificationSubscriptionsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListNotificationSubscriptionsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest} ListNotificationSubscriptionsRequest instance
+                             */
+                            ListNotificationSubscriptionsRequest.create = function create(properties) {
+                                return new ListNotificationSubscriptionsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListNotificationSubscriptionsRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest} message ListNotificationSubscriptionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListNotificationSubscriptionsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListNotificationSubscriptionsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsRequest} message ListNotificationSubscriptionsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListNotificationSubscriptionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListNotificationSubscriptionsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest} ListNotificationSubscriptionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListNotificationSubscriptionsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListNotificationSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest} ListNotificationSubscriptionsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListNotificationSubscriptionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListNotificationSubscriptionsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListNotificationSubscriptionsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListNotificationSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest} ListNotificationSubscriptionsRequest
+                             */
+                            ListNotificationSubscriptionsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListNotificationSubscriptionsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest} message ListNotificationSubscriptionsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListNotificationSubscriptionsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListNotificationSubscriptionsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListNotificationSubscriptionsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListNotificationSubscriptionsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListNotificationSubscriptionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsRequest";
+                            };
+    
+                            return ListNotificationSubscriptionsRequest;
+                        })();
+    
+                        v1.ListNotificationSubscriptionsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListNotificationSubscriptionsResponse.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface IListNotificationSubscriptionsResponse
+                             * @property {Array.<google.shopping.merchant.notifications.v1.INotificationSubscription>|null} [notificationSubscriptions] ListNotificationSubscriptionsResponse notificationSubscriptions
+                             * @property {string|null} [nextPageToken] ListNotificationSubscriptionsResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListNotificationSubscriptionsResponse.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a ListNotificationSubscriptionsResponse.
+                             * @implements IListNotificationSubscriptionsResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse=} [properties] Properties to set
+                             */
+                            function ListNotificationSubscriptionsResponse(properties) {
+                                this.notificationSubscriptions = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListNotificationSubscriptionsResponse notificationSubscriptions.
+                             * @member {Array.<google.shopping.merchant.notifications.v1.INotificationSubscription>} notificationSubscriptions
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @instance
+                             */
+                            ListNotificationSubscriptionsResponse.prototype.notificationSubscriptions = $util.emptyArray;
+    
+                            /**
+                             * ListNotificationSubscriptionsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @instance
+                             */
+                            ListNotificationSubscriptionsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListNotificationSubscriptionsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse} ListNotificationSubscriptionsResponse instance
+                             */
+                            ListNotificationSubscriptionsResponse.create = function create(properties) {
+                                return new ListNotificationSubscriptionsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListNotificationSubscriptionsResponse message. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse} message ListNotificationSubscriptionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListNotificationSubscriptionsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.notificationSubscriptions != null && message.notificationSubscriptions.length)
+                                    for (var i = 0; i < message.notificationSubscriptions.length; ++i)
+                                        $root.google.shopping.merchant.notifications.v1.NotificationSubscription.encode(message.notificationSubscriptions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListNotificationSubscriptionsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IListNotificationSubscriptionsResponse} message ListNotificationSubscriptionsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListNotificationSubscriptionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListNotificationSubscriptionsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse} ListNotificationSubscriptionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListNotificationSubscriptionsResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.notificationSubscriptions && message.notificationSubscriptions.length))
+                                                message.notificationSubscriptions = [];
+                                            message.notificationSubscriptions.push($root.google.shopping.merchant.notifications.v1.NotificationSubscription.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListNotificationSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse} ListNotificationSubscriptionsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListNotificationSubscriptionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListNotificationSubscriptionsResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListNotificationSubscriptionsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.notificationSubscriptions != null && message.hasOwnProperty("notificationSubscriptions")) {
+                                    if (!Array.isArray(message.notificationSubscriptions))
+                                        return "notificationSubscriptions: array expected";
+                                    for (var i = 0; i < message.notificationSubscriptions.length; ++i) {
+                                        var error = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.verify(message.notificationSubscriptions[i]);
+                                        if (error)
+                                            return "notificationSubscriptions." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListNotificationSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse} ListNotificationSubscriptionsResponse
+                             */
+                            ListNotificationSubscriptionsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse();
+                                if (object.notificationSubscriptions) {
+                                    if (!Array.isArray(object.notificationSubscriptions))
+                                        throw TypeError(".google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse.notificationSubscriptions: array expected");
+                                    message.notificationSubscriptions = [];
+                                    for (var i = 0; i < object.notificationSubscriptions.length; ++i) {
+                                        if (typeof object.notificationSubscriptions[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse.notificationSubscriptions: object expected");
+                                        message.notificationSubscriptions[i] = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.fromObject(object.notificationSubscriptions[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListNotificationSubscriptionsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse} message ListNotificationSubscriptionsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListNotificationSubscriptionsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.notificationSubscriptions = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.notificationSubscriptions && message.notificationSubscriptions.length) {
+                                    object.notificationSubscriptions = [];
+                                    for (var j = 0; j < message.notificationSubscriptions.length; ++j)
+                                        object.notificationSubscriptions[j] = $root.google.shopping.merchant.notifications.v1.NotificationSubscription.toObject(message.notificationSubscriptions[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListNotificationSubscriptionsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListNotificationSubscriptionsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListNotificationSubscriptionsResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListNotificationSubscriptionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.ListNotificationSubscriptionsResponse";
+                            };
+    
+                            return ListNotificationSubscriptionsResponse;
+                        })();
+    
+                        v1.NotificationSubscription = (function() {
+    
+                            /**
+                             * Properties of a NotificationSubscription.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface INotificationSubscription
+                             * @property {boolean|null} [allManagedAccounts] NotificationSubscription allManagedAccounts
+                             * @property {string|null} [targetAccount] NotificationSubscription targetAccount
+                             * @property {string|null} [name] NotificationSubscription name
+                             * @property {google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType|null} [registeredEvent] NotificationSubscription registeredEvent
+                             * @property {string|null} [callBackUri] NotificationSubscription callBackUri
+                             */
+    
+                            /**
+                             * Constructs a new NotificationSubscription.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a NotificationSubscription.
+                             * @implements INotificationSubscription
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscription=} [properties] Properties to set
+                             */
+                            function NotificationSubscription(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NotificationSubscription allManagedAccounts.
+                             * @member {boolean|null|undefined} allManagedAccounts
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @instance
+                             */
+                            NotificationSubscription.prototype.allManagedAccounts = null;
+    
+                            /**
+                             * NotificationSubscription targetAccount.
+                             * @member {string|null|undefined} targetAccount
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @instance
+                             */
+                            NotificationSubscription.prototype.targetAccount = null;
+    
+                            /**
+                             * NotificationSubscription name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @instance
+                             */
+                            NotificationSubscription.prototype.name = "";
+    
+                            /**
+                             * NotificationSubscription registeredEvent.
+                             * @member {google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType} registeredEvent
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @instance
+                             */
+                            NotificationSubscription.prototype.registeredEvent = 0;
+    
+                            /**
+                             * NotificationSubscription callBackUri.
+                             * @member {string} callBackUri
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @instance
+                             */
+                            NotificationSubscription.prototype.callBackUri = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * NotificationSubscription interestedIn.
+                             * @member {"allManagedAccounts"|"targetAccount"|undefined} interestedIn
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @instance
+                             */
+                            Object.defineProperty(NotificationSubscription.prototype, "interestedIn", {
+                                get: $util.oneOfGetter($oneOfFields = ["allManagedAccounts", "targetAccount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new NotificationSubscription instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscription=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscription} NotificationSubscription instance
+                             */
+                            NotificationSubscription.create = function create(properties) {
+                                return new NotificationSubscription(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationSubscription message. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscription.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscription} message NotificationSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationSubscription.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.registeredEvent != null && Object.hasOwnProperty.call(message, "registeredEvent"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.registeredEvent);
+                                if (message.allManagedAccounts != null && Object.hasOwnProperty.call(message, "allManagedAccounts"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allManagedAccounts);
+                                if (message.targetAccount != null && Object.hasOwnProperty.call(message, "targetAccount"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetAccount);
+                                if (message.callBackUri != null && Object.hasOwnProperty.call(message, "callBackUri"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.callBackUri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationSubscription message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscription.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscription} message NotificationSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationSubscription.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NotificationSubscription message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscription} NotificationSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationSubscription.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.NotificationSubscription();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 3: {
+                                            message.allManagedAccounts = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.targetAccount = reader.string();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.registeredEvent = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.callBackUri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NotificationSubscription message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscription} NotificationSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationSubscription.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NotificationSubscription message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NotificationSubscription.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.allManagedAccounts != null && message.hasOwnProperty("allManagedAccounts")) {
+                                    properties.interestedIn = 1;
+                                    if (typeof message.allManagedAccounts !== "boolean")
+                                        return "allManagedAccounts: boolean expected";
+                                }
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount")) {
+                                    if (properties.interestedIn === 1)
+                                        return "interestedIn: multiple values";
+                                    properties.interestedIn = 1;
+                                    if (!$util.isString(message.targetAccount))
+                                        return "targetAccount: string expected";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.registeredEvent != null && message.hasOwnProperty("registeredEvent"))
+                                    switch (message.registeredEvent) {
+                                    default:
+                                        return "registeredEvent: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                if (message.callBackUri != null && message.hasOwnProperty("callBackUri"))
+                                    if (!$util.isString(message.callBackUri))
+                                        return "callBackUri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NotificationSubscription message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscription} NotificationSubscription
+                             */
+                            NotificationSubscription.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.NotificationSubscription)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.NotificationSubscription();
+                                if (object.allManagedAccounts != null)
+                                    message.allManagedAccounts = Boolean(object.allManagedAccounts);
+                                if (object.targetAccount != null)
+                                    message.targetAccount = String(object.targetAccount);
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                switch (object.registeredEvent) {
+                                default:
+                                    if (typeof object.registeredEvent === "number") {
+                                        message.registeredEvent = object.registeredEvent;
+                                        break;
+                                    }
+                                    break;
+                                case "NOTIFICATION_EVENT_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.registeredEvent = 0;
+                                    break;
+                                case "PRODUCT_STATUS_CHANGE":
+                                case 1:
+                                    message.registeredEvent = 1;
+                                    break;
+                                }
+                                if (object.callBackUri != null)
+                                    message.callBackUri = String(object.callBackUri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NotificationSubscription message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.NotificationSubscription} message NotificationSubscription
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NotificationSubscription.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.registeredEvent = options.enums === String ? "NOTIFICATION_EVENT_TYPE_UNSPECIFIED" : 0;
+                                    object.callBackUri = "";
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.registeredEvent != null && message.hasOwnProperty("registeredEvent"))
+                                    object.registeredEvent = options.enums === String ? $root.google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType[message.registeredEvent] === undefined ? message.registeredEvent : $root.google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType[message.registeredEvent] : message.registeredEvent;
+                                if (message.allManagedAccounts != null && message.hasOwnProperty("allManagedAccounts")) {
+                                    object.allManagedAccounts = message.allManagedAccounts;
+                                    if (options.oneofs)
+                                        object.interestedIn = "allManagedAccounts";
+                                }
+                                if (message.targetAccount != null && message.hasOwnProperty("targetAccount")) {
+                                    object.targetAccount = message.targetAccount;
+                                    if (options.oneofs)
+                                        object.interestedIn = "targetAccount";
+                                }
+                                if (message.callBackUri != null && message.hasOwnProperty("callBackUri"))
+                                    object.callBackUri = message.callBackUri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NotificationSubscription to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NotificationSubscription.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NotificationSubscription
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscription
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NotificationSubscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.NotificationSubscription";
+                            };
+    
+                            /**
+                             * NotificationEventType enum.
+                             * @name google.shopping.merchant.notifications.v1.NotificationSubscription.NotificationEventType
+                             * @enum {number}
+                             * @property {number} NOTIFICATION_EVENT_TYPE_UNSPECIFIED=0 NOTIFICATION_EVENT_TYPE_UNSPECIFIED value
+                             * @property {number} PRODUCT_STATUS_CHANGE=1 PRODUCT_STATUS_CHANGE value
+                             */
+                            NotificationSubscription.NotificationEventType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "NOTIFICATION_EVENT_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "PRODUCT_STATUS_CHANGE"] = 1;
+                                return values;
+                            })();
+    
+                            return NotificationSubscription;
+                        })();
+    
+                        v1.GetNotificationSubscriptionHealthMetricsRequest = (function() {
+    
+                            /**
+                             * Properties of a GetNotificationSubscriptionHealthMetricsRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface IGetNotificationSubscriptionHealthMetricsRequest
+                             * @property {string|null} [name] GetNotificationSubscriptionHealthMetricsRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetNotificationSubscriptionHealthMetricsRequest.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a GetNotificationSubscriptionHealthMetricsRequest.
+                             * @implements IGetNotificationSubscriptionHealthMetricsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest=} [properties] Properties to set
+                             */
+                            function GetNotificationSubscriptionHealthMetricsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetNotificationSubscriptionHealthMetricsRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @instance
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetNotificationSubscriptionHealthMetricsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest} GetNotificationSubscriptionHealthMetricsRequest instance
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.create = function create(properties) {
+                                return new GetNotificationSubscriptionHealthMetricsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetNotificationSubscriptionHealthMetricsRequest message. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest} message GetNotificationSubscriptionHealthMetricsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetNotificationSubscriptionHealthMetricsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.IGetNotificationSubscriptionHealthMetricsRequest} message GetNotificationSubscriptionHealthMetricsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetNotificationSubscriptionHealthMetricsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest} GetNotificationSubscriptionHealthMetricsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetNotificationSubscriptionHealthMetricsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest} GetNotificationSubscriptionHealthMetricsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetNotificationSubscriptionHealthMetricsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetNotificationSubscriptionHealthMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest} GetNotificationSubscriptionHealthMetricsRequest
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetNotificationSubscriptionHealthMetricsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest} message GetNotificationSubscriptionHealthMetricsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetNotificationSubscriptionHealthMetricsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetNotificationSubscriptionHealthMetricsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetNotificationSubscriptionHealthMetricsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.GetNotificationSubscriptionHealthMetricsRequest";
+                            };
+    
+                            return GetNotificationSubscriptionHealthMetricsRequest;
+                        })();
+    
+                        v1.NotificationSubscriptionHealthMetrics = (function() {
+    
+                            /**
+                             * Properties of a NotificationSubscriptionHealthMetrics.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @interface INotificationSubscriptionHealthMetrics
+                             * @property {string|null} [name] NotificationSubscriptionHealthMetrics name
+                             * @property {number|Long|null} [acknowledgedMessagesCount] NotificationSubscriptionHealthMetrics acknowledgedMessagesCount
+                             * @property {number|Long|null} [undeliveredMessagesCount] NotificationSubscriptionHealthMetrics undeliveredMessagesCount
+                             * @property {number|Long|null} [oldestUnacknowledgedMessageWaitingTime] NotificationSubscriptionHealthMetrics oldestUnacknowledgedMessageWaitingTime
+                             */
+    
+                            /**
+                             * Constructs a new NotificationSubscriptionHealthMetrics.
+                             * @memberof google.shopping.merchant.notifications.v1
+                             * @classdesc Represents a NotificationSubscriptionHealthMetrics.
+                             * @implements INotificationSubscriptionHealthMetrics
+                             * @constructor
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics=} [properties] Properties to set
+                             */
+                            function NotificationSubscriptionHealthMetrics(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NotificationSubscriptionHealthMetrics name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @instance
+                             */
+                            NotificationSubscriptionHealthMetrics.prototype.name = "";
+    
+                            /**
+                             * NotificationSubscriptionHealthMetrics acknowledgedMessagesCount.
+                             * @member {number|Long} acknowledgedMessagesCount
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @instance
+                             */
+                            NotificationSubscriptionHealthMetrics.prototype.acknowledgedMessagesCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * NotificationSubscriptionHealthMetrics undeliveredMessagesCount.
+                             * @member {number|Long} undeliveredMessagesCount
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @instance
+                             */
+                            NotificationSubscriptionHealthMetrics.prototype.undeliveredMessagesCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * NotificationSubscriptionHealthMetrics oldestUnacknowledgedMessageWaitingTime.
+                             * @member {number|Long} oldestUnacknowledgedMessageWaitingTime
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @instance
+                             */
+                            NotificationSubscriptionHealthMetrics.prototype.oldestUnacknowledgedMessageWaitingTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new NotificationSubscriptionHealthMetrics instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics} NotificationSubscriptionHealthMetrics instance
+                             */
+                            NotificationSubscriptionHealthMetrics.create = function create(properties) {
+                                return new NotificationSubscriptionHealthMetrics(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationSubscriptionHealthMetrics message. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics} message NotificationSubscriptionHealthMetrics message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationSubscriptionHealthMetrics.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.acknowledgedMessagesCount != null && Object.hasOwnProperty.call(message, "acknowledgedMessagesCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.acknowledgedMessagesCount);
+                                if (message.undeliveredMessagesCount != null && Object.hasOwnProperty.call(message, "undeliveredMessagesCount"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int64(message.undeliveredMessagesCount);
+                                if (message.oldestUnacknowledgedMessageWaitingTime != null && Object.hasOwnProperty.call(message, "oldestUnacknowledgedMessageWaitingTime"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.oldestUnacknowledgedMessageWaitingTime);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NotificationSubscriptionHealthMetrics message, length delimited. Does not implicitly {@link google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.INotificationSubscriptionHealthMetrics} message NotificationSubscriptionHealthMetrics message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NotificationSubscriptionHealthMetrics.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NotificationSubscriptionHealthMetrics message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics} NotificationSubscriptionHealthMetrics
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationSubscriptionHealthMetrics.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.acknowledgedMessagesCount = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.undeliveredMessagesCount = reader.int64();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.oldestUnacknowledgedMessageWaitingTime = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NotificationSubscriptionHealthMetrics message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics} NotificationSubscriptionHealthMetrics
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NotificationSubscriptionHealthMetrics.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NotificationSubscriptionHealthMetrics message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NotificationSubscriptionHealthMetrics.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.acknowledgedMessagesCount != null && message.hasOwnProperty("acknowledgedMessagesCount"))
+                                    if (!$util.isInteger(message.acknowledgedMessagesCount) && !(message.acknowledgedMessagesCount && $util.isInteger(message.acknowledgedMessagesCount.low) && $util.isInteger(message.acknowledgedMessagesCount.high)))
+                                        return "acknowledgedMessagesCount: integer|Long expected";
+                                if (message.undeliveredMessagesCount != null && message.hasOwnProperty("undeliveredMessagesCount"))
+                                    if (!$util.isInteger(message.undeliveredMessagesCount) && !(message.undeliveredMessagesCount && $util.isInteger(message.undeliveredMessagesCount.low) && $util.isInteger(message.undeliveredMessagesCount.high)))
+                                        return "undeliveredMessagesCount: integer|Long expected";
+                                if (message.oldestUnacknowledgedMessageWaitingTime != null && message.hasOwnProperty("oldestUnacknowledgedMessageWaitingTime"))
+                                    if (!$util.isInteger(message.oldestUnacknowledgedMessageWaitingTime) && !(message.oldestUnacknowledgedMessageWaitingTime && $util.isInteger(message.oldestUnacknowledgedMessageWaitingTime.low) && $util.isInteger(message.oldestUnacknowledgedMessageWaitingTime.high)))
+                                        return "oldestUnacknowledgedMessageWaitingTime: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NotificationSubscriptionHealthMetrics message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics} NotificationSubscriptionHealthMetrics
+                             */
+                            NotificationSubscriptionHealthMetrics.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.acknowledgedMessagesCount != null)
+                                    if ($util.Long)
+                                        (message.acknowledgedMessagesCount = $util.Long.fromValue(object.acknowledgedMessagesCount)).unsigned = false;
+                                    else if (typeof object.acknowledgedMessagesCount === "string")
+                                        message.acknowledgedMessagesCount = parseInt(object.acknowledgedMessagesCount, 10);
+                                    else if (typeof object.acknowledgedMessagesCount === "number")
+                                        message.acknowledgedMessagesCount = object.acknowledgedMessagesCount;
+                                    else if (typeof object.acknowledgedMessagesCount === "object")
+                                        message.acknowledgedMessagesCount = new $util.LongBits(object.acknowledgedMessagesCount.low >>> 0, object.acknowledgedMessagesCount.high >>> 0).toNumber();
+                                if (object.undeliveredMessagesCount != null)
+                                    if ($util.Long)
+                                        (message.undeliveredMessagesCount = $util.Long.fromValue(object.undeliveredMessagesCount)).unsigned = false;
+                                    else if (typeof object.undeliveredMessagesCount === "string")
+                                        message.undeliveredMessagesCount = parseInt(object.undeliveredMessagesCount, 10);
+                                    else if (typeof object.undeliveredMessagesCount === "number")
+                                        message.undeliveredMessagesCount = object.undeliveredMessagesCount;
+                                    else if (typeof object.undeliveredMessagesCount === "object")
+                                        message.undeliveredMessagesCount = new $util.LongBits(object.undeliveredMessagesCount.low >>> 0, object.undeliveredMessagesCount.high >>> 0).toNumber();
+                                if (object.oldestUnacknowledgedMessageWaitingTime != null)
+                                    if ($util.Long)
+                                        (message.oldestUnacknowledgedMessageWaitingTime = $util.Long.fromValue(object.oldestUnacknowledgedMessageWaitingTime)).unsigned = false;
+                                    else if (typeof object.oldestUnacknowledgedMessageWaitingTime === "string")
+                                        message.oldestUnacknowledgedMessageWaitingTime = parseInt(object.oldestUnacknowledgedMessageWaitingTime, 10);
+                                    else if (typeof object.oldestUnacknowledgedMessageWaitingTime === "number")
+                                        message.oldestUnacknowledgedMessageWaitingTime = object.oldestUnacknowledgedMessageWaitingTime;
+                                    else if (typeof object.oldestUnacknowledgedMessageWaitingTime === "object")
+                                        message.oldestUnacknowledgedMessageWaitingTime = new $util.LongBits(object.oldestUnacknowledgedMessageWaitingTime.low >>> 0, object.oldestUnacknowledgedMessageWaitingTime.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NotificationSubscriptionHealthMetrics message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics} message NotificationSubscriptionHealthMetrics
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NotificationSubscriptionHealthMetrics.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.acknowledgedMessagesCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.acknowledgedMessagesCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.undeliveredMessagesCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.undeliveredMessagesCount = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.oldestUnacknowledgedMessageWaitingTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.oldestUnacknowledgedMessageWaitingTime = options.longs === String ? "0" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.acknowledgedMessagesCount != null && message.hasOwnProperty("acknowledgedMessagesCount"))
+                                    if (typeof message.acknowledgedMessagesCount === "number")
+                                        object.acknowledgedMessagesCount = options.longs === String ? String(message.acknowledgedMessagesCount) : message.acknowledgedMessagesCount;
+                                    else
+                                        object.acknowledgedMessagesCount = options.longs === String ? $util.Long.prototype.toString.call(message.acknowledgedMessagesCount) : options.longs === Number ? new $util.LongBits(message.acknowledgedMessagesCount.low >>> 0, message.acknowledgedMessagesCount.high >>> 0).toNumber() : message.acknowledgedMessagesCount;
+                                if (message.undeliveredMessagesCount != null && message.hasOwnProperty("undeliveredMessagesCount"))
+                                    if (typeof message.undeliveredMessagesCount === "number")
+                                        object.undeliveredMessagesCount = options.longs === String ? String(message.undeliveredMessagesCount) : message.undeliveredMessagesCount;
+                                    else
+                                        object.undeliveredMessagesCount = options.longs === String ? $util.Long.prototype.toString.call(message.undeliveredMessagesCount) : options.longs === Number ? new $util.LongBits(message.undeliveredMessagesCount.low >>> 0, message.undeliveredMessagesCount.high >>> 0).toNumber() : message.undeliveredMessagesCount;
+                                if (message.oldestUnacknowledgedMessageWaitingTime != null && message.hasOwnProperty("oldestUnacknowledgedMessageWaitingTime"))
+                                    if (typeof message.oldestUnacknowledgedMessageWaitingTime === "number")
+                                        object.oldestUnacknowledgedMessageWaitingTime = options.longs === String ? String(message.oldestUnacknowledgedMessageWaitingTime) : message.oldestUnacknowledgedMessageWaitingTime;
+                                    else
+                                        object.oldestUnacknowledgedMessageWaitingTime = options.longs === String ? $util.Long.prototype.toString.call(message.oldestUnacknowledgedMessageWaitingTime) : options.longs === Number ? new $util.LongBits(message.oldestUnacknowledgedMessageWaitingTime.low >>> 0, message.oldestUnacknowledgedMessageWaitingTime.high >>> 0).toNumber() : message.oldestUnacknowledgedMessageWaitingTime;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NotificationSubscriptionHealthMetrics to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NotificationSubscriptionHealthMetrics.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NotificationSubscriptionHealthMetrics
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NotificationSubscriptionHealthMetrics.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.notifications.v1.NotificationSubscriptionHealthMetrics";
+                            };
+    
+                            return NotificationSubscriptionHealthMetrics;
+                        })();
+    
+                        return v1;
+                    })();
     
                     notifications.v1beta = (function() {
     
@@ -388,12 +2896,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetNotificationSubscriptionRequest.decode = function decode(reader, length) {
+                            GetNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.GetNotificationSubscriptionRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -602,12 +3112,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateNotificationSubscriptionRequest.decode = function decode(reader, length) {
+                            CreateNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.CreateNotificationSubscriptionRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -834,12 +3346,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateNotificationSubscriptionRequest.decode = function decode(reader, length) {
+                            UpdateNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.UpdateNotificationSubscriptionRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.notificationSubscription = $root.google.shopping.merchant.notifications.v1beta.NotificationSubscription.decode(reader, reader.uint32());
@@ -1060,12 +3574,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeleteNotificationSubscriptionRequest.decode = function decode(reader, length) {
+                            DeleteNotificationSubscriptionRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.DeleteNotificationSubscriptionRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -1285,12 +3801,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListNotificationSubscriptionsRequest.decode = function decode(reader, length) {
+                            ListNotificationSubscriptionsRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.ListNotificationSubscriptionsRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -1526,12 +4044,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListNotificationSubscriptionsResponse.decode = function decode(reader, length) {
+                            ListNotificationSubscriptionsResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.ListNotificationSubscriptionsResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.notificationSubscriptions && message.notificationSubscriptions.length))
@@ -1819,12 +4339,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NotificationSubscription.decode = function decode(reader, length) {
+                            NotificationSubscription.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.NotificationSubscription();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 3: {
                                             message.allManagedAccounts = reader.bool();
@@ -2092,45 +4614,25 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ProductChange _oldValue.
-                             * @member {"oldValue"|undefined} _oldValue
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductChange
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductChange.prototype, "_oldValue", {
                                 get: $util.oneOfGetter($oneOfFields = ["oldValue"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductChange _newValue.
-                             * @member {"newValue"|undefined} _newValue
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductChange
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductChange.prototype, "_newValue", {
                                 get: $util.oneOfGetter($oneOfFields = ["newValue"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductChange _regionCode.
-                             * @member {"regionCode"|undefined} _regionCode
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductChange
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductChange.prototype, "_regionCode", {
                                 get: $util.oneOfGetter($oneOfFields = ["regionCode"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductChange _reportingContext.
-                             * @member {"reportingContext"|undefined} _reportingContext
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductChange
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductChange.prototype, "_reportingContext", {
                                 get: $util.oneOfGetter($oneOfFields = ["reportingContext"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -2195,12 +4697,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ProductChange.decode = function decode(reader, length) {
+                            ProductChange.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.ProductChange();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.oldValue = reader.string();
@@ -2284,11 +4788,16 @@
                                     case 5:
                                     case 6:
                                     case 7:
+                                    case 19:
                                     case 8:
                                     case 9:
+                                    case 18:
                                     case 10:
                                     case 11:
                                     case 12:
+                                    case 15:
+                                    case 16:
+                                    case 17:
                                         break;
                                     }
                                 }
@@ -2360,6 +4869,10 @@
                                 case 7:
                                     message.reportingContext = 7;
                                     break;
+                                case "FREE_LISTINGS_UCP_CHECKOUT":
+                                case 19:
+                                    message.reportingContext = 19;
+                                    break;
                                 case "FREE_LOCAL_LISTINGS":
                                 case 8:
                                     message.reportingContext = 8;
@@ -2367,6 +4880,10 @@
                                 case "FREE_LOCAL_VEHICLE_LISTINGS":
                                 case 9:
                                     message.reportingContext = 9;
+                                    break;
+                                case "YOUTUBE_AFFILIATE":
+                                case 18:
+                                    message.reportingContext = 18;
                                     break;
                                 case "YOUTUBE_SHOPPING":
                                 case 10:
@@ -2379,6 +4896,18 @@
                                 case "LOCAL_CLOUD_RETAIL":
                                 case 12:
                                     message.reportingContext = 12;
+                                    break;
+                                case "PRODUCT_REVIEWS":
+                                case 15:
+                                    message.reportingContext = 15;
+                                    break;
+                                case "MERCHANT_REVIEWS":
+                                case 16:
+                                    message.reportingContext = 16;
+                                    break;
+                                case "YOUTUBE_CHECKOUT":
+                                case 17:
+                                    message.reportingContext = 17;
                                     break;
                                 }
                                 return message;
@@ -2539,67 +5068,37 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * ProductStatusChangeMessage _account.
-                             * @member {"account"|undefined} _account
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductStatusChangeMessage
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStatusChangeMessage.prototype, "_account", {
                                 get: $util.oneOfGetter($oneOfFields = ["account"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductStatusChangeMessage _managingAccount.
-                             * @member {"managingAccount"|undefined} _managingAccount
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductStatusChangeMessage
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStatusChangeMessage.prototype, "_managingAccount", {
                                 get: $util.oneOfGetter($oneOfFields = ["managingAccount"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductStatusChangeMessage _resourceType.
-                             * @member {"resourceType"|undefined} _resourceType
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductStatusChangeMessage
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStatusChangeMessage.prototype, "_resourceType", {
                                 get: $util.oneOfGetter($oneOfFields = ["resourceType"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductStatusChangeMessage _attribute.
-                             * @member {"attribute"|undefined} _attribute
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductStatusChangeMessage
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStatusChangeMessage.prototype, "_attribute", {
                                 get: $util.oneOfGetter($oneOfFields = ["attribute"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductStatusChangeMessage _resourceId.
-                             * @member {"resourceId"|undefined} _resourceId
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductStatusChangeMessage
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStatusChangeMessage.prototype, "_resourceId", {
                                 get: $util.oneOfGetter($oneOfFields = ["resourceId"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * ProductStatusChangeMessage _resource.
-                             * @member {"resource"|undefined} _resource
-                             * @memberof google.shopping.merchant.notifications.v1beta.ProductStatusChangeMessage
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(ProductStatusChangeMessage.prototype, "_resource", {
                                 get: $util.oneOfGetter($oneOfFields = ["resource"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -2671,12 +5170,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ProductStatusChangeMessage.decode = function decode(reader, length) {
+                            ProductStatusChangeMessage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.notifications.v1beta.ProductStatusChangeMessage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.account = reader.string();
@@ -3005,12 +5506,7 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Weight _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Weight
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Weight.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -3071,12 +5567,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Weight.decode = function decode(reader, length) {
+                    Weight.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Weight();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.amountMicros = reader.int64();
@@ -3300,23 +5798,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Price _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * Price _currencyCode.
-                     * @member {"currencyCode"|undefined} _currencyCode
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_currencyCode", {
                         get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -3377,12 +5865,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Price.decode = function decode(reader, length) {
+                    Price.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Price();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.amountMicros = reader.int64();
@@ -3579,23 +6069,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * CustomAttribute _name.
-                     * @member {"name"|undefined} _name
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_name", {
                         get: $util.oneOfGetter($oneOfFields = ["name"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * CustomAttribute _value.
-                     * @member {"value"|undefined} _value
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_value", {
                         get: $util.oneOfGetter($oneOfFields = ["value"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -3659,12 +6139,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CustomAttribute.decode = function decode(reader, length) {
+                    CustomAttribute.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.CustomAttribute();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -3903,12 +6385,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Destination.decode = function decode(reader, length) {
+                    Destination.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Destination();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -4012,6 +6496,12 @@
                      * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
                      * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
                      * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     * @property {number} YOUTUBE_SHOPPING_CHECKOUT=7 YOUTUBE_SHOPPING_CHECKOUT value
+                     * @property {number} YOUTUBE_AFFILIATE=8 YOUTUBE_AFFILIATE value
+                     * @property {number} FREE_VEHICLE_LISTINGS=9 FREE_VEHICLE_LISTINGS value
+                     * @property {number} VEHICLE_ADS=10 VEHICLE_ADS value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
                      */
                     Destination.DestinationEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -4022,6 +6512,12 @@
                         values[valuesById[4] = "FREE_LISTINGS"] = 4;
                         values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
                         values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        values[valuesById[7] = "YOUTUBE_SHOPPING_CHECKOUT"] = 7;
+                        values[valuesById[8] = "YOUTUBE_AFFILIATE"] = 8;
+                        values[valuesById[9] = "FREE_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "VEHICLE_ADS"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
                         return values;
                     })();
     
@@ -4102,12 +6598,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReportingContext.decode = function decode(reader, length) {
+                    ReportingContext.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.ReportingContext();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -4214,11 +6712,16 @@
                      * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
                      * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
                      * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LISTINGS_UCP_CHECKOUT=19 FREE_LISTINGS_UCP_CHECKOUT value
                      * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
                      * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_AFFILIATE=18 YOUTUBE_AFFILIATE value
                      * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
                      * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
                      * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     * @property {number} PRODUCT_REVIEWS=15 PRODUCT_REVIEWS value
+                     * @property {number} MERCHANT_REVIEWS=16 MERCHANT_REVIEWS value
+                     * @property {number} YOUTUBE_CHECKOUT=17 YOUTUBE_CHECKOUT value
                      */
                     ReportingContext.ReportingContextEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -4232,11 +6735,16 @@
                         values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
                         values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
                         values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[19] = "FREE_LISTINGS_UCP_CHECKOUT"] = 19;
                         values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
                         values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[18] = "YOUTUBE_AFFILIATE"] = 18;
                         values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
                         values[valuesById[11] = "CLOUD_RETAIL"] = 11;
                         values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        values[valuesById[15] = "PRODUCT_REVIEWS"] = 15;
+                        values[valuesById[16] = "MERCHANT_REVIEWS"] = 16;
+                        values[valuesById[17] = "YOUTUBE_CHECKOUT"] = 17;
                         return values;
                     })();
     
@@ -4317,12 +6825,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Channel.decode = function decode(reader, length) {
+                    Channel.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Channel();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -4547,12 +7057,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -4897,12 +7409,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -5281,12 +7795,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -5513,12 +8029,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -5882,12 +8400,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -6226,6 +8746,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -6327,6 +8848,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -6373,6 +8902,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -6400,12 +8931,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -6451,6 +8984,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -6545,6 +9082,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -6639,6 +9179,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -6668,6 +9210,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -6698,6 +9241,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -6839,12 +9384,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -7106,12 +9653,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -7314,12 +9863,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -7522,12 +10073,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -7730,12 +10283,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -8003,12 +10558,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -8382,12 +10939,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -8590,12 +11149,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -8822,12 +11383,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -9100,12 +11663,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -9527,12 +12092,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -9922,12 +12489,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -10152,12 +12721,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -10552,12 +13123,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -11219,12 +13792,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -11704,12 +14279,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -11948,12 +14525,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -12204,12 +14783,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -12549,12 +15130,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -12928,12 +15511,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -13453,12 +16038,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -13724,12 +16311,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -14043,12 +16632,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -14284,12 +16875,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -14541,12 +17134,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -14849,12 +17444,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -15353,12 +17950,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -15973,12 +18572,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -16421,12 +19022,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -16456,12 +19054,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -17187,12 +19787,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -17483,12 +20085,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -17769,12 +20373,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -18081,12 +20687,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -18272,6 +20880,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -18331,6 +20940,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -18365,6 +20982,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -18392,12 +21011,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -18419,6 +21040,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -18479,6 +21104,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -18515,6 +21143,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -18538,6 +21168,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -18552,6 +21183,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -18728,12 +21361,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -19145,12 +21780,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -19484,12 +22121,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -19760,12 +22399,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -20295,12 +22936,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -20679,12 +23322,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -20969,12 +23614,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -21244,12 +23891,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -21555,12 +24204,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -21823,12 +24474,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -22149,12 +24802,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -22368,12 +25023,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -22556,12 +25213,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))

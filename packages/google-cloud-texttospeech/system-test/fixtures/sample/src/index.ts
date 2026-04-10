@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,18 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  TextToSpeechClient,
-  TextToSpeechLongAudioSynthesizeClient,
-} from '@google-cloud/text-to-speech';
+import {TextToSpeechClient, TextToSpeechLongAudioSynthesizeClient} from '@google-cloud/text-to-speech';
 
 // check that the client class type name can be used
 function doStuffWithTextToSpeechClient(client: TextToSpeechClient) {
   client.close();
 }
-function doStuffWithTextToSpeechLongAudioSynthesizeClient(
-  client: TextToSpeechLongAudioSynthesizeClient
-) {
+function doStuffWithTextToSpeechLongAudioSynthesizeClient(client: TextToSpeechLongAudioSynthesizeClient) {
   client.close();
 }
 
@@ -36,11 +31,8 @@ function main() {
   const textToSpeechClient = new TextToSpeechClient();
   doStuffWithTextToSpeechClient(textToSpeechClient);
   // check that the client instance can be created
-  const textToSpeechLongAudioSynthesizeClient =
-    new TextToSpeechLongAudioSynthesizeClient();
-  doStuffWithTextToSpeechLongAudioSynthesizeClient(
-    textToSpeechLongAudioSynthesizeClient
-  );
+  const textToSpeechLongAudioSynthesizeClient = new TextToSpeechLongAudioSynthesizeClient();
+  doStuffWithTextToSpeechLongAudioSynthesizeClient(textToSpeechLongAudioSynthesizeClient);
 }
 
 main();

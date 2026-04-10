@@ -1,5 +1,49 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.4.0...kms-inventory-v2.5.0) (2026-03-02)
+
+
+### Features
+
+* [inventory] Add support for project level key usage tracking ([34a3659](https://github.com/googleapis/google-cloud-node/commit/34a365988184038c96de95cf0d8bf4bb5d8a8ccf))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.3.0...kms-inventory-v2.4.0) (2026-02-19)
+
+
+### Features
+
+* [inventory] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations ([#7240](https://github.com/googleapis/google-cloud-node/issues/7240)) ([a383b13](https://github.com/googleapis/google-cloud-node/commit/a383b135a8982a8857b465478d679a75e0b6e89e))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.2.1...kms-inventory-v2.3.0) (2026-01-22)
+
+
+### Features
+
+* [inventory] add the SingleTenantHsm functionality including the management API and resource types ([#7015](https://github.com/googleapis/google-cloud-node/issues/7015)) ([edeb409](https://github.com/googleapis/google-cloud-node/commit/edeb409b0538dbd59a9cba75c07e6bb56b35ab1a))
+
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.2.0...kms-inventory-v2.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.1.0...kms-inventory-v2.2.0) (2025-09-16)
+
+
+### Features
+
+* [kmsinventory] Support KEY_ENCAPSULATION purpose and quantum-safe algorithms ML_KEM_768, ML_KEM_1024 and KEM_XWING ([#6712](https://github.com/googleapis/google-cloud-node/issues/6712)) ([fd613db](https://github.com/googleapis/google-cloud-node/commit/fd613dbb171c6d0e5c6fcface6f96ac05dd49a44))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.0.1...kms-inventory-v2.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6421](https://github.com/googleapis/google-cloud-node/issues/6421)) ([0cba45c](https://github.com/googleapis/google-cloud-node/commit/0cba45c3abc98d4f1ffdf75da3610e6e52267737))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.0.0...kms-inventory-v2.0.1) (2025-03-19)
 
 

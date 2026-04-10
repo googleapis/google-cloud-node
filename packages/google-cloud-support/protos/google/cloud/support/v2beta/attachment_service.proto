@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,36 +37,6 @@ service CaseAttachmentService {
       "https://www.googleapis.com/auth/cloud-platform";
 
   // List all the attachments associated with a support case.
-  //
-  // EXAMPLES:
-  //
-  // cURL:
-  //
-  // ```shell
-  // case="projects/some-project/cases/23598314"
-  // curl \
-  //   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-  //   "https://cloudsupport.googleapis.com/v2/$case/attachments"
-  // ```
-  //
-  // Python:
-  //
-  // ```python
-  // import googleapiclient.discovery
-  //
-  // api_version = "v2"
-  // supportApiService = googleapiclient.discovery.build(
-  //     serviceName="cloudsupport",
-  //     version=api_version,
-  //     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
-  // )
-  // request = (
-  //     supportApiService.cases()
-  //     .attachments()
-  //     .list(parent="projects/some-project/cases/43595344")
-  // )
-  // print(request.execute())
-  // ```
   rpc ListAttachments(ListAttachmentsRequest)
       returns (ListAttachmentsResponse) {
     option (google.api.http) = {
@@ -76,6 +46,14 @@ service CaseAttachmentService {
       }
     };
     option (google.api.method_signature) = "parent";
+  }
+
+  // Retrieve an attachment.
+  rpc GetAttachment(GetAttachmentRequest) returns (Attachment) {
+    option (google.api.http) = {
+      get: "/v2beta/{name=*/*/cases/*/attachments/*}"
+    };
+    option (google.api.method_signature) = "name";
   }
 }
 
@@ -102,6 +80,17 @@ message ListAttachmentsRequest {
   // A token identifying the page of results to return. If unspecified, the
   // first page is retrieved.
   string page_token = 3;
+}
+
+// Request for getting an attachment.
+message GetAttachmentRequest {
+  // Required. The name of the attachment to get.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudsupport.googleapis.com/Attachment"
+    }
+  ];
 }
 
 // The response message for the ListAttachments endpoint.

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,15 +18,18 @@
 
 export {AcceleratorTypesClient} from './accelerator_types_client';
 export {AddressesClient} from './addresses_client';
+export {AdviceClient} from './advice_client';
 export {AutoscalersClient} from './autoscalers_client';
 export {BackendBucketsClient} from './backend_buckets_client';
 export {BackendServicesClient} from './backend_services_client';
+export {CrossSiteNetworksClient} from './cross_site_networks_client';
 export {DisksClient} from './disks_client';
 export {DiskTypesClient} from './disk_types_client';
 export {ExternalVpnGatewaysClient} from './external_vpn_gateways_client';
 export {FirewallPoliciesClient} from './firewall_policies_client';
 export {FirewallsClient} from './firewalls_client';
 export {ForwardingRulesClient} from './forwarding_rules_client';
+export {FutureReservationsClient} from './future_reservations_client';
 export {GlobalAddressesClient} from './global_addresses_client';
 export {GlobalForwardingRulesClient} from './global_forwarding_rules_client';
 export {GlobalNetworkEndpointGroupsClient} from './global_network_endpoint_groups_client';
@@ -43,7 +46,9 @@ export {InstancesClient} from './instances_client';
 export {InstanceSettingsServiceClient} from './instance_settings_service_client';
 export {InstanceTemplatesClient} from './instance_templates_client';
 export {InstantSnapshotsClient} from './instant_snapshots_client';
+export {InterconnectAttachmentGroupsClient} from './interconnect_attachment_groups_client';
 export {InterconnectAttachmentsClient} from './interconnect_attachments_client';
+export {InterconnectGroupsClient} from './interconnect_groups_client';
 export {InterconnectLocationsClient} from './interconnect_locations_client';
 export {InterconnectRemoteLocationsClient} from './interconnect_remote_locations_client';
 export {InterconnectsClient} from './interconnects_client';
@@ -60,17 +65,22 @@ export {NetworksClient} from './networks_client';
 export {NodeGroupsClient} from './node_groups_client';
 export {NodeTemplatesClient} from './node_templates_client';
 export {NodeTypesClient} from './node_types_client';
+export {OrganizationSecurityPoliciesClient} from './organization_security_policies_client';
 export {PacketMirroringsClient} from './packet_mirrorings_client';
+export {PreviewFeaturesClient} from './preview_features_client';
 export {ProjectsClient} from './projects_client';
 export {PublicAdvertisedPrefixesClient} from './public_advertised_prefixes_client';
 export {PublicDelegatedPrefixesClient} from './public_delegated_prefixes_client';
 export {RegionAutoscalersClient} from './region_autoscalers_client';
 export {RegionBackendServicesClient} from './region_backend_services_client';
 export {RegionCommitmentsClient} from './region_commitments_client';
+export {RegionCompositeHealthChecksClient} from './region_composite_health_checks_client';
 export {RegionDisksClient} from './region_disks_client';
 export {RegionDiskTypesClient} from './region_disk_types_client';
+export {RegionHealthAggregationPoliciesClient} from './region_health_aggregation_policies_client';
 export {RegionHealthChecksClient} from './region_health_checks_client';
 export {RegionHealthCheckServicesClient} from './region_health_check_services_client';
+export {RegionHealthSourcesClient} from './region_health_sources_client';
 export {RegionInstanceGroupManagersClient} from './region_instance_group_managers_client';
 export {RegionInstanceGroupsClient} from './region_instance_groups_client';
 export {RegionInstancesClient} from './region_instances_client';
@@ -91,6 +101,8 @@ export {RegionUrlMapsClient} from './region_url_maps_client';
 export {RegionZonesClient} from './region_zones_client';
 export {ReservationBlocksClient} from './reservation_blocks_client';
 export {ReservationsClient} from './reservations_client';
+export {ReservationSlotsClient} from './reservation_slots_client';
+export {ReservationSubBlocksClient} from './reservation_sub_blocks_client';
 export {ResourcePoliciesClient} from './resource_policies_client';
 export {RoutersClient} from './routers_client';
 export {RoutesClient} from './routes_client';
@@ -114,5 +126,6 @@ export {TargetVpnGatewaysClient} from './target_vpn_gateways_client';
 export {UrlMapsClient} from './url_maps_client';
 export {VpnGatewaysClient} from './vpn_gateways_client';
 export {VpnTunnelsClient} from './vpn_tunnels_client';
+export {WireGroupsClient} from './wire_groups_client';
 export {ZoneOperationsClient} from './zone_operations_client';
 export {ZonesClient} from './zones_client';

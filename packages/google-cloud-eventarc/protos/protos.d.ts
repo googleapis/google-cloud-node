@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -58,6 +58,9 @@ export namespace google {
 
                     /** Channel satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
+
+                    /** Channel labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Channel. */
@@ -98,6 +101,9 @@ export namespace google {
 
                     /** Channel satisfiesPzs. */
                     public satisfiesPzs: boolean;
+
+                    /** Channel labels. */
+                    public labels: { [k: string]: string };
 
                     /** Channel transport. */
                     public transport?: "pubsubTopic";
@@ -211,6 +217,9 @@ export namespace google {
 
                     /** ChannelConnection activationToken */
                     activationToken?: (string|null);
+
+                    /** ChannelConnection labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a ChannelConnection. */
@@ -239,6 +248,9 @@ export namespace google {
 
                     /** ChannelConnection activationToken. */
                     public activationToken: string;
+
+                    /** ChannelConnection labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new ChannelConnection instance using the specified properties.
@@ -7099,6 +7111,12 @@ export namespace google {
 
                     /** GoogleApiSource loggingConfig */
                     loggingConfig?: (google.cloud.eventarc.v1.ILoggingConfig|null);
+
+                    /** GoogleApiSource organizationSubscription */
+                    organizationSubscription?: (google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription|null);
+
+                    /** GoogleApiSource projectSubscriptions */
+                    projectSubscriptions?: (google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions|null);
                 }
 
                 /** Represents a GoogleApiSource. */
@@ -7142,6 +7160,15 @@ export namespace google {
 
                     /** GoogleApiSource loggingConfig. */
                     public loggingConfig?: (google.cloud.eventarc.v1.ILoggingConfig|null);
+
+                    /** GoogleApiSource organizationSubscription. */
+                    public organizationSubscription?: (google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription|null);
+
+                    /** GoogleApiSource projectSubscriptions. */
+                    public projectSubscriptions?: (google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions|null);
+
+                    /** GoogleApiSource wideScopeSubscription. */
+                    public wideScopeSubscription?: ("organizationSubscription"|"projectSubscriptions");
 
                     /**
                      * Creates a new GoogleApiSource instance using the specified properties.
@@ -7219,6 +7246,203 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoogleApiSource {
+
+                    /** Properties of a ProjectSubscriptions. */
+                    interface IProjectSubscriptions {
+
+                        /** ProjectSubscriptions list */
+                        list?: (string[]|null);
+                    }
+
+                    /** Represents a ProjectSubscriptions. */
+                    class ProjectSubscriptions implements IProjectSubscriptions {
+
+                        /**
+                         * Constructs a new ProjectSubscriptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions);
+
+                        /** ProjectSubscriptions list. */
+                        public list: string[];
+
+                        /**
+                         * Creates a new ProjectSubscriptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProjectSubscriptions instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions): google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions;
+
+                        /**
+                         * Encodes the specified ProjectSubscriptions message. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.verify|verify} messages.
+                         * @param message ProjectSubscriptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProjectSubscriptions message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions.verify|verify} messages.
+                         * @param message ProjectSubscriptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.v1.GoogleApiSource.IProjectSubscriptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProjectSubscriptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProjectSubscriptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions;
+
+                        /**
+                         * Decodes a ProjectSubscriptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProjectSubscriptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions;
+
+                        /**
+                         * Verifies a ProjectSubscriptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProjectSubscriptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProjectSubscriptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions;
+
+                        /**
+                         * Creates a plain object from a ProjectSubscriptions message. Also converts values to other types if specified.
+                         * @param message ProjectSubscriptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.v1.GoogleApiSource.ProjectSubscriptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProjectSubscriptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProjectSubscriptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an OrganizationSubscription. */
+                    interface IOrganizationSubscription {
+
+                        /** OrganizationSubscription enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents an OrganizationSubscription. */
+                    class OrganizationSubscription implements IOrganizationSubscription {
+
+                        /**
+                         * Constructs a new OrganizationSubscription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription);
+
+                        /** OrganizationSubscription enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new OrganizationSubscription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OrganizationSubscription instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription): google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription;
+
+                        /**
+                         * Encodes the specified OrganizationSubscription message. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.verify|verify} messages.
+                         * @param message OrganizationSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OrganizationSubscription message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription.verify|verify} messages.
+                         * @param message OrganizationSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.v1.GoogleApiSource.IOrganizationSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OrganizationSubscription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OrganizationSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription;
+
+                        /**
+                         * Decodes an OrganizationSubscription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OrganizationSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription;
+
+                        /**
+                         * Verifies an OrganizationSubscription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OrganizationSubscription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OrganizationSubscription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription;
+
+                        /**
+                         * Creates a plain object from an OrganizationSubscription message. Also converts values to other types if specified.
+                         * @param message OrganizationSubscription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.v1.GoogleApiSource.OrganizationSubscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OrganizationSubscription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OrganizationSubscription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a LoggingConfig. */
@@ -7346,6 +7570,9 @@ export namespace google {
 
                     /** GoogleChannelConfig cryptoKeyName */
                     cryptoKeyName?: (string|null);
+
+                    /** GoogleChannelConfig labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a GoogleChannelConfig. */
@@ -7365,6 +7592,9 @@ export namespace google {
 
                     /** GoogleChannelConfig cryptoKeyName. */
                     public cryptoKeyName: string;
+
+                    /** GoogleChannelConfig labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new GoogleChannelConfig instance using the specified properties.
@@ -7639,6 +7869,9 @@ export namespace google {
 
                     /** Pipeline etag */
                     etag?: (string|null);
+
+                    /** Pipeline satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
                 }
 
                 /** Represents a Pipeline. */
@@ -7691,6 +7924,9 @@ export namespace google {
 
                     /** Pipeline etag. */
                     public etag: string;
+
+                    /** Pipeline satisfiesPzs. */
+                    public satisfiesPzs: boolean;
 
                     /**
                      * Creates a new Pipeline instance using the specified properties.
@@ -9178,6 +9414,9 @@ export namespace google {
                     /** Trigger satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
 
+                    /** Trigger retryPolicy */
+                    retryPolicy?: (google.cloud.eventarc.v1.Trigger.IRetryPolicy|null);
+
                     /** Trigger etag */
                     etag?: (string|null);
                 }
@@ -9229,6 +9468,9 @@ export namespace google {
 
                     /** Trigger satisfiesPzs. */
                     public satisfiesPzs: boolean;
+
+                    /** Trigger retryPolicy. */
+                    public retryPolicy?: (google.cloud.eventarc.v1.Trigger.IRetryPolicy|null);
 
                     /** Trigger etag. */
                     public etag: string;
@@ -9309,6 +9551,106 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Trigger {
+
+                    /** Properties of a RetryPolicy. */
+                    interface IRetryPolicy {
+
+                        /** RetryPolicy maxAttempts */
+                        maxAttempts?: (number|null);
+                    }
+
+                    /** Represents a RetryPolicy. */
+                    class RetryPolicy implements IRetryPolicy {
+
+                        /**
+                         * Constructs a new RetryPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.eventarc.v1.Trigger.IRetryPolicy);
+
+                        /** RetryPolicy maxAttempts. */
+                        public maxAttempts: number;
+
+                        /**
+                         * Creates a new RetryPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RetryPolicy instance
+                         */
+                        public static create(properties?: google.cloud.eventarc.v1.Trigger.IRetryPolicy): google.cloud.eventarc.v1.Trigger.RetryPolicy;
+
+                        /**
+                         * Encodes the specified RetryPolicy message. Does not implicitly {@link google.cloud.eventarc.v1.Trigger.RetryPolicy.verify|verify} messages.
+                         * @param message RetryPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.eventarc.v1.Trigger.IRetryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RetryPolicy message, length delimited. Does not implicitly {@link google.cloud.eventarc.v1.Trigger.RetryPolicy.verify|verify} messages.
+                         * @param message RetryPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.eventarc.v1.Trigger.IRetryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RetryPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RetryPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.eventarc.v1.Trigger.RetryPolicy;
+
+                        /**
+                         * Decodes a RetryPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RetryPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.eventarc.v1.Trigger.RetryPolicy;
+
+                        /**
+                         * Verifies a RetryPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RetryPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RetryPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.eventarc.v1.Trigger.RetryPolicy;
+
+                        /**
+                         * Creates a plain object from a RetryPolicy message. Also converts values to other types if specified.
+                         * @param message RetryPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.eventarc.v1.Trigger.RetryPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RetryPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RetryPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an EventFilter. */
@@ -11203,6 +11545,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -11243,6 +11588,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -15308,6 +15656,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -15559,7 +15910,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -15590,7 +15941,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -16832,7 +17183,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -16848,7 +17199,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

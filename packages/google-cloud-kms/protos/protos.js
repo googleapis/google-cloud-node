@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -307,12 +307,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateKeyHandleRequest.decode = function decode(reader, length) {
+                        CreateKeyHandleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateKeyHandleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -540,12 +542,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetKeyHandleRequest.decode = function decode(reader, length) {
+                        GetKeyHandleRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetKeyHandleRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -765,12 +769,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KeyHandle.decode = function decode(reader, length) {
+                        KeyHandle.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.KeyHandle();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -982,12 +988,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateKeyHandleMetadata.decode = function decode(reader, length) {
+                        CreateKeyHandleMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateKeyHandleMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -1201,12 +1209,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyHandlesRequest.decode = function decode(reader, length) {
+                        ListKeyHandlesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListKeyHandlesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -1454,12 +1464,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyHandlesResponse.decode = function decode(reader, length) {
+                        ListKeyHandlesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListKeyHandlesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.keyHandles && message.keyHandles.length))
@@ -1834,12 +1846,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateAutokeyConfigRequest.decode = function decode(reader, length) {
+                        UpdateAutokeyConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateAutokeyConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.autokeyConfig = $root.google.cloud.kms.v1.AutokeyConfig.decode(reader, reader.uint32());
@@ -2060,12 +2074,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetAutokeyConfigRequest.decode = function decode(reader, length) {
+                        GetAutokeyConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetAutokeyConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -2188,6 +2204,7 @@
                          * @property {string|null} [keyProject] AutokeyConfig keyProject
                          * @property {google.cloud.kms.v1.AutokeyConfig.State|null} [state] AutokeyConfig state
                          * @property {string|null} [etag] AutokeyConfig etag
+                         * @property {google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|null} [keyProjectResolutionMode] AutokeyConfig keyProjectResolutionMode
                          */
     
                         /**
@@ -2238,6 +2255,14 @@
                         AutokeyConfig.prototype.etag = "";
     
                         /**
+                         * AutokeyConfig keyProjectResolutionMode.
+                         * @member {google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode} keyProjectResolutionMode
+                         * @memberof google.cloud.kms.v1.AutokeyConfig
+                         * @instance
+                         */
+                        AutokeyConfig.prototype.keyProjectResolutionMode = 0;
+    
+                        /**
                          * Creates a new AutokeyConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.AutokeyConfig
@@ -2269,6 +2294,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
+                            if (message.keyProjectResolutionMode != null && Object.hasOwnProperty.call(message, "keyProjectResolutionMode"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.keyProjectResolutionMode);
                             return writer;
                         };
     
@@ -2296,12 +2323,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AutokeyConfig.decode = function decode(reader, length) {
+                        AutokeyConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.AutokeyConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -2317,6 +2346,10 @@
                                     }
                                 case 6: {
                                         message.etag = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.keyProjectResolutionMode = reader.int32();
                                         break;
                                     }
                                 default:
@@ -2368,11 +2401,22 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
+                            if (message.keyProjectResolutionMode != null && message.hasOwnProperty("keyProjectResolutionMode"))
+                                switch (message.keyProjectResolutionMode) {
+                                default:
+                                    return "keyProjectResolutionMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2415,9 +2459,37 @@
                             case 3:
                                 message.state = 3;
                                 break;
+                            case "KEY_PROJECT_PERMISSION_DENIED":
+                            case 4:
+                                message.state = 4;
+                                break;
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
+                            switch (object.keyProjectResolutionMode) {
+                            default:
+                                if (typeof object.keyProjectResolutionMode === "number") {
+                                    message.keyProjectResolutionMode = object.keyProjectResolutionMode;
+                                    break;
+                                }
+                                break;
+                            case "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED":
+                            case 0:
+                                message.keyProjectResolutionMode = 0;
+                                break;
+                            case "DEDICATED_KEY_PROJECT":
+                            case 1:
+                                message.keyProjectResolutionMode = 1;
+                                break;
+                            case "RESOURCE_PROJECT":
+                            case 2:
+                                message.keyProjectResolutionMode = 2;
+                                break;
+                            case "DISABLED":
+                            case 3:
+                                message.keyProjectResolutionMode = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2439,6 +2511,7 @@
                                 object.keyProject = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.etag = "";
+                                object.keyProjectResolutionMode = options.enums === String ? "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2448,6 +2521,8 @@
                                 object.state = options.enums === String ? $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] === undefined ? message.state : $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] : message.state;
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
+                            if (message.keyProjectResolutionMode != null && message.hasOwnProperty("keyProjectResolutionMode"))
+                                object.keyProjectResolutionMode = options.enums === String ? $root.google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode[message.keyProjectResolutionMode] === undefined ? message.keyProjectResolutionMode : $root.google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode[message.keyProjectResolutionMode] : message.keyProjectResolutionMode;
                             return object;
                         };
     
@@ -2485,6 +2560,7 @@
                          * @property {number} ACTIVE=1 ACTIVE value
                          * @property {number} KEY_PROJECT_DELETED=2 KEY_PROJECT_DELETED value
                          * @property {number} UNINITIALIZED=3 UNINITIALIZED value
+                         * @property {number} KEY_PROJECT_PERMISSION_DENIED=4 KEY_PROJECT_PERMISSION_DENIED value
                          */
                         AutokeyConfig.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -2492,6 +2568,25 @@
                             values[valuesById[1] = "ACTIVE"] = 1;
                             values[valuesById[2] = "KEY_PROJECT_DELETED"] = 2;
                             values[valuesById[3] = "UNINITIALIZED"] = 3;
+                            values[valuesById[4] = "KEY_PROJECT_PERMISSION_DENIED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * KeyProjectResolutionMode enum.
+                         * @name google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode
+                         * @enum {number}
+                         * @property {number} KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED=0 KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED value
+                         * @property {number} DEDICATED_KEY_PROJECT=1 DEDICATED_KEY_PROJECT value
+                         * @property {number} RESOURCE_PROJECT=2 RESOURCE_PROJECT value
+                         * @property {number} DISABLED=3 DISABLED value
+                         */
+                        AutokeyConfig.KeyProjectResolutionMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DEDICATED_KEY_PROJECT"] = 1;
+                            values[valuesById[2] = "RESOURCE_PROJECT"] = 2;
+                            values[valuesById[3] = "DISABLED"] = 3;
                             return values;
                         })();
     
@@ -2583,12 +2678,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ShowEffectiveAutokeyConfigRequest.decode = function decode(reader, length) {
+                        ShowEffectiveAutokeyConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -2786,12 +2883,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ShowEffectiveAutokeyConfigResponse.decode = function decode(reader, length) {
+                        ShowEffectiveAutokeyConfigResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.keyProject = reader.string();
@@ -3299,12 +3398,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEkmConnectionsRequest.decode = function decode(reader, length) {
+                        ListEkmConnectionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListEkmConnectionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -3575,12 +3676,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListEkmConnectionsResponse.decode = function decode(reader, length) {
+                        ListEkmConnectionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListEkmConnectionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.ekmConnections && message.ekmConnections.length))
@@ -3823,12 +3926,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetEkmConnectionRequest.decode = function decode(reader, length) {
+                        GetEkmConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetEkmConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4048,12 +4153,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateEkmConnectionRequest.decode = function decode(reader, length) {
+                        CreateEkmConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateEkmConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -4292,12 +4399,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateEkmConnectionRequest.decode = function decode(reader, length) {
+                        UpdateEkmConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateEkmConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.ekmConnection = $root.google.cloud.kms.v1.EkmConnection.decode(reader, reader.uint32());
@@ -4518,12 +4627,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetEkmConfigRequest.decode = function decode(reader, length) {
+                        GetEkmConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetEkmConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4732,12 +4843,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateEkmConfigRequest.decode = function decode(reader, length) {
+                        UpdateEkmConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateEkmConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.ekmConfig = $root.google.cloud.kms.v1.EkmConfig.decode(reader, reader.uint32());
@@ -5048,12 +5161,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Certificate.decode = function decode(reader, length) {
+                        Certificate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.Certificate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rawDer = reader.bytes();
@@ -5439,12 +5554,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EkmConnection.decode = function decode(reader, length) {
+                        EkmConnection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EkmConnection();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5784,12 +5901,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ServiceResolver.decode = function decode(reader, length) {
+                            ServiceResolver.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EkmConnection.ServiceResolver();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.serviceDirectoryService = reader.string();
@@ -6074,12 +6193,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EkmConfig.decode = function decode(reader, length) {
+                        EkmConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EkmConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -6290,12 +6411,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VerifyConnectivityRequest.decode = function decode(reader, length) {
+                        VerifyConnectivityRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.VerifyConnectivityRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -6482,12 +6605,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VerifyConnectivityResponse.decode = function decode(reader, length) {
+                        VerifyConnectivityResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.VerifyConnectivityResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -6581,6 +6706,8542 @@
                         };
     
                         return VerifyConnectivityResponse;
+                    })();
+    
+                    v1.HsmManagement = (function() {
+    
+                        /**
+                         * Constructs a new HsmManagement service.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a HsmManagement
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function HsmManagement(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (HsmManagement.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = HsmManagement;
+    
+                        /**
+                         * Creates new HsmManagement service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {HsmManagement} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        HsmManagement.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|listSingleTenantHsmInstances}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef ListSingleTenantHsmInstancesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse} [response] ListSingleTenantHsmInstancesResponse
+                         */
+    
+                        /**
+                         * Calls ListSingleTenantHsmInstances.
+                         * @function listSingleTenantHsmInstances
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest} request ListSingleTenantHsmInstancesRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstancesCallback} callback Node-style callback called with the error, if any, and ListSingleTenantHsmInstancesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.listSingleTenantHsmInstances = function listSingleTenantHsmInstances(request, callback) {
+                            return this.rpcCall(listSingleTenantHsmInstances, $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest, $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse, request, callback);
+                        }, "name", { value: "ListSingleTenantHsmInstances" });
+    
+                        /**
+                         * Calls ListSingleTenantHsmInstances.
+                         * @function listSingleTenantHsmInstances
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest} request ListSingleTenantHsmInstancesRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|getSingleTenantHsmInstance}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef GetSingleTenantHsmInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.SingleTenantHsmInstance} [response] SingleTenantHsmInstance
+                         */
+    
+                        /**
+                         * Calls GetSingleTenantHsmInstance.
+                         * @function getSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest} request GetSingleTenantHsmInstanceRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstanceCallback} callback Node-style callback called with the error, if any, and SingleTenantHsmInstance
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.getSingleTenantHsmInstance = function getSingleTenantHsmInstance(request, callback) {
+                            return this.rpcCall(getSingleTenantHsmInstance, $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest, $root.google.cloud.kms.v1.SingleTenantHsmInstance, request, callback);
+                        }, "name", { value: "GetSingleTenantHsmInstance" });
+    
+                        /**
+                         * Calls GetSingleTenantHsmInstance.
+                         * @function getSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest} request GetSingleTenantHsmInstanceRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.SingleTenantHsmInstance>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|createSingleTenantHsmInstance}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef CreateSingleTenantHsmInstanceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSingleTenantHsmInstance.
+                         * @function createSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest} request CreateSingleTenantHsmInstanceRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.createSingleTenantHsmInstance = function createSingleTenantHsmInstance(request, callback) {
+                            return this.rpcCall(createSingleTenantHsmInstance, $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSingleTenantHsmInstance" });
+    
+                        /**
+                         * Calls CreateSingleTenantHsmInstance.
+                         * @function createSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest} request CreateSingleTenantHsmInstanceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|createSingleTenantHsmInstanceProposal}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef CreateSingleTenantHsmInstanceProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSingleTenantHsmInstanceProposal.
+                         * @function createSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest} request CreateSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceProposalCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.createSingleTenantHsmInstanceProposal = function createSingleTenantHsmInstanceProposal(request, callback) {
+                            return this.rpcCall(createSingleTenantHsmInstanceProposal, $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSingleTenantHsmInstanceProposal" });
+    
+                        /**
+                         * Calls CreateSingleTenantHsmInstanceProposal.
+                         * @function createSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest} request CreateSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|approveSingleTenantHsmInstanceProposal}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef ApproveSingleTenantHsmInstanceProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse} [response] ApproveSingleTenantHsmInstanceProposalResponse
+                         */
+    
+                        /**
+                         * Calls ApproveSingleTenantHsmInstanceProposal.
+                         * @function approveSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest} request ApproveSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.ApproveSingleTenantHsmInstanceProposalCallback} callback Node-style callback called with the error, if any, and ApproveSingleTenantHsmInstanceProposalResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.approveSingleTenantHsmInstanceProposal = function approveSingleTenantHsmInstanceProposal(request, callback) {
+                            return this.rpcCall(approveSingleTenantHsmInstanceProposal, $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest, $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse, request, callback);
+                        }, "name", { value: "ApproveSingleTenantHsmInstanceProposal" });
+    
+                        /**
+                         * Calls ApproveSingleTenantHsmInstanceProposal.
+                         * @function approveSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest} request ApproveSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|executeSingleTenantHsmInstanceProposal}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef ExecuteSingleTenantHsmInstanceProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExecuteSingleTenantHsmInstanceProposal.
+                         * @function executeSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest} request ExecuteSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.ExecuteSingleTenantHsmInstanceProposalCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.executeSingleTenantHsmInstanceProposal = function executeSingleTenantHsmInstanceProposal(request, callback) {
+                            return this.rpcCall(executeSingleTenantHsmInstanceProposal, $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExecuteSingleTenantHsmInstanceProposal" });
+    
+                        /**
+                         * Calls ExecuteSingleTenantHsmInstanceProposal.
+                         * @function executeSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest} request ExecuteSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|getSingleTenantHsmInstanceProposal}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef GetSingleTenantHsmInstanceProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal} [response] SingleTenantHsmInstanceProposal
+                         */
+    
+                        /**
+                         * Calls GetSingleTenantHsmInstanceProposal.
+                         * @function getSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest} request GetSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstanceProposalCallback} callback Node-style callback called with the error, if any, and SingleTenantHsmInstanceProposal
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.getSingleTenantHsmInstanceProposal = function getSingleTenantHsmInstanceProposal(request, callback) {
+                            return this.rpcCall(getSingleTenantHsmInstanceProposal, $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest, $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal, request, callback);
+                        }, "name", { value: "GetSingleTenantHsmInstanceProposal" });
+    
+                        /**
+                         * Calls GetSingleTenantHsmInstanceProposal.
+                         * @function getSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest} request GetSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.SingleTenantHsmInstanceProposal>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|listSingleTenantHsmInstanceProposals}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef ListSingleTenantHsmInstanceProposalsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse} [response] ListSingleTenantHsmInstanceProposalsResponse
+                         */
+    
+                        /**
+                         * Calls ListSingleTenantHsmInstanceProposals.
+                         * @function listSingleTenantHsmInstanceProposals
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest} request ListSingleTenantHsmInstanceProposalsRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstanceProposalsCallback} callback Node-style callback called with the error, if any, and ListSingleTenantHsmInstanceProposalsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.listSingleTenantHsmInstanceProposals = function listSingleTenantHsmInstanceProposals(request, callback) {
+                            return this.rpcCall(listSingleTenantHsmInstanceProposals, $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest, $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse, request, callback);
+                        }, "name", { value: "ListSingleTenantHsmInstanceProposals" });
+    
+                        /**
+                         * Calls ListSingleTenantHsmInstanceProposals.
+                         * @function listSingleTenantHsmInstanceProposals
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest} request ListSingleTenantHsmInstanceProposalsRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.HsmManagement|deleteSingleTenantHsmInstanceProposal}.
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @typedef DeleteSingleTenantHsmInstanceProposalCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteSingleTenantHsmInstanceProposal.
+                         * @function deleteSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest} request DeleteSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @param {google.cloud.kms.v1.HsmManagement.DeleteSingleTenantHsmInstanceProposalCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HsmManagement.prototype.deleteSingleTenantHsmInstanceProposal = function deleteSingleTenantHsmInstanceProposal(request, callback) {
+                            return this.rpcCall(deleteSingleTenantHsmInstanceProposal, $root.google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteSingleTenantHsmInstanceProposal" });
+    
+                        /**
+                         * Calls DeleteSingleTenantHsmInstanceProposal.
+                         * @function deleteSingleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.HsmManagement
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest} request DeleteSingleTenantHsmInstanceProposalRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        return HsmManagement;
+                    })();
+    
+                    v1.SingleTenantHsmInstance = (function() {
+    
+                        /**
+                         * Properties of a SingleTenantHsmInstance.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ISingleTenantHsmInstance
+                         * @property {string|null} [name] SingleTenantHsmInstance name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SingleTenantHsmInstance createTime
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstance.State|null} [state] SingleTenantHsmInstance state
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth|null} [quorumAuth] SingleTenantHsmInstance quorumAuth
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] SingleTenantHsmInstance deleteTime
+                         * @property {google.protobuf.IDuration|null} [unrefreshedDurationUntilDisable] SingleTenantHsmInstance unrefreshedDurationUntilDisable
+                         * @property {google.protobuf.ITimestamp|null} [disableTime] SingleTenantHsmInstance disableTime
+                         */
+    
+                        /**
+                         * Constructs a new SingleTenantHsmInstance.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a SingleTenantHsmInstance.
+                         * @implements ISingleTenantHsmInstance
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstance=} [properties] Properties to set
+                         */
+                        function SingleTenantHsmInstance(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SingleTenantHsmInstance name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.name = "";
+    
+                        /**
+                         * SingleTenantHsmInstance createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.createTime = null;
+    
+                        /**
+                         * SingleTenantHsmInstance state.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstance.State} state
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.state = 0;
+    
+                        /**
+                         * SingleTenantHsmInstance quorumAuth.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth|null|undefined} quorumAuth
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.quorumAuth = null;
+    
+                        /**
+                         * SingleTenantHsmInstance deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.deleteTime = null;
+    
+                        /**
+                         * SingleTenantHsmInstance unrefreshedDurationUntilDisable.
+                         * @member {google.protobuf.IDuration|null|undefined} unrefreshedDurationUntilDisable
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.unrefreshedDurationUntilDisable = null;
+    
+                        /**
+                         * SingleTenantHsmInstance disableTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} disableTime
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         */
+                        SingleTenantHsmInstance.prototype.disableTime = null;
+    
+                        /**
+                         * Creates a new SingleTenantHsmInstance instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstance=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstance} SingleTenantHsmInstance instance
+                         */
+                        SingleTenantHsmInstance.create = function create(properties) {
+                            return new SingleTenantHsmInstance(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstance} message SingleTenantHsmInstance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleTenantHsmInstance.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.quorumAuth != null && Object.hasOwnProperty.call(message, "quorumAuth"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.encode(message.quorumAuth, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.unrefreshedDurationUntilDisable != null && Object.hasOwnProperty.call(message, "unrefreshedDurationUntilDisable"))
+                                $root.google.protobuf.Duration.encode(message.unrefreshedDurationUntilDisable, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.disableTime != null && Object.hasOwnProperty.call(message, "disableTime"))
+                                $root.google.protobuf.Timestamp.encode(message.disableTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstance} message SingleTenantHsmInstance message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleTenantHsmInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SingleTenantHsmInstance message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstance} SingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleTenantHsmInstance.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstance();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.quorumAuth = $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.unrefreshedDurationUntilDisable = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.disableTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstance} SingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleTenantHsmInstance.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SingleTenantHsmInstance message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SingleTenantHsmInstance.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    break;
+                                }
+                            if (message.quorumAuth != null && message.hasOwnProperty("quorumAuth")) {
+                                var error = $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.verify(message.quorumAuth);
+                                if (error)
+                                    return "quorumAuth." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.unrefreshedDurationUntilDisable != null && message.hasOwnProperty("unrefreshedDurationUntilDisable")) {
+                                var error = $root.google.protobuf.Duration.verify(message.unrefreshedDurationUntilDisable);
+                                if (error)
+                                    return "unrefreshedDurationUntilDisable." + error;
+                            }
+                            if (message.disableTime != null && message.hasOwnProperty("disableTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.disableTime);
+                                if (error)
+                                    return "disableTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstance} SingleTenantHsmInstance
+                         */
+                        SingleTenantHsmInstance.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstance)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstance();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PENDING_TWO_FACTOR_AUTH_REGISTRATION":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "ACTIVE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DISABLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "DISABLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "DELETING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "DELETED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "FAILED":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            }
+                            if (object.quorumAuth != null) {
+                                if (typeof object.quorumAuth !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.quorumAuth: object expected");
+                                message.quorumAuth = $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.fromObject(object.quorumAuth);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.unrefreshedDurationUntilDisable != null) {
+                                if (typeof object.unrefreshedDurationUntilDisable !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.unrefreshedDurationUntilDisable: object expected");
+                                message.unrefreshedDurationUntilDisable = $root.google.protobuf.Duration.fromObject(object.unrefreshedDurationUntilDisable);
+                            }
+                            if (object.disableTime != null) {
+                                if (typeof object.disableTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.disableTime: object expected");
+                                message.disableTime = $root.google.protobuf.Timestamp.fromObject(object.disableTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SingleTenantHsmInstance message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {google.cloud.kms.v1.SingleTenantHsmInstance} message SingleTenantHsmInstance
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SingleTenantHsmInstance.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.quorumAuth = null;
+                                object.deleteTime = null;
+                                object.unrefreshedDurationUntilDisable = null;
+                                object.disableTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.kms.v1.SingleTenantHsmInstance.State[message.state] === undefined ? message.state : $root.google.cloud.kms.v1.SingleTenantHsmInstance.State[message.state] : message.state;
+                            if (message.quorumAuth != null && message.hasOwnProperty("quorumAuth"))
+                                object.quorumAuth = $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.toObject(message.quorumAuth, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.unrefreshedDurationUntilDisable != null && message.hasOwnProperty("unrefreshedDurationUntilDisable"))
+                                object.unrefreshedDurationUntilDisable = $root.google.protobuf.Duration.toObject(message.unrefreshedDurationUntilDisable, options);
+                            if (message.disableTime != null && message.hasOwnProperty("disableTime"))
+                                object.disableTime = $root.google.protobuf.Timestamp.toObject(message.disableTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SingleTenantHsmInstance to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SingleTenantHsmInstance.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SingleTenantHsmInstance
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SingleTenantHsmInstance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstance";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.kms.v1.SingleTenantHsmInstance.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} PENDING_TWO_FACTOR_AUTH_REGISTRATION=2 PENDING_TWO_FACTOR_AUTH_REGISTRATION value
+                         * @property {number} ACTIVE=3 ACTIVE value
+                         * @property {number} DISABLING=4 DISABLING value
+                         * @property {number} DISABLED=5 DISABLED value
+                         * @property {number} DELETING=6 DELETING value
+                         * @property {number} DELETED=7 DELETED value
+                         * @property {number} FAILED=8 FAILED value
+                         */
+                        SingleTenantHsmInstance.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "PENDING_TWO_FACTOR_AUTH_REGISTRATION"] = 2;
+                            values[valuesById[3] = "ACTIVE"] = 3;
+                            values[valuesById[4] = "DISABLING"] = 4;
+                            values[valuesById[5] = "DISABLED"] = 5;
+                            values[valuesById[6] = "DELETING"] = 6;
+                            values[valuesById[7] = "DELETED"] = 7;
+                            values[valuesById[8] = "FAILED"] = 8;
+                            return values;
+                        })();
+    
+                        SingleTenantHsmInstance.QuorumAuth = (function() {
+    
+                            /**
+                             * Properties of a QuorumAuth.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                             * @interface IQuorumAuth
+                             * @property {number|null} [totalApproverCount] QuorumAuth totalApproverCount
+                             * @property {number|null} [requiredApproverCount] QuorumAuth requiredApproverCount
+                             * @property {Array.<string>|null} [twoFactorPublicKeyPems] QuorumAuth twoFactorPublicKeyPems
+                             */
+    
+                            /**
+                             * Constructs a new QuorumAuth.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance
+                             * @classdesc Represents a QuorumAuth.
+                             * @implements IQuorumAuth
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth=} [properties] Properties to set
+                             */
+                            function QuorumAuth(properties) {
+                                this.twoFactorPublicKeyPems = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QuorumAuth totalApproverCount.
+                             * @member {number} totalApproverCount
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @instance
+                             */
+                            QuorumAuth.prototype.totalApproverCount = 0;
+    
+                            /**
+                             * QuorumAuth requiredApproverCount.
+                             * @member {number} requiredApproverCount
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @instance
+                             */
+                            QuorumAuth.prototype.requiredApproverCount = 0;
+    
+                            /**
+                             * QuorumAuth twoFactorPublicKeyPems.
+                             * @member {Array.<string>} twoFactorPublicKeyPems
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @instance
+                             */
+                            QuorumAuth.prototype.twoFactorPublicKeyPems = $util.emptyArray;
+    
+                            /**
+                             * Creates a new QuorumAuth instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth} QuorumAuth instance
+                             */
+                            QuorumAuth.create = function create(properties) {
+                                return new QuorumAuth(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QuorumAuth message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth} message QuorumAuth message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuorumAuth.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.totalApproverCount != null && Object.hasOwnProperty.call(message, "totalApproverCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.totalApproverCount);
+                                if (message.requiredApproverCount != null && Object.hasOwnProperty.call(message, "requiredApproverCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.requiredApproverCount);
+                                if (message.twoFactorPublicKeyPems != null && message.twoFactorPublicKeyPems.length)
+                                    for (var i = 0; i < message.twoFactorPublicKeyPems.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.twoFactorPublicKeyPems[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QuorumAuth message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth} message QuorumAuth message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuorumAuth.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QuorumAuth message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth} QuorumAuth
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuorumAuth.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.totalApproverCount = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.requiredApproverCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.twoFactorPublicKeyPems && message.twoFactorPublicKeyPems.length))
+                                                message.twoFactorPublicKeyPems = [];
+                                            message.twoFactorPublicKeyPems.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QuorumAuth message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth} QuorumAuth
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuorumAuth.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QuorumAuth message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QuorumAuth.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.totalApproverCount != null && message.hasOwnProperty("totalApproverCount"))
+                                    if (!$util.isInteger(message.totalApproverCount))
+                                        return "totalApproverCount: integer expected";
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    if (!$util.isInteger(message.requiredApproverCount))
+                                        return "requiredApproverCount: integer expected";
+                                if (message.twoFactorPublicKeyPems != null && message.hasOwnProperty("twoFactorPublicKeyPems")) {
+                                    if (!Array.isArray(message.twoFactorPublicKeyPems))
+                                        return "twoFactorPublicKeyPems: array expected";
+                                    for (var i = 0; i < message.twoFactorPublicKeyPems.length; ++i)
+                                        if (!$util.isString(message.twoFactorPublicKeyPems[i]))
+                                            return "twoFactorPublicKeyPems: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QuorumAuth message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth} QuorumAuth
+                             */
+                            QuorumAuth.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth();
+                                if (object.totalApproverCount != null)
+                                    message.totalApproverCount = object.totalApproverCount | 0;
+                                if (object.requiredApproverCount != null)
+                                    message.requiredApproverCount = object.requiredApproverCount | 0;
+                                if (object.twoFactorPublicKeyPems) {
+                                    if (!Array.isArray(object.twoFactorPublicKeyPems))
+                                        throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.twoFactorPublicKeyPems: array expected");
+                                    message.twoFactorPublicKeyPems = [];
+                                    for (var i = 0; i < object.twoFactorPublicKeyPems.length; ++i)
+                                        message.twoFactorPublicKeyPems[i] = String(object.twoFactorPublicKeyPems[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QuorumAuth message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth} message QuorumAuth
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QuorumAuth.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.twoFactorPublicKeyPems = [];
+                                if (options.defaults) {
+                                    object.totalApproverCount = 0;
+                                    object.requiredApproverCount = 0;
+                                }
+                                if (message.totalApproverCount != null && message.hasOwnProperty("totalApproverCount"))
+                                    object.totalApproverCount = message.totalApproverCount;
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    object.requiredApproverCount = message.requiredApproverCount;
+                                if (message.twoFactorPublicKeyPems && message.twoFactorPublicKeyPems.length) {
+                                    object.twoFactorPublicKeyPems = [];
+                                    for (var j = 0; j < message.twoFactorPublicKeyPems.length; ++j)
+                                        object.twoFactorPublicKeyPems[j] = message.twoFactorPublicKeyPems[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QuorumAuth to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QuorumAuth.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QuorumAuth
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QuorumAuth.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth";
+                            };
+    
+                            return QuorumAuth;
+                        })();
+    
+                        return SingleTenantHsmInstance;
+                    })();
+    
+                    v1.SingleTenantHsmInstanceProposal = (function() {
+    
+                        /**
+                         * Properties of a SingleTenantHsmInstanceProposal.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ISingleTenantHsmInstanceProposal
+                         * @property {string|null} [name] SingleTenantHsmInstanceProposal name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SingleTenantHsmInstanceProposal createTime
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State|null} [state] SingleTenantHsmInstanceProposal state
+                         * @property {string|null} [failureReason] SingleTenantHsmInstanceProposal failureReason
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters|null} [quorumParameters] SingleTenantHsmInstanceProposal quorumParameters
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters|null} [requiredActionQuorumParameters] SingleTenantHsmInstanceProposal requiredActionQuorumParameters
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] SingleTenantHsmInstanceProposal expireTime
+                         * @property {google.protobuf.IDuration|null} [ttl] SingleTenantHsmInstanceProposal ttl
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] SingleTenantHsmInstanceProposal deleteTime
+                         * @property {google.protobuf.ITimestamp|null} [purgeTime] SingleTenantHsmInstanceProposal purgeTime
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys|null} [registerTwoFactorAuthKeys] SingleTenantHsmInstanceProposal registerTwoFactorAuthKeys
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance|null} [disableSingleTenantHsmInstance] SingleTenantHsmInstanceProposal disableSingleTenantHsmInstance
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance|null} [enableSingleTenantHsmInstance] SingleTenantHsmInstanceProposal enableSingleTenantHsmInstance
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance|null} [deleteSingleTenantHsmInstance] SingleTenantHsmInstanceProposal deleteSingleTenantHsmInstance
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember|null} [addQuorumMember] SingleTenantHsmInstanceProposal addQuorumMember
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember|null} [removeQuorumMember] SingleTenantHsmInstanceProposal removeQuorumMember
+                         * @property {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance|null} [refreshSingleTenantHsmInstance] SingleTenantHsmInstanceProposal refreshSingleTenantHsmInstance
+                         */
+    
+                        /**
+                         * Constructs a new SingleTenantHsmInstanceProposal.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a SingleTenantHsmInstanceProposal.
+                         * @implements ISingleTenantHsmInstanceProposal
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstanceProposal=} [properties] Properties to set
+                         */
+                        function SingleTenantHsmInstanceProposal(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.name = "";
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.createTime = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal state.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State} state
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.state = 0;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal failureReason.
+                         * @member {string} failureReason
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.failureReason = "";
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal quorumParameters.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters|null|undefined} quorumParameters
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.quorumParameters = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal requiredActionQuorumParameters.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters|null|undefined} requiredActionQuorumParameters
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.requiredActionQuorumParameters = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.expireTime = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal ttl.
+                         * @member {google.protobuf.IDuration|null|undefined} ttl
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.ttl = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.deleteTime = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal purgeTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} purgeTime
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.purgeTime = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal registerTwoFactorAuthKeys.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys|null|undefined} registerTwoFactorAuthKeys
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.registerTwoFactorAuthKeys = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal disableSingleTenantHsmInstance.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance|null|undefined} disableSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.disableSingleTenantHsmInstance = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal enableSingleTenantHsmInstance.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance|null|undefined} enableSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.enableSingleTenantHsmInstance = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal deleteSingleTenantHsmInstance.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance|null|undefined} deleteSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.deleteSingleTenantHsmInstance = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal addQuorumMember.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember|null|undefined} addQuorumMember
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.addQuorumMember = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal removeQuorumMember.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember|null|undefined} removeQuorumMember
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.removeQuorumMember = null;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal refreshSingleTenantHsmInstance.
+                         * @member {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance|null|undefined} refreshSingleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.refreshSingleTenantHsmInstance = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal approvalParameters.
+                         * @member {"quorumParameters"|"requiredActionQuorumParameters"|undefined} approvalParameters
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        Object.defineProperty(SingleTenantHsmInstanceProposal.prototype, "approvalParameters", {
+                            get: $util.oneOfGetter($oneOfFields = ["quorumParameters", "requiredActionQuorumParameters"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal expiration.
+                         * @member {"expireTime"|"ttl"|undefined} expiration
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        Object.defineProperty(SingleTenantHsmInstanceProposal.prototype, "expiration", {
+                            get: $util.oneOfGetter($oneOfFields = ["expireTime", "ttl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SingleTenantHsmInstanceProposal operation.
+                         * @member {"registerTwoFactorAuthKeys"|"disableSingleTenantHsmInstance"|"enableSingleTenantHsmInstance"|"deleteSingleTenantHsmInstance"|"addQuorumMember"|"removeQuorumMember"|"refreshSingleTenantHsmInstance"|undefined} operation
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         */
+                        Object.defineProperty(SingleTenantHsmInstanceProposal.prototype, "operation", {
+                            get: $util.oneOfGetter($oneOfFields = ["registerTwoFactorAuthKeys", "disableSingleTenantHsmInstance", "enableSingleTenantHsmInstance", "deleteSingleTenantHsmInstance", "addQuorumMember", "removeQuorumMember", "refreshSingleTenantHsmInstance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SingleTenantHsmInstanceProposal instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstanceProposal=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal} SingleTenantHsmInstanceProposal instance
+                         */
+                        SingleTenantHsmInstanceProposal.create = function create(properties) {
+                            return new SingleTenantHsmInstanceProposal(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SingleTenantHsmInstanceProposal message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstanceProposal} message SingleTenantHsmInstanceProposal message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleTenantHsmInstanceProposal.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.failureReason != null && Object.hasOwnProperty.call(message, "failureReason"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.failureReason);
+                            if (message.quorumParameters != null && Object.hasOwnProperty.call(message, "quorumParameters"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.encode(message.quorumParameters, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.registerTwoFactorAuthKeys != null && Object.hasOwnProperty.call(message, "registerTwoFactorAuthKeys"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.encode(message.registerTwoFactorAuthKeys, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.disableSingleTenantHsmInstance != null && Object.hasOwnProperty.call(message, "disableSingleTenantHsmInstance"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.encode(message.disableSingleTenantHsmInstance, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.enableSingleTenantHsmInstance != null && Object.hasOwnProperty.call(message, "enableSingleTenantHsmInstance"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.encode(message.enableSingleTenantHsmInstance, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.deleteSingleTenantHsmInstance != null && Object.hasOwnProperty.call(message, "deleteSingleTenantHsmInstance"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.encode(message.deleteSingleTenantHsmInstance, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.addQuorumMember != null && Object.hasOwnProperty.call(message, "addQuorumMember"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.encode(message.addQuorumMember, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.removeQuorumMember != null && Object.hasOwnProperty.call(message, "removeQuorumMember"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.encode(message.removeQuorumMember, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.requiredActionQuorumParameters != null && Object.hasOwnProperty.call(message, "requiredActionQuorumParameters"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.encode(message.requiredActionQuorumParameters, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.purgeTime != null && Object.hasOwnProperty.call(message, "purgeTime"))
+                                $root.google.protobuf.Timestamp.encode(message.purgeTime, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.refreshSingleTenantHsmInstance != null && Object.hasOwnProperty.call(message, "refreshSingleTenantHsmInstance"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.encode(message.refreshSingleTenantHsmInstance, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SingleTenantHsmInstanceProposal message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {google.cloud.kms.v1.ISingleTenantHsmInstanceProposal} message SingleTenantHsmInstanceProposal message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleTenantHsmInstanceProposal.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SingleTenantHsmInstanceProposal message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal} SingleTenantHsmInstanceProposal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleTenantHsmInstanceProposal.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.failureReason = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.quorumParameters = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.requiredActionQuorumParameters = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.purgeTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.registerTwoFactorAuthKeys = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.disableSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.enableSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.deleteSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.addQuorumMember = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.removeQuorumMember = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.refreshSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SingleTenantHsmInstanceProposal message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal} SingleTenantHsmInstanceProposal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleTenantHsmInstanceProposal.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SingleTenantHsmInstanceProposal message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SingleTenantHsmInstanceProposal.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                if (!$util.isString(message.failureReason))
+                                    return "failureReason: string expected";
+                            if (message.quorumParameters != null && message.hasOwnProperty("quorumParameters")) {
+                                properties.approvalParameters = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.verify(message.quorumParameters);
+                                    if (error)
+                                        return "quorumParameters." + error;
+                                }
+                            }
+                            if (message.requiredActionQuorumParameters != null && message.hasOwnProperty("requiredActionQuorumParameters")) {
+                                if (properties.approvalParameters === 1)
+                                    return "approvalParameters: multiple values";
+                                properties.approvalParameters = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.verify(message.requiredActionQuorumParameters);
+                                    if (error)
+                                        return "requiredActionQuorumParameters." + error;
+                                }
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                properties.expiration = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                    if (error)
+                                        return "expireTime." + error;
+                                }
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                if (properties.expiration === 1)
+                                    return "expiration: multiple values";
+                                properties.expiration = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.purgeTime != null && message.hasOwnProperty("purgeTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.purgeTime);
+                                if (error)
+                                    return "purgeTime." + error;
+                            }
+                            if (message.registerTwoFactorAuthKeys != null && message.hasOwnProperty("registerTwoFactorAuthKeys")) {
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.verify(message.registerTwoFactorAuthKeys);
+                                    if (error)
+                                        return "registerTwoFactorAuthKeys." + error;
+                                }
+                            }
+                            if (message.disableSingleTenantHsmInstance != null && message.hasOwnProperty("disableSingleTenantHsmInstance")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.verify(message.disableSingleTenantHsmInstance);
+                                    if (error)
+                                        return "disableSingleTenantHsmInstance." + error;
+                                }
+                            }
+                            if (message.enableSingleTenantHsmInstance != null && message.hasOwnProperty("enableSingleTenantHsmInstance")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.verify(message.enableSingleTenantHsmInstance);
+                                    if (error)
+                                        return "enableSingleTenantHsmInstance." + error;
+                                }
+                            }
+                            if (message.deleteSingleTenantHsmInstance != null && message.hasOwnProperty("deleteSingleTenantHsmInstance")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.verify(message.deleteSingleTenantHsmInstance);
+                                    if (error)
+                                        return "deleteSingleTenantHsmInstance." + error;
+                                }
+                            }
+                            if (message.addQuorumMember != null && message.hasOwnProperty("addQuorumMember")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.verify(message.addQuorumMember);
+                                    if (error)
+                                        return "addQuorumMember." + error;
+                                }
+                            }
+                            if (message.removeQuorumMember != null && message.hasOwnProperty("removeQuorumMember")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.verify(message.removeQuorumMember);
+                                    if (error)
+                                        return "removeQuorumMember." + error;
+                                }
+                            }
+                            if (message.refreshSingleTenantHsmInstance != null && message.hasOwnProperty("refreshSingleTenantHsmInstance")) {
+                                if (properties.operation === 1)
+                                    return "operation: multiple values";
+                                properties.operation = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.verify(message.refreshSingleTenantHsmInstance);
+                                    if (error)
+                                        return "refreshSingleTenantHsmInstance." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SingleTenantHsmInstanceProposal message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal} SingleTenantHsmInstanceProposal
+                         */
+                        SingleTenantHsmInstanceProposal.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "PENDING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "APPROVED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "RUNNING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "SUCCEEDED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "FAILED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "DELETED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            }
+                            if (object.failureReason != null)
+                                message.failureReason = String(object.failureReason);
+                            if (object.quorumParameters != null) {
+                                if (typeof object.quorumParameters !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.quorumParameters: object expected");
+                                message.quorumParameters = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.fromObject(object.quorumParameters);
+                            }
+                            if (object.requiredActionQuorumParameters != null) {
+                                if (typeof object.requiredActionQuorumParameters !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.requiredActionQuorumParameters: object expected");
+                                message.requiredActionQuorumParameters = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.fromObject(object.requiredActionQuorumParameters);
+                            }
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            if (object.ttl != null) {
+                                if (typeof object.ttl !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.ttl: object expected");
+                                message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.purgeTime != null) {
+                                if (typeof object.purgeTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.purgeTime: object expected");
+                                message.purgeTime = $root.google.protobuf.Timestamp.fromObject(object.purgeTime);
+                            }
+                            if (object.registerTwoFactorAuthKeys != null) {
+                                if (typeof object.registerTwoFactorAuthKeys !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.registerTwoFactorAuthKeys: object expected");
+                                message.registerTwoFactorAuthKeys = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.fromObject(object.registerTwoFactorAuthKeys);
+                            }
+                            if (object.disableSingleTenantHsmInstance != null) {
+                                if (typeof object.disableSingleTenantHsmInstance !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.disableSingleTenantHsmInstance: object expected");
+                                message.disableSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.fromObject(object.disableSingleTenantHsmInstance);
+                            }
+                            if (object.enableSingleTenantHsmInstance != null) {
+                                if (typeof object.enableSingleTenantHsmInstance !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.enableSingleTenantHsmInstance: object expected");
+                                message.enableSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.fromObject(object.enableSingleTenantHsmInstance);
+                            }
+                            if (object.deleteSingleTenantHsmInstance != null) {
+                                if (typeof object.deleteSingleTenantHsmInstance !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.deleteSingleTenantHsmInstance: object expected");
+                                message.deleteSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.fromObject(object.deleteSingleTenantHsmInstance);
+                            }
+                            if (object.addQuorumMember != null) {
+                                if (typeof object.addQuorumMember !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.addQuorumMember: object expected");
+                                message.addQuorumMember = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.fromObject(object.addQuorumMember);
+                            }
+                            if (object.removeQuorumMember != null) {
+                                if (typeof object.removeQuorumMember !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.removeQuorumMember: object expected");
+                                message.removeQuorumMember = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.fromObject(object.removeQuorumMember);
+                            }
+                            if (object.refreshSingleTenantHsmInstance != null) {
+                                if (typeof object.refreshSingleTenantHsmInstance !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.refreshSingleTenantHsmInstance: object expected");
+                                message.refreshSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.fromObject(object.refreshSingleTenantHsmInstance);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SingleTenantHsmInstanceProposal message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal} message SingleTenantHsmInstanceProposal
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SingleTenantHsmInstanceProposal.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.failureReason = "";
+                                object.deleteTime = null;
+                                object.purgeTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State[message.state] === undefined ? message.state : $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State[message.state] : message.state;
+                            if (message.failureReason != null && message.hasOwnProperty("failureReason"))
+                                object.failureReason = message.failureReason;
+                            if (message.quorumParameters != null && message.hasOwnProperty("quorumParameters")) {
+                                object.quorumParameters = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.toObject(message.quorumParameters, options);
+                                if (options.oneofs)
+                                    object.approvalParameters = "quorumParameters";
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                                if (options.oneofs)
+                                    object.expiration = "expireTime";
+                            }
+                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                                if (options.oneofs)
+                                    object.expiration = "ttl";
+                            }
+                            if (message.registerTwoFactorAuthKeys != null && message.hasOwnProperty("registerTwoFactorAuthKeys")) {
+                                object.registerTwoFactorAuthKeys = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.toObject(message.registerTwoFactorAuthKeys, options);
+                                if (options.oneofs)
+                                    object.operation = "registerTwoFactorAuthKeys";
+                            }
+                            if (message.disableSingleTenantHsmInstance != null && message.hasOwnProperty("disableSingleTenantHsmInstance")) {
+                                object.disableSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.toObject(message.disableSingleTenantHsmInstance, options);
+                                if (options.oneofs)
+                                    object.operation = "disableSingleTenantHsmInstance";
+                            }
+                            if (message.enableSingleTenantHsmInstance != null && message.hasOwnProperty("enableSingleTenantHsmInstance")) {
+                                object.enableSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.toObject(message.enableSingleTenantHsmInstance, options);
+                                if (options.oneofs)
+                                    object.operation = "enableSingleTenantHsmInstance";
+                            }
+                            if (message.deleteSingleTenantHsmInstance != null && message.hasOwnProperty("deleteSingleTenantHsmInstance")) {
+                                object.deleteSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.toObject(message.deleteSingleTenantHsmInstance, options);
+                                if (options.oneofs)
+                                    object.operation = "deleteSingleTenantHsmInstance";
+                            }
+                            if (message.addQuorumMember != null && message.hasOwnProperty("addQuorumMember")) {
+                                object.addQuorumMember = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.toObject(message.addQuorumMember, options);
+                                if (options.oneofs)
+                                    object.operation = "addQuorumMember";
+                            }
+                            if (message.removeQuorumMember != null && message.hasOwnProperty("removeQuorumMember")) {
+                                object.removeQuorumMember = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.toObject(message.removeQuorumMember, options);
+                                if (options.oneofs)
+                                    object.operation = "removeQuorumMember";
+                            }
+                            if (message.requiredActionQuorumParameters != null && message.hasOwnProperty("requiredActionQuorumParameters")) {
+                                object.requiredActionQuorumParameters = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.toObject(message.requiredActionQuorumParameters, options);
+                                if (options.oneofs)
+                                    object.approvalParameters = "requiredActionQuorumParameters";
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.purgeTime != null && message.hasOwnProperty("purgeTime"))
+                                object.purgeTime = $root.google.protobuf.Timestamp.toObject(message.purgeTime, options);
+                            if (message.refreshSingleTenantHsmInstance != null && message.hasOwnProperty("refreshSingleTenantHsmInstance")) {
+                                object.refreshSingleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.toObject(message.refreshSingleTenantHsmInstance, options);
+                                if (options.oneofs)
+                                    object.operation = "refreshSingleTenantHsmInstance";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SingleTenantHsmInstanceProposal to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SingleTenantHsmInstanceProposal.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SingleTenantHsmInstanceProposal
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SingleTenantHsmInstanceProposal.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} PENDING=2 PENDING value
+                         * @property {number} APPROVED=3 APPROVED value
+                         * @property {number} RUNNING=4 RUNNING value
+                         * @property {number} SUCCEEDED=5 SUCCEEDED value
+                         * @property {number} FAILED=6 FAILED value
+                         * @property {number} DELETED=7 DELETED value
+                         */
+                        SingleTenantHsmInstanceProposal.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "PENDING"] = 2;
+                            values[valuesById[3] = "APPROVED"] = 3;
+                            values[valuesById[4] = "RUNNING"] = 4;
+                            values[valuesById[5] = "SUCCEEDED"] = 5;
+                            values[valuesById[6] = "FAILED"] = 6;
+                            values[valuesById[7] = "DELETED"] = 7;
+                            return values;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.QuorumParameters = (function() {
+    
+                            /**
+                             * Properties of a QuorumParameters.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IQuorumParameters
+                             * @property {number|null} [requiredApproverCount] QuorumParameters requiredApproverCount
+                             * @property {Array.<google.cloud.kms.v1.IChallenge>|null} [challenges] QuorumParameters challenges
+                             * @property {Array.<string>|null} [approvedTwoFactorPublicKeyPems] QuorumParameters approvedTwoFactorPublicKeyPems
+                             */
+    
+                            /**
+                             * Constructs a new QuorumParameters.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents a QuorumParameters.
+                             * @implements IQuorumParameters
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters=} [properties] Properties to set
+                             */
+                            function QuorumParameters(properties) {
+                                this.challenges = [];
+                                this.approvedTwoFactorPublicKeyPems = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QuorumParameters requiredApproverCount.
+                             * @member {number} requiredApproverCount
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @instance
+                             */
+                            QuorumParameters.prototype.requiredApproverCount = 0;
+    
+                            /**
+                             * QuorumParameters challenges.
+                             * @member {Array.<google.cloud.kms.v1.IChallenge>} challenges
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @instance
+                             */
+                            QuorumParameters.prototype.challenges = $util.emptyArray;
+    
+                            /**
+                             * QuorumParameters approvedTwoFactorPublicKeyPems.
+                             * @member {Array.<string>} approvedTwoFactorPublicKeyPems
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @instance
+                             */
+                            QuorumParameters.prototype.approvedTwoFactorPublicKeyPems = $util.emptyArray;
+    
+                            /**
+                             * Creates a new QuorumParameters instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters} QuorumParameters instance
+                             */
+                            QuorumParameters.create = function create(properties) {
+                                return new QuorumParameters(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QuorumParameters message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters} message QuorumParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuorumParameters.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.requiredApproverCount != null && Object.hasOwnProperty.call(message, "requiredApproverCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requiredApproverCount);
+                                if (message.challenges != null && message.challenges.length)
+                                    for (var i = 0; i < message.challenges.length; ++i)
+                                        $root.google.cloud.kms.v1.Challenge.encode(message.challenges[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.approvedTwoFactorPublicKeyPems != null && message.approvedTwoFactorPublicKeyPems.length)
+                                    for (var i = 0; i < message.approvedTwoFactorPublicKeyPems.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.approvedTwoFactorPublicKeyPems[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QuorumParameters message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters} message QuorumParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuorumParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QuorumParameters message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters} QuorumParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuorumParameters.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.requiredApproverCount = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.challenges && message.challenges.length))
+                                                message.challenges = [];
+                                            message.challenges.push($root.google.cloud.kms.v1.Challenge.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.approvedTwoFactorPublicKeyPems && message.approvedTwoFactorPublicKeyPems.length))
+                                                message.approvedTwoFactorPublicKeyPems = [];
+                                            message.approvedTwoFactorPublicKeyPems.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QuorumParameters message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters} QuorumParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuorumParameters.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QuorumParameters message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QuorumParameters.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    if (!$util.isInteger(message.requiredApproverCount))
+                                        return "requiredApproverCount: integer expected";
+                                if (message.challenges != null && message.hasOwnProperty("challenges")) {
+                                    if (!Array.isArray(message.challenges))
+                                        return "challenges: array expected";
+                                    for (var i = 0; i < message.challenges.length; ++i) {
+                                        var error = $root.google.cloud.kms.v1.Challenge.verify(message.challenges[i]);
+                                        if (error)
+                                            return "challenges." + error;
+                                    }
+                                }
+                                if (message.approvedTwoFactorPublicKeyPems != null && message.hasOwnProperty("approvedTwoFactorPublicKeyPems")) {
+                                    if (!Array.isArray(message.approvedTwoFactorPublicKeyPems))
+                                        return "approvedTwoFactorPublicKeyPems: array expected";
+                                    for (var i = 0; i < message.approvedTwoFactorPublicKeyPems.length; ++i)
+                                        if (!$util.isString(message.approvedTwoFactorPublicKeyPems[i]))
+                                            return "approvedTwoFactorPublicKeyPems: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QuorumParameters message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters} QuorumParameters
+                             */
+                            QuorumParameters.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters();
+                                if (object.requiredApproverCount != null)
+                                    message.requiredApproverCount = object.requiredApproverCount | 0;
+                                if (object.challenges) {
+                                    if (!Array.isArray(object.challenges))
+                                        throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.challenges: array expected");
+                                    message.challenges = [];
+                                    for (var i = 0; i < object.challenges.length; ++i) {
+                                        if (typeof object.challenges[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.challenges: object expected");
+                                        message.challenges[i] = $root.google.cloud.kms.v1.Challenge.fromObject(object.challenges[i]);
+                                    }
+                                }
+                                if (object.approvedTwoFactorPublicKeyPems) {
+                                    if (!Array.isArray(object.approvedTwoFactorPublicKeyPems))
+                                        throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.approvedTwoFactorPublicKeyPems: array expected");
+                                    message.approvedTwoFactorPublicKeyPems = [];
+                                    for (var i = 0; i < object.approvedTwoFactorPublicKeyPems.length; ++i)
+                                        message.approvedTwoFactorPublicKeyPems[i] = String(object.approvedTwoFactorPublicKeyPems[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QuorumParameters message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters} message QuorumParameters
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QuorumParameters.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.challenges = [];
+                                    object.approvedTwoFactorPublicKeyPems = [];
+                                }
+                                if (options.defaults)
+                                    object.requiredApproverCount = 0;
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    object.requiredApproverCount = message.requiredApproverCount;
+                                if (message.challenges && message.challenges.length) {
+                                    object.challenges = [];
+                                    for (var j = 0; j < message.challenges.length; ++j)
+                                        object.challenges[j] = $root.google.cloud.kms.v1.Challenge.toObject(message.challenges[j], options);
+                                }
+                                if (message.approvedTwoFactorPublicKeyPems && message.approvedTwoFactorPublicKeyPems.length) {
+                                    object.approvedTwoFactorPublicKeyPems = [];
+                                    for (var j = 0; j < message.approvedTwoFactorPublicKeyPems.length; ++j)
+                                        object.approvedTwoFactorPublicKeyPems[j] = message.approvedTwoFactorPublicKeyPems[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QuorumParameters to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QuorumParameters.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QuorumParameters
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QuorumParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters";
+                            };
+    
+                            return QuorumParameters;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters = (function() {
+    
+                            /**
+                             * Properties of a RequiredActionQuorumParameters.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IRequiredActionQuorumParameters
+                             * @property {Array.<google.cloud.kms.v1.IChallenge>|null} [requiredChallenges] RequiredActionQuorumParameters requiredChallenges
+                             * @property {number|null} [requiredApproverCount] RequiredActionQuorumParameters requiredApproverCount
+                             * @property {Array.<google.cloud.kms.v1.IChallenge>|null} [quorumChallenges] RequiredActionQuorumParameters quorumChallenges
+                             * @property {Array.<string>|null} [approvedTwoFactorPublicKeyPems] RequiredActionQuorumParameters approvedTwoFactorPublicKeyPems
+                             */
+    
+                            /**
+                             * Constructs a new RequiredActionQuorumParameters.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents a RequiredActionQuorumParameters.
+                             * @implements IRequiredActionQuorumParameters
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters=} [properties] Properties to set
+                             */
+                            function RequiredActionQuorumParameters(properties) {
+                                this.requiredChallenges = [];
+                                this.quorumChallenges = [];
+                                this.approvedTwoFactorPublicKeyPems = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RequiredActionQuorumParameters requiredChallenges.
+                             * @member {Array.<google.cloud.kms.v1.IChallenge>} requiredChallenges
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @instance
+                             */
+                            RequiredActionQuorumParameters.prototype.requiredChallenges = $util.emptyArray;
+    
+                            /**
+                             * RequiredActionQuorumParameters requiredApproverCount.
+                             * @member {number} requiredApproverCount
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @instance
+                             */
+                            RequiredActionQuorumParameters.prototype.requiredApproverCount = 0;
+    
+                            /**
+                             * RequiredActionQuorumParameters quorumChallenges.
+                             * @member {Array.<google.cloud.kms.v1.IChallenge>} quorumChallenges
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @instance
+                             */
+                            RequiredActionQuorumParameters.prototype.quorumChallenges = $util.emptyArray;
+    
+                            /**
+                             * RequiredActionQuorumParameters approvedTwoFactorPublicKeyPems.
+                             * @member {Array.<string>} approvedTwoFactorPublicKeyPems
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @instance
+                             */
+                            RequiredActionQuorumParameters.prototype.approvedTwoFactorPublicKeyPems = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RequiredActionQuorumParameters instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters} RequiredActionQuorumParameters instance
+                             */
+                            RequiredActionQuorumParameters.create = function create(properties) {
+                                return new RequiredActionQuorumParameters(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RequiredActionQuorumParameters message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters} message RequiredActionQuorumParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequiredActionQuorumParameters.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.requiredChallenges != null && message.requiredChallenges.length)
+                                    for (var i = 0; i < message.requiredChallenges.length; ++i)
+                                        $root.google.cloud.kms.v1.Challenge.encode(message.requiredChallenges[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.requiredApproverCount != null && Object.hasOwnProperty.call(message, "requiredApproverCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.requiredApproverCount);
+                                if (message.quorumChallenges != null && message.quorumChallenges.length)
+                                    for (var i = 0; i < message.quorumChallenges.length; ++i)
+                                        $root.google.cloud.kms.v1.Challenge.encode(message.quorumChallenges[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.approvedTwoFactorPublicKeyPems != null && message.approvedTwoFactorPublicKeyPems.length)
+                                    for (var i = 0; i < message.approvedTwoFactorPublicKeyPems.length; ++i)
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.approvedTwoFactorPublicKeyPems[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RequiredActionQuorumParameters message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters} message RequiredActionQuorumParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequiredActionQuorumParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RequiredActionQuorumParameters message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters} RequiredActionQuorumParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequiredActionQuorumParameters.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.requiredChallenges && message.requiredChallenges.length))
+                                                message.requiredChallenges = [];
+                                            message.requiredChallenges.push($root.google.cloud.kms.v1.Challenge.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.requiredApproverCount = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.quorumChallenges && message.quorumChallenges.length))
+                                                message.quorumChallenges = [];
+                                            message.quorumChallenges.push($root.google.cloud.kms.v1.Challenge.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.approvedTwoFactorPublicKeyPems && message.approvedTwoFactorPublicKeyPems.length))
+                                                message.approvedTwoFactorPublicKeyPems = [];
+                                            message.approvedTwoFactorPublicKeyPems.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RequiredActionQuorumParameters message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters} RequiredActionQuorumParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequiredActionQuorumParameters.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RequiredActionQuorumParameters message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RequiredActionQuorumParameters.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.requiredChallenges != null && message.hasOwnProperty("requiredChallenges")) {
+                                    if (!Array.isArray(message.requiredChallenges))
+                                        return "requiredChallenges: array expected";
+                                    for (var i = 0; i < message.requiredChallenges.length; ++i) {
+                                        var error = $root.google.cloud.kms.v1.Challenge.verify(message.requiredChallenges[i]);
+                                        if (error)
+                                            return "requiredChallenges." + error;
+                                    }
+                                }
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    if (!$util.isInteger(message.requiredApproverCount))
+                                        return "requiredApproverCount: integer expected";
+                                if (message.quorumChallenges != null && message.hasOwnProperty("quorumChallenges")) {
+                                    if (!Array.isArray(message.quorumChallenges))
+                                        return "quorumChallenges: array expected";
+                                    for (var i = 0; i < message.quorumChallenges.length; ++i) {
+                                        var error = $root.google.cloud.kms.v1.Challenge.verify(message.quorumChallenges[i]);
+                                        if (error)
+                                            return "quorumChallenges." + error;
+                                    }
+                                }
+                                if (message.approvedTwoFactorPublicKeyPems != null && message.hasOwnProperty("approvedTwoFactorPublicKeyPems")) {
+                                    if (!Array.isArray(message.approvedTwoFactorPublicKeyPems))
+                                        return "approvedTwoFactorPublicKeyPems: array expected";
+                                    for (var i = 0; i < message.approvedTwoFactorPublicKeyPems.length; ++i)
+                                        if (!$util.isString(message.approvedTwoFactorPublicKeyPems[i]))
+                                            return "approvedTwoFactorPublicKeyPems: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RequiredActionQuorumParameters message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters} RequiredActionQuorumParameters
+                             */
+                            RequiredActionQuorumParameters.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters();
+                                if (object.requiredChallenges) {
+                                    if (!Array.isArray(object.requiredChallenges))
+                                        throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.requiredChallenges: array expected");
+                                    message.requiredChallenges = [];
+                                    for (var i = 0; i < object.requiredChallenges.length; ++i) {
+                                        if (typeof object.requiredChallenges[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.requiredChallenges: object expected");
+                                        message.requiredChallenges[i] = $root.google.cloud.kms.v1.Challenge.fromObject(object.requiredChallenges[i]);
+                                    }
+                                }
+                                if (object.requiredApproverCount != null)
+                                    message.requiredApproverCount = object.requiredApproverCount | 0;
+                                if (object.quorumChallenges) {
+                                    if (!Array.isArray(object.quorumChallenges))
+                                        throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.quorumChallenges: array expected");
+                                    message.quorumChallenges = [];
+                                    for (var i = 0; i < object.quorumChallenges.length; ++i) {
+                                        if (typeof object.quorumChallenges[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.quorumChallenges: object expected");
+                                        message.quorumChallenges[i] = $root.google.cloud.kms.v1.Challenge.fromObject(object.quorumChallenges[i]);
+                                    }
+                                }
+                                if (object.approvedTwoFactorPublicKeyPems) {
+                                    if (!Array.isArray(object.approvedTwoFactorPublicKeyPems))
+                                        throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.approvedTwoFactorPublicKeyPems: array expected");
+                                    message.approvedTwoFactorPublicKeyPems = [];
+                                    for (var i = 0; i < object.approvedTwoFactorPublicKeyPems.length; ++i)
+                                        message.approvedTwoFactorPublicKeyPems[i] = String(object.approvedTwoFactorPublicKeyPems[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RequiredActionQuorumParameters message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters} message RequiredActionQuorumParameters
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RequiredActionQuorumParameters.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.requiredChallenges = [];
+                                    object.quorumChallenges = [];
+                                    object.approvedTwoFactorPublicKeyPems = [];
+                                }
+                                if (options.defaults)
+                                    object.requiredApproverCount = 0;
+                                if (message.requiredChallenges && message.requiredChallenges.length) {
+                                    object.requiredChallenges = [];
+                                    for (var j = 0; j < message.requiredChallenges.length; ++j)
+                                        object.requiredChallenges[j] = $root.google.cloud.kms.v1.Challenge.toObject(message.requiredChallenges[j], options);
+                                }
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    object.requiredApproverCount = message.requiredApproverCount;
+                                if (message.quorumChallenges && message.quorumChallenges.length) {
+                                    object.quorumChallenges = [];
+                                    for (var j = 0; j < message.quorumChallenges.length; ++j)
+                                        object.quorumChallenges[j] = $root.google.cloud.kms.v1.Challenge.toObject(message.quorumChallenges[j], options);
+                                }
+                                if (message.approvedTwoFactorPublicKeyPems && message.approvedTwoFactorPublicKeyPems.length) {
+                                    object.approvedTwoFactorPublicKeyPems = [];
+                                    for (var j = 0; j < message.approvedTwoFactorPublicKeyPems.length; ++j)
+                                        object.approvedTwoFactorPublicKeyPems[j] = message.approvedTwoFactorPublicKeyPems[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RequiredActionQuorumParameters to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RequiredActionQuorumParameters.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RequiredActionQuorumParameters
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RequiredActionQuorumParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters";
+                            };
+    
+                            return RequiredActionQuorumParameters;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys = (function() {
+    
+                            /**
+                             * Properties of a RegisterTwoFactorAuthKeys.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IRegisterTwoFactorAuthKeys
+                             * @property {number|null} [requiredApproverCount] RegisterTwoFactorAuthKeys requiredApproverCount
+                             * @property {Array.<string>|null} [twoFactorPublicKeyPems] RegisterTwoFactorAuthKeys twoFactorPublicKeyPems
+                             */
+    
+                            /**
+                             * Constructs a new RegisterTwoFactorAuthKeys.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents a RegisterTwoFactorAuthKeys.
+                             * @implements IRegisterTwoFactorAuthKeys
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys=} [properties] Properties to set
+                             */
+                            function RegisterTwoFactorAuthKeys(properties) {
+                                this.twoFactorPublicKeyPems = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RegisterTwoFactorAuthKeys requiredApproverCount.
+                             * @member {number} requiredApproverCount
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @instance
+                             */
+                            RegisterTwoFactorAuthKeys.prototype.requiredApproverCount = 0;
+    
+                            /**
+                             * RegisterTwoFactorAuthKeys twoFactorPublicKeyPems.
+                             * @member {Array.<string>} twoFactorPublicKeyPems
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @instance
+                             */
+                            RegisterTwoFactorAuthKeys.prototype.twoFactorPublicKeyPems = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RegisterTwoFactorAuthKeys instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys} RegisterTwoFactorAuthKeys instance
+                             */
+                            RegisterTwoFactorAuthKeys.create = function create(properties) {
+                                return new RegisterTwoFactorAuthKeys(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RegisterTwoFactorAuthKeys message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys} message RegisterTwoFactorAuthKeys message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegisterTwoFactorAuthKeys.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.requiredApproverCount != null && Object.hasOwnProperty.call(message, "requiredApproverCount"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requiredApproverCount);
+                                if (message.twoFactorPublicKeyPems != null && message.twoFactorPublicKeyPems.length)
+                                    for (var i = 0; i < message.twoFactorPublicKeyPems.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.twoFactorPublicKeyPems[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RegisterTwoFactorAuthKeys message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys} message RegisterTwoFactorAuthKeys message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegisterTwoFactorAuthKeys.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RegisterTwoFactorAuthKeys message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys} RegisterTwoFactorAuthKeys
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegisterTwoFactorAuthKeys.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.requiredApproverCount = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.twoFactorPublicKeyPems && message.twoFactorPublicKeyPems.length))
+                                                message.twoFactorPublicKeyPems = [];
+                                            message.twoFactorPublicKeyPems.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RegisterTwoFactorAuthKeys message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys} RegisterTwoFactorAuthKeys
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegisterTwoFactorAuthKeys.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RegisterTwoFactorAuthKeys message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RegisterTwoFactorAuthKeys.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    if (!$util.isInteger(message.requiredApproverCount))
+                                        return "requiredApproverCount: integer expected";
+                                if (message.twoFactorPublicKeyPems != null && message.hasOwnProperty("twoFactorPublicKeyPems")) {
+                                    if (!Array.isArray(message.twoFactorPublicKeyPems))
+                                        return "twoFactorPublicKeyPems: array expected";
+                                    for (var i = 0; i < message.twoFactorPublicKeyPems.length; ++i)
+                                        if (!$util.isString(message.twoFactorPublicKeyPems[i]))
+                                            return "twoFactorPublicKeyPems: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RegisterTwoFactorAuthKeys message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys} RegisterTwoFactorAuthKeys
+                             */
+                            RegisterTwoFactorAuthKeys.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys();
+                                if (object.requiredApproverCount != null)
+                                    message.requiredApproverCount = object.requiredApproverCount | 0;
+                                if (object.twoFactorPublicKeyPems) {
+                                    if (!Array.isArray(object.twoFactorPublicKeyPems))
+                                        throw TypeError(".google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.twoFactorPublicKeyPems: array expected");
+                                    message.twoFactorPublicKeyPems = [];
+                                    for (var i = 0; i < object.twoFactorPublicKeyPems.length; ++i)
+                                        message.twoFactorPublicKeyPems[i] = String(object.twoFactorPublicKeyPems[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RegisterTwoFactorAuthKeys message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys} message RegisterTwoFactorAuthKeys
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RegisterTwoFactorAuthKeys.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.twoFactorPublicKeyPems = [];
+                                if (options.defaults)
+                                    object.requiredApproverCount = 0;
+                                if (message.requiredApproverCount != null && message.hasOwnProperty("requiredApproverCount"))
+                                    object.requiredApproverCount = message.requiredApproverCount;
+                                if (message.twoFactorPublicKeyPems && message.twoFactorPublicKeyPems.length) {
+                                    object.twoFactorPublicKeyPems = [];
+                                    for (var j = 0; j < message.twoFactorPublicKeyPems.length; ++j)
+                                        object.twoFactorPublicKeyPems[j] = message.twoFactorPublicKeyPems[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RegisterTwoFactorAuthKeys to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RegisterTwoFactorAuthKeys.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RegisterTwoFactorAuthKeys
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RegisterTwoFactorAuthKeys.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys";
+                            };
+    
+                            return RegisterTwoFactorAuthKeys;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance = (function() {
+    
+                            /**
+                             * Properties of a DisableSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IDisableSingleTenantHsmInstance
+                             */
+    
+                            /**
+                             * Constructs a new DisableSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents a DisableSingleTenantHsmInstance.
+                             * @implements IDisableSingleTenantHsmInstance
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance=} [properties] Properties to set
+                             */
+                            function DisableSingleTenantHsmInstance(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new DisableSingleTenantHsmInstance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance} DisableSingleTenantHsmInstance instance
+                             */
+                            DisableSingleTenantHsmInstance.create = function create(properties) {
+                                return new DisableSingleTenantHsmInstance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DisableSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance} message DisableSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DisableSingleTenantHsmInstance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DisableSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance} message DisableSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DisableSingleTenantHsmInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DisableSingleTenantHsmInstance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance} DisableSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DisableSingleTenantHsmInstance.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DisableSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance} DisableSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DisableSingleTenantHsmInstance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DisableSingleTenantHsmInstance message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DisableSingleTenantHsmInstance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DisableSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance} DisableSingleTenantHsmInstance
+                             */
+                            DisableSingleTenantHsmInstance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance)
+                                    return object;
+                                return new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance();
+                            };
+    
+                            /**
+                             * Creates a plain object from a DisableSingleTenantHsmInstance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance} message DisableSingleTenantHsmInstance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DisableSingleTenantHsmInstance.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this DisableSingleTenantHsmInstance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DisableSingleTenantHsmInstance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DisableSingleTenantHsmInstance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DisableSingleTenantHsmInstance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance";
+                            };
+    
+                            return DisableSingleTenantHsmInstance;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance = (function() {
+    
+                            /**
+                             * Properties of an EnableSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IEnableSingleTenantHsmInstance
+                             */
+    
+                            /**
+                             * Constructs a new EnableSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents an EnableSingleTenantHsmInstance.
+                             * @implements IEnableSingleTenantHsmInstance
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance=} [properties] Properties to set
+                             */
+                            function EnableSingleTenantHsmInstance(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new EnableSingleTenantHsmInstance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance} EnableSingleTenantHsmInstance instance
+                             */
+                            EnableSingleTenantHsmInstance.create = function create(properties) {
+                                return new EnableSingleTenantHsmInstance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EnableSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance} message EnableSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnableSingleTenantHsmInstance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EnableSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance} message EnableSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EnableSingleTenantHsmInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EnableSingleTenantHsmInstance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance} EnableSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnableSingleTenantHsmInstance.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EnableSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance} EnableSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EnableSingleTenantHsmInstance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EnableSingleTenantHsmInstance message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EnableSingleTenantHsmInstance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EnableSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance} EnableSingleTenantHsmInstance
+                             */
+                            EnableSingleTenantHsmInstance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance)
+                                    return object;
+                                return new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance();
+                            };
+    
+                            /**
+                             * Creates a plain object from an EnableSingleTenantHsmInstance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance} message EnableSingleTenantHsmInstance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EnableSingleTenantHsmInstance.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this EnableSingleTenantHsmInstance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EnableSingleTenantHsmInstance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EnableSingleTenantHsmInstance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EnableSingleTenantHsmInstance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance";
+                            };
+    
+                            return EnableSingleTenantHsmInstance;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance = (function() {
+    
+                            /**
+                             * Properties of a DeleteSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IDeleteSingleTenantHsmInstance
+                             */
+    
+                            /**
+                             * Constructs a new DeleteSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents a DeleteSingleTenantHsmInstance.
+                             * @implements IDeleteSingleTenantHsmInstance
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance=} [properties] Properties to set
+                             */
+                            function DeleteSingleTenantHsmInstance(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new DeleteSingleTenantHsmInstance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance} DeleteSingleTenantHsmInstance instance
+                             */
+                            DeleteSingleTenantHsmInstance.create = function create(properties) {
+                                return new DeleteSingleTenantHsmInstance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance} message DeleteSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteSingleTenantHsmInstance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance} message DeleteSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteSingleTenantHsmInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteSingleTenantHsmInstance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance} DeleteSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteSingleTenantHsmInstance.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance} DeleteSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteSingleTenantHsmInstance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteSingleTenantHsmInstance message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteSingleTenantHsmInstance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance} DeleteSingleTenantHsmInstance
+                             */
+                            DeleteSingleTenantHsmInstance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance)
+                                    return object;
+                                return new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance();
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteSingleTenantHsmInstance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance} message DeleteSingleTenantHsmInstance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteSingleTenantHsmInstance.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this DeleteSingleTenantHsmInstance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteSingleTenantHsmInstance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteSingleTenantHsmInstance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteSingleTenantHsmInstance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance";
+                            };
+    
+                            return DeleteSingleTenantHsmInstance;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.AddQuorumMember = (function() {
+    
+                            /**
+                             * Properties of an AddQuorumMember.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IAddQuorumMember
+                             * @property {string|null} [twoFactorPublicKeyPem] AddQuorumMember twoFactorPublicKeyPem
+                             */
+    
+                            /**
+                             * Constructs a new AddQuorumMember.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents an AddQuorumMember.
+                             * @implements IAddQuorumMember
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember=} [properties] Properties to set
+                             */
+                            function AddQuorumMember(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AddQuorumMember twoFactorPublicKeyPem.
+                             * @member {string} twoFactorPublicKeyPem
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @instance
+                             */
+                            AddQuorumMember.prototype.twoFactorPublicKeyPem = "";
+    
+                            /**
+                             * Creates a new AddQuorumMember instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember} AddQuorumMember instance
+                             */
+                            AddQuorumMember.create = function create(properties) {
+                                return new AddQuorumMember(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AddQuorumMember message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember} message AddQuorumMember message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddQuorumMember.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.twoFactorPublicKeyPem != null && Object.hasOwnProperty.call(message, "twoFactorPublicKeyPem"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.twoFactorPublicKeyPem);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AddQuorumMember message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember} message AddQuorumMember message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddQuorumMember.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AddQuorumMember message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember} AddQuorumMember
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddQuorumMember.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.twoFactorPublicKeyPem = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AddQuorumMember message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember} AddQuorumMember
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddQuorumMember.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AddQuorumMember message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AddQuorumMember.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.twoFactorPublicKeyPem != null && message.hasOwnProperty("twoFactorPublicKeyPem"))
+                                    if (!$util.isString(message.twoFactorPublicKeyPem))
+                                        return "twoFactorPublicKeyPem: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AddQuorumMember message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember} AddQuorumMember
+                             */
+                            AddQuorumMember.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember();
+                                if (object.twoFactorPublicKeyPem != null)
+                                    message.twoFactorPublicKeyPem = String(object.twoFactorPublicKeyPem);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AddQuorumMember message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember} message AddQuorumMember
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AddQuorumMember.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.twoFactorPublicKeyPem = "";
+                                if (message.twoFactorPublicKeyPem != null && message.hasOwnProperty("twoFactorPublicKeyPem"))
+                                    object.twoFactorPublicKeyPem = message.twoFactorPublicKeyPem;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AddQuorumMember to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AddQuorumMember.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AddQuorumMember
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AddQuorumMember.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember";
+                            };
+    
+                            return AddQuorumMember;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.RemoveQuorumMember = (function() {
+    
+                            /**
+                             * Properties of a RemoveQuorumMember.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IRemoveQuorumMember
+                             * @property {string|null} [twoFactorPublicKeyPem] RemoveQuorumMember twoFactorPublicKeyPem
+                             */
+    
+                            /**
+                             * Constructs a new RemoveQuorumMember.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents a RemoveQuorumMember.
+                             * @implements IRemoveQuorumMember
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember=} [properties] Properties to set
+                             */
+                            function RemoveQuorumMember(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RemoveQuorumMember twoFactorPublicKeyPem.
+                             * @member {string} twoFactorPublicKeyPem
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @instance
+                             */
+                            RemoveQuorumMember.prototype.twoFactorPublicKeyPem = "";
+    
+                            /**
+                             * Creates a new RemoveQuorumMember instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember} RemoveQuorumMember instance
+                             */
+                            RemoveQuorumMember.create = function create(properties) {
+                                return new RemoveQuorumMember(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveQuorumMember message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember} message RemoveQuorumMember message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveQuorumMember.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.twoFactorPublicKeyPem != null && Object.hasOwnProperty.call(message, "twoFactorPublicKeyPem"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.twoFactorPublicKeyPem);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveQuorumMember message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember} message RemoveQuorumMember message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveQuorumMember.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RemoveQuorumMember message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember} RemoveQuorumMember
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveQuorumMember.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.twoFactorPublicKeyPem = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RemoveQuorumMember message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember} RemoveQuorumMember
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveQuorumMember.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RemoveQuorumMember message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RemoveQuorumMember.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.twoFactorPublicKeyPem != null && message.hasOwnProperty("twoFactorPublicKeyPem"))
+                                    if (!$util.isString(message.twoFactorPublicKeyPem))
+                                        return "twoFactorPublicKeyPem: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RemoveQuorumMember message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember} RemoveQuorumMember
+                             */
+                            RemoveQuorumMember.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember();
+                                if (object.twoFactorPublicKeyPem != null)
+                                    message.twoFactorPublicKeyPem = String(object.twoFactorPublicKeyPem);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RemoveQuorumMember message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember} message RemoveQuorumMember
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RemoveQuorumMember.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.twoFactorPublicKeyPem = "";
+                                if (message.twoFactorPublicKeyPem != null && message.hasOwnProperty("twoFactorPublicKeyPem"))
+                                    object.twoFactorPublicKeyPem = message.twoFactorPublicKeyPem;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RemoveQuorumMember to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RemoveQuorumMember.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RemoveQuorumMember
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RemoveQuorumMember.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember";
+                            };
+    
+                            return RemoveQuorumMember;
+                        })();
+    
+                        SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance = (function() {
+    
+                            /**
+                             * Properties of a RefreshSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @interface IRefreshSingleTenantHsmInstance
+                             */
+    
+                            /**
+                             * Constructs a new RefreshSingleTenantHsmInstance.
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal
+                             * @classdesc Represents a RefreshSingleTenantHsmInstance.
+                             * @implements IRefreshSingleTenantHsmInstance
+                             * @constructor
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance=} [properties] Properties to set
+                             */
+                            function RefreshSingleTenantHsmInstance(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new RefreshSingleTenantHsmInstance instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance} RefreshSingleTenantHsmInstance instance
+                             */
+                            RefreshSingleTenantHsmInstance.create = function create(properties) {
+                                return new RefreshSingleTenantHsmInstance(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RefreshSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance} message RefreshSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RefreshSingleTenantHsmInstance.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RefreshSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance} message RefreshSingleTenantHsmInstance message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RefreshSingleTenantHsmInstance.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RefreshSingleTenantHsmInstance message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance} RefreshSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RefreshSingleTenantHsmInstance.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RefreshSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance} RefreshSingleTenantHsmInstance
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RefreshSingleTenantHsmInstance.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RefreshSingleTenantHsmInstance message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RefreshSingleTenantHsmInstance.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RefreshSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance} RefreshSingleTenantHsmInstance
+                             */
+                            RefreshSingleTenantHsmInstance.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance)
+                                    return object;
+                                return new $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance();
+                            };
+    
+                            /**
+                             * Creates a plain object from a RefreshSingleTenantHsmInstance message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance} message RefreshSingleTenantHsmInstance
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RefreshSingleTenantHsmInstance.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this RefreshSingleTenantHsmInstance to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RefreshSingleTenantHsmInstance.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RefreshSingleTenantHsmInstance
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RefreshSingleTenantHsmInstance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance";
+                            };
+    
+                            return RefreshSingleTenantHsmInstance;
+                        })();
+    
+                        return SingleTenantHsmInstanceProposal;
+                    })();
+    
+                    v1.Challenge = (function() {
+    
+                        /**
+                         * Properties of a Challenge.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IChallenge
+                         * @property {Uint8Array|null} [challenge] Challenge challenge
+                         * @property {string|null} [publicKeyPem] Challenge publicKeyPem
+                         */
+    
+                        /**
+                         * Constructs a new Challenge.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a Challenge.
+                         * @implements IChallenge
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IChallenge=} [properties] Properties to set
+                         */
+                        function Challenge(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Challenge challenge.
+                         * @member {Uint8Array} challenge
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @instance
+                         */
+                        Challenge.prototype.challenge = $util.newBuffer([]);
+    
+                        /**
+                         * Challenge publicKeyPem.
+                         * @member {string} publicKeyPem
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @instance
+                         */
+                        Challenge.prototype.publicKeyPem = "";
+    
+                        /**
+                         * Creates a new Challenge instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {google.cloud.kms.v1.IChallenge=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.Challenge} Challenge instance
+                         */
+                        Challenge.create = function create(properties) {
+                            return new Challenge(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Challenge message. Does not implicitly {@link google.cloud.kms.v1.Challenge.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {google.cloud.kms.v1.IChallenge} message Challenge message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Challenge.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.challenge != null && Object.hasOwnProperty.call(message, "challenge"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.challenge);
+                            if (message.publicKeyPem != null && Object.hasOwnProperty.call(message, "publicKeyPem"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.publicKeyPem);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Challenge message, length delimited. Does not implicitly {@link google.cloud.kms.v1.Challenge.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {google.cloud.kms.v1.IChallenge} message Challenge message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Challenge.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Challenge message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.Challenge} Challenge
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Challenge.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.Challenge();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.challenge = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.publicKeyPem = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Challenge message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.Challenge} Challenge
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Challenge.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Challenge message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Challenge.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.challenge != null && message.hasOwnProperty("challenge"))
+                                if (!(message.challenge && typeof message.challenge.length === "number" || $util.isString(message.challenge)))
+                                    return "challenge: buffer expected";
+                            if (message.publicKeyPem != null && message.hasOwnProperty("publicKeyPem"))
+                                if (!$util.isString(message.publicKeyPem))
+                                    return "publicKeyPem: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Challenge message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.Challenge} Challenge
+                         */
+                        Challenge.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.Challenge)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.Challenge();
+                            if (object.challenge != null)
+                                if (typeof object.challenge === "string")
+                                    $util.base64.decode(object.challenge, message.challenge = $util.newBuffer($util.base64.length(object.challenge)), 0);
+                                else if (object.challenge.length >= 0)
+                                    message.challenge = object.challenge;
+                            if (object.publicKeyPem != null)
+                                message.publicKeyPem = String(object.publicKeyPem);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Challenge message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {google.cloud.kms.v1.Challenge} message Challenge
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Challenge.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.challenge = "";
+                                else {
+                                    object.challenge = [];
+                                    if (options.bytes !== Array)
+                                        object.challenge = $util.newBuffer(object.challenge);
+                                }
+                                object.publicKeyPem = "";
+                            }
+                            if (message.challenge != null && message.hasOwnProperty("challenge"))
+                                object.challenge = options.bytes === String ? $util.base64.encode(message.challenge, 0, message.challenge.length) : options.bytes === Array ? Array.prototype.slice.call(message.challenge) : message.challenge;
+                            if (message.publicKeyPem != null && message.hasOwnProperty("publicKeyPem"))
+                                object.publicKeyPem = message.publicKeyPem;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Challenge to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Challenge.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Challenge
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.Challenge
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Challenge.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.Challenge";
+                        };
+    
+                        return Challenge;
+                    })();
+    
+                    v1.ChallengeReply = (function() {
+    
+                        /**
+                         * Properties of a ChallengeReply.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IChallengeReply
+                         * @property {Uint8Array|null} [signedChallenge] ChallengeReply signedChallenge
+                         * @property {string|null} [publicKeyPem] ChallengeReply publicKeyPem
+                         */
+    
+                        /**
+                         * Constructs a new ChallengeReply.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ChallengeReply.
+                         * @implements IChallengeReply
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IChallengeReply=} [properties] Properties to set
+                         */
+                        function ChallengeReply(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ChallengeReply signedChallenge.
+                         * @member {Uint8Array} signedChallenge
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @instance
+                         */
+                        ChallengeReply.prototype.signedChallenge = $util.newBuffer([]);
+    
+                        /**
+                         * ChallengeReply publicKeyPem.
+                         * @member {string} publicKeyPem
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @instance
+                         */
+                        ChallengeReply.prototype.publicKeyPem = "";
+    
+                        /**
+                         * Creates a new ChallengeReply instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {google.cloud.kms.v1.IChallengeReply=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ChallengeReply} ChallengeReply instance
+                         */
+                        ChallengeReply.create = function create(properties) {
+                            return new ChallengeReply(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ChallengeReply message. Does not implicitly {@link google.cloud.kms.v1.ChallengeReply.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {google.cloud.kms.v1.IChallengeReply} message ChallengeReply message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChallengeReply.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.signedChallenge != null && Object.hasOwnProperty.call(message, "signedChallenge"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.signedChallenge);
+                            if (message.publicKeyPem != null && Object.hasOwnProperty.call(message, "publicKeyPem"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.publicKeyPem);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ChallengeReply message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ChallengeReply.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {google.cloud.kms.v1.IChallengeReply} message ChallengeReply message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChallengeReply.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ChallengeReply message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ChallengeReply} ChallengeReply
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChallengeReply.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ChallengeReply();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.signedChallenge = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.publicKeyPem = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ChallengeReply message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ChallengeReply} ChallengeReply
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChallengeReply.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ChallengeReply message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ChallengeReply.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.signedChallenge != null && message.hasOwnProperty("signedChallenge"))
+                                if (!(message.signedChallenge && typeof message.signedChallenge.length === "number" || $util.isString(message.signedChallenge)))
+                                    return "signedChallenge: buffer expected";
+                            if (message.publicKeyPem != null && message.hasOwnProperty("publicKeyPem"))
+                                if (!$util.isString(message.publicKeyPem))
+                                    return "publicKeyPem: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ChallengeReply message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ChallengeReply} ChallengeReply
+                         */
+                        ChallengeReply.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ChallengeReply)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ChallengeReply();
+                            if (object.signedChallenge != null)
+                                if (typeof object.signedChallenge === "string")
+                                    $util.base64.decode(object.signedChallenge, message.signedChallenge = $util.newBuffer($util.base64.length(object.signedChallenge)), 0);
+                                else if (object.signedChallenge.length >= 0)
+                                    message.signedChallenge = object.signedChallenge;
+                            if (object.publicKeyPem != null)
+                                message.publicKeyPem = String(object.publicKeyPem);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ChallengeReply message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {google.cloud.kms.v1.ChallengeReply} message ChallengeReply
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ChallengeReply.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.signedChallenge = "";
+                                else {
+                                    object.signedChallenge = [];
+                                    if (options.bytes !== Array)
+                                        object.signedChallenge = $util.newBuffer(object.signedChallenge);
+                                }
+                                object.publicKeyPem = "";
+                            }
+                            if (message.signedChallenge != null && message.hasOwnProperty("signedChallenge"))
+                                object.signedChallenge = options.bytes === String ? $util.base64.encode(message.signedChallenge, 0, message.signedChallenge.length) : options.bytes === Array ? Array.prototype.slice.call(message.signedChallenge) : message.signedChallenge;
+                            if (message.publicKeyPem != null && message.hasOwnProperty("publicKeyPem"))
+                                object.publicKeyPem = message.publicKeyPem;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ChallengeReply to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ChallengeReply.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ChallengeReply
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ChallengeReply
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ChallengeReply.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ChallengeReply";
+                        };
+    
+                        return ChallengeReply;
+                    })();
+    
+                    v1.ListSingleTenantHsmInstancesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSingleTenantHsmInstancesRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListSingleTenantHsmInstancesRequest
+                         * @property {string|null} [parent] ListSingleTenantHsmInstancesRequest parent
+                         * @property {number|null} [pageSize] ListSingleTenantHsmInstancesRequest pageSize
+                         * @property {string|null} [pageToken] ListSingleTenantHsmInstancesRequest pageToken
+                         * @property {string|null} [filter] ListSingleTenantHsmInstancesRequest filter
+                         * @property {string|null} [orderBy] ListSingleTenantHsmInstancesRequest orderBy
+                         * @property {boolean|null} [showDeleted] ListSingleTenantHsmInstancesRequest showDeleted
+                         */
+    
+                        /**
+                         * Constructs a new ListSingleTenantHsmInstancesRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListSingleTenantHsmInstancesRequest.
+                         * @implements IListSingleTenantHsmInstancesRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest=} [properties] Properties to set
+                         */
+                        function ListSingleTenantHsmInstancesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSingleTenantHsmInstancesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstancesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSingleTenantHsmInstancesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstancesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstancesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstancesRequest showDeleted.
+                         * @member {boolean} showDeleted
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesRequest.prototype.showDeleted = false;
+    
+                        /**
+                         * Creates a new ListSingleTenantHsmInstancesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest} ListSingleTenantHsmInstancesRequest instance
+                         */
+                        ListSingleTenantHsmInstancesRequest.create = function create(properties) {
+                            return new ListSingleTenantHsmInstancesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstancesRequest message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest} message ListSingleTenantHsmInstancesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstancesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.showDeleted != null && Object.hasOwnProperty.call(message, "showDeleted"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.showDeleted);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest} message ListSingleTenantHsmInstancesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstancesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstancesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest} ListSingleTenantHsmInstancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstancesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.showDeleted = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstancesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest} ListSingleTenantHsmInstancesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstancesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSingleTenantHsmInstancesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSingleTenantHsmInstancesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                if (typeof message.showDeleted !== "boolean")
+                                    return "showDeleted: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSingleTenantHsmInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest} ListSingleTenantHsmInstancesRequest
+                         */
+                        ListSingleTenantHsmInstancesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.showDeleted != null)
+                                message.showDeleted = Boolean(object.showDeleted);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSingleTenantHsmInstancesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest} message ListSingleTenantHsmInstancesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSingleTenantHsmInstancesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.showDeleted = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                object.showDeleted = message.showDeleted;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSingleTenantHsmInstancesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSingleTenantHsmInstancesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSingleTenantHsmInstancesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSingleTenantHsmInstancesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest";
+                        };
+    
+                        return ListSingleTenantHsmInstancesRequest;
+                    })();
+    
+                    v1.ListSingleTenantHsmInstancesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSingleTenantHsmInstancesResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListSingleTenantHsmInstancesResponse
+                         * @property {Array.<google.cloud.kms.v1.ISingleTenantHsmInstance>|null} [singleTenantHsmInstances] ListSingleTenantHsmInstancesResponse singleTenantHsmInstances
+                         * @property {string|null} [nextPageToken] ListSingleTenantHsmInstancesResponse nextPageToken
+                         * @property {number|null} [totalSize] ListSingleTenantHsmInstancesResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListSingleTenantHsmInstancesResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListSingleTenantHsmInstancesResponse.
+                         * @implements IListSingleTenantHsmInstancesResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse=} [properties] Properties to set
+                         */
+                        function ListSingleTenantHsmInstancesResponse(properties) {
+                            this.singleTenantHsmInstances = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSingleTenantHsmInstancesResponse singleTenantHsmInstances.
+                         * @member {Array.<google.cloud.kms.v1.ISingleTenantHsmInstance>} singleTenantHsmInstances
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesResponse.prototype.singleTenantHsmInstances = $util.emptyArray;
+    
+                        /**
+                         * ListSingleTenantHsmInstancesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstancesResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstancesResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * Creates a new ListSingleTenantHsmInstancesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse} ListSingleTenantHsmInstancesResponse instance
+                         */
+                        ListSingleTenantHsmInstancesResponse.create = function create(properties) {
+                            return new ListSingleTenantHsmInstancesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstancesResponse message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse} message ListSingleTenantHsmInstancesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstancesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.singleTenantHsmInstances != null && message.singleTenantHsmInstances.length)
+                                for (var i = 0; i < message.singleTenantHsmInstances.length; ++i)
+                                    $root.google.cloud.kms.v1.SingleTenantHsmInstance.encode(message.singleTenantHsmInstances[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse} message ListSingleTenantHsmInstancesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstancesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstancesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse} ListSingleTenantHsmInstancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstancesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.singleTenantHsmInstances && message.singleTenantHsmInstances.length))
+                                            message.singleTenantHsmInstances = [];
+                                        message.singleTenantHsmInstances.push($root.google.cloud.kms.v1.SingleTenantHsmInstance.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstancesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse} ListSingleTenantHsmInstancesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstancesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSingleTenantHsmInstancesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSingleTenantHsmInstancesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.singleTenantHsmInstances != null && message.hasOwnProperty("singleTenantHsmInstances")) {
+                                if (!Array.isArray(message.singleTenantHsmInstances))
+                                    return "singleTenantHsmInstances: array expected";
+                                for (var i = 0; i < message.singleTenantHsmInstances.length; ++i) {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstance.verify(message.singleTenantHsmInstances[i]);
+                                    if (error)
+                                        return "singleTenantHsmInstances." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSingleTenantHsmInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse} ListSingleTenantHsmInstancesResponse
+                         */
+                        ListSingleTenantHsmInstancesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse();
+                            if (object.singleTenantHsmInstances) {
+                                if (!Array.isArray(object.singleTenantHsmInstances))
+                                    throw TypeError(".google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse.singleTenantHsmInstances: array expected");
+                                message.singleTenantHsmInstances = [];
+                                for (var i = 0; i < object.singleTenantHsmInstances.length; ++i) {
+                                    if (typeof object.singleTenantHsmInstances[i] !== "object")
+                                        throw TypeError(".google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse.singleTenantHsmInstances: object expected");
+                                    message.singleTenantHsmInstances[i] = $root.google.cloud.kms.v1.SingleTenantHsmInstance.fromObject(object.singleTenantHsmInstances[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSingleTenantHsmInstancesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse} message ListSingleTenantHsmInstancesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSingleTenantHsmInstancesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.singleTenantHsmInstances = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
+                            if (message.singleTenantHsmInstances && message.singleTenantHsmInstances.length) {
+                                object.singleTenantHsmInstances = [];
+                                for (var j = 0; j < message.singleTenantHsmInstances.length; ++j)
+                                    object.singleTenantHsmInstances[j] = $root.google.cloud.kms.v1.SingleTenantHsmInstance.toObject(message.singleTenantHsmInstances[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSingleTenantHsmInstancesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSingleTenantHsmInstancesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSingleTenantHsmInstancesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSingleTenantHsmInstancesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse";
+                        };
+    
+                        return ListSingleTenantHsmInstancesResponse;
+                    })();
+    
+                    v1.GetSingleTenantHsmInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSingleTenantHsmInstanceRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IGetSingleTenantHsmInstanceRequest
+                         * @property {string|null} [name] GetSingleTenantHsmInstanceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSingleTenantHsmInstanceRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a GetSingleTenantHsmInstanceRequest.
+                         * @implements IGetSingleTenantHsmInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest=} [properties] Properties to set
+                         */
+                        function GetSingleTenantHsmInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSingleTenantHsmInstanceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @instance
+                         */
+                        GetSingleTenantHsmInstanceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSingleTenantHsmInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest} GetSingleTenantHsmInstanceRequest instance
+                         */
+                        GetSingleTenantHsmInstanceRequest.create = function create(properties) {
+                            return new GetSingleTenantHsmInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSingleTenantHsmInstanceRequest message. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest} message GetSingleTenantHsmInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSingleTenantHsmInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSingleTenantHsmInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest} message GetSingleTenantHsmInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSingleTenantHsmInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSingleTenantHsmInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest} GetSingleTenantHsmInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSingleTenantHsmInstanceRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSingleTenantHsmInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest} GetSingleTenantHsmInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSingleTenantHsmInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSingleTenantHsmInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSingleTenantHsmInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSingleTenantHsmInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest} GetSingleTenantHsmInstanceRequest
+                         */
+                        GetSingleTenantHsmInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSingleTenantHsmInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest} message GetSingleTenantHsmInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSingleTenantHsmInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSingleTenantHsmInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSingleTenantHsmInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSingleTenantHsmInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSingleTenantHsmInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest";
+                        };
+    
+                        return GetSingleTenantHsmInstanceRequest;
+                    })();
+    
+                    v1.CreateSingleTenantHsmInstanceRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSingleTenantHsmInstanceRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ICreateSingleTenantHsmInstanceRequest
+                         * @property {string|null} [parent] CreateSingleTenantHsmInstanceRequest parent
+                         * @property {string|null} [singleTenantHsmInstanceId] CreateSingleTenantHsmInstanceRequest singleTenantHsmInstanceId
+                         * @property {google.cloud.kms.v1.ISingleTenantHsmInstance|null} [singleTenantHsmInstance] CreateSingleTenantHsmInstanceRequest singleTenantHsmInstance
+                         */
+    
+                        /**
+                         * Constructs a new CreateSingleTenantHsmInstanceRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a CreateSingleTenantHsmInstanceRequest.
+                         * @implements ICreateSingleTenantHsmInstanceRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest=} [properties] Properties to set
+                         */
+                        function CreateSingleTenantHsmInstanceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSingleTenantHsmInstanceRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @instance
+                         */
+                        CreateSingleTenantHsmInstanceRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSingleTenantHsmInstanceRequest singleTenantHsmInstanceId.
+                         * @member {string} singleTenantHsmInstanceId
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @instance
+                         */
+                        CreateSingleTenantHsmInstanceRequest.prototype.singleTenantHsmInstanceId = "";
+    
+                        /**
+                         * CreateSingleTenantHsmInstanceRequest singleTenantHsmInstance.
+                         * @member {google.cloud.kms.v1.ISingleTenantHsmInstance|null|undefined} singleTenantHsmInstance
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @instance
+                         */
+                        CreateSingleTenantHsmInstanceRequest.prototype.singleTenantHsmInstance = null;
+    
+                        /**
+                         * Creates a new CreateSingleTenantHsmInstanceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest} CreateSingleTenantHsmInstanceRequest instance
+                         */
+                        CreateSingleTenantHsmInstanceRequest.create = function create(properties) {
+                            return new CreateSingleTenantHsmInstanceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceRequest message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest} message CreateSingleTenantHsmInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.singleTenantHsmInstanceId != null && Object.hasOwnProperty.call(message, "singleTenantHsmInstanceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.singleTenantHsmInstanceId);
+                            if (message.singleTenantHsmInstance != null && Object.hasOwnProperty.call(message, "singleTenantHsmInstance"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstance.encode(message.singleTenantHsmInstance, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest} message CreateSingleTenantHsmInstanceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest} CreateSingleTenantHsmInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.singleTenantHsmInstanceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.singleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstance.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest} CreateSingleTenantHsmInstanceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSingleTenantHsmInstanceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSingleTenantHsmInstanceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.singleTenantHsmInstanceId != null && message.hasOwnProperty("singleTenantHsmInstanceId"))
+                                if (!$util.isString(message.singleTenantHsmInstanceId))
+                                    return "singleTenantHsmInstanceId: string expected";
+                            if (message.singleTenantHsmInstance != null && message.hasOwnProperty("singleTenantHsmInstance")) {
+                                var error = $root.google.cloud.kms.v1.SingleTenantHsmInstance.verify(message.singleTenantHsmInstance);
+                                if (error)
+                                    return "singleTenantHsmInstance." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSingleTenantHsmInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest} CreateSingleTenantHsmInstanceRequest
+                         */
+                        CreateSingleTenantHsmInstanceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.singleTenantHsmInstanceId != null)
+                                message.singleTenantHsmInstanceId = String(object.singleTenantHsmInstanceId);
+                            if (object.singleTenantHsmInstance != null) {
+                                if (typeof object.singleTenantHsmInstance !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest.singleTenantHsmInstance: object expected");
+                                message.singleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstance.fromObject(object.singleTenantHsmInstance);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSingleTenantHsmInstanceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest} message CreateSingleTenantHsmInstanceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSingleTenantHsmInstanceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.singleTenantHsmInstanceId = "";
+                                object.singleTenantHsmInstance = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.singleTenantHsmInstanceId != null && message.hasOwnProperty("singleTenantHsmInstanceId"))
+                                object.singleTenantHsmInstanceId = message.singleTenantHsmInstanceId;
+                            if (message.singleTenantHsmInstance != null && message.hasOwnProperty("singleTenantHsmInstance"))
+                                object.singleTenantHsmInstance = $root.google.cloud.kms.v1.SingleTenantHsmInstance.toObject(message.singleTenantHsmInstance, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSingleTenantHsmInstanceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSingleTenantHsmInstanceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSingleTenantHsmInstanceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSingleTenantHsmInstanceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest";
+                        };
+    
+                        return CreateSingleTenantHsmInstanceRequest;
+                    })();
+    
+                    v1.CreateSingleTenantHsmInstanceMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateSingleTenantHsmInstanceMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ICreateSingleTenantHsmInstanceMetadata
+                         */
+    
+                        /**
+                         * Constructs a new CreateSingleTenantHsmInstanceMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a CreateSingleTenantHsmInstanceMetadata.
+                         * @implements ICreateSingleTenantHsmInstanceMetadata
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata=} [properties] Properties to set
+                         */
+                        function CreateSingleTenantHsmInstanceMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CreateSingleTenantHsmInstanceMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata} CreateSingleTenantHsmInstanceMetadata instance
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.create = function create(properties) {
+                            return new CreateSingleTenantHsmInstanceMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceMetadata message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata} message CreateSingleTenantHsmInstanceMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata} message CreateSingleTenantHsmInstanceMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata} CreateSingleTenantHsmInstanceMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata} CreateSingleTenantHsmInstanceMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSingleTenantHsmInstanceMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSingleTenantHsmInstanceMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata} CreateSingleTenantHsmInstanceMetadata
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata)
+                                return object;
+                            return new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSingleTenantHsmInstanceMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata} message CreateSingleTenantHsmInstanceMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CreateSingleTenantHsmInstanceMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSingleTenantHsmInstanceMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSingleTenantHsmInstanceMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata";
+                        };
+    
+                        return CreateSingleTenantHsmInstanceMetadata;
+                    })();
+    
+                    v1.CreateSingleTenantHsmInstanceProposalRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ICreateSingleTenantHsmInstanceProposalRequest
+                         * @property {string|null} [parent] CreateSingleTenantHsmInstanceProposalRequest parent
+                         * @property {string|null} [singleTenantHsmInstanceProposalId] CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposalId
+                         * @property {google.cloud.kms.v1.ISingleTenantHsmInstanceProposal|null} [singleTenantHsmInstanceProposal] CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposal
+                         */
+    
+                        /**
+                         * Constructs a new CreateSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a CreateSingleTenantHsmInstanceProposalRequest.
+                         * @implements ICreateSingleTenantHsmInstanceProposalRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         */
+                        function CreateSingleTenantHsmInstanceProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSingleTenantHsmInstanceProposalRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposalId.
+                         * @member {string} singleTenantHsmInstanceProposalId
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.prototype.singleTenantHsmInstanceProposalId = "";
+    
+                        /**
+                         * CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposal.
+                         * @member {google.cloud.kms.v1.ISingleTenantHsmInstanceProposal|null|undefined} singleTenantHsmInstanceProposal
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.prototype.singleTenantHsmInstanceProposal = null;
+    
+                        /**
+                         * Creates a new CreateSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest} CreateSingleTenantHsmInstanceProposalRequest instance
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.create = function create(properties) {
+                            return new CreateSingleTenantHsmInstanceProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest} message CreateSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.singleTenantHsmInstanceProposalId != null && Object.hasOwnProperty.call(message, "singleTenantHsmInstanceProposalId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.singleTenantHsmInstanceProposalId);
+                            if (message.singleTenantHsmInstanceProposal != null && Object.hasOwnProperty.call(message, "singleTenantHsmInstanceProposal"))
+                                $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.encode(message.singleTenantHsmInstanceProposal, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest} message CreateSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest} CreateSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.singleTenantHsmInstanceProposalId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.singleTenantHsmInstanceProposal = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest} CreateSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSingleTenantHsmInstanceProposalRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.singleTenantHsmInstanceProposalId != null && message.hasOwnProperty("singleTenantHsmInstanceProposalId"))
+                                if (!$util.isString(message.singleTenantHsmInstanceProposalId))
+                                    return "singleTenantHsmInstanceProposalId: string expected";
+                            if (message.singleTenantHsmInstanceProposal != null && message.hasOwnProperty("singleTenantHsmInstanceProposal")) {
+                                var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.verify(message.singleTenantHsmInstanceProposal);
+                                if (error)
+                                    return "singleTenantHsmInstanceProposal." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest} CreateSingleTenantHsmInstanceProposalRequest
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.singleTenantHsmInstanceProposalId != null)
+                                message.singleTenantHsmInstanceProposalId = String(object.singleTenantHsmInstanceProposalId);
+                            if (object.singleTenantHsmInstanceProposal != null) {
+                                if (typeof object.singleTenantHsmInstanceProposal !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest.singleTenantHsmInstanceProposal: object expected");
+                                message.singleTenantHsmInstanceProposal = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.fromObject(object.singleTenantHsmInstanceProposal);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest} message CreateSingleTenantHsmInstanceProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.singleTenantHsmInstanceProposalId = "";
+                                object.singleTenantHsmInstanceProposal = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.singleTenantHsmInstanceProposalId != null && message.hasOwnProperty("singleTenantHsmInstanceProposalId"))
+                                object.singleTenantHsmInstanceProposalId = message.singleTenantHsmInstanceProposalId;
+                            if (message.singleTenantHsmInstanceProposal != null && message.hasOwnProperty("singleTenantHsmInstanceProposal"))
+                                object.singleTenantHsmInstanceProposal = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.toObject(message.singleTenantHsmInstanceProposal, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSingleTenantHsmInstanceProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSingleTenantHsmInstanceProposalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSingleTenantHsmInstanceProposalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest";
+                        };
+    
+                        return CreateSingleTenantHsmInstanceProposalRequest;
+                    })();
+    
+                    v1.CreateSingleTenantHsmInstanceProposalMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateSingleTenantHsmInstanceProposalMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @interface ICreateSingleTenantHsmInstanceProposalMetadata
+                         */
+    
+                        /**
+                         * Constructs a new CreateSingleTenantHsmInstanceProposalMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a CreateSingleTenantHsmInstanceProposalMetadata.
+                         * @implements ICreateSingleTenantHsmInstanceProposalMetadata
+                         * @constructor
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata=} [properties] Properties to set
+                         */
+                        function CreateSingleTenantHsmInstanceProposalMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CreateSingleTenantHsmInstanceProposalMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata} CreateSingleTenantHsmInstanceProposalMetadata instance
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.create = function create(properties) {
+                            return new CreateSingleTenantHsmInstanceProposalMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceProposalMetadata message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata} message CreateSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSingleTenantHsmInstanceProposalMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata} message CreateSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata} CreateSingleTenantHsmInstanceProposalMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata} CreateSingleTenantHsmInstanceProposalMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSingleTenantHsmInstanceProposalMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSingleTenantHsmInstanceProposalMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata} CreateSingleTenantHsmInstanceProposalMetadata
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata)
+                                return object;
+                            return new $root.google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSingleTenantHsmInstanceProposalMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata} message CreateSingleTenantHsmInstanceProposalMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CreateSingleTenantHsmInstanceProposalMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSingleTenantHsmInstanceProposalMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSingleTenantHsmInstanceProposalMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata";
+                        };
+    
+                        return CreateSingleTenantHsmInstanceProposalMetadata;
+                    })();
+    
+                    v1.GetSingleTenantHsmInstanceProposalRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IGetSingleTenantHsmInstanceProposalRequest
+                         * @property {string|null} [name] GetSingleTenantHsmInstanceProposalRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a GetSingleTenantHsmInstanceProposalRequest.
+                         * @implements IGetSingleTenantHsmInstanceProposalRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         */
+                        function GetSingleTenantHsmInstanceProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSingleTenantHsmInstanceProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest} GetSingleTenantHsmInstanceProposalRequest instance
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.create = function create(properties) {
+                            return new GetSingleTenantHsmInstanceProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest} message GetSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest} message GetSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest} GetSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest} GetSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSingleTenantHsmInstanceProposalRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest} GetSingleTenantHsmInstanceProposalRequest
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest} message GetSingleTenantHsmInstanceProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSingleTenantHsmInstanceProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSingleTenantHsmInstanceProposalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSingleTenantHsmInstanceProposalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest";
+                        };
+    
+                        return GetSingleTenantHsmInstanceProposalRequest;
+                    })();
+    
+                    v1.ApproveSingleTenantHsmInstanceProposalRequest = (function() {
+    
+                        /**
+                         * Properties of an ApproveSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IApproveSingleTenantHsmInstanceProposalRequest
+                         * @property {string|null} [name] ApproveSingleTenantHsmInstanceProposalRequest name
+                         * @property {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply|null} [quorumReply] ApproveSingleTenantHsmInstanceProposalRequest quorumReply
+                         * @property {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply|null} [requiredActionQuorumReply] ApproveSingleTenantHsmInstanceProposalRequest requiredActionQuorumReply
+                         */
+    
+                        /**
+                         * Constructs a new ApproveSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an ApproveSingleTenantHsmInstanceProposalRequest.
+                         * @implements IApproveSingleTenantHsmInstanceProposalRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         */
+                        function ApproveSingleTenantHsmInstanceProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApproveSingleTenantHsmInstanceProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.prototype.name = "";
+    
+                        /**
+                         * ApproveSingleTenantHsmInstanceProposalRequest quorumReply.
+                         * @member {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply|null|undefined} quorumReply
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.prototype.quorumReply = null;
+    
+                        /**
+                         * ApproveSingleTenantHsmInstanceProposalRequest requiredActionQuorumReply.
+                         * @member {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply|null|undefined} requiredActionQuorumReply
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.prototype.requiredActionQuorumReply = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ApproveSingleTenantHsmInstanceProposalRequest approvalPayload.
+                         * @member {"quorumReply"|"requiredActionQuorumReply"|undefined} approvalPayload
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ApproveSingleTenantHsmInstanceProposalRequest.prototype, "approvalPayload", {
+                            get: $util.oneOfGetter($oneOfFields = ["quorumReply", "requiredActionQuorumReply"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ApproveSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest} ApproveSingleTenantHsmInstanceProposalRequest instance
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.create = function create(properties) {
+                            return new ApproveSingleTenantHsmInstanceProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest} message ApproveSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.quorumReply != null && Object.hasOwnProperty.call(message, "quorumReply"))
+                                $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.encode(message.quorumReply, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requiredActionQuorumReply != null && Object.hasOwnProperty.call(message, "requiredActionQuorumReply"))
+                                $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.encode(message.requiredActionQuorumReply, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest} message ApproveSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApproveSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest} ApproveSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.quorumReply = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requiredActionQuorumReply = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApproveSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest} ApproveSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApproveSingleTenantHsmInstanceProposalRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.quorumReply != null && message.hasOwnProperty("quorumReply")) {
+                                properties.approvalPayload = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.verify(message.quorumReply);
+                                    if (error)
+                                        return "quorumReply." + error;
+                                }
+                            }
+                            if (message.requiredActionQuorumReply != null && message.hasOwnProperty("requiredActionQuorumReply")) {
+                                if (properties.approvalPayload === 1)
+                                    return "approvalPayload: multiple values";
+                                properties.approvalPayload = 1;
+                                {
+                                    var error = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.verify(message.requiredActionQuorumReply);
+                                    if (error)
+                                        return "requiredActionQuorumReply." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApproveSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest} ApproveSingleTenantHsmInstanceProposalRequest
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.quorumReply != null) {
+                                if (typeof object.quorumReply !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.quorumReply: object expected");
+                                message.quorumReply = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.fromObject(object.quorumReply);
+                            }
+                            if (object.requiredActionQuorumReply != null) {
+                                if (typeof object.requiredActionQuorumReply !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.requiredActionQuorumReply: object expected");
+                                message.requiredActionQuorumReply = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.fromObject(object.requiredActionQuorumReply);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApproveSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest} message ApproveSingleTenantHsmInstanceProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.quorumReply != null && message.hasOwnProperty("quorumReply")) {
+                                object.quorumReply = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.toObject(message.quorumReply, options);
+                                if (options.oneofs)
+                                    object.approvalPayload = "quorumReply";
+                            }
+                            if (message.requiredActionQuorumReply != null && message.hasOwnProperty("requiredActionQuorumReply")) {
+                                object.requiredActionQuorumReply = $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.toObject(message.requiredActionQuorumReply, options);
+                                if (options.oneofs)
+                                    object.approvalPayload = "requiredActionQuorumReply";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApproveSingleTenantHsmInstanceProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ApproveSingleTenantHsmInstanceProposalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ApproveSingleTenantHsmInstanceProposalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest";
+                        };
+    
+                        ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply = (function() {
+    
+                            /**
+                             * Properties of a QuorumReply.
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                             * @interface IQuorumReply
+                             * @property {Array.<google.cloud.kms.v1.IChallengeReply>|null} [challengeReplies] QuorumReply challengeReplies
+                             */
+    
+                            /**
+                             * Constructs a new QuorumReply.
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                             * @classdesc Represents a QuorumReply.
+                             * @implements IQuorumReply
+                             * @constructor
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply=} [properties] Properties to set
+                             */
+                            function QuorumReply(properties) {
+                                this.challengeReplies = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QuorumReply challengeReplies.
+                             * @member {Array.<google.cloud.kms.v1.IChallengeReply>} challengeReplies
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @instance
+                             */
+                            QuorumReply.prototype.challengeReplies = $util.emptyArray;
+    
+                            /**
+                             * Creates a new QuorumReply instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply} QuorumReply instance
+                             */
+                            QuorumReply.create = function create(properties) {
+                                return new QuorumReply(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QuorumReply message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply} message QuorumReply message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuorumReply.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.challengeReplies != null && message.challengeReplies.length)
+                                    for (var i = 0; i < message.challengeReplies.length; ++i)
+                                        $root.google.cloud.kms.v1.ChallengeReply.encode(message.challengeReplies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QuorumReply message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply} message QuorumReply message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QuorumReply.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QuorumReply message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply} QuorumReply
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuorumReply.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.challengeReplies && message.challengeReplies.length))
+                                                message.challengeReplies = [];
+                                            message.challengeReplies.push($root.google.cloud.kms.v1.ChallengeReply.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QuorumReply message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply} QuorumReply
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QuorumReply.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QuorumReply message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QuorumReply.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.challengeReplies != null && message.hasOwnProperty("challengeReplies")) {
+                                    if (!Array.isArray(message.challengeReplies))
+                                        return "challengeReplies: array expected";
+                                    for (var i = 0; i < message.challengeReplies.length; ++i) {
+                                        var error = $root.google.cloud.kms.v1.ChallengeReply.verify(message.challengeReplies[i]);
+                                        if (error)
+                                            return "challengeReplies." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QuorumReply message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply} QuorumReply
+                             */
+                            QuorumReply.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply();
+                                if (object.challengeReplies) {
+                                    if (!Array.isArray(object.challengeReplies))
+                                        throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.challengeReplies: array expected");
+                                    message.challengeReplies = [];
+                                    for (var i = 0; i < object.challengeReplies.length; ++i) {
+                                        if (typeof object.challengeReplies[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.challengeReplies: object expected");
+                                        message.challengeReplies[i] = $root.google.cloud.kms.v1.ChallengeReply.fromObject(object.challengeReplies[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QuorumReply message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply} message QuorumReply
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QuorumReply.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.challengeReplies = [];
+                                if (message.challengeReplies && message.challengeReplies.length) {
+                                    object.challengeReplies = [];
+                                    for (var j = 0; j < message.challengeReplies.length; ++j)
+                                        object.challengeReplies[j] = $root.google.cloud.kms.v1.ChallengeReply.toObject(message.challengeReplies[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QuorumReply to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QuorumReply.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QuorumReply
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QuorumReply.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply";
+                            };
+    
+                            return QuorumReply;
+                        })();
+    
+                        ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply = (function() {
+    
+                            /**
+                             * Properties of a RequiredActionQuorumReply.
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                             * @interface IRequiredActionQuorumReply
+                             * @property {Array.<google.cloud.kms.v1.IChallengeReply>|null} [requiredChallengeReplies] RequiredActionQuorumReply requiredChallengeReplies
+                             * @property {Array.<google.cloud.kms.v1.IChallengeReply>|null} [quorumChallengeReplies] RequiredActionQuorumReply quorumChallengeReplies
+                             */
+    
+                            /**
+                             * Constructs a new RequiredActionQuorumReply.
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest
+                             * @classdesc Represents a RequiredActionQuorumReply.
+                             * @implements IRequiredActionQuorumReply
+                             * @constructor
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply=} [properties] Properties to set
+                             */
+                            function RequiredActionQuorumReply(properties) {
+                                this.requiredChallengeReplies = [];
+                                this.quorumChallengeReplies = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RequiredActionQuorumReply requiredChallengeReplies.
+                             * @member {Array.<google.cloud.kms.v1.IChallengeReply>} requiredChallengeReplies
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @instance
+                             */
+                            RequiredActionQuorumReply.prototype.requiredChallengeReplies = $util.emptyArray;
+    
+                            /**
+                             * RequiredActionQuorumReply quorumChallengeReplies.
+                             * @member {Array.<google.cloud.kms.v1.IChallengeReply>} quorumChallengeReplies
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @instance
+                             */
+                            RequiredActionQuorumReply.prototype.quorumChallengeReplies = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RequiredActionQuorumReply instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply=} [properties] Properties to set
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply} RequiredActionQuorumReply instance
+                             */
+                            RequiredActionQuorumReply.create = function create(properties) {
+                                return new RequiredActionQuorumReply(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RequiredActionQuorumReply message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply} message RequiredActionQuorumReply message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequiredActionQuorumReply.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.requiredChallengeReplies != null && message.requiredChallengeReplies.length)
+                                    for (var i = 0; i < message.requiredChallengeReplies.length; ++i)
+                                        $root.google.cloud.kms.v1.ChallengeReply.encode(message.requiredChallengeReplies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.quorumChallengeReplies != null && message.quorumChallengeReplies.length)
+                                    for (var i = 0; i < message.quorumChallengeReplies.length; ++i)
+                                        $root.google.cloud.kms.v1.ChallengeReply.encode(message.quorumChallengeReplies[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RequiredActionQuorumReply message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply} message RequiredActionQuorumReply message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RequiredActionQuorumReply.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RequiredActionQuorumReply message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply} RequiredActionQuorumReply
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequiredActionQuorumReply.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.requiredChallengeReplies && message.requiredChallengeReplies.length))
+                                                message.requiredChallengeReplies = [];
+                                            message.requiredChallengeReplies.push($root.google.cloud.kms.v1.ChallengeReply.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.quorumChallengeReplies && message.quorumChallengeReplies.length))
+                                                message.quorumChallengeReplies = [];
+                                            message.quorumChallengeReplies.push($root.google.cloud.kms.v1.ChallengeReply.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RequiredActionQuorumReply message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply} RequiredActionQuorumReply
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RequiredActionQuorumReply.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RequiredActionQuorumReply message.
+                             * @function verify
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RequiredActionQuorumReply.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.requiredChallengeReplies != null && message.hasOwnProperty("requiredChallengeReplies")) {
+                                    if (!Array.isArray(message.requiredChallengeReplies))
+                                        return "requiredChallengeReplies: array expected";
+                                    for (var i = 0; i < message.requiredChallengeReplies.length; ++i) {
+                                        var error = $root.google.cloud.kms.v1.ChallengeReply.verify(message.requiredChallengeReplies[i]);
+                                        if (error)
+                                            return "requiredChallengeReplies." + error;
+                                    }
+                                }
+                                if (message.quorumChallengeReplies != null && message.hasOwnProperty("quorumChallengeReplies")) {
+                                    if (!Array.isArray(message.quorumChallengeReplies))
+                                        return "quorumChallengeReplies: array expected";
+                                    for (var i = 0; i < message.quorumChallengeReplies.length; ++i) {
+                                        var error = $root.google.cloud.kms.v1.ChallengeReply.verify(message.quorumChallengeReplies[i]);
+                                        if (error)
+                                            return "quorumChallengeReplies." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RequiredActionQuorumReply message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply} RequiredActionQuorumReply
+                             */
+                            RequiredActionQuorumReply.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply)
+                                    return object;
+                                var message = new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply();
+                                if (object.requiredChallengeReplies) {
+                                    if (!Array.isArray(object.requiredChallengeReplies))
+                                        throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.requiredChallengeReplies: array expected");
+                                    message.requiredChallengeReplies = [];
+                                    for (var i = 0; i < object.requiredChallengeReplies.length; ++i) {
+                                        if (typeof object.requiredChallengeReplies[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.requiredChallengeReplies: object expected");
+                                        message.requiredChallengeReplies[i] = $root.google.cloud.kms.v1.ChallengeReply.fromObject(object.requiredChallengeReplies[i]);
+                                    }
+                                }
+                                if (object.quorumChallengeReplies) {
+                                    if (!Array.isArray(object.quorumChallengeReplies))
+                                        throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.quorumChallengeReplies: array expected");
+                                    message.quorumChallengeReplies = [];
+                                    for (var i = 0; i < object.quorumChallengeReplies.length; ++i) {
+                                        if (typeof object.quorumChallengeReplies[i] !== "object")
+                                            throw TypeError(".google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.quorumChallengeReplies: object expected");
+                                        message.quorumChallengeReplies[i] = $root.google.cloud.kms.v1.ChallengeReply.fromObject(object.quorumChallengeReplies[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RequiredActionQuorumReply message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply} message RequiredActionQuorumReply
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RequiredActionQuorumReply.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.requiredChallengeReplies = [];
+                                    object.quorumChallengeReplies = [];
+                                }
+                                if (message.requiredChallengeReplies && message.requiredChallengeReplies.length) {
+                                    object.requiredChallengeReplies = [];
+                                    for (var j = 0; j < message.requiredChallengeReplies.length; ++j)
+                                        object.requiredChallengeReplies[j] = $root.google.cloud.kms.v1.ChallengeReply.toObject(message.requiredChallengeReplies[j], options);
+                                }
+                                if (message.quorumChallengeReplies && message.quorumChallengeReplies.length) {
+                                    object.quorumChallengeReplies = [];
+                                    for (var j = 0; j < message.quorumChallengeReplies.length; ++j)
+                                        object.quorumChallengeReplies[j] = $root.google.cloud.kms.v1.ChallengeReply.toObject(message.quorumChallengeReplies[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RequiredActionQuorumReply to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RequiredActionQuorumReply.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RequiredActionQuorumReply
+                             * @function getTypeUrl
+                             * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RequiredActionQuorumReply.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply";
+                            };
+    
+                            return RequiredActionQuorumReply;
+                        })();
+    
+                        return ApproveSingleTenantHsmInstanceProposalRequest;
+                    })();
+    
+                    v1.ApproveSingleTenantHsmInstanceProposalResponse = (function() {
+    
+                        /**
+                         * Properties of an ApproveSingleTenantHsmInstanceProposalResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IApproveSingleTenantHsmInstanceProposalResponse
+                         */
+    
+                        /**
+                         * Constructs a new ApproveSingleTenantHsmInstanceProposalResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an ApproveSingleTenantHsmInstanceProposalResponse.
+                         * @implements IApproveSingleTenantHsmInstanceProposalResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse=} [properties] Properties to set
+                         */
+                        function ApproveSingleTenantHsmInstanceProposalResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ApproveSingleTenantHsmInstanceProposalResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse} ApproveSingleTenantHsmInstanceProposalResponse instance
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.create = function create(properties) {
+                            return new ApproveSingleTenantHsmInstanceProposalResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveSingleTenantHsmInstanceProposalResponse message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse} message ApproveSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveSingleTenantHsmInstanceProposalResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse} message ApproveSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApproveSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse} ApproveSingleTenantHsmInstanceProposalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApproveSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse} ApproveSingleTenantHsmInstanceProposalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApproveSingleTenantHsmInstanceProposalResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApproveSingleTenantHsmInstanceProposalResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse} ApproveSingleTenantHsmInstanceProposalResponse
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse)
+                                return object;
+                            return new $root.google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApproveSingleTenantHsmInstanceProposalResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse} message ApproveSingleTenantHsmInstanceProposalResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ApproveSingleTenantHsmInstanceProposalResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ApproveSingleTenantHsmInstanceProposalResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ApproveSingleTenantHsmInstanceProposalResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse";
+                        };
+    
+                        return ApproveSingleTenantHsmInstanceProposalResponse;
+                    })();
+    
+                    v1.ExecuteSingleTenantHsmInstanceProposalRequest = (function() {
+    
+                        /**
+                         * Properties of an ExecuteSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IExecuteSingleTenantHsmInstanceProposalRequest
+                         * @property {string|null} [name] ExecuteSingleTenantHsmInstanceProposalRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an ExecuteSingleTenantHsmInstanceProposalRequest.
+                         * @implements IExecuteSingleTenantHsmInstanceProposalRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         */
+                        function ExecuteSingleTenantHsmInstanceProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExecuteSingleTenantHsmInstanceProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ExecuteSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest} ExecuteSingleTenantHsmInstanceProposalRequest instance
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.create = function create(properties) {
+                            return new ExecuteSingleTenantHsmInstanceProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest} message ExecuteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest} message ExecuteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest} ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest} ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteSingleTenantHsmInstanceProposalRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest} ExecuteSingleTenantHsmInstanceProposalRequest
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest} message ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExecuteSingleTenantHsmInstanceProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest";
+                        };
+    
+                        return ExecuteSingleTenantHsmInstanceProposalRequest;
+                    })();
+    
+                    v1.ExecuteSingleTenantHsmInstanceProposalResponse = (function() {
+    
+                        /**
+                         * Properties of an ExecuteSingleTenantHsmInstanceProposalResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IExecuteSingleTenantHsmInstanceProposalResponse
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteSingleTenantHsmInstanceProposalResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an ExecuteSingleTenantHsmInstanceProposalResponse.
+                         * @implements IExecuteSingleTenantHsmInstanceProposalResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse=} [properties] Properties to set
+                         */
+                        function ExecuteSingleTenantHsmInstanceProposalResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ExecuteSingleTenantHsmInstanceProposalResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse} ExecuteSingleTenantHsmInstanceProposalResponse instance
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.create = function create(properties) {
+                            return new ExecuteSingleTenantHsmInstanceProposalResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteSingleTenantHsmInstanceProposalResponse message. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse} message ExecuteSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteSingleTenantHsmInstanceProposalResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse} message ExecuteSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse} ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse} ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteSingleTenantHsmInstanceProposalResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteSingleTenantHsmInstanceProposalResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse} ExecuteSingleTenantHsmInstanceProposalResponse
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse)
+                                return object;
+                            return new $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteSingleTenantHsmInstanceProposalResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse} message ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ExecuteSingleTenantHsmInstanceProposalResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse";
+                        };
+    
+                        return ExecuteSingleTenantHsmInstanceProposalResponse;
+                    })();
+    
+                    v1.ExecuteSingleTenantHsmInstanceProposalMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExecuteSingleTenantHsmInstanceProposalMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IExecuteSingleTenantHsmInstanceProposalMetadata
+                         */
+    
+                        /**
+                         * Constructs a new ExecuteSingleTenantHsmInstanceProposalMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an ExecuteSingleTenantHsmInstanceProposalMetadata.
+                         * @implements IExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata=} [properties] Properties to set
+                         */
+                        function ExecuteSingleTenantHsmInstanceProposalMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ExecuteSingleTenantHsmInstanceProposalMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata} ExecuteSingleTenantHsmInstanceProposalMetadata instance
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.create = function create(properties) {
+                            return new ExecuteSingleTenantHsmInstanceProposalMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteSingleTenantHsmInstanceProposalMetadata message. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata} message ExecuteSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExecuteSingleTenantHsmInstanceProposalMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata} message ExecuteSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExecuteSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata} ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExecuteSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata} ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExecuteSingleTenantHsmInstanceProposalMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExecuteSingleTenantHsmInstanceProposalMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata} ExecuteSingleTenantHsmInstanceProposalMetadata
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata)
+                                return object;
+                            return new $root.google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExecuteSingleTenantHsmInstanceProposalMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata} message ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ExecuteSingleTenantHsmInstanceProposalMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExecuteSingleTenantHsmInstanceProposalMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata";
+                        };
+    
+                        return ExecuteSingleTenantHsmInstanceProposalMetadata;
+                    })();
+    
+                    v1.ListSingleTenantHsmInstanceProposalsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSingleTenantHsmInstanceProposalsRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListSingleTenantHsmInstanceProposalsRequest
+                         * @property {string|null} [parent] ListSingleTenantHsmInstanceProposalsRequest parent
+                         * @property {number|null} [pageSize] ListSingleTenantHsmInstanceProposalsRequest pageSize
+                         * @property {string|null} [pageToken] ListSingleTenantHsmInstanceProposalsRequest pageToken
+                         * @property {string|null} [filter] ListSingleTenantHsmInstanceProposalsRequest filter
+                         * @property {string|null} [orderBy] ListSingleTenantHsmInstanceProposalsRequest orderBy
+                         * @property {boolean|null} [showDeleted] ListSingleTenantHsmInstanceProposalsRequest showDeleted
+                         */
+    
+                        /**
+                         * Constructs a new ListSingleTenantHsmInstanceProposalsRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListSingleTenantHsmInstanceProposalsRequest.
+                         * @implements IListSingleTenantHsmInstanceProposalsRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest=} [properties] Properties to set
+                         */
+                        function ListSingleTenantHsmInstanceProposalsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsRequest showDeleted.
+                         * @member {boolean} showDeleted
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.prototype.showDeleted = false;
+    
+                        /**
+                         * Creates a new ListSingleTenantHsmInstanceProposalsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest} ListSingleTenantHsmInstanceProposalsRequest instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.create = function create(properties) {
+                            return new ListSingleTenantHsmInstanceProposalsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstanceProposalsRequest message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest} message ListSingleTenantHsmInstanceProposalsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.showDeleted != null && Object.hasOwnProperty.call(message, "showDeleted"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.showDeleted);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstanceProposalsRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest} message ListSingleTenantHsmInstanceProposalsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstanceProposalsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest} ListSingleTenantHsmInstanceProposalsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.showDeleted = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstanceProposalsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest} ListSingleTenantHsmInstanceProposalsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSingleTenantHsmInstanceProposalsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                if (typeof message.showDeleted !== "boolean")
+                                    return "showDeleted: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSingleTenantHsmInstanceProposalsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest} ListSingleTenantHsmInstanceProposalsRequest
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.showDeleted != null)
+                                message.showDeleted = Boolean(object.showDeleted);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSingleTenantHsmInstanceProposalsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest} message ListSingleTenantHsmInstanceProposalsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.showDeleted = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.showDeleted != null && message.hasOwnProperty("showDeleted"))
+                                object.showDeleted = message.showDeleted;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSingleTenantHsmInstanceProposalsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSingleTenantHsmInstanceProposalsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSingleTenantHsmInstanceProposalsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest";
+                        };
+    
+                        return ListSingleTenantHsmInstanceProposalsRequest;
+                    })();
+    
+                    v1.ListSingleTenantHsmInstanceProposalsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSingleTenantHsmInstanceProposalsResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListSingleTenantHsmInstanceProposalsResponse
+                         * @property {Array.<google.cloud.kms.v1.ISingleTenantHsmInstanceProposal>|null} [singleTenantHsmInstanceProposals] ListSingleTenantHsmInstanceProposalsResponse singleTenantHsmInstanceProposals
+                         * @property {string|null} [nextPageToken] ListSingleTenantHsmInstanceProposalsResponse nextPageToken
+                         * @property {number|null} [totalSize] ListSingleTenantHsmInstanceProposalsResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListSingleTenantHsmInstanceProposalsResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListSingleTenantHsmInstanceProposalsResponse.
+                         * @implements IListSingleTenantHsmInstanceProposalsResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse=} [properties] Properties to set
+                         */
+                        function ListSingleTenantHsmInstanceProposalsResponse(properties) {
+                            this.singleTenantHsmInstanceProposals = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsResponse singleTenantHsmInstanceProposals.
+                         * @member {Array.<google.cloud.kms.v1.ISingleTenantHsmInstanceProposal>} singleTenantHsmInstanceProposals
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.prototype.singleTenantHsmInstanceProposals = $util.emptyArray;
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSingleTenantHsmInstanceProposalsResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * Creates a new ListSingleTenantHsmInstanceProposalsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse} ListSingleTenantHsmInstanceProposalsResponse instance
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.create = function create(properties) {
+                            return new ListSingleTenantHsmInstanceProposalsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstanceProposalsResponse message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse} message ListSingleTenantHsmInstanceProposalsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.singleTenantHsmInstanceProposals != null && message.singleTenantHsmInstanceProposals.length)
+                                for (var i = 0; i < message.singleTenantHsmInstanceProposals.length; ++i)
+                                    $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.encode(message.singleTenantHsmInstanceProposals[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSingleTenantHsmInstanceProposalsResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse} message ListSingleTenantHsmInstanceProposalsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstanceProposalsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse} ListSingleTenantHsmInstanceProposalsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.singleTenantHsmInstanceProposals && message.singleTenantHsmInstanceProposals.length))
+                                            message.singleTenantHsmInstanceProposals = [];
+                                        message.singleTenantHsmInstanceProposals.push($root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSingleTenantHsmInstanceProposalsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse} ListSingleTenantHsmInstanceProposalsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSingleTenantHsmInstanceProposalsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.singleTenantHsmInstanceProposals != null && message.hasOwnProperty("singleTenantHsmInstanceProposals")) {
+                                if (!Array.isArray(message.singleTenantHsmInstanceProposals))
+                                    return "singleTenantHsmInstanceProposals: array expected";
+                                for (var i = 0; i < message.singleTenantHsmInstanceProposals.length; ++i) {
+                                    var error = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.verify(message.singleTenantHsmInstanceProposals[i]);
+                                    if (error)
+                                        return "singleTenantHsmInstanceProposals." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSingleTenantHsmInstanceProposalsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse} ListSingleTenantHsmInstanceProposalsResponse
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse();
+                            if (object.singleTenantHsmInstanceProposals) {
+                                if (!Array.isArray(object.singleTenantHsmInstanceProposals))
+                                    throw TypeError(".google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse.singleTenantHsmInstanceProposals: array expected");
+                                message.singleTenantHsmInstanceProposals = [];
+                                for (var i = 0; i < object.singleTenantHsmInstanceProposals.length; ++i) {
+                                    if (typeof object.singleTenantHsmInstanceProposals[i] !== "object")
+                                        throw TypeError(".google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse.singleTenantHsmInstanceProposals: object expected");
+                                    message.singleTenantHsmInstanceProposals[i] = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.fromObject(object.singleTenantHsmInstanceProposals[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSingleTenantHsmInstanceProposalsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse} message ListSingleTenantHsmInstanceProposalsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.singleTenantHsmInstanceProposals = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
+                            if (message.singleTenantHsmInstanceProposals && message.singleTenantHsmInstanceProposals.length) {
+                                object.singleTenantHsmInstanceProposals = [];
+                                for (var j = 0; j < message.singleTenantHsmInstanceProposals.length; ++j)
+                                    object.singleTenantHsmInstanceProposals[j] = $root.google.cloud.kms.v1.SingleTenantHsmInstanceProposal.toObject(message.singleTenantHsmInstanceProposals[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSingleTenantHsmInstanceProposalsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSingleTenantHsmInstanceProposalsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSingleTenantHsmInstanceProposalsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse";
+                        };
+    
+                        return ListSingleTenantHsmInstanceProposalsResponse;
+                    })();
+    
+                    v1.DeleteSingleTenantHsmInstanceProposalRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDeleteSingleTenantHsmInstanceProposalRequest
+                         * @property {string|null} [name] DeleteSingleTenantHsmInstanceProposalRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSingleTenantHsmInstanceProposalRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DeleteSingleTenantHsmInstanceProposalRequest.
+                         * @implements IDeleteSingleTenantHsmInstanceProposalRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         */
+                        function DeleteSingleTenantHsmInstanceProposalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSingleTenantHsmInstanceProposalRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest} DeleteSingleTenantHsmInstanceProposalRequest instance
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.create = function create(properties) {
+                            return new DeleteSingleTenantHsmInstanceProposalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest} message DeleteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest} message DeleteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest} DeleteSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest} DeleteSingleTenantHsmInstanceProposalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSingleTenantHsmInstanceProposalRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest} DeleteSingleTenantHsmInstanceProposalRequest
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest} message DeleteSingleTenantHsmInstanceProposalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSingleTenantHsmInstanceProposalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSingleTenantHsmInstanceProposalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSingleTenantHsmInstanceProposalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest";
+                        };
+    
+                        return DeleteSingleTenantHsmInstanceProposalRequest;
                     })();
     
                     v1.KeyRing = (function() {
@@ -6679,12 +15340,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KeyRing.decode = function decode(reader, length) {
+                        KeyRing.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.KeyRing();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -7037,12 +15700,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoKey.decode = function decode(reader, length) {
+                        CryptoKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CryptoKey(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -7165,6 +15830,7 @@
                                 case 6:
                                 case 7:
                                 case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -7266,6 +15932,10 @@
                             case "MAC":
                             case 9:
                                 message.purpose = 9;
+                                break;
+                            case "KEY_ENCAPSULATION":
+                            case 10:
+                                message.purpose = 10;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -7409,6 +16079,7 @@
                          * @property {number} ASYMMETRIC_DECRYPT=6 ASYMMETRIC_DECRYPT value
                          * @property {number} RAW_ENCRYPT_DECRYPT=7 RAW_ENCRYPT_DECRYPT value
                          * @property {number} MAC=9 MAC value
+                         * @property {number} KEY_ENCAPSULATION=10 KEY_ENCAPSULATION value
                          */
                         CryptoKey.CryptoKeyPurpose = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7418,6 +16089,7 @@
                             values[valuesById[6] = "ASYMMETRIC_DECRYPT"] = 6;
                             values[valuesById[7] = "RAW_ENCRYPT_DECRYPT"] = 7;
                             values[valuesById[9] = "MAC"] = 9;
+                            values[valuesById[10] = "KEY_ENCAPSULATION"] = 10;
                             return values;
                         })();
     
@@ -7520,12 +16192,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoKeyVersionTemplate.decode = function decode(reader, length) {
+                        CryptoKeyVersionTemplate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CryptoKeyVersionTemplate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.protectionLevel = reader.int32();
@@ -7579,6 +16253,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -7621,8 +16296,17 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             return null;
@@ -7666,6 +16350,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -7819,13 +16507,49 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             return message;
@@ -7991,12 +16715,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KeyOperationAttestation.decode = function decode(reader, length) {
+                        KeyOperationAttestation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.KeyOperationAttestation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.format = reader.int32();
@@ -8298,12 +17024,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateChains.decode = function decode(reader, length) {
+                            CertificateChains.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.KeyOperationAttestation.CertificateChains();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.caviumCerts && message.caviumCerts.length))
@@ -8736,12 +17464,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoKeyVersion.decode = function decode(reader, length) {
+                        CryptoKeyVersion.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CryptoKeyVersion();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -8871,6 +17601,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
@@ -8913,8 +17644,17 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.attestation != null && message.hasOwnProperty("attestation")) {
@@ -9062,6 +17802,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             switch (object.algorithm) {
@@ -9215,13 +17959,49 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.attestation != null) {
@@ -9404,8 +18184,17 @@
                          * @property {number} HMAC_SHA512=35 HMAC_SHA512 value
                          * @property {number} HMAC_SHA224=36 HMAC_SHA224 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
+                         * @property {number} ML_KEM_768=47 ML_KEM_768 value
+                         * @property {number} ML_KEM_1024=48 ML_KEM_1024 value
+                         * @property {number} KEM_XWING=63 KEM_XWING value
+                         * @property {number} PQ_SIGN_ML_DSA_44=68 PQ_SIGN_ML_DSA_44 value
                          * @property {number} PQ_SIGN_ML_DSA_65=56 PQ_SIGN_ML_DSA_65 value
+                         * @property {number} PQ_SIGN_ML_DSA_87=69 PQ_SIGN_ML_DSA_87 value
                          * @property {number} PQ_SIGN_SLH_DSA_SHA2_128S=57 PQ_SIGN_SLH_DSA_SHA2_128S value
+                         * @property {number} PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256=60 PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 value
+                         * @property {number} PQ_SIGN_ML_DSA_44_EXTERNAL_MU=70 PQ_SIGN_ML_DSA_44_EXTERNAL_MU value
+                         * @property {number} PQ_SIGN_ML_DSA_65_EXTERNAL_MU=67 PQ_SIGN_ML_DSA_65_EXTERNAL_MU value
+                         * @property {number} PQ_SIGN_ML_DSA_87_EXTERNAL_MU=71 PQ_SIGN_ML_DSA_87_EXTERNAL_MU value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9445,8 +18234,17 @@
                             values[valuesById[35] = "HMAC_SHA512"] = 35;
                             values[valuesById[36] = "HMAC_SHA224"] = 36;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
+                            values[valuesById[47] = "ML_KEM_768"] = 47;
+                            values[valuesById[48] = "ML_KEM_1024"] = 48;
+                            values[valuesById[63] = "KEM_XWING"] = 63;
+                            values[valuesById[68] = "PQ_SIGN_ML_DSA_44"] = 68;
                             values[valuesById[56] = "PQ_SIGN_ML_DSA_65"] = 56;
+                            values[valuesById[69] = "PQ_SIGN_ML_DSA_87"] = 69;
                             values[valuesById[57] = "PQ_SIGN_SLH_DSA_SHA2_128S"] = 57;
+                            values[valuesById[60] = "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256"] = 60;
+                            values[valuesById[70] = "PQ_SIGN_ML_DSA_44_EXTERNAL_MU"] = 70;
+                            values[valuesById[67] = "PQ_SIGN_ML_DSA_65_EXTERNAL_MU"] = 67;
+                            values[valuesById[71] = "PQ_SIGN_ML_DSA_87_EXTERNAL_MU"] = 71;
                             return values;
                         })();
     
@@ -9595,12 +18393,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ChecksummedData.decode = function decode(reader, length) {
+                        ChecksummedData.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ChecksummedData();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.data = reader.bytes();
@@ -9891,12 +18691,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PublicKey.decode = function decode(reader, length) {
+                        PublicKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.PublicKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.pem = reader.string();
@@ -10004,8 +18806,17 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.pemCrc32c != null && message.hasOwnProperty("pemCrc32c")) {
@@ -10025,6 +18836,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.publicKeyFormat != null && message.hasOwnProperty("publicKeyFormat"))
@@ -10033,7 +18845,9 @@
                                     return "publicKeyFormat: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.publicKey != null && message.hasOwnProperty("publicKey")) {
@@ -10209,13 +19023,49 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.pemCrc32c != null) {
@@ -10252,6 +19102,10 @@
                             case 4:
                                 message.protectionLevel = 4;
                                 break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
+                                break;
                             }
                             switch (object.publicKeyFormat) {
                             default:
@@ -10268,9 +19122,17 @@
                             case 1:
                                 message.publicKeyFormat = 1;
                                 break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
                             case "NIST_PQC":
                             case 3:
                                 message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
                                 break;
                             }
                             if (object.publicKey != null) {
@@ -10352,13 +19214,17 @@
                          * @enum {number}
                          * @property {number} PUBLIC_KEY_FORMAT_UNSPECIFIED=0 PUBLIC_KEY_FORMAT_UNSPECIFIED value
                          * @property {number} PEM=1 PEM value
+                         * @property {number} DER=2 DER value
                          * @property {number} NIST_PQC=3 NIST_PQC value
+                         * @property {number} XWING_RAW_BYTES=4 XWING_RAW_BYTES value
                          */
                         PublicKey.PublicKeyFormat = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "PUBLIC_KEY_FORMAT_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PEM"] = 1;
+                            values[valuesById[2] = "DER"] = 2;
                             values[valuesById[3] = "NIST_PQC"] = 3;
+                            values[valuesById[4] = "XWING_RAW_BYTES"] = 4;
                             return values;
                         })();
     
@@ -10381,6 +19247,7 @@
                          * @property {google.cloud.kms.v1.ImportJob.ImportJobState|null} [state] ImportJob state
                          * @property {google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null} [publicKey] ImportJob publicKey
                          * @property {google.cloud.kms.v1.IKeyOperationAttestation|null} [attestation] ImportJob attestation
+                         * @property {string|null} [cryptoKeyBackend] ImportJob cryptoKeyBackend
                          */
     
                         /**
@@ -10479,6 +19346,14 @@
                         ImportJob.prototype.attestation = null;
     
                         /**
+                         * ImportJob cryptoKeyBackend.
+                         * @member {string} cryptoKeyBackend
+                         * @memberof google.cloud.kms.v1.ImportJob
+                         * @instance
+                         */
+                        ImportJob.prototype.cryptoKeyBackend = "";
+    
+                        /**
                          * Creates a new ImportJob instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.ImportJob
@@ -10522,6 +19397,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.protectionLevel);
                             if (message.expireEventTime != null && Object.hasOwnProperty.call(message, "expireEventTime"))
                                 $root.google.protobuf.Timestamp.encode(message.expireEventTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.cryptoKeyBackend != null && Object.hasOwnProperty.call(message, "cryptoKeyBackend"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.cryptoKeyBackend);
                             return writer;
                         };
     
@@ -10549,12 +19426,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportJob.decode = function decode(reader, length) {
+                        ImportJob.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ImportJob();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10594,6 +19473,10 @@
                                     }
                                 case 8: {
                                         message.attestation = $root.google.cloud.kms.v1.KeyOperationAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.cryptoKeyBackend = reader.string();
                                         break;
                                     }
                                 default:
@@ -10656,6 +19539,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -10698,6 +19582,9 @@
                                 if (error)
                                     return "attestation." + error;
                             }
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                if (!$util.isString(message.cryptoKeyBackend))
+                                    return "cryptoKeyBackend: string expected";
                             return null;
                         };
     
@@ -10778,6 +19665,10 @@
                             case 4:
                                 message.protectionLevel = 4;
                                 break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
+                                break;
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -10833,6 +19724,8 @@
                                     throw TypeError(".google.cloud.kms.v1.ImportJob.attestation: object expected");
                                 message.attestation = $root.google.cloud.kms.v1.KeyOperationAttestation.fromObject(object.attestation);
                             }
+                            if (object.cryptoKeyBackend != null)
+                                message.cryptoKeyBackend = String(object.cryptoKeyBackend);
                             return message;
                         };
     
@@ -10860,6 +19753,7 @@
                                 object.attestation = null;
                                 object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                                 object.expireEventTime = null;
+                                object.cryptoKeyBackend = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10881,6 +19775,8 @@
                                 object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             if (message.expireEventTime != null && message.hasOwnProperty("expireEventTime"))
                                 object.expireEventTime = $root.google.protobuf.Timestamp.toObject(message.expireEventTime, options);
+                            if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
+                                object.cryptoKeyBackend = message.cryptoKeyBackend;
                             return object;
                         };
     
@@ -11037,12 +19933,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            WrappingPublicKey.decode = function decode(reader, length) {
+                            WrappingPublicKey.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ImportJob.WrappingPublicKey();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.pem = reader.string();
@@ -11254,12 +20152,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExternalProtectionLevelOptions.decode = function decode(reader, length) {
+                        ExternalProtectionLevelOptions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ExternalProtectionLevelOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.externalKeyUri = reader.string();
@@ -11475,12 +20375,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KeyAccessJustificationsPolicy.decode = function decode(reader, length) {
+                        KeyAccessJustificationsPolicy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.allowedAccessReasons && message.allowedAccessReasons.length))
@@ -11681,6 +20583,286 @@
                         return KeyAccessJustificationsPolicy;
                     })();
     
+                    v1.RetiredResource = (function() {
+    
+                        /**
+                         * Properties of a RetiredResource.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IRetiredResource
+                         * @property {string|null} [name] RetiredResource name
+                         * @property {string|null} [originalResource] RetiredResource originalResource
+                         * @property {string|null} [resourceType] RetiredResource resourceType
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] RetiredResource deleteTime
+                         */
+    
+                        /**
+                         * Constructs a new RetiredResource.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a RetiredResource.
+                         * @implements IRetiredResource
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IRetiredResource=} [properties] Properties to set
+                         */
+                        function RetiredResource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RetiredResource name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.name = "";
+    
+                        /**
+                         * RetiredResource originalResource.
+                         * @member {string} originalResource
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.originalResource = "";
+    
+                        /**
+                         * RetiredResource resourceType.
+                         * @member {string} resourceType
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.resourceType = "";
+    
+                        /**
+                         * RetiredResource deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         */
+                        RetiredResource.prototype.deleteTime = null;
+    
+                        /**
+                         * Creates a new RetiredResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.IRetiredResource=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource instance
+                         */
+                        RetiredResource.create = function create(properties) {
+                            return new RetiredResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RetiredResource message. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.IRetiredResource} message RetiredResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetiredResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.originalResource != null && Object.hasOwnProperty.call(message, "originalResource"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.originalResource);
+                            if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.resourceType);
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RetiredResource message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.IRetiredResource} message RetiredResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RetiredResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RetiredResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetiredResource.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RetiredResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.originalResource = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resourceType = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RetiredResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RetiredResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RetiredResource message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RetiredResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.originalResource != null && message.hasOwnProperty("originalResource"))
+                                if (!$util.isString(message.originalResource))
+                                    return "originalResource: string expected";
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (!$util.isString(message.resourceType))
+                                    return "resourceType: string expected";
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RetiredResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.RetiredResource} RetiredResource
+                         */
+                        RetiredResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.RetiredResource)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.RetiredResource();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.originalResource != null)
+                                message.originalResource = String(object.originalResource);
+                            if (object.resourceType != null)
+                                message.resourceType = String(object.resourceType);
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.RetiredResource.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RetiredResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {google.cloud.kms.v1.RetiredResource} message RetiredResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RetiredResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.originalResource = "";
+                                object.resourceType = "";
+                                object.deleteTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.originalResource != null && message.hasOwnProperty("originalResource"))
+                                object.originalResource = message.originalResource;
+                            if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                object.resourceType = message.resourceType;
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RetiredResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RetiredResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RetiredResource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.RetiredResource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RetiredResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.RetiredResource";
+                        };
+    
+                        return RetiredResource;
+                    })();
+    
                     /**
                      * ProtectionLevel enum.
                      * @name google.cloud.kms.v1.ProtectionLevel
@@ -11690,6 +20872,7 @@
                      * @property {number} HSM=2 HSM value
                      * @property {number} EXTERNAL=3 EXTERNAL value
                      * @property {number} EXTERNAL_VPC=4 EXTERNAL_VPC value
+                     * @property {number} HSM_SINGLE_TENANT=5 HSM_SINGLE_TENANT value
                      */
                     v1.ProtectionLevel = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -11698,6 +20881,7 @@
                         values[valuesById[2] = "HSM"] = 2;
                         values[valuesById[3] = "EXTERNAL"] = 3;
                         values[valuesById[4] = "EXTERNAL_VPC"] = 4;
+                        values[valuesById[5] = "HSM_SINGLE_TENANT"] = 5;
                         return values;
                     })();
     
@@ -11900,6 +21084,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|listRetiredResources}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef ListRetiredResourcesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.ListRetiredResourcesResponse} [response] ListRetiredResourcesResponse
+                         */
+    
+                        /**
+                         * Calls ListRetiredResources.
+                         * @function listRetiredResources
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesRequest} request ListRetiredResourcesRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.ListRetiredResourcesCallback} callback Node-style callback called with the error, if any, and ListRetiredResourcesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.listRetiredResources = function listRetiredResources(request, callback) {
+                            return this.rpcCall(listRetiredResources, $root.google.cloud.kms.v1.ListRetiredResourcesRequest, $root.google.cloud.kms.v1.ListRetiredResourcesResponse, request, callback);
+                        }, "name", { value: "ListRetiredResources" });
+    
+                        /**
+                         * Calls ListRetiredResources.
+                         * @function listRetiredResources
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesRequest} request ListRetiredResourcesRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.ListRetiredResourcesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|getKeyRing}.
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @typedef GetKeyRingCallback
@@ -12065,6 +21282,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|getRetiredResource}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef GetRetiredResourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.RetiredResource} [response] RetiredResource
+                         */
+    
+                        /**
+                         * Calls GetRetiredResource.
+                         * @function getRetiredResource
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetRetiredResourceRequest} request GetRetiredResourceRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.GetRetiredResourceCallback} callback Node-style callback called with the error, if any, and RetiredResource
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.getRetiredResource = function getRetiredResource(request, callback) {
+                            return this.rpcCall(getRetiredResource, $root.google.cloud.kms.v1.GetRetiredResourceRequest, $root.google.cloud.kms.v1.RetiredResource, request, callback);
+                        }, "name", { value: "GetRetiredResource" });
+    
+                        /**
+                         * Calls GetRetiredResource.
+                         * @function getRetiredResource
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IGetRetiredResourceRequest} request GetRetiredResourceRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.RetiredResource>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|createKeyRing}.
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @typedef CreateKeyRingCallback
@@ -12160,6 +21410,72 @@
                          * @instance
                          * @param {google.cloud.kms.v1.ICreateCryptoKeyVersionRequest} request CreateCryptoKeyVersionRequest message or plain object
                          * @returns {Promise<google.cloud.kms.v1.CryptoKeyVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|deleteCryptoKey}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef DeleteCryptoKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteCryptoKey.
+                         * @function deleteCryptoKey
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyRequest} request DeleteCryptoKeyRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.deleteCryptoKey = function deleteCryptoKey(request, callback) {
+                            return this.rpcCall(deleteCryptoKey, $root.google.cloud.kms.v1.DeleteCryptoKeyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteCryptoKey" });
+    
+                        /**
+                         * Calls DeleteCryptoKey.
+                         * @function deleteCryptoKey
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyRequest} request DeleteCryptoKeyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|deleteCryptoKeyVersion}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef DeleteCryptoKeyVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteCryptoKeyVersion.
+                         * @function deleteCryptoKeyVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest} request DeleteCryptoKeyVersionRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.deleteCryptoKeyVersion = function deleteCryptoKeyVersion(request, callback) {
+                            return this.rpcCall(deleteCryptoKeyVersion, $root.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteCryptoKeyVersion" });
+    
+                        /**
+                         * Calls DeleteCryptoKeyVersion.
+                         * @function deleteCryptoKeyVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest} request DeleteCryptoKeyVersionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -12659,6 +21975,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|decapsulate}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef DecapsulateCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.DecapsulateResponse} [response] DecapsulateResponse
+                         */
+    
+                        /**
+                         * Calls Decapsulate.
+                         * @function decapsulate
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} request DecapsulateRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.DecapsulateCallback} callback Node-style callback called with the error, if any, and DecapsulateResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.decapsulate = function decapsulate(request, callback) {
+                            return this.rpcCall(decapsulate, $root.google.cloud.kms.v1.DecapsulateRequest, $root.google.cloud.kms.v1.DecapsulateResponse, request, callback);
+                        }, "name", { value: "Decapsulate" });
+    
+                        /**
+                         * Calls Decapsulate.
+                         * @function decapsulate
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} request DecapsulateRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.DecapsulateResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|generateRandomBytes}.
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @typedef GenerateRandomBytesCallback
@@ -12823,12 +22172,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyRingsRequest.decode = function decode(reader, length) {
+                        ListKeyRingsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListKeyRingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -13130,12 +22481,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCryptoKeysRequest.decode = function decode(reader, length) {
+                        ListCryptoKeysRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListCryptoKeysRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -13468,12 +22821,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCryptoKeyVersionsRequest.decode = function decode(reader, length) {
+                        ListCryptoKeyVersionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListCryptoKeyVersionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -13795,12 +23150,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListImportJobsRequest.decode = function decode(reader, length) {
+                        ListImportJobsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListImportJobsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -13962,6 +23319,258 @@
                         return ListImportJobsRequest;
                     })();
     
+                    v1.ListRetiredResourcesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRetiredResourcesRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListRetiredResourcesRequest
+                         * @property {string|null} [parent] ListRetiredResourcesRequest parent
+                         * @property {number|null} [pageSize] ListRetiredResourcesRequest pageSize
+                         * @property {string|null} [pageToken] ListRetiredResourcesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRetiredResourcesRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListRetiredResourcesRequest.
+                         * @implements IListRetiredResourcesRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesRequest=} [properties] Properties to set
+                         */
+                        function ListRetiredResourcesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRetiredResourcesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @instance
+                         */
+                        ListRetiredResourcesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRetiredResourcesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @instance
+                         */
+                        ListRetiredResourcesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRetiredResourcesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @instance
+                         */
+                        ListRetiredResourcesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListRetiredResourcesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesRequest} ListRetiredResourcesRequest instance
+                         */
+                        ListRetiredResourcesRequest.create = function create(properties) {
+                            return new ListRetiredResourcesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRetiredResourcesRequest message. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesRequest} message ListRetiredResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRetiredResourcesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRetiredResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesRequest} message ListRetiredResourcesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRetiredResourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRetiredResourcesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesRequest} ListRetiredResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRetiredResourcesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListRetiredResourcesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRetiredResourcesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesRequest} ListRetiredResourcesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRetiredResourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRetiredResourcesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRetiredResourcesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRetiredResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesRequest} ListRetiredResourcesRequest
+                         */
+                        ListRetiredResourcesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListRetiredResourcesRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListRetiredResourcesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRetiredResourcesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.ListRetiredResourcesRequest} message ListRetiredResourcesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRetiredResourcesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRetiredResourcesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRetiredResourcesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRetiredResourcesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRetiredResourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ListRetiredResourcesRequest";
+                        };
+    
+                        return ListRetiredResourcesRequest;
+                    })();
+    
                     v1.ListKeyRingsResponse = (function() {
     
                         /**
@@ -14071,12 +23680,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListKeyRingsResponse.decode = function decode(reader, length) {
+                        ListKeyRingsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListKeyRingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.keyRings && message.keyRings.length))
@@ -14343,12 +23954,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCryptoKeysResponse.decode = function decode(reader, length) {
+                        ListCryptoKeysResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListCryptoKeysResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.cryptoKeys && message.cryptoKeys.length))
@@ -14615,12 +24228,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCryptoKeyVersionsResponse.decode = function decode(reader, length) {
+                        ListCryptoKeyVersionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListCryptoKeyVersionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.cryptoKeyVersions && message.cryptoKeyVersions.length))
@@ -14887,12 +24502,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListImportJobsResponse.decode = function decode(reader, length) {
+                        ListImportJobsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListImportJobsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.importJobs && message.importJobs.length))
@@ -15050,6 +24667,294 @@
                         return ListImportJobsResponse;
                     })();
     
+                    v1.ListRetiredResourcesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRetiredResourcesResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IListRetiredResourcesResponse
+                         * @property {Array.<google.cloud.kms.v1.IRetiredResource>|null} [retiredResources] ListRetiredResourcesResponse retiredResources
+                         * @property {string|null} [nextPageToken] ListRetiredResourcesResponse nextPageToken
+                         * @property {number|Long|null} [totalSize] ListRetiredResourcesResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListRetiredResourcesResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a ListRetiredResourcesResponse.
+                         * @implements IListRetiredResourcesResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesResponse=} [properties] Properties to set
+                         */
+                        function ListRetiredResourcesResponse(properties) {
+                            this.retiredResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRetiredResourcesResponse retiredResources.
+                         * @member {Array.<google.cloud.kms.v1.IRetiredResource>} retiredResources
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @instance
+                         */
+                        ListRetiredResourcesResponse.prototype.retiredResources = $util.emptyArray;
+    
+                        /**
+                         * ListRetiredResourcesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @instance
+                         */
+                        ListRetiredResourcesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListRetiredResourcesResponse totalSize.
+                         * @member {number|Long} totalSize
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @instance
+                         */
+                        ListRetiredResourcesResponse.prototype.totalSize = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new ListRetiredResourcesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesResponse} ListRetiredResourcesResponse instance
+                         */
+                        ListRetiredResourcesResponse.create = function create(properties) {
+                            return new ListRetiredResourcesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRetiredResourcesResponse message. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesResponse} message ListRetiredResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRetiredResourcesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retiredResources != null && message.retiredResources.length)
+                                for (var i = 0; i < message.retiredResources.length; ++i)
+                                    $root.google.cloud.kms.v1.RetiredResource.encode(message.retiredResources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRetiredResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IListRetiredResourcesResponse} message ListRetiredResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRetiredResourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRetiredResourcesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesResponse} ListRetiredResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRetiredResourcesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ListRetiredResourcesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.retiredResources && message.retiredResources.length))
+                                            message.retiredResources = [];
+                                        message.retiredResources.push($root.google.cloud.kms.v1.RetiredResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRetiredResourcesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesResponse} ListRetiredResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRetiredResourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRetiredResourcesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRetiredResourcesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.retiredResources != null && message.hasOwnProperty("retiredResources")) {
+                                if (!Array.isArray(message.retiredResources))
+                                    return "retiredResources: array expected";
+                                for (var i = 0; i < message.retiredResources.length; ++i) {
+                                    var error = $root.google.cloud.kms.v1.RetiredResource.verify(message.retiredResources[i]);
+                                    if (error)
+                                        return "retiredResources." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize) && !(message.totalSize && $util.isInteger(message.totalSize.low) && $util.isInteger(message.totalSize.high)))
+                                    return "totalSize: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRetiredResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.ListRetiredResourcesResponse} ListRetiredResourcesResponse
+                         */
+                        ListRetiredResourcesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.ListRetiredResourcesResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.ListRetiredResourcesResponse();
+                            if (object.retiredResources) {
+                                if (!Array.isArray(object.retiredResources))
+                                    throw TypeError(".google.cloud.kms.v1.ListRetiredResourcesResponse.retiredResources: array expected");
+                                message.retiredResources = [];
+                                for (var i = 0; i < object.retiredResources.length; ++i) {
+                                    if (typeof object.retiredResources[i] !== "object")
+                                        throw TypeError(".google.cloud.kms.v1.ListRetiredResourcesResponse.retiredResources: object expected");
+                                    message.retiredResources[i] = $root.google.cloud.kms.v1.RetiredResource.fromObject(object.retiredResources[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                if ($util.Long)
+                                    (message.totalSize = $util.Long.fromValue(object.totalSize)).unsigned = false;
+                                else if (typeof object.totalSize === "string")
+                                    message.totalSize = parseInt(object.totalSize, 10);
+                                else if (typeof object.totalSize === "number")
+                                    message.totalSize = object.totalSize;
+                                else if (typeof object.totalSize === "object")
+                                    message.totalSize = new $util.LongBits(object.totalSize.low >>> 0, object.totalSize.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRetiredResourcesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.ListRetiredResourcesResponse} message ListRetiredResourcesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRetiredResourcesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.retiredResources = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalSize = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalSize = options.longs === String ? "0" : 0;
+                            }
+                            if (message.retiredResources && message.retiredResources.length) {
+                                object.retiredResources = [];
+                                for (var j = 0; j < message.retiredResources.length; ++j)
+                                    object.retiredResources[j] = $root.google.cloud.kms.v1.RetiredResource.toObject(message.retiredResources[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (typeof message.totalSize === "number")
+                                    object.totalSize = options.longs === String ? String(message.totalSize) : message.totalSize;
+                                else
+                                    object.totalSize = options.longs === String ? $util.Long.prototype.toString.call(message.totalSize) : options.longs === Number ? new $util.LongBits(message.totalSize.low >>> 0, message.totalSize.high >>> 0).toNumber() : message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRetiredResourcesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRetiredResourcesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRetiredResourcesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.ListRetiredResourcesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRetiredResourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.ListRetiredResourcesResponse";
+                        };
+    
+                        return ListRetiredResourcesResponse;
+                    })();
+    
                     v1.GetKeyRingRequest = (function() {
     
                         /**
@@ -15135,12 +25040,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetKeyRingRequest.decode = function decode(reader, length) {
+                        GetKeyRingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetKeyRingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15338,12 +25245,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCryptoKeyRequest.decode = function decode(reader, length) {
+                        GetCryptoKeyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetCryptoKeyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15541,12 +25450,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        GetCryptoKeyVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetCryptoKeyVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15755,12 +25666,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPublicKeyRequest.decode = function decode(reader, length) {
+                        GetPublicKeyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetPublicKeyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15814,7 +25727,9 @@
                                     return "publicKeyFormat: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -15849,9 +25764,17 @@
                             case 1:
                                 message.publicKeyFormat = 1;
                                 break;
+                            case "DER":
+                            case 2:
+                                message.publicKeyFormat = 2;
+                                break;
                             case "NIST_PQC":
                             case 3:
                                 message.publicKeyFormat = 3;
+                                break;
+                            case "XWING_RAW_BYTES":
+                            case 4:
+                                message.publicKeyFormat = 4;
                                 break;
                             }
                             return message;
@@ -15995,12 +25918,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetImportJobRequest.decode = function decode(reader, length) {
+                        GetImportJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetImportJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -16113,6 +26038,211 @@
                         return GetImportJobRequest;
                     })();
     
+                    v1.GetRetiredResourceRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRetiredResourceRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IGetRetiredResourceRequest
+                         * @property {string|null} [name] GetRetiredResourceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetRetiredResourceRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a GetRetiredResourceRequest.
+                         * @implements IGetRetiredResourceRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IGetRetiredResourceRequest=} [properties] Properties to set
+                         */
+                        function GetRetiredResourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRetiredResourceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @instance
+                         */
+                        GetRetiredResourceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetRetiredResourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetRetiredResourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.GetRetiredResourceRequest} GetRetiredResourceRequest instance
+                         */
+                        GetRetiredResourceRequest.create = function create(properties) {
+                            return new GetRetiredResourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRetiredResourceRequest message. Does not implicitly {@link google.cloud.kms.v1.GetRetiredResourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetRetiredResourceRequest} message GetRetiredResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRetiredResourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRetiredResourceRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetRetiredResourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGetRetiredResourceRequest} message GetRetiredResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRetiredResourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRetiredResourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.GetRetiredResourceRequest} GetRetiredResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRetiredResourceRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GetRetiredResourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRetiredResourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.GetRetiredResourceRequest} GetRetiredResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRetiredResourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRetiredResourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRetiredResourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRetiredResourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.GetRetiredResourceRequest} GetRetiredResourceRequest
+                         */
+                        GetRetiredResourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.GetRetiredResourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.GetRetiredResourceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRetiredResourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.GetRetiredResourceRequest} message GetRetiredResourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRetiredResourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRetiredResourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRetiredResourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetRetiredResourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.GetRetiredResourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetRetiredResourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.GetRetiredResourceRequest";
+                        };
+    
+                        return GetRetiredResourceRequest;
+                    })();
+    
                     v1.CreateKeyRingRequest = (function() {
     
                         /**
@@ -16220,12 +26350,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateKeyRingRequest.decode = function decode(reader, length) {
+                        CreateKeyRingRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateKeyRingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -16486,12 +26618,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCryptoKeyRequest.decode = function decode(reader, length) {
+                        CreateCryptoKeyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateCryptoKeyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -16742,12 +26876,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        CreateCryptoKeyVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateCryptoKeyVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -16876,6 +27012,416 @@
                         };
     
                         return CreateCryptoKeyVersionRequest;
+                    })();
+    
+                    v1.DeleteCryptoKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCryptoKeyRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDeleteCryptoKeyRequest
+                         * @property {string|null} [name] DeleteCryptoKeyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCryptoKeyRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DeleteCryptoKeyRequest.
+                         * @implements IDeleteCryptoKeyRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyRequest=} [properties] Properties to set
+                         */
+                        function DeleteCryptoKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCryptoKeyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @instance
+                         */
+                        DeleteCryptoKeyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteCryptoKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyRequest} DeleteCryptoKeyRequest instance
+                         */
+                        DeleteCryptoKeyRequest.create = function create(properties) {
+                            return new DeleteCryptoKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyRequest} message DeleteCryptoKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyRequest} message DeleteCryptoKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyRequest} DeleteCryptoKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DeleteCryptoKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyRequest} DeleteCryptoKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCryptoKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCryptoKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCryptoKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyRequest} DeleteCryptoKeyRequest
+                         */
+                        DeleteCryptoKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DeleteCryptoKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DeleteCryptoKeyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCryptoKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.DeleteCryptoKeyRequest} message DeleteCryptoKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCryptoKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCryptoKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCryptoKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCryptoKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCryptoKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DeleteCryptoKeyRequest";
+                        };
+    
+                        return DeleteCryptoKeyRequest;
+                    })();
+    
+                    v1.DeleteCryptoKeyVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteCryptoKeyVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDeleteCryptoKeyVersionRequest
+                         * @property {string|null} [name] DeleteCryptoKeyVersionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCryptoKeyVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DeleteCryptoKeyVersionRequest.
+                         * @implements IDeleteCryptoKeyVersionRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest=} [properties] Properties to set
+                         */
+                        function DeleteCryptoKeyVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCryptoKeyVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @instance
+                         */
+                        DeleteCryptoKeyVersionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteCryptoKeyVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionRequest} DeleteCryptoKeyVersionRequest instance
+                         */
+                        DeleteCryptoKeyVersionRequest.create = function create(properties) {
+                            return new DeleteCryptoKeyVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest} message DeleteCryptoKeyVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest} message DeleteCryptoKeyVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionRequest} DeleteCryptoKeyVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyVersionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionRequest} DeleteCryptoKeyVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCryptoKeyVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCryptoKeyVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionRequest} DeleteCryptoKeyVersionRequest
+                         */
+                        DeleteCryptoKeyVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DeleteCryptoKeyVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.DeleteCryptoKeyVersionRequest} message DeleteCryptoKeyVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCryptoKeyVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCryptoKeyVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCryptoKeyVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCryptoKeyVersionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCryptoKeyVersionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DeleteCryptoKeyVersionRequest";
+                        };
+    
+                        return DeleteCryptoKeyVersionRequest;
                     })();
     
                     v1.ImportCryptoKeyVersionRequest = (function() {
@@ -17032,12 +27578,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        ImportCryptoKeyVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.ImportCryptoKeyVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -17145,8 +27693,17 @@
                                 case 35:
                                 case 36:
                                 case 18:
+                                case 47:
+                                case 48:
+                                case 63:
+                                case 68:
                                 case 56:
+                                case 69:
                                 case 57:
+                                case 60:
+                                case 70:
+                                case 67:
+                                case 71:
                                     break;
                                 }
                             if (message.importJob != null && message.hasOwnProperty("importJob"))
@@ -17330,13 +27887,49 @@
                             case 18:
                                 message.algorithm = 18;
                                 break;
+                            case "ML_KEM_768":
+                            case 47:
+                                message.algorithm = 47;
+                                break;
+                            case "ML_KEM_1024":
+                            case 48:
+                                message.algorithm = 48;
+                                break;
+                            case "KEM_XWING":
+                            case 63:
+                                message.algorithm = 63;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44":
+                            case 68:
+                                message.algorithm = 68;
+                                break;
                             case "PQ_SIGN_ML_DSA_65":
                             case 56:
                                 message.algorithm = 56;
                                 break;
+                            case "PQ_SIGN_ML_DSA_87":
+                            case 69:
+                                message.algorithm = 69;
+                                break;
                             case "PQ_SIGN_SLH_DSA_SHA2_128S":
                             case 57:
                                 message.algorithm = 57;
+                                break;
+                            case "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256":
+                            case 60:
+                                message.algorithm = 60;
+                                break;
+                            case "PQ_SIGN_ML_DSA_44_EXTERNAL_MU":
+                            case 70:
+                                message.algorithm = 70;
+                                break;
+                            case "PQ_SIGN_ML_DSA_65_EXTERNAL_MU":
+                            case 67:
+                                message.algorithm = 67;
+                                break;
+                            case "PQ_SIGN_ML_DSA_87_EXTERNAL_MU":
+                            case 71:
+                                message.algorithm = 71;
                                 break;
                             }
                             if (object.importJob != null)
@@ -17534,12 +28127,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateImportJobRequest.decode = function decode(reader, length) {
+                        CreateImportJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.CreateImportJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -17778,12 +28373,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCryptoKeyRequest.decode = function decode(reader, length) {
+                        UpdateCryptoKeyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateCryptoKeyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cryptoKey = $root.google.cloud.kms.v1.CryptoKey.decode(reader, reader.uint32());
@@ -18015,12 +28612,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        UpdateCryptoKeyVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cryptoKeyVersion = $root.google.cloud.kms.v1.CryptoKeyVersion.decode(reader, reader.uint32());
@@ -18252,12 +28851,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.decode = function decode(reader, length) {
+                        UpdateCryptoKeyPrimaryVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -18468,12 +29069,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestroyCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        DestroyCryptoKeyVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -18671,12 +29274,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RestoreCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        RestoreCryptoKeyVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -18918,12 +29523,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EncryptRequest.decode = function decode(reader, length) {
+                        EncryptRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EncryptRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -19242,12 +29849,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DecryptRequest.decode = function decode(reader, length) {
+                        DecryptRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecryptRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -19588,12 +30197,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RawEncryptRequest.decode = function decode(reader, length) {
+                        RawEncryptRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawEncryptRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -19983,12 +30594,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RawDecryptRequest.decode = function decode(reader, length) {
+                        RawDecryptRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawDecryptRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -20357,12 +30970,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AsymmetricSignRequest.decode = function decode(reader, length) {
+                        AsymmetricSignRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.AsymmetricSignRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -20655,12 +31270,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AsymmetricDecryptRequest.decode = function decode(reader, length) {
+                        AsymmetricDecryptRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.AsymmetricDecryptRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -20919,12 +31536,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MacSignRequest.decode = function decode(reader, length) {
+                        MacSignRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacSignRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -21205,12 +31824,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MacVerifyRequest.decode = function decode(reader, length) {
+                        MacVerifyRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacVerifyRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -21400,6 +32021,272 @@
                         return MacVerifyRequest;
                     })();
     
+                    v1.DecapsulateRequest = (function() {
+    
+                        /**
+                         * Properties of a DecapsulateRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDecapsulateRequest
+                         * @property {string|null} [name] DecapsulateRequest name
+                         * @property {Uint8Array|null} [ciphertext] DecapsulateRequest ciphertext
+                         * @property {google.protobuf.IInt64Value|null} [ciphertextCrc32c] DecapsulateRequest ciphertextCrc32c
+                         */
+    
+                        /**
+                         * Constructs a new DecapsulateRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DecapsulateRequest.
+                         * @implements IDecapsulateRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest=} [properties] Properties to set
+                         */
+                        function DecapsulateRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DecapsulateRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         */
+                        DecapsulateRequest.prototype.name = "";
+    
+                        /**
+                         * DecapsulateRequest ciphertext.
+                         * @member {Uint8Array} ciphertext
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         */
+                        DecapsulateRequest.prototype.ciphertext = $util.newBuffer([]);
+    
+                        /**
+                         * DecapsulateRequest ciphertextCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} ciphertextCrc32c
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         */
+                        DecapsulateRequest.prototype.ciphertextCrc32c = null;
+    
+                        /**
+                         * Creates a new DecapsulateRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest instance
+                         */
+                        DecapsulateRequest.create = function create(properties) {
+                            return new DecapsulateRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateRequest message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} message DecapsulateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ciphertext != null && Object.hasOwnProperty.call(message, "ciphertext"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.ciphertext);
+                            if (message.ciphertextCrc32c != null && Object.hasOwnProperty.call(message, "ciphertextCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.ciphertextCrc32c, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateRequest} message DecapsulateRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecapsulateRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ciphertext = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ciphertextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DecapsulateRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DecapsulateRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                if (!(message.ciphertext && typeof message.ciphertext.length === "number" || $util.isString(message.ciphertext)))
+                                    return "ciphertext: buffer expected";
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.ciphertextCrc32c);
+                                if (error)
+                                    return "ciphertextCrc32c." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DecapsulateRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DecapsulateRequest} DecapsulateRequest
+                         */
+                        DecapsulateRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DecapsulateRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DecapsulateRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ciphertext != null)
+                                if (typeof object.ciphertext === "string")
+                                    $util.base64.decode(object.ciphertext, message.ciphertext = $util.newBuffer($util.base64.length(object.ciphertext)), 0);
+                                else if (object.ciphertext.length >= 0)
+                                    message.ciphertext = object.ciphertext;
+                            if (object.ciphertextCrc32c != null) {
+                                if (typeof object.ciphertextCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.DecapsulateRequest.ciphertextCrc32c: object expected");
+                                message.ciphertextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.ciphertextCrc32c);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DecapsulateRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.DecapsulateRequest} message DecapsulateRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DecapsulateRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.ciphertext = "";
+                                else {
+                                    object.ciphertext = [];
+                                    if (options.bytes !== Array)
+                                        object.ciphertext = $util.newBuffer(object.ciphertext);
+                                }
+                                object.ciphertextCrc32c = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                                object.ciphertext = options.bytes === String ? $util.base64.encode(message.ciphertext, 0, message.ciphertext.length) : options.bytes === Array ? Array.prototype.slice.call(message.ciphertext) : message.ciphertext;
+                            if (message.ciphertextCrc32c != null && message.hasOwnProperty("ciphertextCrc32c"))
+                                object.ciphertextCrc32c = $root.google.protobuf.Int64Value.toObject(message.ciphertextCrc32c, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DecapsulateRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DecapsulateRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DecapsulateRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DecapsulateRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DecapsulateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DecapsulateRequest";
+                        };
+    
+                        return DecapsulateRequest;
+                    })();
+    
                     v1.GenerateRandomBytesRequest = (function() {
     
                         /**
@@ -21507,12 +32394,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateRandomBytesRequest.decode = function decode(reader, length) {
+                        GenerateRandomBytesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GenerateRandomBytesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.location = reader.string();
@@ -21576,6 +32465,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -21623,6 +32513,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -21824,12 +32718,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EncryptResponse.decode = function decode(reader, length) {
+                        EncryptResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.EncryptResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -21916,6 +32812,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -21975,6 +32872,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -22169,12 +33070,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DecryptResponse.decode = function decode(reader, length) {
+                        DecryptResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecryptResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.plaintext = reader.bytes();
@@ -22247,6 +33150,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -22302,6 +33206,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -22556,12 +33464,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RawEncryptResponse.decode = function decode(reader, length) {
+                        RawEncryptResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawEncryptResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.ciphertext = reader.bytes();
@@ -22678,6 +33588,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -22751,6 +33662,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -22985,12 +33900,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RawDecryptResponse.decode = function decode(reader, length) {
+                        RawDecryptResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RawDecryptResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.plaintext = reader.bytes();
@@ -23068,6 +33985,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
@@ -23130,6 +34048,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             if (object.verifiedCiphertextCrc32c != null)
@@ -23352,12 +34274,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AsymmetricSignResponse.decode = function decode(reader, length) {
+                        AsymmetricSignResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.AsymmetricSignResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.signature = reader.bytes();
@@ -23444,6 +34368,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -23503,6 +34428,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -23697,12 +34626,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AsymmetricDecryptResponse.decode = function decode(reader, length) {
+                        AsymmetricDecryptResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.AsymmetricDecryptResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.plaintext = reader.bytes();
@@ -23775,6 +34706,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -23830,6 +34762,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -24029,12 +34965,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MacSignResponse.decode = function decode(reader, length) {
+                        MacSignResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacSignResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -24114,6 +35052,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -24171,6 +35110,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -24384,12 +35327,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MacVerifyResponse.decode = function decode(reader, length) {
+                        MacVerifyResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacVerifyResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -24474,6 +35419,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -24527,6 +35473,10 @@
                             case "EXTERNAL_VPC":
                             case 4:
                                 message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
                                 break;
                             }
                             return message;
@@ -24595,6 +35545,376 @@
                         };
     
                         return MacVerifyResponse;
+                    })();
+    
+                    v1.DecapsulateResponse = (function() {
+    
+                        /**
+                         * Properties of a DecapsulateResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDecapsulateResponse
+                         * @property {string|null} [name] DecapsulateResponse name
+                         * @property {Uint8Array|null} [sharedSecret] DecapsulateResponse sharedSecret
+                         * @property {number|Long|null} [sharedSecretCrc32c] DecapsulateResponse sharedSecretCrc32c
+                         * @property {boolean|null} [verifiedCiphertextCrc32c] DecapsulateResponse verifiedCiphertextCrc32c
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] DecapsulateResponse protectionLevel
+                         */
+    
+                        /**
+                         * Constructs a new DecapsulateResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DecapsulateResponse.
+                         * @implements IDecapsulateResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse=} [properties] Properties to set
+                         */
+                        function DecapsulateResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DecapsulateResponse name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.name = "";
+    
+                        /**
+                         * DecapsulateResponse sharedSecret.
+                         * @member {Uint8Array} sharedSecret
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.sharedSecret = $util.newBuffer([]);
+    
+                        /**
+                         * DecapsulateResponse sharedSecretCrc32c.
+                         * @member {number|Long|null|undefined} sharedSecretCrc32c
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.sharedSecretCrc32c = null;
+    
+                        /**
+                         * DecapsulateResponse verifiedCiphertextCrc32c.
+                         * @member {boolean} verifiedCiphertextCrc32c
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.verifiedCiphertextCrc32c = false;
+    
+                        /**
+                         * DecapsulateResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         */
+                        DecapsulateResponse.prototype.protectionLevel = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DecapsulateResponse.prototype, "_sharedSecretCrc32c", {
+                            get: $util.oneOfGetter($oneOfFields = ["sharedSecretCrc32c"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DecapsulateResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse instance
+                         */
+                        DecapsulateResponse.create = function create(properties) {
+                            return new DecapsulateResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateResponse message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse} message DecapsulateResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.sharedSecret != null && Object.hasOwnProperty.call(message, "sharedSecret"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.sharedSecret);
+                            if (message.sharedSecretCrc32c != null && Object.hasOwnProperty.call(message, "sharedSecretCrc32c"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.sharedSecretCrc32c);
+                            if (message.verifiedCiphertextCrc32c != null && Object.hasOwnProperty.call(message, "verifiedCiphertextCrc32c"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.verifiedCiphertextCrc32c);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.protectionLevel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DecapsulateResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecapsulateResponse} message DecapsulateResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecapsulateResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecapsulateResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sharedSecret = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sharedSecretCrc32c = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verifiedCiphertextCrc32c = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.protectionLevel = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DecapsulateResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecapsulateResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DecapsulateResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DecapsulateResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.sharedSecret != null && message.hasOwnProperty("sharedSecret"))
+                                if (!(message.sharedSecret && typeof message.sharedSecret.length === "number" || $util.isString(message.sharedSecret)))
+                                    return "sharedSecret: buffer expected";
+                            if (message.sharedSecretCrc32c != null && message.hasOwnProperty("sharedSecretCrc32c")) {
+                                properties._sharedSecretCrc32c = 1;
+                                if (!$util.isInteger(message.sharedSecretCrc32c) && !(message.sharedSecretCrc32c && $util.isInteger(message.sharedSecretCrc32c.low) && $util.isInteger(message.sharedSecretCrc32c.high)))
+                                    return "sharedSecretCrc32c: integer|Long expected";
+                            }
+                            if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
+                                if (typeof message.verifiedCiphertextCrc32c !== "boolean")
+                                    return "verifiedCiphertextCrc32c: boolean expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DecapsulateResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DecapsulateResponse} DecapsulateResponse
+                         */
+                        DecapsulateResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DecapsulateResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DecapsulateResponse();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.sharedSecret != null)
+                                if (typeof object.sharedSecret === "string")
+                                    $util.base64.decode(object.sharedSecret, message.sharedSecret = $util.newBuffer($util.base64.length(object.sharedSecret)), 0);
+                                else if (object.sharedSecret.length >= 0)
+                                    message.sharedSecret = object.sharedSecret;
+                            if (object.sharedSecretCrc32c != null)
+                                if ($util.Long)
+                                    (message.sharedSecretCrc32c = $util.Long.fromValue(object.sharedSecretCrc32c)).unsigned = false;
+                                else if (typeof object.sharedSecretCrc32c === "string")
+                                    message.sharedSecretCrc32c = parseInt(object.sharedSecretCrc32c, 10);
+                                else if (typeof object.sharedSecretCrc32c === "number")
+                                    message.sharedSecretCrc32c = object.sharedSecretCrc32c;
+                                else if (typeof object.sharedSecretCrc32c === "object")
+                                    message.sharedSecretCrc32c = new $util.LongBits(object.sharedSecretCrc32c.low >>> 0, object.sharedSecretCrc32c.high >>> 0).toNumber();
+                            if (object.verifiedCiphertextCrc32c != null)
+                                message.verifiedCiphertextCrc32c = Boolean(object.verifiedCiphertextCrc32c);
+                            switch (object.protectionLevel) {
+                            default:
+                                if (typeof object.protectionLevel === "number") {
+                                    message.protectionLevel = object.protectionLevel;
+                                    break;
+                                }
+                                break;
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            case "EXTERNAL_VPC":
+                            case 4:
+                                message.protectionLevel = 4;
+                                break;
+                            case "HSM_SINGLE_TENANT":
+                            case 5:
+                                message.protectionLevel = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DecapsulateResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.DecapsulateResponse} message DecapsulateResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DecapsulateResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.sharedSecret = "";
+                                else {
+                                    object.sharedSecret = [];
+                                    if (options.bytes !== Array)
+                                        object.sharedSecret = $util.newBuffer(object.sharedSecret);
+                                }
+                                object.verifiedCiphertextCrc32c = false;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.sharedSecret != null && message.hasOwnProperty("sharedSecret"))
+                                object.sharedSecret = options.bytes === String ? $util.base64.encode(message.sharedSecret, 0, message.sharedSecret.length) : options.bytes === Array ? Array.prototype.slice.call(message.sharedSecret) : message.sharedSecret;
+                            if (message.sharedSecretCrc32c != null && message.hasOwnProperty("sharedSecretCrc32c")) {
+                                if (typeof message.sharedSecretCrc32c === "number")
+                                    object.sharedSecretCrc32c = options.longs === String ? String(message.sharedSecretCrc32c) : message.sharedSecretCrc32c;
+                                else
+                                    object.sharedSecretCrc32c = options.longs === String ? $util.Long.prototype.toString.call(message.sharedSecretCrc32c) : options.longs === Number ? new $util.LongBits(message.sharedSecretCrc32c.low >>> 0, message.sharedSecretCrc32c.high >>> 0).toNumber() : message.sharedSecretCrc32c;
+                                if (options.oneofs)
+                                    object._sharedSecretCrc32c = "sharedSecretCrc32c";
+                            }
+                            if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
+                                object.verifiedCiphertextCrc32c = message.verifiedCiphertextCrc32c;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] === undefined ? message.protectionLevel : $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DecapsulateResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DecapsulateResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DecapsulateResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DecapsulateResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DecapsulateResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DecapsulateResponse";
+                        };
+    
+                        return DecapsulateResponse;
                     })();
     
                     v1.GenerateRandomBytesResponse = (function() {
@@ -24693,12 +36013,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GenerateRandomBytesResponse.decode = function decode(reader, length) {
+                        GenerateRandomBytesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GenerateRandomBytesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.data = reader.bytes();
@@ -24959,12 +36281,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Digest.decode = function decode(reader, length) {
+                        Digest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.Digest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.sha256 = reader.bytes();
@@ -25134,6 +36458,7 @@
                          * @interface ILocationMetadata
                          * @property {boolean|null} [hsmAvailable] LocationMetadata hsmAvailable
                          * @property {boolean|null} [ekmAvailable] LocationMetadata ekmAvailable
+                         * @property {boolean|null} [hsmSingleTenantAvailable] LocationMetadata hsmSingleTenantAvailable
                          */
     
                         /**
@@ -25168,6 +36493,14 @@
                         LocationMetadata.prototype.ekmAvailable = false;
     
                         /**
+                         * LocationMetadata hsmSingleTenantAvailable.
+                         * @member {boolean} hsmSingleTenantAvailable
+                         * @memberof google.cloud.kms.v1.LocationMetadata
+                         * @instance
+                         */
+                        LocationMetadata.prototype.hsmSingleTenantAvailable = false;
+    
+                        /**
                          * Creates a new LocationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.LocationMetadata
@@ -25195,6 +36528,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.hsmAvailable);
                             if (message.ekmAvailable != null && Object.hasOwnProperty.call(message, "ekmAvailable"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ekmAvailable);
+                            if (message.hsmSingleTenantAvailable != null && Object.hasOwnProperty.call(message, "hsmSingleTenantAvailable"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.hsmSingleTenantAvailable);
                             return writer;
                         };
     
@@ -25222,12 +36557,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LocationMetadata.decode = function decode(reader, length) {
+                        LocationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.LocationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hsmAvailable = reader.bool();
@@ -25235,6 +36572,10 @@
                                     }
                                 case 2: {
                                         message.ekmAvailable = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.hsmSingleTenantAvailable = reader.bool();
                                         break;
                                     }
                                 default:
@@ -25278,6 +36619,9 @@
                             if (message.ekmAvailable != null && message.hasOwnProperty("ekmAvailable"))
                                 if (typeof message.ekmAvailable !== "boolean")
                                     return "ekmAvailable: boolean expected";
+                            if (message.hsmSingleTenantAvailable != null && message.hasOwnProperty("hsmSingleTenantAvailable"))
+                                if (typeof message.hsmSingleTenantAvailable !== "boolean")
+                                    return "hsmSingleTenantAvailable: boolean expected";
                             return null;
                         };
     
@@ -25297,6 +36641,8 @@
                                 message.hsmAvailable = Boolean(object.hsmAvailable);
                             if (object.ekmAvailable != null)
                                 message.ekmAvailable = Boolean(object.ekmAvailable);
+                            if (object.hsmSingleTenantAvailable != null)
+                                message.hsmSingleTenantAvailable = Boolean(object.hsmSingleTenantAvailable);
                             return message;
                         };
     
@@ -25316,11 +36662,14 @@
                             if (options.defaults) {
                                 object.hsmAvailable = false;
                                 object.ekmAvailable = false;
+                                object.hsmSingleTenantAvailable = false;
                             }
                             if (message.hsmAvailable != null && message.hasOwnProperty("hsmAvailable"))
                                 object.hsmAvailable = message.hsmAvailable;
                             if (message.ekmAvailable != null && message.hasOwnProperty("ekmAvailable"))
                                 object.ekmAvailable = message.ekmAvailable;
+                            if (message.hsmSingleTenantAvailable != null && message.hasOwnProperty("hsmSingleTenantAvailable"))
+                                object.hsmSingleTenantAvailable = message.hsmSingleTenantAvailable;
                             return object;
                         };
     
@@ -25351,6 +36700,388 @@
                         };
     
                         return LocationMetadata;
+                    })();
+    
+                    v1.DeleteCryptoKeyMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteCryptoKeyMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDeleteCryptoKeyMetadata
+                         * @property {string|null} [retiredResource] DeleteCryptoKeyMetadata retiredResource
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCryptoKeyMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DeleteCryptoKeyMetadata.
+                         * @implements IDeleteCryptoKeyMetadata
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyMetadata=} [properties] Properties to set
+                         */
+                        function DeleteCryptoKeyMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteCryptoKeyMetadata retiredResource.
+                         * @member {string} retiredResource
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @instance
+                         */
+                        DeleteCryptoKeyMetadata.prototype.retiredResource = "";
+    
+                        /**
+                         * Creates a new DeleteCryptoKeyMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyMetadata} DeleteCryptoKeyMetadata instance
+                         */
+                        DeleteCryptoKeyMetadata.create = function create(properties) {
+                            return new DeleteCryptoKeyMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyMetadata message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyMetadata} message DeleteCryptoKeyMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.retiredResource != null && Object.hasOwnProperty.call(message, "retiredResource"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.retiredResource);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyMetadata} message DeleteCryptoKeyMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyMetadata} DeleteCryptoKeyMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DeleteCryptoKeyMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.retiredResource = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyMetadata} DeleteCryptoKeyMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCryptoKeyMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCryptoKeyMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.retiredResource != null && message.hasOwnProperty("retiredResource"))
+                                if (!$util.isString(message.retiredResource))
+                                    return "retiredResource: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCryptoKeyMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyMetadata} DeleteCryptoKeyMetadata
+                         */
+                        DeleteCryptoKeyMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DeleteCryptoKeyMetadata)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DeleteCryptoKeyMetadata();
+                            if (object.retiredResource != null)
+                                message.retiredResource = String(object.retiredResource);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCryptoKeyMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.DeleteCryptoKeyMetadata} message DeleteCryptoKeyMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCryptoKeyMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.retiredResource = "";
+                            if (message.retiredResource != null && message.hasOwnProperty("retiredResource"))
+                                object.retiredResource = message.retiredResource;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteCryptoKeyMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCryptoKeyMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCryptoKeyMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCryptoKeyMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DeleteCryptoKeyMetadata";
+                        };
+    
+                        return DeleteCryptoKeyMetadata;
+                    })();
+    
+                    v1.DeleteCryptoKeyVersionMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteCryptoKeyVersionMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDeleteCryptoKeyVersionMetadata
+                         */
+    
+                        /**
+                         * Constructs a new DeleteCryptoKeyVersionMetadata.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DeleteCryptoKeyVersionMetadata.
+                         * @implements IDeleteCryptoKeyVersionMetadata
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata=} [properties] Properties to set
+                         */
+                        function DeleteCryptoKeyVersionMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DeleteCryptoKeyVersionMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata} DeleteCryptoKeyVersionMetadata instance
+                         */
+                        DeleteCryptoKeyVersionMetadata.create = function create(properties) {
+                            return new DeleteCryptoKeyVersionMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyVersionMetadata message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata} message DeleteCryptoKeyVersionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyVersionMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteCryptoKeyVersionMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata} message DeleteCryptoKeyVersionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteCryptoKeyVersionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyVersionMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata} DeleteCryptoKeyVersionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyVersionMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteCryptoKeyVersionMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata} DeleteCryptoKeyVersionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteCryptoKeyVersionMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteCryptoKeyVersionMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteCryptoKeyVersionMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteCryptoKeyVersionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata} DeleteCryptoKeyVersionMetadata
+                         */
+                        DeleteCryptoKeyVersionMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata)
+                                return object;
+                            return new $root.google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteCryptoKeyVersionMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata} message DeleteCryptoKeyVersionMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteCryptoKeyVersionMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DeleteCryptoKeyVersionMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteCryptoKeyVersionMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteCryptoKeyVersionMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteCryptoKeyVersionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata";
+                        };
+    
+                        return DeleteCryptoKeyVersionMetadata;
                     })();
     
                     return v1;
@@ -25469,12 +37200,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -25819,12 +37552,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -26203,12 +37938,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -26435,12 +38172,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -26804,12 +38543,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -27148,6 +38889,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -27249,6 +38991,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -27295,6 +39045,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -27322,12 +39074,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -27373,6 +39127,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -27467,6 +39225,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -27561,6 +39322,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -27590,6 +39353,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -27620,6 +39384,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -27761,12 +39527,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -28028,12 +39796,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -28236,12 +40006,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -28444,12 +40216,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -28652,12 +40426,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -28925,12 +40701,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -29304,12 +41082,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -29512,12 +41292,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -29744,12 +41526,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -30022,12 +41806,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -30449,12 +42235,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -30844,12 +42632,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -31074,12 +42864,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -31474,12 +43266,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -32141,12 +43935,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -32626,12 +44422,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -32870,12 +44668,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -33126,12 +44926,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -33471,12 +45273,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -33850,12 +45654,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -34375,12 +46181,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -34646,12 +46454,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -34965,12 +46775,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -35206,12 +47018,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -35463,12 +47277,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -35771,12 +47587,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -36275,12 +48093,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -36895,12 +48715,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -37343,12 +49165,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -37378,12 +49197,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -38109,12 +49930,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -38405,12 +50228,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -38691,12 +50516,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -39003,12 +50830,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -39194,6 +51023,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -39253,6 +51083,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -39287,6 +51125,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -39314,12 +51154,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -39341,6 +51183,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -39401,6 +51247,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -39437,6 +51286,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -39460,6 +51311,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -39474,6 +51326,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -39661,12 +51515,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -40095,12 +51951,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -40434,12 +52292,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -40710,12 +52570,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -41245,12 +53107,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -41629,12 +53493,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -41919,12 +53785,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -42194,12 +54062,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -42505,12 +54375,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -42773,12 +54645,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -43099,12 +54973,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -43340,12 +55216,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -43554,12 +55432,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -43742,12 +55622,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -43970,12 +55852,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -44200,12 +56084,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DoubleValue.decode = function decode(reader, length) {
+                DoubleValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.double();
@@ -44403,12 +56289,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FloatValue.decode = function decode(reader, length) {
+                FloatValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.float();
@@ -44606,12 +56494,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int64Value.decode = function decode(reader, length) {
+                Int64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int64();
@@ -44823,12 +56713,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt64Value.decode = function decode(reader, length) {
+                UInt64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint64();
@@ -45040,12 +56932,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int32Value.decode = function decode(reader, length) {
+                Int32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int32();
@@ -45243,12 +57137,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt32Value.decode = function decode(reader, length) {
+                UInt32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint32();
@@ -45446,12 +57342,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BoolValue.decode = function decode(reader, length) {
+                BoolValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bool();
@@ -45649,12 +57547,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                StringValue.decode = function decode(reader, length) {
+                StringValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.string();
@@ -45852,12 +57752,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BytesValue.decode = function decode(reader, length) {
+                BytesValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bytes();
@@ -46334,12 +58236,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -46614,12 +58518,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -46850,12 +58756,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -47103,12 +59011,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -47338,12 +59248,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -47541,12 +59453,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -47755,12 +59669,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -47987,12 +59903,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -48239,12 +60157,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -74,6 +74,9 @@ export namespace google {
                     /** Order fulfillmentTime */
                     fulfillmentTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Order customerRequestedInstallationDate */
+                    customerRequestedInstallationDate?: (google.type.IDate|null);
+
                     /** Order regionCode */
                     regionCode?: (string|null);
 
@@ -100,6 +103,24 @@ export namespace google {
 
                     /** Order estimatedInstallationDate */
                     estimatedInstallationDate?: (google.type.IDate|null);
+
+                    /** Order estimatedDeliveryDate */
+                    estimatedDeliveryDate?: (google.type.IDate|null);
+
+                    /** Order migration */
+                    migration?: (boolean|null);
+
+                    /** Order acceptedTime */
+                    acceptedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Order requestedDateChange */
+                    requestedDateChange?: (google.type.IDate|null);
+
+                    /** Order vendorNotes */
+                    vendorNotes?: (string|null);
+
+                    /** Order vendorContact */
+                    vendorContact?: (google.cloud.gdchardwaremanagement.v1alpha.IOrganizationContact|null);
                 }
 
                 /** Represents an Order. */
@@ -141,6 +162,9 @@ export namespace google {
                     /** Order fulfillmentTime. */
                     public fulfillmentTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Order customerRequestedInstallationDate. */
+                    public customerRequestedInstallationDate?: (google.type.IDate|null);
+
                     /** Order regionCode. */
                     public regionCode: string;
 
@@ -167,6 +191,24 @@ export namespace google {
 
                     /** Order estimatedInstallationDate. */
                     public estimatedInstallationDate?: (google.type.IDate|null);
+
+                    /** Order estimatedDeliveryDate. */
+                    public estimatedDeliveryDate?: (google.type.IDate|null);
+
+                    /** Order migration. */
+                    public migration: boolean;
+
+                    /** Order acceptedTime. */
+                    public acceptedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Order requestedDateChange. */
+                    public requestedDateChange?: (google.type.IDate|null);
+
+                    /** Order vendorNotes. */
+                    public vendorNotes: string;
+
+                    /** Order vendorContact. */
+                    public vendorContact?: (google.cloud.gdchardwaremanagement.v1alpha.IOrganizationContact|null);
 
                     /**
                      * Creates a new Order instance using the specified properties.
@@ -662,6 +704,9 @@ export namespace google {
 
                     /** Hardware machineInfos */
                     machineInfos?: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo[]|null);
+
+                    /** Hardware estimatedDeliveryDate */
+                    estimatedDeliveryDate?: (google.type.IDate|null);
                 }
 
                 /** Represents a Hardware. */
@@ -726,6 +771,9 @@ export namespace google {
 
                     /** Hardware machineInfos. */
                     public machineInfos: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo[];
+
+                    /** Hardware estimatedDeliveryDate. */
+                    public estimatedDeliveryDate?: (google.type.IDate|null);
 
                     /**
                      * Creates a new Hardware instance using the specified properties.
@@ -1743,6 +1791,15 @@ export namespace google {
 
                     /** Zone provisioningState */
                     provisioningState?: (google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|null);
+
+                    /** Zone skipClusterProvisioning */
+                    skipClusterProvisioning?: (boolean|null);
+
+                    /** Zone clusterIntentRequired */
+                    clusterIntentRequired?: (boolean|null);
+
+                    /** Zone clusterIntentVerified */
+                    clusterIntentVerified?: (boolean|null);
                 }
 
                 /** Represents a Zone. */
@@ -1789,6 +1846,15 @@ export namespace google {
 
                     /** Zone provisioningState. */
                     public provisioningState: (google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Zone.ProvisioningState);
+
+                    /** Zone skipClusterProvisioning. */
+                    public skipClusterProvisioning: boolean;
+
+                    /** Zone clusterIntentRequired. */
+                    public clusterIntentRequired: boolean;
+
+                    /** Zone clusterIntentVerified. */
+                    public clusterIntentVerified: boolean;
 
                     /**
                      * Creates a new Zone instance using the specified properties.
@@ -1878,6 +1944,7 @@ export namespace google {
                         READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS = 5,
                         CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED = 8,
                         READY_FOR_SITE_TURNUP = 6,
+                        OFFLINE = 9,
                         CUSTOMER_FACTORY_TURNUP_CHECKS_FAILED = 7,
                         ACTIVE = 3,
                         CANCELLED = 4
@@ -2601,7 +2668,11 @@ export namespace google {
                         POWER_RECEPTACLE_TYPE_UNSPECIFIED = 0,
                         NEMA_5_15 = 1,
                         C_13 = 2,
-                        STANDARD_EU = 3
+                        STANDARD_EU = 3,
+                        TYPE_G_BS1363 = 4,
+                        CEE_7_3 = 5,
+                        CEE_7_5 = 6,
+                        TYPE_F = 7
                     }
 
                     /** NetworkUplinkType enum. */
@@ -3654,6 +3725,20 @@ export namespace google {
                     public submitOrder(request: google.cloud.gdchardwaremanagement.v1alpha.ISubmitOrderRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls CancelOrder.
+                     * @param request CancelOrderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public cancelOrder(request: google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest, callback: google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrderCallback): void;
+
+                    /**
+                     * Calls CancelOrder.
+                     * @param request CancelOrderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelOrder(request: google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListSites.
                      * @param request ListSitesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListSitesResponse
@@ -4058,6 +4143,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public signalZoneState(request: google.cloud.gdchardwaremanagement.v1alpha.ISignalZoneStateRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RequestOrderDateChange.
+                     * @param request RequestOrderDateChangeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public requestOrderDateChange(request: google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest, callback: google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChangeCallback): void;
+
+                    /**
+                     * Calls RequestOrderDateChange.
+                     * @param request RequestOrderDateChangeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public requestOrderDateChange(request: google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace GDCHardwareManagement {
@@ -4103,6 +4202,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type SubmitOrderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|cancelOrder}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CancelOrderCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|listSites}.
@@ -4306,6 +4412,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type SignalZoneStateCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|requestOrderDateChange}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RequestOrderDateChangeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ListOrdersRequest. */
@@ -5085,6 +5198,109 @@ export namespace google {
                         INFO_PENDING = 1,
                         INFO_COMPLETE = 2
                     }
+                }
+
+                /** Properties of a CancelOrderRequest. */
+                interface ICancelOrderRequest {
+
+                    /** CancelOrderRequest name */
+                    name?: (string|null);
+
+                    /** CancelOrderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CancelOrderRequest. */
+                class CancelOrderRequest implements ICancelOrderRequest {
+
+                    /**
+                     * Constructs a new CancelOrderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest);
+
+                    /** CancelOrderRequest name. */
+                    public name: string;
+
+                    /** CancelOrderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CancelOrderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelOrderRequest instance
+                     */
+                    public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest): google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest;
+
+                    /**
+                     * Encodes the specified CancelOrderRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest.verify|verify} messages.
+                     * @param message CancelOrderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelOrderRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest.verify|verify} messages.
+                     * @param message CancelOrderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.ICancelOrderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelOrderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelOrderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest;
+
+                    /**
+                     * Decodes a CancelOrderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelOrderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest;
+
+                    /**
+                     * Verifies a CancelOrderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelOrderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelOrderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest;
+
+                    /**
+                     * Creates a plain object from a CancelOrderRequest message. Also converts values to other types if specified.
+                     * @param message CancelOrderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.CancelOrderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelOrderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelOrderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListSitesRequest. */
@@ -9041,7 +9257,8 @@ export namespace google {
                         FACTORY_TURNUP_CHECKS_STARTED = 3,
                         FACTORY_TURNUP_CHECKS_PASSED = 1,
                         READY_FOR_SITE_TURNUP = 1,
-                        FACTORY_TURNUP_CHECKS_FAILED = 2
+                        FACTORY_TURNUP_CHECKS_FAILED = 2,
+                        VERIFY_CLUSTER_INTENT_PRESENCE = 4
                     }
 
                     /** ProvisioningStateSignal enum. */
@@ -9179,6 +9396,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RequestOrderDateChangeRequest. */
+                interface IRequestOrderDateChangeRequest {
+
+                    /** RequestOrderDateChangeRequest name */
+                    name?: (string|null);
+
+                    /** RequestOrderDateChangeRequest requestedDate */
+                    requestedDate?: (google.type.IDate|null);
+                }
+
+                /** Represents a RequestOrderDateChangeRequest. */
+                class RequestOrderDateChangeRequest implements IRequestOrderDateChangeRequest {
+
+                    /**
+                     * Constructs a new RequestOrderDateChangeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest);
+
+                    /** RequestOrderDateChangeRequest name. */
+                    public name: string;
+
+                    /** RequestOrderDateChangeRequest requestedDate. */
+                    public requestedDate?: (google.type.IDate|null);
+
+                    /**
+                     * Creates a new RequestOrderDateChangeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RequestOrderDateChangeRequest instance
+                     */
+                    public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest): google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest;
+
+                    /**
+                     * Encodes the specified RequestOrderDateChangeRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest.verify|verify} messages.
+                     * @param message RequestOrderDateChangeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RequestOrderDateChangeRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest.verify|verify} messages.
+                     * @param message RequestOrderDateChangeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.IRequestOrderDateChangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RequestOrderDateChangeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RequestOrderDateChangeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest;
+
+                    /**
+                     * Decodes a RequestOrderDateChangeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RequestOrderDateChangeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest;
+
+                    /**
+                     * Verifies a RequestOrderDateChangeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RequestOrderDateChangeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RequestOrderDateChangeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest;
+
+                    /**
+                     * Creates a plain object from a RequestOrderDateChangeRequest message. Also converts values to other types if specified.
+                     * @param message RequestOrderDateChangeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.RequestOrderDateChangeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RequestOrderDateChangeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RequestOrderDateChangeRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10217,6 +10537,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -10257,6 +10580,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -14213,6 +14539,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -14464,7 +14793,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -14495,7 +14824,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -15737,7 +16066,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -15753,7 +16082,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

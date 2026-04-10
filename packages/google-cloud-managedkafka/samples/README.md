@@ -12,17 +12,24 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Managed_kafka.add_acl_entry](#managed_kafka.add_acl_entry)
+  * [Managed_kafka.create_acl](#managed_kafka.create_acl)
   * [Managed_kafka.create_cluster](#managed_kafka.create_cluster)
   * [Managed_kafka.create_topic](#managed_kafka.create_topic)
+  * [Managed_kafka.delete_acl](#managed_kafka.delete_acl)
   * [Managed_kafka.delete_cluster](#managed_kafka.delete_cluster)
   * [Managed_kafka.delete_consumer_group](#managed_kafka.delete_consumer_group)
   * [Managed_kafka.delete_topic](#managed_kafka.delete_topic)
+  * [Managed_kafka.get_acl](#managed_kafka.get_acl)
   * [Managed_kafka.get_cluster](#managed_kafka.get_cluster)
   * [Managed_kafka.get_consumer_group](#managed_kafka.get_consumer_group)
   * [Managed_kafka.get_topic](#managed_kafka.get_topic)
+  * [Managed_kafka.list_acls](#managed_kafka.list_acls)
   * [Managed_kafka.list_clusters](#managed_kafka.list_clusters)
   * [Managed_kafka.list_consumer_groups](#managed_kafka.list_consumer_groups)
   * [Managed_kafka.list_topics](#managed_kafka.list_topics)
+  * [Managed_kafka.remove_acl_entry](#managed_kafka.remove_acl_entry)
+  * [Managed_kafka.update_acl](#managed_kafka.update_acl)
   * [Managed_kafka.update_cluster](#managed_kafka.update_cluster)
   * [Managed_kafka.update_consumer_group](#managed_kafka.update_consumer_group)
   * [Managed_kafka.update_topic](#managed_kafka.update_topic)
@@ -57,6 +64,40 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
+### Managed_kafka.add_acl_entry
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.add_acl_entry.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.add_acl_entry.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.add_acl_entry.js`
+
+
+-----
+
+
+
+
+### Managed_kafka.create_acl
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_acl.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_acl.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_acl.js`
+
+
+-----
+
+
+
+
 ### Managed_kafka.create_cluster
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_cluster.js).
@@ -84,6 +125,23 @@ __Usage:__
 
 
 `node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.create_topic.js`
+
+
+-----
+
+
+
+
+### Managed_kafka.delete_acl
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_acl.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_acl.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.delete_acl.js`
 
 
 -----
@@ -142,6 +200,23 @@ __Usage:__
 
 
 
+### Managed_kafka.get_acl
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_acl.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_acl.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_acl.js`
+
+
+-----
+
+
+
+
 ### Managed_kafka.get_cluster
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.get_cluster.js).
@@ -193,6 +268,23 @@ __Usage:__
 
 
 
+### Managed_kafka.list_acls
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_acls.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_acls.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_acls.js`
+
+
+-----
+
+
+
+
 ### Managed_kafka.list_clusters
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_clusters.js).
@@ -237,6 +329,40 @@ __Usage:__
 
 
 `node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.list_topics.js`
+
+
+-----
+
+
+
+
+### Managed_kafka.remove_acl_entry
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.remove_acl_entry.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.remove_acl_entry.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.remove_acl_entry.js`
+
+
+-----
+
+
+
+
+### Managed_kafka.update_acl
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_acl.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_acl.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_acl.js`
 
 
 -----

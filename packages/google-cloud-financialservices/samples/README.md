@@ -69,7 +69,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### A_m_l.create_backtest_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_backtest_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_backtest_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_backtest_result.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### A_m_l.create_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_dataset.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### A_m_l.create_engine_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_engine_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_engine_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_engine_config.js,samples/README.md)
 
@@ -120,7 +120,7 @@ __Usage:__
 
 ### A_m_l.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_instance.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 ### A_m_l.create_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_model.js,samples/README.md)
 
@@ -154,7 +154,7 @@ __Usage:__
 
 ### A_m_l.create_prediction_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_prediction_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_prediction_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.create_prediction_result.js,samples/README.md)
 
@@ -171,7 +171,7 @@ __Usage:__
 
 ### A_m_l.delete_backtest_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_backtest_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_backtest_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_backtest_result.js,samples/README.md)
 
@@ -188,7 +188,7 @@ __Usage:__
 
 ### A_m_l.delete_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_dataset.js,samples/README.md)
 
@@ -205,7 +205,7 @@ __Usage:__
 
 ### A_m_l.delete_engine_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_engine_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_engine_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_engine_config.js,samples/README.md)
 
@@ -222,7 +222,7 @@ __Usage:__
 
 ### A_m_l.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_instance.js,samples/README.md)
 
@@ -239,7 +239,7 @@ __Usage:__
 
 ### A_m_l.delete_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_model.js,samples/README.md)
 
@@ -256,7 +256,7 @@ __Usage:__
 
 ### A_m_l.delete_prediction_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_prediction_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_prediction_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.delete_prediction_result.js,samples/README.md)
 
@@ -273,7 +273,7 @@ __Usage:__
 
 ### A_m_l.export_backtest_result_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_backtest_result_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_backtest_result_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_backtest_result_metadata.js,samples/README.md)
 
@@ -290,7 +290,7 @@ __Usage:__
 
 ### A_m_l.export_engine_config_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_engine_config_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_engine_config_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_engine_config_metadata.js,samples/README.md)
 
@@ -307,7 +307,7 @@ __Usage:__
 
 ### A_m_l.export_model_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_model_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_model_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_model_metadata.js,samples/README.md)
 
@@ -324,7 +324,7 @@ __Usage:__
 
 ### A_m_l.export_prediction_result_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_prediction_result_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_prediction_result_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_prediction_result_metadata.js,samples/README.md)
 
@@ -341,7 +341,7 @@ __Usage:__
 
 ### A_m_l.export_registered_parties
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_registered_parties.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_registered_parties.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.export_registered_parties.js,samples/README.md)
 
@@ -358,7 +358,7 @@ __Usage:__
 
 ### A_m_l.get_backtest_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_backtest_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_backtest_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_backtest_result.js,samples/README.md)
 
@@ -375,7 +375,7 @@ __Usage:__
 
 ### A_m_l.get_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_dataset.js,samples/README.md)
 
@@ -392,7 +392,7 @@ __Usage:__
 
 ### A_m_l.get_engine_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_engine_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_engine_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_engine_config.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 ### A_m_l.get_engine_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_engine_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_engine_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_engine_version.js,samples/README.md)
 
@@ -426,7 +426,7 @@ __Usage:__
 
 ### A_m_l.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_instance.js,samples/README.md)
 
@@ -443,7 +443,7 @@ __Usage:__
 
 ### A_m_l.get_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_model.js,samples/README.md)
 
@@ -460,7 +460,7 @@ __Usage:__
 
 ### A_m_l.get_prediction_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_prediction_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_prediction_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.get_prediction_result.js,samples/README.md)
 
@@ -477,7 +477,7 @@ __Usage:__
 
 ### A_m_l.import_registered_parties
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.import_registered_parties.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.import_registered_parties.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.import_registered_parties.js,samples/README.md)
 
@@ -494,7 +494,7 @@ __Usage:__
 
 ### A_m_l.list_backtest_results
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_backtest_results.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_backtest_results.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_backtest_results.js,samples/README.md)
 
@@ -511,7 +511,7 @@ __Usage:__
 
 ### A_m_l.list_datasets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_datasets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_datasets.js,samples/README.md)
 
@@ -528,7 +528,7 @@ __Usage:__
 
 ### A_m_l.list_engine_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_engine_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_engine_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_engine_configs.js,samples/README.md)
 
@@ -545,7 +545,7 @@ __Usage:__
 
 ### A_m_l.list_engine_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_engine_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_engine_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_engine_versions.js,samples/README.md)
 
@@ -562,7 +562,7 @@ __Usage:__
 
 ### A_m_l.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_instances.js,samples/README.md)
 
@@ -579,7 +579,7 @@ __Usage:__
 
 ### A_m_l.list_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_models.js,samples/README.md)
 
@@ -596,7 +596,7 @@ __Usage:__
 
 ### A_m_l.list_prediction_results
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_prediction_results.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_prediction_results.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.list_prediction_results.js,samples/README.md)
 
@@ -613,7 +613,7 @@ __Usage:__
 
 ### A_m_l.update_backtest_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_backtest_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_backtest_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_backtest_result.js,samples/README.md)
 
@@ -630,7 +630,7 @@ __Usage:__
 
 ### A_m_l.update_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_dataset.js,samples/README.md)
 
@@ -647,7 +647,7 @@ __Usage:__
 
 ### A_m_l.update_engine_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_engine_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_engine_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_engine_config.js,samples/README.md)
 
@@ -664,7 +664,7 @@ __Usage:__
 
 ### A_m_l.update_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_instance.js,samples/README.md)
 
@@ -681,7 +681,7 @@ __Usage:__
 
 ### A_m_l.update_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_model.js,samples/README.md)
 
@@ -698,7 +698,7 @@ __Usage:__
 
 ### A_m_l.update_prediction_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_prediction_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_prediction_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_prediction_result.js,samples/README.md)
 
@@ -715,7 +715,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-financialservices/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-financialservices/samples/quickstart.js,samples/README.md)
 

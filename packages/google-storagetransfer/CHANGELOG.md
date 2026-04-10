@@ -1,5 +1,29 @@
 # Changelog
 
+## [4.2.1](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.2.0...storage-transfer-v4.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.1.0...storage-transfer-v4.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.0.1...storage-transfer-v4.1.0) (2025-06-03)
+
+
+### Features
+
+* [storagetransfer] support Azure federated identity ([#6375](https://github.com/googleapis/google-cloud-node/issues/6375)) ([b8f6929](https://github.com/googleapis/google-cloud-node/commit/b8f69297ff6e1eb3df0590f633947a337e30a406))
+* Add protobufjs 2023 edition support ([#6306](https://github.com/googleapis/google-cloud-node/issues/6306)) ([4f02ceb](https://github.com/googleapis/google-cloud-node/commit/4f02ceb7aac05b47b68e3c7c95aeeaa20ac33606))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v4.0.0...storage-transfer-v4.0.1) (2025-03-21)
 
 

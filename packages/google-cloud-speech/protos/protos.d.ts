@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11950,6 +11950,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CustomPromptConfig. */
+                interface ICustomPromptConfig {
+
+                    /** CustomPromptConfig customPrompt */
+                    customPrompt?: (string|null);
+                }
+
+                /** Represents a CustomPromptConfig. */
+                class CustomPromptConfig implements ICustomPromptConfig {
+
+                    /**
+                     * Constructs a new CustomPromptConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.ICustomPromptConfig);
+
+                    /** CustomPromptConfig customPrompt. */
+                    public customPrompt: string;
+
+                    /**
+                     * Creates a new CustomPromptConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomPromptConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.ICustomPromptConfig): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Encodes the specified CustomPromptConfig message. Does not implicitly {@link google.cloud.speech.v2.CustomPromptConfig.verify|verify} messages.
+                     * @param message CustomPromptConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.ICustomPromptConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomPromptConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.CustomPromptConfig.verify|verify} messages.
+                     * @param message CustomPromptConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.ICustomPromptConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomPromptConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomPromptConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Decodes a CustomPromptConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomPromptConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Verifies a CustomPromptConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomPromptConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomPromptConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.CustomPromptConfig;
+
+                    /**
+                     * Creates a plain object from a CustomPromptConfig message. Also converts values to other types if specified.
+                     * @param message CustomPromptConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.CustomPromptConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomPromptConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomPromptConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RecognitionFeatures. */
                 interface IRecognitionFeatures {
 
@@ -11979,6 +12076,9 @@ export namespace google {
 
                     /** RecognitionFeatures maxAlternatives */
                     maxAlternatives?: (number|null);
+
+                    /** RecognitionFeatures customPromptConfig */
+                    customPromptConfig?: (google.cloud.speech.v2.ICustomPromptConfig|null);
                 }
 
                 /** Represents a RecognitionFeatures. */
@@ -12016,6 +12116,9 @@ export namespace google {
 
                     /** RecognitionFeatures maxAlternatives. */
                     public maxAlternatives: number;
+
+                    /** RecognitionFeatures customPromptConfig. */
+                    public customPromptConfig?: (google.cloud.speech.v2.ICustomPromptConfig|null);
 
                     /**
                      * Creates a new RecognitionFeatures instance using the specified properties.
@@ -12622,6 +12725,109 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a DenoiserConfig. */
+                interface IDenoiserConfig {
+
+                    /** DenoiserConfig denoiseAudio */
+                    denoiseAudio?: (boolean|null);
+
+                    /** DenoiserConfig snrThreshold */
+                    snrThreshold?: (number|null);
+                }
+
+                /** Represents a DenoiserConfig. */
+                class DenoiserConfig implements IDenoiserConfig {
+
+                    /**
+                     * Constructs a new DenoiserConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.speech.v2.IDenoiserConfig);
+
+                    /** DenoiserConfig denoiseAudio. */
+                    public denoiseAudio: boolean;
+
+                    /** DenoiserConfig snrThreshold. */
+                    public snrThreshold: number;
+
+                    /**
+                     * Creates a new DenoiserConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DenoiserConfig instance
+                     */
+                    public static create(properties?: google.cloud.speech.v2.IDenoiserConfig): google.cloud.speech.v2.DenoiserConfig;
+
+                    /**
+                     * Encodes the specified DenoiserConfig message. Does not implicitly {@link google.cloud.speech.v2.DenoiserConfig.verify|verify} messages.
+                     * @param message DenoiserConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.speech.v2.IDenoiserConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DenoiserConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.DenoiserConfig.verify|verify} messages.
+                     * @param message DenoiserConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.speech.v2.IDenoiserConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DenoiserConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DenoiserConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.speech.v2.DenoiserConfig;
+
+                    /**
+                     * Decodes a DenoiserConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DenoiserConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.speech.v2.DenoiserConfig;
+
+                    /**
+                     * Verifies a DenoiserConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DenoiserConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DenoiserConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.speech.v2.DenoiserConfig;
+
+                    /**
+                     * Creates a plain object from a DenoiserConfig message. Also converts values to other types if specified.
+                     * @param message DenoiserConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.speech.v2.DenoiserConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DenoiserConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DenoiserConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RecognitionConfig. */
                 interface IRecognitionConfig {
 
@@ -12648,6 +12854,9 @@ export namespace google {
 
                     /** RecognitionConfig translationConfig */
                     translationConfig?: (google.cloud.speech.v2.ITranslationConfig|null);
+
+                    /** RecognitionConfig denoiserConfig */
+                    denoiserConfig?: (google.cloud.speech.v2.IDenoiserConfig|null);
                 }
 
                 /** Represents a RecognitionConfig. */
@@ -12682,6 +12891,9 @@ export namespace google {
 
                     /** RecognitionConfig translationConfig. */
                     public translationConfig?: (google.cloud.speech.v2.ITranslationConfig|null);
+
+                    /** RecognitionConfig denoiserConfig. */
+                    public denoiserConfig?: (google.cloud.speech.v2.IDenoiserConfig|null);
 
                     /** RecognitionConfig decodingConfig. */
                     public decodingConfig?: ("autoDecodingConfig"|"explicitDecodingConfig");
@@ -12896,6 +13108,9 @@ export namespace google {
 
                     /** RecognitionResponseMetadata totalBilledDuration */
                     totalBilledDuration?: (google.protobuf.IDuration|null);
+
+                    /** RecognitionResponseMetadata prompt */
+                    prompt?: (string|null);
                 }
 
                 /** Represents a RecognitionResponseMetadata. */
@@ -12912,6 +13127,9 @@ export namespace google {
 
                     /** RecognitionResponseMetadata totalBilledDuration. */
                     public totalBilledDuration?: (google.protobuf.IDuration|null);
+
+                    /** RecognitionResponseMetadata prompt. */
+                    public prompt?: (string|null);
 
                     /**
                      * Creates a new RecognitionResponseMetadata instance using the specified properties.
@@ -13450,6 +13668,9 @@ export namespace google {
 
                     /** StreamingRecognitionFeatures voiceActivityTimeout */
                     voiceActivityTimeout?: (google.cloud.speech.v2.StreamingRecognitionFeatures.IVoiceActivityTimeout|null);
+
+                    /** StreamingRecognitionFeatures endpointingSensitivity */
+                    endpointingSensitivity?: (google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|keyof typeof google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|null);
                 }
 
                 /** Represents a StreamingRecognitionFeatures. */
@@ -13469,6 +13690,9 @@ export namespace google {
 
                     /** StreamingRecognitionFeatures voiceActivityTimeout. */
                     public voiceActivityTimeout?: (google.cloud.speech.v2.StreamingRecognitionFeatures.IVoiceActivityTimeout|null);
+
+                    /** StreamingRecognitionFeatures endpointingSensitivity. */
+                    public endpointingSensitivity: (google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|keyof typeof google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity);
 
                     /**
                      * Creates a new StreamingRecognitionFeatures instance using the specified properties.
@@ -13651,6 +13875,14 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** EndpointingSensitivity enum. */
+                    enum EndpointingSensitivity {
+                        ENDPOINTING_SENSITIVITY_UNSPECIFIED = 0,
+                        ENDPOINTING_SENSITIVITY_STANDARD = 1,
+                        ENDPOINTING_SENSITIVITY_SUPERSHORT = 2,
+                        ENDPOINTING_SENSITIVITY_SHORT = 3
                     }
                 }
 

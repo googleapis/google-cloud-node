@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -54,6 +54,11 @@ function main(instance, database, user, sqlStatement) {
    *  permitted, including DDL, DML, DQL statements.
    */
   // const sqlStatement = 'abc123'
+  /**
+   *  Optional. If set, validates the sql statement by performing
+   *  syntax and semantic validation and doesn't execute the query.
+   */
+  // const validateOnly = true
 
   // Imports the Alloydb library
   const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1alpha;

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1038,6 +1038,9 @@ export namespace google {
 
                     /** AutokeyConfig etag */
                     etag?: (string|null);
+
+                    /** AutokeyConfig keyProjectResolutionMode */
+                    keyProjectResolutionMode?: (google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|keyof typeof google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|null);
                 }
 
                 /** Represents an AutokeyConfig. */
@@ -1060,6 +1063,9 @@ export namespace google {
 
                     /** AutokeyConfig etag. */
                     public etag: string;
+
+                    /** AutokeyConfig keyProjectResolutionMode. */
+                    public keyProjectResolutionMode: (google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode|keyof typeof google.cloud.kms.v1.AutokeyConfig.KeyProjectResolutionMode);
 
                     /**
                      * Creates a new AutokeyConfig instance using the specified properties.
@@ -1146,7 +1152,16 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         ACTIVE = 1,
                         KEY_PROJECT_DELETED = 2,
-                        UNINITIALIZED = 3
+                        UNINITIALIZED = 3,
+                        KEY_PROJECT_PERMISSION_DENIED = 4
+                    }
+
+                    /** KeyProjectResolutionMode enum. */
+                    enum KeyProjectResolutionMode {
+                        KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED = 0,
+                        DEDICATED_KEY_PROJECT = 1,
+                        RESOURCE_PROJECT = 2,
+                        DISABLED = 3
                     }
                 }
 
@@ -2258,7 +2273,7 @@ export namespace google {
                 interface ICertificate {
 
                     /** Certificate rawDer */
-                    rawDer?: (Uint8Array|string|null);
+                    rawDer?: (Uint8Array|Buffer|string|null);
 
                     /** Certificate parsed */
                     parsed?: (boolean|null);
@@ -2295,7 +2310,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.ICertificate);
 
                     /** Certificate rawDer. */
-                    public rawDer: (Uint8Array|string);
+                    public rawDer: (Uint8Array|Buffer|string);
 
                     /** Certificate parsed. */
                     public parsed: boolean;
@@ -2942,6 +2957,3633 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Represents a HsmManagement */
+                class HsmManagement extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new HsmManagement service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new HsmManagement service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): HsmManagement;
+
+                    /**
+                     * Calls ListSingleTenantHsmInstances.
+                     * @param request ListSingleTenantHsmInstancesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSingleTenantHsmInstancesResponse
+                     */
+                    public listSingleTenantHsmInstances(request: google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest, callback: google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstancesCallback): void;
+
+                    /**
+                     * Calls ListSingleTenantHsmInstances.
+                     * @param request ListSingleTenantHsmInstancesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSingleTenantHsmInstances(request: google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest): Promise<google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse>;
+
+                    /**
+                     * Calls GetSingleTenantHsmInstance.
+                     * @param request GetSingleTenantHsmInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SingleTenantHsmInstance
+                     */
+                    public getSingleTenantHsmInstance(request: google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest, callback: google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstanceCallback): void;
+
+                    /**
+                     * Calls GetSingleTenantHsmInstance.
+                     * @param request GetSingleTenantHsmInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSingleTenantHsmInstance(request: google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest): Promise<google.cloud.kms.v1.SingleTenantHsmInstance>;
+
+                    /**
+                     * Calls CreateSingleTenantHsmInstance.
+                     * @param request CreateSingleTenantHsmInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSingleTenantHsmInstance(request: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest, callback: google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceCallback): void;
+
+                    /**
+                     * Calls CreateSingleTenantHsmInstance.
+                     * @param request CreateSingleTenantHsmInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSingleTenantHsmInstance(request: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateSingleTenantHsmInstanceProposal.
+                     * @param request CreateSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest, callback: google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceProposalCallback): void;
+
+                    /**
+                     * Calls CreateSingleTenantHsmInstanceProposal.
+                     * @param request CreateSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ApproveSingleTenantHsmInstanceProposal.
+                     * @param request ApproveSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ApproveSingleTenantHsmInstanceProposalResponse
+                     */
+                    public approveSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest, callback: google.cloud.kms.v1.HsmManagement.ApproveSingleTenantHsmInstanceProposalCallback): void;
+
+                    /**
+                     * Calls ApproveSingleTenantHsmInstanceProposal.
+                     * @param request ApproveSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public approveSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest): Promise<google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse>;
+
+                    /**
+                     * Calls ExecuteSingleTenantHsmInstanceProposal.
+                     * @param request ExecuteSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public executeSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest, callback: google.cloud.kms.v1.HsmManagement.ExecuteSingleTenantHsmInstanceProposalCallback): void;
+
+                    /**
+                     * Calls ExecuteSingleTenantHsmInstanceProposal.
+                     * @param request ExecuteSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public executeSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetSingleTenantHsmInstanceProposal.
+                     * @param request GetSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SingleTenantHsmInstanceProposal
+                     */
+                    public getSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest, callback: google.cloud.kms.v1.HsmManagement.GetSingleTenantHsmInstanceProposalCallback): void;
+
+                    /**
+                     * Calls GetSingleTenantHsmInstanceProposal.
+                     * @param request GetSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest): Promise<google.cloud.kms.v1.SingleTenantHsmInstanceProposal>;
+
+                    /**
+                     * Calls ListSingleTenantHsmInstanceProposals.
+                     * @param request ListSingleTenantHsmInstanceProposalsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSingleTenantHsmInstanceProposalsResponse
+                     */
+                    public listSingleTenantHsmInstanceProposals(request: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest, callback: google.cloud.kms.v1.HsmManagement.ListSingleTenantHsmInstanceProposalsCallback): void;
+
+                    /**
+                     * Calls ListSingleTenantHsmInstanceProposals.
+                     * @param request ListSingleTenantHsmInstanceProposalsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSingleTenantHsmInstanceProposals(request: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest): Promise<google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse>;
+
+                    /**
+                     * Calls DeleteSingleTenantHsmInstanceProposal.
+                     * @param request DeleteSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest, callback: google.cloud.kms.v1.HsmManagement.DeleteSingleTenantHsmInstanceProposalCallback): void;
+
+                    /**
+                     * Calls DeleteSingleTenantHsmInstanceProposal.
+                     * @param request DeleteSingleTenantHsmInstanceProposalRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSingleTenantHsmInstanceProposal(request: google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace HsmManagement {
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|listSingleTenantHsmInstances}.
+                     * @param error Error, if any
+                     * @param [response] ListSingleTenantHsmInstancesResponse
+                     */
+                    type ListSingleTenantHsmInstancesCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|getSingleTenantHsmInstance}.
+                     * @param error Error, if any
+                     * @param [response] SingleTenantHsmInstance
+                     */
+                    type GetSingleTenantHsmInstanceCallback = (error: (Error|null), response?: google.cloud.kms.v1.SingleTenantHsmInstance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|createSingleTenantHsmInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSingleTenantHsmInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|createSingleTenantHsmInstanceProposal}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSingleTenantHsmInstanceProposalCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|approveSingleTenantHsmInstanceProposal}.
+                     * @param error Error, if any
+                     * @param [response] ApproveSingleTenantHsmInstanceProposalResponse
+                     */
+                    type ApproveSingleTenantHsmInstanceProposalCallback = (error: (Error|null), response?: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|executeSingleTenantHsmInstanceProposal}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExecuteSingleTenantHsmInstanceProposalCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|getSingleTenantHsmInstanceProposal}.
+                     * @param error Error, if any
+                     * @param [response] SingleTenantHsmInstanceProposal
+                     */
+                    type GetSingleTenantHsmInstanceProposalCallback = (error: (Error|null), response?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|listSingleTenantHsmInstanceProposals}.
+                     * @param error Error, if any
+                     * @param [response] ListSingleTenantHsmInstanceProposalsResponse
+                     */
+                    type ListSingleTenantHsmInstanceProposalsCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.HsmManagement|deleteSingleTenantHsmInstanceProposal}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSingleTenantHsmInstanceProposalCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a SingleTenantHsmInstance. */
+                interface ISingleTenantHsmInstance {
+
+                    /** SingleTenantHsmInstance name */
+                    name?: (string|null);
+
+                    /** SingleTenantHsmInstance createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance state */
+                    state?: (google.cloud.kms.v1.SingleTenantHsmInstance.State|keyof typeof google.cloud.kms.v1.SingleTenantHsmInstance.State|null);
+
+                    /** SingleTenantHsmInstance quorumAuth */
+                    quorumAuth?: (google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth|null);
+
+                    /** SingleTenantHsmInstance deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance unrefreshedDurationUntilDisable */
+                    unrefreshedDurationUntilDisable?: (google.protobuf.IDuration|null);
+
+                    /** SingleTenantHsmInstance disableTime */
+                    disableTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SingleTenantHsmInstance. */
+                class SingleTenantHsmInstance implements ISingleTenantHsmInstance {
+
+                    /**
+                     * Constructs a new SingleTenantHsmInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ISingleTenantHsmInstance);
+
+                    /** SingleTenantHsmInstance name. */
+                    public name: string;
+
+                    /** SingleTenantHsmInstance createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance state. */
+                    public state: (google.cloud.kms.v1.SingleTenantHsmInstance.State|keyof typeof google.cloud.kms.v1.SingleTenantHsmInstance.State);
+
+                    /** SingleTenantHsmInstance quorumAuth. */
+                    public quorumAuth?: (google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth|null);
+
+                    /** SingleTenantHsmInstance deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstance unrefreshedDurationUntilDisable. */
+                    public unrefreshedDurationUntilDisable?: (google.protobuf.IDuration|null);
+
+                    /** SingleTenantHsmInstance disableTime. */
+                    public disableTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SingleTenantHsmInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SingleTenantHsmInstance instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ISingleTenantHsmInstance): google.cloud.kms.v1.SingleTenantHsmInstance;
+
+                    /**
+                     * Encodes the specified SingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.verify|verify} messages.
+                     * @param message SingleTenantHsmInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ISingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.verify|verify} messages.
+                     * @param message SingleTenantHsmInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ISingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SingleTenantHsmInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SingleTenantHsmInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstance;
+
+                    /**
+                     * Decodes a SingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SingleTenantHsmInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstance;
+
+                    /**
+                     * Verifies a SingleTenantHsmInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SingleTenantHsmInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstance;
+
+                    /**
+                     * Creates a plain object from a SingleTenantHsmInstance message. Also converts values to other types if specified.
+                     * @param message SingleTenantHsmInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SingleTenantHsmInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SingleTenantHsmInstance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SingleTenantHsmInstance {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        PENDING_TWO_FACTOR_AUTH_REGISTRATION = 2,
+                        ACTIVE = 3,
+                        DISABLING = 4,
+                        DISABLED = 5,
+                        DELETING = 6,
+                        DELETED = 7,
+                        FAILED = 8
+                    }
+
+                    /** Properties of a QuorumAuth. */
+                    interface IQuorumAuth {
+
+                        /** QuorumAuth totalApproverCount */
+                        totalApproverCount?: (number|null);
+
+                        /** QuorumAuth requiredApproverCount */
+                        requiredApproverCount?: (number|null);
+
+                        /** QuorumAuth twoFactorPublicKeyPems */
+                        twoFactorPublicKeyPems?: (string[]|null);
+                    }
+
+                    /** Represents a QuorumAuth. */
+                    class QuorumAuth implements IQuorumAuth {
+
+                        /**
+                         * Constructs a new QuorumAuth.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth);
+
+                        /** QuorumAuth totalApproverCount. */
+                        public totalApproverCount: number;
+
+                        /** QuorumAuth requiredApproverCount. */
+                        public requiredApproverCount: number;
+
+                        /** QuorumAuth twoFactorPublicKeyPems. */
+                        public twoFactorPublicKeyPems: string[];
+
+                        /**
+                         * Creates a new QuorumAuth instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QuorumAuth instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth): google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth;
+
+                        /**
+                         * Encodes the specified QuorumAuth message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.verify|verify} messages.
+                         * @param message QuorumAuth message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QuorumAuth message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth.verify|verify} messages.
+                         * @param message QuorumAuth message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstance.IQuorumAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QuorumAuth message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QuorumAuth
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth;
+
+                        /**
+                         * Decodes a QuorumAuth message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QuorumAuth
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth;
+
+                        /**
+                         * Verifies a QuorumAuth message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QuorumAuth message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QuorumAuth
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth;
+
+                        /**
+                         * Creates a plain object from a QuorumAuth message. Also converts values to other types if specified.
+                         * @param message QuorumAuth
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QuorumAuth to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QuorumAuth
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SingleTenantHsmInstanceProposal. */
+                interface ISingleTenantHsmInstanceProposal {
+
+                    /** SingleTenantHsmInstanceProposal name */
+                    name?: (string|null);
+
+                    /** SingleTenantHsmInstanceProposal createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal state */
+                    state?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State|keyof typeof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State|null);
+
+                    /** SingleTenantHsmInstanceProposal failureReason */
+                    failureReason?: (string|null);
+
+                    /** SingleTenantHsmInstanceProposal quorumParameters */
+                    quorumParameters?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters|null);
+
+                    /** SingleTenantHsmInstanceProposal requiredActionQuorumParameters */
+                    requiredActionQuorumParameters?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters|null);
+
+                    /** SingleTenantHsmInstanceProposal expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** SingleTenantHsmInstanceProposal deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal purgeTime */
+                    purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal registerTwoFactorAuthKeys */
+                    registerTwoFactorAuthKeys?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys|null);
+
+                    /** SingleTenantHsmInstanceProposal disableSingleTenantHsmInstance */
+                    disableSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal enableSingleTenantHsmInstance */
+                    enableSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal deleteSingleTenantHsmInstance */
+                    deleteSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal addQuorumMember */
+                    addQuorumMember?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember|null);
+
+                    /** SingleTenantHsmInstanceProposal removeQuorumMember */
+                    removeQuorumMember?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember|null);
+
+                    /** SingleTenantHsmInstanceProposal refreshSingleTenantHsmInstance */
+                    refreshSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance|null);
+                }
+
+                /** Represents a SingleTenantHsmInstanceProposal. */
+                class SingleTenantHsmInstanceProposal implements ISingleTenantHsmInstanceProposal {
+
+                    /**
+                     * Constructs a new SingleTenantHsmInstanceProposal.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ISingleTenantHsmInstanceProposal);
+
+                    /** SingleTenantHsmInstanceProposal name. */
+                    public name: string;
+
+                    /** SingleTenantHsmInstanceProposal createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal state. */
+                    public state: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State|keyof typeof google.cloud.kms.v1.SingleTenantHsmInstanceProposal.State);
+
+                    /** SingleTenantHsmInstanceProposal failureReason. */
+                    public failureReason: string;
+
+                    /** SingleTenantHsmInstanceProposal quorumParameters. */
+                    public quorumParameters?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters|null);
+
+                    /** SingleTenantHsmInstanceProposal requiredActionQuorumParameters. */
+                    public requiredActionQuorumParameters?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters|null);
+
+                    /** SingleTenantHsmInstanceProposal expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** SingleTenantHsmInstanceProposal deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal purgeTime. */
+                    public purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SingleTenantHsmInstanceProposal registerTwoFactorAuthKeys. */
+                    public registerTwoFactorAuthKeys?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys|null);
+
+                    /** SingleTenantHsmInstanceProposal disableSingleTenantHsmInstance. */
+                    public disableSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal enableSingleTenantHsmInstance. */
+                    public enableSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal deleteSingleTenantHsmInstance. */
+                    public deleteSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal addQuorumMember. */
+                    public addQuorumMember?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember|null);
+
+                    /** SingleTenantHsmInstanceProposal removeQuorumMember. */
+                    public removeQuorumMember?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember|null);
+
+                    /** SingleTenantHsmInstanceProposal refreshSingleTenantHsmInstance. */
+                    public refreshSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal approvalParameters. */
+                    public approvalParameters?: ("quorumParameters"|"requiredActionQuorumParameters");
+
+                    /** SingleTenantHsmInstanceProposal expiration. */
+                    public expiration?: ("expireTime"|"ttl");
+
+                    /** SingleTenantHsmInstanceProposal operation. */
+                    public operation?: ("registerTwoFactorAuthKeys"|"disableSingleTenantHsmInstance"|"enableSingleTenantHsmInstance"|"deleteSingleTenantHsmInstance"|"addQuorumMember"|"removeQuorumMember"|"refreshSingleTenantHsmInstance");
+
+                    /**
+                     * Creates a new SingleTenantHsmInstanceProposal instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SingleTenantHsmInstanceProposal instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ISingleTenantHsmInstanceProposal): google.cloud.kms.v1.SingleTenantHsmInstanceProposal;
+
+                    /**
+                     * Encodes the specified SingleTenantHsmInstanceProposal message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.verify|verify} messages.
+                     * @param message SingleTenantHsmInstanceProposal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ISingleTenantHsmInstanceProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SingleTenantHsmInstanceProposal message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.verify|verify} messages.
+                     * @param message SingleTenantHsmInstanceProposal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ISingleTenantHsmInstanceProposal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SingleTenantHsmInstanceProposal message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SingleTenantHsmInstanceProposal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal;
+
+                    /**
+                     * Decodes a SingleTenantHsmInstanceProposal message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SingleTenantHsmInstanceProposal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal;
+
+                    /**
+                     * Verifies a SingleTenantHsmInstanceProposal message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SingleTenantHsmInstanceProposal message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SingleTenantHsmInstanceProposal
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal;
+
+                    /**
+                     * Creates a plain object from a SingleTenantHsmInstanceProposal message. Also converts values to other types if specified.
+                     * @param message SingleTenantHsmInstanceProposal
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SingleTenantHsmInstanceProposal to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SingleTenantHsmInstanceProposal
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SingleTenantHsmInstanceProposal {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        PENDING = 2,
+                        APPROVED = 3,
+                        RUNNING = 4,
+                        SUCCEEDED = 5,
+                        FAILED = 6,
+                        DELETED = 7
+                    }
+
+                    /** Properties of a QuorumParameters. */
+                    interface IQuorumParameters {
+
+                        /** QuorumParameters requiredApproverCount */
+                        requiredApproverCount?: (number|null);
+
+                        /** QuorumParameters challenges */
+                        challenges?: (google.cloud.kms.v1.IChallenge[]|null);
+
+                        /** QuorumParameters approvedTwoFactorPublicKeyPems */
+                        approvedTwoFactorPublicKeyPems?: (string[]|null);
+                    }
+
+                    /** Represents a QuorumParameters. */
+                    class QuorumParameters implements IQuorumParameters {
+
+                        /**
+                         * Constructs a new QuorumParameters.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters);
+
+                        /** QuorumParameters requiredApproverCount. */
+                        public requiredApproverCount: number;
+
+                        /** QuorumParameters challenges. */
+                        public challenges: google.cloud.kms.v1.IChallenge[];
+
+                        /** QuorumParameters approvedTwoFactorPublicKeyPems. */
+                        public approvedTwoFactorPublicKeyPems: string[];
+
+                        /**
+                         * Creates a new QuorumParameters instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QuorumParameters instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters;
+
+                        /**
+                         * Encodes the specified QuorumParameters message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.verify|verify} messages.
+                         * @param message QuorumParameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QuorumParameters message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters.verify|verify} messages.
+                         * @param message QuorumParameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IQuorumParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QuorumParameters message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QuorumParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters;
+
+                        /**
+                         * Decodes a QuorumParameters message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QuorumParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters;
+
+                        /**
+                         * Verifies a QuorumParameters message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QuorumParameters message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QuorumParameters
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters;
+
+                        /**
+                         * Creates a plain object from a QuorumParameters message. Also converts values to other types if specified.
+                         * @param message QuorumParameters
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.QuorumParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QuorumParameters to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QuorumParameters
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RequiredActionQuorumParameters. */
+                    interface IRequiredActionQuorumParameters {
+
+                        /** RequiredActionQuorumParameters requiredChallenges */
+                        requiredChallenges?: (google.cloud.kms.v1.IChallenge[]|null);
+
+                        /** RequiredActionQuorumParameters requiredApproverCount */
+                        requiredApproverCount?: (number|null);
+
+                        /** RequiredActionQuorumParameters quorumChallenges */
+                        quorumChallenges?: (google.cloud.kms.v1.IChallenge[]|null);
+
+                        /** RequiredActionQuorumParameters approvedTwoFactorPublicKeyPems */
+                        approvedTwoFactorPublicKeyPems?: (string[]|null);
+                    }
+
+                    /** Represents a RequiredActionQuorumParameters. */
+                    class RequiredActionQuorumParameters implements IRequiredActionQuorumParameters {
+
+                        /**
+                         * Constructs a new RequiredActionQuorumParameters.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters);
+
+                        /** RequiredActionQuorumParameters requiredChallenges. */
+                        public requiredChallenges: google.cloud.kms.v1.IChallenge[];
+
+                        /** RequiredActionQuorumParameters requiredApproverCount. */
+                        public requiredApproverCount: number;
+
+                        /** RequiredActionQuorumParameters quorumChallenges. */
+                        public quorumChallenges: google.cloud.kms.v1.IChallenge[];
+
+                        /** RequiredActionQuorumParameters approvedTwoFactorPublicKeyPems. */
+                        public approvedTwoFactorPublicKeyPems: string[];
+
+                        /**
+                         * Creates a new RequiredActionQuorumParameters instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RequiredActionQuorumParameters instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters;
+
+                        /**
+                         * Encodes the specified RequiredActionQuorumParameters message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.verify|verify} messages.
+                         * @param message RequiredActionQuorumParameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RequiredActionQuorumParameters message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters.verify|verify} messages.
+                         * @param message RequiredActionQuorumParameters message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRequiredActionQuorumParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RequiredActionQuorumParameters message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RequiredActionQuorumParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters;
+
+                        /**
+                         * Decodes a RequiredActionQuorumParameters message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RequiredActionQuorumParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters;
+
+                        /**
+                         * Verifies a RequiredActionQuorumParameters message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RequiredActionQuorumParameters message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RequiredActionQuorumParameters
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters;
+
+                        /**
+                         * Creates a plain object from a RequiredActionQuorumParameters message. Also converts values to other types if specified.
+                         * @param message RequiredActionQuorumParameters
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RequiredActionQuorumParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RequiredActionQuorumParameters to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RequiredActionQuorumParameters
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RegisterTwoFactorAuthKeys. */
+                    interface IRegisterTwoFactorAuthKeys {
+
+                        /** RegisterTwoFactorAuthKeys requiredApproverCount */
+                        requiredApproverCount?: (number|null);
+
+                        /** RegisterTwoFactorAuthKeys twoFactorPublicKeyPems */
+                        twoFactorPublicKeyPems?: (string[]|null);
+                    }
+
+                    /** Represents a RegisterTwoFactorAuthKeys. */
+                    class RegisterTwoFactorAuthKeys implements IRegisterTwoFactorAuthKeys {
+
+                        /**
+                         * Constructs a new RegisterTwoFactorAuthKeys.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys);
+
+                        /** RegisterTwoFactorAuthKeys requiredApproverCount. */
+                        public requiredApproverCount: number;
+
+                        /** RegisterTwoFactorAuthKeys twoFactorPublicKeyPems. */
+                        public twoFactorPublicKeyPems: string[];
+
+                        /**
+                         * Creates a new RegisterTwoFactorAuthKeys instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RegisterTwoFactorAuthKeys instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys;
+
+                        /**
+                         * Encodes the specified RegisterTwoFactorAuthKeys message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.verify|verify} messages.
+                         * @param message RegisterTwoFactorAuthKeys message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RegisterTwoFactorAuthKeys message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys.verify|verify} messages.
+                         * @param message RegisterTwoFactorAuthKeys message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRegisterTwoFactorAuthKeys, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RegisterTwoFactorAuthKeys message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RegisterTwoFactorAuthKeys
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys;
+
+                        /**
+                         * Decodes a RegisterTwoFactorAuthKeys message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RegisterTwoFactorAuthKeys
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys;
+
+                        /**
+                         * Verifies a RegisterTwoFactorAuthKeys message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RegisterTwoFactorAuthKeys message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RegisterTwoFactorAuthKeys
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys;
+
+                        /**
+                         * Creates a plain object from a RegisterTwoFactorAuthKeys message. Also converts values to other types if specified.
+                         * @param message RegisterTwoFactorAuthKeys
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RegisterTwoFactorAuthKeys, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RegisterTwoFactorAuthKeys to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RegisterTwoFactorAuthKeys
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DisableSingleTenantHsmInstance. */
+                    interface IDisableSingleTenantHsmInstance {
+                    }
+
+                    /** Represents a DisableSingleTenantHsmInstance. */
+                    class DisableSingleTenantHsmInstance implements IDisableSingleTenantHsmInstance {
+
+                        /**
+                         * Constructs a new DisableSingleTenantHsmInstance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance);
+
+                        /**
+                         * Creates a new DisableSingleTenantHsmInstance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DisableSingleTenantHsmInstance instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance;
+
+                        /**
+                         * Encodes the specified DisableSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message DisableSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DisableSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message DisableSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDisableSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DisableSingleTenantHsmInstance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DisableSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance;
+
+                        /**
+                         * Decodes a DisableSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DisableSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance;
+
+                        /**
+                         * Verifies a DisableSingleTenantHsmInstance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DisableSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DisableSingleTenantHsmInstance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance;
+
+                        /**
+                         * Creates a plain object from a DisableSingleTenantHsmInstance message. Also converts values to other types if specified.
+                         * @param message DisableSingleTenantHsmInstance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DisableSingleTenantHsmInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DisableSingleTenantHsmInstance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DisableSingleTenantHsmInstance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EnableSingleTenantHsmInstance. */
+                    interface IEnableSingleTenantHsmInstance {
+                    }
+
+                    /** Represents an EnableSingleTenantHsmInstance. */
+                    class EnableSingleTenantHsmInstance implements IEnableSingleTenantHsmInstance {
+
+                        /**
+                         * Constructs a new EnableSingleTenantHsmInstance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance);
+
+                        /**
+                         * Creates a new EnableSingleTenantHsmInstance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EnableSingleTenantHsmInstance instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance;
+
+                        /**
+                         * Encodes the specified EnableSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message EnableSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EnableSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message EnableSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IEnableSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EnableSingleTenantHsmInstance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EnableSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance;
+
+                        /**
+                         * Decodes an EnableSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EnableSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance;
+
+                        /**
+                         * Verifies an EnableSingleTenantHsmInstance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EnableSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EnableSingleTenantHsmInstance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance;
+
+                        /**
+                         * Creates a plain object from an EnableSingleTenantHsmInstance message. Also converts values to other types if specified.
+                         * @param message EnableSingleTenantHsmInstance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.EnableSingleTenantHsmInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EnableSingleTenantHsmInstance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EnableSingleTenantHsmInstance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteSingleTenantHsmInstance. */
+                    interface IDeleteSingleTenantHsmInstance {
+                    }
+
+                    /** Represents a DeleteSingleTenantHsmInstance. */
+                    class DeleteSingleTenantHsmInstance implements IDeleteSingleTenantHsmInstance {
+
+                        /**
+                         * Constructs a new DeleteSingleTenantHsmInstance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance);
+
+                        /**
+                         * Creates a new DeleteSingleTenantHsmInstance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteSingleTenantHsmInstance instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance;
+
+                        /**
+                         * Encodes the specified DeleteSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message DeleteSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message DeleteSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IDeleteSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteSingleTenantHsmInstance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance;
+
+                        /**
+                         * Decodes a DeleteSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance;
+
+                        /**
+                         * Verifies a DeleteSingleTenantHsmInstance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteSingleTenantHsmInstance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance;
+
+                        /**
+                         * Creates a plain object from a DeleteSingleTenantHsmInstance message. Also converts values to other types if specified.
+                         * @param message DeleteSingleTenantHsmInstance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.DeleteSingleTenantHsmInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteSingleTenantHsmInstance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteSingleTenantHsmInstance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AddQuorumMember. */
+                    interface IAddQuorumMember {
+
+                        /** AddQuorumMember twoFactorPublicKeyPem */
+                        twoFactorPublicKeyPem?: (string|null);
+                    }
+
+                    /** Represents an AddQuorumMember. */
+                    class AddQuorumMember implements IAddQuorumMember {
+
+                        /**
+                         * Constructs a new AddQuorumMember.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember);
+
+                        /** AddQuorumMember twoFactorPublicKeyPem. */
+                        public twoFactorPublicKeyPem: string;
+
+                        /**
+                         * Creates a new AddQuorumMember instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddQuorumMember instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember;
+
+                        /**
+                         * Encodes the specified AddQuorumMember message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.verify|verify} messages.
+                         * @param message AddQuorumMember message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddQuorumMember message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember.verify|verify} messages.
+                         * @param message AddQuorumMember message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IAddQuorumMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddQuorumMember message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddQuorumMember
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember;
+
+                        /**
+                         * Decodes an AddQuorumMember message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddQuorumMember
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember;
+
+                        /**
+                         * Verifies an AddQuorumMember message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddQuorumMember message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddQuorumMember
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember;
+
+                        /**
+                         * Creates a plain object from an AddQuorumMember message. Also converts values to other types if specified.
+                         * @param message AddQuorumMember
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.AddQuorumMember, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddQuorumMember to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddQuorumMember
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RemoveQuorumMember. */
+                    interface IRemoveQuorumMember {
+
+                        /** RemoveQuorumMember twoFactorPublicKeyPem */
+                        twoFactorPublicKeyPem?: (string|null);
+                    }
+
+                    /** Represents a RemoveQuorumMember. */
+                    class RemoveQuorumMember implements IRemoveQuorumMember {
+
+                        /**
+                         * Constructs a new RemoveQuorumMember.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember);
+
+                        /** RemoveQuorumMember twoFactorPublicKeyPem. */
+                        public twoFactorPublicKeyPem: string;
+
+                        /**
+                         * Creates a new RemoveQuorumMember instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemoveQuorumMember instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember;
+
+                        /**
+                         * Encodes the specified RemoveQuorumMember message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.verify|verify} messages.
+                         * @param message RemoveQuorumMember message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemoveQuorumMember message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember.verify|verify} messages.
+                         * @param message RemoveQuorumMember message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRemoveQuorumMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemoveQuorumMember message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemoveQuorumMember
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember;
+
+                        /**
+                         * Decodes a RemoveQuorumMember message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemoveQuorumMember
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember;
+
+                        /**
+                         * Verifies a RemoveQuorumMember message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemoveQuorumMember message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemoveQuorumMember
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember;
+
+                        /**
+                         * Creates a plain object from a RemoveQuorumMember message. Also converts values to other types if specified.
+                         * @param message RemoveQuorumMember
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RemoveQuorumMember, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemoveQuorumMember to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemoveQuorumMember
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RefreshSingleTenantHsmInstance. */
+                    interface IRefreshSingleTenantHsmInstance {
+                    }
+
+                    /** Represents a RefreshSingleTenantHsmInstance. */
+                    class RefreshSingleTenantHsmInstance implements IRefreshSingleTenantHsmInstance {
+
+                        /**
+                         * Constructs a new RefreshSingleTenantHsmInstance.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance);
+
+                        /**
+                         * Creates a new RefreshSingleTenantHsmInstance instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RefreshSingleTenantHsmInstance instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance;
+
+                        /**
+                         * Encodes the specified RefreshSingleTenantHsmInstance message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message RefreshSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RefreshSingleTenantHsmInstance message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance.verify|verify} messages.
+                         * @param message RefreshSingleTenantHsmInstance message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RefreshSingleTenantHsmInstance message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RefreshSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance;
+
+                        /**
+                         * Decodes a RefreshSingleTenantHsmInstance message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RefreshSingleTenantHsmInstance
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance;
+
+                        /**
+                         * Verifies a RefreshSingleTenantHsmInstance message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RefreshSingleTenantHsmInstance message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RefreshSingleTenantHsmInstance
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance;
+
+                        /**
+                         * Creates a plain object from a RefreshSingleTenantHsmInstance message. Also converts values to other types if specified.
+                         * @param message RefreshSingleTenantHsmInstance
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.RefreshSingleTenantHsmInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RefreshSingleTenantHsmInstance to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RefreshSingleTenantHsmInstance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Challenge. */
+                interface IChallenge {
+
+                    /** Challenge challenge */
+                    challenge?: (Uint8Array|Buffer|string|null);
+
+                    /** Challenge publicKeyPem */
+                    publicKeyPem?: (string|null);
+                }
+
+                /** Represents a Challenge. */
+                class Challenge implements IChallenge {
+
+                    /**
+                     * Constructs a new Challenge.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IChallenge);
+
+                    /** Challenge challenge. */
+                    public challenge: (Uint8Array|Buffer|string);
+
+                    /** Challenge publicKeyPem. */
+                    public publicKeyPem: string;
+
+                    /**
+                     * Creates a new Challenge instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Challenge instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IChallenge): google.cloud.kms.v1.Challenge;
+
+                    /**
+                     * Encodes the specified Challenge message. Does not implicitly {@link google.cloud.kms.v1.Challenge.verify|verify} messages.
+                     * @param message Challenge message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IChallenge, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Challenge message, length delimited. Does not implicitly {@link google.cloud.kms.v1.Challenge.verify|verify} messages.
+                     * @param message Challenge message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IChallenge, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Challenge message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Challenge
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.Challenge;
+
+                    /**
+                     * Decodes a Challenge message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Challenge
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.Challenge;
+
+                    /**
+                     * Verifies a Challenge message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Challenge message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Challenge
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.Challenge;
+
+                    /**
+                     * Creates a plain object from a Challenge message. Also converts values to other types if specified.
+                     * @param message Challenge
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.Challenge, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Challenge to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Challenge
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ChallengeReply. */
+                interface IChallengeReply {
+
+                    /** ChallengeReply signedChallenge */
+                    signedChallenge?: (Uint8Array|Buffer|string|null);
+
+                    /** ChallengeReply publicKeyPem */
+                    publicKeyPem?: (string|null);
+                }
+
+                /** Represents a ChallengeReply. */
+                class ChallengeReply implements IChallengeReply {
+
+                    /**
+                     * Constructs a new ChallengeReply.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IChallengeReply);
+
+                    /** ChallengeReply signedChallenge. */
+                    public signedChallenge: (Uint8Array|Buffer|string);
+
+                    /** ChallengeReply publicKeyPem. */
+                    public publicKeyPem: string;
+
+                    /**
+                     * Creates a new ChallengeReply instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChallengeReply instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IChallengeReply): google.cloud.kms.v1.ChallengeReply;
+
+                    /**
+                     * Encodes the specified ChallengeReply message. Does not implicitly {@link google.cloud.kms.v1.ChallengeReply.verify|verify} messages.
+                     * @param message ChallengeReply message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IChallengeReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChallengeReply message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ChallengeReply.verify|verify} messages.
+                     * @param message ChallengeReply message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IChallengeReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChallengeReply message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChallengeReply
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ChallengeReply;
+
+                    /**
+                     * Decodes a ChallengeReply message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChallengeReply
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ChallengeReply;
+
+                    /**
+                     * Verifies a ChallengeReply message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChallengeReply message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChallengeReply
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ChallengeReply;
+
+                    /**
+                     * Creates a plain object from a ChallengeReply message. Also converts values to other types if specified.
+                     * @param message ChallengeReply
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ChallengeReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChallengeReply to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChallengeReply
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSingleTenantHsmInstancesRequest. */
+                interface IListSingleTenantHsmInstancesRequest {
+
+                    /** ListSingleTenantHsmInstancesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSingleTenantHsmInstancesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSingleTenantHsmInstancesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSingleTenantHsmInstancesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSingleTenantHsmInstancesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListSingleTenantHsmInstancesRequest showDeleted */
+                    showDeleted?: (boolean|null);
+                }
+
+                /** Represents a ListSingleTenantHsmInstancesRequest. */
+                class ListSingleTenantHsmInstancesRequest implements IListSingleTenantHsmInstancesRequest {
+
+                    /**
+                     * Constructs a new ListSingleTenantHsmInstancesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest);
+
+                    /** ListSingleTenantHsmInstancesRequest parent. */
+                    public parent: string;
+
+                    /** ListSingleTenantHsmInstancesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSingleTenantHsmInstancesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSingleTenantHsmInstancesRequest filter. */
+                    public filter: string;
+
+                    /** ListSingleTenantHsmInstancesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListSingleTenantHsmInstancesRequest showDeleted. */
+                    public showDeleted: boolean;
+
+                    /**
+                     * Creates a new ListSingleTenantHsmInstancesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSingleTenantHsmInstancesRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest): google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstancesRequest message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListSingleTenantHsmInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstancesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSingleTenantHsmInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstancesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSingleTenantHsmInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest;
+
+                    /**
+                     * Verifies a ListSingleTenantHsmInstancesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSingleTenantHsmInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSingleTenantHsmInstancesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest;
+
+                    /**
+                     * Creates a plain object from a ListSingleTenantHsmInstancesRequest message. Also converts values to other types if specified.
+                     * @param message ListSingleTenantHsmInstancesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListSingleTenantHsmInstancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSingleTenantHsmInstancesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSingleTenantHsmInstancesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSingleTenantHsmInstancesResponse. */
+                interface IListSingleTenantHsmInstancesResponse {
+
+                    /** ListSingleTenantHsmInstancesResponse singleTenantHsmInstances */
+                    singleTenantHsmInstances?: (google.cloud.kms.v1.ISingleTenantHsmInstance[]|null);
+
+                    /** ListSingleTenantHsmInstancesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSingleTenantHsmInstancesResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListSingleTenantHsmInstancesResponse. */
+                class ListSingleTenantHsmInstancesResponse implements IListSingleTenantHsmInstancesResponse {
+
+                    /**
+                     * Constructs a new ListSingleTenantHsmInstancesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse);
+
+                    /** ListSingleTenantHsmInstancesResponse singleTenantHsmInstances. */
+                    public singleTenantHsmInstances: google.cloud.kms.v1.ISingleTenantHsmInstance[];
+
+                    /** ListSingleTenantHsmInstancesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSingleTenantHsmInstancesResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListSingleTenantHsmInstancesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSingleTenantHsmInstancesResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse): google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstancesResponse message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListSingleTenantHsmInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstancesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSingleTenantHsmInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstancesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSingleTenantHsmInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse;
+
+                    /**
+                     * Verifies a ListSingleTenantHsmInstancesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSingleTenantHsmInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSingleTenantHsmInstancesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse;
+
+                    /**
+                     * Creates a plain object from a ListSingleTenantHsmInstancesResponse message. Also converts values to other types if specified.
+                     * @param message ListSingleTenantHsmInstancesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListSingleTenantHsmInstancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSingleTenantHsmInstancesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSingleTenantHsmInstancesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSingleTenantHsmInstanceRequest. */
+                interface IGetSingleTenantHsmInstanceRequest {
+
+                    /** GetSingleTenantHsmInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSingleTenantHsmInstanceRequest. */
+                class GetSingleTenantHsmInstanceRequest implements IGetSingleTenantHsmInstanceRequest {
+
+                    /**
+                     * Constructs a new GetSingleTenantHsmInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest);
+
+                    /** GetSingleTenantHsmInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSingleTenantHsmInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSingleTenantHsmInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest): google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Encodes the specified GetSingleTenantHsmInstanceRequest message. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest.verify|verify} messages.
+                     * @param message GetSingleTenantHsmInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSingleTenantHsmInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest.verify|verify} messages.
+                     * @param message GetSingleTenantHsmInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetSingleTenantHsmInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSingleTenantHsmInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSingleTenantHsmInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Decodes a GetSingleTenantHsmInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSingleTenantHsmInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Verifies a GetSingleTenantHsmInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSingleTenantHsmInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSingleTenantHsmInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a GetSingleTenantHsmInstanceRequest message. Also converts values to other types if specified.
+                     * @param message GetSingleTenantHsmInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetSingleTenantHsmInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSingleTenantHsmInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSingleTenantHsmInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSingleTenantHsmInstanceRequest. */
+                interface ICreateSingleTenantHsmInstanceRequest {
+
+                    /** CreateSingleTenantHsmInstanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSingleTenantHsmInstanceRequest singleTenantHsmInstanceId */
+                    singleTenantHsmInstanceId?: (string|null);
+
+                    /** CreateSingleTenantHsmInstanceRequest singleTenantHsmInstance */
+                    singleTenantHsmInstance?: (google.cloud.kms.v1.ISingleTenantHsmInstance|null);
+                }
+
+                /** Represents a CreateSingleTenantHsmInstanceRequest. */
+                class CreateSingleTenantHsmInstanceRequest implements ICreateSingleTenantHsmInstanceRequest {
+
+                    /**
+                     * Constructs a new CreateSingleTenantHsmInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest);
+
+                    /** CreateSingleTenantHsmInstanceRequest parent. */
+                    public parent: string;
+
+                    /** CreateSingleTenantHsmInstanceRequest singleTenantHsmInstanceId. */
+                    public singleTenantHsmInstanceId: string;
+
+                    /** CreateSingleTenantHsmInstanceRequest singleTenantHsmInstance. */
+                    public singleTenantHsmInstance?: (google.cloud.kms.v1.ISingleTenantHsmInstance|null);
+
+                    /**
+                     * Creates a new CreateSingleTenantHsmInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSingleTenantHsmInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest): google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceRequest message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSingleTenantHsmInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSingleTenantHsmInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Verifies a CreateSingleTenantHsmInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSingleTenantHsmInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSingleTenantHsmInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSingleTenantHsmInstanceRequest message. Also converts values to other types if specified.
+                     * @param message CreateSingleTenantHsmInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.CreateSingleTenantHsmInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSingleTenantHsmInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSingleTenantHsmInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSingleTenantHsmInstanceMetadata. */
+                interface ICreateSingleTenantHsmInstanceMetadata {
+                }
+
+                /** Represents a CreateSingleTenantHsmInstanceMetadata. */
+                class CreateSingleTenantHsmInstanceMetadata implements ICreateSingleTenantHsmInstanceMetadata {
+
+                    /**
+                     * Constructs a new CreateSingleTenantHsmInstanceMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata);
+
+                    /**
+                     * Creates a new CreateSingleTenantHsmInstanceMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSingleTenantHsmInstanceMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata): google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceMetadata message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSingleTenantHsmInstanceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSingleTenantHsmInstanceMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata;
+
+                    /**
+                     * Verifies a CreateSingleTenantHsmInstanceMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSingleTenantHsmInstanceMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSingleTenantHsmInstanceMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateSingleTenantHsmInstanceMetadata message. Also converts values to other types if specified.
+                     * @param message CreateSingleTenantHsmInstanceMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.CreateSingleTenantHsmInstanceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSingleTenantHsmInstanceMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSingleTenantHsmInstanceMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSingleTenantHsmInstanceProposalRequest. */
+                interface ICreateSingleTenantHsmInstanceProposalRequest {
+
+                    /** CreateSingleTenantHsmInstanceProposalRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposalId */
+                    singleTenantHsmInstanceProposalId?: (string|null);
+
+                    /** CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposal */
+                    singleTenantHsmInstanceProposal?: (google.cloud.kms.v1.ISingleTenantHsmInstanceProposal|null);
+                }
+
+                /** Represents a CreateSingleTenantHsmInstanceProposalRequest. */
+                class CreateSingleTenantHsmInstanceProposalRequest implements ICreateSingleTenantHsmInstanceProposalRequest {
+
+                    /**
+                     * Constructs a new CreateSingleTenantHsmInstanceProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest);
+
+                    /** CreateSingleTenantHsmInstanceProposalRequest parent. */
+                    public parent: string;
+
+                    /** CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposalId. */
+                    public singleTenantHsmInstanceProposalId: string;
+
+                    /** CreateSingleTenantHsmInstanceProposalRequest singleTenantHsmInstanceProposal. */
+                    public singleTenantHsmInstanceProposal?: (google.cloud.kms.v1.ISingleTenantHsmInstanceProposal|null);
+
+                    /**
+                     * Creates a new CreateSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSingleTenantHsmInstanceProposalRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Verifies a CreateSingleTenantHsmInstanceProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSingleTenantHsmInstanceProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                     * @param message CreateSingleTenantHsmInstanceProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSingleTenantHsmInstanceProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSingleTenantHsmInstanceProposalRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSingleTenantHsmInstanceProposalMetadata. */
+                interface ICreateSingleTenantHsmInstanceProposalMetadata {
+                }
+
+                /** Represents a CreateSingleTenantHsmInstanceProposalMetadata. */
+                class CreateSingleTenantHsmInstanceProposalMetadata implements ICreateSingleTenantHsmInstanceProposalMetadata {
+
+                    /**
+                     * Constructs a new CreateSingleTenantHsmInstanceProposalMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata);
+
+                    /**
+                     * Creates a new CreateSingleTenantHsmInstanceProposalMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSingleTenantHsmInstanceProposalMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceProposalMetadata message. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSingleTenantHsmInstanceProposalMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                     * @param message CreateSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.ICreateSingleTenantHsmInstanceProposalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSingleTenantHsmInstanceProposalMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Decodes a CreateSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSingleTenantHsmInstanceProposalMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Verifies a CreateSingleTenantHsmInstanceProposalMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSingleTenantHsmInstanceProposalMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSingleTenantHsmInstanceProposalMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateSingleTenantHsmInstanceProposalMetadata message. Also converts values to other types if specified.
+                     * @param message CreateSingleTenantHsmInstanceProposalMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSingleTenantHsmInstanceProposalMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSingleTenantHsmInstanceProposalMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSingleTenantHsmInstanceProposalRequest. */
+                interface IGetSingleTenantHsmInstanceProposalRequest {
+
+                    /** GetSingleTenantHsmInstanceProposalRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSingleTenantHsmInstanceProposalRequest. */
+                class GetSingleTenantHsmInstanceProposalRequest implements IGetSingleTenantHsmInstanceProposalRequest {
+
+                    /**
+                     * Constructs a new GetSingleTenantHsmInstanceProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest);
+
+                    /** GetSingleTenantHsmInstanceProposalRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSingleTenantHsmInstanceProposalRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest): google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Encodes the specified GetSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message GetSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message GetSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Decodes a GetSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Verifies a GetSingleTenantHsmInstanceProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSingleTenantHsmInstanceProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Creates a plain object from a GetSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                     * @param message GetSingleTenantHsmInstanceProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetSingleTenantHsmInstanceProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSingleTenantHsmInstanceProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSingleTenantHsmInstanceProposalRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ApproveSingleTenantHsmInstanceProposalRequest. */
+                interface IApproveSingleTenantHsmInstanceProposalRequest {
+
+                    /** ApproveSingleTenantHsmInstanceProposalRequest name */
+                    name?: (string|null);
+
+                    /** ApproveSingleTenantHsmInstanceProposalRequest quorumReply */
+                    quorumReply?: (google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply|null);
+
+                    /** ApproveSingleTenantHsmInstanceProposalRequest requiredActionQuorumReply */
+                    requiredActionQuorumReply?: (google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply|null);
+                }
+
+                /** Represents an ApproveSingleTenantHsmInstanceProposalRequest. */
+                class ApproveSingleTenantHsmInstanceProposalRequest implements IApproveSingleTenantHsmInstanceProposalRequest {
+
+                    /**
+                     * Constructs a new ApproveSingleTenantHsmInstanceProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest);
+
+                    /** ApproveSingleTenantHsmInstanceProposalRequest name. */
+                    public name: string;
+
+                    /** ApproveSingleTenantHsmInstanceProposalRequest quorumReply. */
+                    public quorumReply?: (google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply|null);
+
+                    /** ApproveSingleTenantHsmInstanceProposalRequest requiredActionQuorumReply. */
+                    public requiredActionQuorumReply?: (google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply|null);
+
+                    /** ApproveSingleTenantHsmInstanceProposalRequest approvalPayload. */
+                    public approvalPayload?: ("quorumReply"|"requiredActionQuorumReply");
+
+                    /**
+                     * Creates a new ApproveSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApproveSingleTenantHsmInstanceProposalRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Encodes the specified ApproveSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message ApproveSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApproveSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message ApproveSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApproveSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApproveSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Decodes an ApproveSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApproveSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Verifies an ApproveSingleTenantHsmInstanceProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApproveSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApproveSingleTenantHsmInstanceProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Creates a plain object from an ApproveSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                     * @param message ApproveSingleTenantHsmInstanceProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApproveSingleTenantHsmInstanceProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApproveSingleTenantHsmInstanceProposalRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ApproveSingleTenantHsmInstanceProposalRequest {
+
+                    /** Properties of a QuorumReply. */
+                    interface IQuorumReply {
+
+                        /** QuorumReply challengeReplies */
+                        challengeReplies?: (google.cloud.kms.v1.IChallengeReply[]|null);
+                    }
+
+                    /** Represents a QuorumReply. */
+                    class QuorumReply implements IQuorumReply {
+
+                        /**
+                         * Constructs a new QuorumReply.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply);
+
+                        /** QuorumReply challengeReplies. */
+                        public challengeReplies: google.cloud.kms.v1.IChallengeReply[];
+
+                        /**
+                         * Creates a new QuorumReply instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QuorumReply instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply;
+
+                        /**
+                         * Encodes the specified QuorumReply message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.verify|verify} messages.
+                         * @param message QuorumReply message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QuorumReply message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply.verify|verify} messages.
+                         * @param message QuorumReply message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IQuorumReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QuorumReply message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QuorumReply
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply;
+
+                        /**
+                         * Decodes a QuorumReply message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QuorumReply
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply;
+
+                        /**
+                         * Verifies a QuorumReply message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QuorumReply message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QuorumReply
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply;
+
+                        /**
+                         * Creates a plain object from a QuorumReply message. Also converts values to other types if specified.
+                         * @param message QuorumReply
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.QuorumReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QuorumReply to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QuorumReply
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RequiredActionQuorumReply. */
+                    interface IRequiredActionQuorumReply {
+
+                        /** RequiredActionQuorumReply requiredChallengeReplies */
+                        requiredChallengeReplies?: (google.cloud.kms.v1.IChallengeReply[]|null);
+
+                        /** RequiredActionQuorumReply quorumChallengeReplies */
+                        quorumChallengeReplies?: (google.cloud.kms.v1.IChallengeReply[]|null);
+                    }
+
+                    /** Represents a RequiredActionQuorumReply. */
+                    class RequiredActionQuorumReply implements IRequiredActionQuorumReply {
+
+                        /**
+                         * Constructs a new RequiredActionQuorumReply.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply);
+
+                        /** RequiredActionQuorumReply requiredChallengeReplies. */
+                        public requiredChallengeReplies: google.cloud.kms.v1.IChallengeReply[];
+
+                        /** RequiredActionQuorumReply quorumChallengeReplies. */
+                        public quorumChallengeReplies: google.cloud.kms.v1.IChallengeReply[];
+
+                        /**
+                         * Creates a new RequiredActionQuorumReply instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RequiredActionQuorumReply instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply;
+
+                        /**
+                         * Encodes the specified RequiredActionQuorumReply message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.verify|verify} messages.
+                         * @param message RequiredActionQuorumReply message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RequiredActionQuorumReply message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply.verify|verify} messages.
+                         * @param message RequiredActionQuorumReply message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.IRequiredActionQuorumReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RequiredActionQuorumReply message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RequiredActionQuorumReply
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply;
+
+                        /**
+                         * Decodes a RequiredActionQuorumReply message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RequiredActionQuorumReply
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply;
+
+                        /**
+                         * Verifies a RequiredActionQuorumReply message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RequiredActionQuorumReply message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RequiredActionQuorumReply
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply;
+
+                        /**
+                         * Creates a plain object from a RequiredActionQuorumReply message. Also converts values to other types if specified.
+                         * @param message RequiredActionQuorumReply
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalRequest.RequiredActionQuorumReply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RequiredActionQuorumReply to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RequiredActionQuorumReply
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ApproveSingleTenantHsmInstanceProposalResponse. */
+                interface IApproveSingleTenantHsmInstanceProposalResponse {
+                }
+
+                /** Represents an ApproveSingleTenantHsmInstanceProposalResponse. */
+                class ApproveSingleTenantHsmInstanceProposalResponse implements IApproveSingleTenantHsmInstanceProposalResponse {
+
+                    /**
+                     * Constructs a new ApproveSingleTenantHsmInstanceProposalResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse);
+
+                    /**
+                     * Creates a new ApproveSingleTenantHsmInstanceProposalResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApproveSingleTenantHsmInstanceProposalResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Encodes the specified ApproveSingleTenantHsmInstanceProposalResponse message. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                     * @param message ApproveSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApproveSingleTenantHsmInstanceProposalResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                     * @param message ApproveSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IApproveSingleTenantHsmInstanceProposalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApproveSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApproveSingleTenantHsmInstanceProposalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Decodes an ApproveSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApproveSingleTenantHsmInstanceProposalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Verifies an ApproveSingleTenantHsmInstanceProposalResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApproveSingleTenantHsmInstanceProposalResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApproveSingleTenantHsmInstanceProposalResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Creates a plain object from an ApproveSingleTenantHsmInstanceProposalResponse message. Also converts values to other types if specified.
+                     * @param message ApproveSingleTenantHsmInstanceProposalResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ApproveSingleTenantHsmInstanceProposalResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApproveSingleTenantHsmInstanceProposalResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApproveSingleTenantHsmInstanceProposalResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExecuteSingleTenantHsmInstanceProposalRequest. */
+                interface IExecuteSingleTenantHsmInstanceProposalRequest {
+
+                    /** ExecuteSingleTenantHsmInstanceProposalRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExecuteSingleTenantHsmInstanceProposalRequest. */
+                class ExecuteSingleTenantHsmInstanceProposalRequest implements IExecuteSingleTenantHsmInstanceProposalRequest {
+
+                    /**
+                     * Constructs a new ExecuteSingleTenantHsmInstanceProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest);
+
+                    /** ExecuteSingleTenantHsmInstanceProposalRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ExecuteSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecuteSingleTenantHsmInstanceProposalRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Encodes the specified ExecuteSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecuteSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecuteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecuteSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Decodes an ExecuteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecuteSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Verifies an ExecuteSingleTenantHsmInstanceProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecuteSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecuteSingleTenantHsmInstanceProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Creates a plain object from an ExecuteSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecuteSingleTenantHsmInstanceProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecuteSingleTenantHsmInstanceProposalRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExecuteSingleTenantHsmInstanceProposalResponse. */
+                interface IExecuteSingleTenantHsmInstanceProposalResponse {
+                }
+
+                /** Represents an ExecuteSingleTenantHsmInstanceProposalResponse. */
+                class ExecuteSingleTenantHsmInstanceProposalResponse implements IExecuteSingleTenantHsmInstanceProposalResponse {
+
+                    /**
+                     * Constructs a new ExecuteSingleTenantHsmInstanceProposalResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse);
+
+                    /**
+                     * Creates a new ExecuteSingleTenantHsmInstanceProposalResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecuteSingleTenantHsmInstanceProposalResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Encodes the specified ExecuteSingleTenantHsmInstanceProposalResponse message. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecuteSingleTenantHsmInstanceProposalResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse.verify|verify} messages.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecuteSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecuteSingleTenantHsmInstanceProposalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Decodes an ExecuteSingleTenantHsmInstanceProposalResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecuteSingleTenantHsmInstanceProposalResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Verifies an ExecuteSingleTenantHsmInstanceProposalResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecuteSingleTenantHsmInstanceProposalResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecuteSingleTenantHsmInstanceProposalResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse;
+
+                    /**
+                     * Creates a plain object from an ExecuteSingleTenantHsmInstanceProposalResponse message. Also converts values to other types if specified.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecuteSingleTenantHsmInstanceProposalResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecuteSingleTenantHsmInstanceProposalResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExecuteSingleTenantHsmInstanceProposalMetadata. */
+                interface IExecuteSingleTenantHsmInstanceProposalMetadata {
+                }
+
+                /** Represents an ExecuteSingleTenantHsmInstanceProposalMetadata. */
+                class ExecuteSingleTenantHsmInstanceProposalMetadata implements IExecuteSingleTenantHsmInstanceProposalMetadata {
+
+                    /**
+                     * Constructs a new ExecuteSingleTenantHsmInstanceProposalMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata);
+
+                    /**
+                     * Creates a new ExecuteSingleTenantHsmInstanceProposalMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecuteSingleTenantHsmInstanceProposalMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Encodes the specified ExecuteSingleTenantHsmInstanceProposalMetadata message. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecuteSingleTenantHsmInstanceProposalMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata.verify|verify} messages.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IExecuteSingleTenantHsmInstanceProposalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecuteSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecuteSingleTenantHsmInstanceProposalMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Decodes an ExecuteSingleTenantHsmInstanceProposalMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecuteSingleTenantHsmInstanceProposalMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Verifies an ExecuteSingleTenantHsmInstanceProposalMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecuteSingleTenantHsmInstanceProposalMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecuteSingleTenantHsmInstanceProposalMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata;
+
+                    /**
+                     * Creates a plain object from an ExecuteSingleTenantHsmInstanceProposalMetadata message. Also converts values to other types if specified.
+                     * @param message ExecuteSingleTenantHsmInstanceProposalMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ExecuteSingleTenantHsmInstanceProposalMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecuteSingleTenantHsmInstanceProposalMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecuteSingleTenantHsmInstanceProposalMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSingleTenantHsmInstanceProposalsRequest. */
+                interface IListSingleTenantHsmInstanceProposalsRequest {
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest showDeleted */
+                    showDeleted?: (boolean|null);
+                }
+
+                /** Represents a ListSingleTenantHsmInstanceProposalsRequest. */
+                class ListSingleTenantHsmInstanceProposalsRequest implements IListSingleTenantHsmInstanceProposalsRequest {
+
+                    /**
+                     * Constructs a new ListSingleTenantHsmInstanceProposalsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest);
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest parent. */
+                    public parent: string;
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest filter. */
+                    public filter: string;
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListSingleTenantHsmInstanceProposalsRequest showDeleted. */
+                    public showDeleted: boolean;
+
+                    /**
+                     * Creates a new ListSingleTenantHsmInstanceProposalsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSingleTenantHsmInstanceProposalsRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstanceProposalsRequest message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstanceProposalsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstanceProposalsRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstanceProposalsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstanceProposalsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSingleTenantHsmInstanceProposalsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstanceProposalsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSingleTenantHsmInstanceProposalsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest;
+
+                    /**
+                     * Verifies a ListSingleTenantHsmInstanceProposalsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSingleTenantHsmInstanceProposalsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSingleTenantHsmInstanceProposalsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSingleTenantHsmInstanceProposalsRequest message. Also converts values to other types if specified.
+                     * @param message ListSingleTenantHsmInstanceProposalsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSingleTenantHsmInstanceProposalsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSingleTenantHsmInstanceProposalsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSingleTenantHsmInstanceProposalsResponse. */
+                interface IListSingleTenantHsmInstanceProposalsResponse {
+
+                    /** ListSingleTenantHsmInstanceProposalsResponse singleTenantHsmInstanceProposals */
+                    singleTenantHsmInstanceProposals?: (google.cloud.kms.v1.ISingleTenantHsmInstanceProposal[]|null);
+
+                    /** ListSingleTenantHsmInstanceProposalsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSingleTenantHsmInstanceProposalsResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListSingleTenantHsmInstanceProposalsResponse. */
+                class ListSingleTenantHsmInstanceProposalsResponse implements IListSingleTenantHsmInstanceProposalsResponse {
+
+                    /**
+                     * Constructs a new ListSingleTenantHsmInstanceProposalsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse);
+
+                    /** ListSingleTenantHsmInstanceProposalsResponse singleTenantHsmInstanceProposals. */
+                    public singleTenantHsmInstanceProposals: google.cloud.kms.v1.ISingleTenantHsmInstanceProposal[];
+
+                    /** ListSingleTenantHsmInstanceProposalsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSingleTenantHsmInstanceProposalsResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListSingleTenantHsmInstanceProposalsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSingleTenantHsmInstanceProposalsResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstanceProposalsResponse message. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstanceProposalsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSingleTenantHsmInstanceProposalsResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse.verify|verify} messages.
+                     * @param message ListSingleTenantHsmInstanceProposalsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListSingleTenantHsmInstanceProposalsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstanceProposalsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSingleTenantHsmInstanceProposalsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse;
+
+                    /**
+                     * Decodes a ListSingleTenantHsmInstanceProposalsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSingleTenantHsmInstanceProposalsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse;
+
+                    /**
+                     * Verifies a ListSingleTenantHsmInstanceProposalsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSingleTenantHsmInstanceProposalsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSingleTenantHsmInstanceProposalsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSingleTenantHsmInstanceProposalsResponse message. Also converts values to other types if specified.
+                     * @param message ListSingleTenantHsmInstanceProposalsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListSingleTenantHsmInstanceProposalsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSingleTenantHsmInstanceProposalsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSingleTenantHsmInstanceProposalsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSingleTenantHsmInstanceProposalRequest. */
+                interface IDeleteSingleTenantHsmInstanceProposalRequest {
+
+                    /** DeleteSingleTenantHsmInstanceProposalRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSingleTenantHsmInstanceProposalRequest. */
+                class DeleteSingleTenantHsmInstanceProposalRequest implements IDeleteSingleTenantHsmInstanceProposalRequest {
+
+                    /**
+                     * Constructs a new DeleteSingleTenantHsmInstanceProposalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest);
+
+                    /** DeleteSingleTenantHsmInstanceProposalRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSingleTenantHsmInstanceProposalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSingleTenantHsmInstanceProposalRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest): google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Encodes the specified DeleteSingleTenantHsmInstanceProposalRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message DeleteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSingleTenantHsmInstanceProposalRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest.verify|verify} messages.
+                     * @param message DeleteSingleTenantHsmInstanceProposalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteSingleTenantHsmInstanceProposalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Decodes a DeleteSingleTenantHsmInstanceProposalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSingleTenantHsmInstanceProposalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Verifies a DeleteSingleTenantHsmInstanceProposalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSingleTenantHsmInstanceProposalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSingleTenantHsmInstanceProposalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSingleTenantHsmInstanceProposalRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSingleTenantHsmInstanceProposalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteSingleTenantHsmInstanceProposalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSingleTenantHsmInstanceProposalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSingleTenantHsmInstanceProposalRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a KeyRing. */
                 interface IKeyRing {
 
@@ -3220,7 +6862,8 @@ export namespace google {
                         ASYMMETRIC_SIGN = 5,
                         ASYMMETRIC_DECRYPT = 6,
                         RAW_ENCRYPT_DECRYPT = 7,
-                        MAC = 9
+                        MAC = 9,
+                        KEY_ENCAPSULATION = 10
                     }
                 }
 
@@ -3334,7 +6977,7 @@ export namespace google {
                     format?: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|null);
 
                     /** KeyOperationAttestation content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** KeyOperationAttestation certChains */
                     certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -3353,7 +6996,7 @@ export namespace google {
                     public format: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat);
 
                     /** KeyOperationAttestation content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** KeyOperationAttestation certChains. */
                     public certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -3782,8 +7425,17 @@ export namespace google {
                         HMAC_SHA512 = 35,
                         HMAC_SHA224 = 36,
                         EXTERNAL_SYMMETRIC_ENCRYPTION = 18,
+                        ML_KEM_768 = 47,
+                        ML_KEM_1024 = 48,
+                        KEM_XWING = 63,
+                        PQ_SIGN_ML_DSA_44 = 68,
                         PQ_SIGN_ML_DSA_65 = 56,
-                        PQ_SIGN_SLH_DSA_SHA2_128S = 57
+                        PQ_SIGN_ML_DSA_87 = 69,
+                        PQ_SIGN_SLH_DSA_SHA2_128S = 57,
+                        PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60,
+                        PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70,
+                        PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67,
+                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
                     }
 
                     /** CryptoKeyVersionState enum. */
@@ -3812,7 +7464,7 @@ export namespace google {
                 interface IChecksummedData {
 
                     /** ChecksummedData data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** ChecksummedData crc32cChecksum */
                     crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -3828,7 +7480,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IChecksummedData);
 
                     /** ChecksummedData data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** ChecksummedData crc32cChecksum. */
                     public crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -4050,7 +7702,9 @@ export namespace google {
                     enum PublicKeyFormat {
                         PUBLIC_KEY_FORMAT_UNSPECIFIED = 0,
                         PEM = 1,
-                        NIST_PQC = 3
+                        DER = 2,
+                        NIST_PQC = 3,
+                        XWING_RAW_BYTES = 4
                     }
                 }
 
@@ -4086,6 +7740,9 @@ export namespace google {
 
                     /** ImportJob attestation */
                     attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend */
+                    cryptoKeyBackend?: (string|null);
                 }
 
                 /** Represents an ImportJob. */
@@ -4126,6 +7783,9 @@ export namespace google {
 
                     /** ImportJob attestation. */
                     public attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend. */
+                    public cryptoKeyBackend: string;
 
                     /**
                      * Creates a new ImportJob instance using the specified properties.
@@ -4524,13 +8184,129 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RetiredResource. */
+                interface IRetiredResource {
+
+                    /** RetiredResource name */
+                    name?: (string|null);
+
+                    /** RetiredResource originalResource */
+                    originalResource?: (string|null);
+
+                    /** RetiredResource resourceType */
+                    resourceType?: (string|null);
+
+                    /** RetiredResource deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RetiredResource. */
+                class RetiredResource implements IRetiredResource {
+
+                    /**
+                     * Constructs a new RetiredResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRetiredResource);
+
+                    /** RetiredResource name. */
+                    public name: string;
+
+                    /** RetiredResource originalResource. */
+                    public originalResource: string;
+
+                    /** RetiredResource resourceType. */
+                    public resourceType: string;
+
+                    /** RetiredResource deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RetiredResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetiredResource instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRetiredResource): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Encodes the specified RetiredResource message. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetiredResource message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Verifies a RetiredResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetiredResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetiredResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Creates a plain object from a RetiredResource message. Also converts values to other types if specified.
+                     * @param message RetiredResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RetiredResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetiredResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetiredResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** ProtectionLevel enum. */
                 enum ProtectionLevel {
                     PROTECTION_LEVEL_UNSPECIFIED = 0,
                     SOFTWARE = 1,
                     HSM = 2,
                     EXTERNAL = 3,
-                    EXTERNAL_VPC = 4
+                    EXTERNAL_VPC = 4,
+                    HSM_SINGLE_TENANT = 5
                 }
 
                 /** AccessReason enum. */
@@ -4626,6 +8402,20 @@ export namespace google {
                     public listImportJobs(request: google.cloud.kms.v1.IListImportJobsRequest): Promise<google.cloud.kms.v1.ListImportJobsResponse>;
 
                     /**
+                     * Calls ListRetiredResources.
+                     * @param request ListRetiredResourcesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRetiredResourcesResponse
+                     */
+                    public listRetiredResources(request: google.cloud.kms.v1.IListRetiredResourcesRequest, callback: google.cloud.kms.v1.KeyManagementService.ListRetiredResourcesCallback): void;
+
+                    /**
+                     * Calls ListRetiredResources.
+                     * @param request ListRetiredResourcesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRetiredResources(request: google.cloud.kms.v1.IListRetiredResourcesRequest): Promise<google.cloud.kms.v1.ListRetiredResourcesResponse>;
+
+                    /**
                      * Calls GetKeyRing.
                      * @param request GetKeyRingRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and KeyRing
@@ -4696,6 +8486,20 @@ export namespace google {
                     public getImportJob(request: google.cloud.kms.v1.IGetImportJobRequest): Promise<google.cloud.kms.v1.ImportJob>;
 
                     /**
+                     * Calls GetRetiredResource.
+                     * @param request GetRetiredResourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RetiredResource
+                     */
+                    public getRetiredResource(request: google.cloud.kms.v1.IGetRetiredResourceRequest, callback: google.cloud.kms.v1.KeyManagementService.GetRetiredResourceCallback): void;
+
+                    /**
+                     * Calls GetRetiredResource.
+                     * @param request GetRetiredResourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRetiredResource(request: google.cloud.kms.v1.IGetRetiredResourceRequest): Promise<google.cloud.kms.v1.RetiredResource>;
+
+                    /**
                      * Calls CreateKeyRing.
                      * @param request CreateKeyRingRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and KeyRing
@@ -4736,6 +8540,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public createCryptoKeyVersion(request: google.cloud.kms.v1.ICreateCryptoKeyVersionRequest): Promise<google.cloud.kms.v1.CryptoKeyVersion>;
+
+                    /**
+                     * Calls DeleteCryptoKey.
+                     * @param request DeleteCryptoKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteCryptoKey(request: google.cloud.kms.v1.IDeleteCryptoKeyRequest, callback: google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyCallback): void;
+
+                    /**
+                     * Calls DeleteCryptoKey.
+                     * @param request DeleteCryptoKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCryptoKey(request: google.cloud.kms.v1.IDeleteCryptoKeyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteCryptoKeyVersion.
+                     * @param request DeleteCryptoKeyVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteCryptoKeyVersion(request: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest, callback: google.cloud.kms.v1.KeyManagementService.DeleteCryptoKeyVersionCallback): void;
+
+                    /**
+                     * Calls DeleteCryptoKeyVersion.
+                     * @param request DeleteCryptoKeyVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCryptoKeyVersion(request: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls ImportCryptoKeyVersion.
@@ -4948,6 +8780,20 @@ export namespace google {
                     public macVerify(request: google.cloud.kms.v1.IMacVerifyRequest): Promise<google.cloud.kms.v1.MacVerifyResponse>;
 
                     /**
+                     * Calls Decapsulate.
+                     * @param request DecapsulateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DecapsulateResponse
+                     */
+                    public decapsulate(request: google.cloud.kms.v1.IDecapsulateRequest, callback: google.cloud.kms.v1.KeyManagementService.DecapsulateCallback): void;
+
+                    /**
+                     * Calls Decapsulate.
+                     * @param request DecapsulateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public decapsulate(request: google.cloud.kms.v1.IDecapsulateRequest): Promise<google.cloud.kms.v1.DecapsulateResponse>;
+
+                    /**
                      * Calls GenerateRandomBytes.
                      * @param request GenerateRandomBytesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and GenerateRandomBytesResponse
@@ -4993,6 +8839,13 @@ export namespace google {
                     type ListImportJobsCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListImportJobsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|listRetiredResources}.
+                     * @param error Error, if any
+                     * @param [response] ListRetiredResourcesResponse
+                     */
+                    type ListRetiredResourcesCallback = (error: (Error|null), response?: google.cloud.kms.v1.ListRetiredResourcesResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|getKeyRing}.
                      * @param error Error, if any
                      * @param [response] KeyRing
@@ -5028,6 +8881,13 @@ export namespace google {
                     type GetImportJobCallback = (error: (Error|null), response?: google.cloud.kms.v1.ImportJob) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|getRetiredResource}.
+                     * @param error Error, if any
+                     * @param [response] RetiredResource
+                     */
+                    type GetRetiredResourceCallback = (error: (Error|null), response?: google.cloud.kms.v1.RetiredResource) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|createKeyRing}.
                      * @param error Error, if any
                      * @param [response] KeyRing
@@ -5047,6 +8907,20 @@ export namespace google {
                      * @param [response] CryptoKeyVersion
                      */
                     type CreateCryptoKeyVersionCallback = (error: (Error|null), response?: google.cloud.kms.v1.CryptoKeyVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|deleteCryptoKey}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteCryptoKeyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|deleteCryptoKeyVersion}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteCryptoKeyVersionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|importCryptoKeyVersion}.
@@ -5152,6 +9026,13 @@ export namespace google {
                      * @param [response] MacVerifyResponse
                      */
                     type MacVerifyCallback = (error: (Error|null), response?: google.cloud.kms.v1.MacVerifyResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|decapsulate}.
+                     * @param error Error, if any
+                     * @param [response] DecapsulateResponse
+                     */
+                    type DecapsulateCallback = (error: (Error|null), response?: google.cloud.kms.v1.DecapsulateResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|generateRandomBytes}.
@@ -5657,6 +9538,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ListRetiredResourcesRequest. */
+                interface IListRetiredResourcesRequest {
+
+                    /** ListRetiredResourcesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRetiredResourcesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRetiredResourcesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListRetiredResourcesRequest. */
+                class ListRetiredResourcesRequest implements IListRetiredResourcesRequest {
+
+                    /**
+                     * Constructs a new ListRetiredResourcesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListRetiredResourcesRequest);
+
+                    /** ListRetiredResourcesRequest parent. */
+                    public parent: string;
+
+                    /** ListRetiredResourcesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRetiredResourcesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListRetiredResourcesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRetiredResourcesRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListRetiredResourcesRequest): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesRequest message. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesRequest.verify|verify} messages.
+                     * @param message ListRetiredResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListRetiredResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesRequest.verify|verify} messages.
+                     * @param message ListRetiredResourcesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListRetiredResourcesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRetiredResourcesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRetiredResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Decodes a ListRetiredResourcesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRetiredResourcesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Verifies a ListRetiredResourcesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRetiredResourcesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRetiredResourcesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListRetiredResourcesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRetiredResourcesRequest message. Also converts values to other types if specified.
+                     * @param message ListRetiredResourcesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListRetiredResourcesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRetiredResourcesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRetiredResourcesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListKeyRingsResponse. */
                 interface IListKeyRingsResponse {
 
@@ -6087,6 +10077,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListImportJobsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRetiredResourcesResponse. */
+                interface IListRetiredResourcesResponse {
+
+                    /** ListRetiredResourcesResponse retiredResources */
+                    retiredResources?: (google.cloud.kms.v1.IRetiredResource[]|null);
+
+                    /** ListRetiredResourcesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListRetiredResourcesResponse totalSize */
+                    totalSize?: (number|Long|string|null);
+                }
+
+                /** Represents a ListRetiredResourcesResponse. */
+                class ListRetiredResourcesResponse implements IListRetiredResourcesResponse {
+
+                    /**
+                     * Constructs a new ListRetiredResourcesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IListRetiredResourcesResponse);
+
+                    /** ListRetiredResourcesResponse retiredResources. */
+                    public retiredResources: google.cloud.kms.v1.IRetiredResource[];
+
+                    /** ListRetiredResourcesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListRetiredResourcesResponse totalSize. */
+                    public totalSize: (number|Long|string);
+
+                    /**
+                     * Creates a new ListRetiredResourcesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRetiredResourcesResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IListRetiredResourcesResponse): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesResponse message. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesResponse.verify|verify} messages.
+                     * @param message ListRetiredResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IListRetiredResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRetiredResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ListRetiredResourcesResponse.verify|verify} messages.
+                     * @param message ListRetiredResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IListRetiredResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRetiredResourcesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRetiredResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Decodes a ListRetiredResourcesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRetiredResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Verifies a ListRetiredResourcesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRetiredResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRetiredResourcesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ListRetiredResourcesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRetiredResourcesResponse message. Also converts values to other types if specified.
+                     * @param message ListRetiredResourcesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ListRetiredResourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRetiredResourcesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRetiredResourcesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6584,6 +10683,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetRetiredResourceRequest. */
+                interface IGetRetiredResourceRequest {
+
+                    /** GetRetiredResourceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRetiredResourceRequest. */
+                class GetRetiredResourceRequest implements IGetRetiredResourceRequest {
+
+                    /**
+                     * Constructs a new GetRetiredResourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IGetRetiredResourceRequest);
+
+                    /** GetRetiredResourceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRetiredResourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRetiredResourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IGetRetiredResourceRequest): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Encodes the specified GetRetiredResourceRequest message. Does not implicitly {@link google.cloud.kms.v1.GetRetiredResourceRequest.verify|verify} messages.
+                     * @param message GetRetiredResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IGetRetiredResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRetiredResourceRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GetRetiredResourceRequest.verify|verify} messages.
+                     * @param message GetRetiredResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IGetRetiredResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRetiredResourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRetiredResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Decodes a GetRetiredResourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRetiredResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Verifies a GetRetiredResourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRetiredResourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRetiredResourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.GetRetiredResourceRequest;
+
+                    /**
+                     * Creates a plain object from a GetRetiredResourceRequest message. Also converts values to other types if specified.
+                     * @param message GetRetiredResourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.GetRetiredResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRetiredResourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRetiredResourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateKeyRingRequest. */
                 interface ICreateKeyRingRequest {
 
@@ -6911,6 +11107,200 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DeleteCryptoKeyRequest. */
+                interface IDeleteCryptoKeyRequest {
+
+                    /** DeleteCryptoKeyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCryptoKeyRequest. */
+                class DeleteCryptoKeyRequest implements IDeleteCryptoKeyRequest {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyRequest);
+
+                    /** DeleteCryptoKeyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCryptoKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyRequest): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCryptoKeyVersionRequest. */
+                interface IDeleteCryptoKeyVersionRequest {
+
+                    /** DeleteCryptoKeyVersionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCryptoKeyVersionRequest. */
+                class DeleteCryptoKeyVersionRequest implements IDeleteCryptoKeyVersionRequest {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest);
+
+                    /** DeleteCryptoKeyVersionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCryptoKeyVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyVersionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an ImportCryptoKeyVersionRequest. */
                 interface IImportCryptoKeyVersionRequest {
 
@@ -6927,10 +11317,10 @@ export namespace google {
                     importJob?: (string|null);
 
                     /** ImportCryptoKeyVersionRequest wrappedKey */
-                    wrappedKey?: (Uint8Array|string|null);
+                    wrappedKey?: (Uint8Array|Buffer|string|null);
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey */
-                    rsaAesWrappedKey?: (Uint8Array|string|null);
+                    rsaAesWrappedKey?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an ImportCryptoKeyVersionRequest. */
@@ -6955,10 +11345,10 @@ export namespace google {
                     public importJob: string;
 
                     /** ImportCryptoKeyVersionRequest wrappedKey. */
-                    public wrappedKey: (Uint8Array|string);
+                    public wrappedKey: (Uint8Array|Buffer|string);
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey. */
-                    public rsaAesWrappedKey?: (Uint8Array|string|null);
+                    public rsaAesWrappedKey?: (Uint8Array|Buffer|string|null);
 
                     /** ImportCryptoKeyVersionRequest wrappedKeyMaterial. */
                     public wrappedKeyMaterial?: "rsaAesWrappedKey";
@@ -7660,10 +12050,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** EncryptRequest plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** EncryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** EncryptRequest plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7685,10 +12075,10 @@ export namespace google {
                     public name: string;
 
                     /** EncryptRequest plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** EncryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** EncryptRequest plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7781,10 +12171,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** DecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** DecryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** DecryptRequest ciphertextCrc32c */
                     ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7806,10 +12196,10 @@ export namespace google {
                     public name: string;
 
                     /** DecryptRequest ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** DecryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** DecryptRequest ciphertextCrc32c. */
                     public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7902,10 +12292,10 @@ export namespace google {
                     name?: (string|null);
 
                     /** RawEncryptRequest plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptRequest plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7914,7 +12304,7 @@ export namespace google {
                     additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** RawEncryptRequest initializationVector */
-                    initializationVector?: (Uint8Array|string|null);
+                    initializationVector?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptRequest initializationVectorCrc32c */
                     initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7933,10 +12323,10 @@ export namespace google {
                     public name: string;
 
                     /** RawEncryptRequest plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** RawEncryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** RawEncryptRequest plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -7945,7 +12335,7 @@ export namespace google {
                     public additionalAuthenticatedDataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** RawEncryptRequest initializationVector. */
-                    public initializationVector: (Uint8Array|string);
+                    public initializationVector: (Uint8Array|Buffer|string);
 
                     /** RawEncryptRequest initializationVectorCrc32c. */
                     public initializationVectorCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8035,13 +12425,13 @@ export namespace google {
                     name?: (string|null);
 
                     /** RawDecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptRequest additionalAuthenticatedData */
-                    additionalAuthenticatedData?: (Uint8Array|string|null);
+                    additionalAuthenticatedData?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptRequest initializationVector */
-                    initializationVector?: (Uint8Array|string|null);
+                    initializationVector?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptRequest tagLength */
                     tagLength?: (number|null);
@@ -8069,13 +12459,13 @@ export namespace google {
                     public name: string;
 
                     /** RawDecryptRequest ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** RawDecryptRequest additionalAuthenticatedData. */
-                    public additionalAuthenticatedData: (Uint8Array|string);
+                    public additionalAuthenticatedData: (Uint8Array|Buffer|string);
 
                     /** RawDecryptRequest initializationVector. */
-                    public initializationVector: (Uint8Array|string);
+                    public initializationVector: (Uint8Array|Buffer|string);
 
                     /** RawDecryptRequest tagLength. */
                     public tagLength: number;
@@ -8180,7 +12570,7 @@ export namespace google {
                     digestCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** AsymmetricSignRequest data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricSignRequest dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8205,7 +12595,7 @@ export namespace google {
                     public digestCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** AsymmetricSignRequest data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** AsymmetricSignRequest dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8295,7 +12685,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** AsymmetricDecryptRequest ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricDecryptRequest ciphertextCrc32c */
                     ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8314,7 +12704,7 @@ export namespace google {
                     public name: string;
 
                     /** AsymmetricDecryptRequest ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** AsymmetricDecryptRequest ciphertextCrc32c. */
                     public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8404,7 +12794,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** MacSignRequest data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** MacSignRequest dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8423,7 +12813,7 @@ export namespace google {
                     public name: string;
 
                     /** MacSignRequest data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** MacSignRequest dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8513,13 +12903,13 @@ export namespace google {
                     name?: (string|null);
 
                     /** MacVerifyRequest data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** MacVerifyRequest dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** MacVerifyRequest mac */
-                    mac?: (Uint8Array|string|null);
+                    mac?: (Uint8Array|Buffer|string|null);
 
                     /** MacVerifyRequest macCrc32c */
                     macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8538,13 +12928,13 @@ export namespace google {
                     public name: string;
 
                     /** MacVerifyRequest data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** MacVerifyRequest dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
 
                     /** MacVerifyRequest mac. */
-                    public mac: (Uint8Array|string);
+                    public mac: (Uint8Array|Buffer|string);
 
                     /** MacVerifyRequest macCrc32c. */
                     public macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8621,6 +13011,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for MacVerifyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DecapsulateRequest. */
+                interface IDecapsulateRequest {
+
+                    /** DecapsulateRequest name */
+                    name?: (string|null);
+
+                    /** DecapsulateRequest ciphertext */
+                    ciphertext?: (Uint8Array|Buffer|string|null);
+
+                    /** DecapsulateRequest ciphertextCrc32c */
+                    ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+                }
+
+                /** Represents a DecapsulateRequest. */
+                class DecapsulateRequest implements IDecapsulateRequest {
+
+                    /**
+                     * Constructs a new DecapsulateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDecapsulateRequest);
+
+                    /** DecapsulateRequest name. */
+                    public name: string;
+
+                    /** DecapsulateRequest ciphertext. */
+                    public ciphertext: (Uint8Array|Buffer|string);
+
+                    /** DecapsulateRequest ciphertextCrc32c. */
+                    public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /**
+                     * Creates a new DecapsulateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DecapsulateRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDecapsulateRequest): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Encodes the specified DecapsulateRequest message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                     * @param message DecapsulateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDecapsulateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DecapsulateRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                     * @param message DecapsulateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDecapsulateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DecapsulateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DecapsulateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Decodes a DecapsulateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DecapsulateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Verifies a DecapsulateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DecapsulateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DecapsulateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Creates a plain object from a DecapsulateRequest message. Also converts values to other types if specified.
+                     * @param message DecapsulateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DecapsulateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DecapsulateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DecapsulateRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8743,7 +13242,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** EncryptResponse ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** EncryptResponse ciphertextCrc32c */
                     ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8771,7 +13270,7 @@ export namespace google {
                     public name: string;
 
                     /** EncryptResponse ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** EncryptResponse ciphertextCrc32c. */
                     public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8867,7 +13366,7 @@ export namespace google {
                 interface IDecryptResponse {
 
                     /** DecryptResponse plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** DecryptResponse plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8889,7 +13388,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IDecryptResponse);
 
                     /** DecryptResponse plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** DecryptResponse plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -8982,10 +13481,10 @@ export namespace google {
                 interface IRawEncryptResponse {
 
                     /** RawEncryptResponse ciphertext */
-                    ciphertext?: (Uint8Array|string|null);
+                    ciphertext?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptResponse initializationVector */
-                    initializationVector?: (Uint8Array|string|null);
+                    initializationVector?: (Uint8Array|Buffer|string|null);
 
                     /** RawEncryptResponse tagLength */
                     tagLength?: (number|null);
@@ -9022,10 +13521,10 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IRawEncryptResponse);
 
                     /** RawEncryptResponse ciphertext. */
-                    public ciphertext: (Uint8Array|string);
+                    public ciphertext: (Uint8Array|Buffer|string);
 
                     /** RawEncryptResponse initializationVector. */
-                    public initializationVector: (Uint8Array|string);
+                    public initializationVector: (Uint8Array|Buffer|string);
 
                     /** RawEncryptResponse tagLength. */
                     public tagLength: number;
@@ -9133,7 +13632,7 @@ export namespace google {
                 interface IRawDecryptResponse {
 
                     /** RawDecryptResponse plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** RawDecryptResponse plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9161,7 +13660,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IRawDecryptResponse);
 
                     /** RawDecryptResponse plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** RawDecryptResponse plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9260,7 +13759,7 @@ export namespace google {
                 interface IAsymmetricSignResponse {
 
                     /** AsymmetricSignResponse signature */
-                    signature?: (Uint8Array|string|null);
+                    signature?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricSignResponse signatureCrc32c */
                     signatureCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9288,7 +13787,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IAsymmetricSignResponse);
 
                     /** AsymmetricSignResponse signature. */
-                    public signature: (Uint8Array|string);
+                    public signature: (Uint8Array|Buffer|string);
 
                     /** AsymmetricSignResponse signatureCrc32c. */
                     public signatureCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9387,7 +13886,7 @@ export namespace google {
                 interface IAsymmetricDecryptResponse {
 
                     /** AsymmetricDecryptResponse plaintext */
-                    plaintext?: (Uint8Array|string|null);
+                    plaintext?: (Uint8Array|Buffer|string|null);
 
                     /** AsymmetricDecryptResponse plaintextCrc32c */
                     plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9409,7 +13908,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IAsymmetricDecryptResponse);
 
                     /** AsymmetricDecryptResponse plaintext. */
-                    public plaintext: (Uint8Array|string);
+                    public plaintext: (Uint8Array|Buffer|string);
 
                     /** AsymmetricDecryptResponse plaintextCrc32c. */
                     public plaintextCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9505,7 +14004,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** MacSignResponse mac */
-                    mac?: (Uint8Array|string|null);
+                    mac?: (Uint8Array|Buffer|string|null);
 
                     /** MacSignResponse macCrc32c */
                     macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9530,7 +14029,7 @@ export namespace google {
                     public name: string;
 
                     /** MacSignResponse mac. */
-                    public mac: (Uint8Array|string);
+                    public mac: (Uint8Array|Buffer|string);
 
                     /** MacSignResponse macCrc32c. */
                     public macCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9746,11 +14245,132 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DecapsulateResponse. */
+                interface IDecapsulateResponse {
+
+                    /** DecapsulateResponse name */
+                    name?: (string|null);
+
+                    /** DecapsulateResponse sharedSecret */
+                    sharedSecret?: (Uint8Array|Buffer|string|null);
+
+                    /** DecapsulateResponse sharedSecretCrc32c */
+                    sharedSecretCrc32c?: (number|Long|string|null);
+
+                    /** DecapsulateResponse verifiedCiphertextCrc32c */
+                    verifiedCiphertextCrc32c?: (boolean|null);
+
+                    /** DecapsulateResponse protectionLevel */
+                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
+                }
+
+                /** Represents a DecapsulateResponse. */
+                class DecapsulateResponse implements IDecapsulateResponse {
+
+                    /**
+                     * Constructs a new DecapsulateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDecapsulateResponse);
+
+                    /** DecapsulateResponse name. */
+                    public name: string;
+
+                    /** DecapsulateResponse sharedSecret. */
+                    public sharedSecret: (Uint8Array|Buffer|string);
+
+                    /** DecapsulateResponse sharedSecretCrc32c. */
+                    public sharedSecretCrc32c?: (number|Long|string|null);
+
+                    /** DecapsulateResponse verifiedCiphertextCrc32c. */
+                    public verifiedCiphertextCrc32c: boolean;
+
+                    /** DecapsulateResponse protectionLevel. */
+                    public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
+
+                    /**
+                     * Creates a new DecapsulateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DecapsulateResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDecapsulateResponse): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Encodes the specified DecapsulateResponse message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                     * @param message DecapsulateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDecapsulateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DecapsulateResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                     * @param message DecapsulateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDecapsulateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DecapsulateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DecapsulateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Decodes a DecapsulateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DecapsulateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Verifies a DecapsulateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DecapsulateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DecapsulateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Creates a plain object from a DecapsulateResponse message. Also converts values to other types if specified.
+                     * @param message DecapsulateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DecapsulateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DecapsulateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DecapsulateResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerateRandomBytesResponse. */
                 interface IGenerateRandomBytesResponse {
 
                     /** GenerateRandomBytesResponse data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** GenerateRandomBytesResponse dataCrc32c */
                     dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9766,7 +14386,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IGenerateRandomBytesResponse);
 
                     /** GenerateRandomBytesResponse data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** GenerateRandomBytesResponse dataCrc32c. */
                     public dataCrc32c?: (google.protobuf.IInt64Value|null);
@@ -9853,13 +14473,13 @@ export namespace google {
                 interface IDigest {
 
                     /** Digest sha256 */
-                    sha256?: (Uint8Array|string|null);
+                    sha256?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha384 */
-                    sha384?: (Uint8Array|string|null);
+                    sha384?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha512 */
-                    sha512?: (Uint8Array|string|null);
+                    sha512?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a Digest. */
@@ -9872,13 +14492,13 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IDigest);
 
                     /** Digest sha256. */
-                    public sha256?: (Uint8Array|string|null);
+                    public sha256?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha384. */
-                    public sha384?: (Uint8Array|string|null);
+                    public sha384?: (Uint8Array|Buffer|string|null);
 
                     /** Digest sha512. */
-                    public sha512?: (Uint8Array|string|null);
+                    public sha512?: (Uint8Array|Buffer|string|null);
 
                     /** Digest digest. */
                     public digest?: ("sha256"|"sha384"|"sha512");
@@ -9969,6 +14589,9 @@ export namespace google {
 
                     /** LocationMetadata ekmAvailable */
                     ekmAvailable?: (boolean|null);
+
+                    /** LocationMetadata hsmSingleTenantAvailable */
+                    hsmSingleTenantAvailable?: (boolean|null);
                 }
 
                 /** Represents a LocationMetadata. */
@@ -9985,6 +14608,9 @@ export namespace google {
 
                     /** LocationMetadata ekmAvailable. */
                     public ekmAvailable: boolean;
+
+                    /** LocationMetadata hsmSingleTenantAvailable. */
+                    public hsmSingleTenantAvailable: boolean;
 
                     /**
                      * Creates a new LocationMetadata instance using the specified properties.
@@ -10058,6 +14684,194 @@ export namespace google {
 
                     /**
                      * Gets the default type url for LocationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCryptoKeyMetadata. */
+                interface IDeleteCryptoKeyMetadata {
+
+                    /** DeleteCryptoKeyMetadata retiredResource */
+                    retiredResource?: (string|null);
+                }
+
+                /** Represents a DeleteCryptoKeyMetadata. */
+                class DeleteCryptoKeyMetadata implements IDeleteCryptoKeyMetadata {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyMetadata);
+
+                    /** DeleteCryptoKeyMetadata retiredResource. */
+                    public retiredResource: string;
+
+                    /**
+                     * Creates a new DeleteCryptoKeyMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyMetadata): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyMetadata message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCryptoKeyVersionMetadata. */
+                interface IDeleteCryptoKeyVersionMetadata {
+                }
+
+                /** Represents a DeleteCryptoKeyVersionMetadata. */
+                class DeleteCryptoKeyVersionMetadata implements IDeleteCryptoKeyVersionMetadata {
+
+                    /**
+                     * Constructs a new DeleteCryptoKeyVersionMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata);
+
+                    /**
+                     * Creates a new DeleteCryptoKeyVersionMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCryptoKeyVersionMetadata instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionMetadata message. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCryptoKeyVersionMetadata message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata.verify|verify} messages.
+                     * @param message DeleteCryptoKeyVersionMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDeleteCryptoKeyVersionMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCryptoKeyVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Decodes a DeleteCryptoKeyVersionMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCryptoKeyVersionMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Verifies a DeleteCryptoKeyVersionMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCryptoKeyVersionMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCryptoKeyVersionMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteCryptoKeyVersionMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteCryptoKeyVersionMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DeleteCryptoKeyVersionMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCryptoKeyVersionMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCryptoKeyVersionMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10722,6 +15536,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -10762,6 +15579,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -14980,6 +19800,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -15231,7 +20054,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -15262,7 +20085,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -16401,7 +21224,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -16417,7 +21240,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -17568,7 +22391,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -17581,7 +22404,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

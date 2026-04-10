@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -219,7 +216,7 @@
                     "csharp_namespace": "Google.Maps.Places.V1",
                     "go_package": "cloud.google.com/go/maps/places/apiv1/placespb;placespb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TravelModeProto",
+                    "java_outer_classname": "ReferenceProto",
                     "java_package": "com.google.maps.places.v1",
                     "objc_class_prefix": "GMPSV1",
                     "php_namespace": "Google\\Maps\\Places\\V1"
@@ -351,80 +348,17 @@
                     },
                     "ContentBlock": {
                       "fields": {
-                        "topic": {
-                          "type": "string",
-                          "id": 1
-                        },
                         "content": {
                           "type": "google.type.LocalizedText",
                           "id": 2
                         },
-                        "references": {
-                          "type": "References",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "References": {
-                      "fields": {
-                        "reviews": {
-                          "rule": "repeated",
-                          "type": "Review",
-                          "id": 1
-                        },
-                        "places": {
+                        "referencedPlaces": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2,
+                          "id": 4,
                           "options": {
                             "(google.api.resource_reference).type": "places.googleapis.com/Place"
                           }
-                        }
-                      }
-                    },
-                    "Review": {
-                      "options": {
-                        "(google.api.resource).type": "places.googleapis.com/Review",
-                        "(google.api.resource).pattern": "places/{place}/reviews/{review}",
-                        "(google.api.resource).plural": "reviews",
-                        "(google.api.resource).singular": "review"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "relativePublishTimeDescription": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "text": {
-                          "type": "google.type.LocalizedText",
-                          "id": 9
-                        },
-                        "originalText": {
-                          "type": "google.type.LocalizedText",
-                          "id": 12
-                        },
-                        "rating": {
-                          "type": "double",
-                          "id": 7
-                        },
-                        "authorAttribution": {
-                          "type": "AuthorAttribution",
-                          "id": 13
-                        },
-                        "publishTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 14
-                        },
-                        "flagContentUri": {
-                          "type": "string",
-                          "id": 15
-                        },
-                        "googleMapsUri": {
-                          "type": "string",
-                          "id": 16
                         }
                       }
                     },
@@ -563,6 +497,56 @@
                         "googleMapsUri": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "Review": {
+                      "options": {
+                        "(google.api.resource).type": "places.googleapis.com/Review",
+                        "(google.api.resource).pattern": "places/{place}/reviews/{review}",
+                        "(google.api.resource).plural": "reviews",
+                        "(google.api.resource).singular": "review"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "relativePublishTimeDescription": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "text": {
+                          "type": "google.type.LocalizedText",
+                          "id": 9
+                        },
+                        "originalText": {
+                          "type": "google.type.LocalizedText",
+                          "id": 12
+                        },
+                        "rating": {
+                          "type": "double",
+                          "id": 7
+                        },
+                        "authorAttribution": {
+                          "type": "AuthorAttribution",
+                          "id": 13
+                        },
+                        "publishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14
+                        },
+                        "flagContentUri": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "googleMapsUri": {
+                          "type": "string",
+                          "id": 16
+                        },
+                        "visitDate": {
+                          "type": "google.type.Date",
+                          "id": 17
                         }
                       }
                     },
@@ -884,6 +868,10 @@
                           "type": "google.type.LocalizedText",
                           "id": 32
                         },
+                        "googleMapsTypeLabel": {
+                          "type": "google.type.LocalizedText",
+                          "id": 96
+                        },
                         "nationalPhoneNumber": {
                           "type": "string",
                           "id": 7
@@ -965,6 +953,10 @@
                         "businessStatus": {
                           "type": "BusinessStatus",
                           "id": 25
+                        },
+                        "openingDate": {
+                          "type": "google.type.Date",
+                          "id": 95
                         },
                         "priceLevel": {
                           "type": "PriceLevel",
@@ -1217,6 +1209,10 @@
                           "type": "AddressDescriptor",
                           "id": 84
                         },
+                        "googleMapsLinks": {
+                          "type": "GoogleMapsLinks",
+                          "id": 85
+                        },
                         "priceRange": {
                           "type": "PriceRange",
                           "id": 86
@@ -1232,6 +1228,21 @@
                         "neighborhoodSummary": {
                           "type": "NeighborhoodSummary",
                           "id": 91
+                        },
+                        "consumerAlert": {
+                          "type": "ConsumerAlert",
+                          "id": 92
+                        },
+                        "movedPlace": {
+                          "type": "string",
+                          "id": 93,
+                          "options": {
+                            "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                          }
+                        },
+                        "movedPlaceId": {
+                          "type": "string",
+                          "id": 94
                         }
                       },
                       "nested": {
@@ -1410,7 +1421,8 @@
                             "BUSINESS_STATUS_UNSPECIFIED": 0,
                             "OPERATIONAL": 1,
                             "CLOSED_TEMPORARILY": 2,
-                            "CLOSED_PERMANENTLY": 3
+                            "CLOSED_PERMANENTLY": 3,
+                            "FUTURE_OPENING": 4
                           }
                         },
                         "Attribution": {
@@ -1669,6 +1681,30 @@
                             }
                           }
                         },
+                        "GoogleMapsLinks": {
+                          "fields": {
+                            "directionsUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "placeUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "writeAReviewUri": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "reviewsUri": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "photosUri": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        },
                         "ReviewSummary": {
                           "fields": {
                             "text": {
@@ -1682,6 +1718,10 @@
                             "disclosureText": {
                               "type": "google.type.LocalizedText",
                               "id": 3
+                            },
+                            "reviewsUri": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -1730,6 +1770,54 @@
                             "disclosureText": {
                               "type": "google.type.LocalizedText",
                               "id": 4
+                            }
+                          }
+                        },
+                        "ConsumerAlert": {
+                          "fields": {
+                            "overview": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "details": {
+                              "type": "Details",
+                              "id": 2
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "Details": {
+                              "fields": {
+                                "title": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "aboutLink": {
+                                  "type": "Link",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "Link": {
+                                  "fields": {
+                                    "title": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "uri": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         }
@@ -1932,6 +2020,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "includeFutureOpeningBusinesses": {
+                          "type": "bool",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2051,6 +2146,13 @@
                         "includePureServiceAreaBusinesses": {
                           "type": "bool",
                           "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeFutureOpeningBusinesses": {
+                          "type": "bool",
+                          "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2321,6 +2423,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "includeFutureOpeningBusinesses": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2570,6 +2679,23 @@
                         "WALK": 3,
                         "TWO_WHEELER": 4
                       }
+                    },
+                    "References": {
+                      "fields": {
+                        "reviews": {
+                          "rule": "repeated",
+                          "type": "Review",
+                          "id": 1
+                        },
+                        "places": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -2668,7 +2794,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -2786,6 +2915,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -2894,6 +3028,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -3079,6 +3217,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -3088,6 +3227,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -3103,6 +3243,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3120,18 +3261,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -3172,6 +3307,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3254,6 +3390,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3327,6 +3464,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3406,6 +3544,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3418,6 +3557,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3459,6 +3599,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3475,6 +3616,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3492,6 +3634,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3526,6 +3669,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -3667,6 +3811,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -3740,6 +3885,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -3801,10 +3947,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -3888,6 +4031,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -3907,6 +4051,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -3950,6 +4095,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -3983,6 +4129,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -4009,6 +4156,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -4051,6 +4199,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -4100,6 +4249,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -4172,8 +4322,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -4229,6 +4391,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -4260,6 +4423,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -4273,12 +4437,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -4298,6 +4468,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -4311,7 +4482,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

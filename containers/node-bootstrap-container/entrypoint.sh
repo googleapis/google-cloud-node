@@ -15,7 +15,7 @@
 set -e
 
 MONO_REPO_NAME="google-cloud-node"
-cd  "${MONO_REPO_PATH}/packages/gapic-node-templating"
+cd  "${MONO_REPO_PATH}/packages/gapic-node-processing"
 npm i
 npm run compile
 npm link .
@@ -28,4 +28,4 @@ mkdir -p "${MONO_REPO_PATH}/packages/${FOLDER_NAME}" || node /create-gh-issue.js
 node /add-to-well-known-path.js "${INTER_CONTAINER_VARS_PATH}" "${FOLDER_NAME}"
 cd  "${MONO_REPO_PATH}"
 
-/usr/local/bin/gapic-node-templating bootstrap-library --api-id "${API_ID}" --destination-folder "${MONO_REPO_PATH}/packages/${FOLDER_NAME}" --mono-repo-name "${MONO_REPO_NAME}" --folder-name "${FOLDER_NAME}" --service-config-path "${SERVICE_CONFIG_PATH}" || node /create-gh-issue.js
+/usr/local/bin/gapic-node-processing bootstrap-library --api-id "${API_ID}" --destination-folder "${MONO_REPO_PATH}/packages/${FOLDER_NAME}" --mono-repo-name "${MONO_REPO_NAME}" --folder-name "${FOLDER_NAME}" --service-config-path "${SERVICE_CONFIG_PATH}" || node /create-gh-issue.js

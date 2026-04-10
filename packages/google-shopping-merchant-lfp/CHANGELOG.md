@@ -1,5 +1,53 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.9.1...lfp-v0.10.0) (2026-03-19)
+
+
+### Features
+
+* [Many APIs] add more values in DestintionEnum ([#7556](https://github.com/googleapis/google-cloud-node/issues/7556)) ([721dd4c](https://github.com/googleapis/google-cloud-node/commit/721dd4cfb2c8f4759f5e17e3496284d2b78489e0))
+
+## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.9.0...lfp-v0.9.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.8.0...lfp-v0.9.0) (2025-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602))
+
+### Miscellaneous Chores
+
+* Release stable version of libraries ([#6602](https://github.com/googleapis/google-cloud-node/issues/6602)) ([deb5255](https://github.com/googleapis/google-cloud-node/commit/deb5255541602defd05896fc0093adca05f30440))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.7.0...lfp-v0.8.0) (2025-08-12)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20250729 ([#1085](https://github.com/googleapis/google-cloud-node/issues/1085)) ([#6579](https://github.com/googleapis/google-cloud-node/issues/6579)) ([0cbf8ac](https://github.com/googleapis/google-cloud-node/commit/0cbf8ac3e6697d92428f21010beb1c776e5e86fd))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.6.0...lfp-v0.7.0) (2025-08-04)
+
+
+### Features
+
+* [merchantapi] add lfp API for v1 ([#6558](https://github.com/googleapis/google-cloud-node/issues/6558)) ([dfa3722](https://github.com/googleapis/google-cloud-node/commit/dfa37220357f8294ec5e65073ccce4f6a25f62aa))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.5.0...lfp-v0.6.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6426](https://github.com/googleapis/google-cloud-node/issues/6426)) ([6ea5464](https://github.com/googleapis/google-cloud-node/commit/6ea54642532d9797ea87d7cd01c9fac77f9eb035))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/lfp-v0.4.1...lfp-v0.5.0) (2025-05-09)
 
 

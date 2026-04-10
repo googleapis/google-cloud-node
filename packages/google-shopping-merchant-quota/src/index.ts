@@ -16,12 +16,15 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
-const QuotaServiceClient = v1beta.QuotaServiceClient;
-type QuotaServiceClient = v1beta.QuotaServiceClient;
+const AccountLimitsServiceClient = v1.AccountLimitsServiceClient;
+type AccountLimitsServiceClient = v1.AccountLimitsServiceClient;
+const QuotaServiceClient = v1.QuotaServiceClient;
+type QuotaServiceClient = v1.QuotaServiceClient;
 
-export {v1beta, QuotaServiceClient};
-export default {v1beta, QuotaServiceClient};
+export {v1, v1beta, AccountLimitsServiceClient, QuotaServiceClient};
+export default {v1, v1beta, AccountLimitsServiceClient, QuotaServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

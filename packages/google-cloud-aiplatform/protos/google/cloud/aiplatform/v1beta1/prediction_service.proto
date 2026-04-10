@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import "google/cloud/aiplatform/v1beta1/content.proto";
 import "google/cloud/aiplatform/v1beta1/explanation.proto";
 import "google/cloud/aiplatform/v1beta1/tool.proto";
 import "google/cloud/aiplatform/v1beta1/types.proto";
+import "google/cloud/aiplatform/v1beta1/usage_metadata.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -239,6 +240,15 @@ service PredictionService {
     };
     option (google.api.method_signature) = "endpoint,http_body";
   }
+
+  // Embed content with multimodal inputs.
+  rpc EmbedContent(EmbedContentRequest) returns (EmbedContentResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:embedContent"
+      body: "*"
+    };
+    option (google.api.method_signature) = "model,content";
+  }
 }
 
 // Request message for
@@ -273,6 +283,10 @@ message PredictRequest {
   // [PredictSchemata's][google.cloud.aiplatform.v1beta1.Model.predict_schemata]
   // [parameters_schema_uri][google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri].
   google.protobuf.Value parameters = 3;
+
+  // Optional. The user labels for Imagen billing usage only. Only Imagen
+  // supports labels. For other use cases, it will be ignored.
+  map<string, string> labels = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
@@ -800,6 +814,11 @@ message GenerateContentRequest {
   repeated SafetySetting safety_settings = 3
       [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Settings for prompt and response sanitization using the Model
+  // Armor service. If supplied, safety_settings must not be supplied.
+  ModelArmorConfig model_armor_config = 11
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Generation config.
   GenerationConfig generation_config = 4
       [(google.api.field_behavior) = OPTIONAL];
@@ -826,6 +845,9 @@ message GenerateContentResponse {
 
       // Candidates blocked due to prohibited content.
       PROHIBITED_CONTENT = 4;
+
+      // The user prompt was blocked by Model Armor.
+      MODEL_ARMOR = 5;
     }
 
     // Output only. Blocked reason.
@@ -848,6 +870,9 @@ message GenerateContentResponse {
 
     // Number of tokens in the response(s).
     int32 candidates_token_count = 2;
+
+    // Output only. Number of tokens present in thoughts output.
+    int32 thoughts_token_count = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
 
     // Total token count for prompt and response candidates.
     int32 total_token_count = 3;
@@ -934,4 +959,125 @@ message GenerateVideoResponse {
 
   // Returns rai failure reasons if any.
   repeated string rai_media_filtered_reasons = 3;
+}
+
+// Request message for
+// [PredictionService.EmbedContent][google.cloud.aiplatform.v1beta1.PredictionService.EmbedContent].
+message EmbedContentRequest {
+  // Configurations for the EmbedContent API.
+  message EmbedContentConfig {
+    // Optional. The title for the text.
+    //
+    // Only applicable to text-only embedding models.
+    optional string title = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The task type of the embedding.
+    //
+    // Only applicable to text-only embedding models.
+    optional EmbeddingTaskType task_type = 2
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether to silently truncate the input content if it's longer
+    // than the maximum sequence length.
+    //
+    // Only applicable to text-only embedding models.
+    optional bool auto_truncate = 3 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Reduced dimension for the output embedding. If set, excessive
+    // values in the output embedding are truncated from the end.
+    optional int32 output_dimensionality = 4
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether to enable OCR for document content.
+    optional bool document_ocr = 5 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether to extract audio from video content.
+    optional bool audio_track_extraction = 6
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Represents a downstream task the embeddings will be used for.
+  enum EmbeddingTaskType {
+    // Unset value, which will default to one of the other enum values.
+    UNSPECIFIED = 0;
+
+    // Specifies the given text is a query in a search/retrieval setting.
+    RETRIEVAL_QUERY = 2;
+
+    // Specifies the given text is a document from the corpus being searched.
+    RETRIEVAL_DOCUMENT = 3;
+
+    // Specifies the given text will be used for STS.
+    SEMANTIC_SIMILARITY = 4;
+
+    // Specifies that the given text will be classified.
+    CLASSIFICATION = 5;
+
+    // Specifies that the embeddings will be used for clustering.
+    CLUSTERING = 6;
+
+    // Specifies that the embeddings will be used for question answering.
+    QUESTION_ANSWERING = 7;
+
+    // Specifies that the embeddings will be used for fact verification.
+    FACT_VERIFICATION = 8;
+
+    // Specifies that the embeddings will be used for code retrieval.
+    CODE_RETRIEVAL_QUERY = 9;
+  }
+
+  // Required. The name of the publisher model requested to serve the
+  // prediction. Format:
+  // `projects/{project}/locations/{location}/publishers/*/models/*`
+  optional string model = 1 [(google.api.resource_reference) = {
+    type: "aiplatform.googleapis.com/Endpoint"
+  }];
+
+  // Required. Input content to be embedded.
+  optional Content content = 2;
+
+  // Optional. Deprecated: Please use EmbedContentConfig.title instead.
+  // The title for the text.
+  optional string title = 4
+      [deprecated = true, (google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Deprecated: Please use EmbedContentConfig.task_type instead.
+  // The task type of the embedding.
+  optional EmbeddingTaskType task_type = 5
+      [deprecated = true, (google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Deprecated: Please use EmbedContentConfig.output_dimensionality
+  // instead. Reduced dimension for the output embedding. If set, excessive
+  // values in the output embedding are truncated from the end.
+  optional int32 output_dimensionality = 6
+      [deprecated = true, (google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Deprecated: Please use EmbedContentConfig.auto_truncate instead.
+  // Whether to silently truncate the input content if it's longer
+  // than the maximum sequence length.
+  optional bool auto_truncate = 7
+      [deprecated = true, (google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Configuration for the EmbedContent request.
+  optional EmbedContentConfig embed_content_config = 8
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response message for
+// [PredictionService.EmbedContent][google.cloud.aiplatform.v1beta1.PredictionService.EmbedContent].
+message EmbedContentResponse {
+  // A list of floats representing an embedding.
+  message Embedding {
+    // Embedding vector values.
+    repeated float values = 1;
+  }
+
+  // The embedding generated from the input content.
+  Embedding embedding = 1;
+
+  // Usage metadata about the response(s).
+  UsageMetadata usage_metadata = 2;
+
+  // Whether the input content was truncated before generating the embedding.
+  bool truncated = 4;
 }

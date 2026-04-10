@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@
 const aiplatform = require('@google-cloud/aiplatform');
 
 function main() {
+  const dataFoundryServiceClient = new aiplatform.DataFoundryServiceClient();
   const datasetServiceClient = new aiplatform.DatasetServiceClient();
   const deploymentResourcePoolServiceClient = new aiplatform.DeploymentResourcePoolServiceClient();
   const endpointServiceClient = new aiplatform.EndpointServiceClient();
@@ -48,6 +49,7 @@ function main() {
   const reasoningEngineExecutionServiceClient = new aiplatform.ReasoningEngineExecutionServiceClient();
   const reasoningEngineServiceClient = new aiplatform.ReasoningEngineServiceClient();
   const scheduleServiceClient = new aiplatform.ScheduleServiceClient();
+  const sessionServiceClient = new aiplatform.SessionServiceClient();
   const specialistPoolServiceClient = new aiplatform.SpecialistPoolServiceClient();
   const tensorboardServiceClient = new aiplatform.TensorboardServiceClient();
   const vertexRagDataServiceClient = new aiplatform.VertexRagDataServiceClient();

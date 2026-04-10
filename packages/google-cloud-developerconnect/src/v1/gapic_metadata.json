@@ -35,6 +35,31 @@
                 "fetchGitHubInstallations"
               ]
             },
+            "GetAccountConnector": {
+              "methods": [
+                "getAccountConnector"
+              ]
+            },
+            "FetchAccessToken": {
+              "methods": [
+                "fetchAccessToken"
+              ]
+            },
+            "FetchSelf": {
+              "methods": [
+                "fetchSelf"
+              ]
+            },
+            "StartOAuth": {
+              "methods": [
+                "startOAuth"
+              ]
+            },
+            "FinishOAuth": {
+              "methods": [
+                "finishOAuth"
+              ]
+            },
             "CreateConnection": {
               "methods": [
                 "createConnection"
@@ -58,6 +83,31 @@
             "DeleteGitRepositoryLink": {
               "methods": [
                 "deleteGitRepositoryLink"
+              ]
+            },
+            "CreateAccountConnector": {
+              "methods": [
+                "createAccountConnector"
+              ]
+            },
+            "UpdateAccountConnector": {
+              "methods": [
+                "updateAccountConnector"
+              ]
+            },
+            "DeleteAccountConnector": {
+              "methods": [
+                "deleteAccountConnector"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
+            "DeleteSelf": {
+              "methods": [
+                "deleteSelf"
               ]
             },
             "ListConnections": {
@@ -86,6 +136,20 @@
                 "fetchGitRefs",
                 "fetchGitRefsStream",
                 "fetchGitRefsAsync"
+              ]
+            },
+            "ListAccountConnectors": {
+              "methods": [
+                "listAccountConnectors",
+                "listAccountConnectorsStream",
+                "listAccountConnectorsAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
               ]
             }
           }
@@ -118,6 +182,31 @@
                 "fetchGitHubInstallations"
               ]
             },
+            "GetAccountConnector": {
+              "methods": [
+                "getAccountConnector"
+              ]
+            },
+            "FetchAccessToken": {
+              "methods": [
+                "fetchAccessToken"
+              ]
+            },
+            "FetchSelf": {
+              "methods": [
+                "fetchSelf"
+              ]
+            },
+            "StartOAuth": {
+              "methods": [
+                "startOAuth"
+              ]
+            },
+            "FinishOAuth": {
+              "methods": [
+                "finishOAuth"
+              ]
+            },
             "CreateConnection": {
               "methods": [
                 "createConnection"
@@ -141,6 +230,31 @@
             "DeleteGitRepositoryLink": {
               "methods": [
                 "deleteGitRepositoryLink"
+              ]
+            },
+            "CreateAccountConnector": {
+              "methods": [
+                "createAccountConnector"
+              ]
+            },
+            "UpdateAccountConnector": {
+              "methods": [
+                "updateAccountConnector"
+              ]
+            },
+            "DeleteAccountConnector": {
+              "methods": [
+                "deleteAccountConnector"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
+            "DeleteSelf": {
+              "methods": [
+                "deleteSelf"
               ]
             },
             "ListConnections": {
@@ -169,6 +283,112 @@
                 "fetchGitRefs",
                 "fetchGitRefsStream",
                 "fetchGitRefsAsync"
+              ]
+            },
+            "ListAccountConnectors": {
+              "methods": [
+                "listAccountConnectors",
+                "listAccountConnectorsStream",
+                "listAccountConnectorsAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InsightsConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InsightsConfigServiceClient",
+          "rpcs": {
+            "GetInsightsConfig": {
+              "methods": [
+                "getInsightsConfig"
+              ]
+            },
+            "GetDeploymentEvent": {
+              "methods": [
+                "getDeploymentEvent"
+              ]
+            },
+            "CreateInsightsConfig": {
+              "methods": [
+                "createInsightsConfig"
+              ]
+            },
+            "UpdateInsightsConfig": {
+              "methods": [
+                "updateInsightsConfig"
+              ]
+            },
+            "DeleteInsightsConfig": {
+              "methods": [
+                "deleteInsightsConfig"
+              ]
+            },
+            "ListInsightsConfigs": {
+              "methods": [
+                "listInsightsConfigs",
+                "listInsightsConfigsStream",
+                "listInsightsConfigsAsync"
+              ]
+            },
+            "ListDeploymentEvents": {
+              "methods": [
+                "listDeploymentEvents",
+                "listDeploymentEventsStream",
+                "listDeploymentEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InsightsConfigServiceClient",
+          "rpcs": {
+            "GetInsightsConfig": {
+              "methods": [
+                "getInsightsConfig"
+              ]
+            },
+            "GetDeploymentEvent": {
+              "methods": [
+                "getDeploymentEvent"
+              ]
+            },
+            "CreateInsightsConfig": {
+              "methods": [
+                "createInsightsConfig"
+              ]
+            },
+            "UpdateInsightsConfig": {
+              "methods": [
+                "updateInsightsConfig"
+              ]
+            },
+            "DeleteInsightsConfig": {
+              "methods": [
+                "deleteInsightsConfig"
+              ]
+            },
+            "ListInsightsConfigs": {
+              "methods": [
+                "listInsightsConfigs",
+                "listInsightsConfigsStream",
+                "listInsightsConfigsAsync"
+              ]
+            },
+            "ListDeploymentEvents": {
+              "methods": [
+                "listDeploymentEvents",
+                "listDeploymentEventsStream",
+                "listDeploymentEventsAsync"
               ]
             }
           }

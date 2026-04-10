@@ -12,28 +12,35 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Analytics_hub_service.approve_query_template](#analytics_hub_service.approve_query_template)
   * [Analytics_hub_service.create_data_exchange](#analytics_hub_service.create_data_exchange)
   * [Analytics_hub_service.create_listing](#analytics_hub_service.create_listing)
+  * [Analytics_hub_service.create_query_template](#analytics_hub_service.create_query_template)
   * [Analytics_hub_service.delete_data_exchange](#analytics_hub_service.delete_data_exchange)
   * [Analytics_hub_service.delete_listing](#analytics_hub_service.delete_listing)
+  * [Analytics_hub_service.delete_query_template](#analytics_hub_service.delete_query_template)
   * [Analytics_hub_service.delete_subscription](#analytics_hub_service.delete_subscription)
   * [Analytics_hub_service.get_data_exchange](#analytics_hub_service.get_data_exchange)
   * [Analytics_hub_service.get_iam_policy](#analytics_hub_service.get_iam_policy)
   * [Analytics_hub_service.get_listing](#analytics_hub_service.get_listing)
+  * [Analytics_hub_service.get_query_template](#analytics_hub_service.get_query_template)
   * [Analytics_hub_service.get_subscription](#analytics_hub_service.get_subscription)
   * [Analytics_hub_service.list_data_exchanges](#analytics_hub_service.list_data_exchanges)
   * [Analytics_hub_service.list_listings](#analytics_hub_service.list_listings)
   * [Analytics_hub_service.list_org_data_exchanges](#analytics_hub_service.list_org_data_exchanges)
+  * [Analytics_hub_service.list_query_templates](#analytics_hub_service.list_query_templates)
   * [Analytics_hub_service.list_shared_resource_subscriptions](#analytics_hub_service.list_shared_resource_subscriptions)
   * [Analytics_hub_service.list_subscriptions](#analytics_hub_service.list_subscriptions)
   * [Analytics_hub_service.refresh_subscription](#analytics_hub_service.refresh_subscription)
   * [Analytics_hub_service.revoke_subscription](#analytics_hub_service.revoke_subscription)
   * [Analytics_hub_service.set_iam_policy](#analytics_hub_service.set_iam_policy)
+  * [Analytics_hub_service.submit_query_template](#analytics_hub_service.submit_query_template)
   * [Analytics_hub_service.subscribe_data_exchange](#analytics_hub_service.subscribe_data_exchange)
   * [Analytics_hub_service.subscribe_listing](#analytics_hub_service.subscribe_listing)
   * [Analytics_hub_service.test_iam_permissions](#analytics_hub_service.test_iam_permissions)
   * [Analytics_hub_service.update_data_exchange](#analytics_hub_service.update_data_exchange)
   * [Analytics_hub_service.update_listing](#analytics_hub_service.update_listing)
+  * [Analytics_hub_service.update_query_template](#analytics_hub_service.update_query_template)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -48,6 +55,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Analytics_hub_service.approve_query_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.approve_query_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.approve_query_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.approve_query_template.js`
+
+
+-----
+
 
 
 
@@ -85,6 +109,23 @@ __Usage:__
 
 
 
+### Analytics_hub_service.create_query_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_query_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_query_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_query_template.js`
+
+
+-----
+
+
+
+
 ### Analytics_hub_service.delete_data_exchange
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_data_exchange.js).
@@ -112,6 +153,23 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_listing.js`
+
+
+-----
+
+
+
+
+### Analytics_hub_service.delete_query_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_query_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_query_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_query_template.js`
 
 
 -----
@@ -187,6 +245,23 @@ __Usage:__
 
 
 
+### Analytics_hub_service.get_query_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_query_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_query_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_query_template.js`
+
+
+-----
+
+
+
+
 ### Analytics_hub_service.get_subscription
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_subscription.js).
@@ -248,6 +323,23 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_org_data_exchanges.js`
+
+
+-----
+
+
+
+
+### Analytics_hub_service.list_query_templates
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_query_templates.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_query_templates.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_query_templates.js`
 
 
 -----
@@ -340,6 +432,23 @@ __Usage:__
 
 
 
+### Analytics_hub_service.submit_query_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.submit_query_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.submit_query_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.submit_query_template.js`
+
+
+-----
+
+
+
+
 ### Analytics_hub_service.subscribe_data_exchange
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.subscribe_data_exchange.js).
@@ -418,6 +527,23 @@ __Usage:__
 
 
 `node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_listing.js`
+
+
+-----
+
+
+
+
+### Analytics_hub_service.update_query_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_query_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_query_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_query_template.js`
 
 
 -----

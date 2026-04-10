@@ -1,0 +1,16 @@
+{
+  "name": "bigquery",
+  "name_pretty": "Google BigQuery",
+  "product_documentation": "https://cloud.google.com/bigquery",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery/latest",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559654",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/bigquery",
+  "api_id": "bigquery.googleapis.com",
+  "requires_billing": false,
+  "codeowner_team": "@googleapis/api-bigquery",
+  "api_shortname": "bigquery",
+  "library_type": "GAPIC_MANUAL"
+}

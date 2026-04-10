@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/aiplatform/v1/content.proto";
 import "google/cloud/aiplatform/v1/encryption_spec.proto";
+import "google/cloud/aiplatform/v1/evaluation_service.proto";
 import "google/cloud/aiplatform/v1/job_state.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
@@ -42,8 +43,12 @@ message TuningJob {
   };
 
   oneof source_model {
-    // The base model that is being tuned, e.g., "gemini-1.0-pro-002".
+    // The base model that is being tuned. See [Supported
+    // models](https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/tuning#supported_models).
     string base_model = 4;
+
+    // The pre-tuned model for continuous tuning.
+    PreTunedModel pre_tuned_model = 31;
   }
 
   oneof tuning_spec {
@@ -60,7 +65,10 @@ message TuningJob {
 
   // Optional. The display name of the
   // [TunedModel][google.cloud.aiplatform.v1.Model]. The name can be up to 128
-  // characters long and can consist of any UTF-8 characters.
+  // characters long and can consist of any UTF-8 characters. For continuous
+  // tuning, tuned_model_display_name will by default use the same display name
+  // as the pre-tuned model. If a new display name is provided, the tuning job
+  // will create a new model instead of a new version.
   string tuned_model_display_name = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The description of the
@@ -118,7 +126,7 @@ message TuningJob {
     }
   ];
 
-  // Output only. The tuned model resources assiociated with this
+  // Output only. The tuned model resources associated with this
   // [TuningJob][google.cloud.aiplatform.v1.TuningJob].
   TunedModel tuned_model = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
 
@@ -140,13 +148,28 @@ message TuningJob {
   // Users starting the pipeline must have the `iam.serviceAccounts.actAs`
   // permission on this service account.
   string service_account = 22;
+
+  // Output only. Evaluation runs for the Tuning Job.
+  repeated EvaluateDatasetRun evaluate_dataset_runs = 32
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
-// The Model Registry Model and Online Prediction Endpoint assiociated with
+// The Model Registry Model and Online Prediction Endpoint associated with
 // this [TuningJob][google.cloud.aiplatform.v1.TuningJob].
 message TunedModel {
   // Output only. The resource name of the TunedModel. Format:
-  // `projects/{project}/locations/{location}/models/{model}`.
+  //
+  // `projects/{project}/locations/{location}/models/{model}@{version_id}`
+  //
+  // When tuning from a base model, the version ID will be 1.
+  //
+  // For continuous tuning, if the provided tuned_model_display_name is set and
+  // different from parent model's display name, the tuned model will have a new
+  // parent model with version 1. Otherwise the version id will be incremented
+  // by 1 from the last version ID in the parent model. E.g.,
+  //
+  // `projects/{project}/locations/{location}/models/{model}@{last_version_id +
+  // 1}`
   string model = 1 [
     (google.api.field_behavior) = OUTPUT_ONLY,
     (google.api.resource_reference) = {
@@ -162,6 +185,12 @@ message TunedModel {
       type: "aiplatform.googleapis.com/Endpoint"
     }
   ];
+
+  // Output only. The checkpoints associated with this TunedModel.
+  // This field is only populated for tuning jobs that enable intermediate
+  // checkpoints.
+  repeated TunedModelCheckpoint checkpoints = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Dataset distribution for Supervised Tuning.
@@ -245,13 +274,21 @@ message SupervisedTuningDataStats {
   repeated Content user_dataset_examples = 8
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // The number of examples in the dataset that have been truncated by any
-  // amount.
-  int64 total_truncated_example_count = 10;
+  // Output only. The number of examples in the dataset that have been dropped.
+  // An example can be dropped for reasons including: too many tokens, contains
+  // an invalid image, contains too many images, etc.
+  int64 total_truncated_example_count = 10
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // A partial sample of the indices (starting from 1) of the truncated
-  // examples.
-  repeated int64 truncated_example_indices = 11;
+  // Output only. A partial sample of the indices (starting from 1) of the
+  // dropped examples.
+  repeated int64 truncated_example_indices = 11
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. For each index in `truncated_example_indices`, the user-facing
+  // reason why the example was dropped.
+  repeated string dropped_example_reasons = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The tuning data statistic values for
@@ -273,6 +310,9 @@ message SupervisedHyperParameters {
     // Adapter size 1.
     ADAPTER_SIZE_ONE = 1;
 
+    // Adapter size 2.
+    ADAPTER_SIZE_TWO = 6;
+
     // Adapter size 4.
     ADAPTER_SIZE_FOUR = 2;
 
@@ -281,6 +321,9 @@ message SupervisedHyperParameters {
 
     // Adapter size 16.
     ADAPTER_SIZE_SIXTEEN = 4;
+
+    // Adapter size 32.
+    ADAPTER_SIZE_THIRTY_TWO = 5;
   }
 
   // Optional. Number of complete passes the model makes over the entire
@@ -307,6 +350,15 @@ message SupervisedTuningSpec {
   // Optional. Hyperparameters for SFT.
   SupervisedHyperParameters hyper_parameters = 3
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set to true, disable intermediate checkpoints for SFT and only
+  // the last checkpoint will be exported. Otherwise, enable intermediate
+  // checkpoints for SFT. Default is false.
+  bool export_last_checkpoint_only = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Evaluation Config for Tuning Job.
+  EvaluationConfig evaluation_config = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // TunedModel Reference for legacy model migration.
@@ -330,4 +382,85 @@ message TunedModelRef {
       type: "aiplatform.googleapis.com/PipelineJob"
     }];
   }
+}
+
+// Evaluation Config for Tuning Job.
+message EvaluationConfig {
+  // Required. The metrics used for evaluation.
+  repeated Metric metrics = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Config for evaluation output.
+  OutputConfig output_config = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Autorater config for evaluation.
+  AutoraterConfig autorater_config = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Configuration options for inference generation and outputs.
+  // If not set, default generation parameters are used.
+  GenerationConfig inference_generation_config = 5
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Evaluate Dataset Run Result for Tuning Job.
+message EvaluateDatasetRun {
+  // Output only. Deprecated: The updated architecture uses evaluation_run
+  // instead.
+  string operation_name = 1
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The resource name of the evaluation run. Format:
+  // `projects/{project}/locations/{location}/evaluationRuns/{evaluation_run_id}`.
+  string evaluation_run = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The checkpoint id used in the evaluation run. Only populated
+  // when evaluating checkpoints.
+  string checkpoint_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Results for EvaluationService.
+  EvaluateDatasetResponse evaluate_dataset_response = 3
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The error of the evaluation run if any.
+  google.rpc.Status error = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// TunedModelCheckpoint for the Tuned Model of a Tuning Job.
+message TunedModelCheckpoint {
+  // The ID of the checkpoint.
+  string checkpoint_id = 1;
+
+  // The epoch of the checkpoint.
+  int64 epoch = 2;
+
+  // The step of the checkpoint.
+  int64 step = 3;
+
+  // The Endpoint resource name that the checkpoint is deployed to. Format:
+  // `projects/{project}/locations/{location}/endpoints/{endpoint}`.
+  string endpoint = 4;
+}
+
+// A pre-tuned model for continuous tuning.
+message PreTunedModel {
+  // The resource name of the Model.
+  // E.g., a model resource name with a specified version id or alias:
+  //
+  // `projects/{project}/locations/{location}/models/{model}@{version_id}`
+  //
+  // `projects/{project}/locations/{location}/models/{model}@{alias}`
+  //
+  // Or, omit the version id to use the default version:
+  //
+  // `projects/{project}/locations/{location}/models/{model}`
+  string tuned_model_name = 1 [(google.api.resource_reference) = {
+    type: "aiplatform.googleapis.com/Model"
+  }];
+
+  // Optional. The source checkpoint id. If not specified, the default
+  // checkpoint will be used.
+  string checkpoint_id = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. The name of the base model this
+  // [PreTunedModel][google.cloud.aiplatform.v1.PreTunedModel] was tuned from.
+  string base_model = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

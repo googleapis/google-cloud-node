@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -625,6 +625,12 @@ export namespace google {
 
                     /** DiscoverConnectionProfileRequest sqlServerRdbms */
                     sqlServerRdbms?: (google.cloud.datastream.v1.ISqlServerRdbms|null);
+
+                    /** DiscoverConnectionProfileRequest salesforceOrg */
+                    salesforceOrg?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** DiscoverConnectionProfileRequest mongodbCluster */
+                    mongodbCluster?: (google.cloud.datastream.v1.IMongodbCluster|null);
                 }
 
                 /** Represents a DiscoverConnectionProfileRequest. */
@@ -663,6 +669,12 @@ export namespace google {
                     /** DiscoverConnectionProfileRequest sqlServerRdbms. */
                     public sqlServerRdbms?: (google.cloud.datastream.v1.ISqlServerRdbms|null);
 
+                    /** DiscoverConnectionProfileRequest salesforceOrg. */
+                    public salesforceOrg?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** DiscoverConnectionProfileRequest mongodbCluster. */
+                    public mongodbCluster?: (google.cloud.datastream.v1.IMongodbCluster|null);
+
                     /** DiscoverConnectionProfileRequest target. */
                     public target?: ("connectionProfile"|"connectionProfileName");
 
@@ -670,7 +682,7 @@ export namespace google {
                     public hierarchy?: ("fullHierarchy"|"hierarchyDepth");
 
                     /** DiscoverConnectionProfileRequest dataObject. */
-                    public dataObject?: ("oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms");
+                    public dataObject?: ("oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|"salesforceOrg"|"mongodbCluster");
 
                     /**
                      * Creates a new DiscoverConnectionProfileRequest instance using the specified properties.
@@ -764,6 +776,12 @@ export namespace google {
 
                     /** DiscoverConnectionProfileResponse sqlServerRdbms */
                     sqlServerRdbms?: (google.cloud.datastream.v1.ISqlServerRdbms|null);
+
+                    /** DiscoverConnectionProfileResponse salesforceOrg */
+                    salesforceOrg?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** DiscoverConnectionProfileResponse mongodbCluster */
+                    mongodbCluster?: (google.cloud.datastream.v1.IMongodbCluster|null);
                 }
 
                 /** Represents a DiscoverConnectionProfileResponse. */
@@ -787,8 +805,14 @@ export namespace google {
                     /** DiscoverConnectionProfileResponse sqlServerRdbms. */
                     public sqlServerRdbms?: (google.cloud.datastream.v1.ISqlServerRdbms|null);
 
+                    /** DiscoverConnectionProfileResponse salesforceOrg. */
+                    public salesforceOrg?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** DiscoverConnectionProfileResponse mongodbCluster. */
+                    public mongodbCluster?: (google.cloud.datastream.v1.IMongodbCluster|null);
+
                     /** DiscoverConnectionProfileResponse dataObject. */
-                    public dataObject?: ("oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms");
+                    public dataObject?: ("oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|"salesforceOrg"|"mongodbCluster");
 
                     /**
                      * Creates a new DiscoverConnectionProfileResponse instance using the specified properties.
@@ -3501,6 +3525,9 @@ export namespace google {
 
                     /** CreatePrivateConnectionRequest force */
                     force?: (boolean|null);
+
+                    /** CreatePrivateConnectionRequest validateOnly */
+                    validateOnly?: (boolean|null);
                 }
 
                 /** Represents a CreatePrivateConnectionRequest. */
@@ -3526,6 +3553,9 @@ export namespace google {
 
                     /** CreatePrivateConnectionRequest force. */
                     public force: boolean;
+
+                    /** CreatePrivateConnectionRequest validateOnly. */
+                    public validateOnly: boolean;
 
                     /**
                      * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
@@ -5602,6 +5632,439 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a MongodbProfile. */
+                interface IMongodbProfile {
+
+                    /** MongodbProfile hostAddresses */
+                    hostAddresses?: (google.cloud.datastream.v1.IHostAddress[]|null);
+
+                    /** MongodbProfile replicaSet */
+                    replicaSet?: (string|null);
+
+                    /** MongodbProfile username */
+                    username?: (string|null);
+
+                    /** MongodbProfile password */
+                    password?: (string|null);
+
+                    /** MongodbProfile secretManagerStoredPassword */
+                    secretManagerStoredPassword?: (string|null);
+
+                    /** MongodbProfile sslConfig */
+                    sslConfig?: (google.cloud.datastream.v1.IMongodbSslConfig|null);
+
+                    /** MongodbProfile srvConnectionFormat */
+                    srvConnectionFormat?: (google.cloud.datastream.v1.ISrvConnectionFormat|null);
+
+                    /** MongodbProfile standardConnectionFormat */
+                    standardConnectionFormat?: (google.cloud.datastream.v1.IStandardConnectionFormat|null);
+                }
+
+                /** Represents a MongodbProfile. */
+                class MongodbProfile implements IMongodbProfile {
+
+                    /**
+                     * Constructs a new MongodbProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMongodbProfile);
+
+                    /** MongodbProfile hostAddresses. */
+                    public hostAddresses: google.cloud.datastream.v1.IHostAddress[];
+
+                    /** MongodbProfile replicaSet. */
+                    public replicaSet: string;
+
+                    /** MongodbProfile username. */
+                    public username: string;
+
+                    /** MongodbProfile password. */
+                    public password: string;
+
+                    /** MongodbProfile secretManagerStoredPassword. */
+                    public secretManagerStoredPassword: string;
+
+                    /** MongodbProfile sslConfig. */
+                    public sslConfig?: (google.cloud.datastream.v1.IMongodbSslConfig|null);
+
+                    /** MongodbProfile srvConnectionFormat. */
+                    public srvConnectionFormat?: (google.cloud.datastream.v1.ISrvConnectionFormat|null);
+
+                    /** MongodbProfile standardConnectionFormat. */
+                    public standardConnectionFormat?: (google.cloud.datastream.v1.IStandardConnectionFormat|null);
+
+                    /** MongodbProfile mongodbConnectionFormat. */
+                    public mongodbConnectionFormat?: ("srvConnectionFormat"|"standardConnectionFormat");
+
+                    /**
+                     * Creates a new MongodbProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MongodbProfile instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMongodbProfile): google.cloud.datastream.v1.MongodbProfile;
+
+                    /**
+                     * Encodes the specified MongodbProfile message. Does not implicitly {@link google.cloud.datastream.v1.MongodbProfile.verify|verify} messages.
+                     * @param message MongodbProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMongodbProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MongodbProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbProfile.verify|verify} messages.
+                     * @param message MongodbProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMongodbProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MongodbProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MongodbProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MongodbProfile;
+
+                    /**
+                     * Decodes a MongodbProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MongodbProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MongodbProfile;
+
+                    /**
+                     * Verifies a MongodbProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MongodbProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MongodbProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MongodbProfile;
+
+                    /**
+                     * Creates a plain object from a MongodbProfile message. Also converts values to other types if specified.
+                     * @param message MongodbProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MongodbProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MongodbProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MongodbProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a HostAddress. */
+                interface IHostAddress {
+
+                    /** HostAddress hostname */
+                    hostname?: (string|null);
+
+                    /** HostAddress port */
+                    port?: (number|null);
+                }
+
+                /** Represents a HostAddress. */
+                class HostAddress implements IHostAddress {
+
+                    /**
+                     * Constructs a new HostAddress.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IHostAddress);
+
+                    /** HostAddress hostname. */
+                    public hostname: string;
+
+                    /** HostAddress port. */
+                    public port: number;
+
+                    /**
+                     * Creates a new HostAddress instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HostAddress instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IHostAddress): google.cloud.datastream.v1.HostAddress;
+
+                    /**
+                     * Encodes the specified HostAddress message. Does not implicitly {@link google.cloud.datastream.v1.HostAddress.verify|verify} messages.
+                     * @param message HostAddress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IHostAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HostAddress message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.HostAddress.verify|verify} messages.
+                     * @param message HostAddress message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IHostAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HostAddress message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HostAddress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.HostAddress;
+
+                    /**
+                     * Decodes a HostAddress message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HostAddress
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.HostAddress;
+
+                    /**
+                     * Verifies a HostAddress message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HostAddress message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HostAddress
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.HostAddress;
+
+                    /**
+                     * Creates a plain object from a HostAddress message. Also converts values to other types if specified.
+                     * @param message HostAddress
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.HostAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HostAddress to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HostAddress
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SrvConnectionFormat. */
+                interface ISrvConnectionFormat {
+                }
+
+                /** Represents a SrvConnectionFormat. */
+                class SrvConnectionFormat implements ISrvConnectionFormat {
+
+                    /**
+                     * Constructs a new SrvConnectionFormat.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.ISrvConnectionFormat);
+
+                    /**
+                     * Creates a new SrvConnectionFormat instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SrvConnectionFormat instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.ISrvConnectionFormat): google.cloud.datastream.v1.SrvConnectionFormat;
+
+                    /**
+                     * Encodes the specified SrvConnectionFormat message. Does not implicitly {@link google.cloud.datastream.v1.SrvConnectionFormat.verify|verify} messages.
+                     * @param message SrvConnectionFormat message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.ISrvConnectionFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SrvConnectionFormat message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SrvConnectionFormat.verify|verify} messages.
+                     * @param message SrvConnectionFormat message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.ISrvConnectionFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SrvConnectionFormat message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SrvConnectionFormat
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SrvConnectionFormat;
+
+                    /**
+                     * Decodes a SrvConnectionFormat message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SrvConnectionFormat
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SrvConnectionFormat;
+
+                    /**
+                     * Verifies a SrvConnectionFormat message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SrvConnectionFormat message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SrvConnectionFormat
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SrvConnectionFormat;
+
+                    /**
+                     * Creates a plain object from a SrvConnectionFormat message. Also converts values to other types if specified.
+                     * @param message SrvConnectionFormat
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.SrvConnectionFormat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SrvConnectionFormat to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SrvConnectionFormat
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StandardConnectionFormat. */
+                interface IStandardConnectionFormat {
+
+                    /** StandardConnectionFormat directConnection */
+                    directConnection?: (boolean|null);
+                }
+
+                /** Represents a StandardConnectionFormat. */
+                class StandardConnectionFormat implements IStandardConnectionFormat {
+
+                    /**
+                     * Constructs a new StandardConnectionFormat.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IStandardConnectionFormat);
+
+                    /** StandardConnectionFormat directConnection. */
+                    public directConnection: boolean;
+
+                    /**
+                     * Creates a new StandardConnectionFormat instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StandardConnectionFormat instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IStandardConnectionFormat): google.cloud.datastream.v1.StandardConnectionFormat;
+
+                    /**
+                     * Encodes the specified StandardConnectionFormat message. Does not implicitly {@link google.cloud.datastream.v1.StandardConnectionFormat.verify|verify} messages.
+                     * @param message StandardConnectionFormat message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IStandardConnectionFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StandardConnectionFormat message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.StandardConnectionFormat.verify|verify} messages.
+                     * @param message StandardConnectionFormat message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IStandardConnectionFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StandardConnectionFormat message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StandardConnectionFormat
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.StandardConnectionFormat;
+
+                    /**
+                     * Decodes a StandardConnectionFormat message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StandardConnectionFormat
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.StandardConnectionFormat;
+
+                    /**
+                     * Verifies a StandardConnectionFormat message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StandardConnectionFormat message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StandardConnectionFormat
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.StandardConnectionFormat;
+
+                    /**
+                     * Creates a plain object from a StandardConnectionFormat message. Also converts values to other types if specified.
+                     * @param message StandardConnectionFormat
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.StandardConnectionFormat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StandardConnectionFormat to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StandardConnectionFormat
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GcsProfile. */
                 interface IGcsProfile {
 
@@ -6114,6 +6577,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PscInterfaceConfig. */
+                interface IPscInterfaceConfig {
+
+                    /** PscInterfaceConfig networkAttachment */
+                    networkAttachment?: (string|null);
+                }
+
+                /** Represents a PscInterfaceConfig. */
+                class PscInterfaceConfig implements IPscInterfaceConfig {
+
+                    /**
+                     * Constructs a new PscInterfaceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IPscInterfaceConfig);
+
+                    /** PscInterfaceConfig networkAttachment. */
+                    public networkAttachment: string;
+
+                    /**
+                     * Creates a new PscInterfaceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PscInterfaceConfig instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IPscInterfaceConfig): google.cloud.datastream.v1.PscInterfaceConfig;
+
+                    /**
+                     * Encodes the specified PscInterfaceConfig message. Does not implicitly {@link google.cloud.datastream.v1.PscInterfaceConfig.verify|verify} messages.
+                     * @param message PscInterfaceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IPscInterfaceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PscInterfaceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PscInterfaceConfig.verify|verify} messages.
+                     * @param message PscInterfaceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IPscInterfaceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PscInterfaceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PscInterfaceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.PscInterfaceConfig;
+
+                    /**
+                     * Decodes a PscInterfaceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PscInterfaceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.PscInterfaceConfig;
+
+                    /**
+                     * Verifies a PscInterfaceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PscInterfaceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PscInterfaceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.PscInterfaceConfig;
+
+                    /**
+                     * Creates a plain object from a PscInterfaceConfig message. Also converts values to other types if specified.
+                     * @param message PscInterfaceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.PscInterfaceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PscInterfaceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PscInterfaceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a PrivateConnection. */
                 interface IPrivateConnection {
 
@@ -6146,6 +6706,9 @@ export namespace google {
 
                     /** PrivateConnection vpcPeeringConfig */
                     vpcPeeringConfig?: (google.cloud.datastream.v1.IVpcPeeringConfig|null);
+
+                    /** PrivateConnection pscInterfaceConfig */
+                    pscInterfaceConfig?: (google.cloud.datastream.v1.IPscInterfaceConfig|null);
                 }
 
                 /** Represents a PrivateConnection. */
@@ -6187,11 +6750,8 @@ export namespace google {
                     /** PrivateConnection vpcPeeringConfig. */
                     public vpcPeeringConfig?: (google.cloud.datastream.v1.IVpcPeeringConfig|null);
 
-                    /** PrivateConnection _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
-                    /** PrivateConnection _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
+                    /** PrivateConnection pscInterfaceConfig. */
+                    public pscInterfaceConfig?: (google.cloud.datastream.v1.IPscInterfaceConfig|null);
 
                     /**
                      * Creates a new PrivateConnection instance using the specified properties.
@@ -6514,6 +7074,139 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MongodbSslConfig. */
+                interface IMongodbSslConfig {
+
+                    /** MongodbSslConfig clientKey */
+                    clientKey?: (string|null);
+
+                    /** MongodbSslConfig clientKeySet */
+                    clientKeySet?: (boolean|null);
+
+                    /** MongodbSslConfig clientCertificate */
+                    clientCertificate?: (string|null);
+
+                    /** MongodbSslConfig clientCertificateSet */
+                    clientCertificateSet?: (boolean|null);
+
+                    /** MongodbSslConfig caCertificate */
+                    caCertificate?: (string|null);
+
+                    /** MongodbSslConfig caCertificateSet */
+                    caCertificateSet?: (boolean|null);
+
+                    /** MongodbSslConfig secretManagerStoredClientKey */
+                    secretManagerStoredClientKey?: (string|null);
+                }
+
+                /** Represents a MongodbSslConfig. */
+                class MongodbSslConfig implements IMongodbSslConfig {
+
+                    /**
+                     * Constructs a new MongodbSslConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMongodbSslConfig);
+
+                    /** MongodbSslConfig clientKey. */
+                    public clientKey: string;
+
+                    /** MongodbSslConfig clientKeySet. */
+                    public clientKeySet: boolean;
+
+                    /** MongodbSslConfig clientCertificate. */
+                    public clientCertificate: string;
+
+                    /** MongodbSslConfig clientCertificateSet. */
+                    public clientCertificateSet: boolean;
+
+                    /** MongodbSslConfig caCertificate. */
+                    public caCertificate: string;
+
+                    /** MongodbSslConfig caCertificateSet. */
+                    public caCertificateSet: boolean;
+
+                    /** MongodbSslConfig secretManagerStoredClientKey. */
+                    public secretManagerStoredClientKey: string;
+
+                    /**
+                     * Creates a new MongodbSslConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MongodbSslConfig instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMongodbSslConfig): google.cloud.datastream.v1.MongodbSslConfig;
+
+                    /**
+                     * Encodes the specified MongodbSslConfig message. Does not implicitly {@link google.cloud.datastream.v1.MongodbSslConfig.verify|verify} messages.
+                     * @param message MongodbSslConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMongodbSslConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MongodbSslConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbSslConfig.verify|verify} messages.
+                     * @param message MongodbSslConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMongodbSslConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MongodbSslConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MongodbSslConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MongodbSslConfig;
+
+                    /**
+                     * Decodes a MongodbSslConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MongodbSslConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MongodbSslConfig;
+
+                    /**
+                     * Verifies a MongodbSslConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MongodbSslConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MongodbSslConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MongodbSslConfig;
+
+                    /**
+                     * Creates a plain object from a MongodbSslConfig message. Also converts values to other types if specified.
+                     * @param message MongodbSslConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MongodbSslConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MongodbSslConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MongodbSslConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a MysqlSslConfig. */
                 interface IMysqlSslConfig {
 
@@ -6649,6 +7342,9 @@ export namespace google {
 
                     /** OracleSslConfig caCertificateSet */
                     caCertificateSet?: (boolean|null);
+
+                    /** OracleSslConfig serverCertificateDistinguishedName */
+                    serverCertificateDistinguishedName?: (string|null);
                 }
 
                 /** Represents an OracleSslConfig. */
@@ -6665,6 +7361,9 @@ export namespace google {
 
                     /** OracleSslConfig caCertificateSet. */
                     public caCertificateSet: boolean;
+
+                    /** OracleSslConfig serverCertificateDistinguishedName. */
+                    public serverCertificateDistinguishedName: string;
 
                     /**
                      * Creates a new OracleSslConfig instance using the specified properties.
@@ -6857,6 +7556,9 @@ export namespace google {
 
                         /** ServerVerification caCertificate */
                         caCertificate?: (string|null);
+
+                        /** ServerVerification serverCertificateHostname */
+                        serverCertificateHostname?: (string|null);
                     }
 
                     /** Represents a ServerVerification. */
@@ -6870,6 +7572,9 @@ export namespace google {
 
                         /** ServerVerification caCertificate. */
                         public caCertificate: string;
+
+                        /** ServerVerification serverCertificateHostname. */
+                        public serverCertificateHostname: string;
 
                         /**
                          * Creates a new ServerVerification instance using the specified properties.
@@ -6960,6 +7665,9 @@ export namespace google {
 
                         /** ServerAndClientVerification caCertificate */
                         caCertificate?: (string|null);
+
+                        /** ServerAndClientVerification serverCertificateHostname */
+                        serverCertificateHostname?: (string|null);
                     }
 
                     /** Represents a ServerAndClientVerification. */
@@ -6979,6 +7687,9 @@ export namespace google {
 
                         /** ServerAndClientVerification caCertificate. */
                         public caCertificate: string;
+
+                        /** ServerAndClientVerification serverCertificateHostname. */
+                        public serverCertificateHostname: string;
 
                         /**
                          * Creates a new ServerAndClientVerification instance using the specified properties.
@@ -7104,6 +7815,9 @@ export namespace google {
                     /** ConnectionProfile salesforceProfile */
                     salesforceProfile?: (google.cloud.datastream.v1.ISalesforceProfile|null);
 
+                    /** ConnectionProfile mongodbProfile */
+                    mongodbProfile?: (google.cloud.datastream.v1.IMongodbProfile|null);
+
                     /** ConnectionProfile staticServiceIpConnectivity */
                     staticServiceIpConnectivity?: (google.cloud.datastream.v1.IStaticServiceIpConnectivity|null);
 
@@ -7165,6 +7879,9 @@ export namespace google {
                     /** ConnectionProfile salesforceProfile. */
                     public salesforceProfile?: (google.cloud.datastream.v1.ISalesforceProfile|null);
 
+                    /** ConnectionProfile mongodbProfile. */
+                    public mongodbProfile?: (google.cloud.datastream.v1.IMongodbProfile|null);
+
                     /** ConnectionProfile staticServiceIpConnectivity. */
                     public staticServiceIpConnectivity?: (google.cloud.datastream.v1.IStaticServiceIpConnectivity|null);
 
@@ -7174,14 +7891,8 @@ export namespace google {
                     /** ConnectionProfile privateConnectivity. */
                     public privateConnectivity?: (google.cloud.datastream.v1.IPrivateConnectivity|null);
 
-                    /** ConnectionProfile _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
-                    /** ConnectionProfile _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
-
                     /** ConnectionProfile profile. */
-                    public profile?: ("oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile");
+                    public profile?: ("oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile"|"mongodbProfile");
 
                     /** ConnectionProfile connectivity. */
                     public connectivity?: ("staticServiceIpConnectivity"|"forwardSshConnectivity"|"privateConnectivity");
@@ -10934,6 +11645,515 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MongodbSourceConfig. */
+                interface IMongodbSourceConfig {
+
+                    /** MongodbSourceConfig includeObjects */
+                    includeObjects?: (google.cloud.datastream.v1.IMongodbCluster|null);
+
+                    /** MongodbSourceConfig excludeObjects */
+                    excludeObjects?: (google.cloud.datastream.v1.IMongodbCluster|null);
+
+                    /** MongodbSourceConfig maxConcurrentBackfillTasks */
+                    maxConcurrentBackfillTasks?: (number|null);
+                }
+
+                /** Represents a MongodbSourceConfig. */
+                class MongodbSourceConfig implements IMongodbSourceConfig {
+
+                    /**
+                     * Constructs a new MongodbSourceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMongodbSourceConfig);
+
+                    /** MongodbSourceConfig includeObjects. */
+                    public includeObjects?: (google.cloud.datastream.v1.IMongodbCluster|null);
+
+                    /** MongodbSourceConfig excludeObjects. */
+                    public excludeObjects?: (google.cloud.datastream.v1.IMongodbCluster|null);
+
+                    /** MongodbSourceConfig maxConcurrentBackfillTasks. */
+                    public maxConcurrentBackfillTasks: number;
+
+                    /**
+                     * Creates a new MongodbSourceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MongodbSourceConfig instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMongodbSourceConfig): google.cloud.datastream.v1.MongodbSourceConfig;
+
+                    /**
+                     * Encodes the specified MongodbSourceConfig message. Does not implicitly {@link google.cloud.datastream.v1.MongodbSourceConfig.verify|verify} messages.
+                     * @param message MongodbSourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMongodbSourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MongodbSourceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbSourceConfig.verify|verify} messages.
+                     * @param message MongodbSourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMongodbSourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MongodbSourceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MongodbSourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MongodbSourceConfig;
+
+                    /**
+                     * Decodes a MongodbSourceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MongodbSourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MongodbSourceConfig;
+
+                    /**
+                     * Verifies a MongodbSourceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MongodbSourceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MongodbSourceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MongodbSourceConfig;
+
+                    /**
+                     * Creates a plain object from a MongodbSourceConfig message. Also converts values to other types if specified.
+                     * @param message MongodbSourceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MongodbSourceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MongodbSourceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MongodbSourceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MongodbCluster. */
+                interface IMongodbCluster {
+
+                    /** MongodbCluster databases */
+                    databases?: (google.cloud.datastream.v1.IMongodbDatabase[]|null);
+                }
+
+                /** Represents a MongodbCluster. */
+                class MongodbCluster implements IMongodbCluster {
+
+                    /**
+                     * Constructs a new MongodbCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMongodbCluster);
+
+                    /** MongodbCluster databases. */
+                    public databases: google.cloud.datastream.v1.IMongodbDatabase[];
+
+                    /**
+                     * Creates a new MongodbCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MongodbCluster instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMongodbCluster): google.cloud.datastream.v1.MongodbCluster;
+
+                    /**
+                     * Encodes the specified MongodbCluster message. Does not implicitly {@link google.cloud.datastream.v1.MongodbCluster.verify|verify} messages.
+                     * @param message MongodbCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMongodbCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MongodbCluster message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbCluster.verify|verify} messages.
+                     * @param message MongodbCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMongodbCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MongodbCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MongodbCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MongodbCluster;
+
+                    /**
+                     * Decodes a MongodbCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MongodbCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MongodbCluster;
+
+                    /**
+                     * Verifies a MongodbCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MongodbCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MongodbCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MongodbCluster;
+
+                    /**
+                     * Creates a plain object from a MongodbCluster message. Also converts values to other types if specified.
+                     * @param message MongodbCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MongodbCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MongodbCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MongodbCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MongodbDatabase. */
+                interface IMongodbDatabase {
+
+                    /** MongodbDatabase database */
+                    database?: (string|null);
+
+                    /** MongodbDatabase collections */
+                    collections?: (google.cloud.datastream.v1.IMongodbCollection[]|null);
+                }
+
+                /** Represents a MongodbDatabase. */
+                class MongodbDatabase implements IMongodbDatabase {
+
+                    /**
+                     * Constructs a new MongodbDatabase.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMongodbDatabase);
+
+                    /** MongodbDatabase database. */
+                    public database: string;
+
+                    /** MongodbDatabase collections. */
+                    public collections: google.cloud.datastream.v1.IMongodbCollection[];
+
+                    /**
+                     * Creates a new MongodbDatabase instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MongodbDatabase instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMongodbDatabase): google.cloud.datastream.v1.MongodbDatabase;
+
+                    /**
+                     * Encodes the specified MongodbDatabase message. Does not implicitly {@link google.cloud.datastream.v1.MongodbDatabase.verify|verify} messages.
+                     * @param message MongodbDatabase message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMongodbDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MongodbDatabase message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbDatabase.verify|verify} messages.
+                     * @param message MongodbDatabase message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMongodbDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MongodbDatabase message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MongodbDatabase
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MongodbDatabase;
+
+                    /**
+                     * Decodes a MongodbDatabase message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MongodbDatabase
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MongodbDatabase;
+
+                    /**
+                     * Verifies a MongodbDatabase message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MongodbDatabase message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MongodbDatabase
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MongodbDatabase;
+
+                    /**
+                     * Creates a plain object from a MongodbDatabase message. Also converts values to other types if specified.
+                     * @param message MongodbDatabase
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MongodbDatabase, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MongodbDatabase to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MongodbDatabase
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MongodbCollection. */
+                interface IMongodbCollection {
+
+                    /** MongodbCollection collection */
+                    collection?: (string|null);
+
+                    /** MongodbCollection fields */
+                    fields?: (google.cloud.datastream.v1.IMongodbField[]|null);
+                }
+
+                /** Represents a MongodbCollection. */
+                class MongodbCollection implements IMongodbCollection {
+
+                    /**
+                     * Constructs a new MongodbCollection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMongodbCollection);
+
+                    /** MongodbCollection collection. */
+                    public collection: string;
+
+                    /** MongodbCollection fields. */
+                    public fields: google.cloud.datastream.v1.IMongodbField[];
+
+                    /**
+                     * Creates a new MongodbCollection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MongodbCollection instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMongodbCollection): google.cloud.datastream.v1.MongodbCollection;
+
+                    /**
+                     * Encodes the specified MongodbCollection message. Does not implicitly {@link google.cloud.datastream.v1.MongodbCollection.verify|verify} messages.
+                     * @param message MongodbCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMongodbCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MongodbCollection message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbCollection.verify|verify} messages.
+                     * @param message MongodbCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMongodbCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MongodbCollection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MongodbCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MongodbCollection;
+
+                    /**
+                     * Decodes a MongodbCollection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MongodbCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MongodbCollection;
+
+                    /**
+                     * Verifies a MongodbCollection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MongodbCollection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MongodbCollection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MongodbCollection;
+
+                    /**
+                     * Creates a plain object from a MongodbCollection message. Also converts values to other types if specified.
+                     * @param message MongodbCollection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MongodbCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MongodbCollection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MongodbCollection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MongodbField. */
+                interface IMongodbField {
+
+                    /** MongodbField field */
+                    field?: (string|null);
+                }
+
+                /** Represents a MongodbField. */
+                class MongodbField implements IMongodbField {
+
+                    /**
+                     * Constructs a new MongodbField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMongodbField);
+
+                    /** MongodbField field. */
+                    public field: string;
+
+                    /**
+                     * Creates a new MongodbField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MongodbField instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMongodbField): google.cloud.datastream.v1.MongodbField;
+
+                    /**
+                     * Encodes the specified MongodbField message. Does not implicitly {@link google.cloud.datastream.v1.MongodbField.verify|verify} messages.
+                     * @param message MongodbField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMongodbField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MongodbField message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbField.verify|verify} messages.
+                     * @param message MongodbField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMongodbField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MongodbField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MongodbField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MongodbField;
+
+                    /**
+                     * Decodes a MongodbField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MongodbField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MongodbField;
+
+                    /**
+                     * Verifies a MongodbField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MongodbField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MongodbField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MongodbField;
+
+                    /**
+                     * Creates a plain object from a MongodbField message. Also converts values to other types if specified.
+                     * @param message MongodbField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MongodbField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MongodbField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MongodbField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SourceConfig. */
                 interface ISourceConfig {
 
@@ -10954,6 +12174,9 @@ export namespace google {
 
                     /** SourceConfig salesforceSourceConfig */
                     salesforceSourceConfig?: (google.cloud.datastream.v1.ISalesforceSourceConfig|null);
+
+                    /** SourceConfig mongodbSourceConfig */
+                    mongodbSourceConfig?: (google.cloud.datastream.v1.IMongodbSourceConfig|null);
                 }
 
                 /** Represents a SourceConfig. */
@@ -10983,8 +12206,11 @@ export namespace google {
                     /** SourceConfig salesforceSourceConfig. */
                     public salesforceSourceConfig?: (google.cloud.datastream.v1.ISalesforceSourceConfig|null);
 
+                    /** SourceConfig mongodbSourceConfig. */
+                    public mongodbSourceConfig?: (google.cloud.datastream.v1.IMongodbSourceConfig|null);
+
                     /** SourceConfig sourceStreamConfig. */
-                    public sourceStreamConfig?: ("oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig"|"salesforceSourceConfig");
+                    public sourceStreamConfig?: ("oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig"|"salesforceSourceConfig"|"mongodbSourceConfig");
 
                     /**
                      * Creates a new SourceConfig instance using the specified properties.
@@ -11636,6 +12862,9 @@ export namespace google {
 
                         /** SourceHierarchyDatasets datasetTemplate */
                         datasetTemplate?: (google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null);
+
+                        /** SourceHierarchyDatasets projectId */
+                        projectId?: (string|null);
                     }
 
                     /** Represents a SourceHierarchyDatasets. */
@@ -11649,6 +12878,9 @@ export namespace google {
 
                         /** SourceHierarchyDatasets datasetTemplate. */
                         public datasetTemplate?: (google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null);
+
+                        /** SourceHierarchyDatasets projectId. */
+                        public projectId?: (string|null);
 
                         /**
                          * Creates a new SourceHierarchyDatasets instance using the specified properties.
@@ -12377,15 +13609,6 @@ export namespace google {
                     /** Stream backfillStrategy. */
                     public backfillStrategy?: ("backfillAll"|"backfillNone");
 
-                    /** Stream _customerManagedEncryptionKey. */
-                    public _customerManagedEncryptionKey?: "customerManagedEncryptionKey";
-
-                    /** Stream _satisfiesPzs. */
-                    public _satisfiesPzs?: "satisfiesPzs";
-
-                    /** Stream _satisfiesPzi. */
-                    public _satisfiesPzi?: "satisfiesPzi";
-
                     /**
                      * Creates a new Stream instance using the specified properties.
                      * @param [properties] Properties to set
@@ -12496,6 +13719,9 @@ export namespace google {
 
                         /** BackfillAllStrategy salesforceExcludedObjects */
                         salesforceExcludedObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                        /** BackfillAllStrategy mongodbExcludedObjects */
+                        mongodbExcludedObjects?: (google.cloud.datastream.v1.IMongodbCluster|null);
                     }
 
                     /** Represents a BackfillAllStrategy. */
@@ -12522,8 +13748,11 @@ export namespace google {
                         /** BackfillAllStrategy salesforceExcludedObjects. */
                         public salesforceExcludedObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
 
+                        /** BackfillAllStrategy mongodbExcludedObjects. */
+                        public mongodbExcludedObjects?: (google.cloud.datastream.v1.IMongodbCluster|null);
+
                         /** BackfillAllStrategy excludedObjects. */
-                        public excludedObjects?: ("oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects"|"salesforceExcludedObjects");
+                        public excludedObjects?: ("oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects"|"salesforceExcludedObjects"|"mongodbExcludedObjects");
 
                         /**
                          * Creates a new BackfillAllStrategy instance using the specified properties.
@@ -12845,6 +14074,9 @@ export namespace google {
 
                     /** SourceObjectIdentifier salesforceIdentifier */
                     salesforceIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier|null);
+
+                    /** SourceObjectIdentifier mongodbIdentifier */
+                    mongodbIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier|null);
                 }
 
                 /** Represents a SourceObjectIdentifier. */
@@ -12871,8 +14103,11 @@ export namespace google {
                     /** SourceObjectIdentifier salesforceIdentifier. */
                     public salesforceIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier|null);
 
+                    /** SourceObjectIdentifier mongodbIdentifier. */
+                    public mongodbIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier|null);
+
                     /** SourceObjectIdentifier sourceIdentifier. */
-                    public sourceIdentifier?: ("oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier"|"salesforceIdentifier");
+                    public sourceIdentifier?: ("oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier"|"salesforceIdentifier"|"mongodbIdentifier");
 
                     /**
                      * Creates a new SourceObjectIdentifier instance using the specified properties.
@@ -13457,6 +14692,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SalesforceObjectIdentifier
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MongodbObjectIdentifier. */
+                    interface IMongodbObjectIdentifier {
+
+                        /** MongodbObjectIdentifier database */
+                        database?: (string|null);
+
+                        /** MongodbObjectIdentifier collection */
+                        collection?: (string|null);
+                    }
+
+                    /** Represents a MongodbObjectIdentifier. */
+                    class MongodbObjectIdentifier implements IMongodbObjectIdentifier {
+
+                        /**
+                         * Constructs a new MongodbObjectIdentifier.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier);
+
+                        /** MongodbObjectIdentifier database. */
+                        public database: string;
+
+                        /** MongodbObjectIdentifier collection. */
+                        public collection: string;
+
+                        /**
+                         * Creates a new MongodbObjectIdentifier instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MongodbObjectIdentifier instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier): google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier;
+
+                        /**
+                         * Encodes the specified MongodbObjectIdentifier message. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify|verify} messages.
+                         * @param message MongodbObjectIdentifier message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MongodbObjectIdentifier message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify|verify} messages.
+                         * @param message MongodbObjectIdentifier message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MongodbObjectIdentifier message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MongodbObjectIdentifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier;
+
+                        /**
+                         * Decodes a MongodbObjectIdentifier message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MongodbObjectIdentifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier;
+
+                        /**
+                         * Verifies a MongodbObjectIdentifier message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MongodbObjectIdentifier message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MongodbObjectIdentifier
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier;
+
+                        /**
+                         * Creates a plain object from a MongodbObjectIdentifier message. Also converts values to other types if specified.
+                         * @param message MongodbObjectIdentifier
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MongodbObjectIdentifier to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MongodbObjectIdentifier
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -14710,9 +16048,6 @@ export namespace google {
 
                     /** MysqlLogPosition logPosition. */
                     public logPosition?: (number|null);
-
-                    /** MysqlLogPosition _logPosition. */
-                    public _logPosition?: "logPosition";
 
                     /**
                      * Creates a new MysqlLogPosition instance using the specified properties.
@@ -23170,6 +24505,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -23210,6 +24548,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -27428,6 +28769,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -27679,7 +29023,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -27710,7 +29054,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -28952,7 +30296,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -28968,7 +30312,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

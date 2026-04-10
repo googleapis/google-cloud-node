@@ -46,6 +46,26 @@ pnpm install --ignore-scripts --engine-strict --prod; pnpm install
 
 retval=0
 
+if [ "${RUN_INTERDEPENDENT_TESTS}" = "true" ]; then
+    case ${TEST_TYPE} in
+    lint)
+        # Skip interdependent tests for lint
+        ;;
+    samples)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "samples-test"
+        ;;
+    system)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "system-test"
+        ;;
+    units)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "test"
+        ;;
+    *)
+        ${PROJECT_ROOT}/ci/run_interdependent_tests.sh "${TEST_TYPE}"
+        ;;
+    esac
+fi
+
 set +e
 case ${TEST_TYPE} in
 lint)
@@ -68,25 +88,5 @@ units)
 *)
     ;;
 esac
-set -e
-
-# Run flakybot for non-presubmit builds
-if [ ${BUILD_TYPE} != "presubmit" ]; then
-    if [ ${TEST_TYPE} == "system" ] || [ ${TEST_TYPE} == "samples" ]; then
-        if [ -f "${PROJECT}_sponge_log.xml" ]; then
-            echo "Contents in ${PROJECT}_sponge_log.xml:"
-            cat ${PROJECT}_sponge_log.xml
-
-            echo "Calling flakybot --repo ${REPO_OWNER}/${REPO_NAME} --commit_hash ${COMMIT_SHA} --build_url https://console.cloud.google.com/cloud-build/builds;region=global/${BUILD_ID}?project=${PROJECT_ID}"
-            flakybot \
-                --repo "${REPO_OWNER}/${REPO_NAME}" \
-                --commit_hash "${COMMIT_SHA}" \
-                --build_url \
-                "https://console.cloud.google.com/cloud-build/builds;region=global/${BUILD_ID}?project=${PROJECT_ID}"
-        else
-            echo "Missing sponge log: ${PROJECT}_sponge_log.xml"
-        fi
-    fi
-fi
 
 exit ${retval}

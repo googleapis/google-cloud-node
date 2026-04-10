@@ -67,6 +67,58 @@
         "GetRagEngineConfig": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "CreateRagDataSchema": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCreateRagDataSchemas": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetRagDataSchema": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListRagDataSchemas": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteRagDataSchema": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeleteRagDataSchemas": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateRagMetadata": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCreateRagMetadata": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateRagMetadata": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetRagMetadata": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListRagMetadata": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteRagMetadata": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeleteRagMetadata": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,15 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  KeyDashboardServiceClient,
-  KeyTrackingServiceClient,
-} from '@google-cloud/kms-inventory';
+import {KeyDashboardServiceClient, KeyTrackingServiceClient} from '@google-cloud/kms-inventory';
 
 // check that the client class type name can be used
-function doStuffWithKeyDashboardServiceClient(
-  client: KeyDashboardServiceClient
-) {
+function doStuffWithKeyDashboardServiceClient(client: KeyDashboardServiceClient) {
   client.close();
 }
 function doStuffWithKeyTrackingServiceClient(client: KeyTrackingServiceClient) {

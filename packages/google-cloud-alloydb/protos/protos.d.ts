@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -318,7 +318,8 @@ export namespace google {
                     POSTGRES_13 = 1,
                     POSTGRES_14 = 2,
                     POSTGRES_15 = 3,
-                    POSTGRES_16 = 4
+                    POSTGRES_16 = 4,
+                    POSTGRES_17 = 5
                 }
 
                 /** SubscriptionType enum. */
@@ -948,9 +949,6 @@ export namespace google {
                     /** AutomatedBackupPolicy retention. */
                     public retention?: ("timeBasedRetention"|"quantityBasedRetention");
 
-                    /** AutomatedBackupPolicy _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new AutomatedBackupPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1360,9 +1358,6 @@ export namespace google {
                     /** ContinuousBackupConfig encryptionConfig. */
                     public encryptionConfig?: (google.cloud.alloydb.v1.IEncryptionConfig|null);
 
-                    /** ContinuousBackupConfig _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new ContinuousBackupConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1767,6 +1762,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows */
                     maintenanceWindows?: (google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IMaintenanceWindow[]|null);
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods */
+                    denyMaintenancePeriods?: (google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[]|null);
                 }
 
                 /** Represents a MaintenanceUpdatePolicy. */
@@ -1780,6 +1778,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows. */
                     public maintenanceWindows: google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IMaintenanceWindow[];
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods. */
+                    public denyMaintenancePeriods: google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[];
 
                     /**
                      * Creates a new MaintenanceUpdatePolicy instance using the specified properties.
@@ -1958,6 +1959,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for MaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DenyMaintenancePeriod. */
+                    interface IDenyMaintenancePeriod {
+
+                        /** DenyMaintenancePeriod startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate */
+                        endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time */
+                        time?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a DenyMaintenancePeriod. */
+                    class DenyMaintenancePeriod implements IDenyMaintenancePeriod {
+
+                        /**
+                         * Constructs a new DenyMaintenancePeriod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod);
+
+                        /** DenyMaintenancePeriod startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time. */
+                        public time?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new DenyMaintenancePeriod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DenyMaintenancePeriod instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod): google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message. Does not implicitly {@link google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Verifies a DenyMaintenancePeriod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DenyMaintenancePeriod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DenyMaintenancePeriod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Creates a plain object from a DenyMaintenancePeriod message. Also converts values to other types if specified.
+                         * @param message DenyMaintenancePeriod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DenyMaintenancePeriod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DenyMaintenancePeriod
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -2166,6 +2276,9 @@ export namespace google {
 
                     /** Cluster tags */
                     tags?: ({ [k: string]: string }|null);
+
+                    /** Cluster dataplexConfig */
+                    dataplexConfig?: (google.cloud.alloydb.v1.Cluster.IDataplexConfig|null);
                 }
 
                 /** Represents a Cluster. */
@@ -2278,6 +2391,9 @@ export namespace google {
 
                     /** Cluster tags. */
                     public tags: { [k: string]: string };
+
+                    /** Cluster dataplexConfig. */
+                    public dataplexConfig?: (google.cloud.alloydb.v1.Cluster.IDataplexConfig|null);
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource"|"cloudsqlBackupRunSource");
@@ -2877,6 +2993,103 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a DataplexConfig. */
+                    interface IDataplexConfig {
+
+                        /** DataplexConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a DataplexConfig. */
+                    class DataplexConfig implements IDataplexConfig {
+
+                        /**
+                         * Constructs a new DataplexConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1.Cluster.IDataplexConfig);
+
+                        /** DataplexConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new DataplexConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataplexConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1.Cluster.IDataplexConfig): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Verifies a DataplexConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataplexConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.Cluster.DataplexConfig;
+
+                        /**
+                         * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                         * @param message DataplexConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1.Cluster.DataplexConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataplexConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataplexConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -2985,6 +3198,12 @@ export namespace google {
 
                     /** Instance outboundPublicIpAddresses */
                     outboundPublicIpAddresses?: (string[]|null);
+
+                    /** Instance activationPolicy */
+                    activationPolicy?: (google.cloud.alloydb.v1.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1.Instance.ActivationPolicy|null);
+
+                    /** Instance connectionPoolConfig */
+                    connectionPoolConfig?: (google.cloud.alloydb.v1.Instance.IConnectionPoolConfig|null);
                 }
 
                 /** Represents an Instance. */
@@ -3079,6 +3298,12 @@ export namespace google {
 
                     /** Instance outboundPublicIpAddresses. */
                     public outboundPublicIpAddresses: string[];
+
+                    /** Instance activationPolicy. */
+                    public activationPolicy: (google.cloud.alloydb.v1.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1.Instance.ActivationPolicy);
+
+                    /** Instance connectionPoolConfig. */
+                    public connectionPoolConfig?: (google.cloud.alloydb.v1.Instance.IConnectionPoolConfig|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -3415,15 +3640,6 @@ export namespace google {
                         /** QueryInsightsInstanceConfig queryPlansPerMinute. */
                         public queryPlansPerMinute?: (number|null);
 
-                        /** QueryInsightsInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** QueryInsightsInstanceConfig _recordClientAddress. */
-                        public _recordClientAddress?: "recordClientAddress";
-
-                        /** QueryInsightsInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
                         /**
                          * Creates a new QueryInsightsInstanceConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -3562,30 +3778,6 @@ export namespace google {
 
                         /** ObservabilityInstanceConfig trackActiveQueries. */
                         public trackActiveQueries?: (boolean|null);
-
-                        /** ObservabilityInstanceConfig _enabled. */
-                        public _enabled?: "enabled";
-
-                        /** ObservabilityInstanceConfig _preserveComments. */
-                        public _preserveComments?: "preserveComments";
-
-                        /** ObservabilityInstanceConfig _trackWaitEvents. */
-                        public _trackWaitEvents?: "trackWaitEvents";
-
-                        /** ObservabilityInstanceConfig _trackWaitEventTypes. */
-                        public _trackWaitEventTypes?: "trackWaitEventTypes";
-
-                        /** ObservabilityInstanceConfig _maxQueryStringLength. */
-                        public _maxQueryStringLength?: "maxQueryStringLength";
-
-                        /** ObservabilityInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** ObservabilityInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
-                        /** ObservabilityInstanceConfig _trackActiveQueries. */
-                        public _trackActiveQueries?: "trackActiveQueries";
 
                         /**
                          * Creates a new ObservabilityInstanceConfig instance using the specified properties.
@@ -4215,6 +4407,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp */
                         enableOutboundPublicIp?: (boolean|null);
+
+                        /** InstanceNetworkConfig network */
+                        network?: (string|null);
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride */
+                        allocatedIpRangeOverride?: (string|null);
                     }
 
                     /** Represents an InstanceNetworkConfig. */
@@ -4234,6 +4432,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp. */
                         public enableOutboundPublicIp: boolean;
+
+                        /** InstanceNetworkConfig network. */
+                        public network: string;
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride. */
+                        public allocatedIpRangeOverride: string;
 
                         /**
                          * Creates a new InstanceNetworkConfig instance using the specified properties.
@@ -4413,6 +4617,115 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ConnectionPoolConfig. */
+                    interface IConnectionPoolConfig {
+
+                        /** ConnectionPoolConfig enabled */
+                        enabled?: (boolean|null);
+
+                        /** ConnectionPoolConfig flags */
+                        flags?: ({ [k: string]: string }|null);
+
+                        /** ConnectionPoolConfig poolerCount */
+                        poolerCount?: (number|null);
+                    }
+
+                    /** Represents a ConnectionPoolConfig. */
+                    class ConnectionPoolConfig implements IConnectionPoolConfig {
+
+                        /**
+                         * Constructs a new ConnectionPoolConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1.Instance.IConnectionPoolConfig);
+
+                        /** ConnectionPoolConfig enabled. */
+                        public enabled: boolean;
+
+                        /** ConnectionPoolConfig flags. */
+                        public flags: { [k: string]: string };
+
+                        /** ConnectionPoolConfig poolerCount. */
+                        public poolerCount: number;
+
+                        /**
+                         * Creates a new ConnectionPoolConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionPoolConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1.Instance.IConnectionPoolConfig): google.cloud.alloydb.v1.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message. Does not implicitly {@link google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Verifies a ConnectionPoolConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionPoolConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionPoolConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Creates a plain object from a ConnectionPoolConfig message. Also converts values to other types if specified.
+                         * @param message ConnectionPoolConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1.Instance.ConnectionPoolConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionPoolConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionPoolConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -4439,6 +4752,13 @@ export namespace google {
                         AVAILABILITY_TYPE_UNSPECIFIED = 0,
                         ZONAL = 1,
                         REGIONAL = 2
+                    }
+
+                    /** ActivationPolicy enum. */
+                    enum ActivationPolicy {
+                        ACTIVATION_POLICY_UNSPECIFIED = 0,
+                        ALWAYS = 1,
+                        NEVER = 2
                     }
                 }
 
@@ -4578,6 +4898,9 @@ export namespace google {
                     /** Backup deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Backup createCompletionTime */
+                    createCompletionTime?: (google.protobuf.ITimestamp|null);
+
                     /** Backup labels */
                     labels?: ({ [k: string]: string }|null);
 
@@ -4656,6 +4979,9 @@ export namespace google {
 
                     /** Backup deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup createCompletionTime. */
+                    public createCompletionTime?: (google.protobuf.ITimestamp|null);
 
                     /** Backup labels. */
                     public labels: { [k: string]: string };
@@ -5433,6 +5759,15 @@ export namespace google {
 
                     /** Database collation */
                     collation?: (string|null);
+
+                    /** Database characterType */
+                    characterType?: (string|null);
+
+                    /** Database databaseTemplate */
+                    databaseTemplate?: (string|null);
+
+                    /** Database isTemplateDatabase */
+                    isTemplateDatabase?: (boolean|null);
                 }
 
                 /** Represents a Database. */
@@ -5452,6 +5787,15 @@ export namespace google {
 
                     /** Database collation. */
                     public collation: string;
+
+                    /** Database characterType. */
+                    public characterType: string;
+
+                    /** Database databaseTemplate. */
+                    public databaseTemplate: string;
+
+                    /** Database isTemplateDatabase. */
+                    public isTemplateDatabase?: (boolean|null);
 
                     /**
                      * Creates a new Database instance using the specified properties.
@@ -7405,15 +7749,6 @@ export namespace google {
 
                         /** SqlExportOptions ifExistTargetObjects. */
                         public ifExistTargetObjects?: (boolean|null);
-
-                        /** SqlExportOptions _schemaOnly. */
-                        public _schemaOnly?: "schemaOnly";
-
-                        /** SqlExportOptions _cleanTargetObjects. */
-                        public _cleanTargetObjects?: "cleanTargetObjects";
-
-                        /** SqlExportOptions _ifExistTargetObjects. */
-                        public _ifExistTargetObjects?: "ifExistTargetObjects";
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -10830,6 +11165,9 @@ export namespace google {
 
                     /** ExecuteSqlRequest sqlStatement */
                     sqlStatement?: (string|null);
+
+                    /** ExecuteSqlRequest validateOnly */
+                    validateOnly?: (boolean|null);
                 }
 
                 /** Represents an ExecuteSqlRequest. */
@@ -10855,6 +11193,9 @@ export namespace google {
 
                     /** ExecuteSqlRequest sqlStatement. */
                     public sqlStatement: string;
+
+                    /** ExecuteSqlRequest validateOnly. */
+                    public validateOnly: boolean;
 
                     /** ExecuteSqlRequest userCredential. */
                     public userCredential?: "password";
@@ -12677,6 +13018,9 @@ export namespace google {
 
                         /** StageStatus state */
                         state?: (google.cloud.alloydb.v1.UpgradeClusterResponse.Status|keyof typeof google.cloud.alloydb.v1.UpgradeClusterResponse.Status|null);
+
+                        /** StageStatus schedule */
+                        schedule?: (google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule|null);
                     }
 
                     /** Represents a StageStatus. */
@@ -12696,6 +13040,9 @@ export namespace google {
 
                         /** StageStatus state. */
                         public state: (google.cloud.alloydb.v1.UpgradeClusterResponse.Status|keyof typeof google.cloud.alloydb.v1.UpgradeClusterResponse.Status);
+
+                        /** StageStatus schedule. */
+                        public schedule?: (google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule|null);
 
                         /** StageStatus stageSpecificStatus. */
                         public stageSpecificStatus?: "readPoolInstancesUpgrade";
@@ -12776,6 +13123,124 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StageStatus {
+
+                        /** Properties of a StageSchedule. */
+                        interface IStageSchedule {
+
+                            /** StageSchedule estimatedStartTime */
+                            estimatedStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualStartTime */
+                            actualStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule estimatedEndTime */
+                            estimatedEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualEndTime */
+                            actualEndTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a StageSchedule. */
+                        class StageSchedule implements IStageSchedule {
+
+                            /**
+                             * Constructs a new StageSchedule.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule);
+
+                            /** StageSchedule estimatedStartTime. */
+                            public estimatedStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualStartTime. */
+                            public actualStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule estimatedEndTime. */
+                            public estimatedEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualEndTime. */
+                            public actualEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new StageSchedule instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StageSchedule instance
+                             */
+                            public static create(properties?: google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule): google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Encodes the specified StageSchedule message. Does not implicitly {@link google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                             * @param message StageSchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StageSchedule message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                             * @param message StageSchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.IStageSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StageSchedule message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StageSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Decodes a StageSchedule message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StageSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Verifies a StageSchedule message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StageSchedule message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StageSchedule
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Creates a plain object from a StageSchedule message. Also converts values to other types if specified.
+                             * @param message StageSchedule
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StageSchedule to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StageSchedule
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a ReadPoolInstancesUpgradeStageStatus. */
@@ -14218,12 +14683,6 @@ export namespace google {
                     /** SqlResultValue nullValue. */
                     public nullValue?: (boolean|null);
 
-                    /** SqlResultValue _value. */
-                    public _value?: "value";
-
-                    /** SqlResultValue _nullValue. */
-                    public _nullValue?: "nullValue";
-
                     /**
                      * Creates a new SqlResultValue instance using the specified properties.
                      * @param [properties] Properties to set
@@ -14598,7 +15057,9 @@ export namespace google {
                     POSTGRES_13 = 1,
                     POSTGRES_14 = 2,
                     POSTGRES_15 = 3,
-                    POSTGRES_16 = 4
+                    POSTGRES_16 = 4,
+                    POSTGRES_17 = 5,
+                    POSTGRES_18 = 6
                 }
 
                 /** SubscriptionType enum. */
@@ -15228,9 +15689,6 @@ export namespace google {
                     /** AutomatedBackupPolicy retention. */
                     public retention?: ("timeBasedRetention"|"quantityBasedRetention");
 
-                    /** AutomatedBackupPolicy _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new AutomatedBackupPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -15640,9 +16098,6 @@ export namespace google {
                     /** ContinuousBackupConfig encryptionConfig. */
                     public encryptionConfig?: (google.cloud.alloydb.v1alpha.IEncryptionConfig|null);
 
-                    /** ContinuousBackupConfig _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new ContinuousBackupConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -16047,6 +16502,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows */
                     maintenanceWindows?: (google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IMaintenanceWindow[]|null);
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods */
+                    denyMaintenancePeriods?: (google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[]|null);
                 }
 
                 /** Represents a MaintenanceUpdatePolicy. */
@@ -16060,6 +16518,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows. */
                     public maintenanceWindows: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IMaintenanceWindow[];
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods. */
+                    public denyMaintenancePeriods: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[];
 
                     /**
                      * Creates a new MaintenanceUpdatePolicy instance using the specified properties.
@@ -16238,6 +16699,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for MaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DenyMaintenancePeriod. */
+                    interface IDenyMaintenancePeriod {
+
+                        /** DenyMaintenancePeriod startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate */
+                        endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time */
+                        time?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a DenyMaintenancePeriod. */
+                    class DenyMaintenancePeriod implements IDenyMaintenancePeriod {
+
+                        /**
+                         * Constructs a new DenyMaintenancePeriod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod);
+
+                        /** DenyMaintenancePeriod startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time. */
+                        public time?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new DenyMaintenancePeriod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DenyMaintenancePeriod instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message. Does not implicitly {@link google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Verifies a DenyMaintenancePeriod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DenyMaintenancePeriod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DenyMaintenancePeriod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Creates a plain object from a DenyMaintenancePeriod message. Also converts values to other types if specified.
+                         * @param message DenyMaintenancePeriod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.MaintenanceUpdatePolicy.DenyMaintenancePeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DenyMaintenancePeriod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DenyMaintenancePeriod
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -16452,6 +17022,12 @@ export namespace google {
 
                     /** Cluster tags */
                     tags?: ({ [k: string]: string }|null);
+
+                    /** Cluster serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** Cluster dataplexConfig */
+                    dataplexConfig?: (google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig|null);
                 }
 
                 /** Represents a Cluster. */
@@ -16570,6 +17146,12 @@ export namespace google {
 
                     /** Cluster tags. */
                     public tags: { [k: string]: string };
+
+                    /** Cluster serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** Cluster dataplexConfig. */
+                    public dataplexConfig?: (google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig|null);
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource"|"cloudsqlBackupRunSource");
@@ -17169,6 +17751,103 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a DataplexConfig. */
+                    interface IDataplexConfig {
+
+                        /** DataplexConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a DataplexConfig. */
+                    class DataplexConfig implements IDataplexConfig {
+
+                        /**
+                         * Constructs a new DataplexConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig);
+
+                        /** DataplexConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new DataplexConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataplexConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Verifies a DataplexConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataplexConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Cluster.DataplexConfig;
+
+                        /**
+                         * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                         * @param message DataplexConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Cluster.DataplexConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataplexConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataplexConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -17287,6 +17966,12 @@ export namespace google {
                     /** Instance outboundPublicIpAddresses */
                     outboundPublicIpAddresses?: (string[]|null);
 
+                    /** Instance activationPolicy */
+                    activationPolicy?: (google.cloud.alloydb.v1alpha.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1alpha.Instance.ActivationPolicy|null);
+
+                    /** Instance connectionPoolConfig */
+                    connectionPoolConfig?: (google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig|null);
+
                     /** Instance gcaConfig */
                     gcaConfig?: (google.cloud.alloydb.v1alpha.IGCAInstanceConfig|null);
                 }
@@ -17392,6 +18077,12 @@ export namespace google {
 
                     /** Instance outboundPublicIpAddresses. */
                     public outboundPublicIpAddresses: string[];
+
+                    /** Instance activationPolicy. */
+                    public activationPolicy: (google.cloud.alloydb.v1alpha.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1alpha.Instance.ActivationPolicy);
+
+                    /** Instance connectionPoolConfig. */
+                    public connectionPoolConfig?: (google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig|null);
 
                     /** Instance gcaConfig. */
                     public gcaConfig?: (google.cloud.alloydb.v1alpha.IGCAInstanceConfig|null);
@@ -17731,15 +18422,6 @@ export namespace google {
                         /** QueryInsightsInstanceConfig queryPlansPerMinute. */
                         public queryPlansPerMinute?: (number|null);
 
-                        /** QueryInsightsInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** QueryInsightsInstanceConfig _recordClientAddress. */
-                        public _recordClientAddress?: "recordClientAddress";
-
-                        /** QueryInsightsInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
                         /**
                          * Creates a new QueryInsightsInstanceConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -17847,6 +18529,9 @@ export namespace google {
 
                         /** ObservabilityInstanceConfig trackClientAddress */
                         trackClientAddress?: (boolean|null);
+
+                        /** ObservabilityInstanceConfig assistiveExperiencesEnabled */
+                        assistiveExperiencesEnabled?: (boolean|null);
                     }
 
                     /** Represents an ObservabilityInstanceConfig. */
@@ -17885,32 +18570,8 @@ export namespace google {
                         /** ObservabilityInstanceConfig trackClientAddress. */
                         public trackClientAddress?: (boolean|null);
 
-                        /** ObservabilityInstanceConfig _enabled. */
-                        public _enabled?: "enabled";
-
-                        /** ObservabilityInstanceConfig _preserveComments. */
-                        public _preserveComments?: "preserveComments";
-
-                        /** ObservabilityInstanceConfig _trackWaitEvents. */
-                        public _trackWaitEvents?: "trackWaitEvents";
-
-                        /** ObservabilityInstanceConfig _trackWaitEventTypes. */
-                        public _trackWaitEventTypes?: "trackWaitEventTypes";
-
-                        /** ObservabilityInstanceConfig _maxQueryStringLength. */
-                        public _maxQueryStringLength?: "maxQueryStringLength";
-
-                        /** ObservabilityInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** ObservabilityInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
-                        /** ObservabilityInstanceConfig _trackActiveQueries. */
-                        public _trackActiveQueries?: "trackActiveQueries";
-
-                        /** ObservabilityInstanceConfig _trackClientAddress. */
-                        public _trackClientAddress?: "trackClientAddress";
+                        /** ObservabilityInstanceConfig assistiveExperiencesEnabled. */
+                        public assistiveExperiencesEnabled?: (boolean|null);
 
                         /**
                          * Creates a new ObservabilityInstanceConfig instance using the specified properties.
@@ -18647,6 +19308,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp */
                         enableOutboundPublicIp?: (boolean|null);
+
+                        /** InstanceNetworkConfig network */
+                        network?: (string|null);
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride */
+                        allocatedIpRangeOverride?: (string|null);
                     }
 
                     /** Represents an InstanceNetworkConfig. */
@@ -18666,6 +19333,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp. */
                         public enableOutboundPublicIp: boolean;
+
+                        /** InstanceNetworkConfig network. */
+                        public network: string;
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride. */
+                        public allocatedIpRangeOverride: string;
 
                         /**
                          * Creates a new InstanceNetworkConfig instance using the specified properties.
@@ -18845,6 +19518,115 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ConnectionPoolConfig. */
+                    interface IConnectionPoolConfig {
+
+                        /** ConnectionPoolConfig enabled */
+                        enabled?: (boolean|null);
+
+                        /** ConnectionPoolConfig flags */
+                        flags?: ({ [k: string]: string }|null);
+
+                        /** ConnectionPoolConfig poolerCount */
+                        poolerCount?: (number|null);
+                    }
+
+                    /** Represents a ConnectionPoolConfig. */
+                    class ConnectionPoolConfig implements IConnectionPoolConfig {
+
+                        /**
+                         * Constructs a new ConnectionPoolConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig);
+
+                        /** ConnectionPoolConfig enabled. */
+                        public enabled: boolean;
+
+                        /** ConnectionPoolConfig flags. */
+                        public flags: { [k: string]: string };
+
+                        /** ConnectionPoolConfig poolerCount. */
+                        public poolerCount: number;
+
+                        /**
+                         * Creates a new ConnectionPoolConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionPoolConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Verifies a ConnectionPoolConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionPoolConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionPoolConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Creates a plain object from a ConnectionPoolConfig message. Also converts values to other types if specified.
+                         * @param message ConnectionPoolConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Instance.ConnectionPoolConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionPoolConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionPoolConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -18871,6 +19653,13 @@ export namespace google {
                         AVAILABILITY_TYPE_UNSPECIFIED = 0,
                         ZONAL = 1,
                         REGIONAL = 2
+                    }
+
+                    /** ActivationPolicy enum. */
+                    enum ActivationPolicy {
+                        ACTIVATION_POLICY_UNSPECIFIED = 0,
+                        ALWAYS = 1,
+                        NEVER = 2
                     }
                 }
 
@@ -19022,6 +19811,9 @@ export namespace google {
                     /** Backup deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Backup createCompletionTime */
+                    createCompletionTime?: (google.protobuf.ITimestamp|null);
+
                     /** Backup labels */
                     labels?: ({ [k: string]: string }|null);
 
@@ -19103,6 +19895,9 @@ export namespace google {
 
                     /** Backup deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup createCompletionTime. */
+                    public createCompletionTime?: (google.protobuf.ITimestamp|null);
 
                     /** Backup labels. */
                     public labels: { [k: string]: string };
@@ -19883,6 +20678,18 @@ export namespace google {
 
                     /** Database collation */
                     collation?: (string|null);
+
+                    /** Database characterType */
+                    characterType?: (string|null);
+
+                    /** Database isTemplate */
+                    isTemplate?: (boolean|null);
+
+                    /** Database databaseTemplate */
+                    databaseTemplate?: (string|null);
+
+                    /** Database isTemplateDatabase */
+                    isTemplateDatabase?: (boolean|null);
                 }
 
                 /** Represents a Database. */
@@ -19902,6 +20709,18 @@ export namespace google {
 
                     /** Database collation. */
                     public collation: string;
+
+                    /** Database characterType. */
+                    public characterType: string;
+
+                    /** Database isTemplate. */
+                    public isTemplate: boolean;
+
+                    /** Database databaseTemplate. */
+                    public databaseTemplate: string;
+
+                    /** Database isTemplateDatabase. */
+                    public isTemplateDatabase?: (boolean|null);
 
                     /**
                      * Creates a new Database instance using the specified properties.
@@ -20815,6 +21634,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listDatabases(request: google.cloud.alloydb.v1alpha.IListDatabasesRequest): Promise<google.cloud.alloydb.v1alpha.ListDatabasesResponse>;
+
+                    /**
+                     * Calls CreateDatabase.
+                     * @param request CreateDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Database
+                     */
+                    public createDatabase(request: google.cloud.alloydb.v1alpha.ICreateDatabaseRequest, callback: google.cloud.alloydb.v1alpha.AlloyDBAdmin.CreateDatabaseCallback): void;
+
+                    /**
+                     * Calls CreateDatabase.
+                     * @param request CreateDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDatabase(request: google.cloud.alloydb.v1alpha.ICreateDatabaseRequest): Promise<google.cloud.alloydb.v1alpha.Database>;
                 }
 
                 namespace AlloyDBAdmin {
@@ -21077,6 +21910,13 @@ export namespace google {
                      * @param [response] ListDatabasesResponse
                      */
                     type ListDatabasesCallback = (error: (Error|null), response?: google.cloud.alloydb.v1alpha.ListDatabasesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1alpha.AlloyDBAdmin|createDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Database
+                     */
+                    type CreateDatabaseCallback = (error: (Error|null), response?: google.cloud.alloydb.v1alpha.Database) => void;
                 }
 
                 /** Properties of a ListClustersRequest. */
@@ -22152,15 +22992,6 @@ export namespace google {
 
                         /** SqlExportOptions ifExistTargetObjects. */
                         public ifExistTargetObjects?: (boolean|null);
-
-                        /** SqlExportOptions _schemaOnly. */
-                        public _schemaOnly?: "schemaOnly";
-
-                        /** SqlExportOptions _cleanTargetObjects. */
-                        public _cleanTargetObjects?: "cleanTargetObjects";
-
-                        /** SqlExportOptions _ifExistTargetObjects. */
-                        public _ifExistTargetObjects?: "ifExistTargetObjects";
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -25577,6 +26408,9 @@ export namespace google {
 
                     /** ExecuteSqlRequest sqlStatement */
                     sqlStatement?: (string|null);
+
+                    /** ExecuteSqlRequest validateOnly */
+                    validateOnly?: (boolean|null);
                 }
 
                 /** Represents an ExecuteSqlRequest. */
@@ -25602,6 +26436,9 @@ export namespace google {
 
                     /** ExecuteSqlRequest sqlStatement. */
                     public sqlStatement: string;
+
+                    /** ExecuteSqlRequest validateOnly. */
+                    public validateOnly: boolean;
 
                     /** ExecuteSqlRequest userCredential. */
                     public userCredential?: "password";
@@ -27550,6 +28387,9 @@ export namespace google {
 
                         /** StageStatus state */
                         state?: (google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Status|keyof typeof google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Status|null);
+
+                        /** StageStatus schedule */
+                        schedule?: (google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule|null);
                     }
 
                     /** Represents a StageStatus. */
@@ -27569,6 +28409,9 @@ export namespace google {
 
                         /** StageStatus state. */
                         public state: (google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Status|keyof typeof google.cloud.alloydb.v1alpha.UpgradeClusterResponse.Status);
+
+                        /** StageStatus schedule. */
+                        public schedule?: (google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule|null);
 
                         /** StageStatus stageSpecificStatus. */
                         public stageSpecificStatus?: "readPoolInstancesUpgrade";
@@ -27649,6 +28492,124 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StageStatus {
+
+                        /** Properties of a StageSchedule. */
+                        interface IStageSchedule {
+
+                            /** StageSchedule estimatedStartTime */
+                            estimatedStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualStartTime */
+                            actualStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule estimatedEndTime */
+                            estimatedEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualEndTime */
+                            actualEndTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a StageSchedule. */
+                        class StageSchedule implements IStageSchedule {
+
+                            /**
+                             * Constructs a new StageSchedule.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule);
+
+                            /** StageSchedule estimatedStartTime. */
+                            public estimatedStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualStartTime. */
+                            public actualStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule estimatedEndTime. */
+                            public estimatedEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualEndTime. */
+                            public actualEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new StageSchedule instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StageSchedule instance
+                             */
+                            public static create(properties?: google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule): google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Encodes the specified StageSchedule message. Does not implicitly {@link google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                             * @param message StageSchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StageSchedule message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                             * @param message StageSchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.IStageSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StageSchedule message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StageSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Decodes a StageSchedule message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StageSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Verifies a StageSchedule message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StageSchedule message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StageSchedule
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Creates a plain object from a StageSchedule message. Also converts values to other types if specified.
+                             * @param message StageSchedule
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.alloydb.v1alpha.UpgradeClusterStatus.StageStatus.StageSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StageSchedule to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StageSchedule
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a ReadPoolInstancesUpgradeStageStatus. */
@@ -28763,6 +29724,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateDatabaseRequest. */
+                interface ICreateDatabaseRequest {
+
+                    /** CreateDatabaseRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDatabaseRequest databaseId */
+                    databaseId?: (string|null);
+
+                    /** CreateDatabaseRequest database */
+                    database?: (google.cloud.alloydb.v1alpha.IDatabase|null);
+                }
+
+                /** Represents a CreateDatabaseRequest. */
+                class CreateDatabaseRequest implements ICreateDatabaseRequest {
+
+                    /**
+                     * Constructs a new CreateDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1alpha.ICreateDatabaseRequest);
+
+                    /** CreateDatabaseRequest parent. */
+                    public parent: string;
+
+                    /** CreateDatabaseRequest databaseId. */
+                    public databaseId: string;
+
+                    /** CreateDatabaseRequest database. */
+                    public database?: (google.cloud.alloydb.v1alpha.IDatabase|null);
+
+                    /**
+                     * Creates a new CreateDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1alpha.ICreateDatabaseRequest): google.cloud.alloydb.v1alpha.CreateDatabaseRequest;
+
+                    /**
+                     * Encodes the specified CreateDatabaseRequest message. Does not implicitly {@link google.cloud.alloydb.v1alpha.CreateDatabaseRequest.verify|verify} messages.
+                     * @param message CreateDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1alpha.ICreateDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.CreateDatabaseRequest.verify|verify} messages.
+                     * @param message CreateDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1alpha.ICreateDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.CreateDatabaseRequest;
+
+                    /**
+                     * Decodes a CreateDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.CreateDatabaseRequest;
+
+                    /**
+                     * Verifies a CreateDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.CreateDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message CreateDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1alpha.CreateDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SqlResult. */
                 interface ISqlResult {
 
@@ -29090,12 +30160,6 @@ export namespace google {
 
                     /** SqlResultValue nullValue. */
                     public nullValue?: (boolean|null);
-
-                    /** SqlResultValue _value. */
-                    public _value?: "value";
-
-                    /** SqlResultValue _nullValue. */
-                    public _nullValue?: "nullValue";
 
                     /**
                      * Creates a new SqlResultValue instance using the specified properties.
@@ -29471,7 +30535,9 @@ export namespace google {
                     POSTGRES_13 = 1,
                     POSTGRES_14 = 2,
                     POSTGRES_15 = 3,
-                    POSTGRES_16 = 4
+                    POSTGRES_16 = 4,
+                    POSTGRES_17 = 5,
+                    POSTGRES_18 = 6
                 }
 
                 /** SubscriptionType enum. */
@@ -30101,9 +31167,6 @@ export namespace google {
                     /** AutomatedBackupPolicy retention. */
                     public retention?: ("timeBasedRetention"|"quantityBasedRetention");
 
-                    /** AutomatedBackupPolicy _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new AutomatedBackupPolicy instance using the specified properties.
                      * @param [properties] Properties to set
@@ -30513,9 +31576,6 @@ export namespace google {
                     /** ContinuousBackupConfig encryptionConfig. */
                     public encryptionConfig?: (google.cloud.alloydb.v1beta.IEncryptionConfig|null);
 
-                    /** ContinuousBackupConfig _enabled. */
-                    public _enabled?: "enabled";
-
                     /**
                      * Creates a new ContinuousBackupConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -30920,6 +31980,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows */
                     maintenanceWindows?: (google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow[]|null);
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods */
+                    denyMaintenancePeriods?: (google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[]|null);
                 }
 
                 /** Represents a MaintenanceUpdatePolicy. */
@@ -30933,6 +31996,9 @@ export namespace google {
 
                     /** MaintenanceUpdatePolicy maintenanceWindows. */
                     public maintenanceWindows: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow[];
+
+                    /** MaintenanceUpdatePolicy denyMaintenancePeriods. */
+                    public denyMaintenancePeriods: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod[];
 
                     /**
                      * Creates a new MaintenanceUpdatePolicy instance using the specified properties.
@@ -31111,6 +32177,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for MaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DenyMaintenancePeriod. */
+                    interface IDenyMaintenancePeriod {
+
+                        /** DenyMaintenancePeriod startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate */
+                        endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time */
+                        time?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a DenyMaintenancePeriod. */
+                    class DenyMaintenancePeriod implements IDenyMaintenancePeriod {
+
+                        /**
+                         * Constructs a new DenyMaintenancePeriod.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod);
+
+                        /** DenyMaintenancePeriod startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /** DenyMaintenancePeriod time. */
+                        public time?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new DenyMaintenancePeriod instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DenyMaintenancePeriod instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DenyMaintenancePeriod message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod.verify|verify} messages.
+                         * @param message DenyMaintenancePeriod message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IDenyMaintenancePeriod, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Decodes a DenyMaintenancePeriod message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DenyMaintenancePeriod
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Verifies a DenyMaintenancePeriod message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DenyMaintenancePeriod message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DenyMaintenancePeriod
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod;
+
+                        /**
+                         * Creates a plain object from a DenyMaintenancePeriod message. Also converts values to other types if specified.
+                         * @param message DenyMaintenancePeriod
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.DenyMaintenancePeriod, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DenyMaintenancePeriod to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DenyMaintenancePeriod
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -31322,6 +32497,12 @@ export namespace google {
 
                     /** Cluster tags */
                     tags?: ({ [k: string]: string }|null);
+
+                    /** Cluster serviceAccountEmail */
+                    serviceAccountEmail?: (string|null);
+
+                    /** Cluster dataplexConfig */
+                    dataplexConfig?: (google.cloud.alloydb.v1beta.Cluster.IDataplexConfig|null);
                 }
 
                 /** Represents a Cluster. */
@@ -31437,6 +32618,12 @@ export namespace google {
 
                     /** Cluster tags. */
                     public tags: { [k: string]: string };
+
+                    /** Cluster serviceAccountEmail. */
+                    public serviceAccountEmail: string;
+
+                    /** Cluster dataplexConfig. */
+                    public dataplexConfig?: (google.cloud.alloydb.v1beta.Cluster.IDataplexConfig|null);
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource"|"cloudsqlBackupRunSource");
@@ -32036,6 +33223,103 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a DataplexConfig. */
+                    interface IDataplexConfig {
+
+                        /** DataplexConfig enabled */
+                        enabled?: (boolean|null);
+                    }
+
+                    /** Represents a DataplexConfig. */
+                    class DataplexConfig implements IDataplexConfig {
+
+                        /**
+                         * Constructs a new DataplexConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig);
+
+                        /** DataplexConfig enabled. */
+                        public enabled: boolean;
+
+                        /**
+                         * Creates a new DataplexConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataplexConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Encodes the specified DataplexConfig message. Does not implicitly {@link google.cloud.alloydb.v1beta.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataplexConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Cluster.DataplexConfig.verify|verify} messages.
+                         * @param message DataplexConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Cluster.IDataplexConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Decodes a DataplexConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataplexConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Verifies a DataplexConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataplexConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataplexConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Cluster.DataplexConfig;
+
+                        /**
+                         * Creates a plain object from a DataplexConfig message. Also converts values to other types if specified.
+                         * @param message DataplexConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Cluster.DataplexConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataplexConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataplexConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -32151,6 +33435,12 @@ export namespace google {
                     /** Instance outboundPublicIpAddresses */
                     outboundPublicIpAddresses?: (string[]|null);
 
+                    /** Instance activationPolicy */
+                    activationPolicy?: (google.cloud.alloydb.v1beta.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1beta.Instance.ActivationPolicy|null);
+
+                    /** Instance connectionPoolConfig */
+                    connectionPoolConfig?: (google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig|null);
+
                     /** Instance gcaConfig */
                     gcaConfig?: (google.cloud.alloydb.v1beta.IGCAInstanceConfig|null);
                 }
@@ -32253,6 +33543,12 @@ export namespace google {
 
                     /** Instance outboundPublicIpAddresses. */
                     public outboundPublicIpAddresses: string[];
+
+                    /** Instance activationPolicy. */
+                    public activationPolicy: (google.cloud.alloydb.v1beta.Instance.ActivationPolicy|keyof typeof google.cloud.alloydb.v1beta.Instance.ActivationPolicy);
+
+                    /** Instance connectionPoolConfig. */
+                    public connectionPoolConfig?: (google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig|null);
 
                     /** Instance gcaConfig. */
                     public gcaConfig?: (google.cloud.alloydb.v1beta.IGCAInstanceConfig|null);
@@ -32592,15 +33888,6 @@ export namespace google {
                         /** QueryInsightsInstanceConfig queryPlansPerMinute. */
                         public queryPlansPerMinute?: (number|null);
 
-                        /** QueryInsightsInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** QueryInsightsInstanceConfig _recordClientAddress. */
-                        public _recordClientAddress?: "recordClientAddress";
-
-                        /** QueryInsightsInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
                         /**
                          * Creates a new QueryInsightsInstanceConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -32708,6 +33995,9 @@ export namespace google {
 
                         /** ObservabilityInstanceConfig trackClientAddress */
                         trackClientAddress?: (boolean|null);
+
+                        /** ObservabilityInstanceConfig assistiveExperiencesEnabled */
+                        assistiveExperiencesEnabled?: (boolean|null);
                     }
 
                     /** Represents an ObservabilityInstanceConfig. */
@@ -32746,32 +34036,8 @@ export namespace google {
                         /** ObservabilityInstanceConfig trackClientAddress. */
                         public trackClientAddress?: (boolean|null);
 
-                        /** ObservabilityInstanceConfig _enabled. */
-                        public _enabled?: "enabled";
-
-                        /** ObservabilityInstanceConfig _preserveComments. */
-                        public _preserveComments?: "preserveComments";
-
-                        /** ObservabilityInstanceConfig _trackWaitEvents. */
-                        public _trackWaitEvents?: "trackWaitEvents";
-
-                        /** ObservabilityInstanceConfig _trackWaitEventTypes. */
-                        public _trackWaitEventTypes?: "trackWaitEventTypes";
-
-                        /** ObservabilityInstanceConfig _maxQueryStringLength. */
-                        public _maxQueryStringLength?: "maxQueryStringLength";
-
-                        /** ObservabilityInstanceConfig _recordApplicationTags. */
-                        public _recordApplicationTags?: "recordApplicationTags";
-
-                        /** ObservabilityInstanceConfig _queryPlansPerMinute. */
-                        public _queryPlansPerMinute?: "queryPlansPerMinute";
-
-                        /** ObservabilityInstanceConfig _trackActiveQueries. */
-                        public _trackActiveQueries?: "trackActiveQueries";
-
-                        /** ObservabilityInstanceConfig _trackClientAddress. */
-                        public _trackClientAddress?: "trackClientAddress";
+                        /** ObservabilityInstanceConfig assistiveExperiencesEnabled. */
+                        public assistiveExperiencesEnabled?: (boolean|null);
 
                         /**
                          * Creates a new ObservabilityInstanceConfig instance using the specified properties.
@@ -33508,6 +34774,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp */
                         enableOutboundPublicIp?: (boolean|null);
+
+                        /** InstanceNetworkConfig network */
+                        network?: (string|null);
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride */
+                        allocatedIpRangeOverride?: (string|null);
                     }
 
                     /** Represents an InstanceNetworkConfig. */
@@ -33527,6 +34799,12 @@ export namespace google {
 
                         /** InstanceNetworkConfig enableOutboundPublicIp. */
                         public enableOutboundPublicIp: boolean;
+
+                        /** InstanceNetworkConfig network. */
+                        public network: string;
+
+                        /** InstanceNetworkConfig allocatedIpRangeOverride. */
+                        public allocatedIpRangeOverride: string;
 
                         /**
                          * Creates a new InstanceNetworkConfig instance using the specified properties.
@@ -33706,6 +34984,115 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ConnectionPoolConfig. */
+                    interface IConnectionPoolConfig {
+
+                        /** ConnectionPoolConfig enabled */
+                        enabled?: (boolean|null);
+
+                        /** ConnectionPoolConfig flags */
+                        flags?: ({ [k: string]: string }|null);
+
+                        /** ConnectionPoolConfig poolerCount */
+                        poolerCount?: (number|null);
+                    }
+
+                    /** Represents a ConnectionPoolConfig. */
+                    class ConnectionPoolConfig implements IConnectionPoolConfig {
+
+                        /**
+                         * Constructs a new ConnectionPoolConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig);
+
+                        /** ConnectionPoolConfig enabled. */
+                        public enabled: boolean;
+
+                        /** ConnectionPoolConfig flags. */
+                        public flags: { [k: string]: string };
+
+                        /** ConnectionPoolConfig poolerCount. */
+                        public poolerCount: number;
+
+                        /**
+                         * Creates a new ConnectionPoolConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionPoolConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig): google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionPoolConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig.verify|verify} messages.
+                         * @param message ConnectionPoolConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Instance.IConnectionPoolConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Decodes a ConnectionPoolConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionPoolConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Verifies a ConnectionPoolConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionPoolConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionPoolConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig;
+
+                        /**
+                         * Creates a plain object from a ConnectionPoolConfig message. Also converts values to other types if specified.
+                         * @param message ConnectionPoolConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Instance.ConnectionPoolConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionPoolConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionPoolConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -33732,6 +35119,13 @@ export namespace google {
                         AVAILABILITY_TYPE_UNSPECIFIED = 0,
                         ZONAL = 1,
                         REGIONAL = 2
+                    }
+
+                    /** ActivationPolicy enum. */
+                    enum ActivationPolicy {
+                        ACTIVATION_POLICY_UNSPECIFIED = 0,
+                        ALWAYS = 1,
+                        NEVER = 2
                     }
                 }
 
@@ -33883,6 +35277,9 @@ export namespace google {
                     /** Backup deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Backup createCompletionTime */
+                    createCompletionTime?: (google.protobuf.ITimestamp|null);
+
                     /** Backup labels */
                     labels?: ({ [k: string]: string }|null);
 
@@ -33961,6 +35358,9 @@ export namespace google {
 
                     /** Backup deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup createCompletionTime. */
+                    public createCompletionTime?: (google.protobuf.ITimestamp|null);
 
                     /** Backup labels. */
                     public labels: { [k: string]: string };
@@ -34738,6 +36138,18 @@ export namespace google {
 
                     /** Database collation */
                     collation?: (string|null);
+
+                    /** Database characterType */
+                    characterType?: (string|null);
+
+                    /** Database isTemplate */
+                    isTemplate?: (boolean|null);
+
+                    /** Database databaseTemplate */
+                    databaseTemplate?: (string|null);
+
+                    /** Database isTemplateDatabase */
+                    isTemplateDatabase?: (boolean|null);
                 }
 
                 /** Represents a Database. */
@@ -34757,6 +36169,18 @@ export namespace google {
 
                     /** Database collation. */
                     public collation: string;
+
+                    /** Database characterType. */
+                    public characterType: string;
+
+                    /** Database isTemplate. */
+                    public isTemplate: boolean;
+
+                    /** Database databaseTemplate. */
+                    public databaseTemplate: string;
+
+                    /** Database isTemplateDatabase. */
+                    public isTemplateDatabase?: (boolean|null);
 
                     /**
                      * Creates a new Database instance using the specified properties.
@@ -35670,6 +37094,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listDatabases(request: google.cloud.alloydb.v1beta.IListDatabasesRequest): Promise<google.cloud.alloydb.v1beta.ListDatabasesResponse>;
+
+                    /**
+                     * Calls CreateDatabase.
+                     * @param request CreateDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Database
+                     */
+                    public createDatabase(request: google.cloud.alloydb.v1beta.ICreateDatabaseRequest, callback: google.cloud.alloydb.v1beta.AlloyDBAdmin.CreateDatabaseCallback): void;
+
+                    /**
+                     * Calls CreateDatabase.
+                     * @param request CreateDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDatabase(request: google.cloud.alloydb.v1beta.ICreateDatabaseRequest): Promise<google.cloud.alloydb.v1beta.Database>;
                 }
 
                 namespace AlloyDBAdmin {
@@ -35932,6 +37370,13 @@ export namespace google {
                      * @param [response] ListDatabasesResponse
                      */
                     type ListDatabasesCallback = (error: (Error|null), response?: google.cloud.alloydb.v1beta.ListDatabasesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1beta.AlloyDBAdmin|createDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Database
+                     */
+                    type CreateDatabaseCallback = (error: (Error|null), response?: google.cloud.alloydb.v1beta.Database) => void;
                 }
 
                 /** Properties of a ListClustersRequest. */
@@ -37007,15 +38452,6 @@ export namespace google {
 
                         /** SqlExportOptions ifExistTargetObjects. */
                         public ifExistTargetObjects?: (boolean|null);
-
-                        /** SqlExportOptions _schemaOnly. */
-                        public _schemaOnly?: "schemaOnly";
-
-                        /** SqlExportOptions _cleanTargetObjects. */
-                        public _cleanTargetObjects?: "cleanTargetObjects";
-
-                        /** SqlExportOptions _ifExistTargetObjects. */
-                        public _ifExistTargetObjects?: "ifExistTargetObjects";
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -40432,6 +41868,9 @@ export namespace google {
 
                     /** ExecuteSqlRequest sqlStatement */
                     sqlStatement?: (string|null);
+
+                    /** ExecuteSqlRequest validateOnly */
+                    validateOnly?: (boolean|null);
                 }
 
                 /** Represents an ExecuteSqlRequest. */
@@ -40457,6 +41896,9 @@ export namespace google {
 
                     /** ExecuteSqlRequest sqlStatement. */
                     public sqlStatement: string;
+
+                    /** ExecuteSqlRequest validateOnly. */
+                    public validateOnly: boolean;
 
                     /** ExecuteSqlRequest userCredential. */
                     public userCredential?: "password";
@@ -42405,6 +43847,9 @@ export namespace google {
 
                         /** StageStatus state */
                         state?: (google.cloud.alloydb.v1beta.UpgradeClusterResponse.Status|keyof typeof google.cloud.alloydb.v1beta.UpgradeClusterResponse.Status|null);
+
+                        /** StageStatus schedule */
+                        schedule?: (google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule|null);
                     }
 
                     /** Represents a StageStatus. */
@@ -42424,6 +43869,9 @@ export namespace google {
 
                         /** StageStatus state. */
                         public state: (google.cloud.alloydb.v1beta.UpgradeClusterResponse.Status|keyof typeof google.cloud.alloydb.v1beta.UpgradeClusterResponse.Status);
+
+                        /** StageStatus schedule. */
+                        public schedule?: (google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule|null);
 
                         /** StageStatus stageSpecificStatus. */
                         public stageSpecificStatus?: "readPoolInstancesUpgrade";
@@ -42504,6 +43952,124 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StageStatus {
+
+                        /** Properties of a StageSchedule. */
+                        interface IStageSchedule {
+
+                            /** StageSchedule estimatedStartTime */
+                            estimatedStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualStartTime */
+                            actualStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule estimatedEndTime */
+                            estimatedEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualEndTime */
+                            actualEndTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a StageSchedule. */
+                        class StageSchedule implements IStageSchedule {
+
+                            /**
+                             * Constructs a new StageSchedule.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule);
+
+                            /** StageSchedule estimatedStartTime. */
+                            public estimatedStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualStartTime. */
+                            public actualStartTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule estimatedEndTime. */
+                            public estimatedEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /** StageSchedule actualEndTime. */
+                            public actualEndTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new StageSchedule instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StageSchedule instance
+                             */
+                            public static create(properties?: google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule): google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Encodes the specified StageSchedule message. Does not implicitly {@link google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                             * @param message StageSchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StageSchedule message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule.verify|verify} messages.
+                             * @param message StageSchedule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.IStageSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StageSchedule message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StageSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Decodes a StageSchedule message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StageSchedule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Verifies a StageSchedule message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StageSchedule message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StageSchedule
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule;
+
+                            /**
+                             * Creates a plain object from a StageSchedule message. Also converts values to other types if specified.
+                             * @param message StageSchedule
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.alloydb.v1beta.UpgradeClusterStatus.StageStatus.StageSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StageSchedule to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StageSchedule
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a ReadPoolInstancesUpgradeStageStatus. */
@@ -43618,6 +45184,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateDatabaseRequest. */
+                interface ICreateDatabaseRequest {
+
+                    /** CreateDatabaseRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDatabaseRequest databaseId */
+                    databaseId?: (string|null);
+
+                    /** CreateDatabaseRequest database */
+                    database?: (google.cloud.alloydb.v1beta.IDatabase|null);
+                }
+
+                /** Represents a CreateDatabaseRequest. */
+                class CreateDatabaseRequest implements ICreateDatabaseRequest {
+
+                    /**
+                     * Constructs a new CreateDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1beta.ICreateDatabaseRequest);
+
+                    /** CreateDatabaseRequest parent. */
+                    public parent: string;
+
+                    /** CreateDatabaseRequest databaseId. */
+                    public databaseId: string;
+
+                    /** CreateDatabaseRequest database. */
+                    public database?: (google.cloud.alloydb.v1beta.IDatabase|null);
+
+                    /**
+                     * Creates a new CreateDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1beta.ICreateDatabaseRequest): google.cloud.alloydb.v1beta.CreateDatabaseRequest;
+
+                    /**
+                     * Encodes the specified CreateDatabaseRequest message. Does not implicitly {@link google.cloud.alloydb.v1beta.CreateDatabaseRequest.verify|verify} messages.
+                     * @param message CreateDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1beta.ICreateDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.CreateDatabaseRequest.verify|verify} messages.
+                     * @param message CreateDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1beta.ICreateDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.CreateDatabaseRequest;
+
+                    /**
+                     * Decodes a CreateDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.CreateDatabaseRequest;
+
+                    /**
+                     * Verifies a CreateDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.CreateDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message CreateDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1beta.CreateDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SqlResult. */
                 interface ISqlResult {
 
@@ -43945,12 +45620,6 @@ export namespace google {
 
                     /** SqlResultValue nullValue. */
                     public nullValue?: (boolean|null);
-
-                    /** SqlResultValue _value. */
-                    public _value?: "value";
-
-                    /** SqlResultValue _nullValue. */
-                    public _nullValue?: "nullValue";
 
                     /**
                      * Creates a new SqlResultValue instance using the specified properties.
@@ -44701,6 +46370,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -44741,6 +46413,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -49058,6 +50733,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -49309,7 +50987,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -49340,7 +51018,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -51355,7 +53033,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -51368,7 +53046,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
@@ -51455,7 +53133,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -51471,7 +53149,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -51742,6 +53420,115 @@ export namespace google {
 
     /** Namespace type. */
     namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
 
         /** DayOfWeek enum. */
         enum DayOfWeek {

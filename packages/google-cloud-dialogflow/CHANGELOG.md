@@ -4,6 +4,57 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.5.0...dialogflow-v7.6.0) (2026-04-08)
+
+
+### Features
+
+* [dialogflow] updated v2beta1 dialogflow client libraries ([#7853](https://github.com/googleapis/google-cloud-node/issues/7853)) ([75c76e1](https://github.com/googleapis/google-cloud-node/commit/75c76e1253982abc8e228c793dee684004e621f2))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.4.0...dialogflow-v7.5.0) (2026-01-31)
+
+
+### Features
+
+* [dialogflow] added a new field StreamingAnalyzeContentRequest.output_multiple_utterances ([#7065](https://github.com/googleapis/google-cloud-node/issues/7065)) ([6b96607](https://github.com/googleapis/google-cloud-node/commit/6b96607a9b998d4572c8671adcbec50994ffc52a))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.3.0...dialogflow-v7.4.0) (2025-11-11)
+
+
+### Features
+
+* [dialogflow] add agentDesktopSource field to the Participant object ([#6878](https://github.com/googleapis/google-cloud-node/issues/6878)) ([e6cfcde](https://github.com/googleapis/google-cloud-node/commit/e6cfcdea780819b0c84daf0325127be322803fac))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.2.1...dialogflow-v7.3.0) (2025-10-23)
+
+
+### Features
+
+* [dialogflow] Added support for Build Your Own Assist feature ([#6835](https://github.com/googleapis/google-cloud-node/issues/6835)) ([b334162](https://github.com/googleapis/google-cloud-node/commit/b334162c5081489ffc9a970157723b3ffb9cc063))
+
+## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.2.0...dialogflow-v7.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.1.0...dialogflow-v7.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6420](https://github.com/googleapis/google-cloud-node/issues/6420)) ([fe8d6cc](https://github.com/googleapis/google-cloud-node/commit/fe8d6cc157bea696790f2844fa7d410a481c79ed))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.0.1...dialogflow-v7.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.0.0...dialogflow-v7.0.1) (2025-03-21)
 
 

@@ -191,6 +191,18 @@
           "timeout_millis": 20000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
+        },
+        "FetchClusterUpgradeInfo": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FetchNodePoolUpgradeInfo": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CompleteControlPlaneUpgrade": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,26 +16,52 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const admanager = require('@google-ads/admanager');
 
 function main() {
+  const adBreakServiceClient = new admanager.AdBreakServiceClient();
+  const adReviewCenterAdServiceClient = new admanager.AdReviewCenterAdServiceClient();
   const adUnitServiceClient = new admanager.AdUnitServiceClient();
+  const applicationServiceClient = new admanager.ApplicationServiceClient();
+  const audienceSegmentServiceClient = new admanager.AudienceSegmentServiceClient();
+  const bandwidthGroupServiceClient = new admanager.BandwidthGroupServiceClient();
+  const browserLanguageServiceClient = new admanager.BrowserLanguageServiceClient();
+  const browserServiceClient = new admanager.BrowserServiceClient();
+  const cmsMetadataKeyServiceClient = new admanager.CmsMetadataKeyServiceClient();
+  const cmsMetadataValueServiceClient = new admanager.CmsMetadataValueServiceClient();
   const companyServiceClient = new admanager.CompanyServiceClient();
+  const contactServiceClient = new admanager.ContactServiceClient();
+  const contentBundleServiceClient = new admanager.ContentBundleServiceClient();
+  const contentLabelServiceClient = new admanager.ContentLabelServiceClient();
+  const contentServiceClient = new admanager.ContentServiceClient();
+  const creativeTemplateServiceClient = new admanager.CreativeTemplateServiceClient();
   const customFieldServiceClient = new admanager.CustomFieldServiceClient();
-  const customTargetingKeyServiceClient =
-    new admanager.CustomTargetingKeyServiceClient();
-  const customTargetingValueServiceClient =
-    new admanager.CustomTargetingValueServiceClient();
-  const entitySignalsMappingServiceClient =
-    new admanager.EntitySignalsMappingServiceClient();
+  const customTargetingKeyServiceClient = new admanager.CustomTargetingKeyServiceClient();
+  const customTargetingValueServiceClient = new admanager.CustomTargetingValueServiceClient();
+  const deviceCapabilityServiceClient = new admanager.DeviceCapabilityServiceClient();
+  const deviceCategoryServiceClient = new admanager.DeviceCategoryServiceClient();
+  const deviceManufacturerServiceClient = new admanager.DeviceManufacturerServiceClient();
+  const entitySignalsMappingServiceClient = new admanager.EntitySignalsMappingServiceClient();
+  const geoTargetServiceClient = new admanager.GeoTargetServiceClient();
+  const lineItemServiceClient = new admanager.LineItemServiceClient();
+  const mobileCarrierServiceClient = new admanager.MobileCarrierServiceClient();
+  const mobileDeviceServiceClient = new admanager.MobileDeviceServiceClient();
+  const mobileDeviceSubmodelServiceClient = new admanager.MobileDeviceSubmodelServiceClient();
   const networkServiceClient = new admanager.NetworkServiceClient();
+  const operatingSystemServiceClient = new admanager.OperatingSystemServiceClient();
+  const operatingSystemVersionServiceClient = new admanager.OperatingSystemVersionServiceClient();
   const orderServiceClient = new admanager.OrderServiceClient();
   const placementServiceClient = new admanager.PlacementServiceClient();
+  const privateAuctionDealServiceClient = new admanager.PrivateAuctionDealServiceClient();
+  const privateAuctionServiceClient = new admanager.PrivateAuctionServiceClient();
+  const programmaticBuyerServiceClient = new admanager.ProgrammaticBuyerServiceClient();
   const reportServiceClient = new admanager.ReportServiceClient();
   const roleServiceClient = new admanager.RoleServiceClient();
-  const taxonomyCategoryServiceClient =
-    new admanager.TaxonomyCategoryServiceClient();
+  const siteServiceClient = new admanager.SiteServiceClient();
+  const taxonomyCategoryServiceClient = new admanager.TaxonomyCategoryServiceClient();
+  const teamServiceClient = new admanager.TeamServiceClient();
   const userServiceClient = new admanager.UserServiceClient();
 }
 

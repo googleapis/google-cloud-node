@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'DatasetService',
-    filename: './dataset-service.js',
+    library: 'DataFoundryService',
+    filename: './data-foundry-service.js',
   },
   node: {
     child_process: 'empty',

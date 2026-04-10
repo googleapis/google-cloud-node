@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataplex",
-        "version": "4.0.1",
+        "version": "5.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

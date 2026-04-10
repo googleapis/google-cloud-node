@@ -1,5 +1,49 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.7.0...backupdr-v0.8.0) (2026-01-31)
+
+
+### Features
+
+* [backupdr] Add support for AlloyDB backup and restore ([#7050](https://github.com/googleapis/google-cloud-node/issues/7050)) ([a184916](https://github.com/googleapis/google-cloud-node/commit/a18491688b779f910a20a65b8725db519ede1ebb))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.6.0...backupdr-v0.7.0) (2025-11-21)
+
+
+### Features
+
+* [backupdr] Adding new fields for CMEK and Retention Inheritance features ([#6901](https://github.com/googleapis/google-cloud-node/issues/6901)) ([b26f79d](https://github.com/googleapis/google-cloud-node/commit/b26f79d452a55f26a309166362ca3a6a1cda89c1))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.5.1...backupdr-v0.6.0) (2025-11-11)
+
+
+### Features
+
+* [backupdr] Adding `unreachable` field to `ListDataSourceReferences` API ([#6865](https://github.com/googleapis/google-cloud-node/issues/6865)) ([44f08c6](https://github.com/googleapis/google-cloud-node/commit/44f08c6d3e7d9377e7e070c8ba3dcb949e2642c1))
+
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.5.0...backupdr-v0.5.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.4.0...backupdr-v0.5.0) (2025-07-28)
+
+
+### Features
+
+* [backupdr] Add support for Cloud SQL backup and restore ([#6521](https://github.com/googleapis/google-cloud-node/issues/6521)) ([b592fd0](https://github.com/googleapis/google-cloud-node/commit/b592fd0ee3bc242732830a68d0041dc4680f0848))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.3.1...backupdr-v0.4.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6418](https://github.com/googleapis/google-cloud-node/issues/6418)) ([fcfb2c0](https://github.com/googleapis/google-cloud-node/commit/fcfb2c018539983a8ce32205a2ea9e99ef28e88a))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.3.0...backupdr-v0.3.1) (2025-03-19)
 
 

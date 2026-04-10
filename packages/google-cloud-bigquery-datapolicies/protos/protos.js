@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -503,12 +503,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateDataPolicyRequest.decode = function decode(reader, length) {
+                            CreateDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -735,12 +737,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateDataPolicyRequest.decode = function decode(reader, length) {
+                            UpdateDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v1.DataPolicy.decode(reader, reader.uint32());
@@ -972,12 +976,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RenameDataPolicyRequest.decode = function decode(reader, length) {
+                            RenameDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -1188,12 +1194,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeleteDataPolicyRequest.decode = function decode(reader, length) {
+                            DeleteDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -1391,12 +1399,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetDataPolicyRequest.decode = function decode(reader, length) {
+                            GetDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -1627,12 +1637,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListDataPoliciesRequest.decode = function decode(reader, length) {
+                            ListDataPoliciesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -1880,12 +1892,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListDataPoliciesResponse.decode = function decode(reader, length) {
+                            ListDataPoliciesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.dataPolicies && message.dataPolicies.length))
@@ -2184,12 +2198,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DataPolicy.decode = function decode(reader, length) {
+                            DataPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.DataPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.policyTag = reader.string();
@@ -2516,12 +2532,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DataMaskingPolicy.decode = function decode(reader, length) {
+                            DataMaskingPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.predefinedExpression = reader.int32();
@@ -3138,12 +3156,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateDataPolicyRequest.decode = function decode(reader, length) {
+                            CreateDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.CreateDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -3370,12 +3390,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateDataPolicyRequest.decode = function decode(reader, length) {
+                            UpdateDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.UpdateDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy.decode(reader, reader.uint32());
@@ -3596,12 +3618,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeleteDataPolicyRequest.decode = function decode(reader, length) {
+                            DeleteDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.DeleteDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -3799,12 +3823,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetDataPolicyRequest.decode = function decode(reader, length) {
+                            GetDataPolicyRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.GetDataPolicyRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -4024,12 +4050,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListDataPoliciesRequest.decode = function decode(reader, length) {
+                            ListDataPoliciesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -4265,12 +4293,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListDataPoliciesResponse.decode = function decode(reader, length) {
+                            ListDataPoliciesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.ListDataPoliciesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.dataPolicies && message.dataPolicies.length))
@@ -4569,12 +4599,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DataPolicy.decode = function decode(reader, length) {
+                            DataPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.DataPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.policyTag = reader.string();
@@ -4890,12 +4922,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DataMaskingPolicy.decode = function decode(reader, length) {
+                            DataMaskingPolicy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v1beta1.DataMaskingPolicy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.predefinedExpression = reader.int32();
@@ -5062,6 +5096,6211 @@
                         return v1beta1;
                     })();
     
+                    datapolicies.v2 = (function() {
+    
+                        /**
+                         * Namespace v2.
+                         * @memberof google.cloud.bigquery.datapolicies
+                         * @namespace
+                         */
+                        var v2 = {};
+    
+                        v2.DataPolicyService = (function() {
+    
+                            /**
+                             * Constructs a new DataPolicyService service.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a DataPolicyService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function DataPolicyService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (DataPolicyService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DataPolicyService;
+    
+                            /**
+                             * Creates new DataPolicyService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {DataPolicyService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            DataPolicyService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|createDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef CreateDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls CreateDataPolicy.
+                             * @function createDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest} request CreateDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.CreateDataPolicyCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.createDataPolicy = function createDataPolicy(request, callback) {
+                                return this.rpcCall(createDataPolicy, $root.google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest, $root.google.cloud.bigquery.datapolicies.v2.DataPolicy, request, callback);
+                            }, "name", { value: "CreateDataPolicy" });
+    
+                            /**
+                             * Calls CreateDataPolicy.
+                             * @function createDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest} request CreateDataPolicyRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|addGrantees}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef AddGranteesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls AddGrantees.
+                             * @function addGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest} request AddGranteesRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.AddGranteesCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.addGrantees = function addGrantees(request, callback) {
+                                return this.rpcCall(addGrantees, $root.google.cloud.bigquery.datapolicies.v2.AddGranteesRequest, $root.google.cloud.bigquery.datapolicies.v2.DataPolicy, request, callback);
+                            }, "name", { value: "AddGrantees" });
+    
+                            /**
+                             * Calls AddGrantees.
+                             * @function addGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest} request AddGranteesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|removeGrantees}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef RemoveGranteesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls RemoveGrantees.
+                             * @function removeGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest} request RemoveGranteesRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.RemoveGranteesCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.removeGrantees = function removeGrantees(request, callback) {
+                                return this.rpcCall(removeGrantees, $root.google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest, $root.google.cloud.bigquery.datapolicies.v2.DataPolicy, request, callback);
+                            }, "name", { value: "RemoveGrantees" });
+    
+                            /**
+                             * Calls RemoveGrantees.
+                             * @function removeGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest} request RemoveGranteesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|updateDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef UpdateDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls UpdateDataPolicy.
+                             * @function updateDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest} request UpdateDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.UpdateDataPolicyCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.updateDataPolicy = function updateDataPolicy(request, callback) {
+                                return this.rpcCall(updateDataPolicy, $root.google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest, $root.google.cloud.bigquery.datapolicies.v2.DataPolicy, request, callback);
+                            }, "name", { value: "UpdateDataPolicy" });
+    
+                            /**
+                             * Calls UpdateDataPolicy.
+                             * @function updateDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest} request UpdateDataPolicyRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|deleteDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef DeleteDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteDataPolicy.
+                             * @function deleteDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest} request DeleteDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.DeleteDataPolicyCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.deleteDataPolicy = function deleteDataPolicy(request, callback) {
+                                return this.rpcCall(deleteDataPolicy, $root.google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteDataPolicy" });
+    
+                            /**
+                             * Calls DeleteDataPolicy.
+                             * @function deleteDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest} request DeleteDataPolicyRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|getDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef GetDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls GetDataPolicy.
+                             * @function getDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest} request GetDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.GetDataPolicyCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.getDataPolicy = function getDataPolicy(request, callback) {
+                                return this.rpcCall(getDataPolicy, $root.google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest, $root.google.cloud.bigquery.datapolicies.v2.DataPolicy, request, callback);
+                            }, "name", { value: "GetDataPolicy" });
+    
+                            /**
+                             * Calls GetDataPolicy.
+                             * @function getDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest} request GetDataPolicyRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|listDataPolicies}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef ListDataPoliciesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse} [response] ListDataPoliciesResponse
+                             */
+    
+                            /**
+                             * Calls ListDataPolicies.
+                             * @function listDataPolicies
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest} request ListDataPoliciesRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.ListDataPoliciesCallback} callback Node-style callback called with the error, if any, and ListDataPoliciesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.listDataPolicies = function listDataPolicies(request, callback) {
+                                return this.rpcCall(listDataPolicies, $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest, $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse, request, callback);
+                            }, "name", { value: "ListDataPolicies" });
+    
+                            /**
+                             * Calls ListDataPolicies.
+                             * @function listDataPolicies
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest} request ListDataPoliciesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|getIamPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef GetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                                return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "GetIamPolicy" });
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|setIamPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef SetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                                return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "SetIamPolicy" });
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2.DataPolicyService|testIamPermissions}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @typedef TestIamPermissionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                             */
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicyService.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                                return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                            }, "name", { value: "TestIamPermissions" });
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return DataPolicyService;
+                        })();
+    
+                        v2.CreateDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface ICreateDataPolicyRequest
+                             * @property {string|null} [parent] CreateDataPolicyRequest parent
+                             * @property {string|null} [dataPolicyId] CreateDataPolicyRequest dataPolicyId
+                             * @property {google.cloud.bigquery.datapolicies.v2.IDataPolicy|null} [dataPolicy] CreateDataPolicyRequest dataPolicy
+                             */
+    
+                            /**
+                             * Constructs a new CreateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a CreateDataPolicyRequest.
+                             * @implements ICreateDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function CreateDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateDataPolicyRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @instance
+                             */
+                            CreateDataPolicyRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateDataPolicyRequest dataPolicyId.
+                             * @member {string} dataPolicyId
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @instance
+                             */
+                            CreateDataPolicyRequest.prototype.dataPolicyId = "";
+    
+                            /**
+                             * CreateDataPolicyRequest dataPolicy.
+                             * @member {google.cloud.bigquery.datapolicies.v2.IDataPolicy|null|undefined} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @instance
+                             */
+                            CreateDataPolicyRequest.prototype.dataPolicy = null;
+    
+                            /**
+                             * Creates a new CreateDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest} CreateDataPolicyRequest instance
+                             */
+                            CreateDataPolicyRequest.create = function create(properties) {
+                                return new CreateDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest} message CreateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.dataPolicyId != null && Object.hasOwnProperty.call(message, "dataPolicyId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataPolicyId);
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.encode(message.dataPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.ICreateDataPolicyRequest} message CreateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest} CreateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dataPolicyId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest} CreateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    if (!$util.isString(message.dataPolicyId))
+                                        return "dataPolicyId: string expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy")) {
+                                    var error = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.verify(message.dataPolicy);
+                                    if (error)
+                                        return "dataPolicy." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest} CreateDataPolicyRequest
+                             */
+                            CreateDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.dataPolicyId != null)
+                                    message.dataPolicyId = String(object.dataPolicyId);
+                                if (object.dataPolicy != null) {
+                                    if (typeof object.dataPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest.dataPolicy: object expected");
+                                    message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.fromObject(object.dataPolicy);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest} message CreateDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.dataPolicyId = "";
+                                    object.dataPolicy = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    object.dataPolicyId = message.dataPolicyId;
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.toObject(message.dataPolicy, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest";
+                            };
+    
+                            return CreateDataPolicyRequest;
+                        })();
+    
+                        v2.UpdateDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IUpdateDataPolicyRequest
+                             * @property {google.cloud.bigquery.datapolicies.v2.IDataPolicy|null} [dataPolicy] UpdateDataPolicyRequest dataPolicy
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDataPolicyRequest updateMask
+                             * @property {boolean|null} [allowMissing] UpdateDataPolicyRequest allowMissing
+                             */
+    
+                            /**
+                             * Constructs a new UpdateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents an UpdateDataPolicyRequest.
+                             * @implements IUpdateDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function UpdateDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateDataPolicyRequest dataPolicy.
+                             * @member {google.cloud.bigquery.datapolicies.v2.IDataPolicy|null|undefined} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @instance
+                             */
+                            UpdateDataPolicyRequest.prototype.dataPolicy = null;
+    
+                            /**
+                             * UpdateDataPolicyRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @instance
+                             */
+                            UpdateDataPolicyRequest.prototype.updateMask = null;
+    
+                            /**
+                             * UpdateDataPolicyRequest allowMissing.
+                             * @member {boolean} allowMissing
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @instance
+                             */
+                            UpdateDataPolicyRequest.prototype.allowMissing = false;
+    
+                            /**
+                             * Creates a new UpdateDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest} UpdateDataPolicyRequest instance
+                             */
+                            UpdateDataPolicyRequest.create = function create(properties) {
+                                return new UpdateDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest} message UpdateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.encode(message.dataPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IUpdateDataPolicyRequest} message UpdateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest} UpdateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.allowMissing = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest} UpdateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy")) {
+                                    var error = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.verify(message.dataPolicy);
+                                    if (error)
+                                        return "dataPolicy." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                    if (typeof message.allowMissing !== "boolean")
+                                        return "allowMissing: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest} UpdateDataPolicyRequest
+                             */
+                            UpdateDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest();
+                                if (object.dataPolicy != null) {
+                                    if (typeof object.dataPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest.dataPolicy: object expected");
+                                    message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.fromObject(object.dataPolicy);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                if (object.allowMissing != null)
+                                    message.allowMissing = Boolean(object.allowMissing);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest} message UpdateDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.dataPolicy = null;
+                                    object.updateMask = null;
+                                    object.allowMissing = false;
+                                }
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.toObject(message.dataPolicy, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
+                                    object.allowMissing = message.allowMissing;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest";
+                            };
+    
+                            return UpdateDataPolicyRequest;
+                        })();
+    
+                        v2.AddGranteesRequest = (function() {
+    
+                            /**
+                             * Properties of an AddGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IAddGranteesRequest
+                             * @property {string|null} [dataPolicy] AddGranteesRequest dataPolicy
+                             * @property {Array.<string>|null} [grantees] AddGranteesRequest grantees
+                             */
+    
+                            /**
+                             * Constructs a new AddGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents an AddGranteesRequest.
+                             * @implements IAddGranteesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest=} [properties] Properties to set
+                             */
+                            function AddGranteesRequest(properties) {
+                                this.grantees = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AddGranteesRequest dataPolicy.
+                             * @member {string} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @instance
+                             */
+                            AddGranteesRequest.prototype.dataPolicy = "";
+    
+                            /**
+                             * AddGranteesRequest grantees.
+                             * @member {Array.<string>} grantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @instance
+                             */
+                            AddGranteesRequest.prototype.grantees = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AddGranteesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.AddGranteesRequest} AddGranteesRequest instance
+                             */
+                            AddGranteesRequest.create = function create(properties) {
+                                return new AddGranteesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AddGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.AddGranteesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest} message AddGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddGranteesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataPolicy);
+                                if (message.grantees != null && message.grantees.length)
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.grantees[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AddGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.AddGranteesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IAddGranteesRequest} message AddGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddGranteesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AddGranteesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.AddGranteesRequest} AddGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddGranteesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.AddGranteesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataPolicy = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.grantees && message.grantees.length))
+                                                message.grantees = [];
+                                            message.grantees.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AddGranteesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.AddGranteesRequest} AddGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddGranteesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AddGranteesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AddGranteesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    if (!$util.isString(message.dataPolicy))
+                                        return "dataPolicy: string expected";
+                                if (message.grantees != null && message.hasOwnProperty("grantees")) {
+                                    if (!Array.isArray(message.grantees))
+                                        return "grantees: array expected";
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        if (!$util.isString(message.grantees[i]))
+                                            return "grantees: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AddGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.AddGranteesRequest} AddGranteesRequest
+                             */
+                            AddGranteesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.AddGranteesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.AddGranteesRequest();
+                                if (object.dataPolicy != null)
+                                    message.dataPolicy = String(object.dataPolicy);
+                                if (object.grantees) {
+                                    if (!Array.isArray(object.grantees))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.AddGranteesRequest.grantees: array expected");
+                                    message.grantees = [];
+                                    for (var i = 0; i < object.grantees.length; ++i)
+                                        message.grantees[i] = String(object.grantees[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AddGranteesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.AddGranteesRequest} message AddGranteesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AddGranteesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.grantees = [];
+                                if (options.defaults)
+                                    object.dataPolicy = "";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = message.dataPolicy;
+                                if (message.grantees && message.grantees.length) {
+                                    object.grantees = [];
+                                    for (var j = 0; j < message.grantees.length; ++j)
+                                        object.grantees[j] = message.grantees[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AddGranteesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AddGranteesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AddGranteesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.AddGranteesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AddGranteesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.AddGranteesRequest";
+                            };
+    
+                            return AddGranteesRequest;
+                        })();
+    
+                        v2.RemoveGranteesRequest = (function() {
+    
+                            /**
+                             * Properties of a RemoveGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IRemoveGranteesRequest
+                             * @property {string|null} [dataPolicy] RemoveGranteesRequest dataPolicy
+                             * @property {Array.<string>|null} [grantees] RemoveGranteesRequest grantees
+                             */
+    
+                            /**
+                             * Constructs a new RemoveGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a RemoveGranteesRequest.
+                             * @implements IRemoveGranteesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest=} [properties] Properties to set
+                             */
+                            function RemoveGranteesRequest(properties) {
+                                this.grantees = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RemoveGranteesRequest dataPolicy.
+                             * @member {string} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @instance
+                             */
+                            RemoveGranteesRequest.prototype.dataPolicy = "";
+    
+                            /**
+                             * RemoveGranteesRequest grantees.
+                             * @member {Array.<string>} grantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @instance
+                             */
+                            RemoveGranteesRequest.prototype.grantees = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RemoveGranteesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest} RemoveGranteesRequest instance
+                             */
+                            RemoveGranteesRequest.create = function create(properties) {
+                                return new RemoveGranteesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest} message RemoveGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveGranteesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataPolicy);
+                                if (message.grantees != null && message.grantees.length)
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.grantees[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IRemoveGranteesRequest} message RemoveGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveGranteesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RemoveGranteesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest} RemoveGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveGranteesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataPolicy = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.grantees && message.grantees.length))
+                                                message.grantees = [];
+                                            message.grantees.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RemoveGranteesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest} RemoveGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveGranteesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RemoveGranteesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RemoveGranteesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    if (!$util.isString(message.dataPolicy))
+                                        return "dataPolicy: string expected";
+                                if (message.grantees != null && message.hasOwnProperty("grantees")) {
+                                    if (!Array.isArray(message.grantees))
+                                        return "grantees: array expected";
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        if (!$util.isString(message.grantees[i]))
+                                            return "grantees: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RemoveGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest} RemoveGranteesRequest
+                             */
+                            RemoveGranteesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest();
+                                if (object.dataPolicy != null)
+                                    message.dataPolicy = String(object.dataPolicy);
+                                if (object.grantees) {
+                                    if (!Array.isArray(object.grantees))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest.grantees: array expected");
+                                    message.grantees = [];
+                                    for (var i = 0; i < object.grantees.length; ++i)
+                                        message.grantees[i] = String(object.grantees[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RemoveGranteesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest} message RemoveGranteesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RemoveGranteesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.grantees = [];
+                                if (options.defaults)
+                                    object.dataPolicy = "";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = message.dataPolicy;
+                                if (message.grantees && message.grantees.length) {
+                                    object.grantees = [];
+                                    for (var j = 0; j < message.grantees.length; ++j)
+                                        object.grantees[j] = message.grantees[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RemoveGranteesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RemoveGranteesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RemoveGranteesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RemoveGranteesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.RemoveGranteesRequest";
+                            };
+    
+                            return RemoveGranteesRequest;
+                        })();
+    
+                        v2.DeleteDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IDeleteDataPolicyRequest
+                             * @property {string|null} [name] DeleteDataPolicyRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a DeleteDataPolicyRequest.
+                             * @implements IDeleteDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function DeleteDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteDataPolicyRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @instance
+                             */
+                            DeleteDataPolicyRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest} DeleteDataPolicyRequest instance
+                             */
+                            DeleteDataPolicyRequest.create = function create(properties) {
+                                return new DeleteDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest} message DeleteDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDeleteDataPolicyRequest} message DeleteDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest} DeleteDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest} DeleteDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest} DeleteDataPolicyRequest
+                             */
+                            DeleteDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest} message DeleteDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.DeleteDataPolicyRequest";
+                            };
+    
+                            return DeleteDataPolicyRequest;
+                        })();
+    
+                        v2.GetDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a GetDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IGetDataPolicyRequest
+                             * @property {string|null} [name] GetDataPolicyRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a GetDataPolicyRequest.
+                             * @implements IGetDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function GetDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetDataPolicyRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @instance
+                             */
+                            GetDataPolicyRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest} GetDataPolicyRequest instance
+                             */
+                            GetDataPolicyRequest.create = function create(properties) {
+                                return new GetDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest} message GetDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IGetDataPolicyRequest} message GetDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest} GetDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest} GetDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest} GetDataPolicyRequest
+                             */
+                            GetDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest} message GetDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.GetDataPolicyRequest";
+                            };
+    
+                            return GetDataPolicyRequest;
+                        })();
+    
+                        v2.ListDataPoliciesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListDataPoliciesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IListDataPoliciesRequest
+                             * @property {string|null} [parent] ListDataPoliciesRequest parent
+                             * @property {number|null} [pageSize] ListDataPoliciesRequest pageSize
+                             * @property {string|null} [pageToken] ListDataPoliciesRequest pageToken
+                             * @property {string|null} [filter] ListDataPoliciesRequest filter
+                             */
+    
+                            /**
+                             * Constructs a new ListDataPoliciesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a ListDataPoliciesRequest.
+                             * @implements IListDataPoliciesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest=} [properties] Properties to set
+                             */
+                            function ListDataPoliciesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListDataPoliciesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @instance
+                             */
+                            ListDataPoliciesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListDataPoliciesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @instance
+                             */
+                            ListDataPoliciesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListDataPoliciesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @instance
+                             */
+                            ListDataPoliciesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * ListDataPoliciesRequest filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @instance
+                             */
+                            ListDataPoliciesRequest.prototype.filter = "";
+    
+                            /**
+                             * Creates a new ListDataPoliciesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest} ListDataPoliciesRequest instance
+                             */
+                            ListDataPoliciesRequest.create = function create(properties) {
+                                return new ListDataPoliciesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest} message ListDataPoliciesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesRequest} message ListDataPoliciesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest} ListDataPoliciesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest} ListDataPoliciesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListDataPoliciesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListDataPoliciesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListDataPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest} ListDataPoliciesRequest
+                             */
+                            ListDataPoliciesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListDataPoliciesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest} message ListDataPoliciesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListDataPoliciesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                    object.filter = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListDataPoliciesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListDataPoliciesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListDataPoliciesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListDataPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest";
+                            };
+    
+                            return ListDataPoliciesRequest;
+                        })();
+    
+                        v2.ListDataPoliciesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListDataPoliciesResponse.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IListDataPoliciesResponse
+                             * @property {Array.<google.cloud.bigquery.datapolicies.v2.IDataPolicy>|null} [dataPolicies] ListDataPoliciesResponse dataPolicies
+                             * @property {string|null} [nextPageToken] ListDataPoliciesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListDataPoliciesResponse.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a ListDataPoliciesResponse.
+                             * @implements IListDataPoliciesResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse=} [properties] Properties to set
+                             */
+                            function ListDataPoliciesResponse(properties) {
+                                this.dataPolicies = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListDataPoliciesResponse dataPolicies.
+                             * @member {Array.<google.cloud.bigquery.datapolicies.v2.IDataPolicy>} dataPolicies
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @instance
+                             */
+                            ListDataPoliciesResponse.prototype.dataPolicies = $util.emptyArray;
+    
+                            /**
+                             * ListDataPoliciesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @instance
+                             */
+                            ListDataPoliciesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListDataPoliciesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse} ListDataPoliciesResponse instance
+                             */
+                            ListDataPoliciesResponse.create = function create(properties) {
+                                return new ListDataPoliciesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesResponse message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse} message ListDataPoliciesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicies != null && message.dataPolicies.length)
+                                    for (var i = 0; i < message.dataPolicies.length; ++i)
+                                        $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.encode(message.dataPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IListDataPoliciesResponse} message ListDataPoliciesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse} ListDataPoliciesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.dataPolicies && message.dataPolicies.length))
+                                                message.dataPolicies = [];
+                                            message.dataPolicies.push($root.google.cloud.bigquery.datapolicies.v2.DataPolicy.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse} ListDataPoliciesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListDataPoliciesResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListDataPoliciesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicies != null && message.hasOwnProperty("dataPolicies")) {
+                                    if (!Array.isArray(message.dataPolicies))
+                                        return "dataPolicies: array expected";
+                                    for (var i = 0; i < message.dataPolicies.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.verify(message.dataPolicies[i]);
+                                        if (error)
+                                            return "dataPolicies." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListDataPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse} ListDataPoliciesResponse
+                             */
+                            ListDataPoliciesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse();
+                                if (object.dataPolicies) {
+                                    if (!Array.isArray(object.dataPolicies))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse.dataPolicies: array expected");
+                                    message.dataPolicies = [];
+                                    for (var i = 0; i < object.dataPolicies.length; ++i) {
+                                        if (typeof object.dataPolicies[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse.dataPolicies: object expected");
+                                        message.dataPolicies[i] = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.fromObject(object.dataPolicies[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListDataPoliciesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse} message ListDataPoliciesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListDataPoliciesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dataPolicies = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.dataPolicies && message.dataPolicies.length) {
+                                    object.dataPolicies = [];
+                                    for (var j = 0; j < message.dataPolicies.length; ++j)
+                                        object.dataPolicies[j] = $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.toObject(message.dataPolicies[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListDataPoliciesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListDataPoliciesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListDataPoliciesResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListDataPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.ListDataPoliciesResponse";
+                            };
+    
+                            return ListDataPoliciesResponse;
+                        })();
+    
+                        v2.DataPolicy = (function() {
+    
+                            /**
+                             * Properties of a DataPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IDataPolicy
+                             * @property {google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy|null} [dataMaskingPolicy] DataPolicy dataMaskingPolicy
+                             * @property {string|null} [name] DataPolicy name
+                             * @property {string|null} [dataPolicyId] DataPolicy dataPolicyId
+                             * @property {string|null} [etag] DataPolicy etag
+                             * @property {google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType|null} [dataPolicyType] DataPolicy dataPolicyType
+                             * @property {string|null} [policyTag] DataPolicy policyTag
+                             * @property {Array.<string>|null} [grantees] DataPolicy grantees
+                             * @property {google.cloud.bigquery.datapolicies.v2.DataPolicy.Version|null} [version] DataPolicy version
+                             */
+    
+                            /**
+                             * Constructs a new DataPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a DataPolicy.
+                             * @implements IDataPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataPolicy=} [properties] Properties to set
+                             */
+                            function DataPolicy(properties) {
+                                this.grantees = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataPolicy dataMaskingPolicy.
+                             * @member {google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy|null|undefined} dataMaskingPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.dataMaskingPolicy = null;
+    
+                            /**
+                             * DataPolicy name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.name = "";
+    
+                            /**
+                             * DataPolicy dataPolicyId.
+                             * @member {string} dataPolicyId
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.dataPolicyId = "";
+    
+                            /**
+                             * DataPolicy etag.
+                             * @member {string|null|undefined} etag
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.etag = null;
+    
+                            /**
+                             * DataPolicy dataPolicyType.
+                             * @member {google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType} dataPolicyType
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.dataPolicyType = 0;
+    
+                            /**
+                             * DataPolicy policyTag.
+                             * @member {string} policyTag
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.policyTag = "";
+    
+                            /**
+                             * DataPolicy grantees.
+                             * @member {Array.<string>} grantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.grantees = $util.emptyArray;
+    
+                            /**
+                             * DataPolicy version.
+                             * @member {google.cloud.bigquery.datapolicies.v2.DataPolicy.Version} version
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.version = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataPolicy policy.
+                             * @member {"dataMaskingPolicy"|undefined} policy
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             */
+                            Object.defineProperty(DataPolicy.prototype, "policy", {
+                                get: $util.oneOfGetter($oneOfFields = ["dataMaskingPolicy"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(DataPolicy.prototype, "_etag", {
+                                get: $util.oneOfGetter($oneOfFields = ["etag"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataPolicy} DataPolicy instance
+                             */
+                            DataPolicy.create = function create(properties) {
+                                return new DataPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataPolicy} message DataPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.dataPolicyId != null && Object.hasOwnProperty.call(message, "dataPolicyId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataPolicyId);
+                                if (message.dataPolicyType != null && Object.hasOwnProperty.call(message, "dataPolicyType"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.dataPolicyType);
+                                if (message.policyTag != null && Object.hasOwnProperty.call(message, "policyTag"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.policyTag);
+                                if (message.dataMaskingPolicy != null && Object.hasOwnProperty.call(message, "dataMaskingPolicy"))
+                                    $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.encode(message.dataMaskingPolicy, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.grantees != null && message.grantees.length)
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.grantees[i]);
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.version);
+                                if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.etag);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataPolicy} message DataPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataPolicy} DataPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.DataPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 7: {
+                                            message.dataMaskingPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dataPolicyId = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.etag = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataPolicyType = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.policyTag = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.grantees && message.grantees.length))
+                                                message.grantees = [];
+                                            message.grantees.push(reader.string());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.version = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataPolicy} DataPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.dataMaskingPolicy != null && message.hasOwnProperty("dataMaskingPolicy")) {
+                                    properties.policy = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.verify(message.dataMaskingPolicy);
+                                        if (error)
+                                            return "dataMaskingPolicy." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    if (!$util.isString(message.dataPolicyId))
+                                        return "dataPolicyId: string expected";
+                                if (message.etag != null && message.hasOwnProperty("etag")) {
+                                    properties._etag = 1;
+                                    if (!$util.isString(message.etag))
+                                        return "etag: string expected";
+                                }
+                                if (message.dataPolicyType != null && message.hasOwnProperty("dataPolicyType"))
+                                    switch (message.dataPolicyType) {
+                                    default:
+                                        return "dataPolicyType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                    if (!$util.isString(message.policyTag))
+                                        return "policyTag: string expected";
+                                if (message.grantees != null && message.hasOwnProperty("grantees")) {
+                                    if (!Array.isArray(message.grantees))
+                                        return "grantees: array expected";
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        if (!$util.isString(message.grantees[i]))
+                                            return "grantees: string[] expected";
+                                }
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    switch (message.version) {
+                                    default:
+                                        return "version: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataPolicy} DataPolicy
+                             */
+                            DataPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.DataPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.DataPolicy();
+                                if (object.dataMaskingPolicy != null) {
+                                    if (typeof object.dataMaskingPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.DataPolicy.dataMaskingPolicy: object expected");
+                                    message.dataMaskingPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.fromObject(object.dataMaskingPolicy);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.dataPolicyId != null)
+                                    message.dataPolicyId = String(object.dataPolicyId);
+                                if (object.etag != null)
+                                    message.etag = String(object.etag);
+                                switch (object.dataPolicyType) {
+                                default:
+                                    if (typeof object.dataPolicyType === "number") {
+                                        message.dataPolicyType = object.dataPolicyType;
+                                        break;
+                                    }
+                                    break;
+                                case "DATA_POLICY_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.dataPolicyType = 0;
+                                    break;
+                                case "DATA_MASKING_POLICY":
+                                case 1:
+                                    message.dataPolicyType = 1;
+                                    break;
+                                case "RAW_DATA_ACCESS_POLICY":
+                                case 2:
+                                    message.dataPolicyType = 2;
+                                    break;
+                                case "COLUMN_LEVEL_SECURITY_POLICY":
+                                case 3:
+                                    message.dataPolicyType = 3;
+                                    break;
+                                }
+                                if (object.policyTag != null)
+                                    message.policyTag = String(object.policyTag);
+                                if (object.grantees) {
+                                    if (!Array.isArray(object.grantees))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2.DataPolicy.grantees: array expected");
+                                    message.grantees = [];
+                                    for (var i = 0; i < object.grantees.length; ++i)
+                                        message.grantees[i] = String(object.grantees[i]);
+                                }
+                                switch (object.version) {
+                                default:
+                                    if (typeof object.version === "number") {
+                                        message.version = object.version;
+                                        break;
+                                    }
+                                    break;
+                                case "VERSION_UNSPECIFIED":
+                                case 0:
+                                    message.version = 0;
+                                    break;
+                                case "V1":
+                                case 1:
+                                    message.version = 1;
+                                    break;
+                                case "V2":
+                                case 2:
+                                    message.version = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataPolicy} message DataPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.grantees = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.dataPolicyId = "";
+                                    object.dataPolicyType = options.enums === String ? "DATA_POLICY_TYPE_UNSPECIFIED" : 0;
+                                    object.policyTag = "";
+                                    object.version = options.enums === String ? "VERSION_UNSPECIFIED" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    object.dataPolicyId = message.dataPolicyId;
+                                if (message.dataPolicyType != null && message.hasOwnProperty("dataPolicyType"))
+                                    object.dataPolicyType = options.enums === String ? $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType[message.dataPolicyType] === undefined ? message.dataPolicyType : $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType[message.dataPolicyType] : message.dataPolicyType;
+                                if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                    object.policyTag = message.policyTag;
+                                if (message.dataMaskingPolicy != null && message.hasOwnProperty("dataMaskingPolicy")) {
+                                    object.dataMaskingPolicy = $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.toObject(message.dataMaskingPolicy, options);
+                                    if (options.oneofs)
+                                        object.policy = "dataMaskingPolicy";
+                                }
+                                if (message.grantees && message.grantees.length) {
+                                    object.grantees = [];
+                                    for (var j = 0; j < message.grantees.length; ++j)
+                                        object.grantees[j] = message.grantees[j];
+                                }
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = options.enums === String ? $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.Version[message.version] === undefined ? message.version : $root.google.cloud.bigquery.datapolicies.v2.DataPolicy.Version[message.version] : message.version;
+                                if (message.etag != null && message.hasOwnProperty("etag")) {
+                                    object.etag = message.etag;
+                                    if (options.oneofs)
+                                        object._etag = "etag";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.DataPolicy";
+                            };
+    
+                            /**
+                             * DataPolicyType enum.
+                             * @name google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType
+                             * @enum {number}
+                             * @property {number} DATA_POLICY_TYPE_UNSPECIFIED=0 DATA_POLICY_TYPE_UNSPECIFIED value
+                             * @property {number} DATA_MASKING_POLICY=1 DATA_MASKING_POLICY value
+                             * @property {number} RAW_DATA_ACCESS_POLICY=2 RAW_DATA_ACCESS_POLICY value
+                             * @property {number} COLUMN_LEVEL_SECURITY_POLICY=3 COLUMN_LEVEL_SECURITY_POLICY value
+                             */
+                            DataPolicy.DataPolicyType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "DATA_POLICY_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DATA_MASKING_POLICY"] = 1;
+                                values[valuesById[2] = "RAW_DATA_ACCESS_POLICY"] = 2;
+                                values[valuesById[3] = "COLUMN_LEVEL_SECURITY_POLICY"] = 3;
+                                return values;
+                            })();
+    
+                            /**
+                             * Version enum.
+                             * @name google.cloud.bigquery.datapolicies.v2.DataPolicy.Version
+                             * @enum {number}
+                             * @property {number} VERSION_UNSPECIFIED=0 VERSION_UNSPECIFIED value
+                             * @property {number} V1=1 V1 value
+                             * @property {number} V2=2 V2 value
+                             */
+                            DataPolicy.Version = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "VERSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "V1"] = 1;
+                                values[valuesById[2] = "V2"] = 2;
+                                return values;
+                            })();
+    
+                            return DataPolicy;
+                        })();
+    
+                        v2.DataMaskingPolicy = (function() {
+    
+                            /**
+                             * Properties of a DataMaskingPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @interface IDataMaskingPolicy
+                             * @property {google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression|null} [predefinedExpression] DataMaskingPolicy predefinedExpression
+                             * @property {string|null} [routine] DataMaskingPolicy routine
+                             */
+    
+                            /**
+                             * Constructs a new DataMaskingPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2
+                             * @classdesc Represents a DataMaskingPolicy.
+                             * @implements IDataMaskingPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy=} [properties] Properties to set
+                             */
+                            function DataMaskingPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataMaskingPolicy predefinedExpression.
+                             * @member {google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression|null|undefined} predefinedExpression
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @instance
+                             */
+                            DataMaskingPolicy.prototype.predefinedExpression = null;
+    
+                            /**
+                             * DataMaskingPolicy routine.
+                             * @member {string|null|undefined} routine
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @instance
+                             */
+                            DataMaskingPolicy.prototype.routine = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataMaskingPolicy maskingExpression.
+                             * @member {"predefinedExpression"|"routine"|undefined} maskingExpression
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @instance
+                             */
+                            Object.defineProperty(DataMaskingPolicy.prototype, "maskingExpression", {
+                                get: $util.oneOfGetter($oneOfFields = ["predefinedExpression", "routine"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataMaskingPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy} DataMaskingPolicy instance
+                             */
+                            DataMaskingPolicy.create = function create(properties) {
+                                return new DataMaskingPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataMaskingPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy} message DataMaskingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataMaskingPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.predefinedExpression != null && Object.hasOwnProperty.call(message, "predefinedExpression"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.predefinedExpression);
+                                if (message.routine != null && Object.hasOwnProperty.call(message, "routine"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.routine);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataMaskingPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.IDataMaskingPolicy} message DataMaskingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataMaskingPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataMaskingPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy} DataMaskingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataMaskingPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.predefinedExpression = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.routine = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataMaskingPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy} DataMaskingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataMaskingPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataMaskingPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataMaskingPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.predefinedExpression != null && message.hasOwnProperty("predefinedExpression")) {
+                                    properties.maskingExpression = 1;
+                                    switch (message.predefinedExpression) {
+                                    default:
+                                        return "predefinedExpression: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                        break;
+                                    }
+                                }
+                                if (message.routine != null && message.hasOwnProperty("routine")) {
+                                    if (properties.maskingExpression === 1)
+                                        return "maskingExpression: multiple values";
+                                    properties.maskingExpression = 1;
+                                    if (!$util.isString(message.routine))
+                                        return "routine: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataMaskingPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy} DataMaskingPolicy
+                             */
+                            DataMaskingPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy();
+                                switch (object.predefinedExpression) {
+                                default:
+                                    if (typeof object.predefinedExpression === "number") {
+                                        message.predefinedExpression = object.predefinedExpression;
+                                        break;
+                                    }
+                                    break;
+                                case "PREDEFINED_EXPRESSION_UNSPECIFIED":
+                                case 0:
+                                    message.predefinedExpression = 0;
+                                    break;
+                                case "SHA256":
+                                case 1:
+                                    message.predefinedExpression = 1;
+                                    break;
+                                case "ALWAYS_NULL":
+                                case 2:
+                                    message.predefinedExpression = 2;
+                                    break;
+                                case "DEFAULT_MASKING_VALUE":
+                                case 3:
+                                    message.predefinedExpression = 3;
+                                    break;
+                                case "LAST_FOUR_CHARACTERS":
+                                case 4:
+                                    message.predefinedExpression = 4;
+                                    break;
+                                case "FIRST_FOUR_CHARACTERS":
+                                case 5:
+                                    message.predefinedExpression = 5;
+                                    break;
+                                case "EMAIL_MASK":
+                                case 6:
+                                    message.predefinedExpression = 6;
+                                    break;
+                                case "DATE_YEAR_MASK":
+                                case 7:
+                                    message.predefinedExpression = 7;
+                                    break;
+                                case "RANDOM_HASH":
+                                case 8:
+                                    message.predefinedExpression = 8;
+                                    break;
+                                }
+                                if (object.routine != null)
+                                    message.routine = String(object.routine);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataMaskingPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy} message DataMaskingPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataMaskingPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.predefinedExpression != null && message.hasOwnProperty("predefinedExpression")) {
+                                    object.predefinedExpression = options.enums === String ? $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression[message.predefinedExpression] === undefined ? message.predefinedExpression : $root.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression[message.predefinedExpression] : message.predefinedExpression;
+                                    if (options.oneofs)
+                                        object.maskingExpression = "predefinedExpression";
+                                }
+                                if (message.routine != null && message.hasOwnProperty("routine")) {
+                                    object.routine = message.routine;
+                                    if (options.oneofs)
+                                        object.maskingExpression = "routine";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataMaskingPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataMaskingPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataMaskingPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataMaskingPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy";
+                            };
+    
+                            /**
+                             * PredefinedExpression enum.
+                             * @name google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression
+                             * @enum {number}
+                             * @property {number} PREDEFINED_EXPRESSION_UNSPECIFIED=0 PREDEFINED_EXPRESSION_UNSPECIFIED value
+                             * @property {number} SHA256=1 SHA256 value
+                             * @property {number} ALWAYS_NULL=2 ALWAYS_NULL value
+                             * @property {number} DEFAULT_MASKING_VALUE=3 DEFAULT_MASKING_VALUE value
+                             * @property {number} LAST_FOUR_CHARACTERS=4 LAST_FOUR_CHARACTERS value
+                             * @property {number} FIRST_FOUR_CHARACTERS=5 FIRST_FOUR_CHARACTERS value
+                             * @property {number} EMAIL_MASK=6 EMAIL_MASK value
+                             * @property {number} DATE_YEAR_MASK=7 DATE_YEAR_MASK value
+                             * @property {number} RANDOM_HASH=8 RANDOM_HASH value
+                             */
+                            DataMaskingPolicy.PredefinedExpression = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PREDEFINED_EXPRESSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SHA256"] = 1;
+                                values[valuesById[2] = "ALWAYS_NULL"] = 2;
+                                values[valuesById[3] = "DEFAULT_MASKING_VALUE"] = 3;
+                                values[valuesById[4] = "LAST_FOUR_CHARACTERS"] = 4;
+                                values[valuesById[5] = "FIRST_FOUR_CHARACTERS"] = 5;
+                                values[valuesById[6] = "EMAIL_MASK"] = 6;
+                                values[valuesById[7] = "DATE_YEAR_MASK"] = 7;
+                                values[valuesById[8] = "RANDOM_HASH"] = 8;
+                                return values;
+                            })();
+    
+                            return DataMaskingPolicy;
+                        })();
+    
+                        return v2;
+                    })();
+    
+                    datapolicies.v2beta1 = (function() {
+    
+                        /**
+                         * Namespace v2beta1.
+                         * @memberof google.cloud.bigquery.datapolicies
+                         * @namespace
+                         */
+                        var v2beta1 = {};
+    
+                        v2beta1.DataPolicyService = (function() {
+    
+                            /**
+                             * Constructs a new DataPolicyService service.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a DataPolicyService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function DataPolicyService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (DataPolicyService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DataPolicyService;
+    
+                            /**
+                             * Creates new DataPolicyService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {DataPolicyService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            DataPolicyService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|createDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef CreateDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls CreateDataPolicy.
+                             * @function createDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest} request CreateDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.CreateDataPolicyCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.createDataPolicy = function createDataPolicy(request, callback) {
+                                return this.rpcCall(createDataPolicy, $root.google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest, $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy, request, callback);
+                            }, "name", { value: "CreateDataPolicy" });
+    
+                            /**
+                             * Calls CreateDataPolicy.
+                             * @function createDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest} request CreateDataPolicyRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|addGrantees}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef AddGranteesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls AddGrantees.
+                             * @function addGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest} request AddGranteesRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.AddGranteesCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.addGrantees = function addGrantees(request, callback) {
+                                return this.rpcCall(addGrantees, $root.google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest, $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy, request, callback);
+                            }, "name", { value: "AddGrantees" });
+    
+                            /**
+                             * Calls AddGrantees.
+                             * @function addGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest} request AddGranteesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|removeGrantees}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef RemoveGranteesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls RemoveGrantees.
+                             * @function removeGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest} request RemoveGranteesRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.RemoveGranteesCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.removeGrantees = function removeGrantees(request, callback) {
+                                return this.rpcCall(removeGrantees, $root.google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest, $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy, request, callback);
+                            }, "name", { value: "RemoveGrantees" });
+    
+                            /**
+                             * Calls RemoveGrantees.
+                             * @function removeGrantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest} request RemoveGranteesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|updateDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef UpdateDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls UpdateDataPolicy.
+                             * @function updateDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest} request UpdateDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.UpdateDataPolicyCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.updateDataPolicy = function updateDataPolicy(request, callback) {
+                                return this.rpcCall(updateDataPolicy, $root.google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest, $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy, request, callback);
+                            }, "name", { value: "UpdateDataPolicy" });
+    
+                            /**
+                             * Calls UpdateDataPolicy.
+                             * @function updateDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest} request UpdateDataPolicyRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|deleteDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef DeleteDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteDataPolicy.
+                             * @function deleteDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest} request DeleteDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.DeleteDataPolicyCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.deleteDataPolicy = function deleteDataPolicy(request, callback) {
+                                return this.rpcCall(deleteDataPolicy, $root.google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteDataPolicy" });
+    
+                            /**
+                             * Calls DeleteDataPolicy.
+                             * @function deleteDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest} request DeleteDataPolicyRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|getDataPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef GetDataPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} [response] DataPolicy
+                             */
+    
+                            /**
+                             * Calls GetDataPolicy.
+                             * @function getDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest} request GetDataPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.GetDataPolicyCallback} callback Node-style callback called with the error, if any, and DataPolicy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.getDataPolicy = function getDataPolicy(request, callback) {
+                                return this.rpcCall(getDataPolicy, $root.google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest, $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy, request, callback);
+                            }, "name", { value: "GetDataPolicy" });
+    
+                            /**
+                             * Calls GetDataPolicy.
+                             * @function getDataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest} request GetDataPolicyRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2beta1.DataPolicy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|listDataPolicies}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef ListDataPoliciesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse} [response] ListDataPoliciesResponse
+                             */
+    
+                            /**
+                             * Calls ListDataPolicies.
+                             * @function listDataPolicies
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest} request ListDataPoliciesRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.ListDataPoliciesCallback} callback Node-style callback called with the error, if any, and ListDataPoliciesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.listDataPolicies = function listDataPolicies(request, callback) {
+                                return this.rpcCall(listDataPolicies, $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest, $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse, request, callback);
+                            }, "name", { value: "ListDataPolicies" });
+    
+                            /**
+                             * Calls ListDataPolicies.
+                             * @function listDataPolicies
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest} request ListDataPoliciesRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|getIamPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef GetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                                return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "GetIamPolicy" });
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|setIamPolicy}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef SetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                                return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "SetIamPolicy" });
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService|testIamPermissions}.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @typedef TestIamPermissionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                             */
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataPolicyService.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                                return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                            }, "name", { value: "TestIamPermissions" });
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicyService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return DataPolicyService;
+                        })();
+    
+                        v2beta1.CreateDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface ICreateDataPolicyRequest
+                             * @property {string|null} [parent] CreateDataPolicyRequest parent
+                             * @property {string|null} [dataPolicyId] CreateDataPolicyRequest dataPolicyId
+                             * @property {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null} [dataPolicy] CreateDataPolicyRequest dataPolicy
+                             */
+    
+                            /**
+                             * Constructs a new CreateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a CreateDataPolicyRequest.
+                             * @implements ICreateDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function CreateDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateDataPolicyRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @instance
+                             */
+                            CreateDataPolicyRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateDataPolicyRequest dataPolicyId.
+                             * @member {string} dataPolicyId
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @instance
+                             */
+                            CreateDataPolicyRequest.prototype.dataPolicyId = "";
+    
+                            /**
+                             * CreateDataPolicyRequest dataPolicy.
+                             * @member {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null|undefined} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @instance
+                             */
+                            CreateDataPolicyRequest.prototype.dataPolicy = null;
+    
+                            /**
+                             * Creates a new CreateDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest} CreateDataPolicyRequest instance
+                             */
+                            CreateDataPolicyRequest.create = function create(properties) {
+                                return new CreateDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest} message CreateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.dataPolicyId != null && Object.hasOwnProperty.call(message, "dataPolicyId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataPolicyId);
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.encode(message.dataPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ICreateDataPolicyRequest} message CreateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest} CreateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dataPolicyId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest} CreateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    if (!$util.isString(message.dataPolicyId))
+                                        return "dataPolicyId: string expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy")) {
+                                    var error = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.verify(message.dataPolicy);
+                                    if (error)
+                                        return "dataPolicy." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest} CreateDataPolicyRequest
+                             */
+                            CreateDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.dataPolicyId != null)
+                                    message.dataPolicyId = String(object.dataPolicyId);
+                                if (object.dataPolicy != null) {
+                                    if (typeof object.dataPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest.dataPolicy: object expected");
+                                    message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.fromObject(object.dataPolicy);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest} message CreateDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.dataPolicyId = "";
+                                    object.dataPolicy = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    object.dataPolicyId = message.dataPolicyId;
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.toObject(message.dataPolicy, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.CreateDataPolicyRequest";
+                            };
+    
+                            return CreateDataPolicyRequest;
+                        })();
+    
+                        v2beta1.UpdateDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IUpdateDataPolicyRequest
+                             * @property {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null} [dataPolicy] UpdateDataPolicyRequest dataPolicy
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDataPolicyRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents an UpdateDataPolicyRequest.
+                             * @implements IUpdateDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function UpdateDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateDataPolicyRequest dataPolicy.
+                             * @member {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy|null|undefined} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @instance
+                             */
+                            UpdateDataPolicyRequest.prototype.dataPolicy = null;
+    
+                            /**
+                             * UpdateDataPolicyRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @instance
+                             */
+                            UpdateDataPolicyRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest} UpdateDataPolicyRequest instance
+                             */
+                            UpdateDataPolicyRequest.create = function create(properties) {
+                                return new UpdateDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest} message UpdateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.encode(message.dataPolicy, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IUpdateDataPolicyRequest} message UpdateDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest} UpdateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest} UpdateDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy")) {
+                                    var error = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.verify(message.dataPolicy);
+                                    if (error)
+                                        return "dataPolicy." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest} UpdateDataPolicyRequest
+                             */
+                            UpdateDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest();
+                                if (object.dataPolicy != null) {
+                                    if (typeof object.dataPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest.dataPolicy: object expected");
+                                    message.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.fromObject(object.dataPolicy);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest} message UpdateDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.dataPolicy = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.toObject(message.dataPolicy, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.UpdateDataPolicyRequest";
+                            };
+    
+                            return UpdateDataPolicyRequest;
+                        })();
+    
+                        v2beta1.AddGranteesRequest = (function() {
+    
+                            /**
+                             * Properties of an AddGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IAddGranteesRequest
+                             * @property {string|null} [dataPolicy] AddGranteesRequest dataPolicy
+                             * @property {Array.<string>|null} [grantees] AddGranteesRequest grantees
+                             */
+    
+                            /**
+                             * Constructs a new AddGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents an AddGranteesRequest.
+                             * @implements IAddGranteesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest=} [properties] Properties to set
+                             */
+                            function AddGranteesRequest(properties) {
+                                this.grantees = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AddGranteesRequest dataPolicy.
+                             * @member {string} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @instance
+                             */
+                            AddGranteesRequest.prototype.dataPolicy = "";
+    
+                            /**
+                             * AddGranteesRequest grantees.
+                             * @member {Array.<string>} grantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @instance
+                             */
+                            AddGranteesRequest.prototype.grantees = $util.emptyArray;
+    
+                            /**
+                             * Creates a new AddGranteesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest} AddGranteesRequest instance
+                             */
+                            AddGranteesRequest.create = function create(properties) {
+                                return new AddGranteesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AddGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest} message AddGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddGranteesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataPolicy);
+                                if (message.grantees != null && message.grantees.length)
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.grantees[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AddGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IAddGranteesRequest} message AddGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AddGranteesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AddGranteesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest} AddGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddGranteesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataPolicy = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.grantees && message.grantees.length))
+                                                message.grantees = [];
+                                            message.grantees.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AddGranteesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest} AddGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AddGranteesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AddGranteesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AddGranteesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    if (!$util.isString(message.dataPolicy))
+                                        return "dataPolicy: string expected";
+                                if (message.grantees != null && message.hasOwnProperty("grantees")) {
+                                    if (!Array.isArray(message.grantees))
+                                        return "grantees: array expected";
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        if (!$util.isString(message.grantees[i]))
+                                            return "grantees: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AddGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest} AddGranteesRequest
+                             */
+                            AddGranteesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest();
+                                if (object.dataPolicy != null)
+                                    message.dataPolicy = String(object.dataPolicy);
+                                if (object.grantees) {
+                                    if (!Array.isArray(object.grantees))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest.grantees: array expected");
+                                    message.grantees = [];
+                                    for (var i = 0; i < object.grantees.length; ++i)
+                                        message.grantees[i] = String(object.grantees[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AddGranteesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest} message AddGranteesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AddGranteesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.grantees = [];
+                                if (options.defaults)
+                                    object.dataPolicy = "";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = message.dataPolicy;
+                                if (message.grantees && message.grantees.length) {
+                                    object.grantees = [];
+                                    for (var j = 0; j < message.grantees.length; ++j)
+                                        object.grantees[j] = message.grantees[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AddGranteesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AddGranteesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AddGranteesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AddGranteesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.AddGranteesRequest";
+                            };
+    
+                            return AddGranteesRequest;
+                        })();
+    
+                        v2beta1.RemoveGranteesRequest = (function() {
+    
+                            /**
+                             * Properties of a RemoveGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IRemoveGranteesRequest
+                             * @property {string|null} [dataPolicy] RemoveGranteesRequest dataPolicy
+                             * @property {Array.<string>|null} [grantees] RemoveGranteesRequest grantees
+                             */
+    
+                            /**
+                             * Constructs a new RemoveGranteesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a RemoveGranteesRequest.
+                             * @implements IRemoveGranteesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest=} [properties] Properties to set
+                             */
+                            function RemoveGranteesRequest(properties) {
+                                this.grantees = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RemoveGranteesRequest dataPolicy.
+                             * @member {string} dataPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @instance
+                             */
+                            RemoveGranteesRequest.prototype.dataPolicy = "";
+    
+                            /**
+                             * RemoveGranteesRequest grantees.
+                             * @member {Array.<string>} grantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @instance
+                             */
+                            RemoveGranteesRequest.prototype.grantees = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RemoveGranteesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest} RemoveGranteesRequest instance
+                             */
+                            RemoveGranteesRequest.create = function create(properties) {
+                                return new RemoveGranteesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveGranteesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest} message RemoveGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveGranteesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicy != null && Object.hasOwnProperty.call(message, "dataPolicy"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataPolicy);
+                                if (message.grantees != null && message.grantees.length)
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.grantees[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RemoveGranteesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IRemoveGranteesRequest} message RemoveGranteesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RemoveGranteesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RemoveGranteesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest} RemoveGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveGranteesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataPolicy = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.grantees && message.grantees.length))
+                                                message.grantees = [];
+                                            message.grantees.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RemoveGranteesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest} RemoveGranteesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RemoveGranteesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RemoveGranteesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RemoveGranteesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    if (!$util.isString(message.dataPolicy))
+                                        return "dataPolicy: string expected";
+                                if (message.grantees != null && message.hasOwnProperty("grantees")) {
+                                    if (!Array.isArray(message.grantees))
+                                        return "grantees: array expected";
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        if (!$util.isString(message.grantees[i]))
+                                            return "grantees: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RemoveGranteesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest} RemoveGranteesRequest
+                             */
+                            RemoveGranteesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest();
+                                if (object.dataPolicy != null)
+                                    message.dataPolicy = String(object.dataPolicy);
+                                if (object.grantees) {
+                                    if (!Array.isArray(object.grantees))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest.grantees: array expected");
+                                    message.grantees = [];
+                                    for (var i = 0; i < object.grantees.length; ++i)
+                                        message.grantees[i] = String(object.grantees[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RemoveGranteesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest} message RemoveGranteesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RemoveGranteesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.grantees = [];
+                                if (options.defaults)
+                                    object.dataPolicy = "";
+                                if (message.dataPolicy != null && message.hasOwnProperty("dataPolicy"))
+                                    object.dataPolicy = message.dataPolicy;
+                                if (message.grantees && message.grantees.length) {
+                                    object.grantees = [];
+                                    for (var j = 0; j < message.grantees.length; ++j)
+                                        object.grantees[j] = message.grantees[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RemoveGranteesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RemoveGranteesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RemoveGranteesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RemoveGranteesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.RemoveGranteesRequest";
+                            };
+    
+                            return RemoveGranteesRequest;
+                        })();
+    
+                        v2beta1.DeleteDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IDeleteDataPolicyRequest
+                             * @property {string|null} [name] DeleteDataPolicyRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a DeleteDataPolicyRequest.
+                             * @implements IDeleteDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function DeleteDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteDataPolicyRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @instance
+                             */
+                            DeleteDataPolicyRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest} DeleteDataPolicyRequest instance
+                             */
+                            DeleteDataPolicyRequest.create = function create(properties) {
+                                return new DeleteDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest} message DeleteDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDeleteDataPolicyRequest} message DeleteDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest} DeleteDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest} DeleteDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest} DeleteDataPolicyRequest
+                             */
+                            DeleteDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest} message DeleteDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.DeleteDataPolicyRequest";
+                            };
+    
+                            return DeleteDataPolicyRequest;
+                        })();
+    
+                        v2beta1.GetDataPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a GetDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IGetDataPolicyRequest
+                             * @property {string|null} [name] GetDataPolicyRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetDataPolicyRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a GetDataPolicyRequest.
+                             * @implements IGetDataPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest=} [properties] Properties to set
+                             */
+                            function GetDataPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetDataPolicyRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @instance
+                             */
+                            GetDataPolicyRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetDataPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest} GetDataPolicyRequest instance
+                             */
+                            GetDataPolicyRequest.create = function create(properties) {
+                                return new GetDataPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetDataPolicyRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest} message GetDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetDataPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetDataPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IGetDataPolicyRequest} message GetDataPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetDataPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetDataPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest} GetDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetDataPolicyRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetDataPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest} GetDataPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetDataPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetDataPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetDataPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetDataPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest} GetDataPolicyRequest
+                             */
+                            GetDataPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetDataPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest} message GetDataPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetDataPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetDataPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetDataPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetDataPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetDataPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.GetDataPolicyRequest";
+                            };
+    
+                            return GetDataPolicyRequest;
+                        })();
+    
+                        v2beta1.ListDataPoliciesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListDataPoliciesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IListDataPoliciesRequest
+                             * @property {string|null} [parent] ListDataPoliciesRequest parent
+                             * @property {number|null} [pageSize] ListDataPoliciesRequest pageSize
+                             * @property {string|null} [pageToken] ListDataPoliciesRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListDataPoliciesRequest.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a ListDataPoliciesRequest.
+                             * @implements IListDataPoliciesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest=} [properties] Properties to set
+                             */
+                            function ListDataPoliciesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListDataPoliciesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @instance
+                             */
+                            ListDataPoliciesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListDataPoliciesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @instance
+                             */
+                            ListDataPoliciesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListDataPoliciesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @instance
+                             */
+                            ListDataPoliciesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListDataPoliciesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest} ListDataPoliciesRequest instance
+                             */
+                            ListDataPoliciesRequest.create = function create(properties) {
+                                return new ListDataPoliciesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesRequest message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest} message ListDataPoliciesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesRequest} message ListDataPoliciesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest} ListDataPoliciesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest} ListDataPoliciesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListDataPoliciesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListDataPoliciesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListDataPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest} ListDataPoliciesRequest
+                             */
+                            ListDataPoliciesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListDataPoliciesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest} message ListDataPoliciesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListDataPoliciesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListDataPoliciesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListDataPoliciesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListDataPoliciesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListDataPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesRequest";
+                            };
+    
+                            return ListDataPoliciesRequest;
+                        })();
+    
+                        v2beta1.ListDataPoliciesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListDataPoliciesResponse.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IListDataPoliciesResponse
+                             * @property {Array.<google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy>|null} [dataPolicies] ListDataPoliciesResponse dataPolicies
+                             * @property {string|null} [nextPageToken] ListDataPoliciesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListDataPoliciesResponse.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a ListDataPoliciesResponse.
+                             * @implements IListDataPoliciesResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse=} [properties] Properties to set
+                             */
+                            function ListDataPoliciesResponse(properties) {
+                                this.dataPolicies = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListDataPoliciesResponse dataPolicies.
+                             * @member {Array.<google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy>} dataPolicies
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @instance
+                             */
+                            ListDataPoliciesResponse.prototype.dataPolicies = $util.emptyArray;
+    
+                            /**
+                             * ListDataPoliciesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @instance
+                             */
+                            ListDataPoliciesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListDataPoliciesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse} ListDataPoliciesResponse instance
+                             */
+                            ListDataPoliciesResponse.create = function create(properties) {
+                                return new ListDataPoliciesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesResponse message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse} message ListDataPoliciesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataPolicies != null && message.dataPolicies.length)
+                                    for (var i = 0; i < message.dataPolicies.length; ++i)
+                                        $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.encode(message.dataPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IListDataPoliciesResponse} message ListDataPoliciesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse} ListDataPoliciesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.dataPolicies && message.dataPolicies.length))
+                                                message.dataPolicies = [];
+                                            message.dataPolicies.push($root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListDataPoliciesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse} ListDataPoliciesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListDataPoliciesResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListDataPoliciesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataPolicies != null && message.hasOwnProperty("dataPolicies")) {
+                                    if (!Array.isArray(message.dataPolicies))
+                                        return "dataPolicies: array expected";
+                                    for (var i = 0; i < message.dataPolicies.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.verify(message.dataPolicies[i]);
+                                        if (error)
+                                            return "dataPolicies." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListDataPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse} ListDataPoliciesResponse
+                             */
+                            ListDataPoliciesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse();
+                                if (object.dataPolicies) {
+                                    if (!Array.isArray(object.dataPolicies))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse.dataPolicies: array expected");
+                                    message.dataPolicies = [];
+                                    for (var i = 0; i < object.dataPolicies.length; ++i) {
+                                        if (typeof object.dataPolicies[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse.dataPolicies: object expected");
+                                        message.dataPolicies[i] = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.fromObject(object.dataPolicies[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListDataPoliciesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse} message ListDataPoliciesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListDataPoliciesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dataPolicies = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.dataPolicies && message.dataPolicies.length) {
+                                    object.dataPolicies = [];
+                                    for (var j = 0; j < message.dataPolicies.length; ++j)
+                                        object.dataPolicies[j] = $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.toObject(message.dataPolicies[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListDataPoliciesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListDataPoliciesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListDataPoliciesResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListDataPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.ListDataPoliciesResponse";
+                            };
+    
+                            return ListDataPoliciesResponse;
+                        })();
+    
+                        v2beta1.DataPolicy = (function() {
+    
+                            /**
+                             * Properties of a DataPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IDataPolicy
+                             * @property {google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy|null} [dataMaskingPolicy] DataPolicy dataMaskingPolicy
+                             * @property {string|null} [name] DataPolicy name
+                             * @property {string|null} [dataPolicyId] DataPolicy dataPolicyId
+                             * @property {string|null} [etag] DataPolicy etag
+                             * @property {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType|null} [dataPolicyType] DataPolicy dataPolicyType
+                             * @property {string|null} [policyTag] DataPolicy policyTag
+                             * @property {Array.<string>|null} [grantees] DataPolicy grantees
+                             * @property {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version|null} [version] DataPolicy version
+                             */
+    
+                            /**
+                             * Constructs a new DataPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a DataPolicy.
+                             * @implements IDataPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy=} [properties] Properties to set
+                             */
+                            function DataPolicy(properties) {
+                                this.grantees = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataPolicy dataMaskingPolicy.
+                             * @member {google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy|null|undefined} dataMaskingPolicy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.dataMaskingPolicy = null;
+    
+                            /**
+                             * DataPolicy name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.name = "";
+    
+                            /**
+                             * DataPolicy dataPolicyId.
+                             * @member {string} dataPolicyId
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.dataPolicyId = "";
+    
+                            /**
+                             * DataPolicy etag.
+                             * @member {string|null|undefined} etag
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.etag = null;
+    
+                            /**
+                             * DataPolicy dataPolicyType.
+                             * @member {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType} dataPolicyType
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.dataPolicyType = 0;
+    
+                            /**
+                             * DataPolicy policyTag.
+                             * @member {string} policyTag
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.policyTag = "";
+    
+                            /**
+                             * DataPolicy grantees.
+                             * @member {Array.<string>} grantees
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.grantees = $util.emptyArray;
+    
+                            /**
+                             * DataPolicy version.
+                             * @member {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version} version
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            DataPolicy.prototype.version = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataPolicy policy.
+                             * @member {"dataMaskingPolicy"|undefined} policy
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             */
+                            Object.defineProperty(DataPolicy.prototype, "policy", {
+                                get: $util.oneOfGetter($oneOfFields = ["dataMaskingPolicy"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(DataPolicy.prototype, "_etag", {
+                                get: $util.oneOfGetter($oneOfFields = ["etag"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} DataPolicy instance
+                             */
+                            DataPolicy.create = function create(properties) {
+                                return new DataPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy} message DataPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.dataPolicyId != null && Object.hasOwnProperty.call(message, "dataPolicyId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataPolicyId);
+                                if (message.dataPolicyType != null && Object.hasOwnProperty.call(message, "dataPolicyType"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.dataPolicyType);
+                                if (message.policyTag != null && Object.hasOwnProperty.call(message, "policyTag"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.policyTag);
+                                if (message.dataMaskingPolicy != null && Object.hasOwnProperty.call(message, "dataMaskingPolicy"))
+                                    $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.encode(message.dataMaskingPolicy, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.grantees != null && message.grantees.length)
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.grantees[i]);
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.version);
+                                if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.etag);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataPolicy} message DataPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} DataPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 7: {
+                                            message.dataMaskingPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dataPolicyId = reader.string();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.etag = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataPolicyType = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.policyTag = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            if (!(message.grantees && message.grantees.length))
+                                                message.grantees = [];
+                                            message.grantees.push(reader.string());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.version = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} DataPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.dataMaskingPolicy != null && message.hasOwnProperty("dataMaskingPolicy")) {
+                                    properties.policy = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.verify(message.dataMaskingPolicy);
+                                        if (error)
+                                            return "dataMaskingPolicy." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    if (!$util.isString(message.dataPolicyId))
+                                        return "dataPolicyId: string expected";
+                                if (message.etag != null && message.hasOwnProperty("etag")) {
+                                    properties._etag = 1;
+                                    if (!$util.isString(message.etag))
+                                        return "etag: string expected";
+                                }
+                                if (message.dataPolicyType != null && message.hasOwnProperty("dataPolicyType"))
+                                    switch (message.dataPolicyType) {
+                                    default:
+                                        return "dataPolicyType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                    if (!$util.isString(message.policyTag))
+                                        return "policyTag: string expected";
+                                if (message.grantees != null && message.hasOwnProperty("grantees")) {
+                                    if (!Array.isArray(message.grantees))
+                                        return "grantees: array expected";
+                                    for (var i = 0; i < message.grantees.length; ++i)
+                                        if (!$util.isString(message.grantees[i]))
+                                            return "grantees: string[] expected";
+                                }
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    switch (message.version) {
+                                    default:
+                                        return "version: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} DataPolicy
+                             */
+                            DataPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy();
+                                if (object.dataMaskingPolicy != null) {
+                                    if (typeof object.dataMaskingPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.dataMaskingPolicy: object expected");
+                                    message.dataMaskingPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.fromObject(object.dataMaskingPolicy);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.dataPolicyId != null)
+                                    message.dataPolicyId = String(object.dataPolicyId);
+                                if (object.etag != null)
+                                    message.etag = String(object.etag);
+                                switch (object.dataPolicyType) {
+                                default:
+                                    if (typeof object.dataPolicyType === "number") {
+                                        message.dataPolicyType = object.dataPolicyType;
+                                        break;
+                                    }
+                                    break;
+                                case "DATA_POLICY_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.dataPolicyType = 0;
+                                    break;
+                                case "DATA_MASKING_POLICY":
+                                case 1:
+                                    message.dataPolicyType = 1;
+                                    break;
+                                case "RAW_DATA_ACCESS_POLICY":
+                                case 2:
+                                    message.dataPolicyType = 2;
+                                    break;
+                                }
+                                if (object.policyTag != null)
+                                    message.policyTag = String(object.policyTag);
+                                if (object.grantees) {
+                                    if (!Array.isArray(object.grantees))
+                                        throw TypeError(".google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.grantees: array expected");
+                                    message.grantees = [];
+                                    for (var i = 0; i < object.grantees.length; ++i)
+                                        message.grantees[i] = String(object.grantees[i]);
+                                }
+                                switch (object.version) {
+                                default:
+                                    if (typeof object.version === "number") {
+                                        message.version = object.version;
+                                        break;
+                                    }
+                                    break;
+                                case "VERSION_UNSPECIFIED":
+                                case 0:
+                                    message.version = 0;
+                                    break;
+                                case "V1":
+                                case 1:
+                                    message.version = 1;
+                                    break;
+                                case "V2":
+                                case 2:
+                                    message.version = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataPolicy} message DataPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.grantees = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.dataPolicyId = "";
+                                    object.dataPolicyType = options.enums === String ? "DATA_POLICY_TYPE_UNSPECIFIED" : 0;
+                                    object.policyTag = "";
+                                    object.version = options.enums === String ? "VERSION_UNSPECIFIED" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.dataPolicyId != null && message.hasOwnProperty("dataPolicyId"))
+                                    object.dataPolicyId = message.dataPolicyId;
+                                if (message.dataPolicyType != null && message.hasOwnProperty("dataPolicyType"))
+                                    object.dataPolicyType = options.enums === String ? $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType[message.dataPolicyType] === undefined ? message.dataPolicyType : $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType[message.dataPolicyType] : message.dataPolicyType;
+                                if (message.policyTag != null && message.hasOwnProperty("policyTag"))
+                                    object.policyTag = message.policyTag;
+                                if (message.dataMaskingPolicy != null && message.hasOwnProperty("dataMaskingPolicy")) {
+                                    object.dataMaskingPolicy = $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.toObject(message.dataMaskingPolicy, options);
+                                    if (options.oneofs)
+                                        object.policy = "dataMaskingPolicy";
+                                }
+                                if (message.grantees && message.grantees.length) {
+                                    object.grantees = [];
+                                    for (var j = 0; j < message.grantees.length; ++j)
+                                        object.grantees[j] = message.grantees[j];
+                                }
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = options.enums === String ? $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version[message.version] === undefined ? message.version : $root.google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version[message.version] : message.version;
+                                if (message.etag != null && message.hasOwnProperty("etag")) {
+                                    object.etag = message.etag;
+                                    if (options.oneofs)
+                                        object._etag = "etag";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.DataPolicy";
+                            };
+    
+                            /**
+                             * DataPolicyType enum.
+                             * @name google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.DataPolicyType
+                             * @enum {number}
+                             * @property {number} DATA_POLICY_TYPE_UNSPECIFIED=0 DATA_POLICY_TYPE_UNSPECIFIED value
+                             * @property {number} DATA_MASKING_POLICY=1 DATA_MASKING_POLICY value
+                             * @property {number} RAW_DATA_ACCESS_POLICY=2 RAW_DATA_ACCESS_POLICY value
+                             */
+                            DataPolicy.DataPolicyType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "DATA_POLICY_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DATA_MASKING_POLICY"] = 1;
+                                values[valuesById[2] = "RAW_DATA_ACCESS_POLICY"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * Version enum.
+                             * @name google.cloud.bigquery.datapolicies.v2beta1.DataPolicy.Version
+                             * @enum {number}
+                             * @property {number} VERSION_UNSPECIFIED=0 VERSION_UNSPECIFIED value
+                             * @property {number} V1=1 V1 value
+                             * @property {number} V2=2 V2 value
+                             */
+                            DataPolicy.Version = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "VERSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "V1"] = 1;
+                                values[valuesById[2] = "V2"] = 2;
+                                return values;
+                            })();
+    
+                            return DataPolicy;
+                        })();
+    
+                        v2beta1.DataMaskingPolicy = (function() {
+    
+                            /**
+                             * Properties of a DataMaskingPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @interface IDataMaskingPolicy
+                             * @property {google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression|null} [predefinedExpression] DataMaskingPolicy predefinedExpression
+                             */
+    
+                            /**
+                             * Constructs a new DataMaskingPolicy.
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1
+                             * @classdesc Represents a DataMaskingPolicy.
+                             * @implements IDataMaskingPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy=} [properties] Properties to set
+                             */
+                            function DataMaskingPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataMaskingPolicy predefinedExpression.
+                             * @member {google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression|null|undefined} predefinedExpression
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @instance
+                             */
+                            DataMaskingPolicy.prototype.predefinedExpression = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataMaskingPolicy maskingExpression.
+                             * @member {"predefinedExpression"|undefined} maskingExpression
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @instance
+                             */
+                            Object.defineProperty(DataMaskingPolicy.prototype, "maskingExpression", {
+                                get: $util.oneOfGetter($oneOfFields = ["predefinedExpression"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataMaskingPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy} DataMaskingPolicy instance
+                             */
+                            DataMaskingPolicy.create = function create(properties) {
+                                return new DataMaskingPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataMaskingPolicy message. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy} message DataMaskingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataMaskingPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.predefinedExpression != null && Object.hasOwnProperty.call(message, "predefinedExpression"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.predefinedExpression);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataMaskingPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.IDataMaskingPolicy} message DataMaskingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataMaskingPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataMaskingPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy} DataMaskingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataMaskingPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.predefinedExpression = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataMaskingPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy} DataMaskingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataMaskingPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataMaskingPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataMaskingPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.predefinedExpression != null && message.hasOwnProperty("predefinedExpression")) {
+                                    properties.maskingExpression = 1;
+                                    switch (message.predefinedExpression) {
+                                    default:
+                                        return "predefinedExpression: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataMaskingPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy} DataMaskingPolicy
+                             */
+                            DataMaskingPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy();
+                                switch (object.predefinedExpression) {
+                                default:
+                                    if (typeof object.predefinedExpression === "number") {
+                                        message.predefinedExpression = object.predefinedExpression;
+                                        break;
+                                    }
+                                    break;
+                                case "PREDEFINED_EXPRESSION_UNSPECIFIED":
+                                case 0:
+                                    message.predefinedExpression = 0;
+                                    break;
+                                case "SHA256":
+                                case 1:
+                                    message.predefinedExpression = 1;
+                                    break;
+                                case "ALWAYS_NULL":
+                                case 2:
+                                    message.predefinedExpression = 2;
+                                    break;
+                                case "DEFAULT_MASKING_VALUE":
+                                case 3:
+                                    message.predefinedExpression = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataMaskingPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy} message DataMaskingPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataMaskingPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.predefinedExpression != null && message.hasOwnProperty("predefinedExpression")) {
+                                    object.predefinedExpression = options.enums === String ? $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression[message.predefinedExpression] === undefined ? message.predefinedExpression : $root.google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression[message.predefinedExpression] : message.predefinedExpression;
+                                    if (options.oneofs)
+                                        object.maskingExpression = "predefinedExpression";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataMaskingPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataMaskingPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataMaskingPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataMaskingPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy";
+                            };
+    
+                            /**
+                             * PredefinedExpression enum.
+                             * @name google.cloud.bigquery.datapolicies.v2beta1.DataMaskingPolicy.PredefinedExpression
+                             * @enum {number}
+                             * @property {number} PREDEFINED_EXPRESSION_UNSPECIFIED=0 PREDEFINED_EXPRESSION_UNSPECIFIED value
+                             * @property {number} SHA256=1 SHA256 value
+                             * @property {number} ALWAYS_NULL=2 ALWAYS_NULL value
+                             * @property {number} DEFAULT_MASKING_VALUE=3 DEFAULT_MASKING_VALUE value
+                             */
+                            DataMaskingPolicy.PredefinedExpression = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PREDEFINED_EXPRESSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SHA256"] = 1;
+                                values[valuesById[2] = "ALWAYS_NULL"] = 2;
+                                values[valuesById[3] = "DEFAULT_MASKING_VALUE"] = 3;
+                                return values;
+                            })();
+    
+                            return DataMaskingPolicy;
+                        })();
+    
+                        return v2beta1;
+                    })();
+    
                     return datapolicies;
                 })();
     
@@ -5178,12 +11417,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -5528,12 +11769,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -5912,12 +12155,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -6144,12 +12389,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -6513,12 +12760,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -6857,6 +13106,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -6958,6 +13208,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -7004,6 +13262,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -7031,12 +13291,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -7082,6 +13344,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -7176,6 +13442,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -7270,6 +13539,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -7299,6 +13570,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -7329,6 +13601,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -7470,12 +13744,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -7737,12 +14013,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -7945,12 +14223,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -8153,12 +14433,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -8361,12 +14643,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -8634,12 +14918,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -9013,12 +15299,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -9221,12 +15509,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -9453,12 +15743,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -9731,12 +16023,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -10158,12 +16452,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -10553,12 +16849,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -10783,12 +17081,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -11183,12 +17483,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -11850,12 +18152,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -12335,12 +18639,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -12579,12 +18885,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -12835,12 +19143,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -13180,12 +19490,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -13559,12 +19871,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -14084,12 +20398,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -14355,12 +20671,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -14674,12 +20992,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -14915,12 +21235,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -15172,12 +21494,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -15480,12 +21804,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -15984,12 +22310,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -16604,12 +22932,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -17052,12 +23382,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -17087,12 +23414,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -17818,12 +24147,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -18114,12 +24445,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -18400,12 +24733,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -18712,12 +25047,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -18903,6 +25240,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -18962,6 +25300,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -18996,6 +25342,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -19023,12 +25371,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -19050,6 +25400,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -19110,6 +25464,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -19146,6 +25503,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -19169,6 +25528,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -19183,6 +25543,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -19359,12 +25721,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -19776,12 +26140,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -20115,12 +26481,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -20391,12 +26759,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -20926,12 +27296,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -21310,12 +27682,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -21600,12 +27974,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -21875,12 +28251,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -22186,12 +28564,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -22454,12 +28834,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -22780,12 +29162,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -23012,12 +29396,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -23218,12 +29604,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -23581,12 +29969,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SetIamPolicyRequest.decode = function decode(reader, length) {
+                    SetIamPolicyRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.SetIamPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.resource = reader.string();
@@ -23830,12 +30220,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetIamPolicyRequest.decode = function decode(reader, length) {
+                    GetIamPolicyRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetIamPolicyRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.resource = reader.string();
@@ -24064,12 +30456,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TestIamPermissionsRequest.decode = function decode(reader, length) {
+                    TestIamPermissionsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.resource = reader.string();
@@ -24296,12 +30690,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TestIamPermissionsResponse.decode = function decode(reader, length) {
+                    TestIamPermissionsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.permissions && message.permissions.length))
@@ -24513,12 +30909,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetPolicyOptions.decode = function decode(reader, length) {
+                    GetPolicyOptions.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetPolicyOptions();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.requestedPolicyVersion = reader.int32();
@@ -24753,12 +31151,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Policy.decode = function decode(reader, length) {
+                    Policy.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Policy();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.version = reader.int32();
@@ -25066,12 +31466,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Binding.decode = function decode(reader, length) {
+                    Binding.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Binding();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.role = reader.string();
@@ -25327,12 +31729,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuditConfig.decode = function decode(reader, length) {
+                    AuditConfig.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfig();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.service = reader.string();
@@ -25575,12 +31979,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuditLogConfig.decode = function decode(reader, length) {
+                    AuditLogConfig.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditLogConfig();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.logType = reader.int32();
@@ -25867,12 +32273,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    PolicyDelta.decode = function decode(reader, length) {
+                    PolicyDelta.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.PolicyDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.bindingDeltas && message.bindingDeltas.length))
@@ -26154,12 +32562,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BindingDelta.decode = function decode(reader, length) {
+                    BindingDelta.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.BindingDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.action = reader.int32();
@@ -26472,12 +32882,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuditConfigDelta.decode = function decode(reader, length) {
+                    AuditConfigDelta.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfigDelta();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.action = reader.int32();
@@ -26800,12 +33212,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Expr.decode = function decode(reader, length) {
+                Expr.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Expr();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.expression = reader.string();

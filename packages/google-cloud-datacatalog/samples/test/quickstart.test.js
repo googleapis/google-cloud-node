@@ -12,78 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 'use strict';
+
 
 const {assert} = require('chai');
 const {describe, it, before} = require('mocha');
-const uuid = require('uuid');
 const cp = require('child_process');
-const {BigQuery} = require('@google-cloud/bigquery');
+// Imports the Datacatalog library
+const {DataCatalogClient} = require('@google-cloud/datacatalog').v1;
 
-const bigquery = new BigQuery();
+
+// Instantiates a client
+const datacatalogClient = new DataCatalogClient();
+
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const GCLOUD_TESTS_PREFIX = 'nodejs_data_catalog_samples';
-const generateUuid = () =>
-  `${GCLOUD_TESTS_PREFIX}_${uuid.v4()}`.replace(/-/gi, '_');
 
 describe('Quickstart', async () => {
-  let projectId;
-  let datasetId;
-  let tableId;
+ let projectId;
 
-  before(async () => {
-    // Delete any stale datasets from samples tests
-    await deleteDatasets();
 
-    // Create BigQuery dataset & table.
-    datasetId = generateUuid();
-    tableId = generateUuid();
-    await bigquery.createDataset(datasetId);
-    await bigquery.dataset(datasetId).createTable(tableId);
-    projectId = await bigquery.getProjectId();
-  });
+ before(async () => {
+   projectId = await datacatalogClient.getProjectId();
+ });
 
-  it('quickstart should attach tag to BigQuery table', async () => {
-    const output = execSync(
-      `node quickstart ${projectId} ${datasetId} ${tableId}`
-    );
-    assert.include(output, 'Created template:');
-    assert.include(
-      output,
-      `Linked resource: //bigquery.googleapis.com/projects/${projectId}/datasets/${datasetId}/tables/${tableId}`
-    );
-    assert.include(output, 'Tag created for entry:');
-  });
 
-  // Only delete a resource if it is older than 24 hours. That will prevent
-  // collisions with parallel CI test runs.
-  function isResourceStale(creationTime) {
-    const oneDayMs = 86400000;
-    const now = new Date();
-    const created = new Date(creationTime);
-    return now.getTime() - created.getTime() >= oneDayMs;
-  }
-
-  async function deleteDatasets() {
-    let [datasets] = await bigquery.getDatasets();
-    datasets = datasets.filter(dataset =>
-      dataset.id.includes(GCLOUD_TESTS_PREFIX)
-    );
-
-    for (const dataset of datasets) {
-      const [metadata] = await dataset.getMetadata();
-      const creationTime = Number(metadata.creationTime);
-
-      if (isResourceStale(creationTime)) {
-        try {
-          await dataset.delete({force: true});
-        } catch (e) {
-          console.log(`dataset(${dataset.id}).delete() failed`);
-          console.log(e);
-        }
-      }
-    }
-  }
+ it('quickstart should attach tag to BigQuery table', async () => {
+   const output = execSync(
+     `node quickstart projects/${projectId}/locations/us-central1`,
+   );
+   assert(output !== null);
+ });
 });

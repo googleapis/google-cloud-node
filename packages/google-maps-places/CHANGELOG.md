@@ -1,5 +1,42 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.3.0...places-v2.4.0) (2026-03-19)
+
+
+### Features
+
+* [places] add a new business status `FUTURE_OPENING` for places, ([#7821](https://github.com/googleapis/google-cloud-node/issues/7821)) ([bbaf918](https://github.com/googleapis/google-cloud-node/commit/bbaf91884b006918b1235edb483e5ac7ed09442b))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.2.0...places-v2.3.0) (2026-02-19)
+
+
+### Features
+
+* [places] Add `googleMapsTypeLabel` field to show type information on Google Maps ([#7251](https://github.com/googleapis/google-cloud-node/issues/7251)) ([95cccbe](https://github.com/googleapis/google-cloud-node/commit/95cccbe3c0b9e89a443c6a7bfffaa282616203ad))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.1.1...places-v2.2.0) (2025-10-23)
+
+
+### Features
+
+* [places] Add Review.visitDate field to indicate when the review author visited ([#6836](https://github.com/googleapis/google-cloud-node/issues/6836)) ([31da8eb](https://github.com/googleapis/google-cloud-node/commit/31da8eb0033e4edd861695715eda47830a5b447a))
+
+## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/places-v2.1.0...places-v2.1.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.0.1...places-v2.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6425](https://github.com/googleapis/google-cloud-node/issues/6425)) ([c920e8d](https://github.com/googleapis/google-cloud-node/commit/c920e8d0d43be81fc171bc5f7d59800b66b830b8))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/places-v2.0.0...places-v2.0.1) (2025-03-19)
 
 

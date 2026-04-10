@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,19 +19,14 @@
 import {CertificateAuthorityServiceClient} from '@google-cloud/security-private-ca';
 
 // check that the client class type name can be used
-function doStuffWithCertificateAuthorityServiceClient(
-  client: CertificateAuthorityServiceClient
-) {
+function doStuffWithCertificateAuthorityServiceClient(client: CertificateAuthorityServiceClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const certificateAuthorityServiceClient =
-    new CertificateAuthorityServiceClient();
-  doStuffWithCertificateAuthorityServiceClient(
-    certificateAuthorityServiceClient
-  );
+  const certificateAuthorityServiceClient = new CertificateAuthorityServiceClient();
+  doStuffWithCertificateAuthorityServiceClient(certificateAuthorityServiceClient);
 }
 
 main();

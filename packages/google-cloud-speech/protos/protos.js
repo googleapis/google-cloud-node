@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29740,6 +29740,211 @@
                         return SpeakerDiarizationConfig;
                     })();
     
+                    v2.CustomPromptConfig = (function() {
+    
+                        /**
+                         * Properties of a CustomPromptConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface ICustomPromptConfig
+                         * @property {string|null} [customPrompt] CustomPromptConfig customPrompt
+                         */
+    
+                        /**
+                         * Constructs a new CustomPromptConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a CustomPromptConfig.
+                         * @implements ICustomPromptConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.ICustomPromptConfig=} [properties] Properties to set
+                         */
+                        function CustomPromptConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomPromptConfig customPrompt.
+                         * @member {string} customPrompt
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @instance
+                         */
+                        CustomPromptConfig.prototype.customPrompt = "";
+    
+                        /**
+                         * Creates a new CustomPromptConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ICustomPromptConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.CustomPromptConfig} CustomPromptConfig instance
+                         */
+                        CustomPromptConfig.create = function create(properties) {
+                            return new CustomPromptConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomPromptConfig message. Does not implicitly {@link google.cloud.speech.v2.CustomPromptConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ICustomPromptConfig} message CustomPromptConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomPromptConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customPrompt != null && Object.hasOwnProperty.call(message, "customPrompt"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.customPrompt);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomPromptConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.CustomPromptConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ICustomPromptConfig} message CustomPromptConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomPromptConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomPromptConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.CustomPromptConfig} CustomPromptConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomPromptConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.CustomPromptConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customPrompt = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomPromptConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.CustomPromptConfig} CustomPromptConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomPromptConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomPromptConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomPromptConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customPrompt != null && message.hasOwnProperty("customPrompt"))
+                                if (!$util.isString(message.customPrompt))
+                                    return "customPrompt: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomPromptConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.CustomPromptConfig} CustomPromptConfig
+                         */
+                        CustomPromptConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.CustomPromptConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.CustomPromptConfig();
+                            if (object.customPrompt != null)
+                                message.customPrompt = String(object.customPrompt);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomPromptConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.CustomPromptConfig} message CustomPromptConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomPromptConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.customPrompt = "";
+                            if (message.customPrompt != null && message.hasOwnProperty("customPrompt"))
+                                object.customPrompt = message.customPrompt;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomPromptConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomPromptConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomPromptConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.CustomPromptConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomPromptConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.CustomPromptConfig";
+                        };
+    
+                        return CustomPromptConfig;
+                    })();
+    
                     v2.RecognitionFeatures = (function() {
     
                         /**
@@ -29755,6 +29960,7 @@
                          * @property {google.cloud.speech.v2.RecognitionFeatures.MultiChannelMode|null} [multiChannelMode] RecognitionFeatures multiChannelMode
                          * @property {google.cloud.speech.v2.ISpeakerDiarizationConfig|null} [diarizationConfig] RecognitionFeatures diarizationConfig
                          * @property {number|null} [maxAlternatives] RecognitionFeatures maxAlternatives
+                         * @property {google.cloud.speech.v2.ICustomPromptConfig|null} [customPromptConfig] RecognitionFeatures customPromptConfig
                          */
     
                         /**
@@ -29845,6 +30051,14 @@
                         RecognitionFeatures.prototype.maxAlternatives = 0;
     
                         /**
+                         * RecognitionFeatures customPromptConfig.
+                         * @member {google.cloud.speech.v2.ICustomPromptConfig|null|undefined} customPromptConfig
+                         * @memberof google.cloud.speech.v2.RecognitionFeatures
+                         * @instance
+                         */
+                        RecognitionFeatures.prototype.customPromptConfig = null;
+    
+                        /**
                          * Creates a new RecognitionFeatures instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v2.RecognitionFeatures
@@ -29886,6 +30100,8 @@
                                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.maxAlternatives);
                             if (message.multiChannelMode != null && Object.hasOwnProperty.call(message, "multiChannelMode"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.multiChannelMode);
+                            if (message.customPromptConfig != null && Object.hasOwnProperty.call(message, "customPromptConfig"))
+                                $root.google.cloud.speech.v2.CustomPromptConfig.encode(message.customPromptConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             return writer;
                         };
     
@@ -29958,6 +30174,10 @@
                                         message.maxAlternatives = reader.int32();
                                         break;
                                     }
+                                case 18: {
+                                        message.customPromptConfig = $root.google.cloud.speech.v2.CustomPromptConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -30027,6 +30247,11 @@
                             if (message.maxAlternatives != null && message.hasOwnProperty("maxAlternatives"))
                                 if (!$util.isInteger(message.maxAlternatives))
                                     return "maxAlternatives: integer expected";
+                            if (message.customPromptConfig != null && message.hasOwnProperty("customPromptConfig")) {
+                                var error = $root.google.cloud.speech.v2.CustomPromptConfig.verify(message.customPromptConfig);
+                                if (error)
+                                    return "customPromptConfig." + error;
+                            }
                             return null;
                         };
     
@@ -30077,6 +30302,11 @@
                             }
                             if (object.maxAlternatives != null)
                                 message.maxAlternatives = object.maxAlternatives | 0;
+                            if (object.customPromptConfig != null) {
+                                if (typeof object.customPromptConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionFeatures.customPromptConfig: object expected");
+                                message.customPromptConfig = $root.google.cloud.speech.v2.CustomPromptConfig.fromObject(object.customPromptConfig);
+                            }
                             return message;
                         };
     
@@ -30103,6 +30333,7 @@
                                 object.enableSpokenEmojis = false;
                                 object.maxAlternatives = 0;
                                 object.multiChannelMode = options.enums === String ? "MULTI_CHANNEL_MODE_UNSPECIFIED" : 0;
+                                object.customPromptConfig = null;
                             }
                             if (message.profanityFilter != null && message.hasOwnProperty("profanityFilter"))
                                 object.profanityFilter = message.profanityFilter;
@@ -30122,6 +30353,8 @@
                                 object.maxAlternatives = message.maxAlternatives;
                             if (message.multiChannelMode != null && message.hasOwnProperty("multiChannelMode"))
                                 object.multiChannelMode = options.enums === String ? $root.google.cloud.speech.v2.RecognitionFeatures.MultiChannelMode[message.multiChannelMode] === undefined ? message.multiChannelMode : $root.google.cloud.speech.v2.RecognitionFeatures.MultiChannelMode[message.multiChannelMode] : message.multiChannelMode;
+                            if (message.customPromptConfig != null && message.hasOwnProperty("customPromptConfig"))
+                                object.customPromptConfig = $root.google.cloud.speech.v2.CustomPromptConfig.toObject(message.customPromptConfig, options);
                             return object;
                         };
     
@@ -31380,6 +31613,235 @@
                         return SpeechAdaptation;
                     })();
     
+                    v2.DenoiserConfig = (function() {
+    
+                        /**
+                         * Properties of a DenoiserConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IDenoiserConfig
+                         * @property {boolean|null} [denoiseAudio] DenoiserConfig denoiseAudio
+                         * @property {number|null} [snrThreshold] DenoiserConfig snrThreshold
+                         */
+    
+                        /**
+                         * Constructs a new DenoiserConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a DenoiserConfig.
+                         * @implements IDenoiserConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IDenoiserConfig=} [properties] Properties to set
+                         */
+                        function DenoiserConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DenoiserConfig denoiseAudio.
+                         * @member {boolean} denoiseAudio
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @instance
+                         */
+                        DenoiserConfig.prototype.denoiseAudio = false;
+    
+                        /**
+                         * DenoiserConfig snrThreshold.
+                         * @member {number} snrThreshold
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @instance
+                         */
+                        DenoiserConfig.prototype.snrThreshold = 0;
+    
+                        /**
+                         * Creates a new DenoiserConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IDenoiserConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig instance
+                         */
+                        DenoiserConfig.create = function create(properties) {
+                            return new DenoiserConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DenoiserConfig message. Does not implicitly {@link google.cloud.speech.v2.DenoiserConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IDenoiserConfig} message DenoiserConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DenoiserConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.denoiseAudio != null && Object.hasOwnProperty.call(message, "denoiseAudio"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.denoiseAudio);
+                            if (message.snrThreshold != null && Object.hasOwnProperty.call(message, "snrThreshold"))
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.snrThreshold);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DenoiserConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.DenoiserConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IDenoiserConfig} message DenoiserConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DenoiserConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DenoiserConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DenoiserConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.DenoiserConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.denoiseAudio = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.snrThreshold = reader.float();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DenoiserConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DenoiserConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DenoiserConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DenoiserConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.denoiseAudio != null && message.hasOwnProperty("denoiseAudio"))
+                                if (typeof message.denoiseAudio !== "boolean")
+                                    return "denoiseAudio: boolean expected";
+                            if (message.snrThreshold != null && message.hasOwnProperty("snrThreshold"))
+                                if (typeof message.snrThreshold !== "number")
+                                    return "snrThreshold: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DenoiserConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.DenoiserConfig} DenoiserConfig
+                         */
+                        DenoiserConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.DenoiserConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.DenoiserConfig();
+                            if (object.denoiseAudio != null)
+                                message.denoiseAudio = Boolean(object.denoiseAudio);
+                            if (object.snrThreshold != null)
+                                message.snrThreshold = Number(object.snrThreshold);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DenoiserConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.DenoiserConfig} message DenoiserConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DenoiserConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.denoiseAudio = false;
+                                object.snrThreshold = 0;
+                            }
+                            if (message.denoiseAudio != null && message.hasOwnProperty("denoiseAudio"))
+                                object.denoiseAudio = message.denoiseAudio;
+                            if (message.snrThreshold != null && message.hasOwnProperty("snrThreshold"))
+                                object.snrThreshold = options.json && !isFinite(message.snrThreshold) ? String(message.snrThreshold) : message.snrThreshold;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DenoiserConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DenoiserConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DenoiserConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.DenoiserConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DenoiserConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.DenoiserConfig";
+                        };
+    
+                        return DenoiserConfig;
+                    })();
+    
                     v2.RecognitionConfig = (function() {
     
                         /**
@@ -31394,6 +31856,7 @@
                          * @property {google.cloud.speech.v2.ISpeechAdaptation|null} [adaptation] RecognitionConfig adaptation
                          * @property {google.cloud.speech.v2.ITranscriptNormalization|null} [transcriptNormalization] RecognitionConfig transcriptNormalization
                          * @property {google.cloud.speech.v2.ITranslationConfig|null} [translationConfig] RecognitionConfig translationConfig
+                         * @property {google.cloud.speech.v2.IDenoiserConfig|null} [denoiserConfig] RecognitionConfig denoiserConfig
                          */
     
                         /**
@@ -31476,6 +31939,14 @@
                          */
                         RecognitionConfig.prototype.translationConfig = null;
     
+                        /**
+                         * RecognitionConfig denoiserConfig.
+                         * @member {google.cloud.speech.v2.IDenoiserConfig|null|undefined} denoiserConfig
+                         * @memberof google.cloud.speech.v2.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.denoiserConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -31531,6 +32002,8 @@
                                 $root.google.cloud.speech.v2.TranscriptNormalization.encode(message.transcriptNormalization, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.translationConfig != null && Object.hasOwnProperty.call(message, "translationConfig"))
                                 $root.google.cloud.speech.v2.TranslationConfig.encode(message.translationConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.denoiserConfig != null && Object.hasOwnProperty.call(message, "denoiserConfig"))
+                                $root.google.cloud.speech.v2.DenoiserConfig.encode(message.denoiserConfig, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             return writer;
                         };
     
@@ -31599,6 +32072,10 @@
                                     }
                                 case 15: {
                                         message.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.denoiserConfig = $root.google.cloud.speech.v2.DenoiserConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -31685,6 +32162,11 @@
                                 if (error)
                                     return "translationConfig." + error;
                             }
+                            if (message.denoiserConfig != null && message.hasOwnProperty("denoiserConfig")) {
+                                var error = $root.google.cloud.speech.v2.DenoiserConfig.verify(message.denoiserConfig);
+                                if (error)
+                                    return "denoiserConfig." + error;
+                            }
                             return null;
                         };
     
@@ -31739,6 +32221,11 @@
                                     throw TypeError(".google.cloud.speech.v2.RecognitionConfig.translationConfig: object expected");
                                 message.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.fromObject(object.translationConfig);
                             }
+                            if (object.denoiserConfig != null) {
+                                if (typeof object.denoiserConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionConfig.denoiserConfig: object expected");
+                                message.denoiserConfig = $root.google.cloud.speech.v2.DenoiserConfig.fromObject(object.denoiserConfig);
+                            }
                             return message;
                         };
     
@@ -31763,6 +32250,7 @@
                                 object.model = "";
                                 object.transcriptNormalization = null;
                                 object.translationConfig = null;
+                                object.denoiserConfig = null;
                             }
                             if (message.features != null && message.hasOwnProperty("features"))
                                 object.features = $root.google.cloud.speech.v2.RecognitionFeatures.toObject(message.features, options);
@@ -31789,6 +32277,8 @@
                                 object.transcriptNormalization = $root.google.cloud.speech.v2.TranscriptNormalization.toObject(message.transcriptNormalization, options);
                             if (message.translationConfig != null && message.hasOwnProperty("translationConfig"))
                                 object.translationConfig = $root.google.cloud.speech.v2.TranslationConfig.toObject(message.translationConfig, options);
+                            if (message.denoiserConfig != null && message.hasOwnProperty("denoiserConfig"))
+                                object.denoiserConfig = $root.google.cloud.speech.v2.DenoiserConfig.toObject(message.denoiserConfig, options);
                             return object;
                         };
     
@@ -32165,6 +32655,7 @@
                          * @interface IRecognitionResponseMetadata
                          * @property {string|null} [requestId] RecognitionResponseMetadata requestId
                          * @property {google.protobuf.IDuration|null} [totalBilledDuration] RecognitionResponseMetadata totalBilledDuration
+                         * @property {string|null} [prompt] RecognitionResponseMetadata prompt
                          */
     
                         /**
@@ -32199,6 +32690,23 @@
                         RecognitionResponseMetadata.prototype.totalBilledDuration = null;
     
                         /**
+                         * RecognitionResponseMetadata prompt.
+                         * @member {string|null|undefined} prompt
+                         * @memberof google.cloud.speech.v2.RecognitionResponseMetadata
+                         * @instance
+                         */
+                        RecognitionResponseMetadata.prototype.prompt = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(RecognitionResponseMetadata.prototype, "_prompt", {
+                            get: $util.oneOfGetter($oneOfFields = ["prompt"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new RecognitionResponseMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v2.RecognitionResponseMetadata
@@ -32226,6 +32734,8 @@
                                 $root.google.protobuf.Duration.encode(message.totalBilledDuration, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.requestId);
+                            if (message.prompt != null && Object.hasOwnProperty.call(message, "prompt"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.prompt);
                             return writer;
                         };
     
@@ -32270,6 +32780,10 @@
                                         message.totalBilledDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 10: {
+                                        message.prompt = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -32305,6 +32819,7 @@
                         RecognitionResponseMetadata.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
@@ -32312,6 +32827,11 @@
                                 var error = $root.google.protobuf.Duration.verify(message.totalBilledDuration);
                                 if (error)
                                     return "totalBilledDuration." + error;
+                            }
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                properties._prompt = 1;
+                                if (!$util.isString(message.prompt))
+                                    return "prompt: string expected";
                             }
                             return null;
                         };
@@ -32335,6 +32855,8 @@
                                     throw TypeError(".google.cloud.speech.v2.RecognitionResponseMetadata.totalBilledDuration: object expected");
                                 message.totalBilledDuration = $root.google.protobuf.Duration.fromObject(object.totalBilledDuration);
                             }
+                            if (object.prompt != null)
+                                message.prompt = String(object.prompt);
                             return message;
                         };
     
@@ -32359,6 +32881,11 @@
                                 object.totalBilledDuration = $root.google.protobuf.Duration.toObject(message.totalBilledDuration, options);
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.prompt != null && message.hasOwnProperty("prompt")) {
+                                object.prompt = message.prompt;
+                                if (options.oneofs)
+                                    object._prompt = "prompt";
+                            }
                             return object;
                         };
     
@@ -33539,6 +34066,7 @@
                          * @property {boolean|null} [enableVoiceActivityEvents] StreamingRecognitionFeatures enableVoiceActivityEvents
                          * @property {boolean|null} [interimResults] StreamingRecognitionFeatures interimResults
                          * @property {google.cloud.speech.v2.StreamingRecognitionFeatures.IVoiceActivityTimeout|null} [voiceActivityTimeout] StreamingRecognitionFeatures voiceActivityTimeout
+                         * @property {google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity|null} [endpointingSensitivity] StreamingRecognitionFeatures endpointingSensitivity
                          */
     
                         /**
@@ -33581,6 +34109,14 @@
                         StreamingRecognitionFeatures.prototype.voiceActivityTimeout = null;
     
                         /**
+                         * StreamingRecognitionFeatures endpointingSensitivity.
+                         * @member {google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity} endpointingSensitivity
+                         * @memberof google.cloud.speech.v2.StreamingRecognitionFeatures
+                         * @instance
+                         */
+                        StreamingRecognitionFeatures.prototype.endpointingSensitivity = 0;
+    
+                        /**
                          * Creates a new StreamingRecognitionFeatures instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v2.StreamingRecognitionFeatures
@@ -33610,6 +34146,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.interimResults);
                             if (message.voiceActivityTimeout != null && Object.hasOwnProperty.call(message, "voiceActivityTimeout"))
                                 $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.encode(message.voiceActivityTimeout, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.endpointingSensitivity != null && Object.hasOwnProperty.call(message, "endpointingSensitivity"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.endpointingSensitivity);
                             return writer;
                         };
     
@@ -33658,6 +34196,10 @@
                                         message.voiceActivityTimeout = $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 8: {
+                                        message.endpointingSensitivity = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -33704,6 +34246,16 @@
                                 if (error)
                                     return "voiceActivityTimeout." + error;
                             }
+                            if (message.endpointingSensitivity != null && message.hasOwnProperty("endpointingSensitivity"))
+                                switch (message.endpointingSensitivity) {
+                                default:
+                                    return "endpointingSensitivity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -33728,6 +34280,30 @@
                                     throw TypeError(".google.cloud.speech.v2.StreamingRecognitionFeatures.voiceActivityTimeout: object expected");
                                 message.voiceActivityTimeout = $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.fromObject(object.voiceActivityTimeout);
                             }
+                            switch (object.endpointingSensitivity) {
+                            default:
+                                if (typeof object.endpointingSensitivity === "number") {
+                                    message.endpointingSensitivity = object.endpointingSensitivity;
+                                    break;
+                                }
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_UNSPECIFIED":
+                            case 0:
+                                message.endpointingSensitivity = 0;
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_STANDARD":
+                            case 1:
+                                message.endpointingSensitivity = 1;
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_SUPERSHORT":
+                            case 2:
+                                message.endpointingSensitivity = 2;
+                                break;
+                            case "ENDPOINTING_SENSITIVITY_SHORT":
+                            case 3:
+                                message.endpointingSensitivity = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -33748,6 +34324,7 @@
                                 object.enableVoiceActivityEvents = false;
                                 object.interimResults = false;
                                 object.voiceActivityTimeout = null;
+                                object.endpointingSensitivity = options.enums === String ? "ENDPOINTING_SENSITIVITY_UNSPECIFIED" : 0;
                             }
                             if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
                                 object.enableVoiceActivityEvents = message.enableVoiceActivityEvents;
@@ -33755,6 +34332,8 @@
                                 object.interimResults = message.interimResults;
                             if (message.voiceActivityTimeout != null && message.hasOwnProperty("voiceActivityTimeout"))
                                 object.voiceActivityTimeout = $root.google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout.toObject(message.voiceActivityTimeout, options);
+                            if (message.endpointingSensitivity != null && message.hasOwnProperty("endpointingSensitivity"))
+                                object.endpointingSensitivity = options.enums === String ? $root.google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity[message.endpointingSensitivity] === undefined ? message.endpointingSensitivity : $root.google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity[message.endpointingSensitivity] : message.endpointingSensitivity;
                             return object;
                         };
     
@@ -34021,6 +34600,24 @@
                             };
     
                             return VoiceActivityTimeout;
+                        })();
+    
+                        /**
+                         * EndpointingSensitivity enum.
+                         * @name google.cloud.speech.v2.StreamingRecognitionFeatures.EndpointingSensitivity
+                         * @enum {number}
+                         * @property {number} ENDPOINTING_SENSITIVITY_UNSPECIFIED=0 ENDPOINTING_SENSITIVITY_UNSPECIFIED value
+                         * @property {number} ENDPOINTING_SENSITIVITY_STANDARD=1 ENDPOINTING_SENSITIVITY_STANDARD value
+                         * @property {number} ENDPOINTING_SENSITIVITY_SUPERSHORT=2 ENDPOINTING_SENSITIVITY_SUPERSHORT value
+                         * @property {number} ENDPOINTING_SENSITIVITY_SHORT=3 ENDPOINTING_SENSITIVITY_SHORT value
+                         */
+                        StreamingRecognitionFeatures.EndpointingSensitivity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ENDPOINTING_SENSITIVITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENDPOINTING_SENSITIVITY_STANDARD"] = 1;
+                            values[valuesById[2] = "ENDPOINTING_SENSITIVITY_SUPERSHORT"] = 2;
+                            values[valuesById[3] = "ENDPOINTING_SENSITIVITY_SHORT"] = 3;
+                            return values;
                         })();
     
                         return StreamingRecognitionFeatures;

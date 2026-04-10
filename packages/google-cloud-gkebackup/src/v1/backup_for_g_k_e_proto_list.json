@@ -1,9 +1,13 @@
 [
   "../../protos/google/cloud/gkebackup/v1/backup.proto",
+  "../../protos/google/cloud/gkebackup/v1/backup_channel.proto",
   "../../protos/google/cloud/gkebackup/v1/backup_plan.proto",
+  "../../protos/google/cloud/gkebackup/v1/backup_plan_binding.proto",
   "../../protos/google/cloud/gkebackup/v1/common.proto",
   "../../protos/google/cloud/gkebackup/v1/gkebackup.proto",
   "../../protos/google/cloud/gkebackup/v1/restore.proto",
+  "../../protos/google/cloud/gkebackup/v1/restore_channel.proto",
   "../../protos/google/cloud/gkebackup/v1/restore_plan.proto",
+  "../../protos/google/cloud/gkebackup/v1/restore_plan_binding.proto",
   "../../protos/google/cloud/gkebackup/v1/volume.proto"
 ]

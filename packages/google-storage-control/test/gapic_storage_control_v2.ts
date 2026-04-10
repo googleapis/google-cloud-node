@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import {protobuf, LROperation, operationsProtos} from 'google-gax';
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
 const root = protobuf.Root.fromJSON(
-  require('../protos/protos.json')
+  require('../protos/protos.json'),
 ).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,7 +47,7 @@ function generateSampleMessage<T extends object>(instance: T) {
     instance.constructor as typeof protobuf.Message
   ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
-    filledObject
+    filledObject,
   ) as T;
 }
 
@@ -59,7 +59,7 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  error?: Error
+  error?: Error,
 ) {
   return error
     ? sinon.stub().callsArgWith(2, error)
@@ -69,7 +69,7 @@ function stubSimpleCallWithCallback<ResponseType>(
 function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error
+  lroError?: Error,
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -85,7 +85,7 @@ function stubLongRunningCall<ResponseType>(
 function stubLongRunningCallWithCallback<ResponseType>(
   response?: ResponseType,
   callError?: Error,
-  lroError?: Error
+  lroError?: Error,
 ) {
   const innerStub = lroError
     ? sinon.stub().rejects(lroError)
@@ -100,7 +100,7 @@ function stubLongRunningCallWithCallback<ResponseType>(
 
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   const pagingStub = sinon.stub();
   if (responses) {
@@ -138,7 +138,7 @@ function stubPageStreamingCall<ResponseType>(
 
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
-  error?: Error
+  error?: Error,
 ) {
   let counter = 0;
   const asyncIterable = {
@@ -357,13 +357,13 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateFolderRequest()
+        new protos.google.storage.control.v2.CreateFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.Folder()
+        new protos.google.storage.control.v2.Folder(),
       );
       client.innerApiCalls.createFolder = stubSimpleCall(expectedResponse);
       const [response] = await client.createFolder(request);
@@ -379,7 +379,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -390,13 +390,13 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateFolderRequest()
+        new protos.google.storage.control.v2.CreateFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.Folder()
+        new protos.google.storage.control.v2.Folder(),
       );
       client.innerApiCalls.createFolder =
         stubSimpleCallWithCallback(expectedResponse);
@@ -405,14 +405,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IFolder | null
+            result?: protos.google.storage.control.v2.IFolder | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -428,7 +428,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -439,7 +439,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateFolderRequest()
+        new protos.google.storage.control.v2.CreateFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -447,7 +447,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.createFolder = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createFolder(request), expectedError);
       const actualRequest = (
@@ -461,7 +461,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -472,7 +472,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateFolderRequest()
+        new protos.google.storage.control.v2.CreateFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -492,14 +492,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteFolderRequest()
+        new protos.google.storage.control.v2.DeleteFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteFolder = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteFolder(request);
@@ -515,7 +515,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.deleteFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -526,14 +526,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteFolderRequest()
+        new protos.google.storage.control.v2.DeleteFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteFolder =
         stubSimpleCallWithCallback(expectedResponse);
@@ -542,14 +542,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -565,7 +565,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.deleteFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -576,7 +576,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteFolderRequest()
+        new protos.google.storage.control.v2.DeleteFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -585,7 +585,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFolder = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteFolder(request), expectedError);
       const actualRequest = (
@@ -599,7 +599,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.deleteFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -610,7 +610,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteFolderRequest()
+        new protos.google.storage.control.v2.DeleteFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -630,14 +630,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderRequest()
+        new protos.google.storage.control.v2.GetFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.Folder()
+        new protos.google.storage.control.v2.Folder(),
       );
       client.innerApiCalls.getFolder = stubSimpleCall(expectedResponse);
       const [response] = await client.getFolder(request);
@@ -653,7 +653,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -664,14 +664,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderRequest()
+        new protos.google.storage.control.v2.GetFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.Folder()
+        new protos.google.storage.control.v2.Folder(),
       );
       client.innerApiCalls.getFolder =
         stubSimpleCallWithCallback(expectedResponse);
@@ -680,14 +680,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IFolder | null
+            result?: protos.google.storage.control.v2.IFolder | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -703,7 +703,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -714,7 +714,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderRequest()
+        new protos.google.storage.control.v2.GetFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -734,7 +734,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -745,7 +745,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderRequest()
+        new protos.google.storage.control.v2.GetFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -765,14 +765,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetStorageLayoutRequest()
+        new protos.google.storage.control.v2.GetStorageLayoutRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.StorageLayout()
+        new protos.google.storage.control.v2.StorageLayout(),
       );
       client.innerApiCalls.getStorageLayout = stubSimpleCall(expectedResponse);
       const [response] = await client.getStorageLayout(request);
@@ -788,7 +788,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getStorageLayout as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -799,14 +799,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetStorageLayoutRequest()
+        new protos.google.storage.control.v2.GetStorageLayoutRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.StorageLayout()
+        new protos.google.storage.control.v2.StorageLayout(),
       );
       client.innerApiCalls.getStorageLayout =
         stubSimpleCallWithCallback(expectedResponse);
@@ -815,14 +815,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IStorageLayout | null
+            result?: protos.google.storage.control.v2.IStorageLayout | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -838,7 +838,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getStorageLayout as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -849,7 +849,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetStorageLayoutRequest()
+        new protos.google.storage.control.v2.GetStorageLayoutRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -858,7 +858,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.getStorageLayout = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getStorageLayout(request), expectedError);
       const actualRequest = (
@@ -872,7 +872,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getStorageLayout as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -883,7 +883,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetStorageLayoutRequest()
+        new protos.google.storage.control.v2.GetStorageLayoutRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -903,13 +903,13 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+        new protos.google.storage.control.v2.CreateManagedFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.ManagedFolder()
+        new protos.google.storage.control.v2.ManagedFolder(),
       );
       client.innerApiCalls.createManagedFolder =
         stubSimpleCall(expectedResponse);
@@ -926,7 +926,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createManagedFolder as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -937,13 +937,13 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+        new protos.google.storage.control.v2.CreateManagedFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.ManagedFolder()
+        new protos.google.storage.control.v2.ManagedFolder(),
       );
       client.innerApiCalls.createManagedFolder =
         stubSimpleCallWithCallback(expectedResponse);
@@ -952,14 +952,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IManagedFolder | null
+            result?: protos.google.storage.control.v2.IManagedFolder | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -975,7 +975,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createManagedFolder as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -986,7 +986,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+        new protos.google.storage.control.v2.CreateManagedFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -994,7 +994,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.createManagedFolder = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createManagedFolder(request), expectedError);
       const actualRequest = (
@@ -1008,7 +1008,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createManagedFolder as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1019,7 +1019,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateManagedFolderRequest()
+        new protos.google.storage.control.v2.CreateManagedFolderRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -1039,14 +1039,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteManagedFolder =
         stubSimpleCall(expectedResponse);
@@ -1063,7 +1063,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.deleteManagedFolder as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1074,14 +1074,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.innerApiCalls.deleteManagedFolder =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1090,14 +1090,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
+            result?: protos.google.protobuf.IEmpty | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1113,7 +1113,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.deleteManagedFolder as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1124,7 +1124,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1133,7 +1133,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteManagedFolder = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.deleteManagedFolder(request), expectedError);
       const actualRequest = (
@@ -1147,7 +1147,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.deleteManagedFolder as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1158,7 +1158,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DeleteManagedFolderRequest()
+        new protos.google.storage.control.v2.DeleteManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1178,14 +1178,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetManagedFolderRequest()
+        new protos.google.storage.control.v2.GetManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.ManagedFolder()
+        new protos.google.storage.control.v2.ManagedFolder(),
       );
       client.innerApiCalls.getManagedFolder = stubSimpleCall(expectedResponse);
       const [response] = await client.getManagedFolder(request);
@@ -1201,7 +1201,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getManagedFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1212,14 +1212,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetManagedFolderRequest()
+        new protos.google.storage.control.v2.GetManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.ManagedFolder()
+        new protos.google.storage.control.v2.ManagedFolder(),
       );
       client.innerApiCalls.getManagedFolder =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1228,14 +1228,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IManagedFolder | null
+            result?: protos.google.storage.control.v2.IManagedFolder | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1251,7 +1251,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getManagedFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1262,7 +1262,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetManagedFolderRequest()
+        new protos.google.storage.control.v2.GetManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1271,7 +1271,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.getManagedFolder = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getManagedFolder(request), expectedError);
       const actualRequest = (
@@ -1285,7 +1285,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getManagedFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1296,7 +1296,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetManagedFolderRequest()
+        new protos.google.storage.control.v2.GetManagedFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1316,14 +1316,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.disableAnywhereCache =
         stubSimpleCall(expectedResponse);
@@ -1340,7 +1340,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.disableAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1351,14 +1351,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.disableAnywhereCache =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1367,14 +1367,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IAnywhereCache | null
+            result?: protos.google.storage.control.v2.IAnywhereCache | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1390,7 +1390,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.disableAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1401,7 +1401,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1410,7 +1410,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.disableAnywhereCache = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.disableAnywhereCache(request), expectedError);
       const actualRequest = (
@@ -1424,7 +1424,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.disableAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1435,7 +1435,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.DisableAnywhereCacheRequest()
+        new protos.google.storage.control.v2.DisableAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1455,14 +1455,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.pauseAnywhereCache =
         stubSimpleCall(expectedResponse);
@@ -1479,7 +1479,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.pauseAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1490,14 +1490,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.pauseAnywhereCache =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1506,14 +1506,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IAnywhereCache | null
+            result?: protos.google.storage.control.v2.IAnywhereCache | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1529,7 +1529,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.pauseAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1540,7 +1540,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1549,7 +1549,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseAnywhereCache = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.pauseAnywhereCache(request), expectedError);
       const actualRequest = (
@@ -1563,7 +1563,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.pauseAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1574,7 +1574,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.PauseAnywhereCacheRequest()
+        new protos.google.storage.control.v2.PauseAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1594,14 +1594,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.resumeAnywhereCache =
         stubSimpleCall(expectedResponse);
@@ -1618,7 +1618,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.resumeAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1629,14 +1629,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.resumeAnywhereCache =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1645,14 +1645,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IAnywhereCache | null
+            result?: protos.google.storage.control.v2.IAnywhereCache | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1668,7 +1668,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.resumeAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1679,7 +1679,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1688,7 +1688,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeAnywhereCache = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.resumeAnywhereCache(request), expectedError);
       const actualRequest = (
@@ -1702,7 +1702,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.resumeAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1713,7 +1713,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest()
+        new protos.google.storage.control.v2.ResumeAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1733,14 +1733,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.getAnywhereCache = stubSimpleCall(expectedResponse);
       const [response] = await client.getAnywhereCache(request);
@@ -1756,7 +1756,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getAnywhereCache as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1767,14 +1767,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.AnywhereCache()
+        new protos.google.storage.control.v2.AnywhereCache(),
       );
       client.innerApiCalls.getAnywhereCache =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1783,14 +1783,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IAnywhereCache | null
+            result?: protos.google.storage.control.v2.IAnywhereCache | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1806,7 +1806,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getAnywhereCache as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1817,7 +1817,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1826,7 +1826,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnywhereCache = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.getAnywhereCache(request), expectedError);
       const actualRequest = (
@@ -1840,7 +1840,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.getAnywhereCache as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -1851,7 +1851,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetAnywhereCacheRequest()
+        new protos.google.storage.control.v2.GetAnywhereCacheRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -1871,16 +1871,16 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.getProjectIntelligenceConfig =
         stubSimpleCall(expectedResponse);
@@ -1903,16 +1903,16 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.getProjectIntelligenceConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1921,14 +1921,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -1950,22 +1950,22 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProjectIntelligenceConfig = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.getProjectIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
       const actualRequest = (
         client.innerApiCalls.getProjectIntelligenceConfig as SinonStub
@@ -1984,11 +1984,11 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetProjectIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetProjectIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -1997,7 +1997,7 @@ describe('v2.StorageControlClient', () => {
       });
       await assert.rejects(
         client.getProjectIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
     });
   });
@@ -2010,17 +2010,17 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.updateProjectIntelligenceConfig =
         stubSimpleCall(expectedResponse);
@@ -2043,17 +2043,17 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.updateProjectIntelligenceConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2062,14 +2062,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2091,23 +2091,23 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProjectIntelligenceConfig = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.updateProjectIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
       const actualRequest = (
         client.innerApiCalls.updateProjectIntelligenceConfig as SinonStub
@@ -2126,12 +2126,12 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2140,7 +2140,7 @@ describe('v2.StorageControlClient', () => {
       });
       await assert.rejects(
         client.updateProjectIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
     });
   });
@@ -2153,16 +2153,16 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.getFolderIntelligenceConfig =
         stubSimpleCall(expectedResponse);
@@ -2185,16 +2185,16 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.getFolderIntelligenceConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2203,14 +2203,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2232,22 +2232,22 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFolderIntelligenceConfig = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.getFolderIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
       const actualRequest = (
         client.innerApiCalls.getFolderIntelligenceConfig as SinonStub
@@ -2266,11 +2266,11 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetFolderIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetFolderIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2279,7 +2279,7 @@ describe('v2.StorageControlClient', () => {
       });
       await assert.rejects(
         client.getFolderIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
     });
   });
@@ -2292,17 +2292,17 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.updateFolderIntelligenceConfig =
         stubSimpleCall(expectedResponse);
@@ -2325,17 +2325,17 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.updateFolderIntelligenceConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2344,14 +2344,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2373,23 +2373,23 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFolderIntelligenceConfig = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.updateFolderIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
       const actualRequest = (
         client.innerApiCalls.updateFolderIntelligenceConfig as SinonStub
@@ -2408,12 +2408,12 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2422,7 +2422,7 @@ describe('v2.StorageControlClient', () => {
       });
       await assert.rejects(
         client.updateFolderIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
     });
   });
@@ -2435,16 +2435,16 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.getOrganizationIntelligenceConfig =
         stubSimpleCall(expectedResponse);
@@ -2468,16 +2468,16 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.getOrganizationIntelligenceConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2486,14 +2486,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2515,22 +2515,22 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrganizationIntelligenceConfig = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.getOrganizationIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
       const actualRequest = (
         client.innerApiCalls.getOrganizationIntelligenceConfig as SinonStub
@@ -2549,11 +2549,11 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest',
-        ['name']
+        ['name'],
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2562,7 +2562,7 @@ describe('v2.StorageControlClient', () => {
       });
       await assert.rejects(
         client.getOrganizationIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
     });
   });
@@ -2575,17 +2575,17 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.updateOrganizationIntelligenceConfig =
         stubSimpleCall(expectedResponse);
@@ -2609,17 +2609,17 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.storage.control.v2.IntelligenceConfig()
+        new protos.google.storage.control.v2.IntelligenceConfig(),
       );
       client.innerApiCalls.updateOrganizationIntelligenceConfig =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2628,14 +2628,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IIntelligenceConfig | null
+            result?: protos.google.storage.control.v2.IIntelligenceConfig | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -2657,12 +2657,12 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `intelligence_config.name=${defaultValue1 ?? ''}`;
@@ -2671,7 +2671,7 @@ describe('v2.StorageControlClient', () => {
         stubSimpleCall(undefined, expectedError);
       await assert.rejects(
         client.updateOrganizationIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
       const actualRequest = (
         client.innerApiCalls.updateOrganizationIntelligenceConfig as SinonStub
@@ -2690,12 +2690,12 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest()
+        new protos.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest(),
       );
       request.intelligenceConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest',
-        ['intelligenceConfig', 'name']
+        ['intelligenceConfig', 'name'],
       );
       request.intelligenceConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
@@ -2704,8 +2704,410 @@ describe('v2.StorageControlClient', () => {
       });
       await assert.rejects(
         client.updateOrganizationIntelligenceConfig(request),
-        expectedError
+        expectedError,
       );
+    });
+  });
+
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy(),
+      );
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy(),
+      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
+  });
+
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy(),
+      );
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.setIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy(),
+      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.resource = 'projects/value/buckets/value/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
+  });
+
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/objects/**
+      request.resource = 'projects/value/buckets/value/objects/value';
+      // path template: {bucket=projects/*/buckets/*}/managedFolders/**
+      request.resource = 'projects/value/buckets/value/managedFolders/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsResponse(),
+      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.testIamPermissions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/objects/**
+      request.resource = 'projects/value/buckets/value/objects/value';
+      // path template: {bucket=projects/*/buckets/*}/managedFolders/**
+      request.resource = 'projects/value/buckets/value/managedFolders/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsResponse(),
+      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.testIamPermissions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/objects/**
+      request.resource = 'projects/value/buckets/value/objects/value';
+      // path template: {bucket=projects/*/buckets/*}/managedFolders/**
+      request.resource = 'projects/value/buckets/value/managedFolders/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest(),
+      );
+      // path template: {bucket=**}
+      request.resource = 'value';
+      // path template: {bucket=projects/*/buckets/*}/objects/**
+      request.resource = 'projects/value/buckets/value/objects/value';
+      // path template: {bucket=projects/*/buckets/*}/managedFolders/**
+      request.resource = 'projects/value/buckets/value/managedFolders/value';
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 
@@ -2717,14 +3119,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.RenameFolderRequest()
+        new protos.google.storage.control.v2.RenameFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.renameFolder = stubLongRunningCall(expectedResponse);
       const [operation] = await client.renameFolder(request);
@@ -2741,7 +3143,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.renameFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -2752,14 +3154,14 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.RenameFolderRequest()
+        new protos.google.storage.control.v2.RenameFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.renameFolder =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -2771,14 +3173,14 @@ describe('v2.StorageControlClient', () => {
             result?: LROperation<
               protos.google.storage.control.v2.IFolder,
               protos.google.storage.control.v2.IRenameFolderMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -2798,7 +3200,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.renameFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -2809,7 +3211,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.RenameFolderRequest()
+        new protos.google.storage.control.v2.RenameFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -2818,7 +3220,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.renameFolder = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.renameFolder(request), expectedError);
       const actualRequest = (
@@ -2832,7 +3234,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.renameFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -2843,7 +3245,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.RenameFolderRequest()
+        new protos.google.storage.control.v2.RenameFolderRequest(),
       );
       // path template: {bucket=projects/*/buckets/*}/**
       request.name = 'projects/value/buckets/value/value';
@@ -2853,7 +3255,7 @@ describe('v2.StorageControlClient', () => {
       client.innerApiCalls.renameFolder = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.renameFolder(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -2868,7 +3270,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.renameFolder as SinonStub).getCall(0).args[0]
           .requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -2879,7 +3281,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -2887,7 +3289,7 @@ describe('v2.StorageControlClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRenameFolderProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -2904,9 +3306,218 @@ describe('v2.StorageControlClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.checkRenameFolderProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteFolderRecursive', () => {
+    it('invokes deleteFolderRecursive without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteFolderRecursiveRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteFolderRecursive =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteFolderRecursive(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.deleteFolderRecursive as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes deleteFolderRecursive without error using callback', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteFolderRecursiveRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteFolderRecursive =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteFolderRecursive(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.deleteFolderRecursive as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes deleteFolderRecursive with call error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteFolderRecursiveRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteFolderRecursive = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteFolderRecursive(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.deleteFolderRecursive as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes deleteFolderRecursive with LRO error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.storage.control.v2.DeleteFolderRecursiveRequest(),
+      );
+      // path template: {bucket=projects/*/buckets/*}/**
+      request.name = 'projects/value/buckets/value/value';
+      const expectedHeaderRequestParams =
+        'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteFolderRecursive = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteFolderRecursive(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFolderRecursive as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      assert.match(
+        (client.innerApiCalls.deleteFolderRecursive as SinonStub).getCall(0)
+          .args[0].requestId,
+        /[a-z0-9-]{36}/,
+      );
+    });
+
+    it('invokes checkDeleteFolderRecursiveProgress without error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteFolderRecursiveProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteFolderRecursiveProgress with error', async () => {
+      const client = new storagecontrolModule.v2.StorageControlClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteFolderRecursiveProgress(''),
+        expectedError,
+      );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -2919,13 +3530,13 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createAnywhereCache =
         stubLongRunningCall(expectedResponse);
@@ -2943,7 +3554,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -2954,13 +3565,13 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.createAnywhereCache =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -2972,14 +3583,14 @@ describe('v2.StorageControlClient', () => {
             result?: LROperation<
               protos.google.storage.control.v2.IAnywhereCache,
               protos.google.storage.control.v2.ICreateAnywhereCacheMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -2999,7 +3610,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3010,7 +3621,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3018,7 +3629,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.createAnywhereCache = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.createAnywhereCache(request), expectedError);
       const actualRequest = (
@@ -3032,7 +3643,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3043,7 +3654,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.CreateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.CreateAnywhereCacheRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3052,7 +3663,7 @@ describe('v2.StorageControlClient', () => {
       client.innerApiCalls.createAnywhereCache = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.createAnywhereCache(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -3067,7 +3678,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.createAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3078,7 +3689,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -3086,7 +3697,7 @@ describe('v2.StorageControlClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAnywhereCacheProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -3103,11 +3714,11 @@ describe('v2.StorageControlClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.checkCreateAnywhereCacheProgress(''),
-        expectedError
+        expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -3121,7 +3732,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest(),
       );
       request.anywhereCache = {};
       // path template: {bucket=projects/*/buckets/*}/**
@@ -3129,7 +3740,7 @@ describe('v2.StorageControlClient', () => {
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.updateAnywhereCache =
         stubLongRunningCall(expectedResponse);
@@ -3147,7 +3758,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.updateAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3158,7 +3769,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest(),
       );
       request.anywhereCache = {};
       // path template: {bucket=projects/*/buckets/*}/**
@@ -3166,7 +3777,7 @@ describe('v2.StorageControlClient', () => {
       const expectedHeaderRequestParams =
         'bucket=projects%2Fvalue%2Fbuckets%2Fvalue';
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.longrunning.Operation(),
       );
       client.innerApiCalls.updateAnywhereCache =
         stubLongRunningCallWithCallback(expectedResponse);
@@ -3178,14 +3789,14 @@ describe('v2.StorageControlClient', () => {
             result?: LROperation<
               protos.google.storage.control.v2.IAnywhereCache,
               protos.google.storage.control.v2.IUpdateAnywhereCacheMetadata
-            > | null
+            > | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const operation = (await promise) as LROperation<
@@ -3205,7 +3816,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.updateAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3216,7 +3827,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest(),
       );
       request.anywhereCache = {};
       // path template: {bucket=projects/*/buckets/*}/**
@@ -3226,7 +3837,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAnywhereCache = stubLongRunningCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.updateAnywhereCache(request), expectedError);
       const actualRequest = (
@@ -3240,7 +3851,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.updateAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3251,7 +3862,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest()
+        new protos.google.storage.control.v2.UpdateAnywhereCacheRequest(),
       );
       request.anywhereCache = {};
       // path template: {bucket=projects/*/buckets/*}/**
@@ -3262,7 +3873,7 @@ describe('v2.StorageControlClient', () => {
       client.innerApiCalls.updateAnywhereCache = stubLongRunningCall(
         undefined,
         undefined,
-        expectedError
+        expectedError,
       );
       const [operation] = await client.updateAnywhereCache(request);
       await assert.rejects(operation.promise(), expectedError);
@@ -3277,7 +3888,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.updateAnywhereCache as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3288,7 +3899,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
       expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
@@ -3296,7 +3907,7 @@ describe('v2.StorageControlClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAnywhereCacheProgress(
-        expectedResponse.name
+        expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
@@ -3313,11 +3924,11 @@ describe('v2.StorageControlClient', () => {
 
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(
         client.checkUpdateAnywhereCacheProgress(''),
-        expectedError
+        expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
@@ -3331,7 +3942,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListFoldersRequest()
+        new protos.google.storage.control.v2.ListFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3361,7 +3972,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListFoldersRequest()
+        new protos.google.storage.control.v2.ListFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3378,14 +3989,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IFolder[] | null
+            result?: protos.google.storage.control.v2.IFolder[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -3407,7 +4018,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListFoldersRequest()
+        new protos.google.storage.control.v2.ListFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3415,7 +4026,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.listFolders = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listFolders(request), expectedError);
       const actualRequest = (
@@ -3435,7 +4046,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListFoldersRequest()
+        new protos.google.storage.control.v2.ListFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3454,7 +4065,7 @@ describe('v2.StorageControlClient', () => {
           'data',
           (response: protos.google.storage.control.v2.Folder) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3468,14 +4079,14 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listFolders, request)
+          .calledWith(client.innerApiCalls.listFolders, request),
       );
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -3486,7 +4097,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListFoldersRequest()
+        new protos.google.storage.control.v2.ListFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3494,7 +4105,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.descriptors.page.listFolders.createStream = stubPageStreamingCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const stream = client.listFoldersStream(request);
       const promise = new Promise((resolve, reject) => {
@@ -3503,7 +4114,7 @@ describe('v2.StorageControlClient', () => {
           'data',
           (response: protos.google.storage.control.v2.Folder) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3516,14 +4127,14 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listFolders, request)
+          .calledWith(client.innerApiCalls.listFolders, request),
       );
       assert(
         (client.descriptors.page.listFolders.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -3534,7 +4145,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListFoldersRequest()
+        new protos.google.storage.control.v2.ListFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3554,16 +4165,16 @@ describe('v2.StorageControlClient', () => {
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -3574,7 +4185,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListFoldersRequest()
+        new protos.google.storage.control.v2.ListFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3582,7 +4193,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.descriptors.page.listFolders.asyncIterate = stubAsyncIterationCall(
         undefined,
-        expectedError
+        expectedError,
       );
       const iterable = client.listFoldersAsync(request);
       await assert.rejects(async () => {
@@ -3593,16 +4204,16 @@ describe('v2.StorageControlClient', () => {
       });
       assert.deepStrictEqual(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub).getCall(
-          0
+          0,
         ).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listFolders.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });
@@ -3615,20 +4226,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+        new protos.google.storage.control.v2.ListManagedFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
       ];
       client.innerApiCalls.listManagedFolders =
@@ -3646,7 +4257,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.listManagedFolders as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3657,20 +4268,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+        new protos.google.storage.control.v2.ListManagedFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
       ];
       client.innerApiCalls.listManagedFolders =
@@ -3680,14 +4291,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IManagedFolder[] | null
+            result?: protos.google.storage.control.v2.IManagedFolder[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -3703,7 +4314,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.listManagedFolders as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3714,7 +4325,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+        new protos.google.storage.control.v2.ListManagedFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3722,7 +4333,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.listManagedFolders = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listManagedFolders(request), expectedError);
       const actualRequest = (
@@ -3736,7 +4347,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.listManagedFolders as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3747,20 +4358,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+        new protos.google.storage.control.v2.ListManagedFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
       ];
       client.descriptors.page.listManagedFolders.createStream =
@@ -3772,7 +4383,7 @@ describe('v2.StorageControlClient', () => {
           'data',
           (response: protos.google.storage.control.v2.ManagedFolder) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3786,14 +4397,14 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listManagedFolders, request)
+          .calledWith(client.innerApiCalls.listManagedFolders, request),
       );
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -3804,7 +4415,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+        new protos.google.storage.control.v2.ListManagedFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3819,7 +4430,7 @@ describe('v2.StorageControlClient', () => {
           'data',
           (response: protos.google.storage.control.v2.ManagedFolder) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -3832,14 +4443,14 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listManagedFolders, request)
+          .calledWith(client.innerApiCalls.listManagedFolders, request),
       );
       assert(
         (client.descriptors.page.listManagedFolders.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -3850,20 +4461,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+        new protos.google.storage.control.v2.ListManagedFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.ManagedFolder()
+          new protos.google.storage.control.v2.ManagedFolder(),
         ),
       ];
       client.descriptors.page.listManagedFolders.asyncIterate =
@@ -3878,20 +4489,20 @@ describe('v2.StorageControlClient', () => {
         (
           client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
       assert.match(
         (
           client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
         ).getCall(0).args[1].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3902,7 +4513,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListManagedFoldersRequest()
+        new protos.google.storage.control.v2.ListManagedFoldersRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -3921,20 +4532,20 @@ describe('v2.StorageControlClient', () => {
         (
           client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listManagedFolders.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
       assert.match(
         (
           client.descriptors.page.listManagedFolders.asyncIterate as SinonStub
         ).getCall(0).args[1].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
   });
@@ -3947,20 +4558,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
       ];
       client.innerApiCalls.listAnywhereCaches =
@@ -3978,7 +4589,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.listAnywhereCaches as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -3989,20 +4600,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
       ];
       client.innerApiCalls.listAnywhereCaches =
@@ -4012,14 +4623,14 @@ describe('v2.StorageControlClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.storage.control.v2.IAnywhereCache[] | null
+            result?: protos.google.storage.control.v2.IAnywhereCache[] | null,
           ) => {
             if (err) {
               reject(err);
             } else {
               resolve(result);
             }
-          }
+          },
         );
       });
       const response = await promise;
@@ -4035,7 +4646,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.listAnywhereCaches as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -4046,7 +4657,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -4054,7 +4665,7 @@ describe('v2.StorageControlClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnywhereCaches = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(client.listAnywhereCaches(request), expectedError);
       const actualRequest = (
@@ -4068,7 +4679,7 @@ describe('v2.StorageControlClient', () => {
       assert.match(
         (client.innerApiCalls.listAnywhereCaches as SinonStub).getCall(0)
           .args[0].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -4079,20 +4690,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
       ];
       client.descriptors.page.listAnywhereCaches.createStream =
@@ -4104,7 +4715,7 @@ describe('v2.StorageControlClient', () => {
           'data',
           (response: protos.google.storage.control.v2.AnywhereCache) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -4118,14 +4729,14 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAnywhereCaches, request)
+          .calledWith(client.innerApiCalls.listAnywhereCaches, request),
       );
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4136,7 +4747,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -4151,7 +4762,7 @@ describe('v2.StorageControlClient', () => {
           'data',
           (response: protos.google.storage.control.v2.AnywhereCache) => {
             responses.push(response);
-          }
+          },
         );
         stream.on('end', () => {
           resolve(responses);
@@ -4164,14 +4775,14 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listAnywhereCaches, request)
+          .calledWith(client.innerApiCalls.listAnywhereCaches, request),
       );
       assert(
         (client.descriptors.page.listAnywhereCaches.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -4182,20 +4793,20 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
       const expectedHeaderRequestParams = 'bucket=value';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
         generateSampleMessage(
-          new protos.google.storage.control.v2.AnywhereCache()
+          new protos.google.storage.control.v2.AnywhereCache(),
         ),
       ];
       client.descriptors.page.listAnywhereCaches.asyncIterate =
@@ -4210,20 +4821,20 @@ describe('v2.StorageControlClient', () => {
         (
           client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
       assert.match(
         (
           client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub
         ).getCall(0).args[1].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
 
@@ -4234,7 +4845,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.storage.control.v2.ListAnywhereCachesRequest()
+        new protos.google.storage.control.v2.ListAnywhereCachesRequest(),
       );
       // path template: {bucket=**}
       request.parent = 'value';
@@ -4253,20 +4864,20 @@ describe('v2.StorageControlClient', () => {
         (
           client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
       assert(
         (client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+          ].includes(expectedHeaderRequestParams),
       );
       assert.match(
         (
           client.descriptors.page.listAnywhereCaches.asyncIterate as SinonStub
         ).getCall(0).args[1].requestId,
-        /[a-z0-9-]{36}/
+        /[a-z0-9-]{36}/,
       );
     });
   });
@@ -4278,10 +4889,10 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const response = await client.getOperation(request);
@@ -4289,7 +4900,7 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes getOperation without error using callback', async () => {
@@ -4298,10 +4909,10 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new operationsProtos.google.longrunning.Operation(),
       );
       client.operationsClient.getOperation = sinon
         .stub()
@@ -4313,14 +4924,14 @@ describe('v2.StorageControlClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: operationsProtos.google.longrunning.Operation | null
+              result?: operationsProtos.google.longrunning.Operation | null,
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            }
+            },
           )
           .catch(err => {
             throw err;
@@ -4336,12 +4947,12 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
+        new operationsProtos.google.longrunning.GetOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.getOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.getOperation(request);
@@ -4349,7 +4960,7 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.operationsClient.getOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -4361,10 +4972,10 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.cancelOperation =
         stubSimpleCall(expectedResponse);
@@ -4373,7 +4984,7 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
@@ -4382,10 +4993,10 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.cancelOperation = sinon
         .stub()
@@ -4397,14 +5008,14 @@ describe('v2.StorageControlClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
+              result?: protos.google.protobuf.Empty | null,
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            }
+            },
           )
           .catch(err => {
             throw err;
@@ -4420,12 +5031,12 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.cancelOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.cancelOperation(request);
@@ -4433,7 +5044,7 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.operationsClient.cancelOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -4445,10 +5056,10 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.deleteOperation =
         stubSimpleCall(expectedResponse);
@@ -4457,7 +5068,7 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
@@ -4466,10 +5077,10 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
+        new protos.google.protobuf.Empty(),
       );
       client.operationsClient.deleteOperation = sinon
         .stub()
@@ -4481,14 +5092,14 @@ describe('v2.StorageControlClient', () => {
             undefined,
             (
               err?: Error | null,
-              result?: protos.google.protobuf.Empty | null
+              result?: protos.google.protobuf.Empty | null,
             ) => {
               if (err) {
                 reject(err);
               } else {
                 resolve(result);
               }
-            }
+            },
           )
           .catch(err => {
             throw err;
@@ -4504,12 +5115,12 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.deleteOperation = stubSimpleCall(
         undefined,
-        expectedError
+        expectedError,
       );
       await assert.rejects(async () => {
         await client.deleteOperation(request);
@@ -4517,7 +5128,7 @@ describe('v2.StorageControlClient', () => {
       assert(
         (client.operationsClient.deleteOperation as SinonStub)
           .getCall(0)
-          .calledWith(request)
+          .calledWith(request),
       );
     });
   });
@@ -4528,17 +5139,17 @@ describe('v2.StorageControlClient', () => {
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
       );
       const expectedResponse = [
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
         generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
         ),
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -4554,7 +5165,7 @@ describe('v2.StorageControlClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
     it('uses async iteration with listOperations with error', async () => {
@@ -4564,7 +5175,7 @@ describe('v2.StorageControlClient', () => {
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
       );
       const expectedError = new Error('expected');
       client.operationsClient.descriptor.listOperations.asyncIterate =
@@ -4581,7 +5192,7 @@ describe('v2.StorageControlClient', () => {
           client.operationsClient.descriptor.listOperations
             .asyncIterate as SinonStub
         ).getCall(0).args[1],
-        request
+        request,
       );
     });
   });
@@ -4610,13 +5221,13 @@ describe('v2.StorageControlClient', () => {
         const result = client.anywhereCachePath(
           'projectValue',
           'bucketValue',
-          'anywhereCacheValue'
+          'anywhereCacheValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.anywhereCachePathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -4626,7 +5237,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.anywhereCachePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4636,7 +5247,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.anywhereCachePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4646,7 +5257,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.anywhereCachePathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -4675,7 +5286,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.bucketPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -4685,7 +5296,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.bucketPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4695,7 +5306,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.bucketPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -4723,13 +5334,13 @@ describe('v2.StorageControlClient', () => {
         const result = client.folderPath(
           'projectValue',
           'bucketValue',
-          'folderValue'
+          'folderValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.folderPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -4739,7 +5350,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.folderPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4749,7 +5360,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.folderPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4759,7 +5370,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.folderPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -4783,7 +5394,7 @@ describe('v2.StorageControlClient', () => {
       it('folderLocationIntelligenceConfigPath', () => {
         const result = client.folderLocationIntelligenceConfigPath(
           'folderValue',
-          'locationValue'
+          'locationValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -4792,7 +5403,7 @@ describe('v2.StorageControlClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -4806,14 +5417,14 @@ describe('v2.StorageControlClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
       it('matchLocationFromFolderLocationIntelligenceConfigName', () => {
         const result =
           client.matchLocationFromFolderLocationIntelligenceConfigName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -4822,7 +5433,7 @@ describe('v2.StorageControlClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -4850,13 +5461,13 @@ describe('v2.StorageControlClient', () => {
         const result = client.managedFolderPath(
           'projectValue',
           'bucketValue',
-          'managedFolderValue'
+          'managedFolderValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.managedFolderPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -4866,7 +5477,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.managedFolderPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4876,7 +5487,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.managedFolderPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4886,7 +5497,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.managedFolderPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -4910,7 +5521,7 @@ describe('v2.StorageControlClient', () => {
       it('orgLocationIntelligenceConfigPath', () => {
         const result = client.orgLocationIntelligenceConfigPath(
           'orgValue',
-          'locationValue'
+          'locationValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -4919,7 +5530,7 @@ describe('v2.StorageControlClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -4933,7 +5544,7 @@ describe('v2.StorageControlClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -4947,7 +5558,7 @@ describe('v2.StorageControlClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -4975,7 +5586,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -4985,7 +5596,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.projectPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -5009,7 +5620,7 @@ describe('v2.StorageControlClient', () => {
       it('projectLocationIntelligenceConfigPath', () => {
         const result = client.projectLocationIntelligenceConfigPath(
           'projectValue',
-          'locationValue'
+          'locationValue',
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -5018,14 +5629,14 @@ describe('v2.StorageControlClient', () => {
               .render as SinonStub
           )
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
       it('matchProjectFromProjectLocationIntelligenceConfigName', () => {
         const result =
           client.matchProjectFromProjectLocationIntelligenceConfigName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'projectValue');
         assert(
@@ -5034,14 +5645,14 @@ describe('v2.StorageControlClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
       it('matchLocationFromProjectLocationIntelligenceConfigName', () => {
         const result =
           client.matchLocationFromProjectLocationIntelligenceConfigName(
-            fakePath
+            fakePath,
           );
         assert.strictEqual(result, 'locationValue');
         assert(
@@ -5050,7 +5661,7 @@ describe('v2.StorageControlClient', () => {
               .match as SinonStub
           )
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });
@@ -5079,7 +5690,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.storageLayoutPathTemplate.render as SinonStub)
             .getCall(-1)
-            .calledWith(expectedParameters)
+            .calledWith(expectedParameters),
         );
       });
 
@@ -5089,7 +5700,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.storageLayoutPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
 
@@ -5099,7 +5710,7 @@ describe('v2.StorageControlClient', () => {
         assert(
           (client.pathTemplates.storageLayoutPathTemplate.match as SinonStub)
             .getCall(-1)
-            .calledWith(fakePath)
+            .calledWith(fakePath),
         );
       });
     });

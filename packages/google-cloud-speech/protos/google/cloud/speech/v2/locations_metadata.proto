@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ option java_multiple_files = true;
 option java_outer_classname = "LocationsMetadataProto";
 option java_package = "com.google.cloud.speech.v2";
 
-// Representes a singular feature of a model. If the feature is `recognizer`,
+// Represents a singular feature of a model. If the feature is `recognizer`,
 // the release_state of the feature represents the release_state of the model
 message ModelFeature {
   // The name of the feature (Note: the feature can be `recognizer`)

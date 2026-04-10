@@ -17,27 +17,19 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
-import * as path from 'path';
-
+import type * as gax from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/group_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './group_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
@@ -59,10 +51,15 @@ const version = require('../../../package.json').version;
 export class GroupServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('monitoring');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -70,6 +67,7 @@ export class GroupServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   groupServiceStub?: Promise<{[name: string]: Function}>;
@@ -79,7 +77,7 @@ export class GroupServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -96,37 +94,54 @@ export class GroupServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new GroupServiceClient({fallback: true}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GroupServiceClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    }
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    this._servicePath = 'monitoring.' + this._universeDomain;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -135,43 +150,39 @@ export class GroupServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -195,42 +206,36 @@ export class GroupServiceClient {
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
+      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-        ),
-      organizationChannelDescriptorPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-        ),
+      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
+      ),
+      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
+      ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/notificationChannels/{notification_channel}'
-        ),
+      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/notificationChannels/{notification_channel}'
+      ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
-      organizationUptimeCheckConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-        ),
+      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
+      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -252,12 +257,14 @@ export class GroupServiceClient {
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
+      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
+      ),
+      snoozePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/snoozes/{snooze}'
       ),
     };
 
@@ -265,30 +272,24 @@ export class GroupServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listGroups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'group'
-      ),
-      listGroupMembers: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'members'
-      ),
+      listGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'group'),
+      listGroupMembers:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'members')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.monitoring.v3.GroupService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.monitoring.v3.GroupService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -311,45 +312,37 @@ export class GroupServiceClient {
     // Put together the "service stub" for
     // google.monitoring.v3.GroupService.
     this.groupServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.monitoring.v3.GroupService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.monitoring.v3.GroupService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.GroupService,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const groupServiceStubMethods = [
-      'listGroups',
-      'getGroup',
-      'createGroup',
-      'updateGroup',
-      'deleteGroup',
-      'listGroupMembers',
-    ];
+    const groupServiceStubMethods =
+        ['listGroups', 'getGroup', 'createGroup', 'updateGroup', 'deleteGroup', 'listGroupMembers'];
     for (const methodName of groupServiceStubMethods) {
       const callPromise = this.groupServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -360,19 +353,38 @@ export class GroupServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
     return 'monitoring.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
     return 'monitoring.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -392,7 +404,7 @@ export class GroupServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/monitoring',
-      'https://www.googleapis.com/auth/monitoring.read',
+      'https://www.googleapis.com/auth/monitoring.read'
     ];
   }
 
@@ -402,9 +414,8 @@ export class GroupServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -415,861 +426,928 @@ export class GroupServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+/**
+ * Gets a single group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The group to retrieve. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Group|Group}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/group_service.get_group.js</caption>
+ * region_tag:monitoring_v3_generated_GroupService_GetGroup_async
+ */
   getGroup(
-    request: protos.google.monitoring.v3.IGetGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IGetGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IGetGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IGetGroupRequest|undefined, {}|undefined
+      ]>;
   getGroup(
-    request: protos.google.monitoring.v3.IGetGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IGetGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getGroup(
-    request: protos.google.monitoring.v3.IGetGroupRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IGetGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets a single group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The group to retrieve. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Group]{@link google.monitoring.v3.Group}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getGroup(request);
-   */
-  getGroup(
-    request: protos.google.monitoring.v3.IGetGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IGetGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.monitoring.v3.IGroup,
-          protos.google.monitoring.v3.IGetGroupRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IGetGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IGetGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IGetGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGroup(
+      request: protos.google.monitoring.v3.IGetGroupRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.IGetGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getGroup(
+      request?: protos.google.monitoring.v3.IGetGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.IGetGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.IGetGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IGetGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IGetGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IGetGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.getGroup(request, options, callback);
   }
+/**
+ * Creates a new group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+ *   to create the group. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ * @param {google.monitoring.v3.Group} request.group
+ *   Required. A group definition. It is an error to define the `name` field
+ *   because the system assigns the name.
+ * @param {boolean} request.validateOnly
+ *   If true, validate this request but do not create the group.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Group|Group}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/group_service.create_group.js</caption>
+ * region_tag:monitoring_v3_generated_GroupService_CreateGroup_async
+ */
   createGroup(
-    request: protos.google.monitoring.v3.ICreateGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.ICreateGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.ICreateGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.ICreateGroupRequest|undefined, {}|undefined
+      ]>;
   createGroup(
-    request: protos.google.monitoring.v3.ICreateGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.ICreateGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createGroup(
-    request: protos.google.monitoring.v3.ICreateGroupRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.ICreateGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates a new group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project in which to create the group. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {google.monitoring.v3.Group} request.group
-   *   Required. A group definition. It is an error to define the `name` field because
-   *   the system assigns the name.
-   * @param {boolean} request.validateOnly
-   *   If true, validate this request but do not create the group.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Group]{@link google.monitoring.v3.Group}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createGroup(request);
-   */
-  createGroup(
-    request: protos.google.monitoring.v3.ICreateGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.ICreateGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.monitoring.v3.IGroup,
-          protos.google.monitoring.v3.ICreateGroupRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.ICreateGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.ICreateGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.ICreateGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  createGroup(
+      request: protos.google.monitoring.v3.ICreateGroupRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.ICreateGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  createGroup(
+      request?: protos.google.monitoring.v3.ICreateGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.ICreateGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.ICreateGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.ICreateGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.ICreateGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.ICreateGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.createGroup(request, options, callback);
   }
+/**
+ * Updates an existing group.
+ * You can change any group attributes except `name`.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.monitoring.v3.Group} request.group
+ *   Required. The new definition of the group.  All fields of the existing
+ *   group, excepting `name`, are replaced with the corresponding fields of this
+ *   group.
+ * @param {boolean} request.validateOnly
+ *   If true, validate this request but do not update the existing group.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Group|Group}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/group_service.update_group.js</caption>
+ * region_tag:monitoring_v3_generated_GroupService_UpdateGroup_async
+ */
   updateGroup(
-    request: protos.google.monitoring.v3.IUpdateGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IUpdateGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IUpdateGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IUpdateGroupRequest|undefined, {}|undefined
+      ]>;
   updateGroup(
-    request: protos.google.monitoring.v3.IUpdateGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IUpdateGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateGroup(
-    request: protos.google.monitoring.v3.IUpdateGroupRequest,
-    callback: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IUpdateGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates an existing group.
-   * You can change any group attributes except `name`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.monitoring.v3.Group} request.group
-   *   Required. The new definition of the group.  All fields of the existing group,
-   *   excepting `name`, are replaced with the corresponding fields of this group.
-   * @param {boolean} request.validateOnly
-   *   If true, validate this request but do not update the existing group.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Group]{@link google.monitoring.v3.Group}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateGroup(request);
-   */
-  updateGroup(
-    request: protos.google.monitoring.v3.IUpdateGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IUpdateGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.monitoring.v3.IGroup,
-          protos.google.monitoring.v3.IUpdateGroupRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IUpdateGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup,
-      protos.google.monitoring.v3.IUpdateGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IUpdateGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGroup(
+      request: protos.google.monitoring.v3.IUpdateGroupRequest,
+      callback: Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.IUpdateGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateGroup(
+      request?: protos.google.monitoring.v3.IUpdateGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.IUpdateGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.monitoring.v3.IGroup,
+          protos.google.monitoring.v3.IUpdateGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IUpdateGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'group.name': request.group!.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'group.name': request.group!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IUpdateGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.monitoring.v3.IGroup,
+        protos.google.monitoring.v3.IUpdateGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.updateGroup(request, options, callback);
   }
+/**
+ * Deletes an existing group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The group to delete. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ * @param {boolean} request.recursive
+ *   If this field is true, then the request means to delete a group with all
+ *   its descendants. Otherwise, the request means to delete a group only when
+ *   it has no descendants. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/group_service.delete_group.js</caption>
+ * region_tag:monitoring_v3_generated_GroupService_DeleteGroup_async
+ */
   deleteGroup(
-    request: protos.google.monitoring.v3.IDeleteGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.monitoring.v3.IDeleteGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IDeleteGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteGroupRequest|undefined, {}|undefined
+      ]>;
   deleteGroup(
-    request: protos.google.monitoring.v3.IDeleteGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.monitoring.v3.IDeleteGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteGroup(
-    request: protos.google.monitoring.v3.IDeleteGroupRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.monitoring.v3.IDeleteGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes an existing group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The group to delete. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   * @param {boolean} request.recursive
-   *   If this field is true, then the request means to delete a group with all
-   *   its descendants. Otherwise, the request means to delete a group only when
-   *   it has no descendants. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteGroup(request);
-   */
-  deleteGroup(
-    request: protos.google.monitoring.v3.IDeleteGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.monitoring.v3.IDeleteGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteGroupRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.monitoring.v3.IDeleteGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.monitoring.v3.IDeleteGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IDeleteGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteGroup(
+      request: protos.google.monitoring.v3.IDeleteGroupRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteGroup(
+      request?: protos.google.monitoring.v3.IDeleteGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.monitoring.v3.IDeleteGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
-    this.initialize();
-    return this.innerApiCalls.deleteGroup(request, options, callback);
   }
 
+ /**
+ * Lists the existing groups.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+ *   groups are to be listed. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ * @param {string} request.childrenOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns groups whose `parent_name` field contains the group
+ *   name.  If no groups have this parent, the results are empty.
+ * @param {string} request.ancestorsOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns groups that are ancestors of the specified group.
+ *   The groups are returned in order, starting with the immediate parent and
+ *   ending with the most distant ancestor.  If the specified group has no
+ *   immediate parent, the results are empty.
+ * @param {string} request.descendantsOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns the descendants of the specified group.  This is a superset of
+ *   the results returned by the `children_of_group` filter, and includes
+ *   children-of-children, and so forth.
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of results to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `next_page_token` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.monitoring.v3.Group|Group}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGroups(
-    request: protos.google.monitoring.v3.IListGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup[],
-      protos.google.monitoring.v3.IListGroupsRequest | null,
-      protos.google.monitoring.v3.IListGroupsResponse,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IListGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.IGroup[],
+        protos.google.monitoring.v3.IListGroupsRequest|null,
+        protos.google.monitoring.v3.IListGroupsResponse
+      ]>;
   listGroups(
-    request: protos.google.monitoring.v3.IListGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListGroupsRequest,
-      protos.google.monitoring.v3.IListGroupsResponse | null | undefined,
-      protos.google.monitoring.v3.IGroup
-    >
-  ): void;
-  listGroups(
-    request: protos.google.monitoring.v3.IListGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListGroupsRequest,
-      protos.google.monitoring.v3.IListGroupsResponse | null | undefined,
-      protos.google.monitoring.v3.IGroup
-    >
-  ): void;
-  /**
-   * Lists the existing groups.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project whose groups are to be listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.childrenOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns groups whose `parent_name` field contains the group
-   *   name.  If no groups have this parent, the results are empty.
-   * @param {string} request.ancestorsOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns groups that are ancestors of the specified group.
-   *   The groups are returned in order, starting with the immediate parent and
-   *   ending with the most distant ancestor.  If the specified group has no
-   *   immediate parent, the results are empty.
-   * @param {string} request.descendantsOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns the descendants of the specified group.  This is a superset of
-   *   the results returned by the `children_of_group` filter, and includes
-   *   children-of-children, and so forth.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `next_page_token` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Group]{@link google.monitoring.v3.Group}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listGroups(
-    request: protos.google.monitoring.v3.IListGroupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.monitoring.v3.IListGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.monitoring.v3.IListGroupsRequest,
-          protos.google.monitoring.v3.IListGroupsResponse | null | undefined,
-          protos.google.monitoring.v3.IGroup
-        >,
-    callback?: PaginationCallback<
-      protos.google.monitoring.v3.IListGroupsRequest,
-      protos.google.monitoring.v3.IListGroupsResponse | null | undefined,
-      protos.google.monitoring.v3.IGroup
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.IGroup[],
-      protos.google.monitoring.v3.IListGroupsRequest | null,
-      protos.google.monitoring.v3.IListGroupsResponse,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IListGroupsResponse|null|undefined,
+          protos.google.monitoring.v3.IGroup>): void;
+  listGroups(
+      request: protos.google.monitoring.v3.IListGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.monitoring.v3.IListGroupsRequest,
+          protos.google.monitoring.v3.IListGroupsResponse|null|undefined,
+          protos.google.monitoring.v3.IGroup>): void;
+  listGroups(
+      request?: protos.google.monitoring.v3.IListGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.monitoring.v3.IListGroupsRequest,
+          protos.google.monitoring.v3.IListGroupsResponse|null|undefined,
+          protos.google.monitoring.v3.IGroup>,
+      callback?: PaginationCallback<
+          protos.google.monitoring.v3.IListGroupsRequest,
+          protos.google.monitoring.v3.IListGroupsResponse|null|undefined,
+          protos.google.monitoring.v3.IGroup>):
+      Promise<[
+        protos.google.monitoring.v3.IGroup[],
+        protos.google.monitoring.v3.IListGroupsRequest|null,
+        protos.google.monitoring.v3.IListGroupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.monitoring.v3.IListGroupsRequest,
+      protos.google.monitoring.v3.IListGroupsResponse|null|undefined,
+      protos.google.monitoring.v3.IGroup>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGroups request %j', request);
+    return this.innerApiCalls
+      .listGroups(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.monitoring.v3.IGroup[],
+        protos.google.monitoring.v3.IListGroupsRequest|null,
+        protos.google.monitoring.v3.IListGroupsResponse
+      ]) => {
+        this._log.info('listGroups values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listGroups(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project whose groups are to be listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.childrenOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns groups whose `parent_name` field contains the group
-   *   name.  If no groups have this parent, the results are empty.
-   * @param {string} request.ancestorsOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns groups that are ancestors of the specified group.
-   *   The groups are returned in order, starting with the immediate parent and
-   *   ending with the most distant ancestor.  If the specified group has no
-   *   immediate parent, the results are empty.
-   * @param {string} request.descendantsOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns the descendants of the specified group.  This is a superset of
-   *   the results returned by the `children_of_group` filter, and includes
-   *   children-of-children, and so forth.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `next_page_token` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Group]{@link google.monitoring.v3.Group} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+ *   groups are to be listed. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ * @param {string} request.childrenOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns groups whose `parent_name` field contains the group
+ *   name.  If no groups have this parent, the results are empty.
+ * @param {string} request.ancestorsOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns groups that are ancestors of the specified group.
+ *   The groups are returned in order, starting with the immediate parent and
+ *   ending with the most distant ancestor.  If the specified group has no
+ *   immediate parent, the results are empty.
+ * @param {string} request.descendantsOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns the descendants of the specified group.  This is a superset of
+ *   the results returned by the `children_of_group` filter, and includes
+ *   children-of-children, and so forth.
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of results to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `next_page_token` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.monitoring.v3.Group|Group} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGroupsStream(
-    request?: protos.google.monitoring.v3.IListGroupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.monitoring.v3.IListGroupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGroups stream %j', request);
     return this.descriptors.page.listGroups.createStream(
-      this.innerApiCalls.listGroups as gax.GaxCall,
+      this.innerApiCalls.listGroups as GaxCall,
       request,
       callSettings
     );
   }
 
-  /**
-   * Equivalent to `listGroups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project whose groups are to be listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.childrenOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns groups whose `parent_name` field contains the group
-   *   name.  If no groups have this parent, the results are empty.
-   * @param {string} request.ancestorsOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns groups that are ancestors of the specified group.
-   *   The groups are returned in order, starting with the immediate parent and
-   *   ending with the most distant ancestor.  If the specified group has no
-   *   immediate parent, the results are empty.
-   * @param {string} request.descendantsOfGroup
-   *   A group name. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   *
-   *   Returns the descendants of the specified group.  This is a superset of
-   *   the results returned by the `children_of_group` filter, and includes
-   *   children-of-children, and so forth.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `next_page_token` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Group]{@link google.monitoring.v3.Group}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listGroupsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+ *   groups are to be listed. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ * @param {string} request.childrenOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns groups whose `parent_name` field contains the group
+ *   name.  If no groups have this parent, the results are empty.
+ * @param {string} request.ancestorsOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns groups that are ancestors of the specified group.
+ *   The groups are returned in order, starting with the immediate parent and
+ *   ending with the most distant ancestor.  If the specified group has no
+ *   immediate parent, the results are empty.
+ * @param {string} request.descendantsOfGroup
+ *   A group name. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ *
+ *   Returns the descendants of the specified group.  This is a superset of
+ *   the results returned by the `children_of_group` filter, and includes
+ *   children-of-children, and so forth.
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of results to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `next_page_token` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.monitoring.v3.Group|Group}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/group_service.list_groups.js</caption>
+ * region_tag:monitoring_v3_generated_GroupService_ListGroups_async
+ */
   listGroupsAsync(
-    request?: protos.google.monitoring.v3.IListGroupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.monitoring.v3.IGroup> {
+      request?: protos.google.monitoring.v3.IListGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.monitoring.v3.IGroup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGroups iterate %j', request);
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.IGroup>;
   }
+ /**
+ * Lists the monitored resources that are members of a group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The group whose members are listed. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of results to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `next_page_token` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {string} request.filter
+ *   An optional [list
+ *   filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
+ *   describing the members to be returned.  The filter may reference the type,
+ *   labels, and metadata of monitored resources that comprise the group. For
+ *   example, to return only resources representing Compute Engine VM instances,
+ *   use this filter:
+ *
+ *       `resource.type = "gce_instance"`
+ * @param {google.monitoring.v3.TimeInterval} request.interval
+ *   An optional time interval for which results should be returned. Only
+ *   members that were part of the group during the specified interval are
+ *   included in the response.  If no interval is provided then the group
+ *   membership over the last minute is returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.api.MonitoredResource|MonitoredResource}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listGroupMembersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGroupMembers(
-    request: protos.google.monitoring.v3.IListGroupMembersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IMonitoredResource[],
-      protos.google.monitoring.v3.IListGroupMembersRequest | null,
-      protos.google.monitoring.v3.IListGroupMembersResponse,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IListGroupMembersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.api.IMonitoredResource[],
+        protos.google.monitoring.v3.IListGroupMembersRequest|null,
+        protos.google.monitoring.v3.IListGroupMembersResponse
+      ]>;
   listGroupMembers(
-    request: protos.google.monitoring.v3.IListGroupMembersRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListGroupMembersRequest,
-      protos.google.monitoring.v3.IListGroupMembersResponse | null | undefined,
-      protos.google.api.IMonitoredResource
-    >
-  ): void;
-  listGroupMembers(
-    request: protos.google.monitoring.v3.IListGroupMembersRequest,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IListGroupMembersRequest,
-      protos.google.monitoring.v3.IListGroupMembersResponse | null | undefined,
-      protos.google.api.IMonitoredResource
-    >
-  ): void;
-  /**
-   * Lists the monitored resources that are members of a group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The group whose members are listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `next_page_token` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {string} request.filter
-   *   An optional [list
-   *   filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
-   *   describing the members to be returned.  The filter may reference the type,
-   *   labels, and metadata of monitored resources that comprise the group. For
-   *   example, to return only resources representing Compute Engine VM instances,
-   *   use this filter:
-   *
-   *       `resource.type = "gce_instance"`
-   * @param {google.monitoring.v3.TimeInterval} request.interval
-   *   An optional time interval for which results should be returned. Only
-   *   members that were part of the group during the specified interval are
-   *   included in the response.  If no interval is provided then the group
-   *   membership over the last minute is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [MonitoredResource]{@link google.api.MonitoredResource}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listGroupMembersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listGroupMembers(
-    request: protos.google.monitoring.v3.IListGroupMembersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.monitoring.v3.IListGroupMembersRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.monitoring.v3.IListGroupMembersRequest,
-          | protos.google.monitoring.v3.IListGroupMembersResponse
-          | null
-          | undefined,
-          protos.google.api.IMonitoredResource
-        >,
-    callback?: PaginationCallback<
-      protos.google.monitoring.v3.IListGroupMembersRequest,
-      protos.google.monitoring.v3.IListGroupMembersResponse | null | undefined,
-      protos.google.api.IMonitoredResource
-    >
-  ): Promise<
-    [
-      protos.google.api.IMonitoredResource[],
-      protos.google.monitoring.v3.IListGroupMembersRequest | null,
-      protos.google.monitoring.v3.IListGroupMembersResponse,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IListGroupMembersResponse|null|undefined,
+          protos.google.api.IMonitoredResource>): void;
+  listGroupMembers(
+      request: protos.google.monitoring.v3.IListGroupMembersRequest,
+      callback: PaginationCallback<
+          protos.google.monitoring.v3.IListGroupMembersRequest,
+          protos.google.monitoring.v3.IListGroupMembersResponse|null|undefined,
+          protos.google.api.IMonitoredResource>): void;
+  listGroupMembers(
+      request?: protos.google.monitoring.v3.IListGroupMembersRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.monitoring.v3.IListGroupMembersRequest,
+          protos.google.monitoring.v3.IListGroupMembersResponse|null|undefined,
+          protos.google.api.IMonitoredResource>,
+      callback?: PaginationCallback<
+          protos.google.monitoring.v3.IListGroupMembersRequest,
+          protos.google.monitoring.v3.IListGroupMembersResponse|null|undefined,
+          protos.google.api.IMonitoredResource>):
+      Promise<[
+        protos.google.api.IMonitoredResource[],
+        protos.google.monitoring.v3.IListGroupMembersRequest|null,
+        protos.google.monitoring.v3.IListGroupMembersResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.monitoring.v3.IListGroupMembersRequest,
+      protos.google.monitoring.v3.IListGroupMembersResponse|null|undefined,
+      protos.google.api.IMonitoredResource>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGroupMembers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGroupMembers request %j', request);
+    return this.innerApiCalls
+      .listGroupMembers(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.api.IMonitoredResource[],
+        protos.google.monitoring.v3.IListGroupMembersRequest|null,
+        protos.google.monitoring.v3.IListGroupMembersResponse
+      ]) => {
+        this._log.info('listGroupMembers values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.listGroupMembers(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The group whose members are listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `next_page_token` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {string} request.filter
-   *   An optional [list
-   *   filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
-   *   describing the members to be returned.  The filter may reference the type,
-   *   labels, and metadata of monitored resources that comprise the group. For
-   *   example, to return only resources representing Compute Engine VM instances,
-   *   use this filter:
-   *
-   *       `resource.type = "gce_instance"`
-   * @param {google.monitoring.v3.TimeInterval} request.interval
-   *   An optional time interval for which results should be returned. Only
-   *   members that were part of the group during the specified interval are
-   *   included in the response.  If no interval is provided then the group
-   *   membership over the last minute is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [MonitoredResource]{@link google.api.MonitoredResource} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listGroupMembersAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listGroupMembers`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The group whose members are listed. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of results to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `next_page_token` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {string} request.filter
+ *   An optional [list
+ *   filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
+ *   describing the members to be returned.  The filter may reference the type,
+ *   labels, and metadata of monitored resources that comprise the group. For
+ *   example, to return only resources representing Compute Engine VM instances,
+ *   use this filter:
+ *
+ *       `resource.type = "gce_instance"`
+ * @param {google.monitoring.v3.TimeInterval} request.interval
+ *   An optional time interval for which results should be returned. Only
+ *   members that were part of the group during the specified interval are
+ *   included in the response.  If no interval is provided then the group
+ *   membership over the last minute is returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.api.MonitoredResource|MonitoredResource} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listGroupMembersAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listGroupMembersStream(
-    request?: protos.google.monitoring.v3.IListGroupMembersRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.monitoring.v3.IListGroupMembersRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGroupMembers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGroupMembers stream %j', request);
     return this.descriptors.page.listGroupMembers.createStream(
-      this.innerApiCalls.listGroupMembers as gax.GaxCall,
+      this.innerApiCalls.listGroupMembers as GaxCall,
       request,
       callSettings
     );
   }
 
-  /**
-   * Equivalent to `listGroupMembers`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The group whose members are listed. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of results to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `next_page_token` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {string} request.filter
-   *   An optional [list
-   *   filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
-   *   describing the members to be returned.  The filter may reference the type,
-   *   labels, and metadata of monitored resources that comprise the group. For
-   *   example, to return only resources representing Compute Engine VM instances,
-   *   use this filter:
-   *
-   *       `resource.type = "gce_instance"`
-   * @param {google.monitoring.v3.TimeInterval} request.interval
-   *   An optional time interval for which results should be returned. Only
-   *   members that were part of the group during the specified interval are
-   *   included in the response.  If no interval is provided then the group
-   *   membership over the last minute is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [MonitoredResource]{@link google.api.MonitoredResource}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listGroupMembersAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listGroupMembers`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The group whose members are listed. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of results to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `next_page_token` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {string} request.filter
+ *   An optional [list
+ *   filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
+ *   describing the members to be returned.  The filter may reference the type,
+ *   labels, and metadata of monitored resources that comprise the group. For
+ *   example, to return only resources representing Compute Engine VM instances,
+ *   use this filter:
+ *
+ *       `resource.type = "gce_instance"`
+ * @param {google.monitoring.v3.TimeInterval} request.interval
+ *   An optional time interval for which results should be returned. Only
+ *   members that were part of the group during the specified interval are
+ *   included in the response.  If no interval is provided then the group
+ *   membership over the last minute is returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.api.MonitoredResource|MonitoredResource}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/group_service.list_group_members.js</caption>
+ * region_tag:monitoring_v3_generated_GroupService_ListGroupMembers_async
+ */
   listGroupMembersAsync(
-    request?: protos.google.monitoring.v3.IListGroupMembersRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.api.IMonitoredResource> {
+      request?: protos.google.monitoring.v3.IListGroupMembersRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.api.IMonitoredResource>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['listGroupMembers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listGroupMembers iterate %j', request);
     return this.descriptors.page.listGroupMembers.asyncIterate(
       this.innerApiCalls['listGroupMembers'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.IMonitoredResource>;
   }
@@ -1284,7 +1362,7 @@ export class GroupServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyPath(folder: string, alertPolicy: string) {
+  folderAlertPolicyPath(folder:string,alertPolicy:string) {
     return this.pathTemplates.folderAlertPolicyPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1299,9 +1377,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
-      folderAlertPolicyName
-    ).folder;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).folder;
   }
 
   /**
@@ -1312,9 +1388,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
-      folderAlertPolicyName
-    ).alert_policy;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).alert_policy;
   }
 
   /**
@@ -1325,11 +1399,7 @@ export class GroupServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyConditionPath(
-    folder: string,
-    alertPolicy: string,
-    condition: string
-  ) {
+  folderAlertPolicyConditionPath(folder:string,alertPolicy:string,condition:string) {
     return this.pathTemplates.folderAlertPolicyConditionPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1344,12 +1414,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).folder;
+  matchFolderFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).folder;
   }
 
   /**
@@ -1359,12 +1425,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -1374,12 +1436,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).condition;
+  matchConditionFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).condition;
   }
 
   /**
@@ -1389,7 +1447,7 @@ export class GroupServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  folderChannelDescriptorPath(folder: string, channelDescriptor: string) {
+  folderChannelDescriptorPath(folder:string,channelDescriptor:string) {
     return this.pathTemplates.folderChannelDescriptorPathTemplate.render({
       folder: folder,
       channel_descriptor: channelDescriptor,
@@ -1403,12 +1461,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderChannelDescriptorName(
-    folderChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
-      folderChannelDescriptorName
-    ).folder;
+  matchFolderFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).folder;
   }
 
   /**
@@ -1418,12 +1472,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromFolderChannelDescriptorName(
-    folderChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
-      folderChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -1433,7 +1483,7 @@ export class GroupServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  folderGroupPath(folder: string, group: string) {
+  folderGroupPath(folder:string,group:string) {
     return this.pathTemplates.folderGroupPathTemplate.render({
       folder: folder,
       group: group,
@@ -1448,8 +1498,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
-      .folder;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).folder;
   }
 
   /**
@@ -1460,8 +1509,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
-      .group;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).group;
   }
 
   /**
@@ -1471,7 +1519,7 @@ export class GroupServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  folderNotificationChannelPath(folder: string, notificationChannel: string) {
+  folderNotificationChannelPath(folder:string,notificationChannel:string) {
     return this.pathTemplates.folderNotificationChannelPathTemplate.render({
       folder: folder,
       notification_channel: notificationChannel,
@@ -1485,12 +1533,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderNotificationChannelName(
-    folderNotificationChannelName: string
-  ) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
-      folderNotificationChannelName
-    ).folder;
+  matchFolderFromFolderNotificationChannelName(folderNotificationChannelName: string) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).folder;
   }
 
   /**
@@ -1500,12 +1544,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromFolderNotificationChannelName(
-    folderNotificationChannelName: string
-  ) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
-      folderNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromFolderNotificationChannelName(folderNotificationChannelName: string) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).notification_channel;
   }
 
   /**
@@ -1515,7 +1555,7 @@ export class GroupServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  folderServicePath(folder: string, service: string) {
+  folderServicePath(folder:string,service:string) {
     return this.pathTemplates.folderServicePathTemplate.render({
       folder: folder,
       service: service,
@@ -1530,8 +1570,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
-      .folder;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).folder;
   }
 
   /**
@@ -1542,8 +1581,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
-      .service;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).service;
   }
 
   /**
@@ -1554,18 +1592,12 @@ export class GroupServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  folderServiceServiceLevelObjectivePath(
-    folder: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
-      {
-        folder: folder,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  folderServiceServiceLevelObjectivePath(folder:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render({
+      folder: folder,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -1575,12 +1607,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).folder;
+  matchFolderFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).folder;
   }
 
   /**
@@ -1590,12 +1618,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -1605,12 +1629,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -1620,7 +1640,7 @@ export class GroupServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  folderUptimeCheckConfigPath(folder: string, uptimeCheckConfig: string) {
+  folderUptimeCheckConfigPath(folder:string,uptimeCheckConfig:string) {
     return this.pathTemplates.folderUptimeCheckConfigPathTemplate.render({
       folder: folder,
       uptime_check_config: uptimeCheckConfig,
@@ -1634,12 +1654,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderUptimeCheckConfigName(
-    folderUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
-      folderUptimeCheckConfigName
-    ).folder;
+  matchFolderFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).folder;
   }
 
   /**
@@ -1649,12 +1665,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
-    folderUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
-      folderUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).uptime_check_config;
   }
 
   /**
@@ -1664,7 +1676,7 @@ export class GroupServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyPath(organization: string, alertPolicy: string) {
+  organizationAlertPolicyPath(organization:string,alertPolicy:string) {
     return this.pathTemplates.organizationAlertPolicyPathTemplate.render({
       organization: organization,
       alert_policy: alertPolicy,
@@ -1678,12 +1690,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyName(
-    organizationAlertPolicyName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
-      organizationAlertPolicyName
-    ).organization;
+  matchOrganizationFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).organization;
   }
 
   /**
@@ -1693,12 +1701,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyName(
-    organizationAlertPolicyName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
-      organizationAlertPolicyName
-    ).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).alert_policy;
   }
 
   /**
@@ -1709,18 +1713,12 @@ export class GroupServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyConditionPath(
-    organization: string,
-    alertPolicy: string,
-    condition: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
-      {
-        organization: organization,
-        alert_policy: alertPolicy,
-        condition: condition,
-      }
-    );
+  organizationAlertPolicyConditionPath(organization:string,alertPolicy:string,condition:string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render({
+      organization: organization,
+      alert_policy: alertPolicy,
+      condition: condition,
+    });
   }
 
   /**
@@ -1730,12 +1728,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).organization;
+  matchOrganizationFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).organization;
   }
 
   /**
@@ -1745,12 +1739,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -1760,12 +1750,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).condition;
+  matchConditionFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).condition;
   }
 
   /**
@@ -1775,10 +1761,7 @@ export class GroupServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  organizationChannelDescriptorPath(
-    organization: string,
-    channelDescriptor: string
-  ) {
+  organizationChannelDescriptorPath(organization:string,channelDescriptor:string) {
     return this.pathTemplates.organizationChannelDescriptorPathTemplate.render({
       organization: organization,
       channel_descriptor: channelDescriptor,
@@ -1792,12 +1775,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationChannelDescriptorName(
-    organizationChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
-      organizationChannelDescriptorName
-    ).organization;
+  matchOrganizationFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).organization;
   }
 
   /**
@@ -1807,12 +1786,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromOrganizationChannelDescriptorName(
-    organizationChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
-      organizationChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -1822,7 +1797,7 @@ export class GroupServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  organizationGroupPath(organization: string, group: string) {
+  organizationGroupPath(organization:string,group:string) {
     return this.pathTemplates.organizationGroupPathTemplate.render({
       organization: organization,
       group: group,
@@ -1837,9 +1812,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(
-      organizationGroupName
-    ).organization;
+    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).organization;
   }
 
   /**
@@ -1850,9 +1823,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(
-      organizationGroupName
-    ).group;
+    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).group;
   }
 
   /**
@@ -1862,16 +1833,11 @@ export class GroupServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  organizationNotificationChannelPath(
-    organization: string,
-    notificationChannel: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.render(
-      {
-        organization: organization,
-        notification_channel: notificationChannel,
-      }
-    );
+  organizationNotificationChannelPath(organization:string,notificationChannel:string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.render({
+      organization: organization,
+      notification_channel: notificationChannel,
+    });
   }
 
   /**
@@ -1881,12 +1847,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationNotificationChannelName(
-    organizationNotificationChannelName: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
-      organizationNotificationChannelName
-    ).organization;
+  matchOrganizationFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).organization;
   }
 
   /**
@@ -1896,12 +1858,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromOrganizationNotificationChannelName(
-    organizationNotificationChannelName: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
-      organizationNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).notification_channel;
   }
 
   /**
@@ -1911,7 +1869,7 @@ export class GroupServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  organizationServicePath(organization: string, service: string) {
+  organizationServicePath(organization:string,service:string) {
     return this.pathTemplates.organizationServicePathTemplate.render({
       organization: organization,
       service: service,
@@ -1925,12 +1883,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_service resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceName(
-    organizationServiceName: string
-  ) {
-    return this.pathTemplates.organizationServicePathTemplate.match(
-      organizationServiceName
-    ).organization;
+  matchOrganizationFromOrganizationServiceName(organizationServiceName: string) {
+    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).organization;
   }
 
   /**
@@ -1941,9 +1895,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromOrganizationServiceName(organizationServiceName: string) {
-    return this.pathTemplates.organizationServicePathTemplate.match(
-      organizationServiceName
-    ).service;
+    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).service;
   }
 
   /**
@@ -1954,18 +1906,12 @@ export class GroupServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  organizationServiceServiceLevelObjectivePath(
-    organization: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
-      {
-        organization: organization,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  organizationServiceServiceLevelObjectivePath(organization:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render({
+      organization: organization,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -1975,12 +1921,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).organization;
+  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).organization;
   }
 
   /**
@@ -1990,12 +1932,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -2005,12 +1943,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -2020,10 +1954,7 @@ export class GroupServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  organizationUptimeCheckConfigPath(
-    organization: string,
-    uptimeCheckConfig: string
-  ) {
+  organizationUptimeCheckConfigPath(organization:string,uptimeCheckConfig:string) {
     return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.render({
       organization: organization,
       uptime_check_config: uptimeCheckConfig,
@@ -2037,12 +1968,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationUptimeCheckConfigName(
-    organizationUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
-      organizationUptimeCheckConfigName
-    ).organization;
+  matchOrganizationFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).organization;
   }
 
   /**
@@ -2052,12 +1979,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
-    organizationUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
-      organizationUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).uptime_check_config;
   }
 
   /**
@@ -2066,7 +1989,7 @@ export class GroupServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
+  projectPath(project:string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2090,7 +2013,7 @@ export class GroupServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyPath(project: string, alertPolicy: string) {
+  projectAlertPolicyPath(project:string,alertPolicy:string) {
     return this.pathTemplates.projectAlertPolicyPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -2105,9 +2028,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
-      projectAlertPolicyName
-    ).project;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).project;
   }
 
   /**
@@ -2118,9 +2039,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
-      projectAlertPolicyName
-    ).alert_policy;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).alert_policy;
   }
 
   /**
@@ -2131,11 +2050,7 @@ export class GroupServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyConditionPath(
-    project: string,
-    alertPolicy: string,
-    condition: string
-  ) {
+  projectAlertPolicyConditionPath(project:string,alertPolicy:string,condition:string) {
     return this.pathTemplates.projectAlertPolicyConditionPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -2150,12 +2065,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).project;
+  matchProjectFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).project;
   }
 
   /**
@@ -2165,12 +2076,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -2180,12 +2087,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).condition;
+  matchConditionFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).condition;
   }
 
   /**
@@ -2195,7 +2098,7 @@ export class GroupServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  projectChannelDescriptorPath(project: string, channelDescriptor: string) {
+  projectChannelDescriptorPath(project:string,channelDescriptor:string) {
     return this.pathTemplates.projectChannelDescriptorPathTemplate.render({
       project: project,
       channel_descriptor: channelDescriptor,
@@ -2209,12 +2112,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectChannelDescriptorName(
-    projectChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
-      projectChannelDescriptorName
-    ).project;
+  matchProjectFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).project;
   }
 
   /**
@@ -2224,12 +2123,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromProjectChannelDescriptorName(
-    projectChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
-      projectChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -2239,7 +2134,7 @@ export class GroupServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  projectGroupPath(project: string, group: string) {
+  projectGroupPath(project:string,group:string) {
     return this.pathTemplates.projectGroupPathTemplate.render({
       project: project,
       group: group,
@@ -2254,8 +2149,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
-      .project;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).project;
   }
 
   /**
@@ -2266,8 +2160,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
-      .group;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).group;
   }
 
   /**
@@ -2277,7 +2170,7 @@ export class GroupServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  projectNotificationChannelPath(project: string, notificationChannel: string) {
+  projectNotificationChannelPath(project:string,notificationChannel:string) {
     return this.pathTemplates.projectNotificationChannelPathTemplate.render({
       project: project,
       notification_channel: notificationChannel,
@@ -2291,12 +2184,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectNotificationChannelName(
-    projectNotificationChannelName: string
-  ) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
-      projectNotificationChannelName
-    ).project;
+  matchProjectFromProjectNotificationChannelName(projectNotificationChannelName: string) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).project;
   }
 
   /**
@@ -2306,12 +2195,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromProjectNotificationChannelName(
-    projectNotificationChannelName: string
-  ) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
-      projectNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromProjectNotificationChannelName(projectNotificationChannelName: string) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).notification_channel;
   }
 
   /**
@@ -2321,7 +2206,7 @@ export class GroupServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  projectServicePath(project: string, service: string) {
+  projectServicePath(project:string,service:string) {
     return this.pathTemplates.projectServicePathTemplate.render({
       project: project,
       service: service,
@@ -2336,9 +2221,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(
-      projectServiceName
-    ).project;
+    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).project;
   }
 
   /**
@@ -2349,9 +2232,7 @@ export class GroupServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(
-      projectServiceName
-    ).service;
+    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).service;
   }
 
   /**
@@ -2362,18 +2243,12 @@ export class GroupServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  projectServiceServiceLevelObjectivePath(
-    project: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
-      {
-        project: project,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  projectServiceServiceLevelObjectivePath(project:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render({
+      project: project,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -2383,12 +2258,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).project;
+  matchProjectFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).project;
   }
 
   /**
@@ -2398,12 +2269,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -2413,12 +2280,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -2428,7 +2291,7 @@ export class GroupServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  projectUptimeCheckConfigPath(project: string, uptimeCheckConfig: string) {
+  projectUptimeCheckConfigPath(project:string,uptimeCheckConfig:string) {
     return this.pathTemplates.projectUptimeCheckConfigPathTemplate.render({
       project: project,
       uptime_check_config: uptimeCheckConfig,
@@ -2442,12 +2305,8 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectUptimeCheckConfigName(
-    projectUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
-      projectUptimeCheckConfigName
-    ).project;
+  matchProjectFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).project;
   }
 
   /**
@@ -2457,12 +2316,44 @@ export class GroupServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
-    projectUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
-      projectUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).uptime_check_config;
+  }
+
+  /**
+   * Return a fully-qualified snooze resource name string.
+   *
+   * @param {string} project
+   * @param {string} snooze
+   * @returns {string} Resource name string.
+   */
+  snoozePath(project:string,snooze:string) {
+    return this.pathTemplates.snoozePathTemplate.render({
+      project: project,
+      snooze: snooze,
+    });
+  }
+
+  /**
+   * Parse the project from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).project;
+  }
+
+  /**
+   * Parse the snooze from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the snooze.
+   */
+  matchSnoozeFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).snooze;
   }
 
   /**
@@ -2472,9 +2363,9 @@ export class GroupServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.groupServiceStub!.then(stub => {
+    if (this.groupServiceStub && !this._terminated) {
+      return this.groupServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

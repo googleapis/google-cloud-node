@@ -35,7 +35,7 @@
                             "(google.api.http).additional_bindings.body": "build",
                             "(google.api.routing).routing_parameters.field": "parent",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}",
-                            "(google.api.method_signature)": "project_id,build",
+                            "(google.api.method_signature)": "parent",
                             "(google.longrunning.operation_info).response_type": "Build",
                             "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
                           },
@@ -62,6 +62,9 @@
                               "(google.api.method_signature)": "project_id,build"
                             },
                             {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
                               "(google.longrunning.operation_info)": {
                                 "response_type": "Build",
                                 "metadata_type": "BuildOperationMetadata"
@@ -77,7 +80,7 @@
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/builds/*}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/builds/*",
-                            "(google.api.method_signature)": "project_id,id"
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
@@ -98,6 +101,9 @@
                             },
                             {
                               "(google.api.method_signature)": "project_id,id"
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -143,7 +149,7 @@
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/builds/*",
-                            "(google.api.method_signature)": "project_id,id"
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
@@ -166,6 +172,9 @@
                             },
                             {
                               "(google.api.method_signature)": "project_id,id"
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -179,7 +188,7 @@
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/builds/*",
-                            "(google.api.method_signature)": "project_id,id",
+                            "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "Build",
                             "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
                           },
@@ -204,6 +213,9 @@
                             },
                             {
                               "(google.api.method_signature)": "project_id,id"
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             },
                             {
                               "(google.longrunning.operation_info)": {
@@ -267,7 +279,7 @@
                             "(google.api.http).additional_bindings.body": "trigger",
                             "(google.api.routing).routing_parameters.field": "parent",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}",
-                            "(google.api.method_signature)": "project_id,trigger"
+                            "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
@@ -290,6 +302,9 @@
                             },
                             {
                               "(google.api.method_signature)": "project_id,trigger"
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         },
@@ -301,7 +316,7 @@
                             "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/triggers/*}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/triggers/*",
-                            "(google.api.method_signature)": "project_id,trigger_id"
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
@@ -322,6 +337,9 @@
                             },
                             {
                               "(google.api.method_signature)": "project_id,trigger_id"
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -365,7 +383,7 @@
                             "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/triggers/*}",
                             "(google.api.routing).routing_parameters.field": "name",
                             "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/triggers/*",
-                            "(google.api.method_signature)": "project_id,trigger_id"
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
@@ -386,6 +404,9 @@
                             },
                             {
                               "(google.api.method_signature)": "project_id,trigger_id"
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -658,6 +679,70 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "GetDefaultServiceAccount": {
+                          "requestType": "GetDefaultServiceAccountRequest",
+                          "responseType": "DefaultServiceAccount",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/defaultServiceAccount}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/defaultServiceAccount",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/defaultServiceAccount}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "projects/*/locations/{location=*}/defaultServiceAccount"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetDefaultServiceAccountRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/DefaultServiceAccount"
+                          }
+                        }
+                      }
+                    },
+                    "DefaultServiceAccount": {
+                      "options": {
+                        "(google.api.resource).type": "cloudbuild.googleapis.com/DefaultServiceAccount",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/defaultServiceAccount",
+                        "(google.api.resource).singular": "defaultServiceAccount"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
                         }
                       }
                     },
@@ -723,11 +808,17 @@
                         },
                         "object": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "generation": {
                           "type": "int64",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sourceFetcher": {
                           "type": "SourceFetcher",
@@ -751,15 +842,24 @@
                       "fields": {
                         "url": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "dir": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "revision": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -776,11 +876,17 @@
                       "fields": {
                         "projectId": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "repoName": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "branchName": {
                           "type": "string",
@@ -796,16 +902,25 @@
                         },
                         "dir": {
                           "type": "string",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "invertRegex": {
                           "type": "bool",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "substitutions": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -813,15 +928,47 @@
                       "fields": {
                         "bucket": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "object": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "generation": {
                           "type": "int64",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ConnectedRepository": {
+                      "fields": {
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/Repository"
+                          }
+                        },
+                        "dir": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -832,7 +979,8 @@
                             "storageSource",
                             "repoSource",
                             "gitSource",
-                            "storageSourceManifest"
+                            "storageSourceManifest",
+                            "connectedRepository"
                           ]
                         }
                       },
@@ -852,6 +1000,13 @@
                         "storageSourceManifest": {
                           "type": "StorageSourceManifest",
                           "id": 8
+                        },
+                        "connectedRepository": {
+                          "type": "ConnectedRepository",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -868,6 +1023,13 @@
                         "pushTiming": {
                           "type": "TimeSpan",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "artifactRegistryPackage": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -890,6 +1052,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "artifactRegistryPackage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -906,6 +1075,13 @@
                         "pushTiming": {
                           "type": "TimeSpan",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "artifactRegistryPackage": {
+                          "type": "string",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -928,6 +1104,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "artifactRegistryPackage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -944,6 +1127,13 @@
                         "pushTiming": {
                           "type": "TimeSpan",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "artifactRegistryPackage": {
+                          "type": "string",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1178,7 +1368,10 @@
                         },
                         "source": {
                           "type": "Source",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "steps": {
                           "rule": "repeated",
@@ -1564,7 +1757,10 @@
                             },
                             "path": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "artifactId": {
                               "type": "string",
@@ -1647,7 +1843,10 @@
                             },
                             "packagePath": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -1686,6 +1885,20 @@
                         "resolvedStorageSourceManifest": {
                           "type": "StorageSourceManifest",
                           "id": 9
+                        },
+                        "resolvedConnectedRepository": {
+                          "type": "ConnectedRepository",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resolvedGitSource": {
+                          "type": "GitSource",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "fileHashes": {
                           "keyType": "string",
@@ -2328,6 +2541,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "pubsub.googleapis.com/Topic"
                           }
                         },
@@ -2769,10 +2983,7 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 7
                         },
                         "hostUrl": {
                           "type": "string",
@@ -2806,11 +3017,17 @@
                         },
                         "secrets": {
                           "type": "GitHubEnterpriseSecrets",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "displayName": {
                           "type": "string",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sslCa": {
                           "type": "string",
@@ -2965,14 +3182,32 @@
                       },
                       "nested": {
                         "WorkerConfig": {
+                          "oneofs": {
+                            "_enableNestedVirtualization": {
+                              "oneof": [
+                                "enableNestedVirtualization"
+                              ]
+                            }
+                          },
                           "fields": {
                             "machineType": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "diskSizeGb": {
                               "type": "int64",
                               "id": 2
+                            },
+                            "enableNestedVirtualization": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },
@@ -3116,7 +3351,10 @@
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "validateOnly": {
                           "type": "bool",
@@ -4577,6 +4815,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -4685,6 +4928,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -4860,7 +5107,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -5009,6 +5259,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -5018,6 +5269,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -5033,6 +5285,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5050,18 +5303,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -5102,6 +5349,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5184,6 +5432,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -5257,6 +5506,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5336,6 +5586,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5348,6 +5599,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5389,6 +5641,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5405,6 +5658,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5422,6 +5676,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5456,6 +5711,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -5597,6 +5853,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -5670,6 +5927,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -5731,10 +5989,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -5818,6 +6073,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -5837,6 +6093,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -5880,6 +6137,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -5913,6 +6171,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -5939,6 +6198,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -5981,6 +6241,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -6030,6 +6291,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -6102,8 +6364,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -6159,6 +6433,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -6190,6 +6465,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -6203,12 +6479,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -6228,6 +6510,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -6241,7 +6524,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

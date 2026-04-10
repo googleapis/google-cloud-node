@@ -57,7 +57,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Edge_network.create_interconnect_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_interconnect_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_interconnect_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_interconnect_attachment.js,samples/README.md)
 
@@ -74,7 +74,7 @@ __Usage:__
 
 ### Edge_network.create_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_network.js,samples/README.md)
 
@@ -91,7 +91,7 @@ __Usage:__
 
 ### Edge_network.create_router
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_router.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_router.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_router.js,samples/README.md)
 
@@ -108,7 +108,7 @@ __Usage:__
 
 ### Edge_network.create_subnet
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_subnet.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_subnet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.create_subnet.js,samples/README.md)
 
@@ -125,7 +125,7 @@ __Usage:__
 
 ### Edge_network.delete_interconnect_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_interconnect_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_interconnect_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_interconnect_attachment.js,samples/README.md)
 
@@ -142,7 +142,7 @@ __Usage:__
 
 ### Edge_network.delete_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_network.js,samples/README.md)
 
@@ -159,7 +159,7 @@ __Usage:__
 
 ### Edge_network.delete_router
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_router.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_router.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_router.js,samples/README.md)
 
@@ -176,7 +176,7 @@ __Usage:__
 
 ### Edge_network.delete_subnet
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_subnet.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_subnet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.delete_subnet.js,samples/README.md)
 
@@ -193,7 +193,7 @@ __Usage:__
 
 ### Edge_network.diagnose_interconnect
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_interconnect.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_interconnect.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_interconnect.js,samples/README.md)
 
@@ -210,7 +210,7 @@ __Usage:__
 
 ### Edge_network.diagnose_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_network.js,samples/README.md)
 
@@ -227,7 +227,7 @@ __Usage:__
 
 ### Edge_network.diagnose_router
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_router.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_router.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.diagnose_router.js,samples/README.md)
 
@@ -244,7 +244,7 @@ __Usage:__
 
 ### Edge_network.get_interconnect
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_interconnect.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_interconnect.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_interconnect.js,samples/README.md)
 
@@ -261,7 +261,7 @@ __Usage:__
 
 ### Edge_network.get_interconnect_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_interconnect_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_interconnect_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_interconnect_attachment.js,samples/README.md)
 
@@ -278,7 +278,7 @@ __Usage:__
 
 ### Edge_network.get_network
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_network.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_network.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_network.js,samples/README.md)
 
@@ -295,7 +295,7 @@ __Usage:__
 
 ### Edge_network.get_router
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_router.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_router.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_router.js,samples/README.md)
 
@@ -312,7 +312,7 @@ __Usage:__
 
 ### Edge_network.get_subnet
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_subnet.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_subnet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_subnet.js,samples/README.md)
 
@@ -329,7 +329,7 @@ __Usage:__
 
 ### Edge_network.get_zone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_zone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_zone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.get_zone.js,samples/README.md)
 
@@ -346,7 +346,7 @@ __Usage:__
 
 ### Edge_network.initialize_zone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.initialize_zone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.initialize_zone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.initialize_zone.js,samples/README.md)
 
@@ -363,7 +363,7 @@ __Usage:__
 
 ### Edge_network.list_interconnect_attachments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_interconnect_attachments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_interconnect_attachments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_interconnect_attachments.js,samples/README.md)
 
@@ -380,7 +380,7 @@ __Usage:__
 
 ### Edge_network.list_interconnects
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_interconnects.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_interconnects.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_interconnects.js,samples/README.md)
 
@@ -397,7 +397,7 @@ __Usage:__
 
 ### Edge_network.list_networks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_networks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_networks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_networks.js,samples/README.md)
 
@@ -414,7 +414,7 @@ __Usage:__
 
 ### Edge_network.list_routers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_routers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_routers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_routers.js,samples/README.md)
 
@@ -431,7 +431,7 @@ __Usage:__
 
 ### Edge_network.list_subnets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_subnets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_subnets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_subnets.js,samples/README.md)
 
@@ -448,7 +448,7 @@ __Usage:__
 
 ### Edge_network.list_zones
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_zones.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_zones.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_zones.js,samples/README.md)
 
@@ -465,7 +465,7 @@ __Usage:__
 
 ### Edge_network.update_router
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_router.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_router.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_router.js,samples/README.md)
 
@@ -482,7 +482,7 @@ __Usage:__
 
 ### Edge_network.update_subnet
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_subnet.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_subnet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_subnet.js,samples/README.md)
 
@@ -499,7 +499,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-edgenetwork/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgenetwork/samples/quickstart.js,samples/README.md)
 

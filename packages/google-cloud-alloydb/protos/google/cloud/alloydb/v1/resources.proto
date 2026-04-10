@@ -23,6 +23,7 @@ import "google/cloud/alloydb/v1/csql_resources.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/type/date.proto";
 import "google/type/dayofweek.proto";
 import "google/type/timeofday.proto";
 
@@ -40,6 +41,14 @@ option (google.api.resource_definition) = {
 option (google.api.resource_definition) = {
   type: "compute.googleapis.com/Network"
   pattern: "projects/{project}/global/networks/{network}"
+};
+option (google.api.resource_definition) = {
+  type: "cloudkms.googleapis.com/CryptoKey"
+  pattern: "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
+};
+option (google.api.resource_definition) = {
+  type: "compute.googleapis.com/ServiceAttachment"
+  pattern: "projects/{project}/regions/{region}/serviceAttachments/{service_attachment}"
 };
 
 // View on Instance. Pass this enum to rpcs that returns an Instance message to
@@ -91,6 +100,9 @@ enum DatabaseVersion {
 
   // The database version is Postgres 16.
   POSTGRES_16 = 4;
+
+  // The database version is Postgres 17.
+  POSTGRES_17 = 5;
 }
 
 // Subscription_type added to distinguish between Standard and Trial
@@ -149,7 +161,9 @@ message EncryptionConfig {
   // The fully-qualified resource name of the KMS key.
   // Each Cloud KMS key is regionalized and has the following format:
   // projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME]
-  string kms_key_name = 1;
+  string kms_key_name = 1 [(google.api.resource_reference) = {
+    type: "cloudkms.googleapis.com/CryptoKey"
+  }];
 }
 
 // EncryptionInfo describes the encryption information of a cluster or a backup.
@@ -354,13 +368,20 @@ message ContinuousBackupInfo {
   google.protobuf.Timestamp enabled_time = 2
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. Days of the week on which a continuous backup is taken. Output
-  // only field. Ignored if passed into the request.
+  // Output only. Days of the week on which a continuous backup is taken.
   repeated google.type.DayOfWeek schedule = 3
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. The earliest restorable time that can be restored to. Output
-  // only field.
+  // Output only. The earliest restorable time that can be restored to. If
+  // continuous backups and recovery was recently enabled, the earliest
+  // restorable time is the creation time of the earliest eligible backup within
+  // this cluster's continuous backup recovery window. After a cluster has had
+  // continuous backups enabled for the duration of its recovery window, the
+  // earliest restorable time becomes "now minus the recovery window". For
+  // example, assuming a point in time recovery is attempted at 04/16/2025
+  // 3:23:00PM with a 14d recovery window, the earliest restorable time would be
+  // 04/02/2025 3:23:00PM. This field is only visible if the
+  // CLUSTER_VIEW_CONTINUOUS_BACKUP cluster view is provided.
   google.protobuf.Timestamp earliest_restorable_time = 4
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
@@ -404,8 +425,34 @@ message MaintenanceUpdatePolicy {
     google.type.TimeOfDay start_time = 2;
   }
 
+  // DenyMaintenancePeriod definition. Excepting emergencies, maintenance
+  // will not be scheduled to start within this deny period. The start_date must
+  // be less than the end_date.
+  message DenyMaintenancePeriod {
+    // Deny period start date.
+    // This can be:
+    // * A full date, with non-zero year, month and day values OR
+    // * A month and day value, with a zero year for recurring
+    google.type.Date start_date = 1;
+
+    // Deny period end date.
+    // This can be:
+    // * A full date, with non-zero year, month and day values OR
+    // * A month and day value, with a zero year for recurring
+    google.type.Date end_date = 2;
+
+    // Time in UTC when the deny period starts on start_date and ends on
+    // end_date. This can be:
+    // * Full time OR
+    // * All zeros for 00:00:00 UTC
+    google.type.TimeOfDay time = 3;
+  }
+
   // Preferred windows to perform maintenance. Currently limited to 1.
   repeated MaintenanceWindow maintenance_windows = 1;
+
+  // Periods to deny maintenance. Currently limited to 1.
+  repeated DenyMaintenancePeriod deny_maintenance_periods = 2;
 }
 
 // MaintenanceSchedule stores the maintenance schedule generated from
@@ -461,7 +508,9 @@ message Cluster {
   message SecondaryConfig {
     // The name of the primary cluster name with the format:
     // * projects/{project}/locations/{region}/clusters/{cluster_id}
-    string primary_cluster_name = 1;
+    string primary_cluster_name = 1 [(google.api.resource_reference) = {
+      type: "alloydb.googleapis.com/Cluster"
+    }];
   }
 
   // Configuration for the primary cluster. It has the list of clusters that are
@@ -470,8 +519,12 @@ message Cluster {
   message PrimaryConfig {
     // Output only. Names of the clusters that are replicating from this
     // cluster.
-    repeated string secondary_cluster_names = 1
-        [(google.api.field_behavior) = OUTPUT_ONLY];
+    repeated string secondary_cluster_names = 1 [
+      (google.api.field_behavior) = OUTPUT_ONLY,
+      (google.api.resource_reference) = {
+        type: "alloydb.googleapis.com/Cluster"
+      }
+    ];
   }
 
   // PscConfig contains PSC related configuration at a cluster level.
@@ -501,6 +554,14 @@ message Cluster {
     google.protobuf.Timestamp grace_end_time = 4;
   }
 
+  // Configuration for Dataplex integration.
+  message DataplexConfig {
+    // Dataplex is enabled by default for resources such as clusters and
+    // instances. This flag controls the integration of AlloyDB PG
+    // resources (like databases, schemas, and tables) with Dataplex."
+    bool enabled = 1;
+  }
+
   // Cluster State
   enum State {
     // The state of the cluster is unknown.
@@ -509,11 +570,8 @@ message Cluster {
     // The cluster is active and running.
     READY = 1;
 
-    // The cluster is stopped. All instances in the cluster are stopped.
-    // Customers can start a stopped cluster at any point and all their
-    // instances will come back to life with same names and IP resources. In
-    // this state, customer pays for storage.
-    // Associated backups could also be present in a stopped cluster.
+    // This is unused. Even when all instances in the cluster are stopped, the
+    // cluster remains in READY state.
     STOPPED = 2;
 
     // The cluster is empty and has no associated resources.
@@ -643,7 +701,7 @@ message Cluster {
   // system actions like failover or maintenance.
   bool reconciling = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Input only. Initial user to setup during cluster creation. Required.
+  // Input only. Initial user to setup during cluster creation.
   // If used in `RestoreCluster` this is ignored.
   UserPassword initial_user = 14 [(google.api.field_behavior) = INPUT_ONLY];
 
@@ -720,6 +778,9 @@ message Cluster {
     (google.api.field_behavior) = IMMUTABLE,
     (google.api.field_behavior) = OPTIONAL
   ];
+
+  // Optional. Configuration for Dataplex integration.
+  DataplexConfig dataplex_config = 47 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // An Instance is a computing unit that an end customer can connect to.
@@ -870,9 +931,33 @@ message Instance {
     ];
 
     // Output only. The status of the PSC service automation connection.
+    // Possible values:
+    //   "STATE_UNSPECIFIED" - An invalid state as the default case.
+    //   "ACTIVE" - The connection has been created successfully.
+    //   "FAILED" - The connection is not functional since some resources on the
+    // connection fail to be created.
+    //   "CREATING" - The connection is being created.
+    //   "DELETING" - The connection is being deleted.
+    //   "CREATE_REPAIRING" - The connection is being repaired to complete
+    // creation.
+    //   "DELETE_REPAIRING" - The connection is being repaired to complete
+    // deletion.
     string status = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 
     // Output only. The status of the service connection policy.
+    // Possible values:
+    //   "STATE_UNSPECIFIED" - Default state, when Connection Map is created
+    // initially.
+    //   "VALID" - Set when policy and map configuration is valid, and their
+    // matching can lead to allowing creation of PSC Connections subject to
+    // other constraints like connections limit.
+    //   "CONNECTION_POLICY_MISSING" - No Service Connection Policy found for
+    // this network and Service Class
+    //   "POLICY_LIMIT_REACHED" - Service Connection Policy limit reached for
+    //   this network and Service Class
+    //   "CONSUMER_INSTANCE_PROJECT_NOT_ALLOWLISTED" - The consumer instance
+    // project is not in AllowedGoogleProducersResourceHierarchyLevels of the
+    // matching ServiceConnectionPolicy.
     string consumer_network_status = 5
         [(google.api.field_behavior) = OUTPUT_ONLY];
   }
@@ -884,8 +969,12 @@ message Instance {
     // Service Connect (PSC) is enabled for the instance.
     // The name of the resource will be in the format of
     // `projects/<alloydb-tenant-project-number>/regions/<region-name>/serviceAttachments/<service-attachment-name>`
-    string service_attachment_link = 1
-        [(google.api.field_behavior) = OUTPUT_ONLY];
+    string service_attachment_link = 1 [
+      (google.api.field_behavior) = OUTPUT_ONLY,
+      (google.api.resource_reference) = {
+        type: "compute.googleapis.com/ServiceAttachment"
+      }
+    ];
 
     // Optional. List of consumer projects that are allowed to create
     // PSC endpoints to service-attachments to this instance.
@@ -926,6 +1015,40 @@ message Instance {
     // Optional. Enabling an outbound public IP address to support a database
     // server sending requests out into the internet.
     bool enable_outbound_public_ip = 3 [(google.api.field_behavior) = OPTIONAL];
+
+    // Output only. The resource link for the VPC network in which instance
+    // resources are created and from which they are accessible via Private IP.
+    // This will be the same value as the parent cluster's network. It is
+    // specified in the form: //
+    // `projects/{project_number}/global/networks/{network_id}`.
+    string network = 4 [
+      (google.api.field_behavior) = OUTPUT_ONLY,
+      (google.api.resource_reference) = {
+        type: "compute.googleapis.com/Network"
+      }
+    ];
+
+    // Optional. Name of the allocated IP range for the private IP AlloyDB
+    // instance, for example: "google-managed-services-default". If set, the
+    // instance IPs will be created from this allocated range and will override
+    // the IP range used by the parent cluster. The range name must comply with
+    // [RFC 1035](http://datatracker.ietf.org/doc/html/rfc1035). Specifically,
+    // the name must be 1-63 characters long and match the regular expression
+    // [a-z]([-a-z0-9]*[a-z0-9])?.
+    string allocated_ip_range_override = 5
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Configuration for Managed Connection Pool (MCP).
+  message ConnectionPoolConfig {
+    // Optional. Whether to enable Managed Connection Pool (MCP).
+    bool enabled = 12 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Connection Pool flags, as a list of "key": "value" pairs.
+    map<string, string> flags = 13 [(google.api.field_behavior) = OPTIONAL];
+
+    // Output only. The number of running poolers per instance.
+    int32 pooler_count = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   // Instance State
@@ -999,6 +1122,18 @@ message Instance {
 
     // Regional (or Highly) available instance.
     REGIONAL = 2;
+  }
+
+  // Specifies whether an instance needs to spin up.
+  enum ActivationPolicy {
+    // The policy is not specified.
+    ACTIVATION_POLICY_UNSPECIFIED = 0;
+
+    // The instance is running.
+    ALWAYS = 1;
+
+    // The instance is not running.
+    NEVER = 2;
   }
 
   // Output only. The name of the instance resource with the format:
@@ -1144,6 +1279,20 @@ message Instance {
     (google.api.field_info).format = IPV4,
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
+
+  // Optional. Specifies whether an instance needs to spin up. Once the instance
+  // is active, the activation policy can be updated to the `NEVER` to stop the
+  // instance. Likewise, the activation policy can be updated to `ALWAYS` to
+  // start the instance.
+  // There are restrictions around when an instance can/cannot be activated (for
+  // example, a read pool instance should be stopped before stopping primary
+  // etc.). Please refer to the API documentation for more details.
+  ActivationPolicy activation_policy = 35
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The configuration for Managed Connection Pool (MCP).
+  ConnectionPoolConfig connection_pool_config = 37
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // ConnectionInfo singleton resource.
@@ -1270,11 +1419,18 @@ message Backup {
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Update time stamp
+  //
+  // Users should not infer any meaning from this field. Its value is generally
+  // unrelated to the timing of the backup creation operation.
   google.protobuf.Timestamp update_time = 5
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Delete time stamp
   google.protobuf.Timestamp delete_time = 15
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Timestamp when the resource finished being created.
+  google.protobuf.Timestamp create_completion_time = 26
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Labels as key value pairs
@@ -1525,13 +1681,38 @@ message Database {
   // `projects/{project}/locations/{location}/clusters/{cluster}/databases/{database}`.
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
-  // Optional. Charset for the database.
+  // Optional. Immutable. Charset for the database.
   // This field can contain any PostgreSQL supported charset name.
   // Example values include "UTF8", "SQL_ASCII", etc.
-  string charset = 2 [(google.api.field_behavior) = OPTIONAL];
+  string charset = 2 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.field_behavior) = IMMUTABLE
+  ];
 
-  // Optional. Collation for the database.
-  // Name of the custom or native collation for postgres.
-  // Example values include "C", "POSIX", etc
-  string collation = 3 [(google.api.field_behavior) = OPTIONAL];
+  // Optional. Immutable. lc_collate for the database.
+  // String sort order.
+  // Example values include "C", "POSIX", etc.
+  string collation = 3 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.field_behavior) = IMMUTABLE
+  ];
+
+  // Optional. Immutable. lc_ctype for the database.
+  // Character classification (What is a letter? The upper-case equivalent?).
+  // Example values include "C", "POSIX", etc.
+  string character_type = 4 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.field_behavior) = IMMUTABLE
+  ];
+
+  // Input only. Immutable. Template of the database to be used for creating a
+  // new database.
+  string database_template = 6 [
+    (google.api.field_behavior) = INPUT_ONLY,
+    (google.api.field_behavior) = IMMUTABLE
+  ];
+
+  // Optional. Whether the database is a template database.
+  optional bool is_template_database = 7
+      [(google.api.field_behavior) = OPTIONAL];
 }

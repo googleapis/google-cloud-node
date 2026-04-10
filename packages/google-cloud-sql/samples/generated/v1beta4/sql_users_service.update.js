@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,6 +44,17 @@ function main() {
    *  Project ID of the project that contains the instance.
    */
   // const project = 'my-project'
+  /**
+   *  Optional. List of database roles to grant to the user. body.database_roles
+   *  will be ignored for update request.
+   */
+  // const databaseRoles = ['abc','def']
+  /**
+   *  Optional. Specifies whether to revoke existing roles that are not present
+   *  in the `database_roles` field. If `false` or unset, the database roles
+   *  specified in `database_roles` are added to the user's existing roles.
+   */
+  // const revokeExistingRoles = true
   /**
    */
   // const body = {}

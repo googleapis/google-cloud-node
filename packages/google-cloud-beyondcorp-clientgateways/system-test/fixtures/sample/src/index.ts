@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@
 import {ClientGatewaysServiceClient} from '@google-cloud/clientgateways';
 
 // check that the client class type name can be used
-function doStuffWithClientGatewaysServiceClient(
-  client: ClientGatewaysServiceClient
-) {
+function doStuffWithClientGatewaysServiceClient(client: ClientGatewaysServiceClient) {
   client.close();
 }
 

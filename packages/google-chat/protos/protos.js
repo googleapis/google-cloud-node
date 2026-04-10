@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -133,12 +133,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DoubleValue.decode = function decode(reader, length) {
+                DoubleValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.double();
@@ -336,12 +338,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FloatValue.decode = function decode(reader, length) {
+                FloatValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.float();
@@ -539,12 +543,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int64Value.decode = function decode(reader, length) {
+                Int64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int64();
@@ -756,12 +762,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt64Value.decode = function decode(reader, length) {
+                UInt64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint64();
@@ -973,12 +981,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int32Value.decode = function decode(reader, length) {
+                Int32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int32();
@@ -1176,12 +1186,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt32Value.decode = function decode(reader, length) {
+                UInt32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint32();
@@ -1379,12 +1391,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BoolValue.decode = function decode(reader, length) {
+                BoolValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bool();
@@ -1582,12 +1596,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                StringValue.decode = function decode(reader, length) {
+                StringValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.string();
@@ -1785,12 +1801,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BytesValue.decode = function decode(reader, length) {
+                BytesValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bytes();
@@ -1999,12 +2017,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -2399,12 +2419,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -3066,12 +3088,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -3551,12 +3575,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -3795,12 +3821,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -4051,12 +4079,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -4396,12 +4426,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -4775,12 +4807,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -5300,12 +5334,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -5571,12 +5607,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -5890,12 +5928,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -6131,12 +6171,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -6388,12 +6430,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -6696,12 +6740,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -7200,12 +7246,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -7820,12 +7868,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -8072,8 +8122,8 @@
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
@@ -8201,20 +8251,20 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
                  * FieldOptions .google.api.fieldBehavior.
                  * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * FieldOptions .google.api.fieldInfo.
@@ -8277,12 +8327,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
@@ -8314,12 +8361,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -8384,10 +8433,6 @@
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
                                 break;
                             }
-                        case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                                break;
-                            }
                         case 1052: {
                                 if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
                                     message[".google.api.fieldBehavior"] = [];
@@ -8397,6 +8442,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                                 break;
                             }
                         case 291403980: {
@@ -8526,11 +8575,6 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
-                    }
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -8549,6 +8593,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
                         var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
@@ -8720,11 +8769,6 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -8773,6 +8817,11 @@
                                 message[".google.api.fieldBehavior"][i] = 8;
                                 break;
                             }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     if (object[".google.api.fieldInfo"] != null) {
                         if (typeof object[".google.api.fieldInfo"] !== "object")
@@ -9062,12 +9111,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -9358,12 +9409,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -9644,12 +9697,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -9956,12 +10011,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -10147,6 +10204,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -10206,6 +10264,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -10240,6 +10306,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -10267,12 +10335,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -10294,6 +10364,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -10354,6 +10428,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -10390,6 +10467,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -10413,6 +10492,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -10427,6 +10507,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -10603,12 +10685,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -11020,12 +11104,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -11359,12 +11445,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -11635,12 +11723,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -12170,12 +12260,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -12554,12 +12646,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -12844,12 +12938,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -13119,12 +13215,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -13430,12 +13528,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -13698,12 +13798,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -14024,12 +14126,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -14256,12 +14360,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -14484,12 +14590,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -14703,12 +14811,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -15000,12 +15110,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Card.decode = function decode(reader, length) {
+                        Card.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Card();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.header = $root.google.apps.card.v1.Card.CardHeader.decode(reader, reader.uint32());
@@ -15432,12 +15544,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CardHeader.decode = function decode(reader, length) {
+                            CardHeader.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Card.CardHeader();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.title = reader.string();
@@ -15628,6 +15742,7 @@
                              * @property {Array.<google.apps.card.v1.IWidget>|null} [widgets] Section widgets
                              * @property {boolean|null} [collapsible] Section collapsible
                              * @property {number|null} [uncollapsibleWidgetsCount] Section uncollapsibleWidgetsCount
+                             * @property {google.apps.card.v1.ICollapseControl|null} [collapseControl] Section collapseControl
                              */
     
                             /**
@@ -15679,6 +15794,14 @@
                             Section.prototype.uncollapsibleWidgetsCount = 0;
     
                             /**
+                             * Section collapseControl.
+                             * @member {google.apps.card.v1.ICollapseControl|null|undefined} collapseControl
+                             * @memberof google.apps.card.v1.Card.Section
+                             * @instance
+                             */
+                            Section.prototype.collapseControl = null;
+    
+                            /**
                              * Creates a new Section instance using the specified properties.
                              * @function create
                              * @memberof google.apps.card.v1.Card.Section
@@ -15711,6 +15834,8 @@
                                     writer.uint32(/* id 5, wireType 0 =*/40).bool(message.collapsible);
                                 if (message.uncollapsibleWidgetsCount != null && Object.hasOwnProperty.call(message, "uncollapsibleWidgetsCount"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uncollapsibleWidgetsCount);
+                                if (message.collapseControl != null && Object.hasOwnProperty.call(message, "collapseControl"))
+                                    $root.google.apps.card.v1.CollapseControl.encode(message.collapseControl, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 return writer;
                             };
     
@@ -15738,12 +15863,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Section.decode = function decode(reader, length) {
+                            Section.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Card.Section();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.header = reader.string();
@@ -15761,6 +15888,10 @@
                                         }
                                     case 6: {
                                             message.uncollapsibleWidgetsCount = reader.int32();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.collapseControl = $root.google.apps.card.v1.CollapseControl.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -15816,6 +15947,11 @@
                                 if (message.uncollapsibleWidgetsCount != null && message.hasOwnProperty("uncollapsibleWidgetsCount"))
                                     if (!$util.isInteger(message.uncollapsibleWidgetsCount))
                                         return "uncollapsibleWidgetsCount: integer expected";
+                                if (message.collapseControl != null && message.hasOwnProperty("collapseControl")) {
+                                    var error = $root.google.apps.card.v1.CollapseControl.verify(message.collapseControl);
+                                    if (error)
+                                        return "collapseControl." + error;
+                                }
                                 return null;
                             };
     
@@ -15847,6 +15983,11 @@
                                     message.collapsible = Boolean(object.collapsible);
                                 if (object.uncollapsibleWidgetsCount != null)
                                     message.uncollapsibleWidgetsCount = object.uncollapsibleWidgetsCount | 0;
+                                if (object.collapseControl != null) {
+                                    if (typeof object.collapseControl !== "object")
+                                        throw TypeError(".google.apps.card.v1.Card.Section.collapseControl: object expected");
+                                    message.collapseControl = $root.google.apps.card.v1.CollapseControl.fromObject(object.collapseControl);
+                                }
                                 return message;
                             };
     
@@ -15869,6 +16010,7 @@
                                     object.header = "";
                                     object.collapsible = false;
                                     object.uncollapsibleWidgetsCount = 0;
+                                    object.collapseControl = null;
                                 }
                                 if (message.header != null && message.hasOwnProperty("header"))
                                     object.header = message.header;
@@ -15881,6 +16023,8 @@
                                     object.collapsible = message.collapsible;
                                 if (message.uncollapsibleWidgetsCount != null && message.hasOwnProperty("uncollapsibleWidgetsCount"))
                                     object.uncollapsibleWidgetsCount = message.uncollapsibleWidgetsCount;
+                                if (message.collapseControl != null && message.hasOwnProperty("collapseControl"))
+                                    object.collapseControl = $root.google.apps.card.v1.CollapseControl.toObject(message.collapseControl, options);
                                 return object;
                             };
     
@@ -16025,12 +16169,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CardAction.decode = function decode(reader, length) {
+                            CardAction.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Card.CardAction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.actionLabel = reader.string();
@@ -16161,6 +16307,305 @@
                             return CardAction;
                         })();
     
+                        Card.NestedWidget = (function() {
+    
+                            /**
+                             * Properties of a NestedWidget.
+                             * @memberof google.apps.card.v1.Card
+                             * @interface INestedWidget
+                             * @property {google.apps.card.v1.ITextParagraph|null} [textParagraph] NestedWidget textParagraph
+                             * @property {google.apps.card.v1.IButtonList|null} [buttonList] NestedWidget buttonList
+                             * @property {google.apps.card.v1.IImage|null} [image] NestedWidget image
+                             */
+    
+                            /**
+                             * Constructs a new NestedWidget.
+                             * @memberof google.apps.card.v1.Card
+                             * @classdesc Represents a NestedWidget.
+                             * @implements INestedWidget
+                             * @constructor
+                             * @param {google.apps.card.v1.Card.INestedWidget=} [properties] Properties to set
+                             */
+                            function NestedWidget(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NestedWidget textParagraph.
+                             * @member {google.apps.card.v1.ITextParagraph|null|undefined} textParagraph
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @instance
+                             */
+                            NestedWidget.prototype.textParagraph = null;
+    
+                            /**
+                             * NestedWidget buttonList.
+                             * @member {google.apps.card.v1.IButtonList|null|undefined} buttonList
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @instance
+                             */
+                            NestedWidget.prototype.buttonList = null;
+    
+                            /**
+                             * NestedWidget image.
+                             * @member {google.apps.card.v1.IImage|null|undefined} image
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @instance
+                             */
+                            NestedWidget.prototype.image = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * NestedWidget data.
+                             * @member {"textParagraph"|"buttonList"|"image"|undefined} data
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @instance
+                             */
+                            Object.defineProperty(NestedWidget.prototype, "data", {
+                                get: $util.oneOfGetter($oneOfFields = ["textParagraph", "buttonList", "image"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new NestedWidget instance using the specified properties.
+                             * @function create
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {google.apps.card.v1.Card.INestedWidget=} [properties] Properties to set
+                             * @returns {google.apps.card.v1.Card.NestedWidget} NestedWidget instance
+                             */
+                            NestedWidget.create = function create(properties) {
+                                return new NestedWidget(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NestedWidget message. Does not implicitly {@link google.apps.card.v1.Card.NestedWidget.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {google.apps.card.v1.Card.INestedWidget} message NestedWidget message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NestedWidget.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.textParagraph != null && Object.hasOwnProperty.call(message, "textParagraph"))
+                                    $root.google.apps.card.v1.TextParagraph.encode(message.textParagraph, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.buttonList != null && Object.hasOwnProperty.call(message, "buttonList"))
+                                    $root.google.apps.card.v1.ButtonList.encode(message.buttonList, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+                                    $root.google.apps.card.v1.Image.encode(message.image, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NestedWidget message, length delimited. Does not implicitly {@link google.apps.card.v1.Card.NestedWidget.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {google.apps.card.v1.Card.INestedWidget} message NestedWidget message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NestedWidget.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NestedWidget message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.apps.card.v1.Card.NestedWidget} NestedWidget
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NestedWidget.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Card.NestedWidget();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.textParagraph = $root.google.apps.card.v1.TextParagraph.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.buttonList = $root.google.apps.card.v1.ButtonList.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.image = $root.google.apps.card.v1.Image.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NestedWidget message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.apps.card.v1.Card.NestedWidget} NestedWidget
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NestedWidget.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NestedWidget message.
+                             * @function verify
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NestedWidget.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.textParagraph != null && message.hasOwnProperty("textParagraph")) {
+                                    properties.data = 1;
+                                    {
+                                        var error = $root.google.apps.card.v1.TextParagraph.verify(message.textParagraph);
+                                        if (error)
+                                            return "textParagraph." + error;
+                                    }
+                                }
+                                if (message.buttonList != null && message.hasOwnProperty("buttonList")) {
+                                    if (properties.data === 1)
+                                        return "data: multiple values";
+                                    properties.data = 1;
+                                    {
+                                        var error = $root.google.apps.card.v1.ButtonList.verify(message.buttonList);
+                                        if (error)
+                                            return "buttonList." + error;
+                                    }
+                                }
+                                if (message.image != null && message.hasOwnProperty("image")) {
+                                    if (properties.data === 1)
+                                        return "data: multiple values";
+                                    properties.data = 1;
+                                    {
+                                        var error = $root.google.apps.card.v1.Image.verify(message.image);
+                                        if (error)
+                                            return "image." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NestedWidget message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.apps.card.v1.Card.NestedWidget} NestedWidget
+                             */
+                            NestedWidget.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.apps.card.v1.Card.NestedWidget)
+                                    return object;
+                                var message = new $root.google.apps.card.v1.Card.NestedWidget();
+                                if (object.textParagraph != null) {
+                                    if (typeof object.textParagraph !== "object")
+                                        throw TypeError(".google.apps.card.v1.Card.NestedWidget.textParagraph: object expected");
+                                    message.textParagraph = $root.google.apps.card.v1.TextParagraph.fromObject(object.textParagraph);
+                                }
+                                if (object.buttonList != null) {
+                                    if (typeof object.buttonList !== "object")
+                                        throw TypeError(".google.apps.card.v1.Card.NestedWidget.buttonList: object expected");
+                                    message.buttonList = $root.google.apps.card.v1.ButtonList.fromObject(object.buttonList);
+                                }
+                                if (object.image != null) {
+                                    if (typeof object.image !== "object")
+                                        throw TypeError(".google.apps.card.v1.Card.NestedWidget.image: object expected");
+                                    message.image = $root.google.apps.card.v1.Image.fromObject(object.image);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NestedWidget message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {google.apps.card.v1.Card.NestedWidget} message NestedWidget
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NestedWidget.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.textParagraph != null && message.hasOwnProperty("textParagraph")) {
+                                    object.textParagraph = $root.google.apps.card.v1.TextParagraph.toObject(message.textParagraph, options);
+                                    if (options.oneofs)
+                                        object.data = "textParagraph";
+                                }
+                                if (message.buttonList != null && message.hasOwnProperty("buttonList")) {
+                                    object.buttonList = $root.google.apps.card.v1.ButtonList.toObject(message.buttonList, options);
+                                    if (options.oneofs)
+                                        object.data = "buttonList";
+                                }
+                                if (message.image != null && message.hasOwnProperty("image")) {
+                                    object.image = $root.google.apps.card.v1.Image.toObject(message.image, options);
+                                    if (options.oneofs)
+                                        object.data = "image";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NestedWidget to JSON.
+                             * @function toJSON
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NestedWidget.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NestedWidget
+                             * @function getTypeUrl
+                             * @memberof google.apps.card.v1.Card.NestedWidget
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NestedWidget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.apps.card.v1.Card.NestedWidget";
+                            };
+    
+                            return NestedWidget;
+                        })();
+    
                         Card.CardFixedFooter = (function() {
     
                             /**
@@ -16257,12 +16702,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CardFixedFooter.decode = function decode(reader, length) {
+                            CardFixedFooter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Card.CardFixedFooter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.primaryButton = $root.google.apps.card.v1.Button.decode(reader, reader.uint32());
@@ -16433,6 +16880,8 @@
                          * @property {google.apps.card.v1.IDivider|null} [divider] Widget divider
                          * @property {google.apps.card.v1.IGrid|null} [grid] Widget grid
                          * @property {google.apps.card.v1.IColumns|null} [columns] Widget columns
+                         * @property {google.apps.card.v1.ICarousel|null} [carousel] Widget carousel
+                         * @property {google.apps.card.v1.IChipList|null} [chipList] Widget chipList
                          * @property {google.apps.card.v1.Widget.HorizontalAlignment|null} [horizontalAlignment] Widget horizontalAlignment
                          */
     
@@ -16532,6 +16981,22 @@
                         Widget.prototype.columns = null;
     
                         /**
+                         * Widget carousel.
+                         * @member {google.apps.card.v1.ICarousel|null|undefined} carousel
+                         * @memberof google.apps.card.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.carousel = null;
+    
+                        /**
+                         * Widget chipList.
+                         * @member {google.apps.card.v1.IChipList|null|undefined} chipList
+                         * @memberof google.apps.card.v1.Widget
+                         * @instance
+                         */
+                        Widget.prototype.chipList = null;
+    
+                        /**
                          * Widget horizontalAlignment.
                          * @member {google.apps.card.v1.Widget.HorizontalAlignment} horizontalAlignment
                          * @memberof google.apps.card.v1.Widget
@@ -16544,12 +17009,12 @@
     
                         /**
                          * Widget data.
-                         * @member {"textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker"|"divider"|"grid"|"columns"|undefined} data
+                         * @member {"textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker"|"divider"|"grid"|"columns"|"carousel"|"chipList"|undefined} data
                          * @memberof google.apps.card.v1.Widget
                          * @instance
                          */
                         Object.defineProperty(Widget.prototype, "data", {
-                            get: $util.oneOfGetter($oneOfFields = ["textParagraph", "image", "decoratedText", "buttonList", "textInput", "selectionInput", "dateTimePicker", "divider", "grid", "columns"]),
+                            get: $util.oneOfGetter($oneOfFields = ["textParagraph", "image", "decoratedText", "buttonList", "textInput", "selectionInput", "dateTimePicker", "divider", "grid", "columns", "carousel", "chipList"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -16599,6 +17064,10 @@
                                 $root.google.apps.card.v1.Grid.encode(message.grid, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.columns != null && Object.hasOwnProperty.call(message, "columns"))
                                 $root.google.apps.card.v1.Columns.encode(message.columns, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.carousel != null && Object.hasOwnProperty.call(message, "carousel"))
+                                $root.google.apps.card.v1.Carousel.encode(message.carousel, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.chipList != null && Object.hasOwnProperty.call(message, "chipList"))
+                                $root.google.apps.card.v1.ChipList.encode(message.chipList, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -16626,12 +17095,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Widget.decode = function decode(reader, length) {
+                        Widget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Widget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.textParagraph = $root.google.apps.card.v1.TextParagraph.decode(reader, reader.uint32());
@@ -16671,6 +17142,14 @@
                                     }
                                 case 11: {
                                         message.columns = $root.google.apps.card.v1.Columns.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.carousel = $root.google.apps.card.v1.Carousel.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.chipList = $root.google.apps.card.v1.ChipList.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -16811,6 +17290,26 @@
                                         return "columns." + error;
                                 }
                             }
+                            if (message.carousel != null && message.hasOwnProperty("carousel")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.apps.card.v1.Carousel.verify(message.carousel);
+                                    if (error)
+                                        return "carousel." + error;
+                                }
+                            }
+                            if (message.chipList != null && message.hasOwnProperty("chipList")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.apps.card.v1.ChipList.verify(message.chipList);
+                                    if (error)
+                                        return "chipList." + error;
+                                }
+                            }
                             if (message.horizontalAlignment != null && message.hasOwnProperty("horizontalAlignment"))
                                 switch (message.horizontalAlignment) {
                                 default:
@@ -16885,6 +17384,16 @@
                                 if (typeof object.columns !== "object")
                                     throw TypeError(".google.apps.card.v1.Widget.columns: object expected");
                                 message.columns = $root.google.apps.card.v1.Columns.fromObject(object.columns);
+                            }
+                            if (object.carousel != null) {
+                                if (typeof object.carousel !== "object")
+                                    throw TypeError(".google.apps.card.v1.Widget.carousel: object expected");
+                                message.carousel = $root.google.apps.card.v1.Carousel.fromObject(object.carousel);
+                            }
+                            if (object.chipList != null) {
+                                if (typeof object.chipList !== "object")
+                                    throw TypeError(".google.apps.card.v1.Widget.chipList: object expected");
+                                message.chipList = $root.google.apps.card.v1.ChipList.fromObject(object.chipList);
                             }
                             switch (object.horizontalAlignment) {
                             default:
@@ -16980,6 +17489,16 @@
                                 if (options.oneofs)
                                     object.data = "columns";
                             }
+                            if (message.carousel != null && message.hasOwnProperty("carousel")) {
+                                object.carousel = $root.google.apps.card.v1.Carousel.toObject(message.carousel, options);
+                                if (options.oneofs)
+                                    object.data = "carousel";
+                            }
+                            if (message.chipList != null && message.hasOwnProperty("chipList")) {
+                                object.chipList = $root.google.apps.card.v1.ChipList.toObject(message.chipList, options);
+                                if (options.oneofs)
+                                    object.data = "chipList";
+                            }
                             return object;
                         };
     
@@ -17041,6 +17560,24 @@
                             return values;
                         })();
     
+                        /**
+                         * VerticalAlignment enum.
+                         * @name google.apps.card.v1.Widget.VerticalAlignment
+                         * @enum {number}
+                         * @property {number} VERTICAL_ALIGNMENT_UNSPECIFIED=0 VERTICAL_ALIGNMENT_UNSPECIFIED value
+                         * @property {number} TOP=1 TOP value
+                         * @property {number} MIDDLE=2 MIDDLE value
+                         * @property {number} BOTTOM=3 BOTTOM value
+                         */
+                        Widget.VerticalAlignment = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "VERTICAL_ALIGNMENT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TOP"] = 1;
+                            values[valuesById[2] = "MIDDLE"] = 2;
+                            values[valuesById[3] = "BOTTOM"] = 3;
+                            return values;
+                        })();
+    
                         return Widget;
                     })();
     
@@ -17051,6 +17588,8 @@
                          * @memberof google.apps.card.v1
                          * @interface ITextParagraph
                          * @property {string|null} [text] TextParagraph text
+                         * @property {number|null} [maxLines] TextParagraph maxLines
+                         * @property {google.apps.card.v1.TextParagraph.TextSyntax|null} [textSyntax] TextParagraph textSyntax
                          */
     
                         /**
@@ -17075,6 +17614,22 @@
                          * @instance
                          */
                         TextParagraph.prototype.text = "";
+    
+                        /**
+                         * TextParagraph maxLines.
+                         * @member {number} maxLines
+                         * @memberof google.apps.card.v1.TextParagraph
+                         * @instance
+                         */
+                        TextParagraph.prototype.maxLines = 0;
+    
+                        /**
+                         * TextParagraph textSyntax.
+                         * @member {google.apps.card.v1.TextParagraph.TextSyntax} textSyntax
+                         * @memberof google.apps.card.v1.TextParagraph
+                         * @instance
+                         */
+                        TextParagraph.prototype.textSyntax = 0;
     
                         /**
                          * Creates a new TextParagraph instance using the specified properties.
@@ -17102,6 +17657,10 @@
                                 writer = $Writer.create();
                             if (message.text != null && Object.hasOwnProperty.call(message, "text"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                            if (message.maxLines != null && Object.hasOwnProperty.call(message, "maxLines"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxLines);
+                            if (message.textSyntax != null && Object.hasOwnProperty.call(message, "textSyntax"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.textSyntax);
                             return writer;
                         };
     
@@ -17129,15 +17688,25 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextParagraph.decode = function decode(reader, length) {
+                        TextParagraph.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.TextParagraph();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.maxLines = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.textSyntax = reader.int32();
                                         break;
                                     }
                                 default:
@@ -17178,6 +17747,18 @@
                             if (message.text != null && message.hasOwnProperty("text"))
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
+                            if (message.maxLines != null && message.hasOwnProperty("maxLines"))
+                                if (!$util.isInteger(message.maxLines))
+                                    return "maxLines: integer expected";
+                            if (message.textSyntax != null && message.hasOwnProperty("textSyntax"))
+                                switch (message.textSyntax) {
+                                default:
+                                    return "textSyntax: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -17195,6 +17776,28 @@
                             var message = new $root.google.apps.card.v1.TextParagraph();
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.maxLines != null)
+                                message.maxLines = object.maxLines | 0;
+                            switch (object.textSyntax) {
+                            default:
+                                if (typeof object.textSyntax === "number") {
+                                    message.textSyntax = object.textSyntax;
+                                    break;
+                                }
+                                break;
+                            case "TEXT_SYNTAX_UNSPECIFIED":
+                            case 0:
+                                message.textSyntax = 0;
+                                break;
+                            case "HTML":
+                            case 1:
+                                message.textSyntax = 1;
+                                break;
+                            case "MARKDOWN":
+                            case 2:
+                                message.textSyntax = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -17211,10 +17814,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.text = "";
+                                object.maxLines = 0;
+                                object.textSyntax = options.enums === String ? "TEXT_SYNTAX_UNSPECIFIED" : 0;
+                            }
                             if (message.text != null && message.hasOwnProperty("text"))
                                 object.text = message.text;
+                            if (message.maxLines != null && message.hasOwnProperty("maxLines"))
+                                object.maxLines = message.maxLines;
+                            if (message.textSyntax != null && message.hasOwnProperty("textSyntax"))
+                                object.textSyntax = options.enums === String ? $root.google.apps.card.v1.TextParagraph.TextSyntax[message.textSyntax] === undefined ? message.textSyntax : $root.google.apps.card.v1.TextParagraph.TextSyntax[message.textSyntax] : message.textSyntax;
                             return object;
                         };
     
@@ -17243,6 +17853,22 @@
                             }
                             return typeUrlPrefix + "/google.apps.card.v1.TextParagraph";
                         };
+    
+                        /**
+                         * TextSyntax enum.
+                         * @name google.apps.card.v1.TextParagraph.TextSyntax
+                         * @enum {number}
+                         * @property {number} TEXT_SYNTAX_UNSPECIFIED=0 TEXT_SYNTAX_UNSPECIFIED value
+                         * @property {number} HTML=1 HTML value
+                         * @property {number} MARKDOWN=2 MARKDOWN value
+                         */
+                        TextParagraph.TextSyntax = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TEXT_SYNTAX_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HTML"] = 1;
+                            values[valuesById[2] = "MARKDOWN"] = 2;
+                            return values;
+                        })();
     
                         return TextParagraph;
                     })();
@@ -17354,12 +17980,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Image.decode = function decode(reader, length) {
+                        Image.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Image();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.imageUrl = reader.string();
@@ -17576,12 +18204,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Divider.decode = function decode(reader, length) {
+                        Divider.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Divider();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -17685,10 +18315,14 @@
                          * @interface IDecoratedText
                          * @property {google.apps.card.v1.IIcon|null} [icon] DecoratedText icon
                          * @property {google.apps.card.v1.IIcon|null} [startIcon] DecoratedText startIcon
+                         * @property {google.apps.card.v1.Widget.VerticalAlignment|null} [startIconVerticalAlignment] DecoratedText startIconVerticalAlignment
                          * @property {string|null} [topLabel] DecoratedText topLabel
+                         * @property {google.apps.card.v1.ITextParagraph|null} [topLabelText] DecoratedText topLabelText
                          * @property {string|null} [text] DecoratedText text
+                         * @property {google.apps.card.v1.ITextParagraph|null} [contentText] DecoratedText contentText
                          * @property {boolean|null} [wrapText] DecoratedText wrapText
                          * @property {string|null} [bottomLabel] DecoratedText bottomLabel
+                         * @property {google.apps.card.v1.ITextParagraph|null} [bottomLabelText] DecoratedText bottomLabelText
                          * @property {google.apps.card.v1.IOnClick|null} [onClick] DecoratedText onClick
                          * @property {google.apps.card.v1.IButton|null} [button] DecoratedText button
                          * @property {google.apps.card.v1.DecoratedText.ISwitchControl|null} [switchControl] DecoratedText switchControl
@@ -17727,6 +18361,14 @@
                         DecoratedText.prototype.startIcon = null;
     
                         /**
+                         * DecoratedText startIconVerticalAlignment.
+                         * @member {google.apps.card.v1.Widget.VerticalAlignment} startIconVerticalAlignment
+                         * @memberof google.apps.card.v1.DecoratedText
+                         * @instance
+                         */
+                        DecoratedText.prototype.startIconVerticalAlignment = 0;
+    
+                        /**
                          * DecoratedText topLabel.
                          * @member {string} topLabel
                          * @memberof google.apps.card.v1.DecoratedText
@@ -17735,12 +18377,28 @@
                         DecoratedText.prototype.topLabel = "";
     
                         /**
+                         * DecoratedText topLabelText.
+                         * @member {google.apps.card.v1.ITextParagraph|null|undefined} topLabelText
+                         * @memberof google.apps.card.v1.DecoratedText
+                         * @instance
+                         */
+                        DecoratedText.prototype.topLabelText = null;
+    
+                        /**
                          * DecoratedText text.
                          * @member {string} text
                          * @memberof google.apps.card.v1.DecoratedText
                          * @instance
                          */
                         DecoratedText.prototype.text = "";
+    
+                        /**
+                         * DecoratedText contentText.
+                         * @member {google.apps.card.v1.ITextParagraph|null|undefined} contentText
+                         * @memberof google.apps.card.v1.DecoratedText
+                         * @instance
+                         */
+                        DecoratedText.prototype.contentText = null;
     
                         /**
                          * DecoratedText wrapText.
@@ -17757,6 +18415,14 @@
                          * @instance
                          */
                         DecoratedText.prototype.bottomLabel = "";
+    
+                        /**
+                         * DecoratedText bottomLabelText.
+                         * @member {google.apps.card.v1.ITextParagraph|null|undefined} bottomLabelText
+                         * @memberof google.apps.card.v1.DecoratedText
+                         * @instance
+                         */
+                        DecoratedText.prototype.bottomLabelText = null;
     
                         /**
                          * DecoratedText onClick.
@@ -17848,6 +18514,14 @@
                                 $root.google.apps.card.v1.Icon.encode(message.endIcon, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.startIcon != null && Object.hasOwnProperty.call(message, "startIcon"))
                                 $root.google.apps.card.v1.Icon.encode(message.startIcon, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.startIconVerticalAlignment != null && Object.hasOwnProperty.call(message, "startIconVerticalAlignment"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.startIconVerticalAlignment);
+                            if (message.topLabelText != null && Object.hasOwnProperty.call(message, "topLabelText"))
+                                $root.google.apps.card.v1.TextParagraph.encode(message.topLabelText, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.contentText != null && Object.hasOwnProperty.call(message, "contentText"))
+                                $root.google.apps.card.v1.TextParagraph.encode(message.contentText, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.bottomLabelText != null && Object.hasOwnProperty.call(message, "bottomLabelText"))
+                                $root.google.apps.card.v1.TextParagraph.encode(message.bottomLabelText, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             return writer;
                         };
     
@@ -17875,12 +18549,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DecoratedText.decode = function decode(reader, length) {
+                        DecoratedText.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.DecoratedText();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.icon = $root.google.apps.card.v1.Icon.decode(reader, reader.uint32());
@@ -17890,12 +18566,24 @@
                                         message.startIcon = $root.google.apps.card.v1.Icon.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 13: {
+                                        message.startIconVerticalAlignment = reader.int32();
+                                        break;
+                                    }
                                 case 3: {
                                         message.topLabel = reader.string();
                                         break;
                                     }
+                                case 17: {
+                                        message.topLabelText = $root.google.apps.card.v1.TextParagraph.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 4: {
                                         message.text = reader.string();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.contentText = $root.google.apps.card.v1.TextParagraph.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -17904,6 +18592,10 @@
                                     }
                                 case 6: {
                                         message.bottomLabel = reader.string();
+                                        break;
+                                    }
+                                case 19: {
+                                        message.bottomLabelText = $root.google.apps.card.v1.TextParagraph.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -17968,18 +18660,43 @@
                                 if (error)
                                     return "startIcon." + error;
                             }
+                            if (message.startIconVerticalAlignment != null && message.hasOwnProperty("startIconVerticalAlignment"))
+                                switch (message.startIconVerticalAlignment) {
+                                default:
+                                    return "startIconVerticalAlignment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             if (message.topLabel != null && message.hasOwnProperty("topLabel"))
                                 if (!$util.isString(message.topLabel))
                                     return "topLabel: string expected";
+                            if (message.topLabelText != null && message.hasOwnProperty("topLabelText")) {
+                                var error = $root.google.apps.card.v1.TextParagraph.verify(message.topLabelText);
+                                if (error)
+                                    return "topLabelText." + error;
+                            }
                             if (message.text != null && message.hasOwnProperty("text"))
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
+                            if (message.contentText != null && message.hasOwnProperty("contentText")) {
+                                var error = $root.google.apps.card.v1.TextParagraph.verify(message.contentText);
+                                if (error)
+                                    return "contentText." + error;
+                            }
                             if (message.wrapText != null && message.hasOwnProperty("wrapText"))
                                 if (typeof message.wrapText !== "boolean")
                                     return "wrapText: boolean expected";
                             if (message.bottomLabel != null && message.hasOwnProperty("bottomLabel"))
                                 if (!$util.isString(message.bottomLabel))
                                     return "bottomLabel: string expected";
+                            if (message.bottomLabelText != null && message.hasOwnProperty("bottomLabelText")) {
+                                var error = $root.google.apps.card.v1.TextParagraph.verify(message.bottomLabelText);
+                                if (error)
+                                    return "bottomLabelText." + error;
+                            }
                             if (message.onClick != null && message.hasOwnProperty("onClick")) {
                                 var error = $root.google.apps.card.v1.OnClick.verify(message.onClick);
                                 if (error)
@@ -18038,14 +18755,53 @@
                                     throw TypeError(".google.apps.card.v1.DecoratedText.startIcon: object expected");
                                 message.startIcon = $root.google.apps.card.v1.Icon.fromObject(object.startIcon);
                             }
+                            switch (object.startIconVerticalAlignment) {
+                            default:
+                                if (typeof object.startIconVerticalAlignment === "number") {
+                                    message.startIconVerticalAlignment = object.startIconVerticalAlignment;
+                                    break;
+                                }
+                                break;
+                            case "VERTICAL_ALIGNMENT_UNSPECIFIED":
+                            case 0:
+                                message.startIconVerticalAlignment = 0;
+                                break;
+                            case "TOP":
+                            case 1:
+                                message.startIconVerticalAlignment = 1;
+                                break;
+                            case "MIDDLE":
+                            case 2:
+                                message.startIconVerticalAlignment = 2;
+                                break;
+                            case "BOTTOM":
+                            case 3:
+                                message.startIconVerticalAlignment = 3;
+                                break;
+                            }
                             if (object.topLabel != null)
                                 message.topLabel = String(object.topLabel);
+                            if (object.topLabelText != null) {
+                                if (typeof object.topLabelText !== "object")
+                                    throw TypeError(".google.apps.card.v1.DecoratedText.topLabelText: object expected");
+                                message.topLabelText = $root.google.apps.card.v1.TextParagraph.fromObject(object.topLabelText);
+                            }
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.contentText != null) {
+                                if (typeof object.contentText !== "object")
+                                    throw TypeError(".google.apps.card.v1.DecoratedText.contentText: object expected");
+                                message.contentText = $root.google.apps.card.v1.TextParagraph.fromObject(object.contentText);
+                            }
                             if (object.wrapText != null)
                                 message.wrapText = Boolean(object.wrapText);
                             if (object.bottomLabel != null)
                                 message.bottomLabel = String(object.bottomLabel);
+                            if (object.bottomLabelText != null) {
+                                if (typeof object.bottomLabelText !== "object")
+                                    throw TypeError(".google.apps.card.v1.DecoratedText.bottomLabelText: object expected");
+                                message.bottomLabelText = $root.google.apps.card.v1.TextParagraph.fromObject(object.bottomLabelText);
+                            }
                             if (object.onClick != null) {
                                 if (typeof object.onClick !== "object")
                                     throw TypeError(".google.apps.card.v1.DecoratedText.onClick: object expected");
@@ -18090,6 +18846,10 @@
                                 object.bottomLabel = "";
                                 object.onClick = null;
                                 object.startIcon = null;
+                                object.startIconVerticalAlignment = options.enums === String ? "VERTICAL_ALIGNMENT_UNSPECIFIED" : 0;
+                                object.topLabelText = null;
+                                object.contentText = null;
+                                object.bottomLabelText = null;
                             }
                             if (message.icon != null && message.hasOwnProperty("icon"))
                                 object.icon = $root.google.apps.card.v1.Icon.toObject(message.icon, options);
@@ -18120,6 +18880,14 @@
                             }
                             if (message.startIcon != null && message.hasOwnProperty("startIcon"))
                                 object.startIcon = $root.google.apps.card.v1.Icon.toObject(message.startIcon, options);
+                            if (message.startIconVerticalAlignment != null && message.hasOwnProperty("startIconVerticalAlignment"))
+                                object.startIconVerticalAlignment = options.enums === String ? $root.google.apps.card.v1.Widget.VerticalAlignment[message.startIconVerticalAlignment] === undefined ? message.startIconVerticalAlignment : $root.google.apps.card.v1.Widget.VerticalAlignment[message.startIconVerticalAlignment] : message.startIconVerticalAlignment;
+                            if (message.topLabelText != null && message.hasOwnProperty("topLabelText"))
+                                object.topLabelText = $root.google.apps.card.v1.TextParagraph.toObject(message.topLabelText, options);
+                            if (message.contentText != null && message.hasOwnProperty("contentText"))
+                                object.contentText = $root.google.apps.card.v1.TextParagraph.toObject(message.contentText, options);
+                            if (message.bottomLabelText != null && message.hasOwnProperty("bottomLabelText"))
+                                object.bottomLabelText = $root.google.apps.card.v1.TextParagraph.toObject(message.bottomLabelText, options);
                             return object;
                         };
     
@@ -18278,12 +19046,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SwitchControl.decode = function decode(reader, length) {
+                            SwitchControl.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.DecoratedText.SwitchControl();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -18507,6 +19277,7 @@
                          * @property {google.apps.card.v1.IAction|null} [onChangeAction] TextInput onChangeAction
                          * @property {google.apps.card.v1.ISuggestions|null} [initialSuggestions] TextInput initialSuggestions
                          * @property {google.apps.card.v1.IAction|null} [autoCompleteAction] TextInput autoCompleteAction
+                         * @property {google.apps.card.v1.IValidation|null} [validation] TextInput validation
                          * @property {string|null} [placeholderText] TextInput placeholderText
                          */
     
@@ -18590,6 +19361,14 @@
                         TextInput.prototype.autoCompleteAction = null;
     
                         /**
+                         * TextInput validation.
+                         * @member {google.apps.card.v1.IValidation|null|undefined} validation
+                         * @memberof google.apps.card.v1.TextInput
+                         * @instance
+                         */
+                        TextInput.prototype.validation = null;
+    
+                        /**
                          * TextInput placeholderText.
                          * @member {string} placeholderText
                          * @memberof google.apps.card.v1.TextInput
@@ -18637,6 +19416,8 @@
                                 $root.google.apps.card.v1.Suggestions.encode(message.initialSuggestions, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.autoCompleteAction != null && Object.hasOwnProperty.call(message, "autoCompleteAction"))
                                 $root.google.apps.card.v1.Action.encode(message.autoCompleteAction, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.validation != null && Object.hasOwnProperty.call(message, "validation"))
+                                $root.google.apps.card.v1.Validation.encode(message.validation, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.placeholderText != null && Object.hasOwnProperty.call(message, "placeholderText"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.placeholderText);
                             return writer;
@@ -18666,12 +19447,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextInput.decode = function decode(reader, length) {
+                        TextInput.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.TextInput();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -18703,6 +19486,10 @@
                                     }
                                 case 8: {
                                         message.autoCompleteAction = $root.google.apps.card.v1.Action.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.validation = $root.google.apps.card.v1.Validation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 12: {
@@ -18779,6 +19566,11 @@
                                 if (error)
                                     return "autoCompleteAction." + error;
                             }
+                            if (message.validation != null && message.hasOwnProperty("validation")) {
+                                var error = $root.google.apps.card.v1.Validation.verify(message.validation);
+                                if (error)
+                                    return "validation." + error;
+                            }
                             if (message.placeholderText != null && message.hasOwnProperty("placeholderText"))
                                 if (!$util.isString(message.placeholderText))
                                     return "placeholderText: string expected";
@@ -18836,6 +19628,11 @@
                                     throw TypeError(".google.apps.card.v1.TextInput.autoCompleteAction: object expected");
                                 message.autoCompleteAction = $root.google.apps.card.v1.Action.fromObject(object.autoCompleteAction);
                             }
+                            if (object.validation != null) {
+                                if (typeof object.validation !== "object")
+                                    throw TypeError(".google.apps.card.v1.TextInput.validation: object expected");
+                                message.validation = $root.google.apps.card.v1.Validation.fromObject(object.validation);
+                            }
                             if (object.placeholderText != null)
                                 message.placeholderText = String(object.placeholderText);
                             return message;
@@ -18863,6 +19660,7 @@
                                 object.onChangeAction = null;
                                 object.initialSuggestions = null;
                                 object.autoCompleteAction = null;
+                                object.validation = null;
                                 object.placeholderText = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -18881,6 +19679,8 @@
                                 object.initialSuggestions = $root.google.apps.card.v1.Suggestions.toObject(message.initialSuggestions, options);
                             if (message.autoCompleteAction != null && message.hasOwnProperty("autoCompleteAction"))
                                 object.autoCompleteAction = $root.google.apps.card.v1.Action.toObject(message.autoCompleteAction, options);
+                            if (message.validation != null && message.hasOwnProperty("validation"))
+                                object.validation = $root.google.apps.card.v1.Validation.toObject(message.validation, options);
                             if (message.placeholderText != null && message.hasOwnProperty("placeholderText"))
                                 object.placeholderText = message.placeholderText;
                             return object;
@@ -19016,12 +19816,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Suggestions.decode = function decode(reader, length) {
+                        Suggestions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Suggestions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.items && message.items.length))
@@ -19249,12 +20051,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SuggestionItem.decode = function decode(reader, length) {
+                            SuggestionItem.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Suggestions.SuggestionItem();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.text = reader.string();
@@ -19461,12 +20265,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ButtonList.decode = function decode(reader, length) {
+                        ButtonList.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.ButtonList();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.buttons && message.buttons.length))
@@ -19673,11 +20479,11 @@
     
                         /**
                          * SelectionInput multiSelectMaxSelectedItems.
-                         * @member {number} multiSelectMaxSelectedItems
+                         * @member {number|null|undefined} multiSelectMaxSelectedItems
                          * @memberof google.apps.card.v1.SelectionInput
                          * @instance
                          */
-                        SelectionInput.prototype.multiSelectMaxSelectedItems = 0;
+                        SelectionInput.prototype.multiSelectMaxSelectedItems = null;
     
                         /**
                          * SelectionInput multiSelectMinQueryLength.
@@ -19705,6 +20511,12 @@
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SelectionInput.prototype, "_multiSelectMaxSelectedItems", {
+                            get: $util.oneOfGetter($oneOfFields = ["multiSelectMaxSelectedItems"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * SelectionInput multiSelectDataSource.
@@ -19787,12 +20599,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SelectionInput.decode = function decode(reader, length) {
+                        SelectionInput.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.SelectionInput();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -19899,9 +20713,11 @@
                                 if (error)
                                     return "onChangeAction." + error;
                             }
-                            if (message.multiSelectMaxSelectedItems != null && message.hasOwnProperty("multiSelectMaxSelectedItems"))
+                            if (message.multiSelectMaxSelectedItems != null && message.hasOwnProperty("multiSelectMaxSelectedItems")) {
+                                properties._multiSelectMaxSelectedItems = 1;
                                 if (!$util.isInteger(message.multiSelectMaxSelectedItems))
                                     return "multiSelectMaxSelectedItems: integer expected";
+                            }
                             if (message.multiSelectMinQueryLength != null && message.hasOwnProperty("multiSelectMinQueryLength"))
                                 if (!$util.isInteger(message.multiSelectMinQueryLength))
                                     return "multiSelectMinQueryLength: integer expected";
@@ -20022,7 +20838,6 @@
                                 object.label = "";
                                 object.type = options.enums === String ? "CHECK_BOX" : 0;
                                 object.onChangeAction = null;
-                                object.multiSelectMaxSelectedItems = 0;
                                 object.multiSelectMinQueryLength = 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -20038,8 +20853,11 @@
                             }
                             if (message.onChangeAction != null && message.hasOwnProperty("onChangeAction"))
                                 object.onChangeAction = $root.google.apps.card.v1.Action.toObject(message.onChangeAction, options);
-                            if (message.multiSelectMaxSelectedItems != null && message.hasOwnProperty("multiSelectMaxSelectedItems"))
+                            if (message.multiSelectMaxSelectedItems != null && message.hasOwnProperty("multiSelectMaxSelectedItems")) {
                                 object.multiSelectMaxSelectedItems = message.multiSelectMaxSelectedItems;
+                                if (options.oneofs)
+                                    object._multiSelectMaxSelectedItems = "multiSelectMaxSelectedItems";
+                            }
                             if (message.multiSelectMinQueryLength != null && message.hasOwnProperty("multiSelectMinQueryLength"))
                                 object.multiSelectMinQueryLength = message.multiSelectMinQueryLength;
                             if (message.externalDataSource != null && message.hasOwnProperty("externalDataSource")) {
@@ -20155,11 +20973,11 @@
     
                             /**
                              * SelectionItem startIconUri.
-                             * @member {string} startIconUri
+                             * @member {string|null|undefined} startIconUri
                              * @memberof google.apps.card.v1.SelectionInput.SelectionItem
                              * @instance
                              */
-                            SelectionItem.prototype.startIconUri = "";
+                            SelectionItem.prototype.startIconUri = null;
     
                             /**
                              * SelectionItem bottomText.
@@ -20168,6 +20986,20 @@
                              * @instance
                              */
                             SelectionItem.prototype.bottomText = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SelectionItem startIcon.
+                             * @member {"startIconUri"|undefined} startIcon
+                             * @memberof google.apps.card.v1.SelectionInput.SelectionItem
+                             * @instance
+                             */
+                            Object.defineProperty(SelectionItem.prototype, "startIcon", {
+                                get: $util.oneOfGetter($oneOfFields = ["startIconUri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new SelectionItem instance using the specified properties.
@@ -20230,12 +21062,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SelectionItem.decode = function decode(reader, length) {
+                            SelectionItem.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.SelectionInput.SelectionItem();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.text = reader.string();
@@ -20292,6 +21126,7 @@
                             SelectionItem.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.text != null && message.hasOwnProperty("text"))
                                     if (!$util.isString(message.text))
                                         return "text: string expected";
@@ -20301,9 +21136,11 @@
                                 if (message.selected != null && message.hasOwnProperty("selected"))
                                     if (typeof message.selected !== "boolean")
                                         return "selected: boolean expected";
-                                if (message.startIconUri != null && message.hasOwnProperty("startIconUri"))
+                                if (message.startIconUri != null && message.hasOwnProperty("startIconUri")) {
+                                    properties.startIcon = 1;
                                     if (!$util.isString(message.startIconUri))
                                         return "startIconUri: string expected";
+                                }
                                 if (message.bottomText != null && message.hasOwnProperty("bottomText"))
                                     if (!$util.isString(message.bottomText))
                                         return "bottomText: string expected";
@@ -20352,7 +21189,6 @@
                                     object.text = "";
                                     object.value = "";
                                     object.selected = false;
-                                    object.startIconUri = "";
                                     object.bottomText = "";
                                 }
                                 if (message.text != null && message.hasOwnProperty("text"))
@@ -20361,8 +21197,11 @@
                                     object.value = message.value;
                                 if (message.selected != null && message.hasOwnProperty("selected"))
                                     object.selected = message.selected;
-                                if (message.startIconUri != null && message.hasOwnProperty("startIconUri"))
+                                if (message.startIconUri != null && message.hasOwnProperty("startIconUri")) {
                                     object.startIconUri = message.startIconUri;
+                                    if (options.oneofs)
+                                        object.startIcon = "startIconUri";
+                                }
                                 if (message.bottomText != null && message.hasOwnProperty("bottomText"))
                                     object.bottomText = message.bottomText;
                                 return object;
@@ -20496,12 +21335,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PlatformDataSource.decode = function decode(reader, length) {
+                            PlatformDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.SelectionInput.PlatformDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.commonDataSource = reader.int32();
@@ -20709,11 +21550,11 @@
     
                         /**
                          * DateTimePicker valueMsEpoch.
-                         * @member {number|Long} valueMsEpoch
+                         * @member {number|Long|null|undefined} valueMsEpoch
                          * @memberof google.apps.card.v1.DateTimePicker
                          * @instance
                          */
-                        DateTimePicker.prototype.valueMsEpoch = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        DateTimePicker.prototype.valueMsEpoch = null;
     
                         /**
                          * DateTimePicker timezoneOffsetDate.
@@ -20730,6 +21571,15 @@
                          * @instance
                          */
                         DateTimePicker.prototype.onChangeAction = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DateTimePicker.prototype, "_valueMsEpoch", {
+                            get: $util.oneOfGetter($oneOfFields = ["valueMsEpoch"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DateTimePicker instance using the specified properties.
@@ -20794,12 +21644,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DateTimePicker.decode = function decode(reader, length) {
+                        DateTimePicker.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.DateTimePicker();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -20860,6 +21712,7 @@
                         DateTimePicker.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -20875,9 +21728,11 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.valueMsEpoch != null && message.hasOwnProperty("valueMsEpoch"))
+                            if (message.valueMsEpoch != null && message.hasOwnProperty("valueMsEpoch")) {
+                                properties._valueMsEpoch = 1;
                                 if (!$util.isInteger(message.valueMsEpoch) && !(message.valueMsEpoch && $util.isInteger(message.valueMsEpoch.low) && $util.isInteger(message.valueMsEpoch.high)))
                                     return "valueMsEpoch: integer|Long expected";
+                            }
                             if (message.timezoneOffsetDate != null && message.hasOwnProperty("timezoneOffsetDate"))
                                 if (!$util.isInteger(message.timezoneOffsetDate))
                                     return "timezoneOffsetDate: integer expected";
@@ -20961,11 +21816,6 @@
                                 object.name = "";
                                 object.label = "";
                                 object.type = options.enums === String ? "DATE_AND_TIME" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.valueMsEpoch = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.valueMsEpoch = options.longs === String ? "0" : 0;
                                 object.timezoneOffsetDate = 0;
                                 object.onChangeAction = null;
                             }
@@ -20975,11 +21825,14 @@
                                 object.label = message.label;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.apps.card.v1.DateTimePicker.DateTimePickerType[message.type] === undefined ? message.type : $root.google.apps.card.v1.DateTimePicker.DateTimePickerType[message.type] : message.type;
-                            if (message.valueMsEpoch != null && message.hasOwnProperty("valueMsEpoch"))
+                            if (message.valueMsEpoch != null && message.hasOwnProperty("valueMsEpoch")) {
                                 if (typeof message.valueMsEpoch === "number")
                                     object.valueMsEpoch = options.longs === String ? String(message.valueMsEpoch) : message.valueMsEpoch;
                                 else
                                     object.valueMsEpoch = options.longs === String ? $util.Long.prototype.toString.call(message.valueMsEpoch) : options.longs === Number ? new $util.LongBits(message.valueMsEpoch.low >>> 0, message.valueMsEpoch.high >>> 0).toNumber() : message.valueMsEpoch;
+                                if (options.oneofs)
+                                    object._valueMsEpoch = "valueMsEpoch";
+                            }
                             if (message.timezoneOffsetDate != null && message.hasOwnProperty("timezoneOffsetDate"))
                                 object.timezoneOffsetDate = message.timezoneOffsetDate;
                             if (message.onChangeAction != null && message.hasOwnProperty("onChangeAction"))
@@ -21032,6 +21885,517 @@
                         return DateTimePicker;
                     })();
     
+                    v1.OverflowMenu = (function() {
+    
+                        /**
+                         * Properties of an OverflowMenu.
+                         * @memberof google.apps.card.v1
+                         * @interface IOverflowMenu
+                         * @property {Array.<google.apps.card.v1.OverflowMenu.IOverflowMenuItem>|null} [items] OverflowMenu items
+                         */
+    
+                        /**
+                         * Constructs a new OverflowMenu.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents an OverflowMenu.
+                         * @implements IOverflowMenu
+                         * @constructor
+                         * @param {google.apps.card.v1.IOverflowMenu=} [properties] Properties to set
+                         */
+                        function OverflowMenu(properties) {
+                            this.items = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OverflowMenu items.
+                         * @member {Array.<google.apps.card.v1.OverflowMenu.IOverflowMenuItem>} items
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @instance
+                         */
+                        OverflowMenu.prototype.items = $util.emptyArray;
+    
+                        /**
+                         * Creates a new OverflowMenu instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {google.apps.card.v1.IOverflowMenu=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.OverflowMenu} OverflowMenu instance
+                         */
+                        OverflowMenu.create = function create(properties) {
+                            return new OverflowMenu(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OverflowMenu message. Does not implicitly {@link google.apps.card.v1.OverflowMenu.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {google.apps.card.v1.IOverflowMenu} message OverflowMenu message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OverflowMenu.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.items != null && message.items.length)
+                                for (var i = 0; i < message.items.length; ++i)
+                                    $root.google.apps.card.v1.OverflowMenu.OverflowMenuItem.encode(message.items[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OverflowMenu message, length delimited. Does not implicitly {@link google.apps.card.v1.OverflowMenu.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {google.apps.card.v1.IOverflowMenu} message OverflowMenu message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OverflowMenu.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OverflowMenu message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.OverflowMenu} OverflowMenu
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OverflowMenu.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.OverflowMenu();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.items && message.items.length))
+                                            message.items = [];
+                                        message.items.push($root.google.apps.card.v1.OverflowMenu.OverflowMenuItem.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OverflowMenu message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.OverflowMenu} OverflowMenu
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OverflowMenu.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OverflowMenu message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OverflowMenu.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.items != null && message.hasOwnProperty("items")) {
+                                if (!Array.isArray(message.items))
+                                    return "items: array expected";
+                                for (var i = 0; i < message.items.length; ++i) {
+                                    var error = $root.google.apps.card.v1.OverflowMenu.OverflowMenuItem.verify(message.items[i]);
+                                    if (error)
+                                        return "items." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OverflowMenu message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.OverflowMenu} OverflowMenu
+                         */
+                        OverflowMenu.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.OverflowMenu)
+                                return object;
+                            var message = new $root.google.apps.card.v1.OverflowMenu();
+                            if (object.items) {
+                                if (!Array.isArray(object.items))
+                                    throw TypeError(".google.apps.card.v1.OverflowMenu.items: array expected");
+                                message.items = [];
+                                for (var i = 0; i < object.items.length; ++i) {
+                                    if (typeof object.items[i] !== "object")
+                                        throw TypeError(".google.apps.card.v1.OverflowMenu.items: object expected");
+                                    message.items[i] = $root.google.apps.card.v1.OverflowMenu.OverflowMenuItem.fromObject(object.items[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OverflowMenu message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {google.apps.card.v1.OverflowMenu} message OverflowMenu
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OverflowMenu.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.items = [];
+                            if (message.items && message.items.length) {
+                                object.items = [];
+                                for (var j = 0; j < message.items.length; ++j)
+                                    object.items[j] = $root.google.apps.card.v1.OverflowMenu.OverflowMenuItem.toObject(message.items[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OverflowMenu to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OverflowMenu.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OverflowMenu
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.OverflowMenu
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OverflowMenu.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.OverflowMenu";
+                        };
+    
+                        OverflowMenu.OverflowMenuItem = (function() {
+    
+                            /**
+                             * Properties of an OverflowMenuItem.
+                             * @memberof google.apps.card.v1.OverflowMenu
+                             * @interface IOverflowMenuItem
+                             * @property {google.apps.card.v1.IIcon|null} [startIcon] OverflowMenuItem startIcon
+                             * @property {string|null} [text] OverflowMenuItem text
+                             * @property {google.apps.card.v1.IOnClick|null} [onClick] OverflowMenuItem onClick
+                             * @property {boolean|null} [disabled] OverflowMenuItem disabled
+                             */
+    
+                            /**
+                             * Constructs a new OverflowMenuItem.
+                             * @memberof google.apps.card.v1.OverflowMenu
+                             * @classdesc Represents an OverflowMenuItem.
+                             * @implements IOverflowMenuItem
+                             * @constructor
+                             * @param {google.apps.card.v1.OverflowMenu.IOverflowMenuItem=} [properties] Properties to set
+                             */
+                            function OverflowMenuItem(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OverflowMenuItem startIcon.
+                             * @member {google.apps.card.v1.IIcon|null|undefined} startIcon
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @instance
+                             */
+                            OverflowMenuItem.prototype.startIcon = null;
+    
+                            /**
+                             * OverflowMenuItem text.
+                             * @member {string} text
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @instance
+                             */
+                            OverflowMenuItem.prototype.text = "";
+    
+                            /**
+                             * OverflowMenuItem onClick.
+                             * @member {google.apps.card.v1.IOnClick|null|undefined} onClick
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @instance
+                             */
+                            OverflowMenuItem.prototype.onClick = null;
+    
+                            /**
+                             * OverflowMenuItem disabled.
+                             * @member {boolean} disabled
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @instance
+                             */
+                            OverflowMenuItem.prototype.disabled = false;
+    
+                            /**
+                             * Creates a new OverflowMenuItem instance using the specified properties.
+                             * @function create
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {google.apps.card.v1.OverflowMenu.IOverflowMenuItem=} [properties] Properties to set
+                             * @returns {google.apps.card.v1.OverflowMenu.OverflowMenuItem} OverflowMenuItem instance
+                             */
+                            OverflowMenuItem.create = function create(properties) {
+                                return new OverflowMenuItem(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OverflowMenuItem message. Does not implicitly {@link google.apps.card.v1.OverflowMenu.OverflowMenuItem.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {google.apps.card.v1.OverflowMenu.IOverflowMenuItem} message OverflowMenuItem message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OverflowMenuItem.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.startIcon != null && Object.hasOwnProperty.call(message, "startIcon"))
+                                    $root.google.apps.card.v1.Icon.encode(message.startIcon, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                                if (message.onClick != null && Object.hasOwnProperty.call(message, "onClick"))
+                                    $root.google.apps.card.v1.OnClick.encode(message.onClick, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disabled);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OverflowMenuItem message, length delimited. Does not implicitly {@link google.apps.card.v1.OverflowMenu.OverflowMenuItem.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {google.apps.card.v1.OverflowMenu.IOverflowMenuItem} message OverflowMenuItem message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OverflowMenuItem.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OverflowMenuItem message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.apps.card.v1.OverflowMenu.OverflowMenuItem} OverflowMenuItem
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OverflowMenuItem.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.OverflowMenu.OverflowMenuItem();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.startIcon = $root.google.apps.card.v1.Icon.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.text = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.onClick = $root.google.apps.card.v1.OnClick.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.disabled = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OverflowMenuItem message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.apps.card.v1.OverflowMenu.OverflowMenuItem} OverflowMenuItem
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OverflowMenuItem.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OverflowMenuItem message.
+                             * @function verify
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OverflowMenuItem.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.startIcon != null && message.hasOwnProperty("startIcon")) {
+                                    var error = $root.google.apps.card.v1.Icon.verify(message.startIcon);
+                                    if (error)
+                                        return "startIcon." + error;
+                                }
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                if (message.onClick != null && message.hasOwnProperty("onClick")) {
+                                    var error = $root.google.apps.card.v1.OnClick.verify(message.onClick);
+                                    if (error)
+                                        return "onClick." + error;
+                                }
+                                if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                    if (typeof message.disabled !== "boolean")
+                                        return "disabled: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OverflowMenuItem message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.apps.card.v1.OverflowMenu.OverflowMenuItem} OverflowMenuItem
+                             */
+                            OverflowMenuItem.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.apps.card.v1.OverflowMenu.OverflowMenuItem)
+                                    return object;
+                                var message = new $root.google.apps.card.v1.OverflowMenu.OverflowMenuItem();
+                                if (object.startIcon != null) {
+                                    if (typeof object.startIcon !== "object")
+                                        throw TypeError(".google.apps.card.v1.OverflowMenu.OverflowMenuItem.startIcon: object expected");
+                                    message.startIcon = $root.google.apps.card.v1.Icon.fromObject(object.startIcon);
+                                }
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                if (object.onClick != null) {
+                                    if (typeof object.onClick !== "object")
+                                        throw TypeError(".google.apps.card.v1.OverflowMenu.OverflowMenuItem.onClick: object expected");
+                                    message.onClick = $root.google.apps.card.v1.OnClick.fromObject(object.onClick);
+                                }
+                                if (object.disabled != null)
+                                    message.disabled = Boolean(object.disabled);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OverflowMenuItem message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {google.apps.card.v1.OverflowMenu.OverflowMenuItem} message OverflowMenuItem
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OverflowMenuItem.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.startIcon = null;
+                                    object.text = "";
+                                    object.onClick = null;
+                                    object.disabled = false;
+                                }
+                                if (message.startIcon != null && message.hasOwnProperty("startIcon"))
+                                    object.startIcon = $root.google.apps.card.v1.Icon.toObject(message.startIcon, options);
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    object.text = message.text;
+                                if (message.onClick != null && message.hasOwnProperty("onClick"))
+                                    object.onClick = $root.google.apps.card.v1.OnClick.toObject(message.onClick, options);
+                                if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                    object.disabled = message.disabled;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OverflowMenuItem to JSON.
+                             * @function toJSON
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OverflowMenuItem.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OverflowMenuItem
+                             * @function getTypeUrl
+                             * @memberof google.apps.card.v1.OverflowMenu.OverflowMenuItem
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OverflowMenuItem.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.apps.card.v1.OverflowMenu.OverflowMenuItem";
+                            };
+    
+                            return OverflowMenuItem;
+                        })();
+    
+                        return OverflowMenu;
+                    })();
+    
                     v1.Button = (function() {
     
                         /**
@@ -21044,6 +22408,7 @@
                          * @property {google.apps.card.v1.IOnClick|null} [onClick] Button onClick
                          * @property {boolean|null} [disabled] Button disabled
                          * @property {string|null} [altText] Button altText
+                         * @property {google.apps.card.v1.Button.Type|null} [type] Button type
                          */
     
                         /**
@@ -21110,6 +22475,14 @@
                         Button.prototype.altText = "";
     
                         /**
+                         * Button type.
+                         * @member {google.apps.card.v1.Button.Type} type
+                         * @memberof google.apps.card.v1.Button
+                         * @instance
+                         */
+                        Button.prototype.type = 0;
+    
+                        /**
                          * Creates a new Button instance using the specified properties.
                          * @function create
                          * @memberof google.apps.card.v1.Button
@@ -21145,6 +22518,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.disabled);
                             if (message.altText != null && Object.hasOwnProperty.call(message, "altText"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.altText);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.type);
                             return writer;
                         };
     
@@ -21172,12 +22547,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Button.decode = function decode(reader, length) {
+                        Button.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Button();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -21201,6 +22578,10 @@
                                     }
                                 case 6: {
                                         message.altText = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.type = reader.int32();
                                         break;
                                     }
                                 default:
@@ -21262,6 +22643,17 @@
                             if (message.altText != null && message.hasOwnProperty("altText"))
                                 if (!$util.isString(message.altText))
                                     return "altText: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -21298,6 +22690,34 @@
                                 message.disabled = Boolean(object.disabled);
                             if (object.altText != null)
                                 message.altText = String(object.altText);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "OUTLINED":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "FILLED":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "FILLED_TONAL":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "BORDERLESS":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -21321,6 +22741,7 @@
                                 object.onClick = null;
                                 object.disabled = false;
                                 object.altText = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.text != null && message.hasOwnProperty("text"))
                                 object.text = message.text;
@@ -21334,6 +22755,8 @@
                                 object.disabled = message.disabled;
                             if (message.altText != null && message.hasOwnProperty("altText"))
                                 object.altText = message.altText;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.apps.card.v1.Button.Type[message.type] === undefined ? message.type : $root.google.apps.card.v1.Button.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -21362,6 +22785,26 @@
                             }
                             return typeUrlPrefix + "/google.apps.card.v1.Button";
                         };
+    
+                        /**
+                         * Type enum.
+                         * @name google.apps.card.v1.Button.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} OUTLINED=1 OUTLINED value
+                         * @property {number} FILLED=2 FILLED value
+                         * @property {number} FILLED_TONAL=3 FILLED_TONAL value
+                         * @property {number} BORDERLESS=4 BORDERLESS value
+                         */
+                        Button.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "OUTLINED"] = 1;
+                            values[valuesById[2] = "FILLED"] = 2;
+                            values[valuesById[3] = "FILLED_TONAL"] = 3;
+                            values[valuesById[4] = "BORDERLESS"] = 4;
+                            return values;
+                        })();
     
                         return Button;
                     })();
@@ -21509,12 +22952,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Icon.decode = function decode(reader, length) {
+                        Icon.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Icon();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.knownIcon = reader.string();
@@ -21836,12 +23281,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MaterialIcon.decode = function decode(reader, length) {
+                        MaterialIcon.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.MaterialIcon();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -22087,12 +23534,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImageCropStyle.decode = function decode(reader, length) {
+                        ImageCropStyle.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.ImageCropStyle();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -22379,12 +23828,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BorderStyle.decode = function decode(reader, length) {
+                        BorderStyle.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.BorderStyle();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -22685,12 +24136,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImageComponent.decode = function decode(reader, length) {
+                        ImageComponent.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.ImageComponent();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.imageUri = reader.string();
@@ -22981,12 +24434,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Grid.decode = function decode(reader, length) {
+                        Grid.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Grid();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.title = reader.string();
@@ -23304,12 +24759,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GridItem.decode = function decode(reader, length) {
+                            GridItem.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Grid.GridItem();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.id = reader.string();
@@ -23606,12 +25063,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Columns.decode = function decode(reader, length) {
+                        Columns.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Columns();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         if (!(message.columnItems && message.columnItems.length))
@@ -23860,12 +25319,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Column.decode = function decode(reader, length) {
+                            Column.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Columns.Column();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.horizontalSizeStyle = reader.int32();
@@ -24161,6 +25622,7 @@
                                  * @property {google.apps.card.v1.ITextInput|null} [textInput] Widgets textInput
                                  * @property {google.apps.card.v1.ISelectionInput|null} [selectionInput] Widgets selectionInput
                                  * @property {google.apps.card.v1.IDateTimePicker|null} [dateTimePicker] Widgets dateTimePicker
+                                 * @property {google.apps.card.v1.IChipList|null} [chipList] Widgets chipList
                                  */
     
                                 /**
@@ -24234,17 +25696,25 @@
                                  */
                                 Widgets.prototype.dateTimePicker = null;
     
+                                /**
+                                 * Widgets chipList.
+                                 * @member {google.apps.card.v1.IChipList|null|undefined} chipList
+                                 * @memberof google.apps.card.v1.Columns.Column.Widgets
+                                 * @instance
+                                 */
+                                Widgets.prototype.chipList = null;
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
                                 /**
                                  * Widgets data.
-                                 * @member {"textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker"|undefined} data
+                                 * @member {"textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker"|"chipList"|undefined} data
                                  * @memberof google.apps.card.v1.Columns.Column.Widgets
                                  * @instance
                                  */
                                 Object.defineProperty(Widgets.prototype, "data", {
-                                    get: $util.oneOfGetter($oneOfFields = ["textParagraph", "image", "decoratedText", "buttonList", "textInput", "selectionInput", "dateTimePicker"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["textParagraph", "image", "decoratedText", "buttonList", "textInput", "selectionInput", "dateTimePicker", "chipList"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -24286,6 +25756,8 @@
                                         $root.google.apps.card.v1.SelectionInput.encode(message.selectionInput, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                     if (message.dateTimePicker != null && Object.hasOwnProperty.call(message, "dateTimePicker"))
                                         $root.google.apps.card.v1.DateTimePicker.encode(message.dateTimePicker, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    if (message.chipList != null && Object.hasOwnProperty.call(message, "chipList"))
+                                        $root.google.apps.card.v1.ChipList.encode(message.chipList, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -24313,12 +25785,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Widgets.decode = function decode(reader, length) {
+                                Widgets.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Columns.Column.Widgets();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.textParagraph = $root.google.apps.card.v1.TextParagraph.decode(reader, reader.uint32());
@@ -24346,6 +25820,10 @@
                                             }
                                         case 7: {
                                                 message.dateTimePicker = $root.google.apps.card.v1.DateTimePicker.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.chipList = $root.google.apps.card.v1.ChipList.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -24452,6 +25930,16 @@
                                                 return "dateTimePicker." + error;
                                         }
                                     }
+                                    if (message.chipList != null && message.hasOwnProperty("chipList")) {
+                                        if (properties.data === 1)
+                                            return "data: multiple values";
+                                        properties.data = 1;
+                                        {
+                                            var error = $root.google.apps.card.v1.ChipList.verify(message.chipList);
+                                            if (error)
+                                                return "chipList." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -24501,6 +25989,11 @@
                                         if (typeof object.dateTimePicker !== "object")
                                             throw TypeError(".google.apps.card.v1.Columns.Column.Widgets.dateTimePicker: object expected");
                                         message.dateTimePicker = $root.google.apps.card.v1.DateTimePicker.fromObject(object.dateTimePicker);
+                                    }
+                                    if (object.chipList != null) {
+                                        if (typeof object.chipList !== "object")
+                                            throw TypeError(".google.apps.card.v1.Columns.Column.Widgets.chipList: object expected");
+                                        message.chipList = $root.google.apps.card.v1.ChipList.fromObject(object.chipList);
                                     }
                                     return message;
                                 };
@@ -24553,6 +26046,11 @@
                                         if (options.oneofs)
                                             object.data = "dateTimePicker";
                                     }
+                                    if (message.chipList != null && message.hasOwnProperty("chipList")) {
+                                        object.chipList = $root.google.apps.card.v1.ChipList.toObject(message.chipList, options);
+                                        if (options.oneofs)
+                                            object.data = "chipList";
+                                    }
                                     return object;
                                 };
     
@@ -24591,6 +26089,794 @@
                         return Columns;
                     })();
     
+                    v1.Carousel = (function() {
+    
+                        /**
+                         * Properties of a Carousel.
+                         * @memberof google.apps.card.v1
+                         * @interface ICarousel
+                         * @property {Array.<google.apps.card.v1.Carousel.ICarouselCard>|null} [carouselCards] Carousel carouselCards
+                         */
+    
+                        /**
+                         * Constructs a new Carousel.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents a Carousel.
+                         * @implements ICarousel
+                         * @constructor
+                         * @param {google.apps.card.v1.ICarousel=} [properties] Properties to set
+                         */
+                        function Carousel(properties) {
+                            this.carouselCards = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Carousel carouselCards.
+                         * @member {Array.<google.apps.card.v1.Carousel.ICarouselCard>} carouselCards
+                         * @memberof google.apps.card.v1.Carousel
+                         * @instance
+                         */
+                        Carousel.prototype.carouselCards = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Carousel instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {google.apps.card.v1.ICarousel=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.Carousel} Carousel instance
+                         */
+                        Carousel.create = function create(properties) {
+                            return new Carousel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Carousel message. Does not implicitly {@link google.apps.card.v1.Carousel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {google.apps.card.v1.ICarousel} message Carousel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Carousel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.carouselCards != null && message.carouselCards.length)
+                                for (var i = 0; i < message.carouselCards.length; ++i)
+                                    $root.google.apps.card.v1.Carousel.CarouselCard.encode(message.carouselCards[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Carousel message, length delimited. Does not implicitly {@link google.apps.card.v1.Carousel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {google.apps.card.v1.ICarousel} message Carousel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Carousel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Carousel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.Carousel} Carousel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Carousel.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Carousel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        if (!(message.carouselCards && message.carouselCards.length))
+                                            message.carouselCards = [];
+                                        message.carouselCards.push($root.google.apps.card.v1.Carousel.CarouselCard.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Carousel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.Carousel} Carousel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Carousel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Carousel message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Carousel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.carouselCards != null && message.hasOwnProperty("carouselCards")) {
+                                if (!Array.isArray(message.carouselCards))
+                                    return "carouselCards: array expected";
+                                for (var i = 0; i < message.carouselCards.length; ++i) {
+                                    var error = $root.google.apps.card.v1.Carousel.CarouselCard.verify(message.carouselCards[i]);
+                                    if (error)
+                                        return "carouselCards." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Carousel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.Carousel} Carousel
+                         */
+                        Carousel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.Carousel)
+                                return object;
+                            var message = new $root.google.apps.card.v1.Carousel();
+                            if (object.carouselCards) {
+                                if (!Array.isArray(object.carouselCards))
+                                    throw TypeError(".google.apps.card.v1.Carousel.carouselCards: array expected");
+                                message.carouselCards = [];
+                                for (var i = 0; i < object.carouselCards.length; ++i) {
+                                    if (typeof object.carouselCards[i] !== "object")
+                                        throw TypeError(".google.apps.card.v1.Carousel.carouselCards: object expected");
+                                    message.carouselCards[i] = $root.google.apps.card.v1.Carousel.CarouselCard.fromObject(object.carouselCards[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Carousel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {google.apps.card.v1.Carousel} message Carousel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Carousel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.carouselCards = [];
+                            if (message.carouselCards && message.carouselCards.length) {
+                                object.carouselCards = [];
+                                for (var j = 0; j < message.carouselCards.length; ++j)
+                                    object.carouselCards[j] = $root.google.apps.card.v1.Carousel.CarouselCard.toObject(message.carouselCards[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Carousel to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.Carousel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Carousel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Carousel
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.Carousel
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Carousel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.Carousel";
+                        };
+    
+                        Carousel.CarouselCard = (function() {
+    
+                            /**
+                             * Properties of a CarouselCard.
+                             * @memberof google.apps.card.v1.Carousel
+                             * @interface ICarouselCard
+                             * @property {Array.<google.apps.card.v1.Card.INestedWidget>|null} [widgets] CarouselCard widgets
+                             * @property {Array.<google.apps.card.v1.Card.INestedWidget>|null} [footerWidgets] CarouselCard footerWidgets
+                             */
+    
+                            /**
+                             * Constructs a new CarouselCard.
+                             * @memberof google.apps.card.v1.Carousel
+                             * @classdesc Represents a CarouselCard.
+                             * @implements ICarouselCard
+                             * @constructor
+                             * @param {google.apps.card.v1.Carousel.ICarouselCard=} [properties] Properties to set
+                             */
+                            function CarouselCard(properties) {
+                                this.widgets = [];
+                                this.footerWidgets = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CarouselCard widgets.
+                             * @member {Array.<google.apps.card.v1.Card.INestedWidget>} widgets
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @instance
+                             */
+                            CarouselCard.prototype.widgets = $util.emptyArray;
+    
+                            /**
+                             * CarouselCard footerWidgets.
+                             * @member {Array.<google.apps.card.v1.Card.INestedWidget>} footerWidgets
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @instance
+                             */
+                            CarouselCard.prototype.footerWidgets = $util.emptyArray;
+    
+                            /**
+                             * Creates a new CarouselCard instance using the specified properties.
+                             * @function create
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {google.apps.card.v1.Carousel.ICarouselCard=} [properties] Properties to set
+                             * @returns {google.apps.card.v1.Carousel.CarouselCard} CarouselCard instance
+                             */
+                            CarouselCard.create = function create(properties) {
+                                return new CarouselCard(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CarouselCard message. Does not implicitly {@link google.apps.card.v1.Carousel.CarouselCard.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {google.apps.card.v1.Carousel.ICarouselCard} message CarouselCard message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CarouselCard.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.widgets != null && message.widgets.length)
+                                    for (var i = 0; i < message.widgets.length; ++i)
+                                        $root.google.apps.card.v1.Card.NestedWidget.encode(message.widgets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.footerWidgets != null && message.footerWidgets.length)
+                                    for (var i = 0; i < message.footerWidgets.length; ++i)
+                                        $root.google.apps.card.v1.Card.NestedWidget.encode(message.footerWidgets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CarouselCard message, length delimited. Does not implicitly {@link google.apps.card.v1.Carousel.CarouselCard.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {google.apps.card.v1.Carousel.ICarouselCard} message CarouselCard message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CarouselCard.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CarouselCard message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.apps.card.v1.Carousel.CarouselCard} CarouselCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CarouselCard.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Carousel.CarouselCard();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.widgets && message.widgets.length))
+                                                message.widgets = [];
+                                            message.widgets.push($root.google.apps.card.v1.Card.NestedWidget.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.footerWidgets && message.footerWidgets.length))
+                                                message.footerWidgets = [];
+                                            message.footerWidgets.push($root.google.apps.card.v1.Card.NestedWidget.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CarouselCard message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.apps.card.v1.Carousel.CarouselCard} CarouselCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CarouselCard.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CarouselCard message.
+                             * @function verify
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CarouselCard.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.widgets != null && message.hasOwnProperty("widgets")) {
+                                    if (!Array.isArray(message.widgets))
+                                        return "widgets: array expected";
+                                    for (var i = 0; i < message.widgets.length; ++i) {
+                                        var error = $root.google.apps.card.v1.Card.NestedWidget.verify(message.widgets[i]);
+                                        if (error)
+                                            return "widgets." + error;
+                                    }
+                                }
+                                if (message.footerWidgets != null && message.hasOwnProperty("footerWidgets")) {
+                                    if (!Array.isArray(message.footerWidgets))
+                                        return "footerWidgets: array expected";
+                                    for (var i = 0; i < message.footerWidgets.length; ++i) {
+                                        var error = $root.google.apps.card.v1.Card.NestedWidget.verify(message.footerWidgets[i]);
+                                        if (error)
+                                            return "footerWidgets." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CarouselCard message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.apps.card.v1.Carousel.CarouselCard} CarouselCard
+                             */
+                            CarouselCard.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.apps.card.v1.Carousel.CarouselCard)
+                                    return object;
+                                var message = new $root.google.apps.card.v1.Carousel.CarouselCard();
+                                if (object.widgets) {
+                                    if (!Array.isArray(object.widgets))
+                                        throw TypeError(".google.apps.card.v1.Carousel.CarouselCard.widgets: array expected");
+                                    message.widgets = [];
+                                    for (var i = 0; i < object.widgets.length; ++i) {
+                                        if (typeof object.widgets[i] !== "object")
+                                            throw TypeError(".google.apps.card.v1.Carousel.CarouselCard.widgets: object expected");
+                                        message.widgets[i] = $root.google.apps.card.v1.Card.NestedWidget.fromObject(object.widgets[i]);
+                                    }
+                                }
+                                if (object.footerWidgets) {
+                                    if (!Array.isArray(object.footerWidgets))
+                                        throw TypeError(".google.apps.card.v1.Carousel.CarouselCard.footerWidgets: array expected");
+                                    message.footerWidgets = [];
+                                    for (var i = 0; i < object.footerWidgets.length; ++i) {
+                                        if (typeof object.footerWidgets[i] !== "object")
+                                            throw TypeError(".google.apps.card.v1.Carousel.CarouselCard.footerWidgets: object expected");
+                                        message.footerWidgets[i] = $root.google.apps.card.v1.Card.NestedWidget.fromObject(object.footerWidgets[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CarouselCard message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {google.apps.card.v1.Carousel.CarouselCard} message CarouselCard
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CarouselCard.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.widgets = [];
+                                    object.footerWidgets = [];
+                                }
+                                if (message.widgets && message.widgets.length) {
+                                    object.widgets = [];
+                                    for (var j = 0; j < message.widgets.length; ++j)
+                                        object.widgets[j] = $root.google.apps.card.v1.Card.NestedWidget.toObject(message.widgets[j], options);
+                                }
+                                if (message.footerWidgets && message.footerWidgets.length) {
+                                    object.footerWidgets = [];
+                                    for (var j = 0; j < message.footerWidgets.length; ++j)
+                                        object.footerWidgets[j] = $root.google.apps.card.v1.Card.NestedWidget.toObject(message.footerWidgets[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CarouselCard to JSON.
+                             * @function toJSON
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CarouselCard.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CarouselCard
+                             * @function getTypeUrl
+                             * @memberof google.apps.card.v1.Carousel.CarouselCard
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CarouselCard.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.apps.card.v1.Carousel.CarouselCard";
+                            };
+    
+                            return CarouselCard;
+                        })();
+    
+                        return Carousel;
+                    })();
+    
+                    v1.CollapseControl = (function() {
+    
+                        /**
+                         * Properties of a CollapseControl.
+                         * @memberof google.apps.card.v1
+                         * @interface ICollapseControl
+                         * @property {google.apps.card.v1.Widget.HorizontalAlignment|null} [horizontalAlignment] CollapseControl horizontalAlignment
+                         * @property {google.apps.card.v1.IButton|null} [expandButton] CollapseControl expandButton
+                         * @property {google.apps.card.v1.IButton|null} [collapseButton] CollapseControl collapseButton
+                         */
+    
+                        /**
+                         * Constructs a new CollapseControl.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents a CollapseControl.
+                         * @implements ICollapseControl
+                         * @constructor
+                         * @param {google.apps.card.v1.ICollapseControl=} [properties] Properties to set
+                         */
+                        function CollapseControl(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CollapseControl horizontalAlignment.
+                         * @member {google.apps.card.v1.Widget.HorizontalAlignment} horizontalAlignment
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @instance
+                         */
+                        CollapseControl.prototype.horizontalAlignment = 0;
+    
+                        /**
+                         * CollapseControl expandButton.
+                         * @member {google.apps.card.v1.IButton|null|undefined} expandButton
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @instance
+                         */
+                        CollapseControl.prototype.expandButton = null;
+    
+                        /**
+                         * CollapseControl collapseButton.
+                         * @member {google.apps.card.v1.IButton|null|undefined} collapseButton
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @instance
+                         */
+                        CollapseControl.prototype.collapseButton = null;
+    
+                        /**
+                         * Creates a new CollapseControl instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {google.apps.card.v1.ICollapseControl=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.CollapseControl} CollapseControl instance
+                         */
+                        CollapseControl.create = function create(properties) {
+                            return new CollapseControl(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CollapseControl message. Does not implicitly {@link google.apps.card.v1.CollapseControl.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {google.apps.card.v1.ICollapseControl} message CollapseControl message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CollapseControl.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.horizontalAlignment != null && Object.hasOwnProperty.call(message, "horizontalAlignment"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.horizontalAlignment);
+                            if (message.expandButton != null && Object.hasOwnProperty.call(message, "expandButton"))
+                                $root.google.apps.card.v1.Button.encode(message.expandButton, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.collapseButton != null && Object.hasOwnProperty.call(message, "collapseButton"))
+                                $root.google.apps.card.v1.Button.encode(message.collapseButton, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CollapseControl message, length delimited. Does not implicitly {@link google.apps.card.v1.CollapseControl.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {google.apps.card.v1.ICollapseControl} message CollapseControl message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CollapseControl.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CollapseControl message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.CollapseControl} CollapseControl
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CollapseControl.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.CollapseControl();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.horizontalAlignment = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.expandButton = $root.google.apps.card.v1.Button.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.collapseButton = $root.google.apps.card.v1.Button.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CollapseControl message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.CollapseControl} CollapseControl
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CollapseControl.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CollapseControl message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CollapseControl.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.horizontalAlignment != null && message.hasOwnProperty("horizontalAlignment"))
+                                switch (message.horizontalAlignment) {
+                                default:
+                                    return "horizontalAlignment: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.expandButton != null && message.hasOwnProperty("expandButton")) {
+                                var error = $root.google.apps.card.v1.Button.verify(message.expandButton);
+                                if (error)
+                                    return "expandButton." + error;
+                            }
+                            if (message.collapseButton != null && message.hasOwnProperty("collapseButton")) {
+                                var error = $root.google.apps.card.v1.Button.verify(message.collapseButton);
+                                if (error)
+                                    return "collapseButton." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CollapseControl message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.CollapseControl} CollapseControl
+                         */
+                        CollapseControl.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.CollapseControl)
+                                return object;
+                            var message = new $root.google.apps.card.v1.CollapseControl();
+                            switch (object.horizontalAlignment) {
+                            default:
+                                if (typeof object.horizontalAlignment === "number") {
+                                    message.horizontalAlignment = object.horizontalAlignment;
+                                    break;
+                                }
+                                break;
+                            case "HORIZONTAL_ALIGNMENT_UNSPECIFIED":
+                            case 0:
+                                message.horizontalAlignment = 0;
+                                break;
+                            case "START":
+                            case 1:
+                                message.horizontalAlignment = 1;
+                                break;
+                            case "CENTER":
+                            case 2:
+                                message.horizontalAlignment = 2;
+                                break;
+                            case "END":
+                            case 3:
+                                message.horizontalAlignment = 3;
+                                break;
+                            }
+                            if (object.expandButton != null) {
+                                if (typeof object.expandButton !== "object")
+                                    throw TypeError(".google.apps.card.v1.CollapseControl.expandButton: object expected");
+                                message.expandButton = $root.google.apps.card.v1.Button.fromObject(object.expandButton);
+                            }
+                            if (object.collapseButton != null) {
+                                if (typeof object.collapseButton !== "object")
+                                    throw TypeError(".google.apps.card.v1.CollapseControl.collapseButton: object expected");
+                                message.collapseButton = $root.google.apps.card.v1.Button.fromObject(object.collapseButton);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CollapseControl message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {google.apps.card.v1.CollapseControl} message CollapseControl
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CollapseControl.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.horizontalAlignment = options.enums === String ? "HORIZONTAL_ALIGNMENT_UNSPECIFIED" : 0;
+                                object.expandButton = null;
+                                object.collapseButton = null;
+                            }
+                            if (message.horizontalAlignment != null && message.hasOwnProperty("horizontalAlignment"))
+                                object.horizontalAlignment = options.enums === String ? $root.google.apps.card.v1.Widget.HorizontalAlignment[message.horizontalAlignment] === undefined ? message.horizontalAlignment : $root.google.apps.card.v1.Widget.HorizontalAlignment[message.horizontalAlignment] : message.horizontalAlignment;
+                            if (message.expandButton != null && message.hasOwnProperty("expandButton"))
+                                object.expandButton = $root.google.apps.card.v1.Button.toObject(message.expandButton, options);
+                            if (message.collapseButton != null && message.hasOwnProperty("collapseButton"))
+                                object.collapseButton = $root.google.apps.card.v1.Button.toObject(message.collapseButton, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CollapseControl to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CollapseControl.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CollapseControl
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.CollapseControl
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CollapseControl.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.CollapseControl";
+                        };
+    
+                        return CollapseControl;
+                    })();
+    
                     v1.OnClick = (function() {
     
                         /**
@@ -24601,6 +26887,7 @@
                          * @property {google.apps.card.v1.IOpenLink|null} [openLink] OnClick openLink
                          * @property {google.apps.card.v1.IAction|null} [openDynamicLinkAction] OnClick openDynamicLinkAction
                          * @property {google.apps.card.v1.ICard|null} [card] OnClick card
+                         * @property {google.apps.card.v1.IOverflowMenu|null} [overflowMenu] OnClick overflowMenu
                          */
     
                         /**
@@ -24650,17 +26937,25 @@
                          */
                         OnClick.prototype.card = null;
     
+                        /**
+                         * OnClick overflowMenu.
+                         * @member {google.apps.card.v1.IOverflowMenu|null|undefined} overflowMenu
+                         * @memberof google.apps.card.v1.OnClick
+                         * @instance
+                         */
+                        OnClick.prototype.overflowMenu = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * OnClick data.
-                         * @member {"action"|"openLink"|"openDynamicLinkAction"|"card"|undefined} data
+                         * @member {"action"|"openLink"|"openDynamicLinkAction"|"card"|"overflowMenu"|undefined} data
                          * @memberof google.apps.card.v1.OnClick
                          * @instance
                          */
                         Object.defineProperty(OnClick.prototype, "data", {
-                            get: $util.oneOfGetter($oneOfFields = ["action", "openLink", "openDynamicLinkAction", "card"]),
+                            get: $util.oneOfGetter($oneOfFields = ["action", "openLink", "openDynamicLinkAction", "card", "overflowMenu"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -24696,6 +26991,8 @@
                                 $root.google.apps.card.v1.Action.encode(message.openDynamicLinkAction, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.card != null && Object.hasOwnProperty.call(message, "card"))
                                 $root.google.apps.card.v1.Card.encode(message.card, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.overflowMenu != null && Object.hasOwnProperty.call(message, "overflowMenu"))
+                                $root.google.apps.card.v1.OverflowMenu.encode(message.overflowMenu, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -24723,12 +27020,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OnClick.decode = function decode(reader, length) {
+                        OnClick.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.OnClick();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.action = $root.google.apps.card.v1.Action.decode(reader, reader.uint32());
@@ -24744,6 +27043,10 @@
                                     }
                                 case 4: {
                                         message.card = $root.google.apps.card.v1.Card.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.overflowMenu = $root.google.apps.card.v1.OverflowMenu.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -24820,6 +27123,16 @@
                                         return "card." + error;
                                 }
                             }
+                            if (message.overflowMenu != null && message.hasOwnProperty("overflowMenu")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.apps.card.v1.OverflowMenu.verify(message.overflowMenu);
+                                    if (error)
+                                        return "overflowMenu." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -24854,6 +27167,11 @@
                                 if (typeof object.card !== "object")
                                     throw TypeError(".google.apps.card.v1.OnClick.card: object expected");
                                 message.card = $root.google.apps.card.v1.Card.fromObject(object.card);
+                            }
+                            if (object.overflowMenu != null) {
+                                if (typeof object.overflowMenu !== "object")
+                                    throw TypeError(".google.apps.card.v1.OnClick.overflowMenu: object expected");
+                                message.overflowMenu = $root.google.apps.card.v1.OverflowMenu.fromObject(object.overflowMenu);
                             }
                             return message;
                         };
@@ -24890,6 +27208,11 @@
                                 object.card = $root.google.apps.card.v1.Card.toObject(message.card, options);
                                 if (options.oneofs)
                                     object.data = "card";
+                            }
+                            if (message.overflowMenu != null && message.hasOwnProperty("overflowMenu")) {
+                                object.overflowMenu = $root.google.apps.card.v1.OverflowMenu.toObject(message.overflowMenu, options);
+                                if (options.oneofs)
+                                    object.data = "overflowMenu";
                             }
                             return object;
                         };
@@ -25030,12 +27353,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OpenLink.decode = function decode(reader, length) {
+                        OpenLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.OpenLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.url = reader.string();
@@ -25250,6 +27575,8 @@
                          * @property {google.apps.card.v1.Action.LoadIndicator|null} [loadIndicator] Action loadIndicator
                          * @property {boolean|null} [persistValues] Action persistValues
                          * @property {google.apps.card.v1.Action.Interaction|null} [interaction] Action interaction
+                         * @property {Array.<string>|null} [requiredWidgets] Action requiredWidgets
+                         * @property {boolean|null} [allWidgetsAreRequired] Action allWidgetsAreRequired
                          */
     
                         /**
@@ -25262,6 +27589,7 @@
                          */
                         function Action(properties) {
                             this.parameters = [];
+                            this.requiredWidgets = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -25309,6 +27637,22 @@
                         Action.prototype.interaction = 0;
     
                         /**
+                         * Action requiredWidgets.
+                         * @member {Array.<string>} requiredWidgets
+                         * @memberof google.apps.card.v1.Action
+                         * @instance
+                         */
+                        Action.prototype.requiredWidgets = $util.emptyArray;
+    
+                        /**
+                         * Action allWidgetsAreRequired.
+                         * @member {boolean} allWidgetsAreRequired
+                         * @memberof google.apps.card.v1.Action
+                         * @instance
+                         */
+                        Action.prototype.allWidgetsAreRequired = false;
+    
+                        /**
                          * Creates a new Action instance using the specified properties.
                          * @function create
                          * @memberof google.apps.card.v1.Action
@@ -25343,6 +27687,11 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.persistValues);
                             if (message.interaction != null && Object.hasOwnProperty.call(message, "interaction"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.interaction);
+                            if (message.requiredWidgets != null && message.requiredWidgets.length)
+                                for (var i = 0; i < message.requiredWidgets.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.requiredWidgets[i]);
+                            if (message.allWidgetsAreRequired != null && Object.hasOwnProperty.call(message, "allWidgetsAreRequired"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.allWidgetsAreRequired);
                             return writer;
                         };
     
@@ -25370,12 +27719,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Action.decode = function decode(reader, length) {
+                        Action.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Action();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message["function"] = reader.string();
@@ -25397,6 +27748,16 @@
                                     }
                                 case 5: {
                                         message.interaction = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.requiredWidgets && message.requiredWidgets.length))
+                                            message.requiredWidgets = [];
+                                        message.requiredWidgets.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.allWidgetsAreRequired = reader.bool();
                                         break;
                                     }
                                 default:
@@ -25465,6 +27826,16 @@
                                 case 1:
                                     break;
                                 }
+                            if (message.requiredWidgets != null && message.hasOwnProperty("requiredWidgets")) {
+                                if (!Array.isArray(message.requiredWidgets))
+                                    return "requiredWidgets: array expected";
+                                for (var i = 0; i < message.requiredWidgets.length; ++i)
+                                    if (!$util.isString(message.requiredWidgets[i]))
+                                        return "requiredWidgets: string[] expected";
+                            }
+                            if (message.allWidgetsAreRequired != null && message.hasOwnProperty("allWidgetsAreRequired"))
+                                if (typeof message.allWidgetsAreRequired !== "boolean")
+                                    return "allWidgetsAreRequired: boolean expected";
                             return null;
                         };
     
@@ -25526,6 +27897,15 @@
                                 message.interaction = 1;
                                 break;
                             }
+                            if (object.requiredWidgets) {
+                                if (!Array.isArray(object.requiredWidgets))
+                                    throw TypeError(".google.apps.card.v1.Action.requiredWidgets: array expected");
+                                message.requiredWidgets = [];
+                                for (var i = 0; i < object.requiredWidgets.length; ++i)
+                                    message.requiredWidgets[i] = String(object.requiredWidgets[i]);
+                            }
+                            if (object.allWidgetsAreRequired != null)
+                                message.allWidgetsAreRequired = Boolean(object.allWidgetsAreRequired);
                             return message;
                         };
     
@@ -25542,13 +27922,16 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.parameters = [];
+                                object.requiredWidgets = [];
+                            }
                             if (options.defaults) {
                                 object["function"] = "";
                                 object.loadIndicator = options.enums === String ? "SPINNER" : 0;
                                 object.persistValues = false;
                                 object.interaction = options.enums === String ? "INTERACTION_UNSPECIFIED" : 0;
+                                object.allWidgetsAreRequired = false;
                             }
                             if (message["function"] != null && message.hasOwnProperty("function"))
                                 object["function"] = message["function"];
@@ -25563,6 +27946,13 @@
                                 object.persistValues = message.persistValues;
                             if (message.interaction != null && message.hasOwnProperty("interaction"))
                                 object.interaction = options.enums === String ? $root.google.apps.card.v1.Action.Interaction[message.interaction] === undefined ? message.interaction : $root.google.apps.card.v1.Action.Interaction[message.interaction] : message.interaction;
+                            if (message.requiredWidgets && message.requiredWidgets.length) {
+                                object.requiredWidgets = [];
+                                for (var j = 0; j < message.requiredWidgets.length; ++j)
+                                    object.requiredWidgets[j] = message.requiredWidgets[j];
+                            }
+                            if (message.allWidgetsAreRequired != null && message.hasOwnProperty("allWidgetsAreRequired"))
+                                object.allWidgetsAreRequired = message.allWidgetsAreRequired;
                             return object;
                         };
     
@@ -25688,12 +28078,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ActionParameter.decode = function decode(reader, length) {
+                            ActionParameter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Action.ActionParameter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.key = reader.string();
@@ -25850,6 +28242,917 @@
                         return Action;
                     })();
     
+                    v1.Validation = (function() {
+    
+                        /**
+                         * Properties of a Validation.
+                         * @memberof google.apps.card.v1
+                         * @interface IValidation
+                         * @property {number|null} [characterLimit] Validation characterLimit
+                         * @property {google.apps.card.v1.Validation.InputType|null} [inputType] Validation inputType
+                         */
+    
+                        /**
+                         * Constructs a new Validation.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents a Validation.
+                         * @implements IValidation
+                         * @constructor
+                         * @param {google.apps.card.v1.IValidation=} [properties] Properties to set
+                         */
+                        function Validation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Validation characterLimit.
+                         * @member {number} characterLimit
+                         * @memberof google.apps.card.v1.Validation
+                         * @instance
+                         */
+                        Validation.prototype.characterLimit = 0;
+    
+                        /**
+                         * Validation inputType.
+                         * @member {google.apps.card.v1.Validation.InputType} inputType
+                         * @memberof google.apps.card.v1.Validation
+                         * @instance
+                         */
+                        Validation.prototype.inputType = 0;
+    
+                        /**
+                         * Creates a new Validation instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {google.apps.card.v1.IValidation=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.Validation} Validation instance
+                         */
+                        Validation.create = function create(properties) {
+                            return new Validation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Validation message. Does not implicitly {@link google.apps.card.v1.Validation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {google.apps.card.v1.IValidation} message Validation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Validation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.characterLimit != null && Object.hasOwnProperty.call(message, "characterLimit"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.characterLimit);
+                            if (message.inputType != null && Object.hasOwnProperty.call(message, "inputType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.inputType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Validation message, length delimited. Does not implicitly {@link google.apps.card.v1.Validation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {google.apps.card.v1.IValidation} message Validation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Validation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Validation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.Validation} Validation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Validation.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Validation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.characterLimit = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inputType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Validation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.Validation} Validation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Validation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Validation message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Validation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.characterLimit != null && message.hasOwnProperty("characterLimit"))
+                                if (!$util.isInteger(message.characterLimit))
+                                    return "characterLimit: integer expected";
+                            if (message.inputType != null && message.hasOwnProperty("inputType"))
+                                switch (message.inputType) {
+                                default:
+                                    return "inputType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Validation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.Validation} Validation
+                         */
+                        Validation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.Validation)
+                                return object;
+                            var message = new $root.google.apps.card.v1.Validation();
+                            if (object.characterLimit != null)
+                                message.characterLimit = object.characterLimit | 0;
+                            switch (object.inputType) {
+                            default:
+                                if (typeof object.inputType === "number") {
+                                    message.inputType = object.inputType;
+                                    break;
+                                }
+                                break;
+                            case "INPUT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.inputType = 0;
+                                break;
+                            case "TEXT":
+                            case 1:
+                                message.inputType = 1;
+                                break;
+                            case "INTEGER":
+                            case 2:
+                                message.inputType = 2;
+                                break;
+                            case "FLOAT":
+                            case 3:
+                                message.inputType = 3;
+                                break;
+                            case "EMAIL":
+                            case 4:
+                                message.inputType = 4;
+                                break;
+                            case "EMOJI_PICKER":
+                            case 5:
+                                message.inputType = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Validation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {google.apps.card.v1.Validation} message Validation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Validation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.characterLimit = 0;
+                                object.inputType = options.enums === String ? "INPUT_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.characterLimit != null && message.hasOwnProperty("characterLimit"))
+                                object.characterLimit = message.characterLimit;
+                            if (message.inputType != null && message.hasOwnProperty("inputType"))
+                                object.inputType = options.enums === String ? $root.google.apps.card.v1.Validation.InputType[message.inputType] === undefined ? message.inputType : $root.google.apps.card.v1.Validation.InputType[message.inputType] : message.inputType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Validation to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.Validation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Validation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Validation
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.Validation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Validation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.Validation";
+                        };
+    
+                        /**
+                         * InputType enum.
+                         * @name google.apps.card.v1.Validation.InputType
+                         * @enum {number}
+                         * @property {number} INPUT_TYPE_UNSPECIFIED=0 INPUT_TYPE_UNSPECIFIED value
+                         * @property {number} TEXT=1 TEXT value
+                         * @property {number} INTEGER=2 INTEGER value
+                         * @property {number} FLOAT=3 FLOAT value
+                         * @property {number} EMAIL=4 EMAIL value
+                         * @property {number} EMOJI_PICKER=5 EMOJI_PICKER value
+                         */
+                        Validation.InputType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INPUT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "TEXT"] = 1;
+                            values[valuesById[2] = "INTEGER"] = 2;
+                            values[valuesById[3] = "FLOAT"] = 3;
+                            values[valuesById[4] = "EMAIL"] = 4;
+                            values[valuesById[5] = "EMOJI_PICKER"] = 5;
+                            return values;
+                        })();
+    
+                        return Validation;
+                    })();
+    
+                    v1.ChipList = (function() {
+    
+                        /**
+                         * Properties of a ChipList.
+                         * @memberof google.apps.card.v1
+                         * @interface IChipList
+                         * @property {google.apps.card.v1.ChipList.Layout|null} [layout] ChipList layout
+                         * @property {Array.<google.apps.card.v1.IChip>|null} [chips] ChipList chips
+                         */
+    
+                        /**
+                         * Constructs a new ChipList.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents a ChipList.
+                         * @implements IChipList
+                         * @constructor
+                         * @param {google.apps.card.v1.IChipList=} [properties] Properties to set
+                         */
+                        function ChipList(properties) {
+                            this.chips = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ChipList layout.
+                         * @member {google.apps.card.v1.ChipList.Layout} layout
+                         * @memberof google.apps.card.v1.ChipList
+                         * @instance
+                         */
+                        ChipList.prototype.layout = 0;
+    
+                        /**
+                         * ChipList chips.
+                         * @member {Array.<google.apps.card.v1.IChip>} chips
+                         * @memberof google.apps.card.v1.ChipList
+                         * @instance
+                         */
+                        ChipList.prototype.chips = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ChipList instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {google.apps.card.v1.IChipList=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.ChipList} ChipList instance
+                         */
+                        ChipList.create = function create(properties) {
+                            return new ChipList(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ChipList message. Does not implicitly {@link google.apps.card.v1.ChipList.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {google.apps.card.v1.IChipList} message ChipList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChipList.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.layout != null && Object.hasOwnProperty.call(message, "layout"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.layout);
+                            if (message.chips != null && message.chips.length)
+                                for (var i = 0; i < message.chips.length; ++i)
+                                    $root.google.apps.card.v1.Chip.encode(message.chips[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ChipList message, length delimited. Does not implicitly {@link google.apps.card.v1.ChipList.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {google.apps.card.v1.IChipList} message ChipList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ChipList.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ChipList message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.ChipList} ChipList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChipList.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.ChipList();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.layout = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.chips && message.chips.length))
+                                            message.chips = [];
+                                        message.chips.push($root.google.apps.card.v1.Chip.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ChipList message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.ChipList} ChipList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ChipList.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ChipList message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ChipList.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.layout != null && message.hasOwnProperty("layout"))
+                                switch (message.layout) {
+                                default:
+                                    return "layout: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.chips != null && message.hasOwnProperty("chips")) {
+                                if (!Array.isArray(message.chips))
+                                    return "chips: array expected";
+                                for (var i = 0; i < message.chips.length; ++i) {
+                                    var error = $root.google.apps.card.v1.Chip.verify(message.chips[i]);
+                                    if (error)
+                                        return "chips." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ChipList message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.ChipList} ChipList
+                         */
+                        ChipList.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.ChipList)
+                                return object;
+                            var message = new $root.google.apps.card.v1.ChipList();
+                            switch (object.layout) {
+                            default:
+                                if (typeof object.layout === "number") {
+                                    message.layout = object.layout;
+                                    break;
+                                }
+                                break;
+                            case "LAYOUT_UNSPECIFIED":
+                            case 0:
+                                message.layout = 0;
+                                break;
+                            case "WRAPPED":
+                            case 1:
+                                message.layout = 1;
+                                break;
+                            case "HORIZONTAL_SCROLLABLE":
+                            case 2:
+                                message.layout = 2;
+                                break;
+                            }
+                            if (object.chips) {
+                                if (!Array.isArray(object.chips))
+                                    throw TypeError(".google.apps.card.v1.ChipList.chips: array expected");
+                                message.chips = [];
+                                for (var i = 0; i < object.chips.length; ++i) {
+                                    if (typeof object.chips[i] !== "object")
+                                        throw TypeError(".google.apps.card.v1.ChipList.chips: object expected");
+                                    message.chips[i] = $root.google.apps.card.v1.Chip.fromObject(object.chips[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ChipList message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {google.apps.card.v1.ChipList} message ChipList
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ChipList.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.chips = [];
+                            if (options.defaults)
+                                object.layout = options.enums === String ? "LAYOUT_UNSPECIFIED" : 0;
+                            if (message.layout != null && message.hasOwnProperty("layout"))
+                                object.layout = options.enums === String ? $root.google.apps.card.v1.ChipList.Layout[message.layout] === undefined ? message.layout : $root.google.apps.card.v1.ChipList.Layout[message.layout] : message.layout;
+                            if (message.chips && message.chips.length) {
+                                object.chips = [];
+                                for (var j = 0; j < message.chips.length; ++j)
+                                    object.chips[j] = $root.google.apps.card.v1.Chip.toObject(message.chips[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ChipList to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.ChipList
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ChipList.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ChipList
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.ChipList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ChipList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.ChipList";
+                        };
+    
+                        /**
+                         * Layout enum.
+                         * @name google.apps.card.v1.ChipList.Layout
+                         * @enum {number}
+                         * @property {number} LAYOUT_UNSPECIFIED=0 LAYOUT_UNSPECIFIED value
+                         * @property {number} WRAPPED=1 WRAPPED value
+                         * @property {number} HORIZONTAL_SCROLLABLE=2 HORIZONTAL_SCROLLABLE value
+                         */
+                        ChipList.Layout = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "LAYOUT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "WRAPPED"] = 1;
+                            values[valuesById[2] = "HORIZONTAL_SCROLLABLE"] = 2;
+                            return values;
+                        })();
+    
+                        return ChipList;
+                    })();
+    
+                    v1.Chip = (function() {
+    
+                        /**
+                         * Properties of a Chip.
+                         * @memberof google.apps.card.v1
+                         * @interface IChip
+                         * @property {google.apps.card.v1.IIcon|null} [icon] Chip icon
+                         * @property {string|null} [label] Chip label
+                         * @property {google.apps.card.v1.IOnClick|null} [onClick] Chip onClick
+                         * @property {boolean|null} [enabled] Chip enabled
+                         * @property {boolean|null} [disabled] Chip disabled
+                         * @property {string|null} [altText] Chip altText
+                         */
+    
+                        /**
+                         * Constructs a new Chip.
+                         * @memberof google.apps.card.v1
+                         * @classdesc Represents a Chip.
+                         * @implements IChip
+                         * @constructor
+                         * @param {google.apps.card.v1.IChip=} [properties] Properties to set
+                         */
+                        function Chip(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Chip icon.
+                         * @member {google.apps.card.v1.IIcon|null|undefined} icon
+                         * @memberof google.apps.card.v1.Chip
+                         * @instance
+                         */
+                        Chip.prototype.icon = null;
+    
+                        /**
+                         * Chip label.
+                         * @member {string} label
+                         * @memberof google.apps.card.v1.Chip
+                         * @instance
+                         */
+                        Chip.prototype.label = "";
+    
+                        /**
+                         * Chip onClick.
+                         * @member {google.apps.card.v1.IOnClick|null|undefined} onClick
+                         * @memberof google.apps.card.v1.Chip
+                         * @instance
+                         */
+                        Chip.prototype.onClick = null;
+    
+                        /**
+                         * Chip enabled.
+                         * @member {boolean} enabled
+                         * @memberof google.apps.card.v1.Chip
+                         * @instance
+                         */
+                        Chip.prototype.enabled = false;
+    
+                        /**
+                         * Chip disabled.
+                         * @member {boolean} disabled
+                         * @memberof google.apps.card.v1.Chip
+                         * @instance
+                         */
+                        Chip.prototype.disabled = false;
+    
+                        /**
+                         * Chip altText.
+                         * @member {string} altText
+                         * @memberof google.apps.card.v1.Chip
+                         * @instance
+                         */
+                        Chip.prototype.altText = "";
+    
+                        /**
+                         * Creates a new Chip instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {google.apps.card.v1.IChip=} [properties] Properties to set
+                         * @returns {google.apps.card.v1.Chip} Chip instance
+                         */
+                        Chip.create = function create(properties) {
+                            return new Chip(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Chip message. Does not implicitly {@link google.apps.card.v1.Chip.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {google.apps.card.v1.IChip} message Chip message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Chip.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.icon != null && Object.hasOwnProperty.call(message, "icon"))
+                                $root.google.apps.card.v1.Icon.encode(message.icon, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.label);
+                            if (message.onClick != null && Object.hasOwnProperty.call(message, "onClick"))
+                                $root.google.apps.card.v1.OnClick.encode(message.onClick, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.enabled);
+                            if (message.altText != null && Object.hasOwnProperty.call(message, "altText"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.altText);
+                            if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.disabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Chip message, length delimited. Does not implicitly {@link google.apps.card.v1.Chip.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {google.apps.card.v1.IChip} message Chip message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Chip.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Chip message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.card.v1.Chip} Chip
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Chip.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.card.v1.Chip();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.icon = $root.google.apps.card.v1.Icon.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.label = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.onClick = $root.google.apps.card.v1.OnClick.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.disabled = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.altText = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Chip message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.card.v1.Chip} Chip
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Chip.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Chip message.
+                         * @function verify
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Chip.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.icon != null && message.hasOwnProperty("icon")) {
+                                var error = $root.google.apps.card.v1.Icon.verify(message.icon);
+                                if (error)
+                                    return "icon." + error;
+                            }
+                            if (message.label != null && message.hasOwnProperty("label"))
+                                if (!$util.isString(message.label))
+                                    return "label: string expected";
+                            if (message.onClick != null && message.hasOwnProperty("onClick")) {
+                                var error = $root.google.apps.card.v1.OnClick.verify(message.onClick);
+                                if (error)
+                                    return "onClick." + error;
+                            }
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                if (typeof message.disabled !== "boolean")
+                                    return "disabled: boolean expected";
+                            if (message.altText != null && message.hasOwnProperty("altText"))
+                                if (!$util.isString(message.altText))
+                                    return "altText: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Chip message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.card.v1.Chip} Chip
+                         */
+                        Chip.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.card.v1.Chip)
+                                return object;
+                            var message = new $root.google.apps.card.v1.Chip();
+                            if (object.icon != null) {
+                                if (typeof object.icon !== "object")
+                                    throw TypeError(".google.apps.card.v1.Chip.icon: object expected");
+                                message.icon = $root.google.apps.card.v1.Icon.fromObject(object.icon);
+                            }
+                            if (object.label != null)
+                                message.label = String(object.label);
+                            if (object.onClick != null) {
+                                if (typeof object.onClick !== "object")
+                                    throw TypeError(".google.apps.card.v1.Chip.onClick: object expected");
+                                message.onClick = $root.google.apps.card.v1.OnClick.fromObject(object.onClick);
+                            }
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.disabled != null)
+                                message.disabled = Boolean(object.disabled);
+                            if (object.altText != null)
+                                message.altText = String(object.altText);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Chip message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {google.apps.card.v1.Chip} message Chip
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Chip.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.icon = null;
+                                object.label = "";
+                                object.onClick = null;
+                                object.enabled = false;
+                                object.altText = "";
+                                object.disabled = false;
+                            }
+                            if (message.icon != null && message.hasOwnProperty("icon"))
+                                object.icon = $root.google.apps.card.v1.Icon.toObject(message.icon, options);
+                            if (message.label != null && message.hasOwnProperty("label"))
+                                object.label = message.label;
+                            if (message.onClick != null && message.hasOwnProperty("onClick"))
+                                object.onClick = $root.google.apps.card.v1.OnClick.toObject(message.onClick, options);
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                object.enabled = message.enabled;
+                            if (message.altText != null && message.hasOwnProperty("altText"))
+                                object.altText = message.altText;
+                            if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                object.disabled = message.disabled;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Chip to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.card.v1.Chip
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Chip.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Chip
+                         * @function getTypeUrl
+                         * @memberof google.apps.card.v1.Chip
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Chip.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.card.v1.Chip";
+                        };
+    
+                        return Chip;
+                    })();
+    
                     return v1;
                 })();
     
@@ -25986,12 +29289,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Color.decode = function decode(reader, length) {
+                Color.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Color();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.red = reader.float();
@@ -26263,12 +29568,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ActionStatus.decode = function decode(reader, length) {
+                    ActionStatus.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ActionStatus();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.statusCode = reader.int32();
@@ -26577,12 +29884,7 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Annotation _startIndex.
-                     * @member {"startIndex"|undefined} _startIndex
-                     * @memberof google.chat.v1.Annotation
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Annotation.prototype, "_startIndex", {
                         get: $util.oneOfGetter($oneOfFields = ["startIndex"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -26664,12 +29966,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.type = reader.int32();
@@ -27036,12 +30340,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UserMentionMetadata.decode = function decode(reader, length) {
+                    UserMentionMetadata.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UserMentionMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.user = $root.google.chat.v1.User.decode(reader, reader.uint32());
@@ -27341,12 +30647,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SlashCommandMetadata.decode = function decode(reader, length) {
+                    SlashCommandMetadata.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SlashCommandMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.bot = $root.google.chat.v1.User.decode(reader, reader.uint32());
@@ -27577,6 +30885,8 @@
                      * @property {google.chat.v1.RichLinkMetadata.RichLinkType|null} [richLinkType] RichLinkMetadata richLinkType
                      * @property {google.chat.v1.IDriveLinkData|null} [driveLinkData] RichLinkMetadata driveLinkData
                      * @property {google.chat.v1.IChatSpaceLinkData|null} [chatSpaceLinkData] RichLinkMetadata chatSpaceLinkData
+                     * @property {google.chat.v1.IMeetSpaceLinkData|null} [meetSpaceLinkData] RichLinkMetadata meetSpaceLinkData
+                     * @property {google.chat.v1.ICalendarEventLinkData|null} [calendarEventLinkData] RichLinkMetadata calendarEventLinkData
                      */
     
                     /**
@@ -27626,17 +30936,33 @@
                      */
                     RichLinkMetadata.prototype.chatSpaceLinkData = null;
     
+                    /**
+                     * RichLinkMetadata meetSpaceLinkData.
+                     * @member {google.chat.v1.IMeetSpaceLinkData|null|undefined} meetSpaceLinkData
+                     * @memberof google.chat.v1.RichLinkMetadata
+                     * @instance
+                     */
+                    RichLinkMetadata.prototype.meetSpaceLinkData = null;
+    
+                    /**
+                     * RichLinkMetadata calendarEventLinkData.
+                     * @member {google.chat.v1.ICalendarEventLinkData|null|undefined} calendarEventLinkData
+                     * @memberof google.chat.v1.RichLinkMetadata
+                     * @instance
+                     */
+                    RichLinkMetadata.prototype.calendarEventLinkData = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
                     /**
                      * RichLinkMetadata data.
-                     * @member {"driveLinkData"|"chatSpaceLinkData"|undefined} data
+                     * @member {"driveLinkData"|"chatSpaceLinkData"|"meetSpaceLinkData"|"calendarEventLinkData"|undefined} data
                      * @memberof google.chat.v1.RichLinkMetadata
                      * @instance
                      */
                     Object.defineProperty(RichLinkMetadata.prototype, "data", {
-                        get: $util.oneOfGetter($oneOfFields = ["driveLinkData", "chatSpaceLinkData"]),
+                        get: $util.oneOfGetter($oneOfFields = ["driveLinkData", "chatSpaceLinkData", "meetSpaceLinkData", "calendarEventLinkData"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -27672,6 +30998,10 @@
                             $root.google.chat.v1.DriveLinkData.encode(message.driveLinkData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.chatSpaceLinkData != null && Object.hasOwnProperty.call(message, "chatSpaceLinkData"))
                             $root.google.chat.v1.ChatSpaceLinkData.encode(message.chatSpaceLinkData, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.meetSpaceLinkData != null && Object.hasOwnProperty.call(message, "meetSpaceLinkData"))
+                            $root.google.chat.v1.MeetSpaceLinkData.encode(message.meetSpaceLinkData, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.calendarEventLinkData != null && Object.hasOwnProperty.call(message, "calendarEventLinkData"))
+                            $root.google.chat.v1.CalendarEventLinkData.encode(message.calendarEventLinkData, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -27699,12 +31029,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    RichLinkMetadata.decode = function decode(reader, length) {
+                    RichLinkMetadata.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.RichLinkMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.uri = reader.string();
@@ -27720,6 +31052,14 @@
                                 }
                             case 4: {
                                     message.chatSpaceLinkData = $root.google.chat.v1.ChatSpaceLinkData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.meetSpaceLinkData = $root.google.chat.v1.MeetSpaceLinkData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.calendarEventLinkData = $root.google.chat.v1.CalendarEventLinkData.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -27768,6 +31108,9 @@
                             case 0:
                             case 1:
                             case 2:
+                            case 3:
+                            case 4:
+                            case 5:
                                 break;
                             }
                         if (message.driveLinkData != null && message.hasOwnProperty("driveLinkData")) {
@@ -27786,6 +31129,26 @@
                                 var error = $root.google.chat.v1.ChatSpaceLinkData.verify(message.chatSpaceLinkData);
                                 if (error)
                                     return "chatSpaceLinkData." + error;
+                            }
+                        }
+                        if (message.meetSpaceLinkData != null && message.hasOwnProperty("meetSpaceLinkData")) {
+                            if (properties.data === 1)
+                                return "data: multiple values";
+                            properties.data = 1;
+                            {
+                                var error = $root.google.chat.v1.MeetSpaceLinkData.verify(message.meetSpaceLinkData);
+                                if (error)
+                                    return "meetSpaceLinkData." + error;
+                            }
+                        }
+                        if (message.calendarEventLinkData != null && message.hasOwnProperty("calendarEventLinkData")) {
+                            if (properties.data === 1)
+                                return "data: multiple values";
+                            properties.data = 1;
+                            {
+                                var error = $root.google.chat.v1.CalendarEventLinkData.verify(message.calendarEventLinkData);
+                                if (error)
+                                    return "calendarEventLinkData." + error;
                             }
                         }
                         return null;
@@ -27824,6 +31187,18 @@
                         case 2:
                             message.richLinkType = 2;
                             break;
+                        case "GMAIL_MESSAGE":
+                        case 3:
+                            message.richLinkType = 3;
+                            break;
+                        case "MEET_SPACE":
+                        case 4:
+                            message.richLinkType = 4;
+                            break;
+                        case "CALENDAR_EVENT":
+                        case 5:
+                            message.richLinkType = 5;
+                            break;
                         }
                         if (object.driveLinkData != null) {
                             if (typeof object.driveLinkData !== "object")
@@ -27834,6 +31209,16 @@
                             if (typeof object.chatSpaceLinkData !== "object")
                                 throw TypeError(".google.chat.v1.RichLinkMetadata.chatSpaceLinkData: object expected");
                             message.chatSpaceLinkData = $root.google.chat.v1.ChatSpaceLinkData.fromObject(object.chatSpaceLinkData);
+                        }
+                        if (object.meetSpaceLinkData != null) {
+                            if (typeof object.meetSpaceLinkData !== "object")
+                                throw TypeError(".google.chat.v1.RichLinkMetadata.meetSpaceLinkData: object expected");
+                            message.meetSpaceLinkData = $root.google.chat.v1.MeetSpaceLinkData.fromObject(object.meetSpaceLinkData);
+                        }
+                        if (object.calendarEventLinkData != null) {
+                            if (typeof object.calendarEventLinkData !== "object")
+                                throw TypeError(".google.chat.v1.RichLinkMetadata.calendarEventLinkData: object expected");
+                            message.calendarEventLinkData = $root.google.chat.v1.CalendarEventLinkData.fromObject(object.calendarEventLinkData);
                         }
                         return message;
                     };
@@ -27868,6 +31253,16 @@
                             object.chatSpaceLinkData = $root.google.chat.v1.ChatSpaceLinkData.toObject(message.chatSpaceLinkData, options);
                             if (options.oneofs)
                                 object.data = "chatSpaceLinkData";
+                        }
+                        if (message.meetSpaceLinkData != null && message.hasOwnProperty("meetSpaceLinkData")) {
+                            object.meetSpaceLinkData = $root.google.chat.v1.MeetSpaceLinkData.toObject(message.meetSpaceLinkData, options);
+                            if (options.oneofs)
+                                object.data = "meetSpaceLinkData";
+                        }
+                        if (message.calendarEventLinkData != null && message.hasOwnProperty("calendarEventLinkData")) {
+                            object.calendarEventLinkData = $root.google.chat.v1.CalendarEventLinkData.toObject(message.calendarEventLinkData, options);
+                            if (options.oneofs)
+                                object.data = "calendarEventLinkData";
                         }
                         return object;
                     };
@@ -27905,12 +31300,18 @@
                      * @property {number} RICH_LINK_TYPE_UNSPECIFIED=0 RICH_LINK_TYPE_UNSPECIFIED value
                      * @property {number} DRIVE_FILE=1 DRIVE_FILE value
                      * @property {number} CHAT_SPACE=2 CHAT_SPACE value
+                     * @property {number} GMAIL_MESSAGE=3 GMAIL_MESSAGE value
+                     * @property {number} MEET_SPACE=4 MEET_SPACE value
+                     * @property {number} CALENDAR_EVENT=5 CALENDAR_EVENT value
                      */
                     RichLinkMetadata.RichLinkType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "RICH_LINK_TYPE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "DRIVE_FILE"] = 1;
                         values[valuesById[2] = "CHAT_SPACE"] = 2;
+                        values[valuesById[3] = "GMAIL_MESSAGE"] = 3;
+                        values[valuesById[4] = "MEET_SPACE"] = 4;
+                        values[valuesById[5] = "CALENDAR_EVENT"] = 5;
                         return values;
                     })();
     
@@ -28002,12 +31403,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CustomEmojiMetadata.decode = function decode(reader, length) {
+                    CustomEmojiMetadata.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CustomEmojiMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.customEmoji = $root.google.chat.v1.CustomEmoji.decode(reader, reader.uint32());
@@ -28221,12 +31624,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DriveLinkData.decode = function decode(reader, length) {
+                    DriveLinkData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DriveLinkData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.driveDataRef = $root.google.chat.v1.DriveDataRef.decode(reader, reader.uint32());
@@ -28464,12 +31869,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ChatSpaceLinkData.decode = function decode(reader, length) {
+                    ChatSpaceLinkData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ChatSpaceLinkData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.space = reader.string();
@@ -28605,6 +32012,574 @@
                     };
     
                     return ChatSpaceLinkData;
+                })();
+    
+                v1.MeetSpaceLinkData = (function() {
+    
+                    /**
+                     * Properties of a MeetSpaceLinkData.
+                     * @memberof google.chat.v1
+                     * @interface IMeetSpaceLinkData
+                     * @property {string|null} [meetingCode] MeetSpaceLinkData meetingCode
+                     * @property {google.chat.v1.MeetSpaceLinkData.Type|null} [type] MeetSpaceLinkData type
+                     * @property {google.chat.v1.MeetSpaceLinkData.HuddleStatus|null} [huddleStatus] MeetSpaceLinkData huddleStatus
+                     */
+    
+                    /**
+                     * Constructs a new MeetSpaceLinkData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MeetSpaceLinkData.
+                     * @implements IMeetSpaceLinkData
+                     * @constructor
+                     * @param {google.chat.v1.IMeetSpaceLinkData=} [properties] Properties to set
+                     */
+                    function MeetSpaceLinkData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MeetSpaceLinkData meetingCode.
+                     * @member {string} meetingCode
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @instance
+                     */
+                    MeetSpaceLinkData.prototype.meetingCode = "";
+    
+                    /**
+                     * MeetSpaceLinkData type.
+                     * @member {google.chat.v1.MeetSpaceLinkData.Type} type
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @instance
+                     */
+                    MeetSpaceLinkData.prototype.type = 0;
+    
+                    /**
+                     * MeetSpaceLinkData huddleStatus.
+                     * @member {google.chat.v1.MeetSpaceLinkData.HuddleStatus} huddleStatus
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @instance
+                     */
+                    MeetSpaceLinkData.prototype.huddleStatus = 0;
+    
+                    /**
+                     * Creates a new MeetSpaceLinkData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.IMeetSpaceLinkData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MeetSpaceLinkData} MeetSpaceLinkData instance
+                     */
+                    MeetSpaceLinkData.create = function create(properties) {
+                        return new MeetSpaceLinkData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MeetSpaceLinkData message. Does not implicitly {@link google.chat.v1.MeetSpaceLinkData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.IMeetSpaceLinkData} message MeetSpaceLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MeetSpaceLinkData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.meetingCode != null && Object.hasOwnProperty.call(message, "meetingCode"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.meetingCode);
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                        if (message.huddleStatus != null && Object.hasOwnProperty.call(message, "huddleStatus"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.huddleStatus);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MeetSpaceLinkData message, length delimited. Does not implicitly {@link google.chat.v1.MeetSpaceLinkData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.IMeetSpaceLinkData} message MeetSpaceLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MeetSpaceLinkData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MeetSpaceLinkData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MeetSpaceLinkData} MeetSpaceLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MeetSpaceLinkData.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MeetSpaceLinkData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.meetingCode = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.type = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.huddleStatus = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MeetSpaceLinkData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MeetSpaceLinkData} MeetSpaceLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MeetSpaceLinkData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MeetSpaceLinkData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MeetSpaceLinkData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.meetingCode != null && message.hasOwnProperty("meetingCode"))
+                            if (!$util.isString(message.meetingCode))
+                                return "meetingCode: string expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            switch (message.type) {
+                            default:
+                                return "type: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.huddleStatus != null && message.hasOwnProperty("huddleStatus"))
+                            switch (message.huddleStatus) {
+                            default:
+                                return "huddleStatus: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MeetSpaceLinkData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MeetSpaceLinkData} MeetSpaceLinkData
+                     */
+                    MeetSpaceLinkData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MeetSpaceLinkData)
+                            return object;
+                        var message = new $root.google.chat.v1.MeetSpaceLinkData();
+                        if (object.meetingCode != null)
+                            message.meetingCode = String(object.meetingCode);
+                        switch (object.type) {
+                        default:
+                            if (typeof object.type === "number") {
+                                message.type = object.type;
+                                break;
+                            }
+                            break;
+                        case "TYPE_UNSPECIFIED":
+                        case 0:
+                            message.type = 0;
+                            break;
+                        case "MEETING":
+                        case 1:
+                            message.type = 1;
+                            break;
+                        case "HUDDLE":
+                        case 2:
+                            message.type = 2;
+                            break;
+                        }
+                        switch (object.huddleStatus) {
+                        default:
+                            if (typeof object.huddleStatus === "number") {
+                                message.huddleStatus = object.huddleStatus;
+                                break;
+                            }
+                            break;
+                        case "HUDDLE_STATUS_UNSPECIFIED":
+                        case 0:
+                            message.huddleStatus = 0;
+                            break;
+                        case "STARTED":
+                        case 1:
+                            message.huddleStatus = 1;
+                            break;
+                        case "ENDED":
+                        case 2:
+                            message.huddleStatus = 2;
+                            break;
+                        case "MISSED":
+                        case 3:
+                            message.huddleStatus = 3;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MeetSpaceLinkData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.MeetSpaceLinkData} message MeetSpaceLinkData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MeetSpaceLinkData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.meetingCode = "";
+                            object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                            object.huddleStatus = options.enums === String ? "HUDDLE_STATUS_UNSPECIFIED" : 0;
+                        }
+                        if (message.meetingCode != null && message.hasOwnProperty("meetingCode"))
+                            object.meetingCode = message.meetingCode;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = options.enums === String ? $root.google.chat.v1.MeetSpaceLinkData.Type[message.type] === undefined ? message.type : $root.google.chat.v1.MeetSpaceLinkData.Type[message.type] : message.type;
+                        if (message.huddleStatus != null && message.hasOwnProperty("huddleStatus"))
+                            object.huddleStatus = options.enums === String ? $root.google.chat.v1.MeetSpaceLinkData.HuddleStatus[message.huddleStatus] === undefined ? message.huddleStatus : $root.google.chat.v1.MeetSpaceLinkData.HuddleStatus[message.huddleStatus] : message.huddleStatus;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MeetSpaceLinkData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MeetSpaceLinkData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MeetSpaceLinkData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MeetSpaceLinkData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MeetSpaceLinkData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MeetSpaceLinkData";
+                    };
+    
+                    /**
+                     * Type enum.
+                     * @name google.chat.v1.MeetSpaceLinkData.Type
+                     * @enum {number}
+                     * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                     * @property {number} MEETING=1 MEETING value
+                     * @property {number} HUDDLE=2 HUDDLE value
+                     */
+                    MeetSpaceLinkData.Type = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "MEETING"] = 1;
+                        values[valuesById[2] = "HUDDLE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * HuddleStatus enum.
+                     * @name google.chat.v1.MeetSpaceLinkData.HuddleStatus
+                     * @enum {number}
+                     * @property {number} HUDDLE_STATUS_UNSPECIFIED=0 HUDDLE_STATUS_UNSPECIFIED value
+                     * @property {number} STARTED=1 STARTED value
+                     * @property {number} ENDED=2 ENDED value
+                     * @property {number} MISSED=3 MISSED value
+                     */
+                    MeetSpaceLinkData.HuddleStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "HUDDLE_STATUS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "STARTED"] = 1;
+                        values[valuesById[2] = "ENDED"] = 2;
+                        values[valuesById[3] = "MISSED"] = 3;
+                        return values;
+                    })();
+    
+                    return MeetSpaceLinkData;
+                })();
+    
+                v1.CalendarEventLinkData = (function() {
+    
+                    /**
+                     * Properties of a CalendarEventLinkData.
+                     * @memberof google.chat.v1
+                     * @interface ICalendarEventLinkData
+                     * @property {string|null} [calendarId] CalendarEventLinkData calendarId
+                     * @property {string|null} [eventId] CalendarEventLinkData eventId
+                     */
+    
+                    /**
+                     * Constructs a new CalendarEventLinkData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CalendarEventLinkData.
+                     * @implements ICalendarEventLinkData
+                     * @constructor
+                     * @param {google.chat.v1.ICalendarEventLinkData=} [properties] Properties to set
+                     */
+                    function CalendarEventLinkData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CalendarEventLinkData calendarId.
+                     * @member {string} calendarId
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @instance
+                     */
+                    CalendarEventLinkData.prototype.calendarId = "";
+    
+                    /**
+                     * CalendarEventLinkData eventId.
+                     * @member {string} eventId
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @instance
+                     */
+                    CalendarEventLinkData.prototype.eventId = "";
+    
+                    /**
+                     * Creates a new CalendarEventLinkData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {google.chat.v1.ICalendarEventLinkData=} [properties] Properties to set
+                     * @returns {google.chat.v1.CalendarEventLinkData} CalendarEventLinkData instance
+                     */
+                    CalendarEventLinkData.create = function create(properties) {
+                        return new CalendarEventLinkData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CalendarEventLinkData message. Does not implicitly {@link google.chat.v1.CalendarEventLinkData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {google.chat.v1.ICalendarEventLinkData} message CalendarEventLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CalendarEventLinkData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.calendarId != null && Object.hasOwnProperty.call(message, "calendarId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.calendarId);
+                        if (message.eventId != null && Object.hasOwnProperty.call(message, "eventId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.eventId);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CalendarEventLinkData message, length delimited. Does not implicitly {@link google.chat.v1.CalendarEventLinkData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {google.chat.v1.ICalendarEventLinkData} message CalendarEventLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CalendarEventLinkData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CalendarEventLinkData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CalendarEventLinkData} CalendarEventLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CalendarEventLinkData.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CalendarEventLinkData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.calendarId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.eventId = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CalendarEventLinkData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CalendarEventLinkData} CalendarEventLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CalendarEventLinkData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CalendarEventLinkData message.
+                     * @function verify
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CalendarEventLinkData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.calendarId != null && message.hasOwnProperty("calendarId"))
+                            if (!$util.isString(message.calendarId))
+                                return "calendarId: string expected";
+                        if (message.eventId != null && message.hasOwnProperty("eventId"))
+                            if (!$util.isString(message.eventId))
+                                return "eventId: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CalendarEventLinkData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CalendarEventLinkData} CalendarEventLinkData
+                     */
+                    CalendarEventLinkData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CalendarEventLinkData)
+                            return object;
+                        var message = new $root.google.chat.v1.CalendarEventLinkData();
+                        if (object.calendarId != null)
+                            message.calendarId = String(object.calendarId);
+                        if (object.eventId != null)
+                            message.eventId = String(object.eventId);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CalendarEventLinkData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {google.chat.v1.CalendarEventLinkData} message CalendarEventLinkData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CalendarEventLinkData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.calendarId = "";
+                            object.eventId = "";
+                        }
+                        if (message.calendarId != null && message.hasOwnProperty("calendarId"))
+                            object.calendarId = message.calendarId;
+                        if (message.eventId != null && message.hasOwnProperty("eventId"))
+                            object.eventId = message.eventId;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CalendarEventLinkData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CalendarEventLinkData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CalendarEventLinkData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CalendarEventLinkData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CalendarEventLinkData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CalendarEventLinkData";
+                    };
+    
+                    return CalendarEventLinkData;
                 })();
     
                 /**
@@ -28803,12 +32778,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Attachment.decode = function decode(reader, length) {
+                    Attachment.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Attachment();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -29154,12 +33131,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DriveDataRef.decode = function decode(reader, length) {
+                    DriveDataRef.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DriveDataRef();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.driveFileId = reader.string();
@@ -29368,12 +33347,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AttachmentDataRef.decode = function decode(reader, length) {
+                    AttachmentDataRef.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.AttachmentDataRef();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.resourceName = reader.string();
@@ -29584,12 +33565,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetAttachmentRequest.decode = function decode(reader, length) {
+                    GetAttachmentRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetAttachmentRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -29798,12 +33781,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UploadAttachmentRequest.decode = function decode(reader, length) {
+                    UploadAttachmentRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UploadAttachmentRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -30014,12 +33999,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UploadAttachmentResponse.decode = function decode(reader, length) {
+                    UploadAttachmentResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UploadAttachmentResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.attachmentDataRef = $root.google.chat.v1.AttachmentDataRef.decode(reader, reader.uint32());
@@ -30244,12 +34231,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Reaction.decode = function decode(reader, length) {
+                    Reaction.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Reaction();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -30507,12 +34496,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Emoji.decode = function decode(reader, length) {
+                    Emoji.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Emoji();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.unicode = reader.string();
@@ -30782,12 +34773,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CustomEmoji.decode = function decode(reader, length) {
+                    CustomEmoji.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CustomEmoji();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.name = reader.string();
@@ -31047,12 +35040,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomEmojiPayload.decode = function decode(reader, length) {
+                        CustomEmojiPayload.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CustomEmoji.CustomEmojiPayload();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fileContent = reader.bytes();
@@ -31234,12 +35229,7 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * EmojiReactionSummary _reactionCount.
-                     * @member {"reactionCount"|undefined} _reactionCount
-                     * @memberof google.chat.v1.EmojiReactionSummary
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(EmojiReactionSummary.prototype, "_reactionCount", {
                         get: $util.oneOfGetter($oneOfFields = ["reactionCount"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -31300,12 +35290,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EmojiReactionSummary.decode = function decode(reader, length) {
+                    EmojiReactionSummary.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.EmojiReactionSummary();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.emoji = $root.google.chat.v1.Emoji.decode(reader, reader.uint32());
@@ -31536,12 +35528,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateReactionRequest.decode = function decode(reader, length) {
+                    CreateReactionRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateReactionRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -31790,12 +35784,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListReactionsRequest.decode = function decode(reader, length) {
+                    ListReactionsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListReactionsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -32043,12 +36039,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListReactionsResponse.decode = function decode(reader, length) {
+                    ListReactionsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListReactionsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.reactions && message.reactions.length))
@@ -32278,12 +36276,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteReactionRequest.decode = function decode(reader, length) {
+                    DeleteReactionRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteReactionRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -32481,12 +36481,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateCustomEmojiRequest.decode = function decode(reader, length) {
+                    CreateCustomEmojiRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateCustomEmojiRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.customEmoji = $root.google.chat.v1.CustomEmoji.decode(reader, reader.uint32());
@@ -32689,12 +36691,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetCustomEmojiRequest.decode = function decode(reader, length) {
+                    GetCustomEmojiRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetCustomEmojiRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -32914,12 +36918,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListCustomEmojisRequest.decode = function decode(reader, length) {
+                    ListCustomEmojisRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListCustomEmojisRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.pageSize = reader.int32();
@@ -33155,12 +37161,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListCustomEmojisResponse.decode = function decode(reader, length) {
+                    ListCustomEmojisResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListCustomEmojisResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.customEmojis && message.customEmojis.length))
@@ -33390,12 +37398,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteCustomEmojiRequest.decode = function decode(reader, length) {
+                    DeleteCustomEmojiRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteCustomEmojiRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -33637,12 +37647,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    User.decode = function decode(reader, length) {
+                    User.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.User();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -35199,12 +39211,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Membership.decode = function decode(reader, length) {
+                    Membership.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Membership();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -35290,6 +39304,7 @@
                             case 0:
                             case 1:
                             case 2:
+                            case 4:
                                 break;
                             }
                         if (message.member != null && message.hasOwnProperty("member")) {
@@ -35379,6 +39394,10 @@
                         case "ROLE_MANAGER":
                         case 2:
                             message.role = 2;
+                            break;
+                        case "ROLE_ASSISTANT_MANAGER":
+                        case 4:
+                            message.role = 4;
                             break;
                         }
                         if (object.member != null) {
@@ -35498,12 +39517,14 @@
                      * @property {number} MEMBERSHIP_ROLE_UNSPECIFIED=0 MEMBERSHIP_ROLE_UNSPECIFIED value
                      * @property {number} ROLE_MEMBER=1 ROLE_MEMBER value
                      * @property {number} ROLE_MANAGER=2 ROLE_MANAGER value
+                     * @property {number} ROLE_ASSISTANT_MANAGER=4 ROLE_ASSISTANT_MANAGER value
                      */
                     Membership.MembershipRole = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "MEMBERSHIP_ROLE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "ROLE_MEMBER"] = 1;
                         values[valuesById[2] = "ROLE_MANAGER"] = 2;
+                        values[valuesById[4] = "ROLE_ASSISTANT_MANAGER"] = 4;
                         return values;
                     })();
     
@@ -35617,12 +39638,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateMembershipRequest.decode = function decode(reader, length) {
+                    CreateMembershipRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateMembershipRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -35872,12 +39895,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateMembershipRequest.decode = function decode(reader, length) {
+                    UpdateMembershipRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateMembershipRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
@@ -36176,12 +40201,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMembershipsRequest.decode = function decode(reader, length) {
+                    ListMembershipsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListMembershipsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -36465,12 +40492,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMembershipsResponse.decode = function decode(reader, length) {
+                    ListMembershipsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListMembershipsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.memberships && message.memberships.length))
@@ -36711,12 +40740,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetMembershipRequest.decode = function decode(reader, length) {
+                    GetMembershipRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetMembershipRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -36938,12 +40969,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteMembershipRequest.decode = function decode(reader, length) {
+                    DeleteMembershipRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteMembershipRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -37154,12 +41187,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Group.decode = function decode(reader, length) {
+                    Group.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Group();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -37646,12 +41681,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Message.decode = function decode(reader, length) {
+                    Message.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Message();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -38345,12 +42382,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AttachedGif.decode = function decode(reader, length) {
+                    AttachedGif.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.AttachedGif();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.uri = reader.string();
@@ -38471,6 +42510,9 @@
                      * @interface IQuotedMessageMetadata
                      * @property {string|null} [name] QuotedMessageMetadata name
                      * @property {google.protobuf.ITimestamp|null} [lastUpdateTime] QuotedMessageMetadata lastUpdateTime
+                     * @property {google.chat.v1.QuotedMessageMetadata.QuoteType|null} [quoteType] QuotedMessageMetadata quoteType
+                     * @property {google.chat.v1.IQuotedMessageSnapshot|null} [quotedMessageSnapshot] QuotedMessageMetadata quotedMessageSnapshot
+                     * @property {google.chat.v1.IForwardedMetadata|null} [forwardedMetadata] QuotedMessageMetadata forwardedMetadata
                      */
     
                     /**
@@ -38505,6 +42547,30 @@
                     QuotedMessageMetadata.prototype.lastUpdateTime = null;
     
                     /**
+                     * QuotedMessageMetadata quoteType.
+                     * @member {google.chat.v1.QuotedMessageMetadata.QuoteType} quoteType
+                     * @memberof google.chat.v1.QuotedMessageMetadata
+                     * @instance
+                     */
+                    QuotedMessageMetadata.prototype.quoteType = 0;
+    
+                    /**
+                     * QuotedMessageMetadata quotedMessageSnapshot.
+                     * @member {google.chat.v1.IQuotedMessageSnapshot|null|undefined} quotedMessageSnapshot
+                     * @memberof google.chat.v1.QuotedMessageMetadata
+                     * @instance
+                     */
+                    QuotedMessageMetadata.prototype.quotedMessageSnapshot = null;
+    
+                    /**
+                     * QuotedMessageMetadata forwardedMetadata.
+                     * @member {google.chat.v1.IForwardedMetadata|null|undefined} forwardedMetadata
+                     * @memberof google.chat.v1.QuotedMessageMetadata
+                     * @instance
+                     */
+                    QuotedMessageMetadata.prototype.forwardedMetadata = null;
+    
+                    /**
                      * Creates a new QuotedMessageMetadata instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.QuotedMessageMetadata
@@ -38532,6 +42598,12 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.lastUpdateTime != null && Object.hasOwnProperty.call(message, "lastUpdateTime"))
                             $root.google.protobuf.Timestamp.encode(message.lastUpdateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.quoteType != null && Object.hasOwnProperty.call(message, "quoteType"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.quoteType);
+                        if (message.quotedMessageSnapshot != null && Object.hasOwnProperty.call(message, "quotedMessageSnapshot"))
+                            $root.google.chat.v1.QuotedMessageSnapshot.encode(message.quotedMessageSnapshot, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.forwardedMetadata != null && Object.hasOwnProperty.call(message, "forwardedMetadata"))
+                            $root.google.chat.v1.ForwardedMetadata.encode(message.forwardedMetadata, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -38559,12 +42631,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    QuotedMessageMetadata.decode = function decode(reader, length) {
+                    QuotedMessageMetadata.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.QuotedMessageMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -38572,6 +42646,18 @@
                                 }
                             case 2: {
                                     message.lastUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.quoteType = reader.int32();
+                                    break;
+                                }
+                            case 5: {
+                                    message.quotedMessageSnapshot = $root.google.chat.v1.QuotedMessageSnapshot.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.forwardedMetadata = $root.google.chat.v1.ForwardedMetadata.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -38617,6 +42703,24 @@
                             if (error)
                                 return "lastUpdateTime." + error;
                         }
+                        if (message.quoteType != null && message.hasOwnProperty("quoteType"))
+                            switch (message.quoteType) {
+                            default:
+                                return "quoteType: enum value expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                        if (message.quotedMessageSnapshot != null && message.hasOwnProperty("quotedMessageSnapshot")) {
+                            var error = $root.google.chat.v1.QuotedMessageSnapshot.verify(message.quotedMessageSnapshot);
+                            if (error)
+                                return "quotedMessageSnapshot." + error;
+                        }
+                        if (message.forwardedMetadata != null && message.hasOwnProperty("forwardedMetadata")) {
+                            var error = $root.google.chat.v1.ForwardedMetadata.verify(message.forwardedMetadata);
+                            if (error)
+                                return "forwardedMetadata." + error;
+                        }
                         return null;
                     };
     
@@ -38639,6 +42743,32 @@
                                 throw TypeError(".google.chat.v1.QuotedMessageMetadata.lastUpdateTime: object expected");
                             message.lastUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.lastUpdateTime);
                         }
+                        switch (object.quoteType) {
+                        default:
+                            if (typeof object.quoteType === "number") {
+                                message.quoteType = object.quoteType;
+                                break;
+                            }
+                            break;
+                        case "QUOTE_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.quoteType = 0;
+                            break;
+                        case "REPLY":
+                        case 1:
+                            message.quoteType = 1;
+                            break;
+                        }
+                        if (object.quotedMessageSnapshot != null) {
+                            if (typeof object.quotedMessageSnapshot !== "object")
+                                throw TypeError(".google.chat.v1.QuotedMessageMetadata.quotedMessageSnapshot: object expected");
+                            message.quotedMessageSnapshot = $root.google.chat.v1.QuotedMessageSnapshot.fromObject(object.quotedMessageSnapshot);
+                        }
+                        if (object.forwardedMetadata != null) {
+                            if (typeof object.forwardedMetadata !== "object")
+                                throw TypeError(".google.chat.v1.QuotedMessageMetadata.forwardedMetadata: object expected");
+                            message.forwardedMetadata = $root.google.chat.v1.ForwardedMetadata.fromObject(object.forwardedMetadata);
+                        }
                         return message;
                     };
     
@@ -38658,11 +42788,20 @@
                         if (options.defaults) {
                             object.name = "";
                             object.lastUpdateTime = null;
+                            object.quoteType = options.enums === String ? "QUOTE_TYPE_UNSPECIFIED" : 0;
+                            object.quotedMessageSnapshot = null;
+                            object.forwardedMetadata = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.lastUpdateTime != null && message.hasOwnProperty("lastUpdateTime"))
                             object.lastUpdateTime = $root.google.protobuf.Timestamp.toObject(message.lastUpdateTime, options);
+                        if (message.quoteType != null && message.hasOwnProperty("quoteType"))
+                            object.quoteType = options.enums === String ? $root.google.chat.v1.QuotedMessageMetadata.QuoteType[message.quoteType] === undefined ? message.quoteType : $root.google.chat.v1.QuotedMessageMetadata.QuoteType[message.quoteType] : message.quoteType;
+                        if (message.quotedMessageSnapshot != null && message.hasOwnProperty("quotedMessageSnapshot"))
+                            object.quotedMessageSnapshot = $root.google.chat.v1.QuotedMessageSnapshot.toObject(message.quotedMessageSnapshot, options);
+                        if (message.forwardedMetadata != null && message.hasOwnProperty("forwardedMetadata"))
+                            object.forwardedMetadata = $root.google.chat.v1.ForwardedMetadata.toObject(message.forwardedMetadata, options);
                         return object;
                     };
     
@@ -38692,7 +42831,592 @@
                         return typeUrlPrefix + "/google.chat.v1.QuotedMessageMetadata";
                     };
     
+                    /**
+                     * QuoteType enum.
+                     * @name google.chat.v1.QuotedMessageMetadata.QuoteType
+                     * @enum {number}
+                     * @property {number} QUOTE_TYPE_UNSPECIFIED=0 QUOTE_TYPE_UNSPECIFIED value
+                     * @property {number} REPLY=1 REPLY value
+                     */
+                    QuotedMessageMetadata.QuoteType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "QUOTE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REPLY"] = 1;
+                        return values;
+                    })();
+    
                     return QuotedMessageMetadata;
+                })();
+    
+                v1.QuotedMessageSnapshot = (function() {
+    
+                    /**
+                     * Properties of a QuotedMessageSnapshot.
+                     * @memberof google.chat.v1
+                     * @interface IQuotedMessageSnapshot
+                     * @property {string|null} [sender] QuotedMessageSnapshot sender
+                     * @property {string|null} [text] QuotedMessageSnapshot text
+                     * @property {string|null} [formattedText] QuotedMessageSnapshot formattedText
+                     * @property {Array.<google.chat.v1.IAnnotation>|null} [annotations] QuotedMessageSnapshot annotations
+                     * @property {Array.<google.chat.v1.IAttachment>|null} [attachments] QuotedMessageSnapshot attachments
+                     */
+    
+                    /**
+                     * Constructs a new QuotedMessageSnapshot.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a QuotedMessageSnapshot.
+                     * @implements IQuotedMessageSnapshot
+                     * @constructor
+                     * @param {google.chat.v1.IQuotedMessageSnapshot=} [properties] Properties to set
+                     */
+                    function QuotedMessageSnapshot(properties) {
+                        this.annotations = [];
+                        this.attachments = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QuotedMessageSnapshot sender.
+                     * @member {string} sender
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.sender = "";
+    
+                    /**
+                     * QuotedMessageSnapshot text.
+                     * @member {string} text
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.text = "";
+    
+                    /**
+                     * QuotedMessageSnapshot formattedText.
+                     * @member {string} formattedText
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.formattedText = "";
+    
+                    /**
+                     * QuotedMessageSnapshot annotations.
+                     * @member {Array.<google.chat.v1.IAnnotation>} annotations
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.annotations = $util.emptyArray;
+    
+                    /**
+                     * QuotedMessageSnapshot attachments.
+                     * @member {Array.<google.chat.v1.IAttachment>} attachments
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     */
+                    QuotedMessageSnapshot.prototype.attachments = $util.emptyArray;
+    
+                    /**
+                     * Creates a new QuotedMessageSnapshot instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.IQuotedMessageSnapshot=} [properties] Properties to set
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot instance
+                     */
+                    QuotedMessageSnapshot.create = function create(properties) {
+                        return new QuotedMessageSnapshot(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified QuotedMessageSnapshot message. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.IQuotedMessageSnapshot} message QuotedMessageSnapshot message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuotedMessageSnapshot.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.sender != null && Object.hasOwnProperty.call(message, "sender"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.sender);
+                        if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                        if (message.formattedText != null && Object.hasOwnProperty.call(message, "formattedText"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.formattedText);
+                        if (message.annotations != null && message.annotations.length)
+                            for (var i = 0; i < message.annotations.length; ++i)
+                                $root.google.chat.v1.Annotation.encode(message.annotations[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.attachments != null && message.attachments.length)
+                            for (var i = 0; i < message.attachments.length; ++i)
+                                $root.google.chat.v1.Attachment.encode(message.attachments[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QuotedMessageSnapshot message, length delimited. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.IQuotedMessageSnapshot} message QuotedMessageSnapshot message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuotedMessageSnapshot.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QuotedMessageSnapshot message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuotedMessageSnapshot.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.QuotedMessageSnapshot();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.sender = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.text = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.formattedText = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.annotations && message.annotations.length))
+                                        message.annotations = [];
+                                    message.annotations.push($root.google.chat.v1.Annotation.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 5: {
+                                    if (!(message.attachments && message.attachments.length))
+                                        message.attachments = [];
+                                    message.attachments.push($root.google.chat.v1.Attachment.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QuotedMessageSnapshot message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuotedMessageSnapshot.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QuotedMessageSnapshot message.
+                     * @function verify
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QuotedMessageSnapshot.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.sender != null && message.hasOwnProperty("sender"))
+                            if (!$util.isString(message.sender))
+                                return "sender: string expected";
+                        if (message.text != null && message.hasOwnProperty("text"))
+                            if (!$util.isString(message.text))
+                                return "text: string expected";
+                        if (message.formattedText != null && message.hasOwnProperty("formattedText"))
+                            if (!$util.isString(message.formattedText))
+                                return "formattedText: string expected";
+                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                            if (!Array.isArray(message.annotations))
+                                return "annotations: array expected";
+                            for (var i = 0; i < message.annotations.length; ++i) {
+                                var error = $root.google.chat.v1.Annotation.verify(message.annotations[i]);
+                                if (error)
+                                    return "annotations." + error;
+                            }
+                        }
+                        if (message.attachments != null && message.hasOwnProperty("attachments")) {
+                            if (!Array.isArray(message.attachments))
+                                return "attachments: array expected";
+                            for (var i = 0; i < message.attachments.length; ++i) {
+                                var error = $root.google.chat.v1.Attachment.verify(message.attachments[i]);
+                                if (error)
+                                    return "attachments." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QuotedMessageSnapshot message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.QuotedMessageSnapshot} QuotedMessageSnapshot
+                     */
+                    QuotedMessageSnapshot.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.QuotedMessageSnapshot)
+                            return object;
+                        var message = new $root.google.chat.v1.QuotedMessageSnapshot();
+                        if (object.sender != null)
+                            message.sender = String(object.sender);
+                        if (object.text != null)
+                            message.text = String(object.text);
+                        if (object.formattedText != null)
+                            message.formattedText = String(object.formattedText);
+                        if (object.annotations) {
+                            if (!Array.isArray(object.annotations))
+                                throw TypeError(".google.chat.v1.QuotedMessageSnapshot.annotations: array expected");
+                            message.annotations = [];
+                            for (var i = 0; i < object.annotations.length; ++i) {
+                                if (typeof object.annotations[i] !== "object")
+                                    throw TypeError(".google.chat.v1.QuotedMessageSnapshot.annotations: object expected");
+                                message.annotations[i] = $root.google.chat.v1.Annotation.fromObject(object.annotations[i]);
+                            }
+                        }
+                        if (object.attachments) {
+                            if (!Array.isArray(object.attachments))
+                                throw TypeError(".google.chat.v1.QuotedMessageSnapshot.attachments: array expected");
+                            message.attachments = [];
+                            for (var i = 0; i < object.attachments.length; ++i) {
+                                if (typeof object.attachments[i] !== "object")
+                                    throw TypeError(".google.chat.v1.QuotedMessageSnapshot.attachments: object expected");
+                                message.attachments[i] = $root.google.chat.v1.Attachment.fromObject(object.attachments[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QuotedMessageSnapshot message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {google.chat.v1.QuotedMessageSnapshot} message QuotedMessageSnapshot
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QuotedMessageSnapshot.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.annotations = [];
+                            object.attachments = [];
+                        }
+                        if (options.defaults) {
+                            object.sender = "";
+                            object.text = "";
+                            object.formattedText = "";
+                        }
+                        if (message.sender != null && message.hasOwnProperty("sender"))
+                            object.sender = message.sender;
+                        if (message.text != null && message.hasOwnProperty("text"))
+                            object.text = message.text;
+                        if (message.formattedText != null && message.hasOwnProperty("formattedText"))
+                            object.formattedText = message.formattedText;
+                        if (message.annotations && message.annotations.length) {
+                            object.annotations = [];
+                            for (var j = 0; j < message.annotations.length; ++j)
+                                object.annotations[j] = $root.google.chat.v1.Annotation.toObject(message.annotations[j], options);
+                        }
+                        if (message.attachments && message.attachments.length) {
+                            object.attachments = [];
+                            for (var j = 0; j < message.attachments.length; ++j)
+                                object.attachments[j] = $root.google.chat.v1.Attachment.toObject(message.attachments[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QuotedMessageSnapshot to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QuotedMessageSnapshot.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for QuotedMessageSnapshot
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.QuotedMessageSnapshot
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    QuotedMessageSnapshot.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.QuotedMessageSnapshot";
+                    };
+    
+                    return QuotedMessageSnapshot;
+                })();
+    
+                v1.ForwardedMetadata = (function() {
+    
+                    /**
+                     * Properties of a ForwardedMetadata.
+                     * @memberof google.chat.v1
+                     * @interface IForwardedMetadata
+                     * @property {string|null} [space] ForwardedMetadata space
+                     * @property {string|null} [spaceDisplayName] ForwardedMetadata spaceDisplayName
+                     */
+    
+                    /**
+                     * Constructs a new ForwardedMetadata.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ForwardedMetadata.
+                     * @implements IForwardedMetadata
+                     * @constructor
+                     * @param {google.chat.v1.IForwardedMetadata=} [properties] Properties to set
+                     */
+                    function ForwardedMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ForwardedMetadata space.
+                     * @member {string} space
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @instance
+                     */
+                    ForwardedMetadata.prototype.space = "";
+    
+                    /**
+                     * ForwardedMetadata spaceDisplayName.
+                     * @member {string} spaceDisplayName
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @instance
+                     */
+                    ForwardedMetadata.prototype.spaceDisplayName = "";
+    
+                    /**
+                     * Creates a new ForwardedMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.IForwardedMetadata=} [properties] Properties to set
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata instance
+                     */
+                    ForwardedMetadata.create = function create(properties) {
+                        return new ForwardedMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ForwardedMetadata message. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.IForwardedMetadata} message ForwardedMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ForwardedMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.space != null && Object.hasOwnProperty.call(message, "space"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.space);
+                        if (message.spaceDisplayName != null && Object.hasOwnProperty.call(message, "spaceDisplayName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.spaceDisplayName);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ForwardedMetadata message, length delimited. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.IForwardedMetadata} message ForwardedMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ForwardedMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ForwardedMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ForwardedMetadata.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ForwardedMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.space = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.spaceDisplayName = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ForwardedMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ForwardedMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ForwardedMetadata message.
+                     * @function verify
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ForwardedMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.space != null && message.hasOwnProperty("space"))
+                            if (!$util.isString(message.space))
+                                return "space: string expected";
+                        if (message.spaceDisplayName != null && message.hasOwnProperty("spaceDisplayName"))
+                            if (!$util.isString(message.spaceDisplayName))
+                                return "spaceDisplayName: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ForwardedMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ForwardedMetadata} ForwardedMetadata
+                     */
+                    ForwardedMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ForwardedMetadata)
+                            return object;
+                        var message = new $root.google.chat.v1.ForwardedMetadata();
+                        if (object.space != null)
+                            message.space = String(object.space);
+                        if (object.spaceDisplayName != null)
+                            message.spaceDisplayName = String(object.spaceDisplayName);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ForwardedMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {google.chat.v1.ForwardedMetadata} message ForwardedMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ForwardedMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.space = "";
+                            object.spaceDisplayName = "";
+                        }
+                        if (message.space != null && message.hasOwnProperty("space"))
+                            object.space = message.space;
+                        if (message.spaceDisplayName != null && message.hasOwnProperty("spaceDisplayName"))
+                            object.spaceDisplayName = message.spaceDisplayName;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ForwardedMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ForwardedMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ForwardedMetadata
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ForwardedMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ForwardedMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ForwardedMetadata";
+                    };
+    
+                    return ForwardedMetadata;
                 })();
     
                 v1.Thread = (function() {
@@ -38791,12 +43515,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Thread.decode = function decode(reader, length) {
+                    Thread.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Thread();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -39040,12 +43766,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ActionResponse.decode = function decode(reader, length) {
+                    ActionResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ActionResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.type = reader.int32();
@@ -39357,12 +44085,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SelectionItems.decode = function decode(reader, length) {
+                        SelectionItems.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ActionResponse.SelectionItems();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.items && message.items.length))
@@ -39604,12 +44334,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdatedWidget.decode = function decode(reader, length) {
+                        UpdatedWidget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ActionResponse.UpdatedWidget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.suggestions = $root.google.chat.v1.ActionResponse.SelectionItems.decode(reader, reader.uint32());
@@ -39847,12 +44579,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AccessoryWidget.decode = function decode(reader, length) {
+                    AccessoryWidget.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.AccessoryWidget();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.buttonList = $root.google.apps.card.v1.ButtonList.decode(reader, reader.uint32());
@@ -40060,12 +44794,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetMessageRequest.decode = function decode(reader, length) {
+                    GetMessageRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetMessageRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -40274,12 +45010,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteMessageRequest.decode = function decode(reader, length) {
+                    DeleteMessageRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteMessageRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -40512,12 +45250,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateMessageRequest.decode = function decode(reader, length) {
+                    UpdateMessageRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateMessageRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.message = $root.google.chat.v1.Message.decode(reader, reader.uint32());
@@ -40805,12 +45545,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateMessageRequest.decode = function decode(reader, length) {
+                    CreateMessageRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateMessageRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -41169,12 +45911,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMessagesRequest.decode = function decode(reader, length) {
+                    ListMessagesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListMessagesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -41446,12 +46190,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListMessagesResponse.decode = function decode(reader, length) {
+                    ListMessagesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListMessagesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.messages && message.messages.length))
@@ -41706,12 +46452,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DialogAction.decode = function decode(reader, length) {
+                    DialogAction.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DialogAction();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.dialog = $root.google.chat.v1.Dialog.decode(reader, reader.uint32());
@@ -41937,12 +46685,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Dialog.decode = function decode(reader, length) {
+                    Dialog.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Dialog();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.body = $root.google.apps.card.v1.Card.decode(reader, reader.uint32());
@@ -42156,12 +46906,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CardWithId.decode = function decode(reader, length) {
+                    CardWithId.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CardWithId();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.cardId = reader.string();
@@ -42366,12 +47118,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ContextualAddOnMarkup.decode = function decode(reader, length) {
+                    ContextualAddOnMarkup.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ContextualAddOnMarkup();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -42586,12 +47340,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Card.decode = function decode(reader, length) {
+                        Card.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ContextualAddOnMarkup.Card();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.header = $root.google.chat.v1.ContextualAddOnMarkup.Card.CardHeader.decode(reader, reader.uint32());
@@ -42901,12 +47657,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CardHeader.decode = function decode(reader, length) {
+                            CardHeader.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ContextualAddOnMarkup.Card.CardHeader();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.title = reader.string();
@@ -43194,12 +47952,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Section.decode = function decode(reader, length) {
+                            Section.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ContextualAddOnMarkup.Card.Section();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.header = reader.string();
@@ -43440,12 +48200,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CardAction.decode = function decode(reader, length) {
+                            CardAction.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ContextualAddOnMarkup.Card.CardAction();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.actionLabel = reader.string();
@@ -43716,12 +48478,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    WidgetMarkup.decode = function decode(reader, length) {
+                    WidgetMarkup.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.textParagraph = $root.google.chat.v1.WidgetMarkup.TextParagraph.decode(reader, reader.uint32());
@@ -44006,12 +48770,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextParagraph.decode = function decode(reader, length) {
+                        TextParagraph.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.TextParagraph();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -44306,12 +49072,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Button.decode = function decode(reader, length) {
+                        Button.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.Button();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.textButton = $root.google.chat.v1.WidgetMarkup.TextButton.decode(reader, reader.uint32());
@@ -44554,12 +49322,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TextButton.decode = function decode(reader, length) {
+                        TextButton.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.TextButton();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.text = reader.string();
@@ -44877,12 +49647,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KeyValue.decode = function decode(reader, length) {
+                        KeyValue.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.KeyValue();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.icon = reader.int32();
@@ -45377,12 +50149,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Image.decode = function decode(reader, length) {
+                        Image.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.Image();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.imageUrl = reader.string();
@@ -45657,12 +50431,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImageButton.decode = function decode(reader, length) {
+                        ImageButton.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.ImageButton();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.icon = reader.int32();
@@ -46102,12 +50878,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OnClick.decode = function decode(reader, length) {
+                        OnClick.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.OnClick();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.action = $root.google.chat.v1.WidgetMarkup.FormAction.decode(reader, reader.uint32());
@@ -46339,12 +51117,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OpenLink.decode = function decode(reader, length) {
+                        OpenLink.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.OpenLink();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.url = reader.string();
@@ -46555,12 +51335,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FormAction.decode = function decode(reader, length) {
+                        FormAction.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.FormAction();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.actionMethodName = reader.string();
@@ -46798,12 +51580,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ActionParameter.decode = function decode(reader, length) {
+                            ActionParameter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.WidgetMarkup.FormAction.ActionParameter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.key = reader.string();
@@ -47020,12 +51804,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeletionMetadata.decode = function decode(reader, length) {
+                    DeletionMetadata.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeletionMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.deletionType = reader.int32();
@@ -47298,12 +52084,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MatchedUrl.decode = function decode(reader, length) {
+                    MatchedUrl.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MatchedUrl();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 2: {
                                     message.url = reader.string();
@@ -47501,12 +52289,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SlashCommand.decode = function decode(reader, length) {
+                    SlashCommand.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SlashCommand();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.commandId = reader.int64();
@@ -47655,6 +52445,7 @@
                      * @property {boolean|null} [adminInstalled] Space adminInstalled
                      * @property {google.chat.v1.Space.IMembershipCount|null} [membershipCount] Space membershipCount
                      * @property {google.chat.v1.Space.IAccessSettings|null} [accessSettings] Space accessSettings
+                     * @property {string|null} [customer] Space customer
                      * @property {string|null} [spaceUri] Space spaceUri
                      * @property {google.chat.v1.Space.PredefinedPermissionSettings|null} [predefinedPermissionSettings] Space predefinedPermissionSettings
                      * @property {google.chat.v1.Space.IPermissionSettings|null} [permissionSettings] Space permissionSettings
@@ -47805,6 +52596,14 @@
                     Space.prototype.accessSettings = null;
     
                     /**
+                     * Space customer.
+                     * @member {string|null|undefined} customer
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.customer = null;
+    
+                    /**
                      * Space spaceUri.
                      * @member {string} spaceUri
                      * @memberof google.chat.v1.Space
@@ -47838,6 +52637,12 @@
     
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
+    
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(Space.prototype, "_customer", {
+                        get: $util.oneOfGetter($oneOfFields = ["customer"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
     
                     /**
                      * Space spacePermissionSettings.
@@ -47906,6 +52711,8 @@
                             $root.google.chat.v1.Space.MembershipCount.encode(message.membershipCount, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                         if (message.accessSettings != null && Object.hasOwnProperty.call(message, "accessSettings"))
                             $root.google.chat.v1.Space.AccessSettings.encode(message.accessSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                        if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
+                            writer.uint32(/* id 24, wireType 2 =*/194).string(message.customer);
                         if (message.spaceUri != null && Object.hasOwnProperty.call(message, "spaceUri"))
                             writer.uint32(/* id 25, wireType 2 =*/202).string(message.spaceUri);
                         if (message.predefinedPermissionSettings != null && Object.hasOwnProperty.call(message, "predefinedPermissionSettings"))
@@ -47941,12 +52748,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Space.decode = function decode(reader, length) {
+                    Space.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -48010,6 +52819,10 @@
                                 }
                             case 23: {
                                     message.accessSettings = $root.google.chat.v1.Space.AccessSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 24: {
+                                    message.customer = reader.string();
                                     break;
                                 }
                             case 25: {
@@ -48147,6 +52960,11 @@
                             var error = $root.google.chat.v1.Space.AccessSettings.verify(message.accessSettings);
                             if (error)
                                 return "accessSettings." + error;
+                        }
+                        if (message.customer != null && message.hasOwnProperty("customer")) {
+                            properties._customer = 1;
+                            if (!$util.isString(message.customer))
+                                return "customer: string expected";
                         }
                         if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
                             if (!$util.isString(message.spaceUri))
@@ -48319,6 +53137,8 @@
                                 throw TypeError(".google.chat.v1.Space.accessSettings: object expected");
                             message.accessSettings = $root.google.chat.v1.Space.AccessSettings.fromObject(object.accessSettings);
                         }
+                        if (object.customer != null)
+                            message.customer = String(object.customer);
                         if (object.spaceUri != null)
                             message.spaceUri = String(object.spaceUri);
                         switch (object.predefinedPermissionSettings) {
@@ -48419,6 +53239,11 @@
                             object.membershipCount = $root.google.chat.v1.Space.MembershipCount.toObject(message.membershipCount, options);
                         if (message.accessSettings != null && message.hasOwnProperty("accessSettings"))
                             object.accessSettings = $root.google.chat.v1.Space.AccessSettings.toObject(message.accessSettings, options);
+                        if (message.customer != null && message.hasOwnProperty("customer")) {
+                            object.customer = message.customer;
+                            if (options.oneofs)
+                                object._customer = "customer";
+                        }
                         if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
                             object.spaceUri = message.spaceUri;
                         if (message.predefinedPermissionSettings != null && message.hasOwnProperty("predefinedPermissionSettings")) {
@@ -48610,12 +53435,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SpaceDetails.decode = function decode(reader, length) {
+                        SpaceDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.SpaceDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.description = reader.string();
@@ -48837,12 +53664,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MembershipCount.decode = function decode(reader, length) {
+                        MembershipCount.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.MembershipCount();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.joinedDirectHumanUserCount = reader.int32();
@@ -49064,12 +53893,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AccessSettings.decode = function decode(reader, length) {
+                        AccessSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.AccessSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.accessState = reader.int32();
@@ -49349,89 +54180,49 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * PermissionSettings _manageMembersAndGroups.
-                         * @member {"manageMembersAndGroups"|undefined} _manageMembersAndGroups
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_manageMembersAndGroups", {
                             get: $util.oneOfGetter($oneOfFields = ["manageMembersAndGroups"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PermissionSettings _modifySpaceDetails.
-                         * @member {"modifySpaceDetails"|undefined} _modifySpaceDetails
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_modifySpaceDetails", {
                             get: $util.oneOfGetter($oneOfFields = ["modifySpaceDetails"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PermissionSettings _toggleHistory.
-                         * @member {"toggleHistory"|undefined} _toggleHistory
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_toggleHistory", {
                             get: $util.oneOfGetter($oneOfFields = ["toggleHistory"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PermissionSettings _useAtMentionAll.
-                         * @member {"useAtMentionAll"|undefined} _useAtMentionAll
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_useAtMentionAll", {
                             get: $util.oneOfGetter($oneOfFields = ["useAtMentionAll"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PermissionSettings _manageApps.
-                         * @member {"manageApps"|undefined} _manageApps
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_manageApps", {
                             get: $util.oneOfGetter($oneOfFields = ["manageApps"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PermissionSettings _manageWebhooks.
-                         * @member {"manageWebhooks"|undefined} _manageWebhooks
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_manageWebhooks", {
                             get: $util.oneOfGetter($oneOfFields = ["manageWebhooks"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PermissionSettings _postMessages.
-                         * @member {"postMessages"|undefined} _postMessages
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_postMessages", {
                             get: $util.oneOfGetter($oneOfFields = ["postMessages"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PermissionSettings _replyMessages.
-                         * @member {"replyMessages"|undefined} _replyMessages
-                         * @memberof google.chat.v1.Space.PermissionSettings
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PermissionSettings.prototype, "_replyMessages", {
                             get: $util.oneOfGetter($oneOfFields = ["replyMessages"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -49504,12 +54295,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PermissionSettings.decode = function decode(reader, length) {
+                        PermissionSettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.PermissionSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.manageMembersAndGroups = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
@@ -49793,6 +54586,7 @@
                          * @memberof google.chat.v1.Space
                          * @interface IPermissionSetting
                          * @property {boolean|null} [managersAllowed] PermissionSetting managersAllowed
+                         * @property {boolean|null} [assistantManagersAllowed] PermissionSetting assistantManagersAllowed
                          * @property {boolean|null} [membersAllowed] PermissionSetting membersAllowed
                          */
     
@@ -49820,12 +54614,29 @@
                         PermissionSetting.prototype.managersAllowed = false;
     
                         /**
+                         * PermissionSetting assistantManagersAllowed.
+                         * @member {boolean|null|undefined} assistantManagersAllowed
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @instance
+                         */
+                        PermissionSetting.prototype.assistantManagersAllowed = null;
+    
+                        /**
                          * PermissionSetting membersAllowed.
                          * @member {boolean} membersAllowed
                          * @memberof google.chat.v1.Space.PermissionSetting
                          * @instance
                          */
                         PermissionSetting.prototype.membersAllowed = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PermissionSetting.prototype, "_assistantManagersAllowed", {
+                            get: $util.oneOfGetter($oneOfFields = ["assistantManagersAllowed"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new PermissionSetting instance using the specified properties.
@@ -49855,6 +54666,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.managersAllowed);
                             if (message.membersAllowed != null && Object.hasOwnProperty.call(message, "membersAllowed"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.membersAllowed);
+                            if (message.assistantManagersAllowed != null && Object.hasOwnProperty.call(message, "assistantManagersAllowed"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.assistantManagersAllowed);
                             return writer;
                         };
     
@@ -49882,15 +54695,21 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PermissionSetting.decode = function decode(reader, length) {
+                        PermissionSetting.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.PermissionSetting();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.managersAllowed = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.assistantManagersAllowed = reader.bool();
                                         break;
                                     }
                                 case 2: {
@@ -49932,9 +54751,15 @@
                         PermissionSetting.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.managersAllowed != null && message.hasOwnProperty("managersAllowed"))
                                 if (typeof message.managersAllowed !== "boolean")
                                     return "managersAllowed: boolean expected";
+                            if (message.assistantManagersAllowed != null && message.hasOwnProperty("assistantManagersAllowed")) {
+                                properties._assistantManagersAllowed = 1;
+                                if (typeof message.assistantManagersAllowed !== "boolean")
+                                    return "assistantManagersAllowed: boolean expected";
+                            }
                             if (message.membersAllowed != null && message.hasOwnProperty("membersAllowed"))
                                 if (typeof message.membersAllowed !== "boolean")
                                     return "membersAllowed: boolean expected";
@@ -49955,6 +54780,8 @@
                             var message = new $root.google.chat.v1.Space.PermissionSetting();
                             if (object.managersAllowed != null)
                                 message.managersAllowed = Boolean(object.managersAllowed);
+                            if (object.assistantManagersAllowed != null)
+                                message.assistantManagersAllowed = Boolean(object.assistantManagersAllowed);
                             if (object.membersAllowed != null)
                                 message.membersAllowed = Boolean(object.membersAllowed);
                             return message;
@@ -49981,6 +54808,11 @@
                                 object.managersAllowed = message.managersAllowed;
                             if (message.membersAllowed != null && message.hasOwnProperty("membersAllowed"))
                                 object.membersAllowed = message.membersAllowed;
+                            if (message.assistantManagersAllowed != null && message.hasOwnProperty("assistantManagersAllowed")) {
+                                object.assistantManagersAllowed = message.assistantManagersAllowed;
+                                if (options.oneofs)
+                                    object._assistantManagersAllowed = "assistantManagersAllowed";
+                            }
                             return object;
                         };
     
@@ -50112,12 +54944,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateSpaceRequest.decode = function decode(reader, length) {
+                    CreateSpaceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateSpaceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.space = $root.google.chat.v1.Space.decode(reader, reader.uint32());
@@ -50355,12 +55189,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListSpacesRequest.decode = function decode(reader, length) {
+                    ListSpacesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSpacesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.pageSize = reader.int32();
@@ -50596,12 +55432,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListSpacesResponse.decode = function decode(reader, length) {
+                    ListSpacesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSpacesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.spaces && message.spaces.length))
@@ -50842,12 +55680,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetSpaceRequest.decode = function decode(reader, length) {
+                    GetSpaceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetSpaceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -51058,12 +55898,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FindDirectMessageRequest.decode = function decode(reader, length) {
+                    FindDirectMessageRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.FindDirectMessageRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -51283,12 +56125,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateSpaceRequest.decode = function decode(reader, length) {
+                    UpdateSpaceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateSpaceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.space = $root.google.chat.v1.Space.decode(reader, reader.uint32());
@@ -51565,12 +56409,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SearchSpacesRequest.decode = function decode(reader, length) {
+                    SearchSpacesRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SearchSpacesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.useAdminAccess = reader.bool();
@@ -51841,12 +56687,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SearchSpacesResponse.decode = function decode(reader, length) {
+                    SearchSpacesResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SearchSpacesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.spaces && message.spaces.length))
@@ -52100,12 +56948,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteSpaceRequest.decode = function decode(reader, length) {
+                    DeleteSpaceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.DeleteSpaceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -52316,12 +57166,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CompleteImportSpaceRequest.decode = function decode(reader, length) {
+                    CompleteImportSpaceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CompleteImportSpaceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -52519,12 +57371,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CompleteImportSpaceResponse.decode = function decode(reader, length) {
+                    CompleteImportSpaceResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CompleteImportSpaceResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.space = $root.google.chat.v1.Space.decode(reader, reader.uint32());
@@ -52977,12 +57831,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpaceEvent.decode = function decode(reader, length) {
+                    SpaceEvent.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceEvent();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -53641,12 +58497,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetSpaceEventRequest.decode = function decode(reader, length) {
+                    GetSpaceEventRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetSpaceEventRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -53877,12 +58735,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListSpaceEventsRequest.decode = function decode(reader, length) {
+                    ListSpaceEventsRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSpaceEventsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.parent = reader.string();
@@ -54130,12 +58990,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListSpaceEventsResponse.decode = function decode(reader, length) {
+                    ListSpaceEventsResponse.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSpaceEventsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.spaceEvents && message.spaceEvents.length))
@@ -54365,12 +59227,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MembershipCreatedEventData.decode = function decode(reader, length) {
+                    MembershipCreatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipCreatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
@@ -54573,12 +59437,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MembershipDeletedEventData.decode = function decode(reader, length) {
+                    MembershipDeletedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipDeletedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
@@ -54781,12 +59647,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MembershipUpdatedEventData.decode = function decode(reader, length) {
+                    MembershipUpdatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipUpdatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
@@ -54991,12 +59859,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MembershipBatchCreatedEventData.decode = function decode(reader, length) {
+                    MembershipBatchCreatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipBatchCreatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.memberships && message.memberships.length))
@@ -55215,12 +60085,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MembershipBatchUpdatedEventData.decode = function decode(reader, length) {
+                    MembershipBatchUpdatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipBatchUpdatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.memberships && message.memberships.length))
@@ -55439,12 +60311,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MembershipBatchDeletedEventData.decode = function decode(reader, length) {
+                    MembershipBatchDeletedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipBatchDeletedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.memberships && message.memberships.length))
@@ -55661,12 +60535,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MessageCreatedEventData.decode = function decode(reader, length) {
+                    MessageCreatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageCreatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.message = $root.google.chat.v1.Message.decode(reader, reader.uint32());
@@ -55869,12 +60745,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MessageUpdatedEventData.decode = function decode(reader, length) {
+                    MessageUpdatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageUpdatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.message = $root.google.chat.v1.Message.decode(reader, reader.uint32());
@@ -56077,12 +60955,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MessageDeletedEventData.decode = function decode(reader, length) {
+                    MessageDeletedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageDeletedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.message = $root.google.chat.v1.Message.decode(reader, reader.uint32());
@@ -56287,12 +61167,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MessageBatchCreatedEventData.decode = function decode(reader, length) {
+                    MessageBatchCreatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageBatchCreatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.messages && message.messages.length))
@@ -56511,12 +61393,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MessageBatchUpdatedEventData.decode = function decode(reader, length) {
+                    MessageBatchUpdatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageBatchUpdatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.messages && message.messages.length))
@@ -56735,12 +61619,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    MessageBatchDeletedEventData.decode = function decode(reader, length) {
+                    MessageBatchDeletedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageBatchDeletedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.messages && message.messages.length))
@@ -56957,12 +61843,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpaceUpdatedEventData.decode = function decode(reader, length) {
+                    SpaceUpdatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceUpdatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.space = $root.google.chat.v1.Space.decode(reader, reader.uint32());
@@ -57167,12 +62055,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpaceBatchUpdatedEventData.decode = function decode(reader, length) {
+                    SpaceBatchUpdatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceBatchUpdatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.spaces && message.spaces.length))
@@ -57389,12 +62279,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReactionCreatedEventData.decode = function decode(reader, length) {
+                    ReactionCreatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionCreatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.reaction = $root.google.chat.v1.Reaction.decode(reader, reader.uint32());
@@ -57597,12 +62489,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReactionDeletedEventData.decode = function decode(reader, length) {
+                    ReactionDeletedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionDeletedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.reaction = $root.google.chat.v1.Reaction.decode(reader, reader.uint32());
@@ -57807,12 +62701,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReactionBatchCreatedEventData.decode = function decode(reader, length) {
+                    ReactionBatchCreatedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionBatchCreatedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.reactions && message.reactions.length))
@@ -58031,12 +62927,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReactionBatchDeletedEventData.decode = function decode(reader, length) {
+                    ReactionBatchDeletedEventData.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionBatchDeletedEventData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.reactions && message.reactions.length))
@@ -58221,23 +63119,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * SpaceNotificationSetting _notificationSetting.
-                     * @member {"notificationSetting"|undefined} _notificationSetting
-                     * @memberof google.chat.v1.SpaceNotificationSetting
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(SpaceNotificationSetting.prototype, "_notificationSetting", {
                         get: $util.oneOfGetter($oneOfFields = ["notificationSetting"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * SpaceNotificationSetting _muteSetting.
-                     * @member {"muteSetting"|undefined} _muteSetting
-                     * @memberof google.chat.v1.SpaceNotificationSetting
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(SpaceNotificationSetting.prototype, "_muteSetting", {
                         get: $util.oneOfGetter($oneOfFields = ["muteSetting"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -58300,12 +63188,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpaceNotificationSetting.decode = function decode(reader, length) {
+                    SpaceNotificationSetting.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceNotificationSetting();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -58630,12 +63520,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetSpaceNotificationSettingRequest.decode = function decode(reader, length) {
+                    GetSpaceNotificationSettingRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetSpaceNotificationSettingRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -58844,12 +63736,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateSpaceNotificationSettingRequest.decode = function decode(reader, length) {
+                    UpdateSpaceNotificationSettingRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateSpaceNotificationSettingRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.spaceNotificationSetting = $root.google.chat.v1.SpaceNotificationSetting.decode(reader, reader.uint32());
@@ -59081,12 +63975,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpaceReadState.decode = function decode(reader, length) {
+                    SpaceReadState.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceReadState();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -59302,12 +64198,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetSpaceReadStateRequest.decode = function decode(reader, length) {
+                    GetSpaceReadStateRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetSpaceReadStateRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -59516,12 +64414,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateSpaceReadStateRequest.decode = function decode(reader, length) {
+                    UpdateSpaceReadStateRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateSpaceReadStateRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.spaceReadState = $root.google.chat.v1.SpaceReadState.decode(reader, reader.uint32());
@@ -59766,12 +64666,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SetUpSpaceRequest.decode = function decode(reader, length) {
+                    SetUpSpaceRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SetUpSpaceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.space = $root.google.chat.v1.Space.decode(reader, reader.uint32());
@@ -60030,12 +64932,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ThreadReadState.decode = function decode(reader, length) {
+                    ThreadReadState.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ThreadReadState();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -60251,12 +65155,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetThreadReadStateRequest.decode = function decode(reader, length) {
+                    GetThreadReadStateRequest.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetThreadReadStateRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -60440,6 +65346,34 @@
              */
             var api = {};
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
+                return values;
+            })();
+    
             api.ResourceDescriptor = (function() {
     
                 /**
@@ -60598,12 +65532,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -60993,12 +65929,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -61124,34 +66062,6 @@
                 return ResourceReference;
             })();
     
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
-             * @property {number} IDENTIFIER=8 IDENTIFIER value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
-                values[valuesById[8] = "IDENTIFIER"] = 8;
-                return values;
-            })();
-    
             api.FieldInfo = (function() {
     
                 /**
@@ -61237,12 +66147,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldInfo.decode = function decode(reader, length) {
+                FieldInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
@@ -61507,12 +66419,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -61857,12 +66771,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -62241,12 +67157,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -62473,12 +67391,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -62842,12 +67762,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -63186,6 +68108,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -63287,6 +68210,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -63333,6 +68264,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -63360,12 +68293,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -63411,6 +68346,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -63505,6 +68444,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -63599,6 +68541,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -63628,6 +68572,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -63658,6 +68603,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -63799,12 +68746,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -64066,12 +69015,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -64274,12 +69225,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -64482,12 +69435,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -64690,12 +69645,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -64963,12 +69920,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -65342,12 +70301,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -65550,12 +70511,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -65782,12 +70745,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -66060,12 +71025,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());

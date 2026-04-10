@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -692,7 +692,474 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild|getDefaultServiceAccount}.
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @typedef GetDefaultServiceAccountCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devtools.cloudbuild.v1.DefaultServiceAccount} [response] DefaultServiceAccount
+                         */
+    
+                        /**
+                         * Calls GetDefaultServiceAccount.
+                         * @function getDefaultServiceAccount
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest} request GetDefaultServiceAccountRequest message or plain object
+                         * @param {google.devtools.cloudbuild.v1.CloudBuild.GetDefaultServiceAccountCallback} callback Node-style callback called with the error, if any, and DefaultServiceAccount
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudBuild.prototype.getDefaultServiceAccount = function getDefaultServiceAccount(request, callback) {
+                            return this.rpcCall(getDefaultServiceAccount, $root.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest, $root.google.devtools.cloudbuild.v1.DefaultServiceAccount, request, callback);
+                        }, "name", { value: "GetDefaultServiceAccount" });
+    
+                        /**
+                         * Calls GetDefaultServiceAccount.
+                         * @function getDefaultServiceAccount
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest} request GetDefaultServiceAccountRequest message or plain object
+                         * @returns {Promise<google.devtools.cloudbuild.v1.DefaultServiceAccount>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudBuild;
+                    })();
+    
+                    v1.GetDefaultServiceAccountRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDefaultServiceAccountRequest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IGetDefaultServiceAccountRequest
+                         * @property {string|null} [name] GetDefaultServiceAccountRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDefaultServiceAccountRequest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a GetDefaultServiceAccountRequest.
+                         * @implements IGetDefaultServiceAccountRequest
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest=} [properties] Properties to set
+                         */
+                        function GetDefaultServiceAccountRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDefaultServiceAccountRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @instance
+                         */
+                        GetDefaultServiceAccountRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDefaultServiceAccountRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest} GetDefaultServiceAccountRequest instance
+                         */
+                        GetDefaultServiceAccountRequest.create = function create(properties) {
+                            return new GetDefaultServiceAccountRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDefaultServiceAccountRequest message. Does not implicitly {@link google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest} message GetDefaultServiceAccountRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDefaultServiceAccountRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDefaultServiceAccountRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IGetDefaultServiceAccountRequest} message GetDefaultServiceAccountRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDefaultServiceAccountRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDefaultServiceAccountRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest} GetDefaultServiceAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDefaultServiceAccountRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDefaultServiceAccountRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest} GetDefaultServiceAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDefaultServiceAccountRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDefaultServiceAccountRequest message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDefaultServiceAccountRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDefaultServiceAccountRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest} GetDefaultServiceAccountRequest
+                         */
+                        GetDefaultServiceAccountRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDefaultServiceAccountRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest} message GetDefaultServiceAccountRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDefaultServiceAccountRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDefaultServiceAccountRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDefaultServiceAccountRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDefaultServiceAccountRequest
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDefaultServiceAccountRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.GetDefaultServiceAccountRequest";
+                        };
+    
+                        return GetDefaultServiceAccountRequest;
+                    })();
+    
+                    v1.DefaultServiceAccount = (function() {
+    
+                        /**
+                         * Properties of a DefaultServiceAccount.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IDefaultServiceAccount
+                         * @property {string|null} [name] DefaultServiceAccount name
+                         * @property {string|null} [serviceAccountEmail] DefaultServiceAccount serviceAccountEmail
+                         */
+    
+                        /**
+                         * Constructs a new DefaultServiceAccount.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a DefaultServiceAccount.
+                         * @implements IDefaultServiceAccount
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IDefaultServiceAccount=} [properties] Properties to set
+                         */
+                        function DefaultServiceAccount(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DefaultServiceAccount name.
+                         * @member {string} name
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @instance
+                         */
+                        DefaultServiceAccount.prototype.name = "";
+    
+                        /**
+                         * DefaultServiceAccount serviceAccountEmail.
+                         * @member {string} serviceAccountEmail
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @instance
+                         */
+                        DefaultServiceAccount.prototype.serviceAccountEmail = "";
+    
+                        /**
+                         * Creates a new DefaultServiceAccount instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IDefaultServiceAccount=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.DefaultServiceAccount} DefaultServiceAccount instance
+                         */
+                        DefaultServiceAccount.create = function create(properties) {
+                            return new DefaultServiceAccount(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DefaultServiceAccount message. Does not implicitly {@link google.devtools.cloudbuild.v1.DefaultServiceAccount.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IDefaultServiceAccount} message DefaultServiceAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DefaultServiceAccount.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccountEmail);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DefaultServiceAccount message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.DefaultServiceAccount.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IDefaultServiceAccount} message DefaultServiceAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DefaultServiceAccount.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DefaultServiceAccount message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.DefaultServiceAccount} DefaultServiceAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DefaultServiceAccount.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.DefaultServiceAccount();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.serviceAccountEmail = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DefaultServiceAccount message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.DefaultServiceAccount} DefaultServiceAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DefaultServiceAccount.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DefaultServiceAccount message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DefaultServiceAccount.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                if (!$util.isString(message.serviceAccountEmail))
+                                    return "serviceAccountEmail: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DefaultServiceAccount message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.DefaultServiceAccount} DefaultServiceAccount
+                         */
+                        DefaultServiceAccount.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.DefaultServiceAccount)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.DefaultServiceAccount();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.serviceAccountEmail != null)
+                                message.serviceAccountEmail = String(object.serviceAccountEmail);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DefaultServiceAccount message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.DefaultServiceAccount} message DefaultServiceAccount
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DefaultServiceAccount.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.serviceAccountEmail = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                object.serviceAccountEmail = message.serviceAccountEmail;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DefaultServiceAccount to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DefaultServiceAccount.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DefaultServiceAccount
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.DefaultServiceAccount
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DefaultServiceAccount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.DefaultServiceAccount";
+                        };
+    
+                        return DefaultServiceAccount;
                     })();
     
                     v1.RetryBuildRequest = (function() {
@@ -802,12 +1269,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RetryBuildRequest.decode = function decode(reader, length) {
+                        RetryBuildRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RetryBuildRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.name = reader.string();
@@ -1063,12 +1532,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RunBuildTriggerRequest.decode = function decode(reader, length) {
+                        RunBuildTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RunBuildTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.name = reader.string();
@@ -1341,12 +1812,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StorageSource.decode = function decode(reader, length) {
+                        StorageSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.StorageSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bucket = reader.string();
@@ -1657,12 +2130,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitSource.decode = function decode(reader, length) {
+                        GitSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.url = reader.string();
@@ -1978,12 +2453,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RepoSource.decode = function decode(reader, length) {
+                        RepoSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RepoSource(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectId = reader.string();
@@ -2339,12 +2816,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StorageSourceManifest.decode = function decode(reader, length) {
+                        StorageSourceManifest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.StorageSourceManifest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bucket = reader.string();
@@ -2496,6 +2975,258 @@
                         return StorageSourceManifest;
                     })();
     
+                    v1.ConnectedRepository = (function() {
+    
+                        /**
+                         * Properties of a ConnectedRepository.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IConnectedRepository
+                         * @property {string|null} [repository] ConnectedRepository repository
+                         * @property {string|null} [dir] ConnectedRepository dir
+                         * @property {string|null} [revision] ConnectedRepository revision
+                         */
+    
+                        /**
+                         * Constructs a new ConnectedRepository.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a ConnectedRepository.
+                         * @implements IConnectedRepository
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IConnectedRepository=} [properties] Properties to set
+                         */
+                        function ConnectedRepository(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConnectedRepository repository.
+                         * @member {string} repository
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @instance
+                         */
+                        ConnectedRepository.prototype.repository = "";
+    
+                        /**
+                         * ConnectedRepository dir.
+                         * @member {string} dir
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @instance
+                         */
+                        ConnectedRepository.prototype.dir = "";
+    
+                        /**
+                         * ConnectedRepository revision.
+                         * @member {string} revision
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @instance
+                         */
+                        ConnectedRepository.prototype.revision = "";
+    
+                        /**
+                         * Creates a new ConnectedRepository instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IConnectedRepository=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.ConnectedRepository} ConnectedRepository instance
+                         */
+                        ConnectedRepository.create = function create(properties) {
+                            return new ConnectedRepository(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectedRepository message. Does not implicitly {@link google.devtools.cloudbuild.v1.ConnectedRepository.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IConnectedRepository} message ConnectedRepository message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectedRepository.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.repository);
+                            if (message.dir != null && Object.hasOwnProperty.call(message, "dir"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.dir);
+                            if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.revision);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectedRepository message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ConnectedRepository.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IConnectedRepository} message ConnectedRepository message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectedRepository.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConnectedRepository message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.ConnectedRepository} ConnectedRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectedRepository.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ConnectedRepository();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.repository = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dir = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.revision = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConnectedRepository message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.ConnectedRepository} ConnectedRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectedRepository.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConnectedRepository message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConnectedRepository.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                if (!$util.isString(message.repository))
+                                    return "repository: string expected";
+                            if (message.dir != null && message.hasOwnProperty("dir"))
+                                if (!$util.isString(message.dir))
+                                    return "dir: string expected";
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                if (!$util.isString(message.revision))
+                                    return "revision: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConnectedRepository message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.ConnectedRepository} ConnectedRepository
+                         */
+                        ConnectedRepository.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.ConnectedRepository)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.ConnectedRepository();
+                            if (object.repository != null)
+                                message.repository = String(object.repository);
+                            if (object.dir != null)
+                                message.dir = String(object.dir);
+                            if (object.revision != null)
+                                message.revision = String(object.revision);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConnectedRepository message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ConnectedRepository} message ConnectedRepository
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConnectedRepository.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.repository = "";
+                                object.dir = "";
+                                object.revision = "";
+                            }
+                            if (message.repository != null && message.hasOwnProperty("repository"))
+                                object.repository = message.repository;
+                            if (message.dir != null && message.hasOwnProperty("dir"))
+                                object.dir = message.dir;
+                            if (message.revision != null && message.hasOwnProperty("revision"))
+                                object.revision = message.revision;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConnectedRepository to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConnectedRepository.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConnectedRepository
+                         * @function getTypeUrl
+                         * @memberof google.devtools.cloudbuild.v1.ConnectedRepository
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConnectedRepository.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devtools.cloudbuild.v1.ConnectedRepository";
+                        };
+    
+                        return ConnectedRepository;
+                    })();
+    
                     v1.Source = (function() {
     
                         /**
@@ -2506,6 +3237,7 @@
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [repoSource] Source repoSource
                          * @property {google.devtools.cloudbuild.v1.IGitSource|null} [gitSource] Source gitSource
                          * @property {google.devtools.cloudbuild.v1.IStorageSourceManifest|null} [storageSourceManifest] Source storageSourceManifest
+                         * @property {google.devtools.cloudbuild.v1.IConnectedRepository|null} [connectedRepository] Source connectedRepository
                          */
     
                         /**
@@ -2555,17 +3287,25 @@
                          */
                         Source.prototype.storageSourceManifest = null;
     
+                        /**
+                         * Source connectedRepository.
+                         * @member {google.devtools.cloudbuild.v1.IConnectedRepository|null|undefined} connectedRepository
+                         * @memberof google.devtools.cloudbuild.v1.Source
+                         * @instance
+                         */
+                        Source.prototype.connectedRepository = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Source source.
-                         * @member {"storageSource"|"repoSource"|"gitSource"|"storageSourceManifest"|undefined} source
+                         * @member {"storageSource"|"repoSource"|"gitSource"|"storageSourceManifest"|"connectedRepository"|undefined} source
                          * @memberof google.devtools.cloudbuild.v1.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "gitSource", "storageSourceManifest"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "gitSource", "storageSourceManifest", "connectedRepository"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2601,6 +3341,8 @@
                                 $root.google.devtools.cloudbuild.v1.GitSource.encode(message.gitSource, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.storageSourceManifest != null && Object.hasOwnProperty.call(message, "storageSourceManifest"))
                                 $root.google.devtools.cloudbuild.v1.StorageSourceManifest.encode(message.storageSourceManifest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.connectedRepository != null && Object.hasOwnProperty.call(message, "connectedRepository"))
+                                $root.google.devtools.cloudbuild.v1.ConnectedRepository.encode(message.connectedRepository, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -2628,12 +3370,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Source.decode = function decode(reader, length) {
+                        Source.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Source();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.storageSource = $root.google.devtools.cloudbuild.v1.StorageSource.decode(reader, reader.uint32());
@@ -2649,6 +3393,10 @@
                                     }
                                 case 8: {
                                         message.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.connectedRepository = $root.google.devtools.cloudbuild.v1.ConnectedRepository.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -2725,6 +3473,16 @@
                                         return "storageSourceManifest." + error;
                                 }
                             }
+                            if (message.connectedRepository != null && message.hasOwnProperty("connectedRepository")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.cloudbuild.v1.ConnectedRepository.verify(message.connectedRepository);
+                                    if (error)
+                                        return "connectedRepository." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2759,6 +3517,11 @@
                                 if (typeof object.storageSourceManifest !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.Source.storageSourceManifest: object expected");
                                 message.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.fromObject(object.storageSourceManifest);
+                            }
+                            if (object.connectedRepository != null) {
+                                if (typeof object.connectedRepository !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Source.connectedRepository: object expected");
+                                message.connectedRepository = $root.google.devtools.cloudbuild.v1.ConnectedRepository.fromObject(object.connectedRepository);
                             }
                             return message;
                         };
@@ -2795,6 +3558,11 @@
                                 object.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.toObject(message.storageSourceManifest, options);
                                 if (options.oneofs)
                                     object.source = "storageSourceManifest";
+                            }
+                            if (message.connectedRepository != null && message.hasOwnProperty("connectedRepository")) {
+                                object.connectedRepository = $root.google.devtools.cloudbuild.v1.ConnectedRepository.toObject(message.connectedRepository, options);
+                                if (options.oneofs)
+                                    object.source = "connectedRepository";
                             }
                             return object;
                         };
@@ -2837,6 +3605,7 @@
                          * @property {string|null} [name] BuiltImage name
                          * @property {string|null} [digest] BuiltImage digest
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] BuiltImage pushTiming
+                         * @property {string|null} [artifactRegistryPackage] BuiltImage artifactRegistryPackage
                          */
     
                         /**
@@ -2879,6 +3648,14 @@
                         BuiltImage.prototype.pushTiming = null;
     
                         /**
+                         * BuiltImage artifactRegistryPackage.
+                         * @member {string} artifactRegistryPackage
+                         * @memberof google.devtools.cloudbuild.v1.BuiltImage
+                         * @instance
+                         */
+                        BuiltImage.prototype.artifactRegistryPackage = "";
+    
+                        /**
                          * Creates a new BuiltImage instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.BuiltImage
@@ -2908,6 +3685,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.digest);
                             if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.artifactRegistryPackage != null && Object.hasOwnProperty.call(message, "artifactRegistryPackage"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.artifactRegistryPackage);
                             return writer;
                         };
     
@@ -2935,12 +3714,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BuiltImage.decode = function decode(reader, length) {
+                        BuiltImage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuiltImage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -2952,6 +3733,10 @@
                                     }
                                 case 4: {
                                         message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.artifactRegistryPackage = reader.string();
                                         break;
                                     }
                                 default:
@@ -3000,6 +3785,9 @@
                                 if (error)
                                     return "pushTiming." + error;
                             }
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                if (!$util.isString(message.artifactRegistryPackage))
+                                    return "artifactRegistryPackage: string expected";
                             return null;
                         };
     
@@ -3024,6 +3812,8 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.BuiltImage.pushTiming: object expected");
                                 message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
                             }
+                            if (object.artifactRegistryPackage != null)
+                                message.artifactRegistryPackage = String(object.artifactRegistryPackage);
                             return message;
                         };
     
@@ -3044,6 +3834,7 @@
                                 object.name = "";
                                 object.digest = "";
                                 object.pushTiming = null;
+                                object.artifactRegistryPackage = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3051,6 +3842,8 @@
                                 object.digest = message.digest;
                             if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
                                 object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                object.artifactRegistryPackage = message.artifactRegistryPackage;
                             return object;
                         };
     
@@ -3092,6 +3885,7 @@
                          * @property {string|null} [uri] UploadedPythonPackage uri
                          * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedPythonPackage fileHashes
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedPythonPackage pushTiming
+                         * @property {string|null} [artifactRegistryPackage] UploadedPythonPackage artifactRegistryPackage
                          */
     
                         /**
@@ -3134,6 +3928,14 @@
                         UploadedPythonPackage.prototype.pushTiming = null;
     
                         /**
+                         * UploadedPythonPackage artifactRegistryPackage.
+                         * @member {string} artifactRegistryPackage
+                         * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
+                         * @instance
+                         */
+                        UploadedPythonPackage.prototype.artifactRegistryPackage = "";
+    
+                        /**
                          * Creates a new UploadedPythonPackage instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.UploadedPythonPackage
@@ -3163,6 +3965,8 @@
                                 $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.artifactRegistryPackage != null && Object.hasOwnProperty.call(message, "artifactRegistryPackage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.artifactRegistryPackage);
                             return writer;
                         };
     
@@ -3190,12 +3994,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UploadedPythonPackage.decode = function decode(reader, length) {
+                        UploadedPythonPackage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedPythonPackage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -3207,6 +4013,10 @@
                                     }
                                 case 3: {
                                         message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.artifactRegistryPackage = reader.string();
                                         break;
                                     }
                                 default:
@@ -3257,6 +4067,9 @@
                                 if (error)
                                     return "pushTiming." + error;
                             }
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                if (!$util.isString(message.artifactRegistryPackage))
+                                    return "artifactRegistryPackage: string expected";
                             return null;
                         };
     
@@ -3284,6 +4097,8 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.UploadedPythonPackage.pushTiming: object expected");
                                 message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
                             }
+                            if (object.artifactRegistryPackage != null)
+                                message.artifactRegistryPackage = String(object.artifactRegistryPackage);
                             return message;
                         };
     
@@ -3304,6 +4119,7 @@
                                 object.uri = "";
                                 object.fileHashes = null;
                                 object.pushTiming = null;
+                                object.artifactRegistryPackage = "";
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
@@ -3311,6 +4127,8 @@
                                 object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
                             if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
                                 object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                object.artifactRegistryPackage = message.artifactRegistryPackage;
                             return object;
                         };
     
@@ -3352,6 +4170,7 @@
                          * @property {string|null} [uri] UploadedMavenArtifact uri
                          * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedMavenArtifact fileHashes
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedMavenArtifact pushTiming
+                         * @property {string|null} [artifactRegistryPackage] UploadedMavenArtifact artifactRegistryPackage
                          */
     
                         /**
@@ -3394,6 +4213,14 @@
                         UploadedMavenArtifact.prototype.pushTiming = null;
     
                         /**
+                         * UploadedMavenArtifact artifactRegistryPackage.
+                         * @member {string} artifactRegistryPackage
+                         * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
+                         * @instance
+                         */
+                        UploadedMavenArtifact.prototype.artifactRegistryPackage = "";
+    
+                        /**
                          * Creates a new UploadedMavenArtifact instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.UploadedMavenArtifact
@@ -3423,6 +4250,8 @@
                                 $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.artifactRegistryPackage != null && Object.hasOwnProperty.call(message, "artifactRegistryPackage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.artifactRegistryPackage);
                             return writer;
                         };
     
@@ -3450,12 +4279,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UploadedMavenArtifact.decode = function decode(reader, length) {
+                        UploadedMavenArtifact.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedMavenArtifact();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -3467,6 +4298,10 @@
                                     }
                                 case 3: {
                                         message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.artifactRegistryPackage = reader.string();
                                         break;
                                     }
                                 default:
@@ -3517,6 +4352,9 @@
                                 if (error)
                                     return "pushTiming." + error;
                             }
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                if (!$util.isString(message.artifactRegistryPackage))
+                                    return "artifactRegistryPackage: string expected";
                             return null;
                         };
     
@@ -3544,6 +4382,8 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.UploadedMavenArtifact.pushTiming: object expected");
                                 message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
                             }
+                            if (object.artifactRegistryPackage != null)
+                                message.artifactRegistryPackage = String(object.artifactRegistryPackage);
                             return message;
                         };
     
@@ -3564,6 +4404,7 @@
                                 object.uri = "";
                                 object.fileHashes = null;
                                 object.pushTiming = null;
+                                object.artifactRegistryPackage = "";
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
@@ -3571,6 +4412,8 @@
                                 object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
                             if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
                                 object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                object.artifactRegistryPackage = message.artifactRegistryPackage;
                             return object;
                         };
     
@@ -3612,6 +4455,7 @@
                          * @property {string|null} [uri] UploadedGoModule uri
                          * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedGoModule fileHashes
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedGoModule pushTiming
+                         * @property {string|null} [artifactRegistryPackage] UploadedGoModule artifactRegistryPackage
                          */
     
                         /**
@@ -3654,6 +4498,14 @@
                         UploadedGoModule.prototype.pushTiming = null;
     
                         /**
+                         * UploadedGoModule artifactRegistryPackage.
+                         * @member {string} artifactRegistryPackage
+                         * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
+                         * @instance
+                         */
+                        UploadedGoModule.prototype.artifactRegistryPackage = "";
+    
+                        /**
                          * Creates a new UploadedGoModule instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.UploadedGoModule
@@ -3683,6 +4535,8 @@
                                 $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.artifactRegistryPackage != null && Object.hasOwnProperty.call(message, "artifactRegistryPackage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.artifactRegistryPackage);
                             return writer;
                         };
     
@@ -3710,12 +4564,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UploadedGoModule.decode = function decode(reader, length) {
+                        UploadedGoModule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedGoModule();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -3727,6 +4583,10 @@
                                     }
                                 case 3: {
                                         message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.artifactRegistryPackage = reader.string();
                                         break;
                                     }
                                 default:
@@ -3777,6 +4637,9 @@
                                 if (error)
                                     return "pushTiming." + error;
                             }
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                if (!$util.isString(message.artifactRegistryPackage))
+                                    return "artifactRegistryPackage: string expected";
                             return null;
                         };
     
@@ -3804,6 +4667,8 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.UploadedGoModule.pushTiming: object expected");
                                 message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
                             }
+                            if (object.artifactRegistryPackage != null)
+                                message.artifactRegistryPackage = String(object.artifactRegistryPackage);
                             return message;
                         };
     
@@ -3824,6 +4689,7 @@
                                 object.uri = "";
                                 object.fileHashes = null;
                                 object.pushTiming = null;
+                                object.artifactRegistryPackage = "";
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
@@ -3831,6 +4697,8 @@
                                 object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
                             if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
                                 object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                object.artifactRegistryPackage = message.artifactRegistryPackage;
                             return object;
                         };
     
@@ -3872,6 +4740,7 @@
                          * @property {string|null} [uri] UploadedNpmPackage uri
                          * @property {google.devtools.cloudbuild.v1.IFileHashes|null} [fileHashes] UploadedNpmPackage fileHashes
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pushTiming] UploadedNpmPackage pushTiming
+                         * @property {string|null} [artifactRegistryPackage] UploadedNpmPackage artifactRegistryPackage
                          */
     
                         /**
@@ -3914,6 +4783,14 @@
                         UploadedNpmPackage.prototype.pushTiming = null;
     
                         /**
+                         * UploadedNpmPackage artifactRegistryPackage.
+                         * @member {string} artifactRegistryPackage
+                         * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
+                         * @instance
+                         */
+                        UploadedNpmPackage.prototype.artifactRegistryPackage = "";
+    
+                        /**
                          * Creates a new UploadedNpmPackage instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.UploadedNpmPackage
@@ -3943,6 +4820,8 @@
                                 $root.google.devtools.cloudbuild.v1.FileHashes.encode(message.fileHashes, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.pushTiming != null && Object.hasOwnProperty.call(message, "pushTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pushTiming, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.artifactRegistryPackage != null && Object.hasOwnProperty.call(message, "artifactRegistryPackage"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.artifactRegistryPackage);
                             return writer;
                         };
     
@@ -3970,12 +4849,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UploadedNpmPackage.decode = function decode(reader, length) {
+                        UploadedNpmPackage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UploadedNpmPackage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -3987,6 +4868,10 @@
                                     }
                                 case 3: {
                                         message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.artifactRegistryPackage = reader.string();
                                         break;
                                     }
                                 default:
@@ -4037,6 +4922,9 @@
                                 if (error)
                                     return "pushTiming." + error;
                             }
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                if (!$util.isString(message.artifactRegistryPackage))
+                                    return "artifactRegistryPackage: string expected";
                             return null;
                         };
     
@@ -4064,6 +4952,8 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.UploadedNpmPackage.pushTiming: object expected");
                                 message.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.pushTiming);
                             }
+                            if (object.artifactRegistryPackage != null)
+                                message.artifactRegistryPackage = String(object.artifactRegistryPackage);
                             return message;
                         };
     
@@ -4084,6 +4974,7 @@
                                 object.uri = "";
                                 object.fileHashes = null;
                                 object.pushTiming = null;
+                                object.artifactRegistryPackage = "";
                             }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
@@ -4091,6 +4982,8 @@
                                 object.fileHashes = $root.google.devtools.cloudbuild.v1.FileHashes.toObject(message.fileHashes, options);
                             if (message.pushTiming != null && message.hasOwnProperty("pushTiming"))
                                 object.pushTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pushTiming, options);
+                            if (message.artifactRegistryPackage != null && message.hasOwnProperty("artifactRegistryPackage"))
+                                object.artifactRegistryPackage = message.artifactRegistryPackage;
                             return object;
                         };
     
@@ -4317,12 +5210,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * BuildStep _automapSubstitutions.
-                         * @member {"automapSubstitutions"|undefined} _automapSubstitutions
-                         * @memberof google.devtools.cloudbuild.v1.BuildStep
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(BuildStep.prototype, "_automapSubstitutions", {
                             get: $util.oneOfGetter($oneOfFields = ["automapSubstitutions"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -4424,12 +5312,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BuildStep.decode = function decode(reader, length) {
+                        BuildStep.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildStep();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5018,12 +5908,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Volume.decode = function decode(reader, length) {
+                        Volume.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Volume();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5347,12 +6239,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Results.decode = function decode(reader, length) {
+                        Results.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Results();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         if (!(message.images && message.images.length))
@@ -5819,12 +6713,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ArtifactResult.decode = function decode(reader, length) {
+                        ArtifactResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ArtifactResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.location = reader.string();
@@ -6402,12 +7298,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Build.decode = function decode(reader, length) {
+                        Build.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Build(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 45: {
                                         message.name = reader.string();
@@ -7311,12 +8209,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Warning.decode = function decode(reader, length) {
+                            Warning.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Build.Warning();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.text = reader.string();
@@ -7585,12 +8485,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FailureInfo.decode = function decode(reader, length) {
+                            FailureInfo.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Build.FailureInfo();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.type = reader.int32();
@@ -7897,12 +8799,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Dependency.decode = function decode(reader, length) {
+                        Dependency.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Dependency();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.empty = reader.bool();
@@ -8169,12 +9073,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GitSourceDependency.decode = function decode(reader, length) {
+                            GitSourceDependency.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Dependency.GitSourceDependency();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.repository = $root.google.devtools.cloudbuild.v1.Dependency.GitSourceRepository.decode(reader, reader.uint32());
@@ -8465,12 +9371,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GitSourceRepository.decode = function decode(reader, length) {
+                            GitSourceRepository.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Dependency.GitSourceRepository();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.url = reader.string();
@@ -8693,12 +9601,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitConfig.decode = function decode(reader, length) {
+                        GitConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.http = $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig.decode(reader, reader.uint32());
@@ -8898,12 +9808,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            HttpConfig.decode = function decode(reader, length) {
+                            HttpConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitConfig.HttpConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.proxySecretVersionName = reader.string();
@@ -9169,12 +10081,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Artifacts.decode = function decode(reader, length) {
+                        Artifacts.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.images && message.images.length))
@@ -9550,12 +10464,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ArtifactObjects.decode = function decode(reader, length) {
+                            ArtifactObjects.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.location = reader.string();
@@ -9842,12 +10758,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MavenArtifact.decode = function decode(reader, length) {
+                            MavenArtifact.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.MavenArtifact();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.repository = reader.string();
@@ -10149,12 +11067,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GoModule.decode = function decode(reader, length) {
+                            GoModule.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.GoModule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.repositoryName = reader.string();
@@ -10426,12 +11346,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PythonPackage.decode = function decode(reader, length) {
+                            PythonPackage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.PythonPackage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.repository = reader.string();
@@ -10667,12 +11589,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NpmPackage.decode = function decode(reader, length) {
+                            NpmPackage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Artifacts.NpmPackage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.repository = reader.string();
@@ -10897,12 +11821,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TimeSpan.decode = function decode(reader, length) {
+                        TimeSpan.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.TimeSpan();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -11123,12 +12049,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BuildOperationMetadata.decode = function decode(reader, length) {
+                        BuildOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.build = $root.google.devtools.cloudbuild.v1.Build.decode(reader, reader.uint32());
@@ -11255,6 +12183,8 @@
                          * @property {google.devtools.cloudbuild.v1.IStorageSource|null} [resolvedStorageSource] SourceProvenance resolvedStorageSource
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [resolvedRepoSource] SourceProvenance resolvedRepoSource
                          * @property {google.devtools.cloudbuild.v1.IStorageSourceManifest|null} [resolvedStorageSourceManifest] SourceProvenance resolvedStorageSourceManifest
+                         * @property {google.devtools.cloudbuild.v1.IConnectedRepository|null} [resolvedConnectedRepository] SourceProvenance resolvedConnectedRepository
+                         * @property {google.devtools.cloudbuild.v1.IGitSource|null} [resolvedGitSource] SourceProvenance resolvedGitSource
                          * @property {Object.<string,google.devtools.cloudbuild.v1.IFileHashes>|null} [fileHashes] SourceProvenance fileHashes
                          */
     
@@ -11299,6 +12229,22 @@
                         SourceProvenance.prototype.resolvedStorageSourceManifest = null;
     
                         /**
+                         * SourceProvenance resolvedConnectedRepository.
+                         * @member {google.devtools.cloudbuild.v1.IConnectedRepository|null|undefined} resolvedConnectedRepository
+                         * @memberof google.devtools.cloudbuild.v1.SourceProvenance
+                         * @instance
+                         */
+                        SourceProvenance.prototype.resolvedConnectedRepository = null;
+    
+                        /**
+                         * SourceProvenance resolvedGitSource.
+                         * @member {google.devtools.cloudbuild.v1.IGitSource|null|undefined} resolvedGitSource
+                         * @memberof google.devtools.cloudbuild.v1.SourceProvenance
+                         * @instance
+                         */
+                        SourceProvenance.prototype.resolvedGitSource = null;
+    
+                        /**
                          * SourceProvenance fileHashes.
                          * @member {Object.<string,google.devtools.cloudbuild.v1.IFileHashes>} fileHashes
                          * @memberof google.devtools.cloudbuild.v1.SourceProvenance
@@ -11341,6 +12287,10 @@
                                 $root.google.devtools.cloudbuild.v1.RepoSource.encode(message.resolvedRepoSource, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.resolvedStorageSourceManifest != null && Object.hasOwnProperty.call(message, "resolvedStorageSourceManifest"))
                                 $root.google.devtools.cloudbuild.v1.StorageSourceManifest.encode(message.resolvedStorageSourceManifest, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.resolvedConnectedRepository != null && Object.hasOwnProperty.call(message, "resolvedConnectedRepository"))
+                                $root.google.devtools.cloudbuild.v1.ConnectedRepository.encode(message.resolvedConnectedRepository, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.resolvedGitSource != null && Object.hasOwnProperty.call(message, "resolvedGitSource"))
+                                $root.google.devtools.cloudbuild.v1.GitSource.encode(message.resolvedGitSource, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -11368,12 +12318,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceProvenance.decode = function decode(reader, length) {
+                        SourceProvenance.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.SourceProvenance(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.resolvedStorageSource = $root.google.devtools.cloudbuild.v1.StorageSource.decode(reader, reader.uint32());
@@ -11385,6 +12337,14 @@
                                     }
                                 case 9: {
                                         message.resolvedStorageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.resolvedConnectedRepository = $root.google.devtools.cloudbuild.v1.ConnectedRepository.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.resolvedGitSource = $root.google.devtools.cloudbuild.v1.GitSource.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -11460,6 +12420,16 @@
                                 if (error)
                                     return "resolvedStorageSourceManifest." + error;
                             }
+                            if (message.resolvedConnectedRepository != null && message.hasOwnProperty("resolvedConnectedRepository")) {
+                                var error = $root.google.devtools.cloudbuild.v1.ConnectedRepository.verify(message.resolvedConnectedRepository);
+                                if (error)
+                                    return "resolvedConnectedRepository." + error;
+                            }
+                            if (message.resolvedGitSource != null && message.hasOwnProperty("resolvedGitSource")) {
+                                var error = $root.google.devtools.cloudbuild.v1.GitSource.verify(message.resolvedGitSource);
+                                if (error)
+                                    return "resolvedGitSource." + error;
+                            }
                             if (message.fileHashes != null && message.hasOwnProperty("fileHashes")) {
                                 if (!$util.isObject(message.fileHashes))
                                     return "fileHashes: object expected";
@@ -11500,6 +12470,16 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.SourceProvenance.resolvedStorageSourceManifest: object expected");
                                 message.resolvedStorageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.fromObject(object.resolvedStorageSourceManifest);
                             }
+                            if (object.resolvedConnectedRepository != null) {
+                                if (typeof object.resolvedConnectedRepository !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.SourceProvenance.resolvedConnectedRepository: object expected");
+                                message.resolvedConnectedRepository = $root.google.devtools.cloudbuild.v1.ConnectedRepository.fromObject(object.resolvedConnectedRepository);
+                            }
+                            if (object.resolvedGitSource != null) {
+                                if (typeof object.resolvedGitSource !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.SourceProvenance.resolvedGitSource: object expected");
+                                message.resolvedGitSource = $root.google.devtools.cloudbuild.v1.GitSource.fromObject(object.resolvedGitSource);
+                            }
                             if (object.fileHashes) {
                                 if (typeof object.fileHashes !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.SourceProvenance.fileHashes: object expected");
@@ -11532,6 +12512,8 @@
                                 object.resolvedStorageSource = null;
                                 object.resolvedRepoSource = null;
                                 object.resolvedStorageSourceManifest = null;
+                                object.resolvedConnectedRepository = null;
+                                object.resolvedGitSource = null;
                             }
                             if (message.resolvedStorageSource != null && message.hasOwnProperty("resolvedStorageSource"))
                                 object.resolvedStorageSource = $root.google.devtools.cloudbuild.v1.StorageSource.toObject(message.resolvedStorageSource, options);
@@ -11545,6 +12527,10 @@
                                 object.resolvedRepoSource = $root.google.devtools.cloudbuild.v1.RepoSource.toObject(message.resolvedRepoSource, options);
                             if (message.resolvedStorageSourceManifest != null && message.hasOwnProperty("resolvedStorageSourceManifest"))
                                 object.resolvedStorageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.toObject(message.resolvedStorageSourceManifest, options);
+                            if (message.resolvedConnectedRepository != null && message.hasOwnProperty("resolvedConnectedRepository"))
+                                object.resolvedConnectedRepository = $root.google.devtools.cloudbuild.v1.ConnectedRepository.toObject(message.resolvedConnectedRepository, options);
+                            if (message.resolvedGitSource != null && message.hasOwnProperty("resolvedGitSource"))
+                                object.resolvedGitSource = $root.google.devtools.cloudbuild.v1.GitSource.toObject(message.resolvedGitSource, options);
                             return object;
                         };
     
@@ -11664,12 +12650,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileHashes.decode = function decode(reader, length) {
+                        FileHashes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.FileHashes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.fileHash && message.fileHash.length))
@@ -11897,12 +12885,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Hash.decode = function decode(reader, length) {
+                        Hash.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Hash();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -12191,12 +13181,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Secrets.decode = function decode(reader, length) {
+                        Secrets.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Secrets();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.secretManager && message.secretManager.length))
@@ -12458,12 +13450,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InlineSecret.decode = function decode(reader, length) {
+                        InlineSecret.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.InlineSecret(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.kmsKeyName = reader.string();
@@ -12721,12 +13715,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SecretManagerSecret.decode = function decode(reader, length) {
+                        SecretManagerSecret.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.SecretManagerSecret();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.versionName = reader.string();
@@ -12950,12 +13946,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Secret.decode = function decode(reader, length) {
+                        Secret.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Secret(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.kmsKeyName = reader.string();
@@ -13224,12 +14222,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateBuildRequest.decode = function decode(reader, length) {
+                        CreateBuildRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.CreateBuildRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.parent = reader.string();
@@ -13479,12 +14479,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetBuildRequest.decode = function decode(reader, length) {
+                        GetBuildRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GetBuildRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.name = reader.string();
@@ -13751,12 +14753,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListBuildsRequest.decode = function decode(reader, length) {
+                        ListBuildsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ListBuildsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 9: {
                                         message.parent = reader.string();
@@ -14016,12 +15020,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListBuildsResponse.decode = function decode(reader, length) {
+                        ListBuildsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ListBuildsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.builds && message.builds.length))
@@ -14273,12 +15279,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CancelBuildRequest.decode = function decode(reader, length) {
+                        CancelBuildRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.CancelBuildRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.name = reader.string();
@@ -14512,12 +15520,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ApproveBuildRequest.decode = function decode(reader, length) {
+                        ApproveBuildRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ApproveBuildRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -14755,12 +15765,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BuildApproval.decode = function decode(reader, length) {
+                        BuildApproval.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildApproval();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.state = reader.int32();
@@ -15047,12 +16059,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ApprovalConfig.decode = function decode(reader, length) {
+                        ApprovalConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ApprovalConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.approvalRequired = reader.bool();
@@ -15294,12 +16308,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ApprovalResult.decode = function decode(reader, length) {
+                        ApprovalResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ApprovalResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.approverAccount = reader.string();
@@ -15660,12 +16676,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitRepoSource.decode = function decode(reader, length) {
+                        GitRepoSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitRepoSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
@@ -16035,12 +17053,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitFileSource.decode = function decode(reader, length) {
+                        GitFileSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitFileSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -16615,12 +17635,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BuildTrigger.decode = function decode(reader, length) {
+                        BuildTrigger.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildTrigger(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 34: {
                                         message.resourceName = reader.string();
@@ -17266,12 +18288,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RepositoryEventConfig.decode = function decode(reader, length) {
+                        RepositoryEventConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.RepositoryEventConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.repository = reader.string();
@@ -17634,12 +18658,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitHubEventsConfig.decode = function decode(reader, length) {
+                        GitHubEventsConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitHubEventsConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.installationId = reader.int64();
@@ -17956,12 +18982,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PubsubConfig.decode = function decode(reader, length) {
+                        PubsubConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PubsubConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.subscription = reader.string();
@@ -18275,12 +19303,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        WebhookConfig.decode = function decode(reader, length) {
+                        WebhookConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.WebhookConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.secret = reader.string();
@@ -18571,12 +19601,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PullRequestFilter.decode = function decode(reader, length) {
+                        PullRequestFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PullRequestFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.branch = reader.string();
@@ -18880,12 +19912,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PushFilter.decode = function decode(reader, length) {
+                        PushFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PushFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.branch = reader.string();
@@ -19140,12 +20174,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateBuildTriggerRequest.decode = function decode(reader, length) {
+                        CreateBuildTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.parent = reader.string();
@@ -19395,12 +20431,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetBuildTriggerRequest.decode = function decode(reader, length) {
+                        GetBuildTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GetBuildTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.name = reader.string();
@@ -19656,12 +20694,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListBuildTriggersRequest.decode = function decode(reader, length) {
+                        ListBuildTriggersRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ListBuildTriggersRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.parent = reader.string();
@@ -19909,12 +20949,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListBuildTriggersResponse.decode = function decode(reader, length) {
+                        ListBuildTriggersResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ListBuildTriggersResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.triggers && message.triggers.length))
@@ -20166,12 +21208,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteBuildTriggerRequest.decode = function decode(reader, length) {
+                        DeleteBuildTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.name = reader.string();
@@ -20427,12 +21471,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateBuildTriggerRequest.decode = function decode(reader, length) {
+                        UpdateBuildTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectId = reader.string();
@@ -20853,12 +21899,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BuildOptions.decode = function decode(reader, length) {
+                        BuildOptions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.sourceProvenanceHash && message.sourceProvenanceHash.length))
@@ -21585,12 +22633,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PoolOption.decode = function decode(reader, length) {
+                            PoolOption.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildOptions.PoolOption();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -21873,12 +22923,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReceiveTriggerWebhookRequest.decode = function decode(reader, length) {
+                        ReceiveTriggerWebhookRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.name = reader.string();
@@ -22119,12 +23171,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReceiveTriggerWebhookResponse.decode = function decode(reader, length) {
+                        ReceiveTriggerWebhookResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -22393,12 +23447,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitHubEnterpriseConfig.decode = function decode(reader, length) {
+                        GitHubEnterpriseConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitHubEnterpriseConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 7: {
                                         message.name = reader.string();
@@ -22750,12 +23806,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitHubEnterpriseSecrets.decode = function decode(reader, length) {
+                        GitHubEnterpriseSecrets.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GitHubEnterpriseSecrets();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.privateKeyVersionName = reader.string();
@@ -23105,12 +24163,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        WorkerPool.decode = function decode(reader, length) {
+                        WorkerPool.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.WorkerPool(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -23560,12 +24620,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrivatePoolV1Config.decode = function decode(reader, length) {
+                        PrivatePoolV1Config.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.workerConfig = $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig.decode(reader, reader.uint32());
@@ -23723,6 +24785,7 @@
                              * @interface IWorkerConfig
                              * @property {string|null} [machineType] WorkerConfig machineType
                              * @property {number|Long|null} [diskSizeGb] WorkerConfig diskSizeGb
+                             * @property {boolean|null} [enableNestedVirtualization] WorkerConfig enableNestedVirtualization
                              */
     
                             /**
@@ -23757,6 +24820,23 @@
                             WorkerConfig.prototype.diskSizeGb = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                             /**
+                             * WorkerConfig enableNestedVirtualization.
+                             * @member {boolean|null|undefined} enableNestedVirtualization
+                             * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig
+                             * @instance
+                             */
+                            WorkerConfig.prototype.enableNestedVirtualization = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(WorkerConfig.prototype, "_enableNestedVirtualization", {
+                                get: $util.oneOfGetter($oneOfFields = ["enableNestedVirtualization"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new WorkerConfig instance using the specified properties.
                              * @function create
                              * @memberof google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig
@@ -23784,6 +24864,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineType);
                                 if (message.diskSizeGb != null && Object.hasOwnProperty.call(message, "diskSizeGb"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.diskSizeGb);
+                                if (message.enableNestedVirtualization != null && Object.hasOwnProperty.call(message, "enableNestedVirtualization"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableNestedVirtualization);
                                 return writer;
                             };
     
@@ -23811,12 +24893,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            WorkerConfig.decode = function decode(reader, length) {
+                            WorkerConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.machineType = reader.string();
@@ -23824,6 +24908,10 @@
                                         }
                                     case 2: {
                                             message.diskSizeGb = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.enableNestedVirtualization = reader.bool();
                                             break;
                                         }
                                     default:
@@ -23861,12 +24949,18 @@
                             WorkerConfig.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.machineType != null && message.hasOwnProperty("machineType"))
                                     if (!$util.isString(message.machineType))
                                         return "machineType: string expected";
                                 if (message.diskSizeGb != null && message.hasOwnProperty("diskSizeGb"))
                                     if (!$util.isInteger(message.diskSizeGb) && !(message.diskSizeGb && $util.isInteger(message.diskSizeGb.low) && $util.isInteger(message.diskSizeGb.high)))
                                         return "diskSizeGb: integer|Long expected";
+                                if (message.enableNestedVirtualization != null && message.hasOwnProperty("enableNestedVirtualization")) {
+                                    properties._enableNestedVirtualization = 1;
+                                    if (typeof message.enableNestedVirtualization !== "boolean")
+                                        return "enableNestedVirtualization: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -23893,6 +24987,8 @@
                                         message.diskSizeGb = object.diskSizeGb;
                                     else if (typeof object.diskSizeGb === "object")
                                         message.diskSizeGb = new $util.LongBits(object.diskSizeGb.low >>> 0, object.diskSizeGb.high >>> 0).toNumber();
+                                if (object.enableNestedVirtualization != null)
+                                    message.enableNestedVirtualization = Boolean(object.enableNestedVirtualization);
                                 return message;
                             };
     
@@ -23924,6 +25020,11 @@
                                         object.diskSizeGb = options.longs === String ? String(message.diskSizeGb) : message.diskSizeGb;
                                     else
                                         object.diskSizeGb = options.longs === String ? $util.Long.prototype.toString.call(message.diskSizeGb) : options.longs === Number ? new $util.LongBits(message.diskSizeGb.low >>> 0, message.diskSizeGb.high >>> 0).toNumber() : message.diskSizeGb;
+                                if (message.enableNestedVirtualization != null && message.hasOwnProperty("enableNestedVirtualization")) {
+                                    object.enableNestedVirtualization = message.enableNestedVirtualization;
+                                    if (options.oneofs)
+                                        object._enableNestedVirtualization = "enableNestedVirtualization";
+                                }
                                 return object;
                             };
     
@@ -24063,12 +25164,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NetworkConfig.decode = function decode(reader, length) {
+                            NetworkConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.peeredNetwork = reader.string();
@@ -24353,12 +25456,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PrivateServiceConnect.decode = function decode(reader, length) {
+                            PrivateServiceConnect.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.networkAttachment = reader.string();
@@ -24617,12 +25722,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateWorkerPoolRequest.decode = function decode(reader, length) {
+                        CreateWorkerPoolRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -24862,12 +25969,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetWorkerPoolRequest.decode = function decode(reader, length) {
+                        GetWorkerPoolRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.GetWorkerPoolRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -25098,12 +26207,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteWorkerPoolRequest.decode = function decode(reader, length) {
+                        DeleteWorkerPoolRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -25360,12 +26471,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateWorkerPoolRequest.decode = function decode(reader, length) {
+                        UpdateWorkerPoolRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.workerPool = $root.google.devtools.cloudbuild.v1.WorkerPool.decode(reader, reader.uint32());
@@ -25620,12 +26733,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListWorkerPoolsRequest.decode = function decode(reader, length) {
+                        ListWorkerPoolsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -25861,12 +26976,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListWorkerPoolsResponse.decode = function decode(reader, length) {
+                        ListWorkerPoolsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ListWorkerPoolsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.workerPools && message.workerPools.length))
@@ -26118,12 +27235,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateWorkerPoolOperationMetadata.decode = function decode(reader, length) {
+                        CreateWorkerPoolOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.workerPool = reader.string();
@@ -26378,12 +27497,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateWorkerPoolOperationMetadata.decode = function decode(reader, length) {
+                        UpdateWorkerPoolOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.workerPool = reader.string();
@@ -26638,12 +27759,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteWorkerPoolOperationMetadata.decode = function decode(reader, length) {
+                        DeleteWorkerPoolOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.workerPool = reader.string();
@@ -26954,12 +28077,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -27306,12 +28431,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RunWorkflowCustomOperationMetadata.decode = function decode(reader, length) {
+                        RunWorkflowCustomOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.RunWorkflowCustomOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -28237,12 +29364,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Connection.decode = function decode(reader, length) {
+                        Connection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.Connection(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -28715,12 +29844,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InstallationState.decode = function decode(reader, length) {
+                        InstallationState.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.InstallationState();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.stage = reader.int32();
@@ -29019,12 +30150,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchLinkableRepositoriesRequest.decode = function decode(reader, length) {
+                        FetchLinkableRepositoriesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.connection = reader.string();
@@ -29260,12 +30393,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchLinkableRepositoriesResponse.decode = function decode(reader, length) {
+                        FetchLinkableRepositoriesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchLinkableRepositoriesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.repositories && message.repositories.length))
@@ -29506,12 +30641,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitHubConfig.decode = function decode(reader, length) {
+                        GitHubConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.GitHubConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.authorizerCredential = $root.google.devtools.cloudbuild.v2.OAuthCredential.decode(reader, reader.uint32());
@@ -29840,12 +30977,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitHubEnterpriseConfig.decode = function decode(reader, length) {
+                        GitHubEnterpriseConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.GitHubEnterpriseConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostUri = reader.string();
@@ -30251,12 +31390,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitLabConfig.decode = function decode(reader, length) {
+                        GitLabConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.GitLabConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostUri = reader.string();
@@ -30608,12 +31749,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BitbucketDataCenterConfig.decode = function decode(reader, length) {
+                        BitbucketDataCenterConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.BitbucketDataCenterConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostUri = reader.string();
@@ -30932,12 +32075,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BitbucketCloudConfig.decode = function decode(reader, length) {
+                        BitbucketCloudConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.BitbucketCloudConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.workspace = reader.string();
@@ -31182,12 +32327,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ServiceDirectoryConfig.decode = function decode(reader, length) {
+                        ServiceDirectoryConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.ServiceDirectoryConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.service = reader.string();
@@ -31453,12 +32600,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Repository.decode = function decode(reader, length) {
+                        Repository.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.Repository(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -31784,12 +32933,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OAuthCredential.decode = function decode(reader, length) {
+                        OAuthCredential.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.OAuthCredential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.oauthTokenSecretVersion = reader.string();
@@ -32011,12 +33162,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UserCredential.decode = function decode(reader, length) {
+                        UserCredential.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.UserCredential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.userTokenSecretVersion = reader.string();
@@ -32249,12 +33402,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConnectionRequest.decode = function decode(reader, length) {
+                        CreateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.CreateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -32482,12 +33637,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetConnectionRequest.decode = function decode(reader, length) {
+                        GetConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.GetConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -32707,12 +33864,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionsRequest.decode = function decode(reader, length) {
+                        ListConnectionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.ListConnectionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -32948,12 +34107,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionsResponse.decode = function decode(reader, length) {
+                        ListConnectionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.ListConnectionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.connections && message.connections.length))
@@ -33216,12 +34377,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateConnectionRequest.decode = function decode(reader, length) {
+                        UpdateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.UpdateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.connection = $root.google.devtools.cloudbuild.v2.Connection.decode(reader, reader.uint32());
@@ -33488,12 +34651,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConnectionRequest.decode = function decode(reader, length) {
+                        DeleteConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.DeleteConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -33738,12 +34903,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateRepositoryRequest.decode = function decode(reader, length) {
+                        CreateRepositoryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.CreateRepositoryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -33984,12 +35151,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateRepositoriesRequest.decode = function decode(reader, length) {
+                        BatchCreateRepositoriesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.BatchCreateRepositoriesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -34221,12 +35390,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BatchCreateRepositoriesResponse.decode = function decode(reader, length) {
+                        BatchCreateRepositoriesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.BatchCreateRepositoriesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.repositories && message.repositories.length))
@@ -34443,12 +35614,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetRepositoryRequest.decode = function decode(reader, length) {
+                        GetRepositoryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.GetRepositoryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -34679,12 +35852,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRepositoriesRequest.decode = function decode(reader, length) {
+                        ListRepositoriesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.ListRepositoriesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -34932,12 +36107,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRepositoriesResponse.decode = function decode(reader, length) {
+                        ListRepositoriesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.ListRepositoriesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.repositories && message.repositories.length))
@@ -35189,12 +36366,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteRepositoryRequest.decode = function decode(reader, length) {
+                        DeleteRepositoryRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.DeleteRepositoryRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -35417,12 +36596,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadWriteTokenRequest.decode = function decode(reader, length) {
+                        FetchReadWriteTokenRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchReadWriteTokenRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.repository = reader.string();
@@ -35620,12 +36801,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadTokenRequest.decode = function decode(reader, length) {
+                        FetchReadTokenRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchReadTokenRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.repository = reader.string();
@@ -35834,12 +37017,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadTokenResponse.decode = function decode(reader, length) {
+                        FetchReadTokenResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchReadTokenResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.token = reader.string();
@@ -36066,12 +37251,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchReadWriteTokenResponse.decode = function decode(reader, length) {
+                        FetchReadWriteTokenResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.token = reader.string();
@@ -36309,12 +37496,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProcessWebhookRequest.decode = function decode(reader, length) {
+                        ProcessWebhookRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.ProcessWebhookRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -36553,12 +37742,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchGitRefsRequest.decode = function decode(reader, length) {
+                        FetchGitRefsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchGitRefsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.repository = reader.string();
@@ -36811,12 +38002,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchGitRefsResponse.decode = function decode(reader, length) {
+                        FetchGitRefsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v2.FetchGitRefsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.refNames && message.refNames.length))
@@ -37059,12 +38252,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -37409,12 +38604,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -37793,12 +38990,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -38025,12 +39224,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -38394,12 +39595,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -38738,6 +39941,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -38839,6 +40043,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -38885,6 +40097,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -38912,12 +40126,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -38963,6 +40179,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -39057,6 +40277,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -39151,6 +40374,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -39180,6 +40405,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -39210,6 +40436,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -39351,12 +40579,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -39618,12 +40848,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -39826,12 +41058,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40034,12 +41268,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40242,12 +41478,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40515,12 +41753,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -40894,12 +42134,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -41102,12 +42344,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -41334,12 +42578,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -41612,12 +42858,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -41990,12 +43238,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpBody.decode = function decode(reader, length) {
+                HttpBody.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpBody();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.contentType = reader.string();
@@ -42320,12 +43570,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -42715,12 +43967,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -42933,12 +44187,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RoutingRule.decode = function decode(reader, length) {
+                RoutingRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RoutingRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.routingParameters && message.routingParameters.length))
@@ -43166,12 +44422,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RoutingParameter.decode = function decode(reader, length) {
+                RoutingParameter.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RoutingParameter();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.field = reader.string();
@@ -43396,12 +44654,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -43796,12 +45056,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -44463,12 +45725,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -44948,12 +46212,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -45192,12 +46458,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -45448,12 +46716,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -45793,12 +47063,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -46172,12 +47444,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -46697,12 +47971,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -46968,12 +48244,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -47287,12 +48565,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -47528,12 +48808,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -47785,12 +49067,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48093,12 +49377,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48597,12 +49883,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -49217,12 +50505,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -49665,12 +50955,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -49700,12 +50987,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -50431,12 +51720,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -50727,12 +52018,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -51013,12 +52306,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -51325,12 +52620,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -51516,6 +52813,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -51575,6 +52873,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -51609,6 +52915,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -51636,12 +52944,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -51663,6 +52973,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -51723,6 +53037,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -51759,6 +53076,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -51782,6 +53101,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -51796,6 +53116,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -51994,12 +53316,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -52445,12 +53769,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -52784,12 +54110,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -53060,12 +54388,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -53595,12 +54925,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -53979,12 +55311,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -54269,12 +55603,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -54544,12 +55880,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -54855,12 +56193,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -55123,12 +56463,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -55449,12 +56791,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -55690,12 +57034,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -55904,12 +57250,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -56092,12 +57440,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -56320,12 +57670,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -56820,12 +58172,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -57100,12 +58454,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -57336,12 +58692,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -57589,12 +58947,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -57824,12 +59184,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -58027,12 +59389,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -58241,12 +59605,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -58473,12 +59839,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -58725,12 +60093,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

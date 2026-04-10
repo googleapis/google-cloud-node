@@ -17,31 +17,23 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
-import * as path from 'path';
-
+import type * as gax from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v3/query_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './query_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
- *  The QueryService API is used to manage time series data in Stackdriver
+ *  The QueryService API is used to manage time series data in Cloud
  *  Monitoring. Time series data is a collection of data points that describes
  *  the time-varying values of a metric.
  * @class
@@ -50,10 +42,15 @@ const version = require('../../../package.json').version;
 export class QueryServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('monitoring');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -61,6 +58,7 @@ export class QueryServiceClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
   queryServiceStub?: Promise<{[name: string]: Function}>;
@@ -70,7 +68,7 @@ export class QueryServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -87,37 +85,54 @@ export class QueryServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new QueryServiceClient({fallback: true}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof QueryServiceClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    }
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    this._servicePath = 'monitoring.' + this._universeDomain;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -126,43 +141,39 @@ export class QueryServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
-    if (typeof process !== 'undefined' && 'versions' in process) {
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
+    if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -186,42 +197,36 @@ export class QueryServiceClient {
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/services/{service}'
       ),
-      folderServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
+      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/alertPolicies/{alert_policy}'
       ),
-      organizationAlertPolicyConditionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-        ),
-      organizationChannelDescriptorPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-        ),
+      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
+      ),
+      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
+      ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/groups/{group}'
       ),
-      organizationNotificationChannelPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/notificationChannels/{notification_channel}'
-        ),
+      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/notificationChannels/{notification_channel}'
+      ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/services/{service}'
       ),
-      organizationServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
-      organizationUptimeCheckConfigPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-        ),
+      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
+      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
+      ),
       projectAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}'
       ),
@@ -240,12 +245,14 @@ export class QueryServiceClient {
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/services/{service}'
       ),
-      projectServiceServiceLevelObjectivePathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-        ),
+      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
+      ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
+      ),
+      snoozePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/snoozes/{snooze}'
       ),
     };
 
@@ -253,25 +260,22 @@ export class QueryServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      queryTimeSeries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'timeSeriesData'
-      ),
+      queryTimeSeries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'timeSeriesData')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.monitoring.v3.QueryService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.monitoring.v3.QueryService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -294,38 +298,37 @@ export class QueryServiceClient {
     // Put together the "service stub" for
     // google.monitoring.v3.QueryService.
     this.queryServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.monitoring.v3.QueryService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.monitoring.v3.QueryService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.QueryService,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const queryServiceStubMethods = ['queryTimeSeries'];
+    const queryServiceStubMethods =
+        ['queryTimeSeries'];
     for (const methodName of queryServiceStubMethods) {
       const callPromise = this.queryServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -336,19 +339,38 @@ export class QueryServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
     return 'monitoring.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
     return 'monitoring.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -368,7 +390,7 @@ export class QueryServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/monitoring',
-      'https://www.googleapis.com/auth/monitoring.read',
+      'https://www.googleapis.com/auth/monitoring.read'
     ];
   }
 
@@ -378,9 +400,8 @@ export class QueryServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -392,212 +413,233 @@ export class QueryServiceClient {
   // -- Service calls --
   // -------------------
 
+ /**
+ * Queries time series by using Monitoring Query Language (MQL). We recommend
+ * using PromQL instead of MQL. For more information about the status of MQL,
+ * see the [MQL deprecation
+ * notice](https://cloud.google.com/stackdriver/docs/deprecations/mql).
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+ *   to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ * @param {string} request.query
+ *   Required. The query in the [Monitoring Query
+ *   Language](https://cloud.google.com/monitoring/mql/reference) format.
+ *   The default time zone is in UTC.
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of time_series_data to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `nextPageToken` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.monitoring.v3.TimeSeriesData|TimeSeriesData}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `queryTimeSeriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated QueryTimeSeries is deprecated and may be removed in a future version.
+ */
   queryTimeSeries(
-    request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.monitoring.v3.ITimeSeriesData[],
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse,
-    ]
-  >;
+      request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.monitoring.v3.ITimeSeriesData[],
+        protos.google.monitoring.v3.IQueryTimeSeriesRequest|null,
+        protos.google.monitoring.v3.IQueryTimeSeriesResponse
+      ]>;
   queryTimeSeries(
-    request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeriesData
-    >
-  ): void;
-  queryTimeSeries(
-    request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-    callback: PaginationCallback<
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeriesData
-    >
-  ): void;
-  /**
-   * Queries time series using Monitoring Query Language. This method does not require a Workspace.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.query
-   *   Required. The query in the [Monitoring Query
-   *   Language](https://cloud.google.com/monitoring/mql/reference) format.
-   *   The default time zone is in UTC.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of time_series_data to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [TimeSeriesData]{@link google.monitoring.v3.TimeSeriesData}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `queryTimeSeriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  queryTimeSeries(
-    request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-          | protos.google.monitoring.v3.IQueryTimeSeriesResponse
-          | null
-          | undefined,
-          protos.google.monitoring.v3.ITimeSeriesData
-        >,
-    callback?: PaginationCallback<
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse | null | undefined,
-      protos.google.monitoring.v3.ITimeSeriesData
-    >
-  ): Promise<
-    [
-      protos.google.monitoring.v3.ITimeSeriesData[],
-      protos.google.monitoring.v3.IQueryTimeSeriesRequest | null,
-      protos.google.monitoring.v3.IQueryTimeSeriesResponse,
-    ]
-  > | void {
+          protos.google.monitoring.v3.IQueryTimeSeriesResponse|null|undefined,
+          protos.google.monitoring.v3.ITimeSeriesData>): void;
+  queryTimeSeries(
+      request: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+      callback: PaginationCallback<
+          protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+          protos.google.monitoring.v3.IQueryTimeSeriesResponse|null|undefined,
+          protos.google.monitoring.v3.ITimeSeriesData>): void;
+  queryTimeSeries(
+      request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+          protos.google.monitoring.v3.IQueryTimeSeriesResponse|null|undefined,
+          protos.google.monitoring.v3.ITimeSeriesData>,
+      callback?: PaginationCallback<
+          protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+          protos.google.monitoring.v3.IQueryTimeSeriesResponse|null|undefined,
+          protos.google.monitoring.v3.ITimeSeriesData>):
+      Promise<[
+        protos.google.monitoring.v3.ITimeSeriesData[],
+        protos.google.monitoring.v3.IQueryTimeSeriesRequest|null,
+        protos.google.monitoring.v3.IQueryTimeSeriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$QueryService-$QueryTimeSeries','QueryTimeSeries is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    const wrappedCallback: PaginationCallback<
+      protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+      protos.google.monitoring.v3.IQueryTimeSeriesResponse|null|undefined,
+      protos.google.monitoring.v3.ITimeSeriesData>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('queryTimeSeries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryTimeSeries request %j', request);
+    return this.innerApiCalls
+      .queryTimeSeries(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.monitoring.v3.ITimeSeriesData[],
+        protos.google.monitoring.v3.IQueryTimeSeriesRequest|null,
+        protos.google.monitoring.v3.IQueryTimeSeriesResponse
+      ]) => {
+        this._log.info('queryTimeSeries values %j', response);
+        return [response, input, output];
       });
-    this.initialize();
-    return this.innerApiCalls.queryTimeSeries(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.query
-   *   Required. The query in the [Monitoring Query
-   *   Language](https://cloud.google.com/monitoring/mql/reference) format.
-   *   The default time zone is in UTC.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of time_series_data to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [TimeSeriesData]{@link google.monitoring.v3.TimeSeriesData} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `queryTimeSeriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `queryTimeSeries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+ *   to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ * @param {string} request.query
+ *   Required. The query in the [Monitoring Query
+ *   Language](https://cloud.google.com/monitoring/mql/reference) format.
+ *   The default time zone is in UTC.
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of time_series_data to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `nextPageToken` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.monitoring.v3.TimeSeriesData|TimeSeriesData} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `queryTimeSeriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @deprecated QueryTimeSeries is deprecated and may be removed in a future version.
+ */
   queryTimeSeriesStream(
-    request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['queryTimeSeries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$QueryService-$QueryTimeSeries','QueryTimeSeries is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this._log.info('queryTimeSeries stream %j', request);
     return this.descriptors.page.queryTimeSeries.createStream(
-      this.innerApiCalls.queryTimeSeries as gax.GaxCall,
+      this.innerApiCalls.queryTimeSeries as GaxCall,
       request,
       callSettings
     );
   }
 
-  /**
-   * Equivalent to `queryTimeSeries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project on which to execute the request. The format is:
-   *
-   *       projects/[PROJECT_ID_OR_NUMBER]
-   * @param {string} request.query
-   *   Required. The query in the [Monitoring Query
-   *   Language](https://cloud.google.com/monitoring/mql/reference) format.
-   *   The default time zone is in UTC.
-   * @param {number} request.pageSize
-   *   A positive number that is the maximum number of time_series_data to return.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [TimeSeriesData]{@link google.monitoring.v3.TimeSeriesData}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.queryTimeSeriesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `queryTimeSeries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The
+ *   [project](https://cloud.google.com/monitoring/api/v3#project_name) on which
+ *   to execute the request. The format is:
+ *
+ *       projects/[PROJECT_ID_OR_NUMBER]
+ * @param {string} request.query
+ *   Required. The query in the [Monitoring Query
+ *   Language](https://cloud.google.com/monitoring/mql/reference) format.
+ *   The default time zone is in UTC.
+ * @param {number} request.pageSize
+ *   A positive number that is the maximum number of time_series_data to return.
+ * @param {string} request.pageToken
+ *   If this field is not empty then it must contain the `nextPageToken` value
+ *   returned by a previous call to this method.  Using this field causes the
+ *   method to return additional results from the previous method call.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.monitoring.v3.TimeSeriesData|TimeSeriesData}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3/query_service.query_time_series.js</caption>
+ * region_tag:monitoring_v3_generated_QueryService_QueryTimeSeries_async
+ * @deprecated QueryTimeSeries is deprecated and may be removed in a future version.
+ */
   queryTimeSeriesAsync(
-    request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.monitoring.v3.ITimeSeriesData> {
+      request?: protos.google.monitoring.v3.IQueryTimeSeriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.monitoring.v3.ITimeSeriesData>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['queryTimeSeries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this.warn('DEP$QueryService-$QueryTimeSeries','QueryTimeSeries is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this._log.info('queryTimeSeries iterate %j', request);
     return this.descriptors.page.queryTimeSeries.asyncIterate(
       this.innerApiCalls['queryTimeSeries'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.monitoring.v3.ITimeSeriesData>;
   }
@@ -612,7 +654,7 @@ export class QueryServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyPath(folder: string, alertPolicy: string) {
+  folderAlertPolicyPath(folder:string,alertPolicy:string) {
     return this.pathTemplates.folderAlertPolicyPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -627,9 +669,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
-      folderAlertPolicyName
-    ).folder;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).folder;
   }
 
   /**
@@ -640,9 +680,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
-      folderAlertPolicyName
-    ).alert_policy;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).alert_policy;
   }
 
   /**
@@ -653,11 +691,7 @@ export class QueryServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyConditionPath(
-    folder: string,
-    alertPolicy: string,
-    condition: string
-  ) {
+  folderAlertPolicyConditionPath(folder:string,alertPolicy:string,condition:string) {
     return this.pathTemplates.folderAlertPolicyConditionPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -672,12 +706,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).folder;
+  matchFolderFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).folder;
   }
 
   /**
@@ -687,12 +717,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -702,12 +728,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromFolderAlertPolicyConditionName(
-    folderAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
-      folderAlertPolicyConditionName
-    ).condition;
+  matchConditionFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).condition;
   }
 
   /**
@@ -717,7 +739,7 @@ export class QueryServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  folderChannelDescriptorPath(folder: string, channelDescriptor: string) {
+  folderChannelDescriptorPath(folder:string,channelDescriptor:string) {
     return this.pathTemplates.folderChannelDescriptorPathTemplate.render({
       folder: folder,
       channel_descriptor: channelDescriptor,
@@ -731,12 +753,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderChannelDescriptorName(
-    folderChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
-      folderChannelDescriptorName
-    ).folder;
+  matchFolderFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).folder;
   }
 
   /**
@@ -746,12 +764,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromFolderChannelDescriptorName(
-    folderChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
-      folderChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -761,7 +775,7 @@ export class QueryServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  folderGroupPath(folder: string, group: string) {
+  folderGroupPath(folder:string,group:string) {
     return this.pathTemplates.folderGroupPathTemplate.render({
       folder: folder,
       group: group,
@@ -776,8 +790,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
-      .folder;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).folder;
   }
 
   /**
@@ -788,8 +801,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
-      .group;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).group;
   }
 
   /**
@@ -799,7 +811,7 @@ export class QueryServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  folderNotificationChannelPath(folder: string, notificationChannel: string) {
+  folderNotificationChannelPath(folder:string,notificationChannel:string) {
     return this.pathTemplates.folderNotificationChannelPathTemplate.render({
       folder: folder,
       notification_channel: notificationChannel,
@@ -813,12 +825,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderNotificationChannelName(
-    folderNotificationChannelName: string
-  ) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
-      folderNotificationChannelName
-    ).folder;
+  matchFolderFromFolderNotificationChannelName(folderNotificationChannelName: string) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).folder;
   }
 
   /**
@@ -828,12 +836,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromFolderNotificationChannelName(
-    folderNotificationChannelName: string
-  ) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
-      folderNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromFolderNotificationChannelName(folderNotificationChannelName: string) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).notification_channel;
   }
 
   /**
@@ -843,7 +847,7 @@ export class QueryServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  folderServicePath(folder: string, service: string) {
+  folderServicePath(folder:string,service:string) {
     return this.pathTemplates.folderServicePathTemplate.render({
       folder: folder,
       service: service,
@@ -858,8 +862,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
-      .folder;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).folder;
   }
 
   /**
@@ -870,8 +873,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
-      .service;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).service;
   }
 
   /**
@@ -882,18 +884,12 @@ export class QueryServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  folderServiceServiceLevelObjectivePath(
-    folder: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
-      {
-        folder: folder,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  folderServiceServiceLevelObjectivePath(folder:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render({
+      folder: folder,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -903,12 +899,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).folder;
+  matchFolderFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).folder;
   }
 
   /**
@@ -918,12 +910,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -933,12 +921,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
-    folderServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
-      folderServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -948,7 +932,7 @@ export class QueryServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  folderUptimeCheckConfigPath(folder: string, uptimeCheckConfig: string) {
+  folderUptimeCheckConfigPath(folder:string,uptimeCheckConfig:string) {
     return this.pathTemplates.folderUptimeCheckConfigPathTemplate.render({
       folder: folder,
       uptime_check_config: uptimeCheckConfig,
@@ -962,12 +946,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderUptimeCheckConfigName(
-    folderUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
-      folderUptimeCheckConfigName
-    ).folder;
+  matchFolderFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).folder;
   }
 
   /**
@@ -977,12 +957,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
-    folderUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
-      folderUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).uptime_check_config;
   }
 
   /**
@@ -992,7 +968,7 @@ export class QueryServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyPath(organization: string, alertPolicy: string) {
+  organizationAlertPolicyPath(organization:string,alertPolicy:string) {
     return this.pathTemplates.organizationAlertPolicyPathTemplate.render({
       organization: organization,
       alert_policy: alertPolicy,
@@ -1006,12 +982,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyName(
-    organizationAlertPolicyName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
-      organizationAlertPolicyName
-    ).organization;
+  matchOrganizationFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).organization;
   }
 
   /**
@@ -1021,12 +993,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyName(
-    organizationAlertPolicyName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
-      organizationAlertPolicyName
-    ).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).alert_policy;
   }
 
   /**
@@ -1037,18 +1005,12 @@ export class QueryServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyConditionPath(
-    organization: string,
-    alertPolicy: string,
-    condition: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
-      {
-        organization: organization,
-        alert_policy: alertPolicy,
-        condition: condition,
-      }
-    );
+  organizationAlertPolicyConditionPath(organization:string,alertPolicy:string,condition:string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render({
+      organization: organization,
+      alert_policy: alertPolicy,
+      condition: condition,
+    });
   }
 
   /**
@@ -1058,12 +1020,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).organization;
+  matchOrganizationFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).organization;
   }
 
   /**
@@ -1073,12 +1031,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -1088,12 +1042,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromOrganizationAlertPolicyConditionName(
-    organizationAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
-      organizationAlertPolicyConditionName
-    ).condition;
+  matchConditionFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).condition;
   }
 
   /**
@@ -1103,10 +1053,7 @@ export class QueryServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  organizationChannelDescriptorPath(
-    organization: string,
-    channelDescriptor: string
-  ) {
+  organizationChannelDescriptorPath(organization:string,channelDescriptor:string) {
     return this.pathTemplates.organizationChannelDescriptorPathTemplate.render({
       organization: organization,
       channel_descriptor: channelDescriptor,
@@ -1120,12 +1067,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationChannelDescriptorName(
-    organizationChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
-      organizationChannelDescriptorName
-    ).organization;
+  matchOrganizationFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).organization;
   }
 
   /**
@@ -1135,12 +1078,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromOrganizationChannelDescriptorName(
-    organizationChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
-      organizationChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -1150,7 +1089,7 @@ export class QueryServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  organizationGroupPath(organization: string, group: string) {
+  organizationGroupPath(organization:string,group:string) {
     return this.pathTemplates.organizationGroupPathTemplate.render({
       organization: organization,
       group: group,
@@ -1165,9 +1104,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(
-      organizationGroupName
-    ).organization;
+    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).organization;
   }
 
   /**
@@ -1178,9 +1115,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(
-      organizationGroupName
-    ).group;
+    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).group;
   }
 
   /**
@@ -1190,16 +1125,11 @@ export class QueryServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  organizationNotificationChannelPath(
-    organization: string,
-    notificationChannel: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.render(
-      {
-        organization: organization,
-        notification_channel: notificationChannel,
-      }
-    );
+  organizationNotificationChannelPath(organization:string,notificationChannel:string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.render({
+      organization: organization,
+      notification_channel: notificationChannel,
+    });
   }
 
   /**
@@ -1209,12 +1139,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationNotificationChannelName(
-    organizationNotificationChannelName: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
-      organizationNotificationChannelName
-    ).organization;
+  matchOrganizationFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).organization;
   }
 
   /**
@@ -1224,12 +1150,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromOrganizationNotificationChannelName(
-    organizationNotificationChannelName: string
-  ) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
-      organizationNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).notification_channel;
   }
 
   /**
@@ -1239,7 +1161,7 @@ export class QueryServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  organizationServicePath(organization: string, service: string) {
+  organizationServicePath(organization:string,service:string) {
     return this.pathTemplates.organizationServicePathTemplate.render({
       organization: organization,
       service: service,
@@ -1253,12 +1175,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_service resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceName(
-    organizationServiceName: string
-  ) {
-    return this.pathTemplates.organizationServicePathTemplate.match(
-      organizationServiceName
-    ).organization;
+  matchOrganizationFromOrganizationServiceName(organizationServiceName: string) {
+    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).organization;
   }
 
   /**
@@ -1269,9 +1187,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromOrganizationServiceName(organizationServiceName: string) {
-    return this.pathTemplates.organizationServicePathTemplate.match(
-      organizationServiceName
-    ).service;
+    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).service;
   }
 
   /**
@@ -1282,18 +1198,12 @@ export class QueryServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  organizationServiceServiceLevelObjectivePath(
-    organization: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
-      {
-        organization: organization,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  organizationServiceServiceLevelObjectivePath(organization:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render({
+      organization: organization,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -1303,12 +1213,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).organization;
+  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).organization;
   }
 
   /**
@@ -1318,12 +1224,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -1333,12 +1235,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
-    organizationServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
-      organizationServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -1348,10 +1246,7 @@ export class QueryServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  organizationUptimeCheckConfigPath(
-    organization: string,
-    uptimeCheckConfig: string
-  ) {
+  organizationUptimeCheckConfigPath(organization:string,uptimeCheckConfig:string) {
     return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.render({
       organization: organization,
       uptime_check_config: uptimeCheckConfig,
@@ -1365,12 +1260,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationUptimeCheckConfigName(
-    organizationUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
-      organizationUptimeCheckConfigName
-    ).organization;
+  matchOrganizationFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).organization;
   }
 
   /**
@@ -1380,12 +1271,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
-    organizationUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
-      organizationUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).uptime_check_config;
   }
 
   /**
@@ -1395,7 +1282,7 @@ export class QueryServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyPath(project: string, alertPolicy: string) {
+  projectAlertPolicyPath(project:string,alertPolicy:string) {
     return this.pathTemplates.projectAlertPolicyPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -1410,9 +1297,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
-      projectAlertPolicyName
-    ).project;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).project;
   }
 
   /**
@@ -1423,9 +1308,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
-      projectAlertPolicyName
-    ).alert_policy;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).alert_policy;
   }
 
   /**
@@ -1436,11 +1319,7 @@ export class QueryServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyConditionPath(
-    project: string,
-    alertPolicy: string,
-    condition: string
-  ) {
+  projectAlertPolicyConditionPath(project:string,alertPolicy:string,condition:string) {
     return this.pathTemplates.projectAlertPolicyConditionPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -1455,12 +1334,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).project;
+  matchProjectFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).project;
   }
 
   /**
@@ -1470,12 +1345,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).alert_policy;
+  matchAlertPolicyFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).alert_policy;
   }
 
   /**
@@ -1485,12 +1356,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromProjectAlertPolicyConditionName(
-    projectAlertPolicyConditionName: string
-  ) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
-      projectAlertPolicyConditionName
-    ).condition;
+  matchConditionFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).condition;
   }
 
   /**
@@ -1500,7 +1367,7 @@ export class QueryServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  projectChannelDescriptorPath(project: string, channelDescriptor: string) {
+  projectChannelDescriptorPath(project:string,channelDescriptor:string) {
     return this.pathTemplates.projectChannelDescriptorPathTemplate.render({
       project: project,
       channel_descriptor: channelDescriptor,
@@ -1514,12 +1381,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectChannelDescriptorName(
-    projectChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
-      projectChannelDescriptorName
-    ).project;
+  matchProjectFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).project;
   }
 
   /**
@@ -1529,12 +1392,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromProjectChannelDescriptorName(
-    projectChannelDescriptorName: string
-  ) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
-      projectChannelDescriptorName
-    ).channel_descriptor;
+  matchChannelDescriptorFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).channel_descriptor;
   }
 
   /**
@@ -1544,7 +1403,7 @@ export class QueryServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  projectGroupPath(project: string, group: string) {
+  projectGroupPath(project:string,group:string) {
     return this.pathTemplates.projectGroupPathTemplate.render({
       project: project,
       group: group,
@@ -1559,8 +1418,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
-      .project;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).project;
   }
 
   /**
@@ -1571,8 +1429,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
-      .group;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).group;
   }
 
   /**
@@ -1582,7 +1439,7 @@ export class QueryServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  projectNotificationChannelPath(project: string, notificationChannel: string) {
+  projectNotificationChannelPath(project:string,notificationChannel:string) {
     return this.pathTemplates.projectNotificationChannelPathTemplate.render({
       project: project,
       notification_channel: notificationChannel,
@@ -1596,12 +1453,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectNotificationChannelName(
-    projectNotificationChannelName: string
-  ) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
-      projectNotificationChannelName
-    ).project;
+  matchProjectFromProjectNotificationChannelName(projectNotificationChannelName: string) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).project;
   }
 
   /**
@@ -1611,12 +1464,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromProjectNotificationChannelName(
-    projectNotificationChannelName: string
-  ) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
-      projectNotificationChannelName
-    ).notification_channel;
+  matchNotificationChannelFromProjectNotificationChannelName(projectNotificationChannelName: string) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).notification_channel;
   }
 
   /**
@@ -1626,7 +1475,7 @@ export class QueryServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  projectServicePath(project: string, service: string) {
+  projectServicePath(project:string,service:string) {
     return this.pathTemplates.projectServicePathTemplate.render({
       project: project,
       service: service,
@@ -1641,9 +1490,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(
-      projectServiceName
-    ).project;
+    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).project;
   }
 
   /**
@@ -1654,9 +1501,7 @@ export class QueryServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(
-      projectServiceName
-    ).service;
+    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).service;
   }
 
   /**
@@ -1667,18 +1512,12 @@ export class QueryServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  projectServiceServiceLevelObjectivePath(
-    project: string,
-    service: string,
-    serviceLevelObjective: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
-      {
-        project: project,
-        service: service,
-        service_level_objective: serviceLevelObjective,
-      }
-    );
+  projectServiceServiceLevelObjectivePath(project:string,service:string,serviceLevelObjective:string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render({
+      project: project,
+      service: service,
+      service_level_objective: serviceLevelObjective,
+    });
   }
 
   /**
@@ -1688,12 +1527,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).project;
+  matchProjectFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).project;
   }
 
   /**
@@ -1703,12 +1538,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).service;
+  matchServiceFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service;
   }
 
   /**
@@ -1718,12 +1549,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
-    projectServiceServiceLevelObjectiveName: string
-  ) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
-      projectServiceServiceLevelObjectiveName
-    ).service_level_objective;
+  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service_level_objective;
   }
 
   /**
@@ -1733,7 +1560,7 @@ export class QueryServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  projectUptimeCheckConfigPath(project: string, uptimeCheckConfig: string) {
+  projectUptimeCheckConfigPath(project:string,uptimeCheckConfig:string) {
     return this.pathTemplates.projectUptimeCheckConfigPathTemplate.render({
       project: project,
       uptime_check_config: uptimeCheckConfig,
@@ -1747,12 +1574,8 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectUptimeCheckConfigName(
-    projectUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
-      projectUptimeCheckConfigName
-    ).project;
+  matchProjectFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).project;
   }
 
   /**
@@ -1762,12 +1585,44 @@ export class QueryServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
-    projectUptimeCheckConfigName: string
-  ) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
-      projectUptimeCheckConfigName
-    ).uptime_check_config;
+  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).uptime_check_config;
+  }
+
+  /**
+   * Return a fully-qualified snooze resource name string.
+   *
+   * @param {string} project
+   * @param {string} snooze
+   * @returns {string} Resource name string.
+   */
+  snoozePath(project:string,snooze:string) {
+    return this.pathTemplates.snoozePathTemplate.render({
+      project: project,
+      snooze: snooze,
+    });
+  }
+
+  /**
+   * Parse the project from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).project;
+  }
+
+  /**
+   * Parse the snooze from Snooze resource.
+   *
+   * @param {string} snoozeName
+   *   A fully-qualified path representing Snooze resource.
+   * @returns {string} A string representing the snooze.
+   */
+  matchSnoozeFromSnoozeName(snoozeName: string) {
+    return this.pathTemplates.snoozePathTemplate.match(snoozeName).snooze;
   }
 
   /**
@@ -1777,9 +1632,9 @@ export class QueryServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    this.initialize();
-    if (!this._terminated) {
-      return this.queryServiceStub!.then(stub => {
+    if (this.queryServiceStub && !this._terminated) {
+      return this.queryServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

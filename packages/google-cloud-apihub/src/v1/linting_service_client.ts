@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,36 +101,17 @@ export class LintingServiceClient {
    *     const client = new LintingServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LintingServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'apihub.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -146,9 +120,7 @@ export class LintingServiceClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +146,7 @@ export class LintingServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +162,13 @@ export class LintingServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -225,6 +201,9 @@ export class LintingServiceClient {
       attributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/attributes/{attribute}'
       ),
+      curationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/curations/{curation}'
+      ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
       ),
@@ -234,6 +213,12 @@ export class LintingServiceClient {
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}'
       ),
+      discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+      ),
+      discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
+      ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/externalApis/{external_api}'
       ),
@@ -242,6 +227,9 @@ export class LintingServiceClient {
       ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/plugins/{plugin}'
+      ),
+      pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
       ),
       runtimeProjectAttachmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}'
@@ -259,11 +247,8 @@ export class LintingServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.apihub.v1.LintingService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.apihub.v1.LintingService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -294,40 +279,31 @@ export class LintingServiceClient {
     // Put together the "service stub" for
     // google.cloud.apihub.v1.LintingService.
     this.lintingServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.apihub.v1.LintingService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.apihub.v1.LintingService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apihub.v1.LintingService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const lintingServiceStubMethods = [
-      'getStyleGuide',
-      'updateStyleGuide',
-      'getStyleGuideContents',
-      'lintSpec',
-    ];
+    const lintingServiceStubMethods =
+        ['getStyleGuide', 'updateStyleGuide', 'getStyleGuideContents', 'lintSpec'];
     for (const methodName of lintingServiceStubMethods) {
       const callPromise = this.lintingServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -347,14 +323,8 @@ export class LintingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apihub.googleapis.com';
   }
@@ -365,14 +335,8 @@ export class LintingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apihub.googleapis.com';
   }
@@ -403,7 +367,9 @@ export class LintingServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -412,9 +378,8 @@ export class LintingServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -425,472 +390,395 @@ export class LintingServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Get the style guide being used for linting.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the spec to retrieve.
-   *   Format:
-   *   `projects/{project}/locations/{location}/plugins/{plugin}/styleGuide`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.StyleGuide|StyleGuide}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/linting_service.get_style_guide.js</caption>
-   * region_tag:apihub_v1_generated_LintingService_GetStyleGuide_async
-   */
+/**
+ * Get the style guide being used for linting.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the spec to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/plugins/{plugin}/styleGuide`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.StyleGuide|StyleGuide}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/linting_service.get_style_guide.js</caption>
+ * region_tag:apihub_v1_generated_LintingService_GetStyleGuide_async
+ */
   getStyleGuide(
-    request?: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IGetStyleGuideRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IGetStyleGuideRequest|undefined, {}|undefined
+      ]>;
   getStyleGuide(
-    request: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IGetStyleGuideRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStyleGuide(
-    request: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IGetStyleGuideRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStyleGuide(
-    request?: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IStyleGuide,
-          | protos.google.cloud.apihub.v1.IGetStyleGuideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IGetStyleGuideRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IGetStyleGuideRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IGetStyleGuideRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStyleGuide(
+      request: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IGetStyleGuideRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStyleGuide(
+      request?: protos.google.cloud.apihub.v1.IGetStyleGuideRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IGetStyleGuideRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IGetStyleGuideRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IGetStyleGuideRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getStyleGuide request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IStyleGuide,
-          | protos.google.cloud.apihub.v1.IGetStyleGuideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IGetStyleGuideRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getStyleGuide response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getStyleGuide(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IStyleGuide,
-          protos.google.cloud.apihub.v1.IGetStyleGuideRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getStyleGuide response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getStyleGuide(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IGetStyleGuideRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getStyleGuide response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Update the styleGuide to be used for liniting in by API hub.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.apihub.v1.StyleGuide} request.styleGuide
-   *   Required. The Style guide resource to update.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. The list of fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.StyleGuide|StyleGuide}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/linting_service.update_style_guide.js</caption>
-   * region_tag:apihub_v1_generated_LintingService_UpdateStyleGuide_async
-   */
+/**
+ * Update the styleGuide to be used for liniting in by API hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.apihub.v1.StyleGuide} request.styleGuide
+ *   Required. The Style guide resource to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.StyleGuide|StyleGuide}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/linting_service.update_style_guide.js</caption>
+ * region_tag:apihub_v1_generated_LintingService_UpdateStyleGuide_async
+ */
   updateStyleGuide(
-    request?: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|undefined, {}|undefined
+      ]>;
   updateStyleGuide(
-    request: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateStyleGuide(
-    request: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateStyleGuide(
-    request?: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IStyleGuide,
-          | protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IStyleGuide,
-      protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateStyleGuide(
+      request: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateStyleGuide(
+      request?: protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IStyleGuide,
+          protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'style_guide.name': request.styleGuide!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'style_guide.name': request.styleGuide!.name?.toString() ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateStyleGuide request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IStyleGuide,
-          | protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateStyleGuide response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateStyleGuide(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IStyleGuide,
-          protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateStyleGuide response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateStyleGuide(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IStyleGuide,
+        protos.google.cloud.apihub.v1.IUpdateStyleGuideRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateStyleGuide response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Get the contents of the style guide.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the StyleGuide whose contents need to be retrieved.
-   *   There is exactly one style guide resource per project per location.
-   *   The expected format is
-   *   `projects/{project}/locations/{location}/plugins/{plugin}/styleGuide`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.StyleGuideContents|StyleGuideContents}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/linting_service.get_style_guide_contents.js</caption>
-   * region_tag:apihub_v1_generated_LintingService_GetStyleGuideContents_async
-   */
+/**
+ * Get the contents of the style guide.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the StyleGuide whose contents need to be retrieved.
+ *   There is exactly one style guide resource per project per location.
+ *   The expected format is
+ *   `projects/{project}/locations/{location}/plugins/{plugin}/styleGuide`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.StyleGuideContents|StyleGuideContents}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/linting_service.get_style_guide_contents.js</caption>
+ * region_tag:apihub_v1_generated_LintingService_GetStyleGuideContents_async
+ */
   getStyleGuideContents(
-    request?: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IStyleGuideContents,
-      protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IStyleGuideContents,
+        protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|undefined, {}|undefined
+      ]>;
   getStyleGuideContents(
-    request: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuideContents,
-      | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStyleGuideContents(
-    request: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuideContents,
-      | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getStyleGuideContents(
-    request?: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IStyleGuideContents,
-          | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IStyleGuideContents,
-      | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IStyleGuideContents,
-      protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStyleGuideContents(
+      request: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IStyleGuideContents,
+          protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getStyleGuideContents(
+      request?: protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IStyleGuideContents,
+          protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IStyleGuideContents,
+          protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IStyleGuideContents,
+        protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getStyleGuideContents request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IStyleGuideContents,
-          | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IStyleGuideContents,
+        protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getStyleGuideContents response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getStyleGuideContents(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IStyleGuideContents,
-          (
-            | protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getStyleGuideContents response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getStyleGuideContents(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IStyleGuideContents,
+        protos.google.cloud.apihub.v1.IGetStyleGuideContentsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getStyleGuideContents response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Lints the requested spec and updates the corresponding API Spec with the
-   * lint response. This lint response will be available in all subsequent
-   * Get and List Spec calls to Core service.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the spec to be linted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/linting_service.lint_spec.js</caption>
-   * region_tag:apihub_v1_generated_LintingService_LintSpec_async
-   */
+/**
+ * Lints the requested spec and updates the corresponding API Spec with the
+ * lint response. This lint response will be available in all subsequent
+ * Get and List Spec calls to Core service.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the spec to be linted.
+ *   Format:
+ *   `projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/linting_service.lint_spec.js</caption>
+ * region_tag:apihub_v1_generated_LintingService_LintSpec_async
+ */
   lintSpec(
-    request?: protos.google.cloud.apihub.v1.ILintSpecRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.apihub.v1.ILintSpecRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.ILintSpecRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.ILintSpecRequest|undefined, {}|undefined
+      ]>;
   lintSpec(
-    request: protos.google.cloud.apihub.v1.ILintSpecRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.apihub.v1.ILintSpecRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lintSpec(
-    request: protos.google.cloud.apihub.v1.ILintSpecRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.apihub.v1.ILintSpecRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lintSpec(
-    request?: protos.google.cloud.apihub.v1.ILintSpecRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.ILintSpecRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.ILintSpecRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.apihub.v1.ILintSpecRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.apihub.v1.ILintSpecRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.ILintSpecRequest|null|undefined,
+          {}|null|undefined>): void;
+  lintSpec(
+      request: protos.google.cloud.apihub.v1.ILintSpecRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.ILintSpecRequest|null|undefined,
+          {}|null|undefined>): void;
+  lintSpec(
+      request?: protos.google.cloud.apihub.v1.ILintSpecRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.ILintSpecRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.ILintSpecRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.ILintSpecRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('lintSpec request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.ILintSpecRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.ILintSpecRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('lintSpec response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .lintSpec(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.ILintSpecRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('lintSpec response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.lintSpec(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.apihub.v1.ILintSpecRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('lintSpec response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -930,7 +818,7 @@ export class LintingServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -980,7 +868,7 @@ export class LintingServiceClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project: string, location: string, api: string) {
+  apiPath(project:string,location:string,api:string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       location: location,
@@ -1029,11 +917,7 @@ export class LintingServiceClient {
    * @param {string} api_hub_instance
    * @returns {string} Resource name string.
    */
-  apiHubInstancePath(
-    project: string,
-    location: string,
-    apiHubInstance: string
-  ) {
+  apiHubInstancePath(project:string,location:string,apiHubInstance:string) {
     return this.pathTemplates.apiHubInstancePathTemplate.render({
       project: project,
       location: location,
@@ -1049,9 +933,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).project;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).project;
   }
 
   /**
@@ -1062,9 +944,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).location;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).location;
   }
 
   /**
@@ -1075,9 +955,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the api_hub_instance.
    */
   matchApiHubInstanceFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).api_hub_instance;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).api_hub_instance;
   }
 
   /**
@@ -1090,13 +968,7 @@ export class LintingServiceClient {
    * @param {string} operation
    * @returns {string} Resource name string.
    */
-  apiOperationPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    operation: string
-  ) {
+  apiOperationPath(project:string,location:string,api:string,version:string,operation:string) {
     return this.pathTemplates.apiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -1114,8 +986,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .project;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).project;
   }
 
   /**
@@ -1126,8 +997,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .location;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).location;
   }
 
   /**
@@ -1138,8 +1008,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the api.
    */
   matchApiFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .api;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).api;
   }
 
   /**
@@ -1150,8 +1019,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .version;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).version;
   }
 
   /**
@@ -1162,8 +1030,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the operation.
    */
   matchOperationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .operation;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).operation;
   }
 
   /**
@@ -1174,7 +1041,7 @@ export class LintingServiceClient {
    * @param {string} attribute
    * @returns {string} Resource name string.
    */
-  attributePath(project: string, location: string, attribute: string) {
+  attributePath(project:string,location:string,attribute:string) {
     return this.pathTemplates.attributePathTemplate.render({
       project: project,
       location: location,
@@ -1190,8 +1057,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .project;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).project;
   }
 
   /**
@@ -1202,8 +1068,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .location;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).location;
   }
 
   /**
@@ -1214,8 +1079,56 @@ export class LintingServiceClient {
    * @returns {string} A string representing the attribute.
    */
   matchAttributeFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .attribute;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).attribute;
+  }
+
+  /**
+   * Return a fully-qualified curation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} curation
+   * @returns {string} Resource name string.
+   */
+  curationPath(project:string,location:string,curation:string) {
+    return this.pathTemplates.curationPathTemplate.render({
+      project: project,
+      location: location,
+      curation: curation,
+    });
+  }
+
+  /**
+   * Parse the project from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).project;
+  }
+
+  /**
+   * Parse the location from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).location;
+  }
+
+  /**
+   * Parse the curation from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the curation.
+   */
+  matchCurationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).curation;
   }
 
   /**
@@ -1228,13 +1141,7 @@ export class LintingServiceClient {
    * @param {string} definition
    * @returns {string} Resource name string.
    */
-  definitionPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    definition: string
-  ) {
+  definitionPath(project:string,location:string,api:string,version:string,definition:string) {
     return this.pathTemplates.definitionPathTemplate.render({
       project: project,
       location: location,
@@ -1252,8 +1159,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .project;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).project;
   }
 
   /**
@@ -1264,8 +1170,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .location;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).location;
   }
 
   /**
@@ -1287,8 +1192,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .version;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).version;
   }
 
   /**
@@ -1299,8 +1203,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the definition.
    */
   matchDefinitionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .definition;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).definition;
   }
 
   /**
@@ -1311,7 +1214,7 @@ export class LintingServiceClient {
    * @param {string} dependency
    * @returns {string} Resource name string.
    */
-  dependencyPath(project: string, location: string, dependency: string) {
+  dependencyPath(project:string,location:string,dependency:string) {
     return this.pathTemplates.dependencyPathTemplate.render({
       project: project,
       location: location,
@@ -1327,8 +1230,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .project;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).project;
   }
 
   /**
@@ -1339,8 +1241,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .location;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).location;
   }
 
   /**
@@ -1351,8 +1252,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the dependency.
    */
   matchDependencyFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .dependency;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).dependency;
   }
 
   /**
@@ -1363,7 +1263,7 @@ export class LintingServiceClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project: string, location: string, deployment: string) {
+  deploymentPath(project:string,location:string,deployment:string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1379,8 +1279,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
   }
 
   /**
@@ -1391,8 +1290,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
   }
 
   /**
@@ -1403,8 +1301,118 @@ export class LintingServiceClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiObservation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiOperation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @param {string} discovered_api_operation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+      discovered_api_operation: discoveredApiOperation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  }
+
+  /**
+   * Parse the discovered_api_operation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_operation.
+   */
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
   }
 
   /**
@@ -1415,7 +1423,7 @@ export class LintingServiceClient {
    * @param {string} external_api
    * @returns {string} Resource name string.
    */
-  externalApiPath(project: string, location: string, externalApi: string) {
+  externalApiPath(project:string,location:string,externalApi:string) {
     return this.pathTemplates.externalApiPathTemplate.render({
       project: project,
       location: location,
@@ -1431,8 +1439,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .project;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).project;
   }
 
   /**
@@ -1443,8 +1450,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .location;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).location;
   }
 
   /**
@@ -1455,8 +1461,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the external_api.
    */
   matchExternalApiFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .external_api;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).external_api;
   }
 
   /**
@@ -1467,11 +1472,7 @@ export class LintingServiceClient {
    * @param {string} host_project_registration
    * @returns {string} Resource name string.
    */
-  hostProjectRegistrationPath(
-    project: string,
-    location: string,
-    hostProjectRegistration: string
-  ) {
+  hostProjectRegistrationPath(project:string,location:string,hostProjectRegistration:string) {
     return this.pathTemplates.hostProjectRegistrationPathTemplate.render({
       project: project,
       location: location,
@@ -1486,12 +1487,8 @@ export class LintingServiceClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).project;
+  matchProjectFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).project;
   }
 
   /**
@@ -1501,12 +1498,8 @@ export class LintingServiceClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).location;
+  matchLocationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).location;
   }
 
   /**
@@ -1516,12 +1509,8 @@ export class LintingServiceClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the host_project_registration.
    */
-  matchHostProjectRegistrationFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).host_project_registration;
+  matchHostProjectRegistrationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).host_project_registration;
   }
 
   /**
@@ -1532,7 +1521,7 @@ export class LintingServiceClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  pluginPath(project: string, location: string, plugin: string) {
+  pluginPath(project:string,location:string,plugin:string) {
     return this.pathTemplates.pluginPathTemplate.render({
       project: project,
       location: location,
@@ -1574,6 +1563,68 @@ export class LintingServiceClient {
   }
 
   /**
+   * Return a fully-qualified pluginInstance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} plugin
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+    return this.pathTemplates.pluginInstancePathTemplate.render({
+      project: project,
+      location: location,
+      plugin: plugin,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+  }
+
+  /**
+   * Parse the location from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+  }
+
+  /**
+   * Parse the plugin from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the plugin.
+   */
+  matchPluginFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+  }
+
+  /**
+   * Parse the instance from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
+  }
+
+  /**
    * Return a fully-qualified runtimeProjectAttachment resource name string.
    *
    * @param {string} project
@@ -1581,11 +1632,7 @@ export class LintingServiceClient {
    * @param {string} runtime_project_attachment
    * @returns {string} Resource name string.
    */
-  runtimeProjectAttachmentPath(
-    project: string,
-    location: string,
-    runtimeProjectAttachment: string
-  ) {
+  runtimeProjectAttachmentPath(project:string,location:string,runtimeProjectAttachment:string) {
     return this.pathTemplates.runtimeProjectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -1600,12 +1647,8 @@ export class LintingServiceClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).project;
+  matchProjectFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).project;
   }
 
   /**
@@ -1615,12 +1658,8 @@ export class LintingServiceClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).location;
+  matchLocationFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).location;
   }
 
   /**
@@ -1630,12 +1669,8 @@ export class LintingServiceClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the runtime_project_attachment.
    */
-  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).runtime_project_attachment;
+  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).runtime_project_attachment;
   }
 
   /**
@@ -1648,13 +1683,7 @@ export class LintingServiceClient {
    * @param {string} spec
    * @returns {string} Resource name string.
    */
-  specPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    spec: string
-  ) {
+  specPath(project:string,location:string,api:string,version:string,spec:string) {
     return this.pathTemplates.specPathTemplate.render({
       project: project,
       location: location,
@@ -1727,7 +1756,7 @@ export class LintingServiceClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  styleGuidePath(project: string, location: string, plugin: string) {
+  styleGuidePath(project:string,location:string,plugin:string) {
     return this.pathTemplates.styleGuidePathTemplate.render({
       project: project,
       location: location,
@@ -1743,8 +1772,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .project;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).project;
   }
 
   /**
@@ -1755,8 +1783,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .location;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).location;
   }
 
   /**
@@ -1767,8 +1794,7 @@ export class LintingServiceClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .plugin;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).plugin;
   }
 
   /**
@@ -1780,7 +1806,7 @@ export class LintingServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project: string, location: string, api: string, version: string) {
+  versionPath(project:string,location:string,api:string,version:string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -1845,7 +1871,7 @@ export class LintingServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

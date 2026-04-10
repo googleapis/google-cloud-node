@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -328,7 +328,7 @@ export namespace grafeas {
         interface IAttestationOccurrence {
 
             /** AttestationOccurrence serializedPayload */
-            serializedPayload?: (Uint8Array|string|null);
+            serializedPayload?: (Uint8Array|Buffer|string|null);
 
             /** AttestationOccurrence signatures */
             signatures?: (grafeas.v1.ISignature[]|null);
@@ -347,7 +347,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.IAttestationOccurrence);
 
             /** AttestationOccurrence serializedPayload. */
-            public serializedPayload: (Uint8Array|string);
+            public serializedPayload: (Uint8Array|Buffer|string);
 
             /** AttestationOccurrence signatures. */
             public signatures: grafeas.v1.ISignature[];
@@ -558,7 +558,7 @@ export namespace grafeas {
         interface ISignature {
 
             /** Signature signature */
-            signature?: (Uint8Array|string|null);
+            signature?: (Uint8Array|Buffer|string|null);
 
             /** Signature publicKeyId */
             publicKeyId?: (string|null);
@@ -574,7 +574,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.ISignature);
 
             /** Signature signature. */
-            public signature: (Uint8Array|string);
+            public signature: (Uint8Array|Buffer|string);
 
             /** Signature publicKeyId. */
             public publicKeyId: string;
@@ -661,7 +661,7 @@ export namespace grafeas {
         interface IEnvelope {
 
             /** Envelope payload */
-            payload?: (Uint8Array|string|null);
+            payload?: (Uint8Array|Buffer|string|null);
 
             /** Envelope payloadType */
             payloadType?: (string|null);
@@ -680,7 +680,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.IEnvelope);
 
             /** Envelope payload. */
-            public payload: (Uint8Array|string);
+            public payload: (Uint8Array|Buffer|string);
 
             /** Envelope payloadType. */
             public payloadType: string;
@@ -770,7 +770,7 @@ export namespace grafeas {
         interface IEnvelopeSignature {
 
             /** EnvelopeSignature sig */
-            sig?: (Uint8Array|string|null);
+            sig?: (Uint8Array|Buffer|string|null);
 
             /** EnvelopeSignature keyid */
             keyid?: (string|null);
@@ -786,7 +786,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1.IEnvelopeSignature);
 
             /** EnvelopeSignature sig. */
-            public sig: (Uint8Array|string);
+            public sig: (Uint8Array|Buffer|string);
 
             /** EnvelopeSignature keyid. */
             public keyid: string;
@@ -877,6 +877,9 @@ export namespace grafeas {
 
             /** FileLocation layerDetails */
             layerDetails?: (grafeas.v1.ILayerDetails|null);
+
+            /** FileLocation lineNumber */
+            lineNumber?: (number|null);
         }
 
         /** Represents a FileLocation. */
@@ -893,6 +896,9 @@ export namespace grafeas {
 
             /** FileLocation layerDetails. */
             public layerDetails?: (grafeas.v1.ILayerDetails|null);
+
+            /** FileLocation lineNumber. */
+            public lineNumber: number;
 
             /**
              * Creates a new FileLocation instance using the specified properties.
@@ -983,6 +989,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount */
             layerCount?: (number|null);
+
+            /** BaseImage registry */
+            registry?: (string|null);
         }
 
         /** Represents a BaseImage. */
@@ -1002,6 +1011,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount. */
             public layerCount: number;
+
+            /** BaseImage registry. */
+            public registry: string;
 
             /**
              * Creates a new BaseImage instance using the specified properties.
@@ -1312,7 +1324,7 @@ export namespace grafeas {
             algo?: (string|null);
 
             /** Digest digestBytes */
-            digestBytes?: (Uint8Array|string|null);
+            digestBytes?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a Digest. */
@@ -1328,7 +1340,7 @@ export namespace grafeas {
             public algo: string;
 
             /** Digest digestBytes. */
-            public digestBytes: (Uint8Array|string);
+            public digestBytes: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Digest instance using the specified properties.
@@ -2770,7 +2782,7 @@ export namespace grafeas {
                 digest?: ({ [k: string]: string }|null);
 
                 /** ResourceDescriptor content */
-                content?: (Uint8Array|string|null);
+                content?: (Uint8Array|Buffer|string|null);
 
                 /** ResourceDescriptor downloadLocation */
                 downloadLocation?: (string|null);
@@ -2801,7 +2813,7 @@ export namespace grafeas {
                 public digest: { [k: string]: string };
 
                 /** ResourceDescriptor content. */
-                public content: (Uint8Array|string);
+                public content: (Uint8Array|Buffer|string);
 
                 /** ResourceDescriptor downloadLocation. */
                 public downloadLocation: string;
@@ -5053,7 +5065,7 @@ export namespace grafeas {
             type?: (string|null);
 
             /** Hash value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a Hash. */
@@ -5069,7 +5081,7 @@ export namespace grafeas {
             public type: string;
 
             /** Hash value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Hash instance using the specified properties.
@@ -6181,7 +6193,7 @@ export namespace grafeas {
             cisBenchmark?: (grafeas.v1.ComplianceNote.ICisBenchmark|null);
 
             /** ComplianceNote scanInstructions */
-            scanInstructions?: (Uint8Array|string|null);
+            scanInstructions?: (Uint8Array|Buffer|string|null);
 
             /** ComplianceNote impact */
             impact?: (string|null);
@@ -6215,7 +6227,7 @@ export namespace grafeas {
             public cisBenchmark?: (grafeas.v1.ComplianceNote.ICisBenchmark|null);
 
             /** ComplianceNote scanInstructions. */
-            public scanInstructions: (Uint8Array|string);
+            public scanInstructions: (Uint8Array|Buffer|string);
 
             /** ComplianceNote impact. */
             public impact?: (string|null);
@@ -7543,6 +7555,12 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence vulnerabilityAttestation */
             vulnerabilityAttestation?: (grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null);
+
+            /** DiscoveryOccurrence files */
+            files?: (grafeas.v1.DiscoveryOccurrence.IFile[]|null);
+
+            /** DiscoveryOccurrence lastVulnerabilityUpdateTime */
+            lastVulnerabilityUpdateTime?: (google.protobuf.ITimestamp|null);
         }
 
         /** Represents a DiscoveryOccurrence. */
@@ -7583,6 +7601,12 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence vulnerabilityAttestation. */
             public vulnerabilityAttestation?: (grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null);
+
+            /** DiscoveryOccurrence files. */
+            public files: grafeas.v1.DiscoveryOccurrence.IFile[];
+
+            /** DiscoveryOccurrence lastVulnerabilityUpdateTime. */
+            public lastVulnerabilityUpdateTime?: (google.protobuf.ITimestamp|null);
 
             /**
              * Creates a new DiscoveryOccurrence instance using the specified properties.
@@ -8009,6 +8033,109 @@ export namespace grafeas {
                     SUCCESS = 1,
                     FAILURE = 2
                 }
+            }
+
+            /** Properties of a File. */
+            interface IFile {
+
+                /** File name */
+                name?: (string|null);
+
+                /** File digest */
+                digest?: ({ [k: string]: string }|null);
+            }
+
+            /** Represents a File. */
+            class File implements IFile {
+
+                /**
+                 * Constructs a new File.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.DiscoveryOccurrence.IFile);
+
+                /** File name. */
+                public name: string;
+
+                /** File digest. */
+                public digest: { [k: string]: string };
+
+                /**
+                 * Creates a new File instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns File instance
+                 */
+                public static create(properties?: grafeas.v1.DiscoveryOccurrence.IFile): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Encodes the specified File message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.File.verify|verify} messages.
+                 * @param message File message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.DiscoveryOccurrence.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified File message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.File.verify|verify} messages.
+                 * @param message File message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.DiscoveryOccurrence.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a File message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns File
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Decodes a File message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns File
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Verifies a File message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a File message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns File
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Creates a plain object from a File message. Also converts values to other types if specified.
+                 * @param message File
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.DiscoveryOccurrence.File, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this File to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for File
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -9184,6 +9311,9 @@ export namespace grafeas {
 
             /** ListOccurrencesRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOccurrencesRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOccurrencesRequest. */
@@ -9206,6 +9336,9 @@ export namespace grafeas {
 
             /** ListOccurrencesRequest pageToken. */
             public pageToken: string;
+
+            /** ListOccurrencesRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOccurrencesRequest instance using the specified properties.
@@ -9293,6 +9426,9 @@ export namespace grafeas {
 
             /** ListOccurrencesResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOccurrencesResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOccurrencesResponse. */
@@ -9309,6 +9445,9 @@ export namespace grafeas {
 
             /** ListOccurrencesResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOccurrencesResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOccurrencesResponse instance using the specified properties.
@@ -9905,6 +10044,9 @@ export namespace grafeas {
 
             /** ListNotesRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListNotesRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListNotesRequest. */
@@ -9927,6 +10069,9 @@ export namespace grafeas {
 
             /** ListNotesRequest pageToken. */
             public pageToken: string;
+
+            /** ListNotesRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListNotesRequest instance using the specified properties.
@@ -10014,6 +10159,9 @@ export namespace grafeas {
 
             /** ListNotesResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListNotesResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListNotesResponse. */
@@ -10030,6 +10178,9 @@ export namespace grafeas {
 
             /** ListNotesResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListNotesResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListNotesResponse instance using the specified properties.
@@ -12687,6 +12838,12 @@ export namespace grafeas {
 
             /** SecretOccurrence statuses */
             statuses?: (grafeas.v1.ISecretStatus[]|null);
+
+            /** SecretOccurrence data */
+            data?: (google.protobuf.IAny|null);
+
+            /** SecretOccurrence digest */
+            digest?: (grafeas.v1.IDigest|null);
         }
 
         /** Represents a SecretOccurrence. */
@@ -12706,6 +12863,12 @@ export namespace grafeas {
 
             /** SecretOccurrence statuses. */
             public statuses: grafeas.v1.ISecretStatus[];
+
+            /** SecretOccurrence data. */
+            public data?: (google.protobuf.IAny|null);
+
+            /** SecretOccurrence digest. */
+            public digest?: (grafeas.v1.IDigest|null);
 
             /**
              * Creates a new SecretOccurrence instance using the specified properties.
@@ -13009,7 +13172,27 @@ export namespace grafeas {
         enum SecretKind {
             SECRET_KIND_UNSPECIFIED = 0,
             SECRET_KIND_UNKNOWN = 1,
-            SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY = 2
+            SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY = 2,
+            SECRET_KIND_GCP_API_KEY = 3,
+            SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS = 4,
+            SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN = 5,
+            SECRET_KIND_ANTHROPIC_ADMIN_API_KEY = 6,
+            SECRET_KIND_ANTHROPIC_API_KEY = 7,
+            SECRET_KIND_AZURE_ACCESS_TOKEN = 8,
+            SECRET_KIND_AZURE_IDENTITY_TOKEN = 9,
+            SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN = 10,
+            SECRET_KIND_GITHUB_APP_REFRESH_TOKEN = 11,
+            SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN = 12,
+            SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN = 13,
+            SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN = 14,
+            SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN = 15,
+            SECRET_KIND_GITHUB_OAUTH_TOKEN = 16,
+            SECRET_KIND_HUGGINGFACE_API_KEY = 17,
+            SECRET_KIND_OPENAI_API_KEY = 18,
+            SECRET_KIND_PERPLEXITY_API_KEY = 19,
+            SECRET_KIND_STRIPE_SECRET_KEY = 20,
+            SECRET_KIND_STRIPE_RESTRICTED_KEY = 21,
+            SECRET_KIND_STRIPE_WEBHOOK_SECRET = 22
         }
 
         /** Properties of an UpgradeNote. */
@@ -14477,6 +14660,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssV2 */
             cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityNote advisoryPublishTime */
+            advisoryPublishTime?: (google.protobuf.ITimestamp|null);
         }
 
         /** Represents a VulnerabilityNote. */
@@ -14511,6 +14697,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssV2. */
             public cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityNote advisoryPublishTime. */
+            public advisoryPublishTime?: (google.protobuf.ITimestamp|null);
 
             /**
              * Creates a new VulnerabilityNote instance using the specified properties.
@@ -15033,6 +15222,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence extraDetails */
             extraDetails?: (string|null);
+
+            /** VulnerabilityOccurrence risk */
+            risk?: (grafeas.v1.IRisk|null);
         }
 
         /** Represents a VulnerabilityOccurrence. */
@@ -15085,6 +15277,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence extraDetails. */
             public extraDetails: string;
+
+            /** VulnerabilityOccurrence risk. */
+            public risk?: (grafeas.v1.IRisk|null);
 
             /**
              * Creates a new VulnerabilityOccurrence instance using the specified properties.
@@ -15456,6 +15651,309 @@ export namespace grafeas {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
+
+        /** Properties of a Risk. */
+        interface IRisk {
+
+            /** Risk cisaKev */
+            cisaKev?: (grafeas.v1.ICISAKnownExploitedVulnerabilities|null);
+
+            /** Risk epss */
+            epss?: (grafeas.v1.IExploitPredictionScoringSystem|null);
+        }
+
+        /** Represents a Risk. */
+        class Risk implements IRisk {
+
+            /**
+             * Constructs a new Risk.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IRisk);
+
+            /** Risk cisaKev. */
+            public cisaKev?: (grafeas.v1.ICISAKnownExploitedVulnerabilities|null);
+
+            /** Risk epss. */
+            public epss?: (grafeas.v1.IExploitPredictionScoringSystem|null);
+
+            /**
+             * Creates a new Risk instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Risk instance
+             */
+            public static create(properties?: grafeas.v1.IRisk): grafeas.v1.Risk;
+
+            /**
+             * Encodes the specified Risk message. Does not implicitly {@link grafeas.v1.Risk.verify|verify} messages.
+             * @param message Risk message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IRisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Risk message, length delimited. Does not implicitly {@link grafeas.v1.Risk.verify|verify} messages.
+             * @param message Risk message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IRisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Risk message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Risk
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Risk;
+
+            /**
+             * Decodes a Risk message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Risk
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Risk;
+
+            /**
+             * Verifies a Risk message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Risk message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Risk
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Risk;
+
+            /**
+             * Creates a plain object from a Risk message. Also converts values to other types if specified.
+             * @param message Risk
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Risk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Risk to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Risk
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CISAKnownExploitedVulnerabilities. */
+        interface ICISAKnownExploitedVulnerabilities {
+
+            /** CISAKnownExploitedVulnerabilities knownRansomwareCampaignUse */
+            knownRansomwareCampaignUse?: (string|null);
+        }
+
+        /** Represents a CISAKnownExploitedVulnerabilities. */
+        class CISAKnownExploitedVulnerabilities implements ICISAKnownExploitedVulnerabilities {
+
+            /**
+             * Constructs a new CISAKnownExploitedVulnerabilities.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ICISAKnownExploitedVulnerabilities);
+
+            /** CISAKnownExploitedVulnerabilities knownRansomwareCampaignUse. */
+            public knownRansomwareCampaignUse: string;
+
+            /**
+             * Creates a new CISAKnownExploitedVulnerabilities instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CISAKnownExploitedVulnerabilities instance
+             */
+            public static create(properties?: grafeas.v1.ICISAKnownExploitedVulnerabilities): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Encodes the specified CISAKnownExploitedVulnerabilities message. Does not implicitly {@link grafeas.v1.CISAKnownExploitedVulnerabilities.verify|verify} messages.
+             * @param message CISAKnownExploitedVulnerabilities message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ICISAKnownExploitedVulnerabilities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CISAKnownExploitedVulnerabilities message, length delimited. Does not implicitly {@link grafeas.v1.CISAKnownExploitedVulnerabilities.verify|verify} messages.
+             * @param message CISAKnownExploitedVulnerabilities message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ICISAKnownExploitedVulnerabilities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CISAKnownExploitedVulnerabilities message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CISAKnownExploitedVulnerabilities
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Decodes a CISAKnownExploitedVulnerabilities message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CISAKnownExploitedVulnerabilities
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Verifies a CISAKnownExploitedVulnerabilities message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CISAKnownExploitedVulnerabilities message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CISAKnownExploitedVulnerabilities
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Creates a plain object from a CISAKnownExploitedVulnerabilities message. Also converts values to other types if specified.
+             * @param message CISAKnownExploitedVulnerabilities
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.CISAKnownExploitedVulnerabilities, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CISAKnownExploitedVulnerabilities to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CISAKnownExploitedVulnerabilities
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an ExploitPredictionScoringSystem. */
+        interface IExploitPredictionScoringSystem {
+
+            /** ExploitPredictionScoringSystem percentile */
+            percentile?: (number|null);
+
+            /** ExploitPredictionScoringSystem score */
+            score?: (number|null);
+        }
+
+        /** Represents an ExploitPredictionScoringSystem. */
+        class ExploitPredictionScoringSystem implements IExploitPredictionScoringSystem {
+
+            /**
+             * Constructs a new ExploitPredictionScoringSystem.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IExploitPredictionScoringSystem);
+
+            /** ExploitPredictionScoringSystem percentile. */
+            public percentile: number;
+
+            /** ExploitPredictionScoringSystem score. */
+            public score: number;
+
+            /**
+             * Creates a new ExploitPredictionScoringSystem instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ExploitPredictionScoringSystem instance
+             */
+            public static create(properties?: grafeas.v1.IExploitPredictionScoringSystem): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Encodes the specified ExploitPredictionScoringSystem message. Does not implicitly {@link grafeas.v1.ExploitPredictionScoringSystem.verify|verify} messages.
+             * @param message ExploitPredictionScoringSystem message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IExploitPredictionScoringSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ExploitPredictionScoringSystem message, length delimited. Does not implicitly {@link grafeas.v1.ExploitPredictionScoringSystem.verify|verify} messages.
+             * @param message ExploitPredictionScoringSystem message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IExploitPredictionScoringSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an ExploitPredictionScoringSystem message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ExploitPredictionScoringSystem
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Decodes an ExploitPredictionScoringSystem message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ExploitPredictionScoringSystem
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Verifies an ExploitPredictionScoringSystem message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an ExploitPredictionScoringSystem message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ExploitPredictionScoringSystem
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Creates a plain object from an ExploitPredictionScoringSystem message. Also converts values to other types if specified.
+             * @param message ExploitPredictionScoringSystem
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ExploitPredictionScoringSystem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ExploitPredictionScoringSystem to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExploitPredictionScoringSystem
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
     }
 
     /** Namespace v1beta1. */
@@ -15592,7 +16090,7 @@ export namespace grafeas {
                 contentType?: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|null);
 
                 /** GenericSignedAttestation serializedPayload */
-                serializedPayload?: (Uint8Array|string|null);
+                serializedPayload?: (Uint8Array|Buffer|string|null);
 
                 /** GenericSignedAttestation signatures */
                 signatures?: (grafeas.v1beta1.ISignature[]|null);
@@ -15611,7 +16109,7 @@ export namespace grafeas {
                 public contentType: (grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType|keyof typeof grafeas.v1beta1.attestation.GenericSignedAttestation.ContentType);
 
                 /** GenericSignedAttestation serializedPayload. */
-                public serializedPayload: (Uint8Array|string);
+                public serializedPayload: (Uint8Array|Buffer|string);
 
                 /** GenericSignedAttestation signatures. */
                 public signatures: grafeas.v1beta1.ISignature[];
@@ -16223,7 +16721,7 @@ export namespace grafeas {
         interface ISignature {
 
             /** Signature signature */
-            signature?: (Uint8Array|string|null);
+            signature?: (Uint8Array|Buffer|string|null);
 
             /** Signature publicKeyId */
             publicKeyId?: (string|null);
@@ -16239,7 +16737,7 @@ export namespace grafeas {
             constructor(properties?: grafeas.v1beta1.ISignature);
 
             /** Signature signature. */
-            public signature: (Uint8Array|string);
+            public signature: (Uint8Array|Buffer|string);
 
             /** Signature publicKeyId. */
             public publicKeyId: string;
@@ -16435,7 +16933,7 @@ export namespace grafeas {
                 publicKey?: (string|null);
 
                 /** BuildSignature signature */
-                signature?: (Uint8Array|string|null);
+                signature?: (Uint8Array|Buffer|string|null);
 
                 /** BuildSignature keyId */
                 keyId?: (string|null);
@@ -16457,7 +16955,7 @@ export namespace grafeas {
                 public publicKey: string;
 
                 /** BuildSignature signature. */
-                public signature: (Uint8Array|string);
+                public signature: (Uint8Array|Buffer|string);
 
                 /** BuildSignature keyId. */
                 public keyId: string;
@@ -17048,7 +17546,7 @@ export namespace grafeas {
                 type?: (grafeas.v1beta1.provenance.Hash.HashType|keyof typeof grafeas.v1beta1.provenance.Hash.HashType|null);
 
                 /** Hash value */
-                value?: (Uint8Array|string|null);
+                value?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Hash. */
@@ -17064,7 +17562,7 @@ export namespace grafeas {
                 public type: (grafeas.v1beta1.provenance.Hash.HashType|keyof typeof grafeas.v1beta1.provenance.Hash.HashType);
 
                 /** Hash value. */
-                public value: (Uint8Array|string);
+                public value: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Hash instance using the specified properties.
@@ -26306,6 +26804,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -26346,6 +26847,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -30564,6 +31068,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -30812,7 +31319,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -30843,7 +31350,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -32079,7 +32586,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -32095,7 +32602,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -33314,7 +33821,7 @@ export namespace google {
                 auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
 
                 /** Policy etag */
-                etag?: (Uint8Array|string|null);
+                etag?: (Uint8Array|Buffer|string|null);
             }
 
             /** Represents a Policy. */
@@ -33336,7 +33843,7 @@ export namespace google {
                 public auditConfigs: google.iam.v1.IAuditConfig[];
 
                 /** Policy etag. */
-                public etag: (Uint8Array|string);
+                public etag: (Uint8Array|Buffer|string);
 
                 /**
                  * Creates a new Policy instance using the specified properties.

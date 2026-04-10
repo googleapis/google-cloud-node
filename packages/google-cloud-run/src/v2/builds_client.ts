@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +101,20 @@ export class BuildsClient {
    *     const client = new BuildsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof BuildsClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'run.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +140,7 @@ export class BuildsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -184,9 +156,13 @@ export class BuildsClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -210,6 +186,9 @@ export class BuildsClient {
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}/executions/{execution}'
       ),
+      instancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}'
+      ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}'
       ),
@@ -229,11 +208,8 @@ export class BuildsClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.run.v2.Builds',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.run.v2.Builds', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -264,35 +240,31 @@ export class BuildsClient {
     // Put together the "service stub" for
     // google.cloud.run.v2.Builds.
     this.buildsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.run.v2.Builds'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.run.v2.Builds') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.run.v2.Builds,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const buildsStubMethods = ['submitBuild'];
+    const buildsStubMethods =
+        ['submitBuild'];
     for (const methodName of buildsStubMethods) {
       const callPromise = this.buildsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -312,14 +284,8 @@ export class BuildsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'run.googleapis.com';
   }
@@ -330,14 +296,8 @@ export class BuildsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'run.googleapis.com';
   }
@@ -368,7 +328,9 @@ export class BuildsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -377,9 +339,8 @@ export class BuildsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -390,139 +351,133 @@ export class BuildsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Submits a build in a given project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The project and location to build in. Location must be a region,
-   *   e.g., 'us-central1' or 'global' if the global builder is to be used.
-   *   Format:
-   *   `projects/{project}/locations/{location}`
-   * @param {google.cloud.run.v2.StorageSource} request.storageSource
-   *   Required. Source for the build.
-   * @param {string} request.imageUri
-   *   Required. Artifact Registry URI to store the built image.
-   * @param {google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild} request.buildpackBuild
-   *   Build the source using Buildpacks.
-   * @param {google.cloud.run.v2.SubmitBuildRequest.DockerBuild} request.dockerBuild
-   *   Build the source using Docker. This means the source has a Dockerfile.
-   * @param {string} [request.serviceAccount]
-   *   Optional. The service account to use for the build. If not set, the default
-   *   Cloud Build service account for the project will be used.
-   * @param {string} [request.workerPool]
-   *   Optional. Name of the Cloud Build Custom Worker Pool that should be used to
-   *   build the function. The format of this field is
-   *   `projects/{project}/locations/{region}/workerPools/{workerPool}` where
-   *   `{project}` and `{region}` are the project id and region respectively where
-   *   the worker pool is defined and `{workerPool}` is the short name of the
-   *   worker pool.
-   * @param {string[]} [request.tags]
-   *   Optional. Additional tags to annotate the build.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.run.v2.SubmitBuildResponse|SubmitBuildResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v2/builds.submit_build.js</caption>
-   * region_tag:run_v2_generated_Builds_SubmitBuild_async
-   */
+/**
+ * Submits a build in a given project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to build in. Location must be a region,
+ *   e.g., 'us-central1' or 'global' if the global builder is to be used.
+ *   Format:
+ *   `projects/{project}/locations/{location}`
+ * @param {google.cloud.run.v2.StorageSource} request.storageSource
+ *   Required. Source for the build.
+ * @param {string} request.imageUri
+ *   Required. Artifact Registry URI to store the built image.
+ * @param {google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild} request.buildpackBuild
+ *   Build the source using Buildpacks.
+ * @param {google.cloud.run.v2.SubmitBuildRequest.DockerBuild} request.dockerBuild
+ *   Build the source using Docker. This means the source has a Dockerfile.
+ * @param {string} [request.serviceAccount]
+ *   Optional. The service account to use for the build. If not set, the default
+ *   Cloud Build service account for the project will be used.
+ * @param {string} [request.workerPool]
+ *   Optional. Name of the Cloud Build Custom Worker Pool that should be used to
+ *   build the function. The format of this field is
+ *   `projects/{project}/locations/{region}/workerPools/{workerPool}` where
+ *   `{project}` and `{region}` are the project id and region respectively where
+ *   the worker pool is defined and `{workerPool}` is the short name of the
+ *   worker pool.
+ * @param {string[]} [request.tags]
+ *   Optional. Additional tags to annotate the build.
+ * @param {string} [request.machineType]
+ *   Optional. The machine type from default pool to use for the build. If left
+ *   blank, cloudbuild will use a sensible default. Currently only E2_HIGHCPU_8
+ *   is supported. If worker_pool is set, this field will be ignored.
+ * @param {google.api.LaunchStage} [request.releaseTrack]
+ *   Optional. The release track of the client that initiated the build request.
+ * @param {string} [request.client]
+ *   Optional. The client that initiated the build request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.run.v2.SubmitBuildResponse|SubmitBuildResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v2/builds.submit_build.js</caption>
+ * region_tag:run_v2_generated_Builds_SubmitBuild_async
+ */
   submitBuild(
-    request?: protos.google.cloud.run.v2.ISubmitBuildRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.run.v2.ISubmitBuildResponse,
-      protos.google.cloud.run.v2.ISubmitBuildRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.run.v2.ISubmitBuildRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.run.v2.ISubmitBuildResponse,
+        protos.google.cloud.run.v2.ISubmitBuildRequest|undefined, {}|undefined
+      ]>;
   submitBuild(
-    request: protos.google.cloud.run.v2.ISubmitBuildRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.run.v2.ISubmitBuildResponse,
-      protos.google.cloud.run.v2.ISubmitBuildRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  submitBuild(
-    request: protos.google.cloud.run.v2.ISubmitBuildRequest,
-    callback: Callback<
-      protos.google.cloud.run.v2.ISubmitBuildResponse,
-      protos.google.cloud.run.v2.ISubmitBuildRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  submitBuild(
-    request?: protos.google.cloud.run.v2.ISubmitBuildRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.run.v2.ISubmitBuildRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.run.v2.ISubmitBuildResponse,
-          protos.google.cloud.run.v2.ISubmitBuildRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.run.v2.ISubmitBuildResponse,
-      protos.google.cloud.run.v2.ISubmitBuildRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.run.v2.ISubmitBuildResponse,
-      protos.google.cloud.run.v2.ISubmitBuildRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.run.v2.ISubmitBuildRequest|null|undefined,
+          {}|null|undefined>): void;
+  submitBuild(
+      request: protos.google.cloud.run.v2.ISubmitBuildRequest,
+      callback: Callback<
+          protos.google.cloud.run.v2.ISubmitBuildResponse,
+          protos.google.cloud.run.v2.ISubmitBuildRequest|null|undefined,
+          {}|null|undefined>): void;
+  submitBuild(
+      request?: protos.google.cloud.run.v2.ISubmitBuildRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.run.v2.ISubmitBuildResponse,
+          protos.google.cloud.run.v2.ISubmitBuildRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.run.v2.ISubmitBuildResponse,
+          protos.google.cloud.run.v2.ISubmitBuildRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.run.v2.ISubmitBuildResponse,
+        protos.google.cloud.run.v2.ISubmitBuildRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('submitBuild request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.run.v2.ISubmitBuildResponse,
-          protos.google.cloud.run.v2.ISubmitBuildRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.run.v2.ISubmitBuildResponse,
+        protos.google.cloud.run.v2.ISubmitBuildRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('submitBuild response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .submitBuild(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.run.v2.ISubmitBuildResponse,
-          protos.google.cloud.run.v2.ISubmitBuildRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('submitBuild response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.submitBuild(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.run.v2.ISubmitBuildResponse,
+        protos.google.cloud.run.v2.ISubmitBuildRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('submitBuild response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -562,7 +517,7 @@ export class BuildsClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -613,12 +568,7 @@ export class BuildsClient {
    * @param {string} execution
    * @returns {string} Resource name string.
    */
-  executionPath(
-    project: string,
-    location: string,
-    job: string,
-    execution: string
-  ) {
+  executionPath(project:string,location:string,job:string,execution:string) {
     return this.pathTemplates.executionPathTemplate.render({
       project: project,
       location: location,
@@ -635,8 +585,7 @@ export class BuildsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .project;
+    return this.pathTemplates.executionPathTemplate.match(executionName).project;
   }
 
   /**
@@ -647,8 +596,7 @@ export class BuildsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .location;
+    return this.pathTemplates.executionPathTemplate.match(executionName).location;
   }
 
   /**
@@ -670,8 +618,56 @@ export class BuildsClient {
    * @returns {string} A string representing the execution.
    */
   matchExecutionFromExecutionName(executionName: string) {
-    return this.pathTemplates.executionPathTemplate.match(executionName)
-      .execution;
+    return this.pathTemplates.executionPathTemplate.match(executionName).execution;
+  }
+
+  /**
+   * Return a fully-qualified instance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  instancePath(project:string,location:string,instance:string) {
+    return this.pathTemplates.instancePathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).project;
+  }
+
+  /**
+   * Parse the location from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).location;
+  }
+
+  /**
+   * Parse the instance from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
   }
 
   /**
@@ -682,7 +678,7 @@ export class BuildsClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(project: string, location: string, job: string) {
+  jobPath(project:string,location:string,job:string) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -732,12 +728,7 @@ export class BuildsClient {
    * @param {string} revision
    * @returns {string} Resource name string.
    */
-  revisionPath(
-    project: string,
-    location: string,
-    service: string,
-    revision: string
-  ) {
+  revisionPath(project:string,location:string,service:string,revision:string) {
     return this.pathTemplates.revisionPathTemplate.render({
       project: project,
       location: location,
@@ -798,7 +789,7 @@ export class BuildsClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(project: string, location: string, service: string) {
+  servicePath(project:string,location:string,service:string) {
     return this.pathTemplates.servicePathTemplate.render({
       project: project,
       location: location,
@@ -849,13 +840,7 @@ export class BuildsClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(
-    project: string,
-    location: string,
-    job: string,
-    execution: string,
-    task: string
-  ) {
+  taskPath(project:string,location:string,job:string,execution:string,task:string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -928,7 +913,7 @@ export class BuildsClient {
    * @param {string} worker_pool
    * @returns {string} Resource name string.
    */
-  workerPoolPath(project: string, location: string, workerPool: string) {
+  workerPoolPath(project:string,location:string,workerPool:string) {
     return this.pathTemplates.workerPoolPathTemplate.render({
       project: project,
       location: location,
@@ -944,8 +929,7 @@ export class BuildsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWorkerPoolName(workerPoolName: string) {
-    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
-      .project;
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).project;
   }
 
   /**
@@ -956,8 +940,7 @@ export class BuildsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWorkerPoolName(workerPoolName: string) {
-    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
-      .location;
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).location;
   }
 
   /**
@@ -968,8 +951,7 @@ export class BuildsClient {
    * @returns {string} A string representing the worker_pool.
    */
   matchWorkerPoolFromWorkerPoolName(workerPoolName: string) {
-    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
-      .worker_pool;
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName).worker_pool;
   }
 
   /**
@@ -984,9 +966,7 @@ export class BuildsClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

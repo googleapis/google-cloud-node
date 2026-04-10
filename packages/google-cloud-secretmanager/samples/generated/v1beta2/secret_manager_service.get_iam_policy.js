@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ function main(resource) {
   // const options = {}
 
   // Imports the Secretmanager library
-  const {SecretManagerServiceClient} = require('@google-cloud/secretmanager').v1beta2;
+  const {SecretManagerServiceClient} = require('@google-cloud/secret-manager').v1beta2;
 
   // Instantiates a client
   const secretmanagerClient = new SecretManagerServiceClient();

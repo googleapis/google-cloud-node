@@ -1,20 +1,20 @@
 {
   "name": "@google-cloud/dataform",
-  "version": "2.0.1",
-  "description": "dataform client for Node.js",
+  "version": "2.2.1",
+  "description": "Dataform API client for Node.js",
   "repository": {
     "type": "git",
-    "directory": "packages/google-cloud-dataform",
-    "url": "https://github.com/googleapis/google-cloud-node.git"
+    "url": "https://github.com/googleapis/google-cloud-node.git",
+    "directory": "packages/google-cloud-dataform"
   },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
   "files": [
     "build/src",
-    "build/protos",
-    "!build/src/**/*.map"
+    "build/protos"
   ],
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataform",
   "keywords": [
     "google apis client",
     "google api client",
@@ -26,7 +26,7 @@
     "cloud",
     "google dataform",
     "dataform",
-    "dataform service"
+    "Dataform API"
   ],
   "scripts": {
     "clean": "gts clean",
@@ -37,15 +37,15 @@
     "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
-    "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
+    "prepare": "npm run compile",
     "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "test": "c8 mocha build/test",
+    "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
+    "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -55,17 +55,24 @@
     "gapic-tools": "^1.0.0",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "linkinator": "^6.1.2",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
-    "sinon": "^19.0.2",
+    "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18.0.0"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataform"
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
+  }
 }

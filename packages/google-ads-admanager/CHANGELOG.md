@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.4.1...admanager-v0.5.0) (2025-10-23)
+
+
+### Features
+
+* [admanager] Added Application resource ([#6834](https://github.com/googleapis/google-cloud-node/issues/6834)) ([79e9ddf](https://github.com/googleapis/google-cloud-node/commit/79e9ddf22a87f114cb7c692be5ee3b34424ad5d5))
+
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.4.0...admanager-v0.4.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.3.0...admanager-v0.4.0) (2025-07-09)
+
+
+### Features
+
+* [admanager] Added support for AdBreak resource ([#6450](https://github.com/googleapis/google-cloud-node/issues/6450)) ([080b6ca](https://github.com/googleapis/google-cloud-node/commit/080b6cab7cf7274b71874243cef452a21b720131))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6417](https://github.com/googleapis/google-cloud-node/issues/6417)) ([0d6d584](https://github.com/googleapis/google-cloud-node/commit/0d6d584a0c5c8f9f96daf3ede46f9440758e0f35))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.2.0...admanager-v0.3.0) (2025-03-19)
 
 

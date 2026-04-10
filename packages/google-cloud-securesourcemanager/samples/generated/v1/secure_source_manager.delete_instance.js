@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,6 +46,10 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. If set to true, will force the deletion of the instance.
+   */
+  // const force = true
 
   // Imports the Securesourcemanager library
   const {SecureSourceManagerClient} = require('@google-cloud/securesourcemanager').v1;

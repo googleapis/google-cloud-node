@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -121,41 +112,20 @@ export class SimulatorClient {
    *     const client = new SimulatorClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SimulatorClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'policysimulator.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -181,7 +151,7 @@ export class SimulatorClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -195,7 +165,10 @@ export class SimulatorClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -216,100 +189,92 @@ export class SimulatorClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      customConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/customConstraints/{custom_constraint}'
+      ),
+      folderConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/constraints/{constraint}'
+      ),
       folderLocationReplayPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/replays/{replay}'
       ),
-      folderLocationReplayReplayResultPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'folders/{folder}/locations/{location}/replays/{replay}/results/{replay_result}'
-        ),
+      folderLocationReplayReplayResultPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/replays/{replay}/results/{replay_result}'
+      ),
+      folderPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/policies/{policy}'
+      ),
+      orgPolicyViolationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/orgPolicyViolationsPreviews/{org_policy_violations_preview}/orgPolicyViolations/{org_policy_violation}'
+      ),
+      orgPolicyViolationsPreviewPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/orgPolicyViolationsPreviews/{org_policy_violations_preview}'
+      ),
+      organizationConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/constraints/{constraint}'
+      ),
       organizationLocationReplayPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/replays/{replay}'
       ),
-      organizationLocationReplayReplayResultPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'organizations/{organization}/locations/{location}/replays/{replay}/results/{replay_result}'
-        ),
+      organizationLocationReplayReplayResultPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/replays/{replay}/results/{replay_result}'
+      ),
+      organizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/policies/{policy}'
+      ),
+      projectConstraintPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/constraints/{constraint}'
+      ),
       projectLocationReplayPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/replays/{replay}'
       ),
-      projectLocationReplayReplayResultPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/replays/{replay}/results/{replay_result}'
-        ),
+      projectLocationReplayReplayResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/replays/{replay}/results/{replay_result}'
+      ),
+      projectPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/policies/{policy}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listReplayResults: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'replayResults'
-      ),
+      listReplayResults:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'replayResults')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=operations/**}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*/replays/*/operations/**}'},
-            {get: '/v1/{name=folders/*/locations/*/replays/*/operations/**}'},
-            {
-              get: '/v1/{name=organizations/*/locations/*/replays/*/operations/**}',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=operations}',
-          additional_bindings: [
-            {get: '/v1/{name=projects/*/locations/*/replays/*/operations}'},
-            {get: '/v1/{name=folders/*/locations/*/replays/*/operations}'},
-            {
-              get: '/v1/{name=organizations/*/locations/*/replays/*/operations}',
-            },
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=operations/**}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=folders/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=organizations/*/locations/*/replays/*/operations/**}',},{get: '/v1/{name=projects/*/locations/*/orgPolicyViolationsPreviews/*/operations/**}',},{get: '/v1/{name=folders/*/locations/*/orgPolicyViolationsPreviews/*/operations/**}',},{get: '/v1/{name=organizations/*/locations/*/orgPolicyViolationsPreviews/*/operations/**}',},{get: '/v1/{name=projects/*/locations/*/accessPolicySimulations/*/operations/**}',},{get: '/v1/{name=folders/*/locations/*/accessPolicySimulations/*/operations/**}',},{get: '/v1/{name=organizations/*/locations/*/accessPolicySimulations/*/operations/**}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=operations}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/replays/*/operations}',},{get: '/v1/{name=folders/*/locations/*/replays/*/operations}',},{get: '/v1/{name=organizations/*/locations/*/replays/*/operations}',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createReplayResponse = protoFilesRoot.lookup(
-      '.google.cloud.policysimulator.v1.Replay'
-    ) as gax.protobuf.Type;
+      '.google.cloud.policysimulator.v1.Replay') as gax.protobuf.Type;
     const createReplayMetadata = protoFilesRoot.lookup(
-      '.google.cloud.policysimulator.v1.ReplayOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.policysimulator.v1.ReplayOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createReplay: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createReplayResponse.decode.bind(createReplayResponse),
-        createReplayMetadata.decode.bind(createReplayMetadata)
-      ),
+        createReplayMetadata.decode.bind(createReplayMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.policysimulator.v1.Simulator',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.policysimulator.v1.Simulator', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -340,37 +305,28 @@ export class SimulatorClient {
     // Put together the "service stub" for
     // google.cloud.policysimulator.v1.Simulator.
     this.simulatorStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.policysimulator.v1.Simulator'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.policysimulator.v1.Simulator') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.policysimulator.v1.Simulator,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const simulatorStubMethods = [
-      'getReplay',
-      'createReplay',
-      'listReplayResults',
-    ];
+    const simulatorStubMethods =
+        ['getReplay', 'createReplay', 'listReplayResults'];
     for (const methodName of simulatorStubMethods) {
       const callPromise = this.simulatorStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -395,14 +351,8 @@ export class SimulatorClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'policysimulator.googleapis.com';
   }
@@ -413,14 +363,8 @@ export class SimulatorClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'policysimulator.googleapis.com';
   }
@@ -451,7 +395,9 @@ export class SimulatorClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -460,9 +406,8 @@ export class SimulatorClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -473,434 +418,323 @@ export class SimulatorClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets the specified {@link protos.google.cloud.policysimulator.v1.Replay|Replay}. Each
-   * `Replay` is available for at least 7 days.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the {@link protos.google.cloud.policysimulator.v1.Replay|Replay}
-   *   to retrieve, in the following format:
-   *
-   *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`,
-   *   where `{resource-id}` is the ID of the project, folder, or organization
-   *   that owns the `Replay`.
-   *
-   *   Example:
-   *   `projects/my-example-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.policysimulator.v1.Replay|Replay}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/simulator.get_replay.js</caption>
-   * region_tag:policysimulator_v1_generated_Simulator_GetReplay_async
-   */
+/**
+ * Gets the specified {@link protos.google.cloud.policysimulator.v1.Replay|Replay}. Each
+ * `Replay` is available for at least 7 days.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the {@link protos.google.cloud.policysimulator.v1.Replay|Replay}
+ *   to retrieve, in the following format:
+ *
+ *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`,
+ *   where `{resource-id}` is the ID of the project, folder, or organization
+ *   that owns the `Replay`.
+ *
+ *   Example:
+ *   `projects/my-example-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.policysimulator.v1.Replay|Replay}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/simulator.get_replay.js</caption>
+ * region_tag:policysimulator_v1_generated_Simulator_GetReplay_async
+ */
   getReplay(
-    request?: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.policysimulator.v1.IReplay,
-      protos.google.cloud.policysimulator.v1.IGetReplayRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.policysimulator.v1.IReplay,
+        protos.google.cloud.policysimulator.v1.IGetReplayRequest|undefined, {}|undefined
+      ]>;
   getReplay(
-    request: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.policysimulator.v1.IReplay,
-      | protos.google.cloud.policysimulator.v1.IGetReplayRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReplay(
-    request: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
-    callback: Callback<
-      protos.google.cloud.policysimulator.v1.IReplay,
-      | protos.google.cloud.policysimulator.v1.IGetReplayRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReplay(
-    request?: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.policysimulator.v1.IReplay,
-          | protos.google.cloud.policysimulator.v1.IGetReplayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.policysimulator.v1.IReplay,
-      | protos.google.cloud.policysimulator.v1.IGetReplayRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.policysimulator.v1.IReplay,
-      protos.google.cloud.policysimulator.v1.IGetReplayRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.policysimulator.v1.IGetReplayRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReplay(
+      request: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
+      callback: Callback<
+          protos.google.cloud.policysimulator.v1.IReplay,
+          protos.google.cloud.policysimulator.v1.IGetReplayRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReplay(
+      request?: protos.google.cloud.policysimulator.v1.IGetReplayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.policysimulator.v1.IReplay,
+          protos.google.cloud.policysimulator.v1.IGetReplayRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.policysimulator.v1.IReplay,
+          protos.google.cloud.policysimulator.v1.IGetReplayRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.policysimulator.v1.IReplay,
+        protos.google.cloud.policysimulator.v1.IGetReplayRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReplay request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.policysimulator.v1.IReplay,
-          | protos.google.cloud.policysimulator.v1.IGetReplayRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.policysimulator.v1.IReplay,
+        protos.google.cloud.policysimulator.v1.IGetReplayRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReplay response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReplay(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.policysimulator.v1.IReplay,
-          protos.google.cloud.policysimulator.v1.IGetReplayRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getReplay response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReplay(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.policysimulator.v1.IReplay,
+        protos.google.cloud.policysimulator.v1.IGetReplayRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReplay response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Creates and starts a {@link protos.google.cloud.policysimulator.v1.Replay|Replay} using
-   * the given {@link protos.google.cloud.policysimulator.v1.ReplayConfig|ReplayConfig}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this
-   *   {@link protos.google.cloud.policysimulator.v1.Replay|Replay} will be created. This
-   *   resource must be a project, folder, or organization with a location.
-   *
-   *   Example: `projects/my-example-project/locations/global`
-   * @param {google.cloud.policysimulator.v1.Replay} request.replay
-   *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} to create.
-   *   Set `Replay.ReplayConfig` to configure the replay.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/simulator.create_replay.js</caption>
-   * region_tag:policysimulator_v1_generated_Simulator_CreateReplay_async
-   */
+/**
+ * Creates and starts a {@link protos.google.cloud.policysimulator.v1.Replay|Replay} using
+ * the given {@link protos.google.cloud.policysimulator.v1.ReplayConfig|ReplayConfig}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this
+ *   {@link protos.google.cloud.policysimulator.v1.Replay|Replay} will be created. This
+ *   resource must be a project, folder, or organization with a location.
+ *
+ *   Example: `projects/my-example-project/locations/global`
+ * @param {google.cloud.policysimulator.v1.Replay} request.replay
+ *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} to create.
+ *   Set `Replay.ReplayConfig` to configure the replay.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/simulator.create_replay.js</caption>
+ * region_tag:policysimulator_v1_generated_Simulator_CreateReplay_async
+ */
   createReplay(
-    request?: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.policysimulator.v1.IReplay,
-        protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createReplay(
-    request: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.policysimulator.v1.IReplay,
-        protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createReplay(
-    request: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.policysimulator.v1.IReplay,
-        protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createReplay(
-    request?: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.policysimulator.v1.IReplay,
-            protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.policysimulator.v1.IReplay,
-        protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.policysimulator.v1.IReplay,
-        protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.policysimulator.v1.ICreateReplayRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.policysimulator.v1.IReplay,
-            protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createReplay response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createReplay request %j', request);
-    return this.innerApiCalls
-      .createReplay(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.policysimulator.v1.IReplay,
-            protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createReplay response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createReplay(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createReplay response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createReplay()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/simulator.create_replay.js</caption>
-   * region_tag:policysimulator_v1_generated_Simulator_CreateReplay_async
-   */
-  async checkCreateReplayProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.policysimulator.v1.Replay,
-      protos.google.cloud.policysimulator.v1.ReplayOperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createReplay()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/simulator.create_replay.js</caption>
+ * region_tag:policysimulator_v1_generated_Simulator_CreateReplay_async
+ */
+  async checkCreateReplayProgress(name: string): Promise<LROperation<protos.google.cloud.policysimulator.v1.Replay, protos.google.cloud.policysimulator.v1.ReplayOperationMetadata>>{
     this._log.info('createReplay long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createReplay,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.policysimulator.v1.Replay,
-      protos.google.cloud.policysimulator.v1.ReplayOperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createReplay, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.policysimulator.v1.Replay, protos.google.cloud.policysimulator.v1.ReplayOperationMetadata>;
   }
-  /**
-   * Lists the results of running a
-   * {@link protos.google.cloud.policysimulator.v1.Replay|Replay}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} whose
-   *   results are listed, in the following format:
-   *
-   *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`
-   *
-   *   Example:
-   *   `projects/my-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
-   * @param {number} request.pageSize
-   *   The maximum number of
-   *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} objects to
-   *   return. Defaults to 5000.
-   *
-   *   The maximum value is 5000; values above 5000 are rounded down to 5000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.policysimulator.v1.Simulator.ListReplayResults|Simulator.ListReplayResults}
-   *   call. Provide this token to retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to
-   *   [Simulator.ListReplayResults[] must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReplayResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists the results of running a
+ * {@link protos.google.cloud.policysimulator.v1.Replay|Replay}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} whose
+ *   results are listed, in the following format:
+ *
+ *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`
+ *
+ *   Example:
+ *   `projects/my-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
+ * @param {number} request.pageSize
+ *   The maximum number of
+ *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} objects to
+ *   return. Defaults to 5000.
+ *
+ *   The maximum value is 5000; values above 5000 are rounded down to 5000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.policysimulator.v1.Simulator.ListReplayResults|Simulator.ListReplayResults}
+ *   call. Provide this token to retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to
+ *   [Simulator.ListReplayResults[] must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReplayResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReplayResults(
-    request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.policysimulator.v1.IReplayResult[],
-      protos.google.cloud.policysimulator.v1.IListReplayResultsRequest | null,
-      protos.google.cloud.policysimulator.v1.IListReplayResultsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.policysimulator.v1.IReplayResult[],
+        protos.google.cloud.policysimulator.v1.IListReplayResultsRequest|null,
+        protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
+      ]>;
   listReplayResults(
-    request: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-      | protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.policysimulator.v1.IReplayResult
-    >
-  ): void;
-  listReplayResults(
-    request: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-      | protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.policysimulator.v1.IReplayResult
-    >
-  ): void;
-  listReplayResults(
-    request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-          | protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.policysimulator.v1.IReplayResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-      | protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
-      | null
-      | undefined,
-      protos.google.cloud.policysimulator.v1.IReplayResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.policysimulator.v1.IReplayResult[],
-      protos.google.cloud.policysimulator.v1.IListReplayResultsRequest | null,
-      protos.google.cloud.policysimulator.v1.IListReplayResultsResponse,
-    ]
-  > | void {
+          protos.google.cloud.policysimulator.v1.IListReplayResultsResponse|null|undefined,
+          protos.google.cloud.policysimulator.v1.IReplayResult>): void;
+  listReplayResults(
+      request: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+          protos.google.cloud.policysimulator.v1.IListReplayResultsResponse|null|undefined,
+          protos.google.cloud.policysimulator.v1.IReplayResult>): void;
+  listReplayResults(
+      request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+          protos.google.cloud.policysimulator.v1.IListReplayResultsResponse|null|undefined,
+          protos.google.cloud.policysimulator.v1.IReplayResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+          protos.google.cloud.policysimulator.v1.IListReplayResultsResponse|null|undefined,
+          protos.google.cloud.policysimulator.v1.IReplayResult>):
+      Promise<[
+        protos.google.cloud.policysimulator.v1.IReplayResult[],
+        protos.google.cloud.policysimulator.v1.IListReplayResultsRequest|null,
+        protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-          | protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
-          | null
-          | undefined,
-          protos.google.cloud.policysimulator.v1.IReplayResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+      protos.google.cloud.policysimulator.v1.IListReplayResultsResponse|null|undefined,
+      protos.google.cloud.policysimulator.v1.IReplayResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReplayResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -909,72 +743,69 @@ export class SimulatorClient {
     this._log.info('listReplayResults request %j', request);
     return this.innerApiCalls
       .listReplayResults(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.policysimulator.v1.IReplayResult[],
-          protos.google.cloud.policysimulator.v1.IListReplayResultsRequest | null,
-          protos.google.cloud.policysimulator.v1.IListReplayResultsResponse,
-        ]) => {
-          this._log.info('listReplayResults values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.policysimulator.v1.IReplayResult[],
+        protos.google.cloud.policysimulator.v1.IListReplayResultsRequest|null,
+        protos.google.cloud.policysimulator.v1.IListReplayResultsResponse
+      ]) => {
+        this._log.info('listReplayResults values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReplayResults`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} whose
-   *   results are listed, in the following format:
-   *
-   *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`
-   *
-   *   Example:
-   *   `projects/my-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
-   * @param {number} request.pageSize
-   *   The maximum number of
-   *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} objects to
-   *   return. Defaults to 5000.
-   *
-   *   The maximum value is 5000; values above 5000 are rounded down to 5000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.policysimulator.v1.Simulator.ListReplayResults|Simulator.ListReplayResults}
-   *   call. Provide this token to retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to
-   *   [Simulator.ListReplayResults[] must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReplayResultsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReplayResults`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} whose
+ *   results are listed, in the following format:
+ *
+ *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`
+ *
+ *   Example:
+ *   `projects/my-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
+ * @param {number} request.pageSize
+ *   The maximum number of
+ *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} objects to
+ *   return. Defaults to 5000.
+ *
+ *   The maximum value is 5000; values above 5000 are rounded down to 5000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.policysimulator.v1.Simulator.ListReplayResults|Simulator.ListReplayResults}
+ *   call. Provide this token to retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to
+ *   [Simulator.ListReplayResults[] must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReplayResultsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReplayResultsStream(
-    request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReplayResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReplayResults stream %j', request);
     return this.descriptors.page.listReplayResults.createStream(
       this.innerApiCalls.listReplayResults as GaxCall,
@@ -983,63 +814,62 @@ export class SimulatorClient {
     );
   }
 
-  /**
-   * Equivalent to `listReplayResults`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} whose
-   *   results are listed, in the following format:
-   *
-   *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`
-   *
-   *   Example:
-   *   `projects/my-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
-   * @param {number} request.pageSize
-   *   The maximum number of
-   *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} objects to
-   *   return. Defaults to 5000.
-   *
-   *   The maximum value is 5000; values above 5000 are rounded down to 5000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.policysimulator.v1.Simulator.ListReplayResults|Simulator.ListReplayResults}
-   *   call. Provide this token to retrieve the next page of results.
-   *
-   *   When paginating, all other parameters provided to
-   *   [Simulator.ListReplayResults[] must match the call that provided the page
-   *   token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/simulator.list_replay_results.js</caption>
-   * region_tag:policysimulator_v1_generated_Simulator_ListReplayResults_async
-   */
+/**
+ * Equivalent to `listReplayResults`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The {@link protos.google.cloud.policysimulator.v1.Replay|Replay} whose
+ *   results are listed, in the following format:
+ *
+ *   `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`
+ *
+ *   Example:
+ *   `projects/my-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
+ * @param {number} request.pageSize
+ *   The maximum number of
+ *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult} objects to
+ *   return. Defaults to 5000.
+ *
+ *   The maximum value is 5000; values above 5000 are rounded down to 5000.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.policysimulator.v1.Simulator.ListReplayResults|Simulator.ListReplayResults}
+ *   call. Provide this token to retrieve the next page of results.
+ *
+ *   When paginating, all other parameters provided to
+ *   [Simulator.ListReplayResults[] must match the call that provided the page
+ *   token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.policysimulator.v1.ReplayResult|ReplayResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/simulator.list_replay_results.js</caption>
+ * region_tag:policysimulator_v1_generated_Simulator_ListReplayResults_async
+ */
   listReplayResultsAsync(
-    request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.policysimulator.v1.IReplayResult> {
+      request?: protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.policysimulator.v1.IReplayResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReplayResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReplayResults iterate %j', request);
     return this.descriptors.page.listReplayResults.asyncIterate(
       this.innerApiCalls['listReplayResults'] as GaxCall,
@@ -1047,7 +877,7 @@ export class SimulatorClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.policysimulator.v1.IReplayResult>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1092,20 +922,20 @@ export class SimulatorClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1142,13 +972,13 @@ export class SimulatorClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1182,7 +1012,7 @@ export class SimulatorClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1197,20 +1027,20 @@ export class SimulatorClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1254,26 +1084,98 @@ export class SimulatorClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified customConstraint resource name string.
+   *
+   * @param {string} organization
+   * @param {string} custom_constraint
+   * @returns {string} Resource name string.
+   */
+  customConstraintPath(organization:string,customConstraint:string) {
+    return this.pathTemplates.customConstraintPathTemplate.render({
+      organization: organization,
+      custom_constraint: customConstraint,
+    });
+  }
+
+  /**
+   * Parse the organization from CustomConstraint resource.
+   *
+   * @param {string} customConstraintName
+   *   A fully-qualified path representing CustomConstraint resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromCustomConstraintName(customConstraintName: string) {
+    return this.pathTemplates.customConstraintPathTemplate.match(customConstraintName).organization;
+  }
+
+  /**
+   * Parse the custom_constraint from CustomConstraint resource.
+   *
+   * @param {string} customConstraintName
+   *   A fully-qualified path representing CustomConstraint resource.
+   * @returns {string} A string representing the custom_constraint.
+   */
+  matchCustomConstraintFromCustomConstraintName(customConstraintName: string) {
+    return this.pathTemplates.customConstraintPathTemplate.match(customConstraintName).custom_constraint;
+  }
+
+  /**
+   * Return a fully-qualified folderConstraint resource name string.
+   *
+   * @param {string} folder
+   * @param {string} constraint
+   * @returns {string} Resource name string.
+   */
+  folderConstraintPath(folder:string,constraint:string) {
+    return this.pathTemplates.folderConstraintPathTemplate.render({
+      folder: folder,
+      constraint: constraint,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderConstraint resource.
+   *
+   * @param {string} folderConstraintName
+   *   A fully-qualified path representing folder_constraint resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderConstraintName(folderConstraintName: string) {
+    return this.pathTemplates.folderConstraintPathTemplate.match(folderConstraintName).folder;
+  }
+
+  /**
+   * Parse the constraint from FolderConstraint resource.
+   *
+   * @param {string} folderConstraintName
+   *   A fully-qualified path representing folder_constraint resource.
+   * @returns {string} A string representing the constraint.
+   */
+  matchConstraintFromFolderConstraintName(folderConstraintName: string) {
+    return this.pathTemplates.folderConstraintPathTemplate.match(folderConstraintName).constraint;
+  }
 
   /**
    * Return a fully-qualified folderLocationReplay resource name string.
@@ -1283,7 +1185,7 @@ export class SimulatorClient {
    * @param {string} replay
    * @returns {string} Resource name string.
    */
-  folderLocationReplayPath(folder: string, location: string, replay: string) {
+  folderLocationReplayPath(folder:string,location:string,replay:string) {
     return this.pathTemplates.folderLocationReplayPathTemplate.render({
       folder: folder,
       location: location,
@@ -1299,9 +1201,7 @@ export class SimulatorClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderLocationReplayName(folderLocationReplayName: string) {
-    return this.pathTemplates.folderLocationReplayPathTemplate.match(
-      folderLocationReplayName
-    ).folder;
+    return this.pathTemplates.folderLocationReplayPathTemplate.match(folderLocationReplayName).folder;
   }
 
   /**
@@ -1312,9 +1212,7 @@ export class SimulatorClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFolderLocationReplayName(folderLocationReplayName: string) {
-    return this.pathTemplates.folderLocationReplayPathTemplate.match(
-      folderLocationReplayName
-    ).location;
+    return this.pathTemplates.folderLocationReplayPathTemplate.match(folderLocationReplayName).location;
   }
 
   /**
@@ -1325,9 +1223,7 @@ export class SimulatorClient {
    * @returns {string} A string representing the replay.
    */
   matchReplayFromFolderLocationReplayName(folderLocationReplayName: string) {
-    return this.pathTemplates.folderLocationReplayPathTemplate.match(
-      folderLocationReplayName
-    ).replay;
+    return this.pathTemplates.folderLocationReplayPathTemplate.match(folderLocationReplayName).replay;
   }
 
   /**
@@ -1339,20 +1235,13 @@ export class SimulatorClient {
    * @param {string} replay_result
    * @returns {string} Resource name string.
    */
-  folderLocationReplayReplayResultPath(
-    folder: string,
-    location: string,
-    replay: string,
-    replayResult: string
-  ) {
-    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.render(
-      {
-        folder: folder,
-        location: location,
-        replay: replay,
-        replay_result: replayResult,
-      }
-    );
+  folderLocationReplayReplayResultPath(folder:string,location:string,replay:string,replayResult:string) {
+    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.render({
+      folder: folder,
+      location: location,
+      replay: replay,
+      replay_result: replayResult,
+    });
   }
 
   /**
@@ -1362,12 +1251,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing folder_location_replay_replay_result resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationReplayReplayResultName(
-    folderLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(
-      folderLocationReplayReplayResultName
-    ).folder;
+  matchFolderFromFolderLocationReplayReplayResultName(folderLocationReplayReplayResultName: string) {
+    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(folderLocationReplayReplayResultName).folder;
   }
 
   /**
@@ -1377,12 +1262,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing folder_location_replay_replay_result resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationReplayReplayResultName(
-    folderLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(
-      folderLocationReplayReplayResultName
-    ).location;
+  matchLocationFromFolderLocationReplayReplayResultName(folderLocationReplayReplayResultName: string) {
+    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(folderLocationReplayReplayResultName).location;
   }
 
   /**
@@ -1392,12 +1273,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing folder_location_replay_replay_result resource.
    * @returns {string} A string representing the replay.
    */
-  matchReplayFromFolderLocationReplayReplayResultName(
-    folderLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(
-      folderLocationReplayReplayResultName
-    ).replay;
+  matchReplayFromFolderLocationReplayReplayResultName(folderLocationReplayReplayResultName: string) {
+    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(folderLocationReplayReplayResultName).replay;
   }
 
   /**
@@ -1407,12 +1284,191 @@ export class SimulatorClient {
    *   A fully-qualified path representing folder_location_replay_replay_result resource.
    * @returns {string} A string representing the replay_result.
    */
-  matchReplayResultFromFolderLocationReplayReplayResultName(
-    folderLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(
-      folderLocationReplayReplayResultName
-    ).replay_result;
+  matchReplayResultFromFolderLocationReplayReplayResultName(folderLocationReplayReplayResultName: string) {
+    return this.pathTemplates.folderLocationReplayReplayResultPathTemplate.match(folderLocationReplayReplayResultName).replay_result;
+  }
+
+  /**
+   * Return a fully-qualified folderPolicy resource name string.
+   *
+   * @param {string} folder
+   * @param {string} policy
+   * @returns {string} Resource name string.
+   */
+  folderPolicyPath(folder:string,policy:string) {
+    return this.pathTemplates.folderPolicyPathTemplate.render({
+      folder: folder,
+      policy: policy,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderPolicy resource.
+   *
+   * @param {string} folderPolicyName
+   *   A fully-qualified path representing folder_policy resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderPolicyName(folderPolicyName: string) {
+    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName).folder;
+  }
+
+  /**
+   * Parse the policy from FolderPolicy resource.
+   *
+   * @param {string} folderPolicyName
+   *   A fully-qualified path representing folder_policy resource.
+   * @returns {string} A string representing the policy.
+   */
+  matchPolicyFromFolderPolicyName(folderPolicyName: string) {
+    return this.pathTemplates.folderPolicyPathTemplate.match(folderPolicyName).policy;
+  }
+
+  /**
+   * Return a fully-qualified orgPolicyViolation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} org_policy_violations_preview
+   * @param {string} org_policy_violation
+   * @returns {string} Resource name string.
+   */
+  orgPolicyViolationPath(organization:string,location:string,orgPolicyViolationsPreview:string,orgPolicyViolation:string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.render({
+      organization: organization,
+      location: location,
+      org_policy_violations_preview: orgPolicyViolationsPreview,
+      org_policy_violation: orgPolicyViolation,
+    });
+  }
+
+  /**
+   * Parse the organization from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).organization;
+  }
+
+  /**
+   * Parse the location from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).location;
+  }
+
+  /**
+   * Parse the org_policy_violations_preview from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the org_policy_violations_preview.
+   */
+  matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).org_policy_violations_preview;
+  }
+
+  /**
+   * Parse the org_policy_violation from OrgPolicyViolation resource.
+   *
+   * @param {string} orgPolicyViolationName
+   *   A fully-qualified path representing OrgPolicyViolation resource.
+   * @returns {string} A string representing the org_policy_violation.
+   */
+  matchOrgPolicyViolationFromOrgPolicyViolationName(orgPolicyViolationName: string) {
+    return this.pathTemplates.orgPolicyViolationPathTemplate.match(orgPolicyViolationName).org_policy_violation;
+  }
+
+  /**
+   * Return a fully-qualified orgPolicyViolationsPreview resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} org_policy_violations_preview
+   * @returns {string} Resource name string.
+   */
+  orgPolicyViolationsPreviewPath(organization:string,location:string,orgPolicyViolationsPreview:string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.render({
+      organization: organization,
+      location: location,
+      org_policy_violations_preview: orgPolicyViolationsPreview,
+    });
+  }
+
+  /**
+   * Parse the organization from OrgPolicyViolationsPreview resource.
+   *
+   * @param {string} orgPolicyViolationsPreviewName
+   *   A fully-qualified path representing OrgPolicyViolationsPreview resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrgPolicyViolationsPreviewName(orgPolicyViolationsPreviewName: string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match(orgPolicyViolationsPreviewName).organization;
+  }
+
+  /**
+   * Parse the location from OrgPolicyViolationsPreview resource.
+   *
+   * @param {string} orgPolicyViolationsPreviewName
+   *   A fully-qualified path representing OrgPolicyViolationsPreview resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrgPolicyViolationsPreviewName(orgPolicyViolationsPreviewName: string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match(orgPolicyViolationsPreviewName).location;
+  }
+
+  /**
+   * Parse the org_policy_violations_preview from OrgPolicyViolationsPreview resource.
+   *
+   * @param {string} orgPolicyViolationsPreviewName
+   *   A fully-qualified path representing OrgPolicyViolationsPreview resource.
+   * @returns {string} A string representing the org_policy_violations_preview.
+   */
+  matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName(orgPolicyViolationsPreviewName: string) {
+    return this.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match(orgPolicyViolationsPreviewName).org_policy_violations_preview;
+  }
+
+  /**
+   * Return a fully-qualified organizationConstraint resource name string.
+   *
+   * @param {string} organization
+   * @param {string} constraint
+   * @returns {string} Resource name string.
+   */
+  organizationConstraintPath(organization:string,constraint:string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.render({
+      organization: organization,
+      constraint: constraint,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationConstraint resource.
+   *
+   * @param {string} organizationConstraintName
+   *   A fully-qualified path representing organization_constraint resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationConstraintName(organizationConstraintName: string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.match(organizationConstraintName).organization;
+  }
+
+  /**
+   * Parse the constraint from OrganizationConstraint resource.
+   *
+   * @param {string} organizationConstraintName
+   *   A fully-qualified path representing organization_constraint resource.
+   * @returns {string} A string representing the constraint.
+   */
+  matchConstraintFromOrganizationConstraintName(organizationConstraintName: string) {
+    return this.pathTemplates.organizationConstraintPathTemplate.match(organizationConstraintName).constraint;
   }
 
   /**
@@ -1423,11 +1479,7 @@ export class SimulatorClient {
    * @param {string} replay
    * @returns {string} Resource name string.
    */
-  organizationLocationReplayPath(
-    organization: string,
-    location: string,
-    replay: string
-  ) {
+  organizationLocationReplayPath(organization:string,location:string,replay:string) {
     return this.pathTemplates.organizationLocationReplayPathTemplate.render({
       organization: organization,
       location: location,
@@ -1442,12 +1494,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing organization_location_replay resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationReplayName(
-    organizationLocationReplayName: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayPathTemplate.match(
-      organizationLocationReplayName
-    ).organization;
+  matchOrganizationFromOrganizationLocationReplayName(organizationLocationReplayName: string) {
+    return this.pathTemplates.organizationLocationReplayPathTemplate.match(organizationLocationReplayName).organization;
   }
 
   /**
@@ -1457,12 +1505,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing organization_location_replay resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationReplayName(
-    organizationLocationReplayName: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayPathTemplate.match(
-      organizationLocationReplayName
-    ).location;
+  matchLocationFromOrganizationLocationReplayName(organizationLocationReplayName: string) {
+    return this.pathTemplates.organizationLocationReplayPathTemplate.match(organizationLocationReplayName).location;
   }
 
   /**
@@ -1472,12 +1516,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing organization_location_replay resource.
    * @returns {string} A string representing the replay.
    */
-  matchReplayFromOrganizationLocationReplayName(
-    organizationLocationReplayName: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayPathTemplate.match(
-      organizationLocationReplayName
-    ).replay;
+  matchReplayFromOrganizationLocationReplayName(organizationLocationReplayName: string) {
+    return this.pathTemplates.organizationLocationReplayPathTemplate.match(organizationLocationReplayName).replay;
   }
 
   /**
@@ -1489,20 +1529,13 @@ export class SimulatorClient {
    * @param {string} replay_result
    * @returns {string} Resource name string.
    */
-  organizationLocationReplayReplayResultPath(
-    organization: string,
-    location: string,
-    replay: string,
-    replayResult: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.render(
-      {
-        organization: organization,
-        location: location,
-        replay: replay,
-        replay_result: replayResult,
-      }
-    );
+  organizationLocationReplayReplayResultPath(organization:string,location:string,replay:string,replayResult:string) {
+    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.render({
+      organization: organization,
+      location: location,
+      replay: replay,
+      replay_result: replayResult,
+    });
   }
 
   /**
@@ -1512,12 +1545,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing organization_location_replay_replay_result resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationReplayReplayResultName(
-    organizationLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(
-      organizationLocationReplayReplayResultName
-    ).organization;
+  matchOrganizationFromOrganizationLocationReplayReplayResultName(organizationLocationReplayReplayResultName: string) {
+    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(organizationLocationReplayReplayResultName).organization;
   }
 
   /**
@@ -1527,12 +1556,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing organization_location_replay_replay_result resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationReplayReplayResultName(
-    organizationLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(
-      organizationLocationReplayReplayResultName
-    ).location;
+  matchLocationFromOrganizationLocationReplayReplayResultName(organizationLocationReplayReplayResultName: string) {
+    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(organizationLocationReplayReplayResultName).location;
   }
 
   /**
@@ -1542,12 +1567,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing organization_location_replay_replay_result resource.
    * @returns {string} A string representing the replay.
    */
-  matchReplayFromOrganizationLocationReplayReplayResultName(
-    organizationLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(
-      organizationLocationReplayReplayResultName
-    ).replay;
+  matchReplayFromOrganizationLocationReplayReplayResultName(organizationLocationReplayReplayResultName: string) {
+    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(organizationLocationReplayReplayResultName).replay;
   }
 
   /**
@@ -1557,12 +1578,80 @@ export class SimulatorClient {
    *   A fully-qualified path representing organization_location_replay_replay_result resource.
    * @returns {string} A string representing the replay_result.
    */
-  matchReplayResultFromOrganizationLocationReplayReplayResultName(
-    organizationLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(
-      organizationLocationReplayReplayResultName
-    ).replay_result;
+  matchReplayResultFromOrganizationLocationReplayReplayResultName(organizationLocationReplayReplayResultName: string) {
+    return this.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match(organizationLocationReplayReplayResultName).replay_result;
+  }
+
+  /**
+   * Return a fully-qualified organizationPolicy resource name string.
+   *
+   * @param {string} organization
+   * @param {string} policy
+   * @returns {string} Resource name string.
+   */
+  organizationPolicyPath(organization:string,policy:string) {
+    return this.pathTemplates.organizationPolicyPathTemplate.render({
+      organization: organization,
+      policy: policy,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationPolicy resource.
+   *
+   * @param {string} organizationPolicyName
+   *   A fully-qualified path representing organization_policy resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationPolicyName(organizationPolicyName: string) {
+    return this.pathTemplates.organizationPolicyPathTemplate.match(organizationPolicyName).organization;
+  }
+
+  /**
+   * Parse the policy from OrganizationPolicy resource.
+   *
+   * @param {string} organizationPolicyName
+   *   A fully-qualified path representing organization_policy resource.
+   * @returns {string} A string representing the policy.
+   */
+  matchPolicyFromOrganizationPolicyName(organizationPolicyName: string) {
+    return this.pathTemplates.organizationPolicyPathTemplate.match(organizationPolicyName).policy;
+  }
+
+  /**
+   * Return a fully-qualified projectConstraint resource name string.
+   *
+   * @param {string} project
+   * @param {string} constraint
+   * @returns {string} Resource name string.
+   */
+  projectConstraintPath(project:string,constraint:string) {
+    return this.pathTemplates.projectConstraintPathTemplate.render({
+      project: project,
+      constraint: constraint,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectConstraint resource.
+   *
+   * @param {string} projectConstraintName
+   *   A fully-qualified path representing project_constraint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectConstraintName(projectConstraintName: string) {
+    return this.pathTemplates.projectConstraintPathTemplate.match(projectConstraintName).project;
+  }
+
+  /**
+   * Parse the constraint from ProjectConstraint resource.
+   *
+   * @param {string} projectConstraintName
+   *   A fully-qualified path representing project_constraint resource.
+   * @returns {string} A string representing the constraint.
+   */
+  matchConstraintFromProjectConstraintName(projectConstraintName: string) {
+    return this.pathTemplates.projectConstraintPathTemplate.match(projectConstraintName).constraint;
   }
 
   /**
@@ -1573,7 +1662,7 @@ export class SimulatorClient {
    * @param {string} replay
    * @returns {string} Resource name string.
    */
-  projectLocationReplayPath(project: string, location: string, replay: string) {
+  projectLocationReplayPath(project:string,location:string,replay:string) {
     return this.pathTemplates.projectLocationReplayPathTemplate.render({
       project: project,
       location: location,
@@ -1589,9 +1678,7 @@ export class SimulatorClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationReplayName(projectLocationReplayName: string) {
-    return this.pathTemplates.projectLocationReplayPathTemplate.match(
-      projectLocationReplayName
-    ).project;
+    return this.pathTemplates.projectLocationReplayPathTemplate.match(projectLocationReplayName).project;
   }
 
   /**
@@ -1601,12 +1688,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing project_location_replay resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationReplayName(
-    projectLocationReplayName: string
-  ) {
-    return this.pathTemplates.projectLocationReplayPathTemplate.match(
-      projectLocationReplayName
-    ).location;
+  matchLocationFromProjectLocationReplayName(projectLocationReplayName: string) {
+    return this.pathTemplates.projectLocationReplayPathTemplate.match(projectLocationReplayName).location;
   }
 
   /**
@@ -1617,9 +1700,7 @@ export class SimulatorClient {
    * @returns {string} A string representing the replay.
    */
   matchReplayFromProjectLocationReplayName(projectLocationReplayName: string) {
-    return this.pathTemplates.projectLocationReplayPathTemplate.match(
-      projectLocationReplayName
-    ).replay;
+    return this.pathTemplates.projectLocationReplayPathTemplate.match(projectLocationReplayName).replay;
   }
 
   /**
@@ -1631,20 +1712,13 @@ export class SimulatorClient {
    * @param {string} replay_result
    * @returns {string} Resource name string.
    */
-  projectLocationReplayReplayResultPath(
-    project: string,
-    location: string,
-    replay: string,
-    replayResult: string
-  ) {
-    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        replay: replay,
-        replay_result: replayResult,
-      }
-    );
+  projectLocationReplayReplayResultPath(project:string,location:string,replay:string,replayResult:string) {
+    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.render({
+      project: project,
+      location: location,
+      replay: replay,
+      replay_result: replayResult,
+    });
   }
 
   /**
@@ -1654,12 +1728,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing project_location_replay_replay_result resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationReplayReplayResultName(
-    projectLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(
-      projectLocationReplayReplayResultName
-    ).project;
+  matchProjectFromProjectLocationReplayReplayResultName(projectLocationReplayReplayResultName: string) {
+    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(projectLocationReplayReplayResultName).project;
   }
 
   /**
@@ -1669,12 +1739,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing project_location_replay_replay_result resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationReplayReplayResultName(
-    projectLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(
-      projectLocationReplayReplayResultName
-    ).location;
+  matchLocationFromProjectLocationReplayReplayResultName(projectLocationReplayReplayResultName: string) {
+    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(projectLocationReplayReplayResultName).location;
   }
 
   /**
@@ -1684,12 +1750,8 @@ export class SimulatorClient {
    *   A fully-qualified path representing project_location_replay_replay_result resource.
    * @returns {string} A string representing the replay.
    */
-  matchReplayFromProjectLocationReplayReplayResultName(
-    projectLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(
-      projectLocationReplayReplayResultName
-    ).replay;
+  matchReplayFromProjectLocationReplayReplayResultName(projectLocationReplayReplayResultName: string) {
+    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(projectLocationReplayReplayResultName).replay;
   }
 
   /**
@@ -1699,12 +1761,44 @@ export class SimulatorClient {
    *   A fully-qualified path representing project_location_replay_replay_result resource.
    * @returns {string} A string representing the replay_result.
    */
-  matchReplayResultFromProjectLocationReplayReplayResultName(
-    projectLocationReplayReplayResultName: string
-  ) {
-    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(
-      projectLocationReplayReplayResultName
-    ).replay_result;
+  matchReplayResultFromProjectLocationReplayReplayResultName(projectLocationReplayReplayResultName: string) {
+    return this.pathTemplates.projectLocationReplayReplayResultPathTemplate.match(projectLocationReplayReplayResultName).replay_result;
+  }
+
+  /**
+   * Return a fully-qualified projectPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} policy
+   * @returns {string} Resource name string.
+   */
+  projectPolicyPath(project:string,policy:string) {
+    return this.pathTemplates.projectPolicyPathTemplate.render({
+      project: project,
+      policy: policy,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectPolicy resource.
+   *
+   * @param {string} projectPolicyName
+   *   A fully-qualified path representing project_policy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectPolicyName(projectPolicyName: string) {
+    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName).project;
+  }
+
+  /**
+   * Parse the policy from ProjectPolicy resource.
+   *
+   * @param {string} projectPolicyName
+   *   A fully-qualified path representing project_policy resource.
+   * @returns {string} A string representing the policy.
+   */
+  matchPolicyFromProjectPolicyName(projectPolicyName: string) {
+    return this.pathTemplates.projectPolicyPathTemplate.match(projectPolicyName).policy;
   }
 
   /**
@@ -1719,7 +1813,7 @@ export class SimulatorClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

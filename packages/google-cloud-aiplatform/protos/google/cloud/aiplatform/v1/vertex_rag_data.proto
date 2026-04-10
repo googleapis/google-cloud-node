@@ -19,6 +19,7 @@ package google.cloud.aiplatform.v1;
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/aiplatform/v1/api_auth.proto";
+import "google/cloud/aiplatform/v1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1/io.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -76,7 +77,47 @@ message RagEmbeddingModelConfig {
 // Config for the Vector DB to use for RAG.
 message RagVectorDbConfig {
   // The config for the default RAG-managed Vector DB.
-  message RagManagedDb {}
+  message RagManagedDb {
+    // Config for KNN search.
+    message KNN {}
+
+    // Config for ANN search.
+    //
+    // RagManagedDb uses a tree-based structure to partition data and
+    // facilitate faster searches. As a tradeoff, it requires longer indexing
+    // time and manual triggering of index rebuild via the ImportRagFiles and
+    // UpdateRagCorpus API.
+    message ANN {
+      // The depth of the tree-based structure. Only depth values of 2 and 3 are
+      // supported.
+      //
+      // Recommended value is 2 if you have if you have O(10K) files in the
+      // RagCorpus and set this to 3 if more than that.
+      //
+      // Default value is 2.
+      int32 tree_depth = 1;
+
+      // Number of leaf nodes in the tree-based structure. Each leaf node
+      // contains groups of closely related vectors along with their
+      // corresponding centroid.
+      //
+      // Recommended value is 10 * sqrt(num of RagFiles in your RagCorpus).
+      //
+      // Default value is 500.
+      int32 leaf_count = 2;
+    }
+
+    // Choice of retrieval strategy.
+    oneof retrieval_strategy {
+      // Performs a KNN search on RagCorpus.
+      // Default choice if not specified.
+      KNN knn = 1;
+
+      // Performs an ANN search on RagCorpus. Use this if you have a lot of
+      // files (> 10K) in your RagCorpus and want to reduce the search latency.
+      ANN ann = 2;
+    }
+  }
 
   // The config for the Pinecone.
   message Pinecone {
@@ -223,6 +264,15 @@ message RagCorpus {
 
   // Output only. RagCorpus state.
   CorpusStatus corpus_status = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. Immutable. The CMEK key name used to encrypt at-rest data related
+  // to this Corpus. Only applicable to RagManagedDb option for Vector DB. This
+  // field can only be set at corpus creation time, and cannot be updated or
+  // deleted.
+  EncryptionSpec encryption_spec = 12 [
+    (google.api.field_behavior) = IMMUTABLE,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 }
 
 // A RagFile contains user data for chunking, embedding and indexing.
@@ -347,10 +397,32 @@ message RagFileParsingConfig {
     int32 max_parsing_requests_per_min = 2;
   }
 
+  // Specifies the advanced parsing for RagFiles.
+  message LlmParser {
+    // The name of a LLM model used for parsing.
+    // Format:
+    // * `projects/{project_id}/locations/{location}/publishers/{publisher}/models/{model}`
+    string model_name = 1;
+
+    // The maximum number of requests the job is allowed to make to the
+    // LLM model per minute. Consult
+    // https://cloud.google.com/vertex-ai/generative-ai/docs/quotas
+    // and your document size to set an appropriate value here. If unspecified,
+    // a default value of 5000 QPM would be used.
+    int32 max_parsing_requests_per_min = 2;
+
+    // The prompt to use for parsing. If not specified, a default prompt will
+    // be used.
+    string custom_parsing_prompt = 3;
+  }
+
   // The parser to use for RagFiles.
   oneof parser {
     // The Layout Parser to use for RagFiles.
     LayoutParser layout_parser = 4;
+
+    // The LLM Parser to use for RagFiles.
+    LlmParser llm_parser = 5;
   }
 }
 
@@ -431,4 +503,69 @@ message ImportRagFilesConfig {
   // If unspecified, a default value of 1,000 QPM would be used.
   int32 max_embedding_requests_per_min = 5
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Rebuilds the ANN index to optimize for recall on the imported data.
+  // Only applicable for RagCorpora running on RagManagedDb with
+  // `retrieval_strategy` set to `ANN`. The rebuild will be performed using the
+  // existing ANN config set on the RagCorpus. To change the ANN config, please
+  // use the UpdateRagCorpus API.
+  //
+  // Default is false, i.e., index is not rebuilt.
+  bool rebuild_ann_index = 19;
+}
+
+// Configuration message for RagManagedDb used by RagEngine.
+message RagManagedDbConfig {
+  // Scaled tier offers production grade performance along with
+  // autoscaling functionality. It is suitable for customers with large
+  // amounts of data or performance sensitive workloads.
+  message Scaled {}
+
+  // Basic tier is a cost-effective and low compute tier suitable for
+  // the following cases:
+  // * Experimenting with RagManagedDb.
+  // * Small data size.
+  // * Latency insensitive workload.
+  // * Only using RAG Engine with external vector DBs.
+  //
+  // NOTE: This is the default tier if not explicitly chosen.
+  message Basic {}
+
+  // Disables the RAG Engine service and deletes all your data held
+  // within this service. This will halt the billing of the service.
+  //
+  // NOTE: Once deleted the data cannot be recovered. To start using
+  // RAG Engine again, you will need to update the tier by calling the
+  // UpdateRagEngineConfig API.
+  message Unprovisioned {}
+
+  // The tier of the RagManagedDb.
+  oneof tier {
+    // Sets the RagManagedDb to the Scaled tier.
+    Scaled scaled = 4;
+
+    // Sets the RagManagedDb to the Basic tier.
+    Basic basic = 2;
+
+    // Sets the RagManagedDb to the Unprovisioned tier.
+    Unprovisioned unprovisioned = 3;
+  }
+}
+
+// Config for RagEngine.
+message RagEngineConfig {
+  option (google.api.resource) = {
+    type: "aiplatform.googleapis.com/RagEngineConfig"
+    pattern: "projects/{project}/locations/{location}/ragEngineConfig"
+    plural: "ragEngineConfigs"
+    singular: "ragEngineConfig"
+  };
+
+  // Identifier. The name of the RagEngineConfig.
+  // Format:
+  // `projects/{project}/locations/{location}/ragEngineConfig`
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
+
+  // The config of the RagManagedDb used by RagEngine.
+  RagManagedDbConfig rag_managed_db_config = 2;
 }

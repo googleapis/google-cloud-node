@@ -1,5 +1,74 @@
 # Changelog
 
+## [0.23.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.22.0...chat-v0.23.0) (2026-02-19)
+
+
+### Features
+
+* [chat] Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto ([#7084](https://github.com/googleapis/google-cloud-node/issues/7084)) ([9f75b64](https://github.com/googleapis/google-cloud-node/commit/9f75b642a89a9739644f1aea2af00cacfe626224))
+
+## [0.22.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.21.0...chat-v0.22.0) (2026-01-22)
+
+
+### Features
+
+* [chat] updated v3 dialogflow client libraries ([#7006](https://github.com/googleapis/google-cloud-node/issues/7006)) ([6698e2e](https://github.com/googleapis/google-cloud-node/commit/6698e2ed3c19a577e81843d7c3a5062bfbcd3c6a))
+
+## [0.21.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.20.0...chat-v0.21.0) (2025-10-25)
+
+
+### Features
+
+* [chat] add ROLE_ASSISTANT_MANAGER to the MembershipRole enum in the Membership proto and assistant_managers_allowed to the PermissionSetting ([#6843](https://github.com/googleapis/google-cloud-node/issues/6843)) ([84654a5](https://github.com/googleapis/google-cloud-node/commit/84654a5c0cc56d940b96a85b0e439dc6ac140699))
+
+## [0.20.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.19.1...chat-v0.20.0) (2025-10-16)
+
+
+### Features
+
+* [chat] Add `Carousel` widget ([#6821](https://github.com/googleapis/google-cloud-node/issues/6821)) ([7365b32](https://github.com/googleapis/google-cloud-node/commit/7365b32f30e259c4839aad81e4c5cc5a91e6ebee))
+
+## [0.19.1](https://github.com/googleapis/google-cloud-node/compare/chat-v0.19.0...chat-v0.19.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.19.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.18.0...chat-v0.19.0) (2025-08-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* [chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#6619](https://github.com/googleapis/google-cloud-node/issues/6619))
+
+### Bug Fixes
+
+* [chat] Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#6619](https://github.com/googleapis/google-cloud-node/issues/6619)) ([71b30db](https://github.com/googleapis/google-cloud-node/commit/71b30db34f8c83c1b2395270fd7ff8fb2621b669))
+
+## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.17.0...chat-v0.18.0) (2025-08-04)
+
+
+### Features
+
+* [chat] Addition of app auth support for chat api ([#6545](https://github.com/googleapis/google-cloud-node/issues/6545)) ([f185fb1](https://github.com/googleapis/google-cloud-node/commit/f185fb1681c37ade2d8159af240b27a308ac05e3))
+
+## [0.17.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.16.0...chat-v0.17.0) (2025-07-28)
+
+
+### Features
+
+* [chat] Exposing 1p integration message content (drive, calendar, huddle, meet chips) ([#6517](https://github.com/googleapis/google-cloud-node/issues/6517)) ([e29b9a3](https://github.com/googleapis/google-cloud-node/commit/e29b9a30ca4580fb6370c83cd99279f03f251479))
+
+## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.15.0...chat-v0.16.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6417](https://github.com/googleapis/google-cloud-node/issues/6417)) ([0d6d584](https://github.com/googleapis/google-cloud-node/commit/0d6d584a0c5c8f9f96daf3ede46f9440758e0f35))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.14.0...chat-v0.15.0) (2025-03-19)
 
 

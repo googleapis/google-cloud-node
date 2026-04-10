@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.4.0...memorystore-v0.5.0) (2026-01-16)
+
+
+### Features
+
+* [memorystore] Adding Method AggregateIssueStats of Database Center API v1beta ([#7001](https://github.com/googleapis/google-cloud-node/issues/7001)) ([80a9eaf](https://github.com/googleapis/google-cloud-node/commit/80a9eaffd72f8d0e549084fb453c98420940e45c))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.3.1...memorystore-v0.4.0) (2026-01-12)
+
+
+### Features
+
+* [memorystore] A new field `Instance.simulate_maintenance_event` is added to message `.google.cloud.memorystore.v1.` ([#6949](https://github.com/googleapis/google-cloud-node/issues/6949)) ([227bf51](https://github.com/googleapis/google-cloud-node/commit/227bf51ea4ff0aff802a3550fc04b4bc971f29cb))
+
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.3.0...memorystore-v0.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.2.1...memorystore-v0.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6421](https://github.com/googleapis/google-cloud-node/issues/6421)) ([0cba45c](https://github.com/googleapis/google-cloud-node/commit/0cba45c3abc98d4f1ffdf75da3610e6e52267737))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.2.0...memorystore-v0.2.1) (2025-03-19)
 
 

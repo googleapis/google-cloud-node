@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -73,8 +73,8 @@ function main(origin, destination) {
   // const departureTime = {}
   /**
    *  Optional. The arrival time.
-   *  NOTE: Can only be set when
-   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  is set to
+   *  NOTE: This field is ignored when requests specify a
+   *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  other than
    *  `TRANSIT`. You can specify either `departure_time` or `arrival_time`, but
    *  not both. Transit trips are available for up to 7 days in the past or 100
    *  days in the future.

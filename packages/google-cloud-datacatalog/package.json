@@ -5,7 +5,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "name": "@google-cloud/datacatalog",
-  "version": "5.1.0",
+  "version": "5.2.1",
   "author": "Google LLC",
   "description": "Google Cloud Data Catalog API client for Node.js",
   "main": "build/src/index.js",
@@ -30,7 +30,7 @@
     "Google Cloud Data Catalog API"
   ],
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -41,13 +41,13 @@
     "gapic-tools": "^1.0.0",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "linkinator": "^6.1.2",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
-    "sinon": "^19.0.2",
+    "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "scripts": {
@@ -70,5 +70,13 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-datacatalog",
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
+  }
 }

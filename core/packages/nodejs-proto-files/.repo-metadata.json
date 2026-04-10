@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-proto-files",
+  "name_pretty": "Google APIs Proto Files",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node-core",
+  "distribution_name": "google-proto-files",
+  "requires_billing": false,
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/google-proto-files/latest",
+  "library_type": "OTHER"
+}

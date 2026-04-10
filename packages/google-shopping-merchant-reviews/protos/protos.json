@@ -209,7 +209,7 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             },
-                            "attributes": {
+                            "merchantReviewAttributes": {
                               "type": "MerchantReviewAttributes",
                               "id": 3,
                               "options": {
@@ -221,7 +221,7 @@
                               "type": "google.shopping.type.CustomAttribute",
                               "id": 4,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "dataSource": {
@@ -440,7 +440,7 @@
                               "type": "string",
                               "id": 15,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             },
@@ -768,7 +768,7 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             },
-                            "attributes": {
+                            "productReviewAttributes": {
                               "type": "ProductReviewAttributes",
                               "id": 3,
                               "options": {
@@ -875,6 +875,16 @@
                               "oneof": [
                                 "isSpam"
                               ]
+                            },
+                            "_isVerifiedPurchase": {
+                              "oneof": [
+                                "isVerifiedPurchase"
+                              ]
+                            },
+                            "_isIncentivizedReview": {
+                              "oneof": [
+                                "isIncentivizedReview"
+                              ]
                             }
                           },
                           "fields": {
@@ -969,7 +979,7 @@
                               "type": "string",
                               "id": 12,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             },
@@ -1087,6 +1097,22 @@
                             "isSpam": {
                               "type": "bool",
                               "id": 27,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "isVerifiedPurchase": {
+                              "type": "bool",
+                              "id": 30,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "isIncentivizedReview": {
+                              "type": "bool",
+                              "id": 31,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
@@ -1382,7 +1408,13 @@
                         "LOCAL_INVENTORY_ADS": 3,
                         "FREE_LISTINGS": 4,
                         "FREE_LOCAL_LISTINGS": 5,
-                        "YOUTUBE_SHOPPING": 6
+                        "YOUTUBE_SHOPPING": 6,
+                        "YOUTUBE_SHOPPING_CHECKOUT": 7,
+                        "YOUTUBE_AFFILIATE": 8,
+                        "FREE_VEHICLE_LISTINGS": 9,
+                        "VEHICLE_ADS": 10,
+                        "CLOUD_RETAIL": 11,
+                        "LOCAL_CLOUD_RETAIL": 12
                       }
                     }
                   }
@@ -1407,11 +1439,16 @@
                         "LOCAL_INVENTORY_ADS": 5,
                         "VEHICLE_INVENTORY_ADS": 6,
                         "FREE_LISTINGS": 7,
+                        "FREE_LISTINGS_UCP_CHECKOUT": 19,
                         "FREE_LOCAL_LISTINGS": 8,
                         "FREE_LOCAL_VEHICLE_LISTINGS": 9,
+                        "YOUTUBE_AFFILIATE": 18,
                         "YOUTUBE_SHOPPING": 10,
                         "CLOUD_RETAIL": 11,
-                        "LOCAL_CLOUD_RETAIL": 12
+                        "LOCAL_CLOUD_RETAIL": 12,
+                        "PRODUCT_REVIEWS": 15,
+                        "MERCHANT_REVIEWS": 16,
+                        "YOUTUBE_CHECKOUT": 17
                       }
                     }
                   }
@@ -1545,6 +1582,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -1653,6 +1695,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -1828,7 +1874,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -1934,6 +1983,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -1943,6 +1993,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -1958,6 +2009,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -1975,18 +2027,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -2027,6 +2073,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2109,6 +2156,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -2182,6 +2230,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2261,6 +2310,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2273,6 +2323,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2314,6 +2365,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2330,6 +2382,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2347,6 +2400,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -2381,6 +2435,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -2522,6 +2577,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -2595,6 +2651,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -2656,10 +2713,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -2743,6 +2797,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -2762,6 +2817,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -2805,6 +2861,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -2838,6 +2895,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -2864,6 +2922,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -2906,6 +2965,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -2955,6 +3015,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -3027,8 +3088,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -3084,6 +3157,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -3115,6 +3189,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -3128,12 +3203,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -3153,6 +3234,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -3166,7 +3248,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

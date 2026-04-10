@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1598,6 +1598,7 @@
                          * @property {string|null} [parent] AdaptiveMtTranslateRequest parent
                          * @property {string|null} [dataset] AdaptiveMtTranslateRequest dataset
                          * @property {Array.<string>|null} [content] AdaptiveMtTranslateRequest content
+                         * @property {string|null} [mimeType] AdaptiveMtTranslateRequest mimeType
                          * @property {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null} [referenceSentenceConfig] AdaptiveMtTranslateRequest referenceSentenceConfig
                          * @property {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig|null} [glossaryConfig] AdaptiveMtTranslateRequest glossaryConfig
                          */
@@ -1643,6 +1644,14 @@
                         AdaptiveMtTranslateRequest.prototype.content = $util.emptyArray;
     
                         /**
+                         * AdaptiveMtTranslateRequest mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        AdaptiveMtTranslateRequest.prototype.mimeType = "";
+    
+                        /**
                          * AdaptiveMtTranslateRequest referenceSentenceConfig.
                          * @member {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null|undefined} referenceSentenceConfig
                          * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
@@ -1661,23 +1670,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * AdaptiveMtTranslateRequest _referenceSentenceConfig.
-                         * @member {"referenceSentenceConfig"|undefined} _referenceSentenceConfig
-                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AdaptiveMtTranslateRequest.prototype, "_referenceSentenceConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["referenceSentenceConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * AdaptiveMtTranslateRequest _glossaryConfig.
-                         * @member {"glossaryConfig"|undefined} _glossaryConfig
-                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AdaptiveMtTranslateRequest.prototype, "_glossaryConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["glossaryConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -1714,6 +1713,8 @@
                             if (message.content != null && message.content.length)
                                 for (var i = 0; i < message.content.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.content[i]);
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.mimeType);
                             if (message.referenceSentenceConfig != null && Object.hasOwnProperty.call(message, "referenceSentenceConfig"))
                                 $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.encode(message.referenceSentenceConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.glossaryConfig != null && Object.hasOwnProperty.call(message, "glossaryConfig"))
@@ -1766,6 +1767,10 @@
                                         if (!(message.content && message.content.length))
                                             message.content = [];
                                         message.content.push(reader.string());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.mimeType = reader.string();
                                         break;
                                     }
                                 case 6: {
@@ -1825,6 +1830,9 @@
                                     if (!$util.isString(message.content[i]))
                                         return "content: string[] expected";
                             }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
                             if (message.referenceSentenceConfig != null && message.hasOwnProperty("referenceSentenceConfig")) {
                                 properties._referenceSentenceConfig = 1;
                                 {
@@ -1867,6 +1875,8 @@
                                 for (var i = 0; i < object.content.length; ++i)
                                     message.content[i] = String(object.content[i]);
                             }
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
                             if (object.referenceSentenceConfig != null) {
                                 if (typeof object.referenceSentenceConfig !== "object")
                                     throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.referenceSentenceConfig: object expected");
@@ -1898,6 +1908,7 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.dataset = "";
+                                object.mimeType = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -1908,6 +1919,8 @@
                                 for (var j = 0; j < message.content.length; ++j)
                                     object.content[j] = message.content[j];
                             }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
                             if (message.referenceSentenceConfig != null && message.hasOwnProperty("referenceSentenceConfig")) {
                                 object.referenceSentenceConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.toObject(message.referenceSentenceConfig, options);
                                 if (options.oneofs)
@@ -31701,6 +31714,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3beta1.TranslationService|refineText}.
+                         * @memberof google.cloud.translation.v3beta1.TranslationService
+                         * @typedef RefineTextCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3beta1.RefineTextResponse} [response] RefineTextResponse
+                         */
+    
+                        /**
+                         * Calls RefineText.
+                         * @function refineText
+                         * @memberof google.cloud.translation.v3beta1.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3beta1.IRefineTextRequest} request RefineTextRequest message or plain object
+                         * @param {google.cloud.translation.v3beta1.TranslationService.RefineTextCallback} callback Node-style callback called with the error, if any, and RefineTextResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.refineText = function refineText(request, callback) {
+                            return this.rpcCall(refineText, $root.google.cloud.translation.v3beta1.RefineTextRequest, $root.google.cloud.translation.v3beta1.RefineTextResponse, request, callback);
+                        }, "name", { value: "RefineText" });
+    
+                        /**
+                         * Calls RefineText.
+                         * @function refineText
+                         * @memberof google.cloud.translation.v3beta1.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3beta1.IRefineTextRequest} request RefineTextRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3beta1.RefineTextResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return TranslationService;
                     })();
     
@@ -31712,6 +31758,7 @@
                          * @interface ITranslateTextGlossaryConfig
                          * @property {string|null} [glossary] TranslateTextGlossaryConfig glossary
                          * @property {boolean|null} [ignoreCase] TranslateTextGlossaryConfig ignoreCase
+                         * @property {boolean|null} [contextualTranslationEnabled] TranslateTextGlossaryConfig contextualTranslationEnabled
                          */
     
                         /**
@@ -31746,6 +31793,14 @@
                         TranslateTextGlossaryConfig.prototype.ignoreCase = false;
     
                         /**
+                         * TranslateTextGlossaryConfig contextualTranslationEnabled.
+                         * @member {boolean} contextualTranslationEnabled
+                         * @memberof google.cloud.translation.v3beta1.TranslateTextGlossaryConfig
+                         * @instance
+                         */
+                        TranslateTextGlossaryConfig.prototype.contextualTranslationEnabled = false;
+    
+                        /**
                          * Creates a new TranslateTextGlossaryConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3beta1.TranslateTextGlossaryConfig
@@ -31773,6 +31828,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.glossary);
                             if (message.ignoreCase != null && Object.hasOwnProperty.call(message, "ignoreCase"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ignoreCase);
+                            if (message.contextualTranslationEnabled != null && Object.hasOwnProperty.call(message, "contextualTranslationEnabled"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.contextualTranslationEnabled);
                             return writer;
                         };
     
@@ -31817,6 +31874,10 @@
                                         message.ignoreCase = reader.bool();
                                         break;
                                     }
+                                case 4: {
+                                        message.contextualTranslationEnabled = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -31858,6 +31919,9 @@
                             if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
                                 if (typeof message.ignoreCase !== "boolean")
                                     return "ignoreCase: boolean expected";
+                            if (message.contextualTranslationEnabled != null && message.hasOwnProperty("contextualTranslationEnabled"))
+                                if (typeof message.contextualTranslationEnabled !== "boolean")
+                                    return "contextualTranslationEnabled: boolean expected";
                             return null;
                         };
     
@@ -31877,6 +31941,8 @@
                                 message.glossary = String(object.glossary);
                             if (object.ignoreCase != null)
                                 message.ignoreCase = Boolean(object.ignoreCase);
+                            if (object.contextualTranslationEnabled != null)
+                                message.contextualTranslationEnabled = Boolean(object.contextualTranslationEnabled);
                             return message;
                         };
     
@@ -31896,11 +31962,14 @@
                             if (options.defaults) {
                                 object.glossary = "";
                                 object.ignoreCase = false;
+                                object.contextualTranslationEnabled = false;
                             }
                             if (message.glossary != null && message.hasOwnProperty("glossary"))
                                 object.glossary = message.glossary;
                             if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
                                 object.ignoreCase = message.ignoreCase;
+                            if (message.contextualTranslationEnabled != null && message.hasOwnProperty("contextualTranslationEnabled"))
+                                object.contextualTranslationEnabled = message.contextualTranslationEnabled;
                             return object;
                         };
     
@@ -41410,6 +41479,7 @@
                          * @property {string|null} [customizedAttribution] BatchTranslateDocumentRequest customizedAttribution
                          * @property {boolean|null} [enableShadowRemovalNativePdf] BatchTranslateDocumentRequest enableShadowRemovalNativePdf
                          * @property {boolean|null} [enableRotationCorrection] BatchTranslateDocumentRequest enableRotationCorrection
+                         * @property {boolean|null} [pdfNativeOnly] BatchTranslateDocumentRequest pdfNativeOnly
                          */
     
                         /**
@@ -41521,6 +41591,14 @@
                         BatchTranslateDocumentRequest.prototype.enableRotationCorrection = false;
     
                         /**
+                         * BatchTranslateDocumentRequest pdfNativeOnly.
+                         * @member {boolean} pdfNativeOnly
+                         * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.pdfNativeOnly = false;
+    
+                        /**
                          * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
@@ -41573,6 +41651,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.enableShadowRemovalNativePdf);
                             if (message.enableRotationCorrection != null && Object.hasOwnProperty.call(message, "enableRotationCorrection"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableRotationCorrection);
+                            if (message.pdfNativeOnly != null && Object.hasOwnProperty.call(message, "pdfNativeOnly"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.pdfNativeOnly);
                             return writer;
                         };
     
@@ -41714,6 +41794,10 @@
                                         message.enableRotationCorrection = reader.bool();
                                         break;
                                     }
+                                case 13: {
+                                        message.pdfNativeOnly = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -41811,6 +41895,9 @@
                             if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
                                 if (typeof message.enableRotationCorrection !== "boolean")
                                     return "enableRotationCorrection: boolean expected";
+                            if (message.pdfNativeOnly != null && message.hasOwnProperty("pdfNativeOnly"))
+                                if (typeof message.pdfNativeOnly !== "boolean")
+                                    return "pdfNativeOnly: boolean expected";
                             return null;
                         };
     
@@ -41882,6 +41969,8 @@
                                 message.enableShadowRemovalNativePdf = Boolean(object.enableShadowRemovalNativePdf);
                             if (object.enableRotationCorrection != null)
                                 message.enableRotationCorrection = Boolean(object.enableRotationCorrection);
+                            if (object.pdfNativeOnly != null)
+                                message.pdfNativeOnly = Boolean(object.pdfNativeOnly);
                             return message;
                         };
     
@@ -41914,6 +42003,7 @@
                                 object.customizedAttribution = "";
                                 object.enableShadowRemovalNativePdf = false;
                                 object.enableRotationCorrection = false;
+                                object.pdfNativeOnly = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -41953,6 +42043,8 @@
                                 object.enableShadowRemovalNativePdf = message.enableShadowRemovalNativePdf;
                             if (message.enableRotationCorrection != null && message.hasOwnProperty("enableRotationCorrection"))
                                 object.enableRotationCorrection = message.enableRotationCorrection;
+                            if (message.pdfNativeOnly != null && message.hasOwnProperty("pdfNativeOnly"))
+                                object.pdfNativeOnly = message.pdfNativeOnly;
                             return object;
                         };
     
@@ -43567,6 +43659,753 @@
                         })();
     
                         return BatchTranslateDocumentMetadata;
+                    })();
+    
+                    v3beta1.RefinementEntry = (function() {
+    
+                        /**
+                         * Properties of a RefinementEntry.
+                         * @memberof google.cloud.translation.v3beta1
+                         * @interface IRefinementEntry
+                         * @property {string|null} [sourceText] RefinementEntry sourceText
+                         * @property {string|null} [originalTranslation] RefinementEntry originalTranslation
+                         */
+    
+                        /**
+                         * Constructs a new RefinementEntry.
+                         * @memberof google.cloud.translation.v3beta1
+                         * @classdesc Represents a RefinementEntry.
+                         * @implements IRefinementEntry
+                         * @constructor
+                         * @param {google.cloud.translation.v3beta1.IRefinementEntry=} [properties] Properties to set
+                         */
+                        function RefinementEntry(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RefinementEntry sourceText.
+                         * @member {string} sourceText
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @instance
+                         */
+                        RefinementEntry.prototype.sourceText = "";
+    
+                        /**
+                         * RefinementEntry originalTranslation.
+                         * @member {string} originalTranslation
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @instance
+                         */
+                        RefinementEntry.prototype.originalTranslation = "";
+    
+                        /**
+                         * Creates a new RefinementEntry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefinementEntry=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3beta1.RefinementEntry} RefinementEntry instance
+                         */
+                        RefinementEntry.create = function create(properties) {
+                            return new RefinementEntry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RefinementEntry message. Does not implicitly {@link google.cloud.translation.v3beta1.RefinementEntry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefinementEntry} message RefinementEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefinementEntry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceText != null && Object.hasOwnProperty.call(message, "sourceText"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceText);
+                            if (message.originalTranslation != null && Object.hasOwnProperty.call(message, "originalTranslation"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.originalTranslation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RefinementEntry message, length delimited. Does not implicitly {@link google.cloud.translation.v3beta1.RefinementEntry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefinementEntry} message RefinementEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefinementEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RefinementEntry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3beta1.RefinementEntry} RefinementEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefinementEntry.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.RefinementEntry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceText = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.originalTranslation = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RefinementEntry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3beta1.RefinementEntry} RefinementEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefinementEntry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RefinementEntry message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RefinementEntry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceText != null && message.hasOwnProperty("sourceText"))
+                                if (!$util.isString(message.sourceText))
+                                    return "sourceText: string expected";
+                            if (message.originalTranslation != null && message.hasOwnProperty("originalTranslation"))
+                                if (!$util.isString(message.originalTranslation))
+                                    return "originalTranslation: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RefinementEntry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3beta1.RefinementEntry} RefinementEntry
+                         */
+                        RefinementEntry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3beta1.RefinementEntry)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3beta1.RefinementEntry();
+                            if (object.sourceText != null)
+                                message.sourceText = String(object.sourceText);
+                            if (object.originalTranslation != null)
+                                message.originalTranslation = String(object.originalTranslation);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RefinementEntry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.RefinementEntry} message RefinementEntry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RefinementEntry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceText = "";
+                                object.originalTranslation = "";
+                            }
+                            if (message.sourceText != null && message.hasOwnProperty("sourceText"))
+                                object.sourceText = message.sourceText;
+                            if (message.originalTranslation != null && message.hasOwnProperty("originalTranslation"))
+                                object.originalTranslation = message.originalTranslation;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RefinementEntry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RefinementEntry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RefinementEntry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3beta1.RefinementEntry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RefinementEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3beta1.RefinementEntry";
+                        };
+    
+                        return RefinementEntry;
+                    })();
+    
+                    v3beta1.RefineTextRequest = (function() {
+    
+                        /**
+                         * Properties of a RefineTextRequest.
+                         * @memberof google.cloud.translation.v3beta1
+                         * @interface IRefineTextRequest
+                         * @property {string|null} [parent] RefineTextRequest parent
+                         * @property {Array.<google.cloud.translation.v3beta1.IRefinementEntry>|null} [refinementEntries] RefineTextRequest refinementEntries
+                         * @property {string|null} [sourceLanguageCode] RefineTextRequest sourceLanguageCode
+                         * @property {string|null} [targetLanguageCode] RefineTextRequest targetLanguageCode
+                         */
+    
+                        /**
+                         * Constructs a new RefineTextRequest.
+                         * @memberof google.cloud.translation.v3beta1
+                         * @classdesc Represents a RefineTextRequest.
+                         * @implements IRefineTextRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3beta1.IRefineTextRequest=} [properties] Properties to set
+                         */
+                        function RefineTextRequest(properties) {
+                            this.refinementEntries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RefineTextRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @instance
+                         */
+                        RefineTextRequest.prototype.parent = "";
+    
+                        /**
+                         * RefineTextRequest refinementEntries.
+                         * @member {Array.<google.cloud.translation.v3beta1.IRefinementEntry>} refinementEntries
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @instance
+                         */
+                        RefineTextRequest.prototype.refinementEntries = $util.emptyArray;
+    
+                        /**
+                         * RefineTextRequest sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @instance
+                         */
+                        RefineTextRequest.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * RefineTextRequest targetLanguageCode.
+                         * @member {string} targetLanguageCode
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @instance
+                         */
+                        RefineTextRequest.prototype.targetLanguageCode = "";
+    
+                        /**
+                         * Creates a new RefineTextRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefineTextRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3beta1.RefineTextRequest} RefineTextRequest instance
+                         */
+                        RefineTextRequest.create = function create(properties) {
+                            return new RefineTextRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RefineTextRequest message. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefineTextRequest} message RefineTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefineTextRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.refinementEntries != null && message.refinementEntries.length)
+                                for (var i = 0; i < message.refinementEntries.length; ++i)
+                                    $root.google.cloud.translation.v3beta1.RefinementEntry.encode(message.refinementEntries[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCode != null && Object.hasOwnProperty.call(message, "targetLanguageCode"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.targetLanguageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RefineTextRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefineTextRequest} message RefineTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefineTextRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RefineTextRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3beta1.RefineTextRequest} RefineTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefineTextRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.RefineTextRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.refinementEntries && message.refinementEntries.length))
+                                            message.refinementEntries = [];
+                                        message.refinementEntries.push($root.google.cloud.translation.v3beta1.RefinementEntry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sourceLanguageCode = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.targetLanguageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RefineTextRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3beta1.RefineTextRequest} RefineTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefineTextRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RefineTextRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RefineTextRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.refinementEntries != null && message.hasOwnProperty("refinementEntries")) {
+                                if (!Array.isArray(message.refinementEntries))
+                                    return "refinementEntries: array expected";
+                                for (var i = 0; i < message.refinementEntries.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3beta1.RefinementEntry.verify(message.refinementEntries[i]);
+                                    if (error)
+                                        return "refinementEntries." + error;
+                                }
+                            }
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                if (!$util.isString(message.targetLanguageCode))
+                                    return "targetLanguageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RefineTextRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3beta1.RefineTextRequest} RefineTextRequest
+                         */
+                        RefineTextRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3beta1.RefineTextRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3beta1.RefineTextRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.refinementEntries) {
+                                if (!Array.isArray(object.refinementEntries))
+                                    throw TypeError(".google.cloud.translation.v3beta1.RefineTextRequest.refinementEntries: array expected");
+                                message.refinementEntries = [];
+                                for (var i = 0; i < object.refinementEntries.length; ++i) {
+                                    if (typeof object.refinementEntries[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3beta1.RefineTextRequest.refinementEntries: object expected");
+                                    message.refinementEntries[i] = $root.google.cloud.translation.v3beta1.RefinementEntry.fromObject(object.refinementEntries[i]);
+                                }
+                            }
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCode != null)
+                                message.targetLanguageCode = String(object.targetLanguageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RefineTextRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.RefineTextRequest} message RefineTextRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RefineTextRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.refinementEntries = [];
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sourceLanguageCode = "";
+                                object.targetLanguageCode = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.refinementEntries && message.refinementEntries.length) {
+                                object.refinementEntries = [];
+                                for (var j = 0; j < message.refinementEntries.length; ++j)
+                                    object.refinementEntries[j] = $root.google.cloud.translation.v3beta1.RefinementEntry.toObject(message.refinementEntries[j], options);
+                            }
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                object.targetLanguageCode = message.targetLanguageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RefineTextRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RefineTextRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RefineTextRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3beta1.RefineTextRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RefineTextRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3beta1.RefineTextRequest";
+                        };
+    
+                        return RefineTextRequest;
+                    })();
+    
+                    v3beta1.RefineTextResponse = (function() {
+    
+                        /**
+                         * Properties of a RefineTextResponse.
+                         * @memberof google.cloud.translation.v3beta1
+                         * @interface IRefineTextResponse
+                         * @property {Array.<string>|null} [refinedTranslations] RefineTextResponse refinedTranslations
+                         */
+    
+                        /**
+                         * Constructs a new RefineTextResponse.
+                         * @memberof google.cloud.translation.v3beta1
+                         * @classdesc Represents a RefineTextResponse.
+                         * @implements IRefineTextResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3beta1.IRefineTextResponse=} [properties] Properties to set
+                         */
+                        function RefineTextResponse(properties) {
+                            this.refinedTranslations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RefineTextResponse refinedTranslations.
+                         * @member {Array.<string>} refinedTranslations
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @instance
+                         */
+                        RefineTextResponse.prototype.refinedTranslations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RefineTextResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefineTextResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3beta1.RefineTextResponse} RefineTextResponse instance
+                         */
+                        RefineTextResponse.create = function create(properties) {
+                            return new RefineTextResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RefineTextResponse message. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefineTextResponse} message RefineTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefineTextResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.refinedTranslations != null && message.refinedTranslations.length)
+                                for (var i = 0; i < message.refinedTranslations.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.refinedTranslations[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RefineTextResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.IRefineTextResponse} message RefineTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RefineTextResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RefineTextResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3beta1.RefineTextResponse} RefineTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefineTextResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3beta1.RefineTextResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.refinedTranslations && message.refinedTranslations.length))
+                                            message.refinedTranslations = [];
+                                        message.refinedTranslations.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RefineTextResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3beta1.RefineTextResponse} RefineTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RefineTextResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RefineTextResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RefineTextResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.refinedTranslations != null && message.hasOwnProperty("refinedTranslations")) {
+                                if (!Array.isArray(message.refinedTranslations))
+                                    return "refinedTranslations: array expected";
+                                for (var i = 0; i < message.refinedTranslations.length; ++i)
+                                    if (!$util.isString(message.refinedTranslations[i]))
+                                        return "refinedTranslations: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RefineTextResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3beta1.RefineTextResponse} RefineTextResponse
+                         */
+                        RefineTextResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3beta1.RefineTextResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3beta1.RefineTextResponse();
+                            if (object.refinedTranslations) {
+                                if (!Array.isArray(object.refinedTranslations))
+                                    throw TypeError(".google.cloud.translation.v3beta1.RefineTextResponse.refinedTranslations: array expected");
+                                message.refinedTranslations = [];
+                                for (var i = 0; i < object.refinedTranslations.length; ++i)
+                                    message.refinedTranslations[i] = String(object.refinedTranslations[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RefineTextResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3beta1.RefineTextResponse} message RefineTextResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RefineTextResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.refinedTranslations = [];
+                            if (message.refinedTranslations && message.refinedTranslations.length) {
+                                object.refinedTranslations = [];
+                                for (var j = 0; j < message.refinedTranslations.length; ++j)
+                                    object.refinedTranslations[j] = message.refinedTranslations[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RefineTextResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RefineTextResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RefineTextResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3beta1.RefineTextResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RefineTextResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3beta1.RefineTextResponse";
+                        };
+    
+                        return RefineTextResponse;
                     })();
     
                     return v3beta1;

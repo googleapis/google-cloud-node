@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The project and location from which the `LbRouteExtension`
-   *  resources are listed, specified in the following format:
+   *  resources are listed. These values are specified in the following format:
    *  `projects/{project}/locations/{location}`.
    */
   // const parent = 'abc123'
@@ -48,7 +48,7 @@ function main(parent) {
    */
   // const filter = 'abc123'
   /**
-   *  Optional. Hint for how to order the results.
+   *  Optional. Hint about how to order the results.
    */
   // const orderBy = 'abc123'
 

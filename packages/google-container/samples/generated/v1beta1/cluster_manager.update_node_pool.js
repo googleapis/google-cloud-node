@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
+function main(nodeVersion, imageType) {
   // [START container_v1beta1_generated_ClusterManager_UpdateNodePool_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -42,16 +42,23 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
   // const nodeVersion = 'abc123'
   /**
    *  Required. The desired image type for the node pool. Please see
-   *  https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
-   *  available image types.
+   *  https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
+   *  for available image types.
    */
   // const imageType = 'abc123'
   /**
    *  The desired list of Google Compute Engine
-   *  zones (https://cloud.google.com/compute/docs/zones#available) in which the
-   *  node pool's nodes should be located. Changing the locations for a node pool
-   *  will result in nodes being either created or removed from the node pool,
-   *  depending on whether locations are being added or removed.
+   *  zones (https://cloud.google.com/compute/docs/zones#available)
+   *  in which the node pool's nodes should be located. Changing the locations
+   *  for a node pool will result in nodes being either created or removed from
+   *  the node pool, depending on whether locations are being added or removed.
+   *  Warning: It is recommended to update node pool locations in a standalone
+   *  API call. Do not combine a location update with changes to other fields
+   *  (such as `tags`, `labels`, `taints`, etc.) in the same request.
+   *  Otherwise, the API performs a structural modification where changes to
+   *  other fields will only apply to newly created nodes and will not be
+   *  applied to existing nodes in the node pool. To ensure all nodes are updated
+   *  consistently, use a separate API call for location changes.
    */
   // const locations = ['abc','def']
   /**
@@ -136,8 +143,9 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
   // const windowsNodeConfig = {}
   /**
    *  A list of hardware accelerators to be attached to each node.
-   *  See https://cloud.google.com/compute/docs/gpus for more information about
-   *  support for GPUs.
+   *  See
+   *  https://cloud.google.com/compute/docs/gpus
+   *  for more information about support for GPUs.
    */
   // const accelerators = [1,2,3,4]
   /**
@@ -174,6 +182,36 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  Specifies the configuration of queued provisioning.
    */
   // const queuedProvisioning = {}
+  /**
+   *  List of Storage Pools where boot disks are provisioned.
+   *  Existing Storage Pools will be replaced with storage-pools.
+   */
+  // const storagePools = ['abc','def']
+  /**
+   *  The maximum duration for the nodes to exist.
+   *  If unspecified, the nodes can exist indefinitely.
+   */
+  // const maxRunDuration = {}
+  /**
+   *  Flex Start flag for enabling Flex Start VM.
+   */
+  // const flexStart = true
+  /**
+   *  The desired boot disk config for nodes in the node pool.
+   *  Initiates an upgrade operation that migrates the nodes in the
+   *  node pool to the specified boot disk config.
+   */
+  // const bootDisk = {}
+  /**
+   *  The desired node drain configuration for nodes in the node pool.
+   */
+  // const nodeDrainConfig = {}
+  /**
+   *  Consolidation delay defines duration after which the Cluster Autoscaler can
+   *  scale down underutilized nodes. If not set, nodes are scaled down by
+   *  default behavior, i.e. according to the chosen autoscaling profile.
+   */
+  // const consolidationDelay = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1beta1;
@@ -184,10 +222,6 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
   async function callUpdateNodePool() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
-      nodePoolId,
       nodeVersion,
       imageType,
     };

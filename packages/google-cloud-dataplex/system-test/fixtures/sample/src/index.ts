@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,17 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  CatalogServiceClient,
-  CmekServiceClient,
-  ContentServiceClient,
-  DataplexServiceClient,
-  DataScanServiceClient,
-  DataTaxonomyServiceClient,
-  MetadataServiceClient,
-} from '@google-cloud/dataplex';
+import {BusinessGlossaryServiceClient, CatalogServiceClient, CmekServiceClient, ContentServiceClient, DataplexServiceClient, DataProductServiceClient, DataScanServiceClient, DataTaxonomyServiceClient, MetadataServiceClient} from '@google-cloud/dataplex';
 
 // check that the client class type name can be used
+function doStuffWithBusinessGlossaryServiceClient(client: BusinessGlossaryServiceClient) {
+  client.close();
+}
 function doStuffWithCatalogServiceClient(client: CatalogServiceClient) {
   client.close();
 }
@@ -39,12 +34,13 @@ function doStuffWithContentServiceClient(client: ContentServiceClient) {
 function doStuffWithDataplexServiceClient(client: DataplexServiceClient) {
   client.close();
 }
+function doStuffWithDataProductServiceClient(client: DataProductServiceClient) {
+  client.close();
+}
 function doStuffWithDataScanServiceClient(client: DataScanServiceClient) {
   client.close();
 }
-function doStuffWithDataTaxonomyServiceClient(
-  client: DataTaxonomyServiceClient
-) {
+function doStuffWithDataTaxonomyServiceClient(client: DataTaxonomyServiceClient) {
   client.close();
 }
 function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
@@ -52,6 +48,9 @@ function doStuffWithMetadataServiceClient(client: MetadataServiceClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const businessGlossaryServiceClient = new BusinessGlossaryServiceClient();
+  doStuffWithBusinessGlossaryServiceClient(businessGlossaryServiceClient);
   // check that the client instance can be created
   const catalogServiceClient = new CatalogServiceClient();
   doStuffWithCatalogServiceClient(catalogServiceClient);
@@ -64,6 +63,9 @@ function main() {
   // check that the client instance can be created
   const dataplexServiceClient = new DataplexServiceClient();
   doStuffWithDataplexServiceClient(dataplexServiceClient);
+  // check that the client instance can be created
+  const dataProductServiceClient = new DataProductServiceClient();
+  doStuffWithDataProductServiceClient(dataProductServiceClient);
   // check that the client instance can be created
   const dataScanServiceClient = new DataScanServiceClient();
   doStuffWithDataScanServiceClient(dataScanServiceClient);

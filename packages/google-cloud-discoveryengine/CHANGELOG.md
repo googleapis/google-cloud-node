@@ -1,5 +1,66 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.3...discoveryengine-v2.6.0) (2026-03-25)
+
+
+### Features
+
+* [discoveryengine] Update DataStoreSpec and add BoostSpec to SearchService ([#7837](https://github.com/googleapis/google-cloud-node/issues/7837)) ([6943587](https://github.com/googleapis/google-cloud-node/commit/694358739b082ad17f42800b42e5dbbf4c2c975b))
+
+## [2.5.3](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.2...discoveryengine-v2.5.3) (2026-03-02)
+
+
+### Bug Fixes
+
+* Enable google-cloud-discoveryengine tests to run on windows ([a28d23f](https://github.com/googleapis/google-cloud-node/commit/a28d23fde5441c969b380dbd0dff0dc48836c01e))
+* Enable google-cloud-discoveryengine tests to run on windows ([23b81e4](https://github.com/googleapis/google-cloud-node/commit/23b81e4ae4c2dbe26f3731df4bd6cac9c687753b))
+* Try an alternative bash script for windows compatibility without an additional dependency ([f9b1ee9](https://github.com/googleapis/google-cloud-node/commit/f9b1ee9a92eb12f57a56db1bf591d3ec3afb4864))
+
+## [2.5.2](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.1...discoveryengine-v2.5.2) (2025-10-21)
+
+
+### Bug Fixes
+
+* [discoveryengine] Include AssistAnswer as a part of the Session ([#6824](https://github.com/googleapis/google-cloud-node/issues/6824)) ([9eb1fef](https://github.com/googleapis/google-cloud-node/commit/9eb1fef3ff79fc73a5b890d69b5187baf87897e3))
+
+## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.0...discoveryengine-v2.5.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.4.0...discoveryengine-v2.5.0) (2025-09-16)
+
+
+### Features
+
+* [discoveryengine] Added `ranking_expression_backed` and `rank_signals` fields related to the Custom Ranking feature ([#6708](https://github.com/googleapis/google-cloud-node/issues/6708)) ([a9078c3](https://github.com/googleapis/google-cloud-node/commit/a9078c30ec0cd7409befbe4177e0d5e381dc50a0))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.3.0...discoveryengine-v2.4.0) (2025-07-28)
+
+
+### Features
+
+* [discoveryengine] add AssistantService ([#6524](https://github.com/googleapis/google-cloud-node/issues/6524)) ([fe83966](https://github.com/googleapis/google-cloud-node/commit/fe839667fab84d85b7dedc82947309579cf443c6))
+* [discoveryengine] add SessionService ([#6528](https://github.com/googleapis/google-cloud-node/issues/6528)) ([032112f](https://github.com/googleapis/google-cloud-node/commit/032112fc61ff177814bfde60f95bc5dbaf170605))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.2.0...discoveryengine-v2.3.0) (2025-07-09)
+
+
+### Features
+
+* [discoveryengine] add methods from gax to cache proto root and process custom error details ([#6396](https://github.com/googleapis/google-cloud-node/issues/6396)) ([9a504a4](https://github.com/googleapis/google-cloud-node/commit/9a504a4d8f8aeb6d86ac731fc969dc148b62ea5f))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.1.0...discoveryengine-v2.2.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.0.1...discoveryengine-v2.1.0) (2025-05-09)
 
 

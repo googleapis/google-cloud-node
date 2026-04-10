@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,18 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  ManagedKafkaClient,
-  ManagedKafkaConnectClient,
-} from '@google-cloud/managedkafka';
+import {ManagedKafkaClient, ManagedKafkaConnectClient} from '@google-cloud/managedkafka';
 
 // check that the client class type name can be used
 function doStuffWithManagedKafkaClient(client: ManagedKafkaClient) {
   client.close();
 }
-function doStuffWithManagedKafkaConnectClient(
-  client: ManagedKafkaConnectClient
-) {
+function doStuffWithManagedKafkaConnectClient(client: ManagedKafkaConnectClient) {
   client.close();
 }
 

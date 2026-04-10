@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallba
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -487,6 +487,12 @@ export class TripServiceClient {
       ]) => {
         this._log.info('createTrip response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -509,10 +515,10 @@ export class TripServiceClient {
  *   unchanged since this timestamp, the route field is not set in the response.
  *   If a minimum is unspecified, the route data are always retrieved.
  * @param {google.protobuf.Timestamp} request.remainingWaypointsVersion
- *   Indicates the minimum timestamp (exclusive) for which
- *   `Trip.remaining_waypoints` are retrieved. If they are unchanged since this
- *   timestamp, the `remaining_waypoints` are not set in the response. If this
- *   field is unspecified, `remaining_waypoints` is always retrieved.
+ *   Deprecated: `Trip.remaining_waypoints` are always retrieved. Use
+ *   `remaining_waypoints_route_version` to control when
+ *   `Trip.remaining_waypoints.traffic_to_waypoint` and
+ *   `Trip.remaining_waypoints.path_to_waypoint` data are retrieved.
  * @param {maps.fleetengine.v1.PolylineFormatType} request.routeFormatType
  *   The returned current route format, `LAT_LNG_LIST_TYPE` (in `Trip.route`),
  *   or `ENCODED_POLYLINE_TYPE` (in `Trip.current_route_segment`). The default
@@ -621,6 +627,12 @@ export class TripServiceClient {
       ]) => {
         this._log.info('getTrip response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -728,6 +740,12 @@ export class TripServiceClient {
       ]) => {
         this._log.info('deleteTrip response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -844,6 +862,12 @@ export class TripServiceClient {
       ]) => {
         this._log.info('reportBillableTrip response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -993,6 +1017,12 @@ export class TripServiceClient {
       ]) => {
         this._log.info('updateTrip response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 

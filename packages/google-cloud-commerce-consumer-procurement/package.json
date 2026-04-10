@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/procurement",
-  "version": "0.6.1",
+  "version": "0.7.1",
   "description": "Cloud Commerce Consumer Procurement API client for Node.js",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -55,14 +55,14 @@
     "gapic-tools": "^1.0.0",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "linkinator": "^6.1.2",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "null-loader": "^4.0.1",
     "pack-n-play": "^3.0.0",
-    "sinon": "^19.0.2",
+    "sinon": "21.0.3",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
     "webpack": "^5.98.0",
@@ -70,5 +70,13 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
   }
 }

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ function main(message, updateMask) {
    *  authentication (/chat/api/guides/auth/service-accounts).)
    *  - `accessory_widgets`  (Requires app
    *  authentication (/chat/api/guides/auth/service-accounts).)
+   *  - `quoted_message_metadata` (Only allows removal of the quoted message.)
    */
   // const updateMask = {}
   /**

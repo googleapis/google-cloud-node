@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,6 +42,10 @@ function main(parent, dataset, content) {
    *  Required. The content of the input in string format.
    */
   // const content = ['abc','def']
+  /**
+   *  The format of the source text.
+   */
+  // const mimeType = 'abc123'
   /**
    *  Configuration for caller provided reference sentences.
    */

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,8 +46,13 @@ service SessionService {
     option (google.api.http) = {
       post: "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions"
       body: "session"
+      additional_bindings {
+        post: "/v1beta1/{parent=reasoningEngines/*}/sessions"
+        body: "session"
+      }
     };
     option (google.api.method_signature) = "parent,session";
+    option (google.api.method_signature) = "parent,session,session_id";
     option (google.longrunning.operation_info) = {
       response_type: "Session"
       metadata_type: "CreateSessionOperationMetadata"
@@ -59,6 +64,9 @@ service SessionService {
   rpc GetSession(GetSessionRequest) returns (Session) {
     option (google.api.http) = {
       get: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}"
+      additional_bindings {
+        get: "/v1beta1/{name=reasoningEngines/*/sessions/*}"
+      }
     };
     option (google.api.method_signature) = "name";
   }
@@ -68,6 +76,9 @@ service SessionService {
   rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse) {
     option (google.api.http) = {
       get: "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*}/sessions"
+      additional_bindings {
+        get: "/v1beta1/{parent=reasoningEngines/*}/sessions"
+      }
     };
     option (google.api.method_signature) = "parent";
   }
@@ -77,6 +88,10 @@ service SessionService {
     option (google.api.http) = {
       patch: "/v1beta1/{session.name=projects/*/locations/*/reasoningEngines/*/sessions/*}"
       body: "session"
+      additional_bindings {
+        patch: "/v1beta1/{session.name=reasoningEngines/*/sessions/*}"
+        body: "session"
+      }
     };
     option (google.api.method_signature) = "session,update_mask";
   }
@@ -87,6 +102,9 @@ service SessionService {
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
       delete: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}"
+      additional_bindings {
+        delete: "/v1beta1/{name=reasoningEngines/*/sessions/*}"
+      }
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -99,6 +117,9 @@ service SessionService {
   rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {
     option (google.api.http) = {
       get: "/v1beta1/{parent=projects/*/locations/*/reasoningEngines/*/sessions/*}/events"
+      additional_bindings {
+        get: "/v1beta1/{parent=reasoningEngines/*/sessions/*}/events"
+      }
     };
     option (google.api.method_signature) = "parent";
   }
@@ -108,6 +129,10 @@ service SessionService {
     option (google.api.http) = {
       post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}:appendEvent"
       body: "event"
+      additional_bindings {
+        post: "/v1beta1/{name=reasoningEngines/*/sessions/*}:appendEvent"
+        body: "event"
+      }
     };
     option (google.api.method_signature) = "name,event";
   }
@@ -122,12 +147,21 @@ message CreateSessionRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "aiplatform.googleapis.com/Session"
+      type: "aiplatform.googleapis.com/ReasoningEngine"
     }
   ];
 
   // Required. The session to create.
   Session session = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The user defined ID to use for session, which will become the
+  // final component of the session resource name. If not provided, Vertex AI
+  // will generate a value for this ID.
+  //
+  // This value may be up to 63 characters, and valid characters are
+  // `[a-z0-9-]`. The first character must be a letter, and the last character
+  // must be a letter or number.
+  string session_id = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Metadata associated with the
@@ -161,7 +195,7 @@ message ListSessionsRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "aiplatform.googleapis.com/Session"
+      type: "aiplatform.googleapis.com/ReasoningEngine"
     }
   ];
 
@@ -180,8 +214,10 @@ message ListSessionsRequest {
   // Optional. The standard list filter.
   // Supported fields:
   //    * `display_name`
+  //    * `user_id`
+  //    * `labels`
   //
-  // Example: `display_name=abc`.
+  // Example: `display_name="abc"`, `user_id="123"`, `labels.key="value"`.
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. A comma-separated list of fields to order by, sorted in ascending
@@ -243,7 +279,7 @@ message ListEventsRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "aiplatform.googleapis.com/SessionEvent"
+      type: "aiplatform.googleapis.com/Session"
     }
   ];
 
@@ -258,6 +294,21 @@ message ListEventsRequest {
   // [SessionService.ListEvents][google.cloud.aiplatform.v1beta1.SessionService.ListEvents]
   // call.
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The standard list filter.
+  // Supported fields:
+  //    * `timestamp` range (i.e. `timestamp>="2025-01-31T11:30:00-04:00"` where
+  //    the timestamp is in RFC 3339 format)
+  //
+  // More detail in [AIP-160](https://google.aip.dev/160).
+  string filter = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A comma-separated list of fields to order by, sorted in ascending
+  // order. Use "desc" after a field name for descending. Supported fields:
+  //   * `timestamp`
+  //
+  // Example: `timestamp desc`.
+  string order_by = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
@@ -283,7 +334,7 @@ message AppendEventRequest {
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "aiplatform.googleapis.com/SessionEvent"
+      type: "aiplatform.googleapis.com/Session"
     }
   ];
 

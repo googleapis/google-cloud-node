@@ -23,9 +23,13 @@ fi
 
 PATH_NAME=$1
 PUSH_ARG=$2
-PACKAGE_PATH="packages/${PATH_NAME}"
+PACKAGE_PATH="${PATH_NAME}"
 
-LIBRARY_NAME=$(jq -r .name ${PACKAGE_PATH}/package.json)
+SCRIPT_DIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
+REPO_ROOT=$(dirname "${SCRIPT_DIR}")
+PACKAGE_ABS_PATH="${REPO_ROOT}/${PATH_NAME}"
+
+LIBRARY_NAME=$(jq -r .name "${PACKAGE_ABS_PATH}/package.json")
 COMPONENT=$(echo ${LIBRARY_NAME} | cut -f2 -d/)
 if [[ -z "${COMPONENT}" ]]
 then

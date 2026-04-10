@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,36 +16,23 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  IdentityAwareProxyAdminServiceClient,
-  IdentityAwareProxyOAuthServiceClient,
-} from '@google-cloud/iap';
+import {IdentityAwareProxyAdminServiceClient, IdentityAwareProxyOAuthServiceClient} from '@google-cloud/iap';
 
 // check that the client class type name can be used
-function doStuffWithIdentityAwareProxyAdminServiceClient(
-  client: IdentityAwareProxyAdminServiceClient
-) {
+function doStuffWithIdentityAwareProxyAdminServiceClient(client: IdentityAwareProxyAdminServiceClient) {
   client.close();
 }
-function doStuffWithIdentityAwareProxyOAuthServiceClient(
-  client: IdentityAwareProxyOAuthServiceClient
-) {
+function doStuffWithIdentityAwareProxyOAuthServiceClient(client: IdentityAwareProxyOAuthServiceClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const identityAwareProxyAdminServiceClient =
-    new IdentityAwareProxyAdminServiceClient();
-  doStuffWithIdentityAwareProxyAdminServiceClient(
-    identityAwareProxyAdminServiceClient
-  );
+  const identityAwareProxyAdminServiceClient = new IdentityAwareProxyAdminServiceClient();
+  doStuffWithIdentityAwareProxyAdminServiceClient(identityAwareProxyAdminServiceClient);
   // check that the client instance can be created
-  const identityAwareProxyOAuthServiceClient =
-    new IdentityAwareProxyOAuthServiceClient();
-  doStuffWithIdentityAwareProxyOAuthServiceClient(
-    identityAwareProxyOAuthServiceClient
-  );
+  const identityAwareProxyOAuthServiceClient = new IdentityAwareProxyOAuthServiceClient();
+  doStuffWithIdentityAwareProxyOAuthServiceClient(identityAwareProxyOAuthServiceClient);
 }
 
 main();

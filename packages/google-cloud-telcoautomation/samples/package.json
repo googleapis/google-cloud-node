@@ -14,10 +14,10 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/telcoautomation": "^0.4.1"
+    "@google-cloud/telcoautomation": "^0.5.1"
   },
   "devDependencies": {
-    "c8": "^8.0.0",
+    "c8": "^10.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0"
   }

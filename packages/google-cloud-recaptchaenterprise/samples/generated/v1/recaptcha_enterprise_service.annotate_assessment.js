@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -61,6 +61,11 @@ function main(name) {
    *  details on payment lifecycle events that occur in the transaction.
    */
   // const transactionEvent = {}
+  /**
+   *  Optional. If using an external multi-factor authentication provider,
+   *  provide phone authentication details for fraud detection purposes.
+   */
+  // const phoneAuthenticationEvent = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;

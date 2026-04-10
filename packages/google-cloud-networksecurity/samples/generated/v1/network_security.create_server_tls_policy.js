@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,9 +34,10 @@ function main(parent, serverTlsPolicyId, serverTlsPolicy) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Short name of the ServerTlsPolicy resource to be created. This value should
-   *  be 1-63 characters long, containing only letters, numbers, hyphens, and
-   *  underscores, and should not start with a number. E.g. "server_mtls_policy".
+   *  Required. Short name of the ServerTlsPolicy resource to be created. This
+   *  value should be 1-63 characters long, containing only letters, numbers,
+   *  hyphens, and underscores, and should not start with a number. E.g.
+   *  "server_mtls_policy".
    */
   // const serverTlsPolicyId = 'abc123'
   /**
@@ -45,7 +46,7 @@ function main(parent, serverTlsPolicyId, serverTlsPolicy) {
   // const serverTlsPolicy = {}
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
+  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();

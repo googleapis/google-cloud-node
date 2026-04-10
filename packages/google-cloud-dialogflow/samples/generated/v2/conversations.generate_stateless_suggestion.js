@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -59,6 +59,16 @@ function main(parent) {
    *  it's trigger event is included here.
    */
   // const triggerEvents = [1,2,3,4]
+  /**
+   *  Optional. Name of the CX SecuritySettings which is used to redact generated
+   *  response. If this field is empty, try to fetch v2 security_settings, which
+   *  is a project level setting. If this field is empty and no v2
+   *  security_settings set up in this project, no redaction will be done.
+   *  Format:
+   *  `projects/<Project ID>/locations/<Location ID>/securitySettings/<Security
+   *  Settings ID>`.
+   */
+  // const securitySettings = 'abc123'
 
   // Imports the Dialogflow library
   const {ConversationsClient} = require('@google-cloud/dialogflow').v2;

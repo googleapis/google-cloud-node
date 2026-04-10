@@ -14,7 +14,9 @@
                     "java_outer_classname": "VpcFlowLogsConfigProto",
                     "java_package": "com.google.cloud.networkmanagement.v1",
                     "php_namespace": "Google\\Cloud\\NetworkManagement\\V1",
-                    "ruby_package": "Google::Cloud::NetworkManagement::V1"
+                    "ruby_package": "Google::Cloud::NetworkManagement::V1",
+                    "(google.api.resource_definition).type": "networkmanagement.googleapis.com/OrganizationLocation",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
                   "nested": {
                     "ConnectivityTest": {
@@ -193,6 +195,10 @@
                           "type": "string",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "string",
+                          "id": 21
+                        },
                         "cloudFunction": {
                           "type": "CloudFunctionEndpoint",
                           "id": 10
@@ -223,7 +229,8 @@
                           "values": {
                             "NETWORK_TYPE_UNSPECIFIED": 0,
                             "GCP_NETWORK": 1,
-                            "NON_GCP_NETWORK": 2
+                            "NON_GCP_NETWORK": 2,
+                            "INTERNET": 3
                           }
                         },
                         "ForwardingRuleTarget": {
@@ -256,6 +263,13 @@
                             "uri": {
                               "type": "string",
                               "id": 1
+                            },
+                            "serviceUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -351,6 +365,15 @@
                         "destinationEgressLocation": {
                           "type": "EdgeLocation",
                           "id": 9
+                        },
+                        "edgeResponses": {
+                          "rule": "repeated",
+                          "type": "SingleEdgeResponse",
+                          "id": 10
+                        },
+                        "probedAllDevices": {
+                          "type": "bool",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -375,6 +398,34 @@
                             "metropolitanArea": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "SingleEdgeResponse": {
+                          "fields": {
+                            "result": {
+                              "type": "ProbingResult",
+                              "id": 1
+                            },
+                            "sentProbeCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "successfulProbeCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "probingLatency": {
+                              "type": "LatencyDistribution",
+                              "id": 4
+                            },
+                            "destinationEgressLocation": {
+                              "type": "EdgeLocation",
+                              "id": 5
+                            },
+                            "destinationRouter": {
+                              "type": "string",
+                              "id": 6
                             }
                           }
                         }
@@ -407,8 +458,10 @@
                             "endpoint",
                             "googleService",
                             "forwardingRule",
+                            "hybridSubnet",
                             "vpnGateway",
                             "vpnTunnel",
+                            "interconnectAttachment",
                             "vpcConnector",
                             "directVpcEgressConnection",
                             "serverlessExternalConnection",
@@ -419,6 +472,10 @@
                             "loadBalancer",
                             "network",
                             "gkeMaster",
+                            "gkePod",
+                            "ipMasqueradingSkipped",
+                            "gkeNetworkPolicy",
+                            "gkeNetworkPolicySkipped",
                             "cloudSqlInstance",
                             "redisInstance",
                             "redisCluster",
@@ -429,7 +486,8 @@
                             "proxyConnection",
                             "loadBalancerBackendInfo",
                             "storageBucket",
-                            "serverlessNeg"
+                            "serverlessNeg",
+                            "ngfwPacketInspection"
                           ]
                         }
                       },
@@ -474,6 +532,10 @@
                           "type": "ForwardingRuleInfo",
                           "id": 9
                         },
+                        "hybridSubnet": {
+                          "type": "HybridSubnetInfo",
+                          "id": 36
+                        },
                         "vpnGateway": {
                           "type": "VpnGatewayInfo",
                           "id": 10
@@ -481,6 +543,10 @@
                         "vpnTunnel": {
                           "type": "VpnTunnelInfo",
                           "id": 11
+                        },
+                        "interconnectAttachment": {
+                          "type": "InterconnectAttachmentInfo",
+                          "id": 35
                         },
                         "vpcConnector": {
                           "type": "VpcConnectorInfo",
@@ -525,6 +591,22 @@
                           "type": "GKEMasterInfo",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "GkePodInfo",
+                          "id": 37
+                        },
+                        "ipMasqueradingSkipped": {
+                          "type": "IpMasqueradingSkippedInfo",
+                          "id": 38
+                        },
+                        "gkeNetworkPolicy": {
+                          "type": "GkeNetworkPolicyInfo",
+                          "id": 39
+                        },
+                        "gkeNetworkPolicySkipped": {
+                          "type": "GkeNetworkPolicySkippedInfo",
+                          "id": 40
+                        },
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
@@ -568,6 +650,10 @@
                         "serverlessNeg": {
                           "type": "ServerlessNegInfo",
                           "id": 29
+                        },
+                        "ngfwPacketInspection": {
+                          "type": "NgfwPacketInspectionInfo",
+                          "id": 42
                         }
                       },
                       "nested": {
@@ -588,6 +674,7 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_GKE_POD": 39,
                             "START_FROM_REDIS_INSTANCE": 32,
                             "START_FROM_REDIS_CLUSTER": 33,
                             "START_FROM_CLOUD_FUNCTION": 23,
@@ -605,12 +692,21 @@
                             "ARRIVE_AT_INSTANCE": 9,
                             "ARRIVE_AT_INTERNAL_LOAD_BALANCER": 10,
                             "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": 11,
+                            "ARRIVE_AT_HYBRID_SUBNET": 38,
                             "ARRIVE_AT_VPN_GATEWAY": 12,
                             "ARRIVE_AT_VPN_TUNNEL": 13,
+                            "ARRIVE_AT_INTERCONNECT_ATTACHMENT": 37,
                             "ARRIVE_AT_VPC_CONNECTOR": 24,
+                            "ARRIVE_AT_GKE_POD": 44,
                             "DIRECT_VPC_EGRESS_CONNECTION": 35,
                             "SERVERLESS_EXTERNAL_CONNECTION": 36,
+                            "NGFW_PACKET_INSPECTION": 47,
                             "NAT": 14,
+                            "SKIP_GKE_POD_IP_MASQUERADING": 40,
+                            "SKIP_GKE_INGRESS_NETWORK_POLICY": 41,
+                            "SKIP_GKE_EGRESS_NETWORK_POLICY": 42,
+                            "APPLY_INGRESS_GKE_NETWORK_POLICY": 45,
+                            "APPLY_EGRESS_GKE_NETWORK_POLICY": 46,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
                             "DROP": 17,
@@ -662,6 +758,26 @@
                         "pscNetworkAttachmentUri": {
                           "type": "string",
                           "id": 9
+                        },
+                        "running": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "status": {
+                          "type": "Status",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "Status": {
+                          "values": {
+                            "STATUS_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "NOT_RUNNING": 2
+                          }
                         }
                       }
                     },
@@ -736,6 +852,14 @@
                         "firewallRuleType": {
                           "type": "FirewallRuleType",
                           "id": 10
+                        },
+                        "policyPriority": {
+                          "type": "int32",
+                          "id": 12
+                        },
+                        "targetType": {
+                          "type": "TargetType",
+                          "id": 13
                         }
                       },
                       "nested": {
@@ -748,9 +872,18 @@
                             "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
                             "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
+                            "SYSTEM_NETWORK_FIREWALL_POLICY_RULE": 7,
+                            "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE": 8,
                             "UNSUPPORTED_FIREWALL_POLICY_RULE": 100,
                             "TRACKING_STATE": 101,
                             "ANALYSIS_SKIPPED": 102
+                          }
+                        },
+                        "TargetType": {
+                          "values": {
+                            "TARGET_TYPE_UNSPECIFIED": 0,
+                            "INSTANCES": 1,
+                            "INTERNAL_MANAGED_LB": 2
                           }
                         }
                       }
@@ -927,7 +1060,8 @@
                             "NEXT_HOP_BLACKHOLE": 9,
                             "NEXT_HOP_ILB": 10,
                             "NEXT_HOP_ROUTER_APPLIANCE": 11,
-                            "NEXT_HOP_NCC_HUB": 12
+                            "NEXT_HOP_NCC_HUB": 12,
+                            "SECURE_WEB_PROXY_GATEWAY": 13
                           }
                         },
                         "RouteScope": {
@@ -1096,6 +1230,22 @@
                         }
                       }
                     },
+                    "HybridSubnetInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "VpnGatewayInfo": {
                       "fields": {
                         "displayName": {
@@ -1174,6 +1324,52 @@
                         }
                       }
                     },
+                    "InterconnectAttachmentInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "interconnectUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "cloudRouterUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 6
+                        },
+                        "l2AttachmentMatchedIpAddress": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "DEDICATED": 1,
+                            "PARTNER": 2,
+                            "PARTNER_PROVIDER": 3,
+                            "L2_DEDICATED": 4
+                          }
+                        }
+                      }
+                    },
                     "EndpointInfo": {
                       "fields": {
                         "sourceIp": {
@@ -1234,6 +1430,10 @@
                         "pscGoogleApiTarget": {
                           "type": "string",
                           "id": 5
+                        },
+                        "googleServiceType": {
+                          "type": "GoogleServiceType",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -1256,7 +1456,18 @@
                             "CLOUD_RUN_REVISION": 14,
                             "GOOGLE_MANAGED_SERVICE": 15,
                             "REDIS_INSTANCE": 16,
-                            "REDIS_CLUSTER": 17
+                            "REDIS_CLUSTER": 17,
+                            "GKE_POD": 19
+                          }
+                        },
+                        "GoogleServiceType": {
+                          "values": {
+                            "GOOGLE_SERVICE_TYPE_UNSPECIFIED": 0,
+                            "IAP": 1,
+                            "GFE_PROXY_OR_HEALTH_CHECK_PROBER": 2,
+                            "CLOUD_DNS": 3,
+                            "PRIVATE_GOOGLE_ACCESS": 4,
+                            "SERVERLESS_VPC_ACCESS": 5
                           }
                         }
                       }
@@ -1299,7 +1510,8 @@
                             "CLOUD_SQL_INSTANCE": 6,
                             "ANOTHER_PROJECT": 7,
                             "NCC_HUB": 8,
-                            "ROUTER_APPLIANCE": 9
+                            "ROUTER_APPLIANCE": 9,
+                            "SECURE_WEB_PROXY_GATEWAY": 10
                           }
                         }
                       }
@@ -1373,6 +1585,9 @@
                             "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS": 29,
                             "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS": 36,
                             "NO_SOURCE_LOCATION": 5,
+                            "NO_SOURCE_GCP_NETWORK_LOCATION": 42,
+                            "NO_SOURCE_NON_GCP_NETWORK_LOCATION": 43,
+                            "NO_SOURCE_INTERNET_LOCATION": 44,
                             "INVALID_ARGUMENT": 6,
                             "TRACE_TOO_LONG": 9,
                             "INTERNAL_ERROR": 10,
@@ -1385,14 +1600,18 @@
                             "FIREWALL_CONFIG_NOT_FOUND": 26,
                             "ROUTE_CONFIG_NOT_FOUND": 27,
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT": 19,
+                            "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT": 39,
                             "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED": 20,
+                            "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED": 45,
                             "SOURCE_REDIS_CLUSTER_UNSUPPORTED": 34,
                             "SOURCE_REDIS_INSTANCE_UNSUPPORTED": 35,
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
                             "NON_ROUTABLE_IP_ADDRESS": 22,
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
                             "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31,
-                            "NO_SERVERLESS_IP_RANGES": 37
+                            "NO_SERVERLESS_IP_RANGES": 37,
+                            "IP_VERSION_PROTOCOL_MISMATCH": 40,
+                            "GKE_POD_UNKNOWN_ENDPOINT_LOCATION": 41
                           }
                         }
                       }
@@ -1418,6 +1637,14 @@
                         "region": {
                           "type": "string",
                           "id": 5
+                        },
+                        "sourceGeolocationCode": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "destinationGeolocationCode": {
+                          "type": "string",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -1438,6 +1665,8 @@
                             "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED": 52,
                             "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID": 53,
                             "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS": 44,
+                            "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS": 109,
+                            "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS": 98,
                             "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH": 45,
                             "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH": 46,
                             "PRIVATE_TRAFFIC_TO_INTERNET": 7,
@@ -1451,6 +1680,7 @@
                             "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS": 85,
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
+                            "GKE_POD_NOT_RUNNING": 103,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
                             "REDIS_INSTANCE_NOT_RUNNING": 68,
                             "REDIS_CLUSTER_NOT_RUNNING": 69,
@@ -1510,7 +1740,21 @@
                             "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED": 83,
                             "PSC_PORT_MAPPING_PORT_MISMATCH": 86,
                             "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED": 87,
-                            "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88
+                            "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88,
+                            "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED": 89,
+                            "NO_MATCHING_NAT64_GATEWAY": 90,
+                            "NO_CONFIGURED_PRIVATE_NAT64_RULE": 107,
+                            "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH": 96,
+                            "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION": 97,
+                            "CLOUD_NAT_PROTOCOL_UNSUPPORTED": 99,
+                            "L2_INTERCONNECT_UNSUPPORTED_PROTOCOL": 100,
+                            "L2_INTERCONNECT_UNSUPPORTED_PORT": 101,
+                            "L2_INTERCONNECT_DESTINATION_IP_MISMATCH": 102,
+                            "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED": 104,
+                            "HYBRID_SUBNET_REGION_MISMATCH": 105,
+                            "HYBRID_SUBNET_NO_ROUTE": 106,
+                            "GKE_NETWORK_POLICY": 108,
+                            "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION": 110
                           }
                         }
                       }
@@ -1536,6 +1780,91 @@
                         "dnsEndpoint": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "GkePodInfo": {
+                      "fields": {
+                        "podUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IpMasqueradingSkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        },
+                        "nonMasqueradeRange": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE": 1,
+                            "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE": 2,
+                            "DESTINATION_ON_SAME_NODE": 3,
+                            "DEFAULT_SNAT_DISABLED": 4,
+                            "NO_MASQUERADING_FOR_IPV6": 5,
+                            "POD_USES_NODE_NETWORK_NAMESPACE": 6,
+                            "NO_MASQUERADING_FOR_RETURN_PACKET": 7
+                          }
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicyInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "direction": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicySkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "NETWORK_POLICY_DISABLED": 1,
+                            "INGRESS_SOURCE_ON_SAME_NODE": 2,
+                            "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD": 3,
+                            "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC": 4,
+                            "NETWORK_POLICY_ANALYSIS_UNSUPPORTED": 100
+                          }
                         }
                       }
                     },
@@ -1799,6 +2128,10 @@
                         "natGatewayName": {
                           "type": "string",
                           "id": 13
+                        },
+                        "cloudNatGatewayType": {
+                          "type": "CloudNatGatewayType",
+                          "id": 14
                         }
                       },
                       "nested": {
@@ -1808,7 +2141,18 @@
                             "INTERNAL_TO_EXTERNAL": 1,
                             "EXTERNAL_TO_INTERNAL": 2,
                             "CLOUD_NAT": 3,
-                            "PRIVATE_SERVICE_CONNECT": 4
+                            "PRIVATE_SERVICE_CONNECT": 4,
+                            "GKE_POD_IP_MASQUERADING": 5
+                          }
+                        },
+                        "CloudNatGatewayType": {
+                          "values": {
+                            "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED": 0,
+                            "PUBLIC_NAT44": 1,
+                            "PUBLIC_NAT64": 2,
+                            "PRIVATE_NAT_NCC": 3,
+                            "PRIVATE_NAT_HYBRID": 4,
+                            "PRIVATE_NAT64": 5
                           }
                         }
                       }
@@ -1945,6 +2289,14 @@
                     "ServerlessNegInfo": {
                       "fields": {
                         "negUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "NgfwPacketInspectionInfo": {
+                      "fields": {
+                        "securityProfileGroupUri": {
                           "type": "string",
                           "id": 1
                         }
@@ -2381,6 +2733,160 @@
                               }
                             }
                           ]
+                        },
+                        "QueryOrgVpcFlowLogsConfigs": {
+                          "requestType": "QueryOrgVpcFlowLogsConfigsRequest",
+                          "responseType": "QueryOrgVpcFlowLogsConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:queryOrgVpcFlowLogsConfigs"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:queryOrgVpcFlowLogsConfigs"
+                              }
+                            }
+                          ]
+                        },
+                        "ShowEffectiveFlowLogsConfigs": {
+                          "requestType": "ShowEffectiveFlowLogsConfigsRequest",
+                          "responseType": "ShowEffectiveFlowLogsConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:showEffectiveFlowLogsConfigs"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:showEffectiveFlowLogsConfigs"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "OrganizationVpcFlowLogsService": {
+                      "options": {
+                        "(google.api.default_host)": "networkmanagement.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListVpcFlowLogsConfigs": {
+                          "requestType": "ListVpcFlowLogsConfigsRequest",
+                          "responseType": "ListVpcFlowLogsConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetVpcFlowLogsConfig": {
+                          "requestType": "GetVpcFlowLogsConfigRequest",
+                          "responseType": "VpcFlowLogsConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateVpcFlowLogsConfig": {
+                          "requestType": "CreateVpcFlowLogsConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs",
+                            "(google.api.http).body": "vpc_flow_logs_config",
+                            "(google.api.method_signature)": "parent,vpc_flow_logs_config,vpc_flow_logs_config_id",
+                            "(google.longrunning.operation_info).response_type": "VpcFlowLogsConfig",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkmanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs",
+                                "body": "vpc_flow_logs_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,vpc_flow_logs_config,vpc_flow_logs_config_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "VpcFlowLogsConfig",
+                                "metadata_type": "google.cloud.networkmanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateVpcFlowLogsConfig": {
+                          "requestType": "UpdateVpcFlowLogsConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{vpc_flow_logs_config.name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                            "(google.api.http).body": "vpc_flow_logs_config",
+                            "(google.api.method_signature)": "vpc_flow_logs_config,update_mask",
+                            "(google.longrunning.operation_info).response_type": "VpcFlowLogsConfig",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkmanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{vpc_flow_logs_config.name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                                "body": "vpc_flow_logs_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "vpc_flow_logs_config,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "VpcFlowLogsConfig",
+                                "metadata_type": "google.cloud.networkmanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteVpcFlowLogsConfig": {
+                          "requestType": "DeleteVpcFlowLogsConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkmanagement.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.networkmanagement.v1.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2511,10 +3017,119 @@
                         }
                       }
                     },
+                    "QueryOrgVpcFlowLogsConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkmanagement.googleapis.com/VpcFlowLogsConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryOrgVpcFlowLogsConfigsResponse": {
+                      "fields": {
+                        "vpcFlowLogsConfigs": {
+                          "rule": "repeated",
+                          "type": "VpcFlowLogsConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ShowEffectiveFlowLogsConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkmanagement.googleapis.com/VpcFlowLogsConfig"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ShowEffectiveFlowLogsConfigsResponse": {
+                      "fields": {
+                        "effectiveFlowLogsConfigs": {
+                          "rule": "repeated",
+                          "type": "EffectiveVpcFlowLogsConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "VpcFlowLogsConfig": {
                       "options": {
                         "(google.api.resource).type": "networkmanagement.googleapis.com/VpcFlowLogsConfig",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}",
                         "(google.api.resource).plural": "vpcFlowLogsConfigs",
                         "(google.api.resource).singular": "vpcFlowLogsConfig"
                       },
@@ -2549,6 +3164,11 @@
                             "filterExpr"
                           ]
                         },
+                        "_crossProjectMetadata": {
+                          "oneof": [
+                            "crossProjectMetadata"
+                          ]
+                        },
                         "_targetResourceState": {
                           "oneof": [
                             "targetResourceState"
@@ -2556,6 +3176,8 @@
                         },
                         "targetResource": {
                           "oneof": [
+                            "network",
+                            "subnet",
                             "interconnectAttachment",
                             "vpnTunnel"
                           ]
@@ -2625,6 +3247,14 @@
                             "proto3_optional": true
                           }
                         },
+                        "crossProjectMetadata": {
+                          "type": "CrossProjectMetadata",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
                         "targetResourceState": {
                           "type": "TargetResourceState",
                           "id": 12,
@@ -2632,6 +3262,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 100
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 101
                         },
                         "interconnectAttachment": {
                           "type": "string",
@@ -2691,11 +3329,154 @@
                             "CUSTOM_METADATA": 3
                           }
                         },
+                        "CrossProjectMetadata": {
+                          "values": {
+                            "CROSS_PROJECT_METADATA_UNSPECIFIED": 0,
+                            "CROSS_PROJECT_METADATA_ENABLED": 1,
+                            "CROSS_PROJECT_METADATA_DISABLED": 2
+                          }
+                        },
                         "TargetResourceState": {
                           "values": {
                             "TARGET_RESOURCE_STATE_UNSPECIFIED": 0,
                             "TARGET_RESOURCE_EXISTS": 1,
                             "TARGET_RESOURCE_DOES_NOT_EXIST": 2
+                          }
+                        }
+                      }
+                    },
+                    "EffectiveVpcFlowLogsConfig": {
+                      "oneofs": {
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_aggregationInterval": {
+                          "oneof": [
+                            "aggregationInterval"
+                          ]
+                        },
+                        "_flowSampling": {
+                          "oneof": [
+                            "flowSampling"
+                          ]
+                        },
+                        "_metadata": {
+                          "oneof": [
+                            "metadata"
+                          ]
+                        },
+                        "_filterExpr": {
+                          "oneof": [
+                            "filterExpr"
+                          ]
+                        },
+                        "_crossProjectMetadata": {
+                          "oneof": [
+                            "crossProjectMetadata"
+                          ]
+                        },
+                        "targetResource": {
+                          "oneof": [
+                            "network",
+                            "subnet",
+                            "interconnectAttachment",
+                            "vpnTunnel"
+                          ]
+                        },
+                        "_scope": {
+                          "oneof": [
+                            "scope"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "VpcFlowLogsConfig.State",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "aggregationInterval": {
+                          "type": "VpcFlowLogsConfig.AggregationInterval",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "flowSampling": {
+                          "type": "float",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metadata": {
+                          "type": "VpcFlowLogsConfig.Metadata",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metadataFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "filterExpr": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "crossProjectMetadata": {
+                          "type": "VpcFlowLogsConfig.CrossProjectMetadata",
+                          "id": 13,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 100
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 101
+                        },
+                        "interconnectAttachment": {
+                          "type": "string",
+                          "id": 102
+                        },
+                        "vpnTunnel": {
+                          "type": "string",
+                          "id": 103
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 12,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Scope": {
+                          "values": {
+                            "SCOPE_UNSPECIFIED": 0,
+                            "SUBNET": 1,
+                            "COMPUTE_API_SUBNET": 2,
+                            "NETWORK": 3,
+                            "VPN_TUNNEL": 4,
+                            "INTERCONNECT_ATTACHMENT": 5,
+                            "ORGANIZATION": 6
                           }
                         }
                       }
@@ -2710,7 +3491,9 @@
                     "java_outer_classname": "VpcFlowLogsConfigProto",
                     "java_package": "com.google.cloud.networkmanagement.v1beta1",
                     "php_namespace": "Google\\Cloud\\NetworkManagement\\V1beta1",
-                    "ruby_package": "Google::Cloud::NetworkManagement::V1beta1"
+                    "ruby_package": "Google::Cloud::NetworkManagement::V1beta1",
+                    "(google.api.resource_definition).type": "networkmanagement.googleapis.com/OrganizationLocation",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
                   "nested": {
                     "ConnectivityTest": {
@@ -2889,6 +3672,10 @@
                           "type": "string",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "string",
+                          "id": 21
+                        },
                         "cloudFunction": {
                           "type": "CloudFunctionEndpoint",
                           "id": 10
@@ -2919,7 +3706,8 @@
                           "values": {
                             "NETWORK_TYPE_UNSPECIFIED": 0,
                             "GCP_NETWORK": 1,
-                            "NON_GCP_NETWORK": 2
+                            "NON_GCP_NETWORK": 2,
+                            "INTERNET": 3
                           }
                         },
                         "ForwardingRuleTarget": {
@@ -2952,6 +3740,13 @@
                             "uri": {
                               "type": "string",
                               "id": 1
+                            },
+                            "serviceUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -3047,6 +3842,15 @@
                         "destinationEgressLocation": {
                           "type": "EdgeLocation",
                           "id": 9
+                        },
+                        "edgeResponses": {
+                          "rule": "repeated",
+                          "type": "SingleEdgeResponse",
+                          "id": 10
+                        },
+                        "probedAllDevices": {
+                          "type": "bool",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -3071,6 +3875,34 @@
                             "metropolitanArea": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "SingleEdgeResponse": {
+                          "fields": {
+                            "result": {
+                              "type": "ProbingResult",
+                              "id": 1
+                            },
+                            "sentProbeCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "successfulProbeCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "probingLatency": {
+                              "type": "LatencyDistribution",
+                              "id": 4
+                            },
+                            "destinationEgressLocation": {
+                              "type": "EdgeLocation",
+                              "id": 5
+                            },
+                            "destinationRouter": {
+                              "type": "string",
+                              "id": 6
                             }
                           }
                         }
@@ -3103,8 +3935,10 @@
                             "endpoint",
                             "googleService",
                             "forwardingRule",
+                            "hybridSubnet",
                             "vpnGateway",
                             "vpnTunnel",
+                            "interconnectAttachment",
                             "vpcConnector",
                             "directVpcEgressConnection",
                             "serverlessExternalConnection",
@@ -3115,6 +3949,10 @@
                             "loadBalancer",
                             "network",
                             "gkeMaster",
+                            "gkePod",
+                            "ipMasqueradingSkipped",
+                            "gkeNetworkPolicy",
+                            "gkeNetworkPolicySkipped",
                             "cloudSqlInstance",
                             "redisInstance",
                             "redisCluster",
@@ -3125,7 +3963,8 @@
                             "proxyConnection",
                             "loadBalancerBackendInfo",
                             "storageBucket",
-                            "serverlessNeg"
+                            "serverlessNeg",
+                            "ngfwPacketInspection"
                           ]
                         }
                       },
@@ -3170,6 +4009,10 @@
                           "type": "ForwardingRuleInfo",
                           "id": 9
                         },
+                        "hybridSubnet": {
+                          "type": "HybridSubnetInfo",
+                          "id": 36
+                        },
                         "vpnGateway": {
                           "type": "VpnGatewayInfo",
                           "id": 10
@@ -3177,6 +4020,10 @@
                         "vpnTunnel": {
                           "type": "VpnTunnelInfo",
                           "id": 11
+                        },
+                        "interconnectAttachment": {
+                          "type": "InterconnectAttachmentInfo",
+                          "id": 35
                         },
                         "vpcConnector": {
                           "type": "VpcConnectorInfo",
@@ -3221,6 +4068,22 @@
                           "type": "GKEMasterInfo",
                           "id": 18
                         },
+                        "gkePod": {
+                          "type": "GkePodInfo",
+                          "id": 37
+                        },
+                        "ipMasqueradingSkipped": {
+                          "type": "IpMasqueradingSkippedInfo",
+                          "id": 38
+                        },
+                        "gkeNetworkPolicy": {
+                          "type": "GkeNetworkPolicyInfo",
+                          "id": 39
+                        },
+                        "gkeNetworkPolicySkipped": {
+                          "type": "GkeNetworkPolicySkippedInfo",
+                          "id": 40
+                        },
                         "cloudSqlInstance": {
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
@@ -3264,6 +4127,10 @@
                         "serverlessNeg": {
                           "type": "ServerlessNegInfo",
                           "id": 29
+                        },
+                        "ngfwPacketInspection": {
+                          "type": "NgfwPacketInspectionInfo",
+                          "id": 42
                         }
                       },
                       "nested": {
@@ -3284,6 +4151,7 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_GKE_POD": 39,
                             "START_FROM_REDIS_INSTANCE": 32,
                             "START_FROM_REDIS_CLUSTER": 33,
                             "START_FROM_CLOUD_FUNCTION": 23,
@@ -3301,12 +4169,21 @@
                             "ARRIVE_AT_INSTANCE": 9,
                             "ARRIVE_AT_INTERNAL_LOAD_BALANCER": 10,
                             "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": 11,
+                            "ARRIVE_AT_HYBRID_SUBNET": 38,
                             "ARRIVE_AT_VPN_GATEWAY": 12,
                             "ARRIVE_AT_VPN_TUNNEL": 13,
+                            "ARRIVE_AT_INTERCONNECT_ATTACHMENT": 37,
                             "ARRIVE_AT_VPC_CONNECTOR": 24,
+                            "ARRIVE_AT_GKE_POD": 44,
                             "DIRECT_VPC_EGRESS_CONNECTION": 35,
                             "SERVERLESS_EXTERNAL_CONNECTION": 36,
+                            "NGFW_PACKET_INSPECTION": 47,
                             "NAT": 14,
+                            "SKIP_GKE_POD_IP_MASQUERADING": 40,
+                            "SKIP_GKE_INGRESS_NETWORK_POLICY": 41,
+                            "SKIP_GKE_EGRESS_NETWORK_POLICY": 42,
+                            "APPLY_INGRESS_GKE_NETWORK_POLICY": 45,
+                            "APPLY_EGRESS_GKE_NETWORK_POLICY": 46,
                             "PROXY_CONNECTION": 15,
                             "DELIVER": 16,
                             "DROP": 17,
@@ -3358,6 +4235,26 @@
                         "pscNetworkAttachmentUri": {
                           "type": "string",
                           "id": 9
+                        },
+                        "running": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "status": {
+                          "type": "Status",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "Status": {
+                          "values": {
+                            "STATUS_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "NOT_RUNNING": 2
+                          }
                         }
                       }
                     },
@@ -3432,6 +4329,14 @@
                         "firewallRuleType": {
                           "type": "FirewallRuleType",
                           "id": 10
+                        },
+                        "policyPriority": {
+                          "type": "int32",
+                          "id": 12
+                        },
+                        "targetType": {
+                          "type": "TargetType",
+                          "id": 13
                         }
                       },
                       "nested": {
@@ -3444,9 +4349,18 @@
                             "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
                             "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
+                            "SYSTEM_NETWORK_FIREWALL_POLICY_RULE": 7,
+                            "SYSTEM_REGIONAL_NETWORK_FIREWALL_POLICY_RULE": 8,
                             "UNSUPPORTED_FIREWALL_POLICY_RULE": 100,
                             "TRACKING_STATE": 101,
                             "ANALYSIS_SKIPPED": 102
+                          }
+                        },
+                        "TargetType": {
+                          "values": {
+                            "TARGET_TYPE_UNSPECIFIED": 0,
+                            "INSTANCES": 1,
+                            "INTERNAL_MANAGED_LB": 2
                           }
                         }
                       }
@@ -3623,7 +4537,8 @@
                             "NEXT_HOP_BLACKHOLE": 9,
                             "NEXT_HOP_ILB": 10,
                             "NEXT_HOP_ROUTER_APPLIANCE": 11,
-                            "NEXT_HOP_NCC_HUB": 12
+                            "NEXT_HOP_NCC_HUB": 12,
+                            "SECURE_WEB_PROXY_GATEWAY": 13
                           }
                         },
                         "RouteScope": {
@@ -3792,6 +4707,22 @@
                         }
                       }
                     },
+                    "HybridSubnetInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "VpnGatewayInfo": {
                       "fields": {
                         "displayName": {
@@ -3870,6 +4801,52 @@
                         }
                       }
                     },
+                    "InterconnectAttachmentInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "interconnectUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "cloudRouterUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 6
+                        },
+                        "l2AttachmentMatchedIpAddress": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "DEDICATED": 1,
+                            "PARTNER": 2,
+                            "PARTNER_PROVIDER": 3,
+                            "L2_DEDICATED": 4
+                          }
+                        }
+                      }
+                    },
                     "EndpointInfo": {
                       "fields": {
                         "sourceIp": {
@@ -3930,6 +4907,10 @@
                         "pscGoogleApiTarget": {
                           "type": "string",
                           "id": 5
+                        },
+                        "googleServiceType": {
+                          "type": "GoogleServiceType",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -3952,7 +4933,18 @@
                             "CLOUD_RUN_REVISION": 14,
                             "GOOGLE_MANAGED_SERVICE": 15,
                             "REDIS_INSTANCE": 16,
-                            "REDIS_CLUSTER": 17
+                            "REDIS_CLUSTER": 17,
+                            "GKE_POD": 19
+                          }
+                        },
+                        "GoogleServiceType": {
+                          "values": {
+                            "GOOGLE_SERVICE_TYPE_UNSPECIFIED": 0,
+                            "IAP": 1,
+                            "GFE_PROXY_OR_HEALTH_CHECK_PROBER": 2,
+                            "CLOUD_DNS": 3,
+                            "PRIVATE_GOOGLE_ACCESS": 4,
+                            "SERVERLESS_VPC_ACCESS": 5
                           }
                         }
                       }
@@ -3995,7 +4987,8 @@
                             "CLOUD_SQL_INSTANCE": 6,
                             "ANOTHER_PROJECT": 7,
                             "NCC_HUB": 8,
-                            "ROUTER_APPLIANCE": 9
+                            "ROUTER_APPLIANCE": 9,
+                            "SECURE_WEB_PROXY_GATEWAY": 10
                           }
                         }
                       }
@@ -4069,6 +5062,9 @@
                             "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS": 29,
                             "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS": 36,
                             "NO_SOURCE_LOCATION": 5,
+                            "NO_SOURCE_GCP_NETWORK_LOCATION": 42,
+                            "NO_SOURCE_NON_GCP_NETWORK_LOCATION": 43,
+                            "NO_SOURCE_INTERNET_LOCATION": 44,
                             "INVALID_ARGUMENT": 6,
                             "TRACE_TOO_LONG": 9,
                             "INTERNAL_ERROR": 10,
@@ -4081,14 +5077,18 @@
                             "FIREWALL_CONFIG_NOT_FOUND": 26,
                             "ROUTE_CONFIG_NOT_FOUND": 27,
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT": 19,
+                            "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_ENDPOINT": 39,
                             "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED": 20,
+                            "SOURCE_EXTERNAL_CLOUD_SQL_UNSUPPORTED": 45,
                             "SOURCE_REDIS_CLUSTER_UNSUPPORTED": 34,
                             "SOURCE_REDIS_INSTANCE_UNSUPPORTED": 35,
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
                             "NON_ROUTABLE_IP_ADDRESS": 22,
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
                             "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG": 31,
-                            "NO_SERVERLESS_IP_RANGES": 37
+                            "NO_SERVERLESS_IP_RANGES": 37,
+                            "IP_VERSION_PROTOCOL_MISMATCH": 40,
+                            "GKE_POD_UNKNOWN_ENDPOINT_LOCATION": 41
                           }
                         }
                       }
@@ -4114,6 +5114,14 @@
                         "region": {
                           "type": "string",
                           "id": 5
+                        },
+                        "sourceGeolocationCode": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "destinationGeolocationCode": {
+                          "type": "string",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -4134,6 +5142,8 @@
                             "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED": 52,
                             "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID": 53,
                             "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS": 44,
+                            "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV4_ADDRESS": 109,
+                            "NO_ROUTE_FROM_EXTERNAL_IPV6_SOURCE_TO_PRIVATE_IPV6_ADDRESS": 98,
                             "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH": 45,
                             "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH": 46,
                             "PRIVATE_TRAFFIC_TO_INTERNET": 7,
@@ -4147,6 +5157,7 @@
                             "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS": 85,
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
+                            "GKE_POD_NOT_RUNNING": 103,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
                             "REDIS_INSTANCE_NOT_RUNNING": 68,
                             "REDIS_CLUSTER_NOT_RUNNING": 69,
@@ -4206,7 +5217,21 @@
                             "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED": 83,
                             "PSC_PORT_MAPPING_PORT_MISMATCH": 86,
                             "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED": 87,
-                            "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88
+                            "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION": 88,
+                            "TRAFFIC_FROM_HYBRID_ENDPOINT_TO_INTERNET_DISALLOWED": 89,
+                            "NO_MATCHING_NAT64_GATEWAY": 90,
+                            "NO_CONFIGURED_PRIVATE_NAT64_RULE": 107,
+                            "LOAD_BALANCER_BACKEND_IP_VERSION_MISMATCH": 96,
+                            "NO_KNOWN_ROUTE_FROM_NCC_NETWORK_TO_DESTINATION": 97,
+                            "CLOUD_NAT_PROTOCOL_UNSUPPORTED": 99,
+                            "L2_INTERCONNECT_UNSUPPORTED_PROTOCOL": 100,
+                            "L2_INTERCONNECT_UNSUPPORTED_PORT": 101,
+                            "L2_INTERCONNECT_DESTINATION_IP_MISMATCH": 102,
+                            "NCC_ROUTE_WITHIN_HYBRID_SUBNET_UNSUPPORTED": 104,
+                            "HYBRID_SUBNET_REGION_MISMATCH": 105,
+                            "HYBRID_SUBNET_NO_ROUTE": 106,
+                            "GKE_NETWORK_POLICY": 108,
+                            "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION": 110
                           }
                         }
                       }
@@ -4232,6 +5257,91 @@
                         "dnsEndpoint": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "GkePodInfo": {
+                      "fields": {
+                        "podUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IpMasqueradingSkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        },
+                        "nonMasqueradeRange": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "DESTINATION_IP_IN_CONFIGURED_NON_MASQUERADE_RANGE": 1,
+                            "DESTINATION_IP_IN_DEFAULT_NON_MASQUERADE_RANGE": 2,
+                            "DESTINATION_ON_SAME_NODE": 3,
+                            "DEFAULT_SNAT_DISABLED": 4,
+                            "NO_MASQUERADING_FOR_IPV6": 5,
+                            "POD_USES_NODE_NETWORK_NAMESPACE": 6,
+                            "NO_MASQUERADING_FOR_RETURN_PACKET": 7
+                          }
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicyInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "direction": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GkeNetworkPolicySkippedInfo": {
+                      "fields": {
+                        "reason": {
+                          "type": "Reason",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "NETWORK_POLICY_DISABLED": 1,
+                            "INGRESS_SOURCE_ON_SAME_NODE": 2,
+                            "EGRESS_FROM_NODE_NETWORK_NAMESPACE_POD": 3,
+                            "NETWORK_POLICY_NOT_APPLIED_TO_RESPONSE_TRAFFIC": 4,
+                            "NETWORK_POLICY_ANALYSIS_UNSUPPORTED": 100
+                          }
                         }
                       }
                     },
@@ -4495,6 +5605,10 @@
                         "natGatewayName": {
                           "type": "string",
                           "id": 13
+                        },
+                        "cloudNatGatewayType": {
+                          "type": "CloudNatGatewayType",
+                          "id": 14
                         }
                       },
                       "nested": {
@@ -4504,7 +5618,18 @@
                             "INTERNAL_TO_EXTERNAL": 1,
                             "EXTERNAL_TO_INTERNAL": 2,
                             "CLOUD_NAT": 3,
-                            "PRIVATE_SERVICE_CONNECT": 4
+                            "PRIVATE_SERVICE_CONNECT": 4,
+                            "GKE_POD_IP_MASQUERADING": 5
+                          }
+                        },
+                        "CloudNatGatewayType": {
+                          "values": {
+                            "CLOUD_NAT_GATEWAY_TYPE_UNSPECIFIED": 0,
+                            "PUBLIC_NAT44": 1,
+                            "PUBLIC_NAT64": 2,
+                            "PRIVATE_NAT_NCC": 3,
+                            "PRIVATE_NAT_HYBRID": 4,
+                            "PRIVATE_NAT64": 5
                           }
                         }
                       }
@@ -4641,6 +5766,14 @@
                     "ServerlessNegInfo": {
                       "fields": {
                         "negUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "NgfwPacketInspectionInfo": {
+                      "fields": {
+                        "securityProfileGroupUri": {
                           "type": "string",
                           "id": 1
                         }
@@ -5057,6 +6190,160 @@
                               }
                             }
                           ]
+                        },
+                        "QueryOrgVpcFlowLogsConfigs": {
+                          "requestType": "QueryOrgVpcFlowLogsConfigsRequest",
+                          "responseType": "QueryOrgVpcFlowLogsConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:queryOrgVpcFlowLogsConfigs"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:queryOrgVpcFlowLogsConfigs"
+                              }
+                            }
+                          ]
+                        },
+                        "ShowEffectiveFlowLogsConfigs": {
+                          "requestType": "ShowEffectiveFlowLogsConfigsRequest",
+                          "responseType": "ShowEffectiveFlowLogsConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:showEffectiveFlowLogsConfigs"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/vpcFlowLogsConfigs:showEffectiveFlowLogsConfigs"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "OrganizationVpcFlowLogsService": {
+                      "options": {
+                        "(google.api.default_host)": "networkmanagement.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListVpcFlowLogsConfigs": {
+                          "requestType": "ListVpcFlowLogsConfigsRequest",
+                          "responseType": "ListVpcFlowLogsConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetVpcFlowLogsConfig": {
+                          "requestType": "GetVpcFlowLogsConfigRequest",
+                          "responseType": "VpcFlowLogsConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateVpcFlowLogsConfig": {
+                          "requestType": "CreateVpcFlowLogsConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs",
+                            "(google.api.http).body": "vpc_flow_logs_config",
+                            "(google.api.method_signature)": "parent,vpc_flow_logs_config,vpc_flow_logs_config_id",
+                            "(google.longrunning.operation_info).response_type": "VpcFlowLogsConfig",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkmanagement.v1beta1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=organizations/*/locations/*}/vpcFlowLogsConfigs",
+                                "body": "vpc_flow_logs_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,vpc_flow_logs_config,vpc_flow_logs_config_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "VpcFlowLogsConfig",
+                                "metadata_type": "google.cloud.networkmanagement.v1beta1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateVpcFlowLogsConfig": {
+                          "requestType": "UpdateVpcFlowLogsConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{vpc_flow_logs_config.name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                            "(google.api.http).body": "vpc_flow_logs_config",
+                            "(google.api.method_signature)": "vpc_flow_logs_config,update_mask",
+                            "(google.longrunning.operation_info).response_type": "VpcFlowLogsConfig",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkmanagement.v1beta1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{vpc_flow_logs_config.name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                                "body": "vpc_flow_logs_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "vpc_flow_logs_config,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "VpcFlowLogsConfig",
+                                "metadata_type": "google.cloud.networkmanagement.v1beta1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteVpcFlowLogsConfig": {
+                          "requestType": "DeleteVpcFlowLogsConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.networkmanagement.v1beta1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=organizations/*/locations/*/vpcFlowLogsConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "google.cloud.networkmanagement.v1beta1.OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -5187,10 +6474,119 @@
                         }
                       }
                     },
+                    "QueryOrgVpcFlowLogsConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkmanagement.googleapis.com/VpcFlowLogsConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryOrgVpcFlowLogsConfigsResponse": {
+                      "fields": {
+                        "vpcFlowLogsConfigs": {
+                          "rule": "repeated",
+                          "type": "VpcFlowLogsConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ShowEffectiveFlowLogsConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkmanagement.googleapis.com/VpcFlowLogsConfig"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ShowEffectiveFlowLogsConfigsResponse": {
+                      "fields": {
+                        "effectiveFlowLogsConfigs": {
+                          "rule": "repeated",
+                          "type": "EffectiveVpcFlowLogsConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "VpcFlowLogsConfig": {
                       "options": {
                         "(google.api.resource).type": "networkmanagement.googleapis.com/VpcFlowLogsConfig",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}",
                         "(google.api.resource).plural": "vpcFlowLogsConfigs",
                         "(google.api.resource).singular": "vpcFlowLogsConfig"
                       },
@@ -5225,8 +6621,20 @@
                             "filterExpr"
                           ]
                         },
+                        "_crossProjectMetadata": {
+                          "oneof": [
+                            "crossProjectMetadata"
+                          ]
+                        },
+                        "_targetResourceState": {
+                          "oneof": [
+                            "targetResourceState"
+                          ]
+                        },
                         "targetResource": {
                           "oneof": [
+                            "network",
+                            "subnet",
                             "interconnectAttachment",
                             "vpnTunnel"
                           ]
@@ -5296,6 +6704,30 @@
                             "proto3_optional": true
                           }
                         },
+                        "crossProjectMetadata": {
+                          "type": "CrossProjectMetadata",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetResourceState": {
+                          "type": "TargetResourceState",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 100
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 101
+                        },
                         "interconnectAttachment": {
                           "type": "string",
                           "id": 102
@@ -5353,6 +6785,156 @@
                             "EXCLUDE_ALL_METADATA": 2,
                             "CUSTOM_METADATA": 3
                           }
+                        },
+                        "CrossProjectMetadata": {
+                          "values": {
+                            "CROSS_PROJECT_METADATA_UNSPECIFIED": 0,
+                            "CROSS_PROJECT_METADATA_ENABLED": 1,
+                            "CROSS_PROJECT_METADATA_DISABLED": 2
+                          }
+                        },
+                        "TargetResourceState": {
+                          "values": {
+                            "TARGET_RESOURCE_STATE_UNSPECIFIED": 0,
+                            "TARGET_RESOURCE_EXISTS": 1,
+                            "TARGET_RESOURCE_DOES_NOT_EXIST": 2
+                          }
+                        }
+                      }
+                    },
+                    "EffectiveVpcFlowLogsConfig": {
+                      "oneofs": {
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_aggregationInterval": {
+                          "oneof": [
+                            "aggregationInterval"
+                          ]
+                        },
+                        "_flowSampling": {
+                          "oneof": [
+                            "flowSampling"
+                          ]
+                        },
+                        "_metadata": {
+                          "oneof": [
+                            "metadata"
+                          ]
+                        },
+                        "_filterExpr": {
+                          "oneof": [
+                            "filterExpr"
+                          ]
+                        },
+                        "_crossProjectMetadata": {
+                          "oneof": [
+                            "crossProjectMetadata"
+                          ]
+                        },
+                        "targetResource": {
+                          "oneof": [
+                            "network",
+                            "subnet",
+                            "interconnectAttachment",
+                            "vpnTunnel"
+                          ]
+                        },
+                        "_scope": {
+                          "oneof": [
+                            "scope"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "VpcFlowLogsConfig.State",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "aggregationInterval": {
+                          "type": "VpcFlowLogsConfig.AggregationInterval",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "flowSampling": {
+                          "type": "float",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metadata": {
+                          "type": "VpcFlowLogsConfig.Metadata",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "metadataFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "filterExpr": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "crossProjectMetadata": {
+                          "type": "VpcFlowLogsConfig.CrossProjectMetadata",
+                          "id": 13,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 100
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 101
+                        },
+                        "interconnectAttachment": {
+                          "type": "string",
+                          "id": 102
+                        },
+                        "vpnTunnel": {
+                          "type": "string",
+                          "id": 103
+                        },
+                        "scope": {
+                          "type": "Scope",
+                          "id": 12,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Scope": {
+                          "values": {
+                            "SCOPE_UNSPECIFIED": 0,
+                            "SUBNET": 1,
+                            "COMPUTE_API_SUBNET": 2,
+                            "NETWORK": 3,
+                            "VPN_TUNNEL": 4,
+                            "INTERCONNECT_ATTACHMENT": 5,
+                            "ORGANIZATION": 6
+                          }
                         }
                       }
                     }
@@ -5376,7 +6958,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -5595,6 +7180,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -5703,6 +7293,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -5888,6 +7482,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -5897,6 +7492,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -5912,6 +7508,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -5929,18 +7526,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -5981,6 +7572,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -6063,6 +7655,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -6136,6 +7729,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -6215,6 +7809,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -6227,6 +7822,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -6268,6 +7864,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -6284,6 +7881,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -6301,6 +7899,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -6335,6 +7934,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -6476,6 +8076,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -6549,6 +8150,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -6610,10 +8212,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -6697,6 +8296,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -6716,6 +8316,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -6759,6 +8360,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -6792,6 +8394,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -6818,6 +8421,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -6860,6 +8464,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -6909,6 +8514,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -6981,8 +8587,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -7038,6 +8656,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -7069,6 +8688,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -7082,12 +8702,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -7107,6 +8733,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -7120,7 +8747,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

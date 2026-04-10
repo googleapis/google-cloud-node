@@ -95,6 +95,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "EstablishVolumePeering": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListSnapshots": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -320,6 +324,46 @@
           "retry_params_name": "default"
         },
         "DeleteQuotaRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RestoreBackupFiles": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListHostGroups": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetHostGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateHostGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateHostGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteHostGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ExecuteOntapPost": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ExecuteOntapGet": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ExecuteOntapDelete": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ExecuteOntapPatch": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

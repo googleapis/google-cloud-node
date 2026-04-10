@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,36 +37,6 @@ service CommentService {
       "https://www.googleapis.com/auth/cloud-platform";
 
   // List all the comments associated with a case.
-  //
-  // EXAMPLES:
-  //
-  // cURL:
-  //
-  // ```shell
-  // case="projects/some-project/cases/43595344"
-  // curl \
-  //   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-  //   "https://cloudsupport.googleapis.com/v2/$case/comments"
-  // ```
-  //
-  // Python:
-  //
-  // ```python
-  // import googleapiclient.discovery
-  //
-  // api_version = "v2"
-  // supportApiService = googleapiclient.discovery.build(
-  //     serviceName="cloudsupport",
-  //     version=api_version,
-  //     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
-  // )
-  // request = (
-  //     supportApiService.cases()
-  //     .comments()
-  //     .list(parent="projects/some-project/cases/43595344")
-  // )
-  // print(request.execute())
-  // ```
   rpc ListComments(ListCommentsRequest) returns (ListCommentsResponse) {
     option (google.api.http) = {
       get: "/v2beta/{parent=projects/*/cases/*}/comments"
@@ -80,44 +50,6 @@ service CommentService {
   // Add a new comment to a case.
   //
   // The comment must have the following fields set: `body`.
-  //
-  // EXAMPLES:
-  //
-  // cURL:
-  //
-  // ```shell
-  // case="projects/some-project/cases/43591344"
-  // curl \
-  //   --request POST \
-  //   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-  //   --header 'Content-Type: application/json' \
-  //   --data '{
-  //     "body": "This is a test comment."
-  //   }' \
-  //   "https://cloudsupport.googleapis.com/v2/$case/comments"
-  // ```
-  //
-  // Python:
-  //
-  // ```python
-  // import googleapiclient.discovery
-  //
-  // api_version = "v2"
-  // supportApiService = googleapiclient.discovery.build(
-  //     serviceName="cloudsupport",
-  //     version=api_version,
-  //     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
-  // )
-  // request = (
-  //     supportApiService.cases()
-  //     .comments()
-  //     .create(
-  //         parent="projects/some-project/cases/43595344",
-  //         body={"body": "This is a test comment."},
-  //     )
-  // )
-  // print(request.execute())
-  // ```
   rpc CreateComment(CreateCommentRequest) returns (Comment) {
     option (google.api.http) = {
       post: "/v2beta/{parent=projects/*/cases/*}/comments"
@@ -128,6 +60,14 @@ service CommentService {
       }
     };
     option (google.api.method_signature) = "parent,comment";
+  }
+
+  // Retrieve a comment.
+  rpc GetComment(GetCommentRequest) returns (Comment) {
+    option (google.api.http) = {
+      get: "/v2beta/{name=*/*/cases/*/comments/*}"
+    };
+    option (google.api.method_signature) = "name";
   }
 }
 
@@ -172,4 +112,15 @@ message CreateCommentRequest {
 
   // Required. The comment to be added.
   Comment comment = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// The request message for the GetComment endpoint.
+message GetCommentRequest {
+  // Required. The name of the comment to retrieve.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "cloudsupport.googleapis.com/Comment"
+    }
+  ];
 }

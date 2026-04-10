@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -98,6 +98,9 @@
                              * @property {google.protobuf.ITimestamp|null} [deleteTime] CertificateAuthority deleteTime
                              * @property {google.protobuf.ITimestamp|null} [expireTime] CertificateAuthority expireTime
                              * @property {Object.<string,string>|null} [labels] CertificateAuthority labels
+                             * @property {google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls|null} [userDefinedAccessUrls] CertificateAuthority userDefinedAccessUrls
+                             * @property {boolean|null} [satisfiesPzs] CertificateAuthority satisfiesPzs
+                             * @property {boolean|null} [satisfiesPzi] CertificateAuthority satisfiesPzi
                              */
     
                             /**
@@ -255,6 +258,30 @@
                             CertificateAuthority.prototype.labels = $util.emptyObject;
     
                             /**
+                             * CertificateAuthority userDefinedAccessUrls.
+                             * @member {google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls|null|undefined} userDefinedAccessUrls
+                             * @memberof google.cloud.security.privateca.v1.CertificateAuthority
+                             * @instance
+                             */
+                            CertificateAuthority.prototype.userDefinedAccessUrls = null;
+    
+                            /**
+                             * CertificateAuthority satisfiesPzs.
+                             * @member {boolean} satisfiesPzs
+                             * @memberof google.cloud.security.privateca.v1.CertificateAuthority
+                             * @instance
+                             */
+                            CertificateAuthority.prototype.satisfiesPzs = false;
+    
+                            /**
+                             * CertificateAuthority satisfiesPzi.
+                             * @member {boolean} satisfiesPzi
+                             * @memberof google.cloud.security.privateca.v1.CertificateAuthority
+                             * @instance
+                             */
+                            CertificateAuthority.prototype.satisfiesPzi = false;
+    
+                            /**
                              * Creates a new CertificateAuthority instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.security.privateca.v1.CertificateAuthority
@@ -315,6 +342,12 @@
                                 if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                     for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                         writer.uint32(/* id 17, wireType 2 =*/138).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.userDefinedAccessUrls != null && Object.hasOwnProperty.call(message, "userDefinedAccessUrls"))
+                                    $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.encode(message.userDefinedAccessUrls, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                                if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
+                                    writer.uint32(/* id 19, wireType 0 =*/152).bool(message.satisfiesPzs);
+                                if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
+                                    writer.uint32(/* id 20, wireType 0 =*/160).bool(message.satisfiesPzi);
                                 return writer;
                             };
     
@@ -342,12 +375,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateAuthority.decode = function decode(reader, length) {
+                            CertificateAuthority.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateAuthority(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -438,6 +473,18 @@
                                                 }
                                             }
                                             message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.userDefinedAccessUrls = $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 19: {
+                                            message.satisfiesPzs = reader.bool();
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.satisfiesPzi = reader.bool();
                                             break;
                                         }
                                     default:
@@ -580,6 +627,17 @@
                                         if (!$util.isString(message.labels[key[i]]))
                                             return "labels: string{k:string} expected";
                                 }
+                                if (message.userDefinedAccessUrls != null && message.hasOwnProperty("userDefinedAccessUrls")) {
+                                    var error = $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.verify(message.userDefinedAccessUrls);
+                                    if (error)
+                                        return "userDefinedAccessUrls." + error;
+                                }
+                                if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                    if (typeof message.satisfiesPzs !== "boolean")
+                                        return "satisfiesPzs: boolean expected";
+                                if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                    if (typeof message.satisfiesPzi !== "boolean")
+                                        return "satisfiesPzi: boolean expected";
                                 return null;
                             };
     
@@ -740,6 +798,15 @@
                                     for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                         message.labels[keys[i]] = String(object.labels[keys[i]]);
                                 }
+                                if (object.userDefinedAccessUrls != null) {
+                                    if (typeof object.userDefinedAccessUrls !== "object")
+                                        throw TypeError(".google.cloud.security.privateca.v1.CertificateAuthority.userDefinedAccessUrls: object expected");
+                                    message.userDefinedAccessUrls = $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.fromObject(object.userDefinedAccessUrls);
+                                }
+                                if (object.satisfiesPzs != null)
+                                    message.satisfiesPzs = Boolean(object.satisfiesPzs);
+                                if (object.satisfiesPzi != null)
+                                    message.satisfiesPzi = Boolean(object.satisfiesPzi);
                                 return message;
                             };
     
@@ -777,6 +844,9 @@
                                     object.updateTime = null;
                                     object.deleteTime = null;
                                     object.expireTime = null;
+                                    object.userDefinedAccessUrls = null;
+                                    object.satisfiesPzs = false;
+                                    object.satisfiesPzi = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -822,6 +892,12 @@
                                     for (var j = 0; j < keys2.length; ++j)
                                         object.labels[keys2[j]] = message.labels[keys2[j]];
                                 }
+                                if (message.userDefinedAccessUrls != null && message.hasOwnProperty("userDefinedAccessUrls"))
+                                    object.userDefinedAccessUrls = $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.toObject(message.userDefinedAccessUrls, options);
+                                if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                                    object.satisfiesPzs = message.satisfiesPzs;
+                                if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
+                                    object.satisfiesPzi = message.satisfiesPzi;
                                 return object;
                             };
     
@@ -987,12 +1063,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                AccessUrls.decode = function decode(reader, length) {
+                                AccessUrls.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.caCertificateAccessUrl = reader.string();
@@ -1242,12 +1320,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KeyVersionSpec.decode = function decode(reader, length) {
+                                KeyVersionSpec.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateAuthority.KeyVersionSpec();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.cloudKmsKeyVersion = reader.string();
@@ -1464,6 +1544,267 @@
                                 return values;
                             })();
     
+                            CertificateAuthority.UserDefinedAccessUrls = (function() {
+    
+                                /**
+                                 * Properties of a UserDefinedAccessUrls.
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority
+                                 * @interface IUserDefinedAccessUrls
+                                 * @property {Array.<string>|null} [aiaIssuingCertificateUrls] UserDefinedAccessUrls aiaIssuingCertificateUrls
+                                 * @property {Array.<string>|null} [crlAccessUrls] UserDefinedAccessUrls crlAccessUrls
+                                 */
+    
+                                /**
+                                 * Constructs a new UserDefinedAccessUrls.
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority
+                                 * @classdesc Represents a UserDefinedAccessUrls.
+                                 * @implements IUserDefinedAccessUrls
+                                 * @constructor
+                                 * @param {google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls=} [properties] Properties to set
+                                 */
+                                function UserDefinedAccessUrls(properties) {
+                                    this.aiaIssuingCertificateUrls = [];
+                                    this.crlAccessUrls = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * UserDefinedAccessUrls aiaIssuingCertificateUrls.
+                                 * @member {Array.<string>} aiaIssuingCertificateUrls
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @instance
+                                 */
+                                UserDefinedAccessUrls.prototype.aiaIssuingCertificateUrls = $util.emptyArray;
+    
+                                /**
+                                 * UserDefinedAccessUrls crlAccessUrls.
+                                 * @member {Array.<string>} crlAccessUrls
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @instance
+                                 */
+                                UserDefinedAccessUrls.prototype.crlAccessUrls = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new UserDefinedAccessUrls instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls=} [properties] Properties to set
+                                 * @returns {google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls} UserDefinedAccessUrls instance
+                                 */
+                                UserDefinedAccessUrls.create = function create(properties) {
+                                    return new UserDefinedAccessUrls(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified UserDefinedAccessUrls message. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls} message UserDefinedAccessUrls message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                UserDefinedAccessUrls.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.aiaIssuingCertificateUrls != null && message.aiaIssuingCertificateUrls.length)
+                                        for (var i = 0; i < message.aiaIssuingCertificateUrls.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.aiaIssuingCertificateUrls[i]);
+                                    if (message.crlAccessUrls != null && message.crlAccessUrls.length)
+                                        for (var i = 0; i < message.crlAccessUrls.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.crlAccessUrls[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified UserDefinedAccessUrls message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.CertificateAuthority.IUserDefinedAccessUrls} message UserDefinedAccessUrls message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                UserDefinedAccessUrls.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a UserDefinedAccessUrls message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls} UserDefinedAccessUrls
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                UserDefinedAccessUrls.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.aiaIssuingCertificateUrls && message.aiaIssuingCertificateUrls.length))
+                                                    message.aiaIssuingCertificateUrls = [];
+                                                message.aiaIssuingCertificateUrls.push(reader.string());
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.crlAccessUrls && message.crlAccessUrls.length))
+                                                    message.crlAccessUrls = [];
+                                                message.crlAccessUrls.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a UserDefinedAccessUrls message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls} UserDefinedAccessUrls
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                UserDefinedAccessUrls.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a UserDefinedAccessUrls message.
+                                 * @function verify
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                UserDefinedAccessUrls.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.aiaIssuingCertificateUrls != null && message.hasOwnProperty("aiaIssuingCertificateUrls")) {
+                                        if (!Array.isArray(message.aiaIssuingCertificateUrls))
+                                            return "aiaIssuingCertificateUrls: array expected";
+                                        for (var i = 0; i < message.aiaIssuingCertificateUrls.length; ++i)
+                                            if (!$util.isString(message.aiaIssuingCertificateUrls[i]))
+                                                return "aiaIssuingCertificateUrls: string[] expected";
+                                    }
+                                    if (message.crlAccessUrls != null && message.hasOwnProperty("crlAccessUrls")) {
+                                        if (!Array.isArray(message.crlAccessUrls))
+                                            return "crlAccessUrls: array expected";
+                                        for (var i = 0; i < message.crlAccessUrls.length; ++i)
+                                            if (!$util.isString(message.crlAccessUrls[i]))
+                                                return "crlAccessUrls: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a UserDefinedAccessUrls message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls} UserDefinedAccessUrls
+                                 */
+                                UserDefinedAccessUrls.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls)
+                                        return object;
+                                    var message = new $root.google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls();
+                                    if (object.aiaIssuingCertificateUrls) {
+                                        if (!Array.isArray(object.aiaIssuingCertificateUrls))
+                                            throw TypeError(".google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.aiaIssuingCertificateUrls: array expected");
+                                        message.aiaIssuingCertificateUrls = [];
+                                        for (var i = 0; i < object.aiaIssuingCertificateUrls.length; ++i)
+                                            message.aiaIssuingCertificateUrls[i] = String(object.aiaIssuingCertificateUrls[i]);
+                                    }
+                                    if (object.crlAccessUrls) {
+                                        if (!Array.isArray(object.crlAccessUrls))
+                                            throw TypeError(".google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls.crlAccessUrls: array expected");
+                                        message.crlAccessUrls = [];
+                                        for (var i = 0; i < object.crlAccessUrls.length; ++i)
+                                            message.crlAccessUrls[i] = String(object.crlAccessUrls[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a UserDefinedAccessUrls message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls} message UserDefinedAccessUrls
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                UserDefinedAccessUrls.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults) {
+                                        object.aiaIssuingCertificateUrls = [];
+                                        object.crlAccessUrls = [];
+                                    }
+                                    if (message.aiaIssuingCertificateUrls && message.aiaIssuingCertificateUrls.length) {
+                                        object.aiaIssuingCertificateUrls = [];
+                                        for (var j = 0; j < message.aiaIssuingCertificateUrls.length; ++j)
+                                            object.aiaIssuingCertificateUrls[j] = message.aiaIssuingCertificateUrls[j];
+                                    }
+                                    if (message.crlAccessUrls && message.crlAccessUrls.length) {
+                                        object.crlAccessUrls = [];
+                                        for (var j = 0; j < message.crlAccessUrls.length; ++j)
+                                            object.crlAccessUrls[j] = message.crlAccessUrls[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this UserDefinedAccessUrls to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                UserDefinedAccessUrls.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for UserDefinedAccessUrls
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                UserDefinedAccessUrls.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.security.privateca.v1.CertificateAuthority.UserDefinedAccessUrls";
+                                };
+    
+                                return UserDefinedAccessUrls;
+                            })();
+    
                             return CertificateAuthority;
                         })();
     
@@ -1598,12 +1939,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CaPool.decode = function decode(reader, length) {
+                            CaPool.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -1953,12 +2296,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                PublishingOptions.decode = function decode(reader, length) {
+                                PublishingOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool.PublishingOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.publishCaCert = reader.bool();
@@ -2143,6 +2488,7 @@
                                  * @memberof google.cloud.security.privateca.v1.CaPool
                                  * @interface IIssuancePolicy
                                  * @property {Array.<google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IAllowedKeyType>|null} [allowedKeyTypes] IssuancePolicy allowedKeyTypes
+                                 * @property {google.protobuf.IDuration|null} [backdateDuration] IssuancePolicy backdateDuration
                                  * @property {google.protobuf.IDuration|null} [maximumLifetime] IssuancePolicy maximumLifetime
                                  * @property {google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IIssuanceModes|null} [allowedIssuanceModes] IssuancePolicy allowedIssuanceModes
                                  * @property {google.cloud.security.privateca.v1.IX509Parameters|null} [baselineValues] IssuancePolicy baselineValues
@@ -2173,6 +2519,14 @@
                                  * @instance
                                  */
                                 IssuancePolicy.prototype.allowedKeyTypes = $util.emptyArray;
+    
+                                /**
+                                 * IssuancePolicy backdateDuration.
+                                 * @member {google.protobuf.IDuration|null|undefined} backdateDuration
+                                 * @memberof google.cloud.security.privateca.v1.CaPool.IssuancePolicy
+                                 * @instance
+                                 */
+                                IssuancePolicy.prototype.backdateDuration = null;
     
                                 /**
                                  * IssuancePolicy maximumLifetime.
@@ -2251,6 +2605,8 @@
                                         $root.google.cloud.security.privateca.v1.CertificateIdentityConstraints.encode(message.identityConstraints, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                     if (message.passthroughExtensions != null && Object.hasOwnProperty.call(message, "passthroughExtensions"))
                                         $root.google.cloud.security.privateca.v1.CertificateExtensionConstraints.encode(message.passthroughExtensions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    if (message.backdateDuration != null && Object.hasOwnProperty.call(message, "backdateDuration"))
+                                        $root.google.protobuf.Duration.encode(message.backdateDuration, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -2278,17 +2634,23 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                IssuancePolicy.decode = function decode(reader, length) {
+                                IssuancePolicy.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.allowedKeyTypes && message.allowedKeyTypes.length))
                                                     message.allowedKeyTypes = [];
                                                 message.allowedKeyTypes.push($root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.backdateDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         case 2: {
@@ -2355,6 +2717,11 @@
                                                 return "allowedKeyTypes." + error;
                                         }
                                     }
+                                    if (message.backdateDuration != null && message.hasOwnProperty("backdateDuration")) {
+                                        var error = $root.google.protobuf.Duration.verify(message.backdateDuration);
+                                        if (error)
+                                            return "backdateDuration." + error;
+                                    }
                                     if (message.maximumLifetime != null && message.hasOwnProperty("maximumLifetime")) {
                                         var error = $root.google.protobuf.Duration.verify(message.maximumLifetime);
                                         if (error)
@@ -2405,6 +2772,11 @@
                                             message.allowedKeyTypes[i] = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.fromObject(object.allowedKeyTypes[i]);
                                         }
                                     }
+                                    if (object.backdateDuration != null) {
+                                        if (typeof object.backdateDuration !== "object")
+                                            throw TypeError(".google.cloud.security.privateca.v1.CaPool.IssuancePolicy.backdateDuration: object expected");
+                                        message.backdateDuration = $root.google.protobuf.Duration.fromObject(object.backdateDuration);
+                                    }
                                     if (object.maximumLifetime != null) {
                                         if (typeof object.maximumLifetime !== "object")
                                             throw TypeError(".google.cloud.security.privateca.v1.CaPool.IssuancePolicy.maximumLifetime: object expected");
@@ -2454,6 +2826,7 @@
                                         object.baselineValues = null;
                                         object.identityConstraints = null;
                                         object.passthroughExtensions = null;
+                                        object.backdateDuration = null;
                                     }
                                     if (message.allowedKeyTypes && message.allowedKeyTypes.length) {
                                         object.allowedKeyTypes = [];
@@ -2470,6 +2843,8 @@
                                         object.identityConstraints = $root.google.cloud.security.privateca.v1.CertificateIdentityConstraints.toObject(message.identityConstraints, options);
                                     if (message.passthroughExtensions != null && message.hasOwnProperty("passthroughExtensions"))
                                         object.passthroughExtensions = $root.google.cloud.security.privateca.v1.CertificateExtensionConstraints.toObject(message.passthroughExtensions, options);
+                                    if (message.backdateDuration != null && message.hasOwnProperty("backdateDuration"))
+                                        object.backdateDuration = $root.google.protobuf.Duration.toObject(message.backdateDuration, options);
                                     return object;
                                 };
     
@@ -2609,12 +2984,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    AllowedKeyType.decode = function decode(reader, length) {
+                                    AllowedKeyType.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.rsa = $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType.decode(reader, reader.uint32());
@@ -2854,12 +3231,14 @@
                                          * @throws {Error} If the payload is not a reader or valid buffer
                                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                          */
-                                        RsaKeyType.decode = function decode(reader, length) {
+                                        RsaKeyType.decode = function decode(reader, length, error) {
                                             if (!(reader instanceof $Reader))
                                                 reader = $Reader.create(reader);
                                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.RsaKeyType();
                                             while (reader.pos < end) {
                                                 var tag = reader.uint32();
+                                                if (tag === error)
+                                                    break;
                                                 switch (tag >>> 3) {
                                                 case 1: {
                                                         message.minModulusSize = reader.int64();
@@ -3098,12 +3477,14 @@
                                          * @throws {Error} If the payload is not a reader or valid buffer
                                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                          */
-                                        EcKeyType.decode = function decode(reader, length) {
+                                        EcKeyType.decode = function decode(reader, length, error) {
                                             if (!(reader instanceof $Reader))
                                                 reader = $Reader.create(reader);
                                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.AllowedKeyType.EcKeyType();
                                             while (reader.pos < end) {
                                                 var tag = reader.uint32();
+                                                if (tag === error)
+                                                    break;
                                                 switch (tag >>> 3) {
                                                 case 1: {
                                                         message.signatureAlgorithm = reader.int32();
@@ -3362,12 +3743,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    IssuanceModes.decode = function decode(reader, length) {
+                                    IssuanceModes.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CaPool.IssuancePolicy.IssuanceModes();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.allowCsrBasedIssuance = reader.bool();
@@ -3687,12 +4070,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateRevocationList.decode = function decode(reader, length) {
+                            CertificateRevocationList.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateRevocationList(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -4120,12 +4505,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RevokedCertificate.decode = function decode(reader, length) {
+                                RevokedCertificate.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateRevocationList.RevokedCertificate();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.certificate = reader.string();
@@ -4582,12 +4969,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Certificate.decode = function decode(reader, length) {
+                            Certificate.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.Certificate(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -4737,6 +5126,7 @@
                                         return "subjectMode: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 3:
                                     case 2:
                                         break;
                                     }
@@ -4825,6 +5215,10 @@
                                 case "DEFAULT":
                                 case 1:
                                     message.subjectMode = 1;
+                                    break;
+                                case "RDN_SEQUENCE":
+                                case 3:
+                                    message.subjectMode = 3;
                                     break;
                                 case "REFLECTED_SPIFFE":
                                 case 2:
@@ -5065,12 +5459,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RevocationDetails.decode = function decode(reader, length) {
+                                RevocationDetails.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.Certificate.RevocationDetails();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.revocationState = reader.int32();
@@ -5433,12 +5829,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateTemplate.decode = function decode(reader, length) {
+                            CertificateTemplate.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateTemplate(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -5858,12 +6256,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            X509Parameters.decode = function decode(reader, length) {
+                            X509Parameters.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.X509Parameters();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.keyUsage = $root.google.cloud.security.privateca.v1.KeyUsage.decode(reader, reader.uint32());
@@ -6147,23 +6547,13 @@
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
-                                /**
-                                 * CaOptions _isCa.
-                                 * @member {"isCa"|undefined} _isCa
-                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.CaOptions
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(CaOptions.prototype, "_isCa", {
                                     get: $util.oneOfGetter($oneOfFields = ["isCa"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
-                                /**
-                                 * CaOptions _maxIssuerPathLength.
-                                 * @member {"maxIssuerPathLength"|undefined} _maxIssuerPathLength
-                                 * @memberof google.cloud.security.privateca.v1.X509Parameters.CaOptions
-                                 * @instance
-                                 */
+                                // Virtual OneOf for proto3 optional field
                                 Object.defineProperty(CaOptions.prototype, "_maxIssuerPathLength", {
                                     get: $util.oneOfGetter($oneOfFields = ["maxIssuerPathLength"]),
                                     set: $util.oneOfSetter($oneOfFields)
@@ -6224,12 +6614,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CaOptions.decode = function decode(reader, length) {
+                                CaOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.X509Parameters.CaOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.isCa = reader.bool();
@@ -6551,12 +6943,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                NameConstraints.decode = function decode(reader, length) {
+                                NameConstraints.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.X509Parameters.NameConstraints();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.critical = reader.bool();
@@ -6992,12 +7386,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SubordinateConfig.decode = function decode(reader, length) {
+                            SubordinateConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.SubordinateConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificateAuthority = reader.string();
@@ -7222,12 +7618,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SubordinateConfigChain.decode = function decode(reader, length) {
+                                SubordinateConfigChain.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.pemCertificates && message.pemCertificates.length))
@@ -7453,12 +7851,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublicKey.decode = function decode(reader, length) {
+                            PublicKey.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.PublicKey();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.key = reader.bytes();
@@ -7744,12 +8144,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateConfig.decode = function decode(reader, length) {
+                            CertificateConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.subjectConfig = $root.google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig.decode(reader, reader.uint32());
@@ -8012,12 +8414,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SubjectConfig.decode = function decode(reader, length) {
+                                SubjectConfig.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.subject = $root.google.cloud.security.privateca.v1.Subject.decode(reader, reader.uint32());
@@ -8238,12 +8642,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KeyId.decode = function decode(reader, length) {
+                                KeyId.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateConfig.KeyId();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.keyId = reader.string();
@@ -8373,6 +8779,7 @@
                              * @property {Array.<string>|null} [crlDistributionPoints] CertificateDescription crlDistributionPoints
                              * @property {Array.<string>|null} [aiaIssuingCertificateUrls] CertificateDescription aiaIssuingCertificateUrls
                              * @property {google.cloud.security.privateca.v1.CertificateDescription.ICertificateFingerprint|null} [certFingerprint] CertificateDescription certFingerprint
+                             * @property {string|null} [tbsCertificateDigest] CertificateDescription tbsCertificateDigest
                              */
     
                             /**
@@ -8457,6 +8864,14 @@
                             CertificateDescription.prototype.certFingerprint = null;
     
                             /**
+                             * CertificateDescription tbsCertificateDigest.
+                             * @member {string} tbsCertificateDigest
+                             * @memberof google.cloud.security.privateca.v1.CertificateDescription
+                             * @instance
+                             */
+                            CertificateDescription.prototype.tbsCertificateDigest = "";
+    
+                            /**
                              * Creates a new CertificateDescription instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.security.privateca.v1.CertificateDescription
@@ -8498,6 +8913,8 @@
                                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.aiaIssuingCertificateUrls[i]);
                                 if (message.certFingerprint != null && Object.hasOwnProperty.call(message, "certFingerprint"))
                                     $root.google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint.encode(message.certFingerprint, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.tbsCertificateDigest != null && Object.hasOwnProperty.call(message, "tbsCertificateDigest"))
+                                    writer.uint32(/* id 9, wireType 2 =*/74).string(message.tbsCertificateDigest);
                                 return writer;
                             };
     
@@ -8525,12 +8942,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateDescription.decode = function decode(reader, length) {
+                            CertificateDescription.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateDescription();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.subjectDescription = $root.google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription.decode(reader, reader.uint32());
@@ -8566,6 +8985,10 @@
                                         }
                                     case 8: {
                                             message.certFingerprint = $root.google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.tbsCertificateDigest = reader.string();
                                             break;
                                         }
                                     default:
@@ -8647,6 +9070,9 @@
                                     if (error)
                                         return "certFingerprint." + error;
                                 }
+                                if (message.tbsCertificateDigest != null && message.hasOwnProperty("tbsCertificateDigest"))
+                                    if (!$util.isString(message.tbsCertificateDigest))
+                                        return "tbsCertificateDigest: string expected";
                                 return null;
                             };
     
@@ -8706,6 +9132,8 @@
                                         throw TypeError(".google.cloud.security.privateca.v1.CertificateDescription.certFingerprint: object expected");
                                     message.certFingerprint = $root.google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint.fromObject(object.certFingerprint);
                                 }
+                                if (object.tbsCertificateDigest != null)
+                                    message.tbsCertificateDigest = String(object.tbsCertificateDigest);
                                 return message;
                             };
     
@@ -8733,6 +9161,7 @@
                                     object.subjectKeyId = null;
                                     object.authorityKeyId = null;
                                     object.certFingerprint = null;
+                                    object.tbsCertificateDigest = "";
                                 }
                                 if (message.subjectDescription != null && message.hasOwnProperty("subjectDescription"))
                                     object.subjectDescription = $root.google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription.toObject(message.subjectDescription, options);
@@ -8756,6 +9185,8 @@
                                 }
                                 if (message.certFingerprint != null && message.hasOwnProperty("certFingerprint"))
                                     object.certFingerprint = $root.google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint.toObject(message.certFingerprint, options);
+                                if (message.tbsCertificateDigest != null && message.hasOwnProperty("tbsCertificateDigest"))
+                                    object.tbsCertificateDigest = message.tbsCertificateDigest;
                                 return object;
                             };
     
@@ -8925,12 +9356,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SubjectDescription.decode = function decode(reader, length) {
+                                SubjectDescription.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateDescription.SubjectDescription();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.subject = $root.google.cloud.security.privateca.v1.Subject.decode(reader, reader.uint32());
@@ -9214,12 +9647,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KeyId.decode = function decode(reader, length) {
+                                KeyId.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateDescription.KeyId();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.keyId = reader.string();
@@ -9417,12 +9852,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CertificateFingerprint.decode = function decode(reader, length) {
+                                CertificateFingerprint.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateDescription.CertificateFingerprint();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.sha256Hash = reader.string();
@@ -9628,12 +10065,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ObjectId.decode = function decode(reader, length) {
+                            ObjectId.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ObjectId();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.objectIdPath && message.objectIdPath.length))
@@ -9872,12 +10311,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            X509Extension.decode = function decode(reader, length) {
+                            X509Extension.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.X509Extension();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.objectId = $root.google.cloud.security.privateca.v1.ObjectId.decode(reader, reader.uint32());
@@ -10138,12 +10579,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            KeyUsage.decode = function decode(reader, length) {
+                            KeyUsage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.KeyUsage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.baseKeyUsage = $root.google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions.decode(reader, reader.uint32());
@@ -10481,12 +10924,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KeyUsageOptions.decode = function decode(reader, length) {
+                                KeyUsageOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.digitalSignature = reader.bool();
@@ -10836,12 +11281,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ExtendedKeyUsageOptions.decode = function decode(reader, length) {
+                                ExtendedKeyUsageOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.serverAuth = reader.bool();
@@ -11018,6 +11465,568 @@
                             return KeyUsage;
                         })();
     
+                        v1.AttributeTypeAndValue = (function() {
+    
+                            /**
+                             * Properties of an AttributeTypeAndValue.
+                             * @memberof google.cloud.security.privateca.v1
+                             * @interface IAttributeTypeAndValue
+                             * @property {google.cloud.security.privateca.v1.AttributeType|null} [type] AttributeTypeAndValue type
+                             * @property {google.cloud.security.privateca.v1.IObjectId|null} [objectId] AttributeTypeAndValue objectId
+                             * @property {string|null} [value] AttributeTypeAndValue value
+                             */
+    
+                            /**
+                             * Constructs a new AttributeTypeAndValue.
+                             * @memberof google.cloud.security.privateca.v1
+                             * @classdesc Represents an AttributeTypeAndValue.
+                             * @implements IAttributeTypeAndValue
+                             * @constructor
+                             * @param {google.cloud.security.privateca.v1.IAttributeTypeAndValue=} [properties] Properties to set
+                             */
+                            function AttributeTypeAndValue(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AttributeTypeAndValue type.
+                             * @member {google.cloud.security.privateca.v1.AttributeType|null|undefined} type
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @instance
+                             */
+                            AttributeTypeAndValue.prototype.type = null;
+    
+                            /**
+                             * AttributeTypeAndValue objectId.
+                             * @member {google.cloud.security.privateca.v1.IObjectId|null|undefined} objectId
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @instance
+                             */
+                            AttributeTypeAndValue.prototype.objectId = null;
+    
+                            /**
+                             * AttributeTypeAndValue value.
+                             * @member {string} value
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @instance
+                             */
+                            AttributeTypeAndValue.prototype.value = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AttributeTypeAndValue attributeType.
+                             * @member {"type"|"objectId"|undefined} attributeType
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @instance
+                             */
+                            Object.defineProperty(AttributeTypeAndValue.prototype, "attributeType", {
+                                get: $util.oneOfGetter($oneOfFields = ["type", "objectId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AttributeTypeAndValue instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IAttributeTypeAndValue=} [properties] Properties to set
+                             * @returns {google.cloud.security.privateca.v1.AttributeTypeAndValue} AttributeTypeAndValue instance
+                             */
+                            AttributeTypeAndValue.create = function create(properties) {
+                                return new AttributeTypeAndValue(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AttributeTypeAndValue message. Does not implicitly {@link google.cloud.security.privateca.v1.AttributeTypeAndValue.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IAttributeTypeAndValue} message AttributeTypeAndValue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AttributeTypeAndValue.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.objectId != null && Object.hasOwnProperty.call(message, "objectId"))
+                                    $root.google.cloud.security.privateca.v1.ObjectId.encode(message.objectId, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.value);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AttributeTypeAndValue message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.AttributeTypeAndValue.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IAttributeTypeAndValue} message AttributeTypeAndValue message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AttributeTypeAndValue.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AttributeTypeAndValue message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.security.privateca.v1.AttributeTypeAndValue} AttributeTypeAndValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AttributeTypeAndValue.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.AttributeTypeAndValue();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.objectId = $root.google.cloud.security.privateca.v1.ObjectId.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.value = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AttributeTypeAndValue message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.security.privateca.v1.AttributeTypeAndValue} AttributeTypeAndValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AttributeTypeAndValue.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AttributeTypeAndValue message.
+                             * @function verify
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AttributeTypeAndValue.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.type != null && message.hasOwnProperty("type")) {
+                                    properties.attributeType = 1;
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                        break;
+                                    }
+                                }
+                                if (message.objectId != null && message.hasOwnProperty("objectId")) {
+                                    if (properties.attributeType === 1)
+                                        return "attributeType: multiple values";
+                                    properties.attributeType = 1;
+                                    {
+                                        var error = $root.google.cloud.security.privateca.v1.ObjectId.verify(message.objectId);
+                                        if (error)
+                                            return "objectId." + error;
+                                    }
+                                }
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    if (!$util.isString(message.value))
+                                        return "value: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AttributeTypeAndValue message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.security.privateca.v1.AttributeTypeAndValue} AttributeTypeAndValue
+                             */
+                            AttributeTypeAndValue.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.security.privateca.v1.AttributeTypeAndValue)
+                                    return object;
+                                var message = new $root.google.cloud.security.privateca.v1.AttributeTypeAndValue();
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "ATTRIBUTE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "COMMON_NAME":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "COUNTRY_CODE":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "ORGANIZATION":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "ORGANIZATIONAL_UNIT":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                case "LOCALITY":
+                                case 5:
+                                    message.type = 5;
+                                    break;
+                                case "PROVINCE":
+                                case 6:
+                                    message.type = 6;
+                                    break;
+                                case "STREET_ADDRESS":
+                                case 7:
+                                    message.type = 7;
+                                    break;
+                                case "POSTAL_CODE":
+                                case 8:
+                                    message.type = 8;
+                                    break;
+                                }
+                                if (object.objectId != null) {
+                                    if (typeof object.objectId !== "object")
+                                        throw TypeError(".google.cloud.security.privateca.v1.AttributeTypeAndValue.objectId: object expected");
+                                    message.objectId = $root.google.cloud.security.privateca.v1.ObjectId.fromObject(object.objectId);
+                                }
+                                if (object.value != null)
+                                    message.value = String(object.value);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AttributeTypeAndValue message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.AttributeTypeAndValue} message AttributeTypeAndValue
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AttributeTypeAndValue.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.value = "";
+                                if (message.type != null && message.hasOwnProperty("type")) {
+                                    object.type = options.enums === String ? $root.google.cloud.security.privateca.v1.AttributeType[message.type] === undefined ? message.type : $root.google.cloud.security.privateca.v1.AttributeType[message.type] : message.type;
+                                    if (options.oneofs)
+                                        object.attributeType = "type";
+                                }
+                                if (message.objectId != null && message.hasOwnProperty("objectId")) {
+                                    object.objectId = $root.google.cloud.security.privateca.v1.ObjectId.toObject(message.objectId, options);
+                                    if (options.oneofs)
+                                        object.attributeType = "objectId";
+                                }
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = message.value;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AttributeTypeAndValue to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AttributeTypeAndValue.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AttributeTypeAndValue
+                             * @function getTypeUrl
+                             * @memberof google.cloud.security.privateca.v1.AttributeTypeAndValue
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AttributeTypeAndValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.security.privateca.v1.AttributeTypeAndValue";
+                            };
+    
+                            return AttributeTypeAndValue;
+                        })();
+    
+                        v1.RelativeDistinguishedName = (function() {
+    
+                            /**
+                             * Properties of a RelativeDistinguishedName.
+                             * @memberof google.cloud.security.privateca.v1
+                             * @interface IRelativeDistinguishedName
+                             * @property {Array.<google.cloud.security.privateca.v1.IAttributeTypeAndValue>|null} [attributes] RelativeDistinguishedName attributes
+                             */
+    
+                            /**
+                             * Constructs a new RelativeDistinguishedName.
+                             * @memberof google.cloud.security.privateca.v1
+                             * @classdesc Represents a RelativeDistinguishedName.
+                             * @implements IRelativeDistinguishedName
+                             * @constructor
+                             * @param {google.cloud.security.privateca.v1.IRelativeDistinguishedName=} [properties] Properties to set
+                             */
+                            function RelativeDistinguishedName(properties) {
+                                this.attributes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RelativeDistinguishedName attributes.
+                             * @member {Array.<google.cloud.security.privateca.v1.IAttributeTypeAndValue>} attributes
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @instance
+                             */
+                            RelativeDistinguishedName.prototype.attributes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new RelativeDistinguishedName instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IRelativeDistinguishedName=} [properties] Properties to set
+                             * @returns {google.cloud.security.privateca.v1.RelativeDistinguishedName} RelativeDistinguishedName instance
+                             */
+                            RelativeDistinguishedName.create = function create(properties) {
+                                return new RelativeDistinguishedName(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RelativeDistinguishedName message. Does not implicitly {@link google.cloud.security.privateca.v1.RelativeDistinguishedName.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IRelativeDistinguishedName} message RelativeDistinguishedName message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RelativeDistinguishedName.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.attributes != null && message.attributes.length)
+                                    for (var i = 0; i < message.attributes.length; ++i)
+                                        $root.google.cloud.security.privateca.v1.AttributeTypeAndValue.encode(message.attributes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RelativeDistinguishedName message, length delimited. Does not implicitly {@link google.cloud.security.privateca.v1.RelativeDistinguishedName.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.IRelativeDistinguishedName} message RelativeDistinguishedName message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RelativeDistinguishedName.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RelativeDistinguishedName message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.security.privateca.v1.RelativeDistinguishedName} RelativeDistinguishedName
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RelativeDistinguishedName.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.RelativeDistinguishedName();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.attributes && message.attributes.length))
+                                                message.attributes = [];
+                                            message.attributes.push($root.google.cloud.security.privateca.v1.AttributeTypeAndValue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RelativeDistinguishedName message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.security.privateca.v1.RelativeDistinguishedName} RelativeDistinguishedName
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RelativeDistinguishedName.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RelativeDistinguishedName message.
+                             * @function verify
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RelativeDistinguishedName.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                                    if (!Array.isArray(message.attributes))
+                                        return "attributes: array expected";
+                                    for (var i = 0; i < message.attributes.length; ++i) {
+                                        var error = $root.google.cloud.security.privateca.v1.AttributeTypeAndValue.verify(message.attributes[i]);
+                                        if (error)
+                                            return "attributes." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RelativeDistinguishedName message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.security.privateca.v1.RelativeDistinguishedName} RelativeDistinguishedName
+                             */
+                            RelativeDistinguishedName.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.security.privateca.v1.RelativeDistinguishedName)
+                                    return object;
+                                var message = new $root.google.cloud.security.privateca.v1.RelativeDistinguishedName();
+                                if (object.attributes) {
+                                    if (!Array.isArray(object.attributes))
+                                        throw TypeError(".google.cloud.security.privateca.v1.RelativeDistinguishedName.attributes: array expected");
+                                    message.attributes = [];
+                                    for (var i = 0; i < object.attributes.length; ++i) {
+                                        if (typeof object.attributes[i] !== "object")
+                                            throw TypeError(".google.cloud.security.privateca.v1.RelativeDistinguishedName.attributes: object expected");
+                                        message.attributes[i] = $root.google.cloud.security.privateca.v1.AttributeTypeAndValue.fromObject(object.attributes[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RelativeDistinguishedName message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {google.cloud.security.privateca.v1.RelativeDistinguishedName} message RelativeDistinguishedName
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RelativeDistinguishedName.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.attributes = [];
+                                if (message.attributes && message.attributes.length) {
+                                    object.attributes = [];
+                                    for (var j = 0; j < message.attributes.length; ++j)
+                                        object.attributes[j] = $root.google.cloud.security.privateca.v1.AttributeTypeAndValue.toObject(message.attributes[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RelativeDistinguishedName to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RelativeDistinguishedName.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RelativeDistinguishedName
+                             * @function getTypeUrl
+                             * @memberof google.cloud.security.privateca.v1.RelativeDistinguishedName
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RelativeDistinguishedName.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.security.privateca.v1.RelativeDistinguishedName";
+                            };
+    
+                            return RelativeDistinguishedName;
+                        })();
+    
                         v1.Subject = (function() {
     
                             /**
@@ -11032,6 +12041,7 @@
                              * @property {string|null} [province] Subject province
                              * @property {string|null} [streetAddress] Subject streetAddress
                              * @property {string|null} [postalCode] Subject postalCode
+                             * @property {Array.<google.cloud.security.privateca.v1.IRelativeDistinguishedName>|null} [rdnSequence] Subject rdnSequence
                              */
     
                             /**
@@ -11043,6 +12053,7 @@
                              * @param {google.cloud.security.privateca.v1.ISubject=} [properties] Properties to set
                              */
                             function Subject(properties) {
+                                this.rdnSequence = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -11114,6 +12125,14 @@
                             Subject.prototype.postalCode = "";
     
                             /**
+                             * Subject rdnSequence.
+                             * @member {Array.<google.cloud.security.privateca.v1.IRelativeDistinguishedName>} rdnSequence
+                             * @memberof google.cloud.security.privateca.v1.Subject
+                             * @instance
+                             */
+                            Subject.prototype.rdnSequence = $util.emptyArray;
+    
+                            /**
                              * Creates a new Subject instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.security.privateca.v1.Subject
@@ -11153,6 +12172,9 @@
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.streetAddress);
                                 if (message.postalCode != null && Object.hasOwnProperty.call(message, "postalCode"))
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.postalCode);
+                                if (message.rdnSequence != null && message.rdnSequence.length)
+                                    for (var i = 0; i < message.rdnSequence.length; ++i)
+                                        $root.google.cloud.security.privateca.v1.RelativeDistinguishedName.encode(message.rdnSequence[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -11180,12 +12202,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Subject.decode = function decode(reader, length) {
+                            Subject.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.Subject();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.commonName = reader.string();
@@ -11217,6 +12241,12 @@
                                         }
                                     case 8: {
                                             message.postalCode = reader.string();
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (!(message.rdnSequence && message.rdnSequence.length))
+                                                message.rdnSequence = [];
+                                            message.rdnSequence.push($root.google.cloud.security.privateca.v1.RelativeDistinguishedName.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -11278,6 +12308,15 @@
                                 if (message.postalCode != null && message.hasOwnProperty("postalCode"))
                                     if (!$util.isString(message.postalCode))
                                         return "postalCode: string expected";
+                                if (message.rdnSequence != null && message.hasOwnProperty("rdnSequence")) {
+                                    if (!Array.isArray(message.rdnSequence))
+                                        return "rdnSequence: array expected";
+                                    for (var i = 0; i < message.rdnSequence.length; ++i) {
+                                        var error = $root.google.cloud.security.privateca.v1.RelativeDistinguishedName.verify(message.rdnSequence[i]);
+                                        if (error)
+                                            return "rdnSequence." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -11309,6 +12348,16 @@
                                     message.streetAddress = String(object.streetAddress);
                                 if (object.postalCode != null)
                                     message.postalCode = String(object.postalCode);
+                                if (object.rdnSequence) {
+                                    if (!Array.isArray(object.rdnSequence))
+                                        throw TypeError(".google.cloud.security.privateca.v1.Subject.rdnSequence: array expected");
+                                    message.rdnSequence = [];
+                                    for (var i = 0; i < object.rdnSequence.length; ++i) {
+                                        if (typeof object.rdnSequence[i] !== "object")
+                                            throw TypeError(".google.cloud.security.privateca.v1.Subject.rdnSequence: object expected");
+                                        message.rdnSequence[i] = $root.google.cloud.security.privateca.v1.RelativeDistinguishedName.fromObject(object.rdnSequence[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -11325,6 +12374,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.rdnSequence = [];
                                 if (options.defaults) {
                                     object.commonName = "";
                                     object.countryCode = "";
@@ -11351,6 +12402,11 @@
                                     object.streetAddress = message.streetAddress;
                                 if (message.postalCode != null && message.hasOwnProperty("postalCode"))
                                     object.postalCode = message.postalCode;
+                                if (message.rdnSequence && message.rdnSequence.length) {
+                                    object.rdnSequence = [];
+                                    for (var j = 0; j < message.rdnSequence.length; ++j)
+                                        object.rdnSequence[j] = $root.google.cloud.security.privateca.v1.RelativeDistinguishedName.toObject(message.rdnSequence[j], options);
+                                }
                                 return object;
                             };
     
@@ -11522,12 +12578,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SubjectAltNames.decode = function decode(reader, length) {
+                            SubjectAltNames.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.SubjectAltNames();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.dnsNames && message.dnsNames.length))
@@ -11817,23 +12875,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * CertificateIdentityConstraints _allowSubjectPassthrough.
-                             * @member {"allowSubjectPassthrough"|undefined} _allowSubjectPassthrough
-                             * @memberof google.cloud.security.privateca.v1.CertificateIdentityConstraints
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CertificateIdentityConstraints.prototype, "_allowSubjectPassthrough", {
                                 get: $util.oneOfGetter($oneOfFields = ["allowSubjectPassthrough"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * CertificateIdentityConstraints _allowSubjectAltNamesPassthrough.
-                             * @member {"allowSubjectAltNamesPassthrough"|undefined} _allowSubjectAltNamesPassthrough
-                             * @memberof google.cloud.security.privateca.v1.CertificateIdentityConstraints
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(CertificateIdentityConstraints.prototype, "_allowSubjectAltNamesPassthrough", {
                                 get: $util.oneOfGetter($oneOfFields = ["allowSubjectAltNamesPassthrough"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -11896,12 +12944,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateIdentityConstraints.decode = function decode(reader, length) {
+                            CertificateIdentityConstraints.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateIdentityConstraints();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.celExpression = $root.google.type.Expr.decode(reader, reader.uint32());
@@ -12155,12 +13205,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateExtensionConstraints.decode = function decode(reader, length) {
+                            CertificateExtensionConstraints.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CertificateExtensionConstraints();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.knownExtensions && message.knownExtensions.length))
@@ -12393,6 +13445,34 @@
                         })();
     
                         /**
+                         * AttributeType enum.
+                         * @name google.cloud.security.privateca.v1.AttributeType
+                         * @enum {number}
+                         * @property {number} ATTRIBUTE_TYPE_UNSPECIFIED=0 ATTRIBUTE_TYPE_UNSPECIFIED value
+                         * @property {number} COMMON_NAME=1 COMMON_NAME value
+                         * @property {number} COUNTRY_CODE=2 COUNTRY_CODE value
+                         * @property {number} ORGANIZATION=3 ORGANIZATION value
+                         * @property {number} ORGANIZATIONAL_UNIT=4 ORGANIZATIONAL_UNIT value
+                         * @property {number} LOCALITY=5 LOCALITY value
+                         * @property {number} PROVINCE=6 PROVINCE value
+                         * @property {number} STREET_ADDRESS=7 STREET_ADDRESS value
+                         * @property {number} POSTAL_CODE=8 POSTAL_CODE value
+                         */
+                        v1.AttributeType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ATTRIBUTE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "COMMON_NAME"] = 1;
+                            values[valuesById[2] = "COUNTRY_CODE"] = 2;
+                            values[valuesById[3] = "ORGANIZATION"] = 3;
+                            values[valuesById[4] = "ORGANIZATIONAL_UNIT"] = 4;
+                            values[valuesById[5] = "LOCALITY"] = 5;
+                            values[valuesById[6] = "PROVINCE"] = 6;
+                            values[valuesById[7] = "STREET_ADDRESS"] = 7;
+                            values[valuesById[8] = "POSTAL_CODE"] = 8;
+                            return values;
+                        })();
+    
+                        /**
                          * RevocationReason enum.
                          * @name google.cloud.security.privateca.v1.RevocationReason
                          * @enum {number}
@@ -12426,12 +13506,14 @@
                          * @enum {number}
                          * @property {number} SUBJECT_REQUEST_MODE_UNSPECIFIED=0 SUBJECT_REQUEST_MODE_UNSPECIFIED value
                          * @property {number} DEFAULT=1 DEFAULT value
+                         * @property {number} RDN_SEQUENCE=3 RDN_SEQUENCE value
                          * @property {number} REFLECTED_SPIFFE=2 REFLECTED_SPIFFE value
                          */
                         v1.SubjectRequestMode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SUBJECT_REQUEST_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DEFAULT"] = 1;
+                            values[valuesById[3] = "RDN_SEQUENCE"] = 3;
                             values[valuesById[2] = "REFLECTED_SPIFFE"] = 2;
                             return values;
                         })();
@@ -13568,12 +14650,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateCertificateRequest.decode = function decode(reader, length) {
+                            CreateCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CreateCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -13837,12 +14921,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCertificateRequest.decode = function decode(reader, length) {
+                            GetCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.GetCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -14084,12 +15170,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificatesRequest.decode = function decode(reader, length) {
+                            ListCertificatesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificatesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -14362,12 +15450,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificatesResponse.decode = function decode(reader, length) {
+                            ListCertificatesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificatesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.certificates && message.certificates.length))
@@ -14646,12 +15736,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RevokeCertificateRequest.decode = function decode(reader, length) {
+                            RevokeCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.RevokeCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -14950,12 +16042,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCertificateRequest.decode = function decode(reader, length) {
+                            UpdateCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.UpdateCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificate = $root.google.cloud.security.privateca.v1.Certificate.decode(reader, reader.uint32());
@@ -15221,12 +16315,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ActivateCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            ActivateCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -15499,12 +16595,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            CreateCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -15766,12 +16864,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DisableCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            DisableCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -16005,12 +17105,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EnableCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            EnableCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -16221,12 +17323,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FetchCertificateAuthorityCsrRequest.decode = function decode(reader, length) {
+                            FetchCertificateAuthorityCsrRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -16424,12 +17528,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FetchCertificateAuthorityCsrResponse.decode = function decode(reader, length) {
+                            FetchCertificateAuthorityCsrResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.pemCsr = reader.string();
@@ -16627,12 +17733,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            GetCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -16874,12 +17982,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateAuthoritiesRequest.decode = function decode(reader, length) {
+                            ListCertificateAuthoritiesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -17152,12 +18262,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateAuthoritiesResponse.decode = function decode(reader, length) {
+                            ListCertificateAuthoritiesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificateAuthoritiesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.certificateAuthorities && message.certificateAuthorities.length))
@@ -17425,12 +18537,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UndeleteCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            UndeleteCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -17685,12 +18799,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeleteCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            DeleteCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -17959,12 +19075,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            UpdateCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificateAuthority = $root.google.cloud.security.privateca.v1.CertificateAuthority.decode(reader, reader.uint32());
@@ -18230,12 +19348,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateCaPoolRequest.decode = function decode(reader, length) {
+                            CreateCaPoolRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CreateCaPoolRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -18497,12 +19617,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCaPoolRequest.decode = function decode(reader, length) {
+                            UpdateCaPoolRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.UpdateCaPoolRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.caPool = $root.google.cloud.security.privateca.v1.CaPool.decode(reader, reader.uint32());
@@ -18757,12 +19879,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeleteCaPoolRequest.decode = function decode(reader, length) {
+                            DeleteCaPoolRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.DeleteCaPoolRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -18996,12 +20120,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FetchCaCertsRequest.decode = function decode(reader, length) {
+                            FetchCaCertsRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.FetchCaCertsRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.caPool = reader.string();
@@ -19214,12 +20340,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FetchCaCertsResponse.decode = function decode(reader, length) {
+                            FetchCaCertsResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.FetchCaCertsResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.caCerts && message.caCerts.length))
@@ -19435,12 +20563,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CertChain.decode = function decode(reader, length) {
+                                CertChain.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.FetchCaCertsResponse.CertChain();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.certificates && message.certificates.length))
@@ -19655,12 +20785,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCaPoolRequest.decode = function decode(reader, length) {
+                            GetCaPoolRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.GetCaPoolRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -19902,12 +21034,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCaPoolsRequest.decode = function decode(reader, length) {
+                            ListCaPoolsRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCaPoolsRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -20180,12 +21314,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCaPoolsResponse.decode = function decode(reader, length) {
+                            ListCaPoolsResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCaPoolsResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.caPools && message.caPools.length))
@@ -20442,12 +21578,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCertificateRevocationListRequest.decode = function decode(reader, length) {
+                            GetCertificateRevocationListRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -20689,12 +21827,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateRevocationListsRequest.decode = function decode(reader, length) {
+                            ListCertificateRevocationListsRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -20967,12 +22107,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateRevocationListsResponse.decode = function decode(reader, length) {
+                            ListCertificateRevocationListsResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificateRevocationListsResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.certificateRevocationLists && message.certificateRevocationLists.length))
@@ -21251,12 +22393,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCertificateRevocationListRequest.decode = function decode(reader, length) {
+                            UpdateCertificateRevocationListRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificateRevocationList = $root.google.cloud.security.privateca.v1.CertificateRevocationList.decode(reader, reader.uint32());
@@ -21522,12 +22666,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateCertificateTemplateRequest.decode = function decode(reader, length) {
+                            CreateCertificateTemplateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -21778,12 +22924,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeleteCertificateTemplateRequest.decode = function decode(reader, length) {
+                            DeleteCertificateTemplateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -21994,12 +23142,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCertificateTemplateRequest.decode = function decode(reader, length) {
+                            GetCertificateTemplateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.GetCertificateTemplateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -22241,12 +23391,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateTemplatesRequest.decode = function decode(reader, length) {
+                            ListCertificateTemplatesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -22519,12 +23671,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateTemplatesResponse.decode = function decode(reader, length) {
+                            ListCertificateTemplatesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.ListCertificateTemplatesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.certificateTemplates && message.certificateTemplates.length))
@@ -22803,12 +23957,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCertificateTemplateRequest.decode = function decode(reader, length) {
+                            UpdateCertificateTemplateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificateTemplate = $root.google.cloud.security.privateca.v1.CertificateTemplate.decode(reader, reader.uint32());
@@ -23107,12 +24263,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OperationMetadata.decode = function decode(reader, length) {
+                            OperationMetadata.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1.OperationMetadata();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -23598,12 +24756,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateAuthority.decode = function decode(reader, length) {
+                            CertificateAuthority.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -24215,12 +25375,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                IssuingOptions.decode = function decode(reader, length) {
+                                IssuingOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.IssuingOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.includeCaCertUrl = reader.bool();
@@ -24515,12 +25677,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CertificateAuthorityPolicy.decode = function decode(reader, length) {
+                                CertificateAuthorityPolicy.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.CertificateAuthorityPolicy();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.allowedConfigList = $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.CertificateAuthorityPolicy.AllowedConfigList.decode(reader, reader.uint32());
@@ -24863,12 +26027,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    AllowedConfigList.decode = function decode(reader, length) {
+                                    AllowedConfigList.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.CertificateAuthorityPolicy.AllowedConfigList();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     if (!(message.allowedConfigValues && message.allowedConfigValues.length))
@@ -25148,12 +26314,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    AllowedSubjectAltNames.decode = function decode(reader, length) {
+                                    AllowedSubjectAltNames.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.CertificateAuthorityPolicy.AllowedSubjectAltNames();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     if (!(message.allowedDnsNames && message.allowedDnsNames.length))
@@ -25481,12 +26649,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    IssuanceModes.decode = function decode(reader, length) {
+                                    IssuanceModes.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.CertificateAuthorityPolicy.IssuanceModes();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.allowCsrBasedIssuance = reader.bool();
@@ -25711,12 +26881,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                AccessUrls.decode = function decode(reader, length) {
+                                AccessUrls.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.AccessUrls();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.caCertificateAccessUrl = reader.string();
@@ -25952,12 +27124,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KeyVersionSpec.decode = function decode(reader, length) {
+                                KeyVersionSpec.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.KeyVersionSpec();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.cloudKmsKeyVersion = reader.string();
@@ -26406,12 +27580,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateRevocationList.decode = function decode(reader, length) {
+                            CertificateRevocationList.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateRevocationList(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -26827,12 +28003,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RevokedCertificate.decode = function decode(reader, length) {
+                                RevokedCertificate.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateRevocationList.RevokedCertificate();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.certificate = reader.string();
@@ -27256,12 +28434,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Certificate.decode = function decode(reader, length) {
+                            Certificate.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.Certificate(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -27679,12 +28859,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                RevocationDetails.decode = function decode(reader, length) {
+                                RevocationDetails.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.Certificate.RevocationDetails();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.revocationState = reader.int32();
@@ -28014,12 +29196,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ReusableConfig.decode = function decode(reader, length) {
+                            ReusableConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ReusableConfig(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -28377,12 +29561,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ReusableConfigValues.decode = function decode(reader, length) {
+                            ReusableConfigValues.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ReusableConfigValues();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.keyUsage = $root.google.cloud.security.privateca.v1beta1.KeyUsage.decode(reader, reader.uint32());
@@ -28701,12 +29887,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CaOptions.decode = function decode(reader, length) {
+                                CaOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ReusableConfigValues.CaOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.isCa = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
@@ -28955,12 +30143,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ReusableConfigWrapper.decode = function decode(reader, length) {
+                            ReusableConfigWrapper.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ReusableConfigWrapper();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.reusableConfig = reader.string();
@@ -29211,12 +30401,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SubordinateConfig.decode = function decode(reader, length) {
+                            SubordinateConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.SubordinateConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificateAuthority = reader.string();
@@ -29441,12 +30633,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SubordinateConfigChain.decode = function decode(reader, length) {
+                                SubordinateConfigChain.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.SubordinateConfig.SubordinateConfigChain();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.pemCertificates && message.pemCertificates.length))
@@ -29672,12 +30866,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublicKey.decode = function decode(reader, length) {
+                            PublicKey.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.PublicKey();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.type = reader.int32();
@@ -29959,12 +31155,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateConfig.decode = function decode(reader, length) {
+                            CertificateConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.subjectConfig = $root.google.cloud.security.privateca.v1beta1.CertificateConfig.SubjectConfig.decode(reader, reader.uint32());
@@ -30221,12 +31419,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SubjectConfig.decode = function decode(reader, length) {
+                                SubjectConfig.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateConfig.SubjectConfig();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.subject = $root.google.cloud.security.privateca.v1beta1.Subject.decode(reader, reader.uint32());
@@ -30543,12 +31743,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CertificateDescription.decode = function decode(reader, length) {
+                            CertificateDescription.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateDescription();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.subjectDescription = $root.google.cloud.security.privateca.v1beta1.CertificateDescription.SubjectDescription.decode(reader, reader.uint32());
@@ -30954,12 +32156,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SubjectDescription.decode = function decode(reader, length) {
+                                SubjectDescription.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateDescription.SubjectDescription();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.subject = $root.google.cloud.security.privateca.v1beta1.Subject.decode(reader, reader.uint32());
@@ -31255,12 +32459,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KeyId.decode = function decode(reader, length) {
+                                KeyId.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateDescription.KeyId();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.keyId = reader.string();
@@ -31458,12 +32664,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CertificateFingerprint.decode = function decode(reader, length) {
+                                CertificateFingerprint.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CertificateDescription.CertificateFingerprint();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.sha256Hash = reader.string();
@@ -31669,12 +32877,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ObjectId.decode = function decode(reader, length) {
+                            ObjectId.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ObjectId();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.objectIdPath && message.objectIdPath.length))
@@ -31913,12 +33123,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            X509Extension.decode = function decode(reader, length) {
+                            X509Extension.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.X509Extension();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.objectId = $root.google.cloud.security.privateca.v1beta1.ObjectId.decode(reader, reader.uint32());
@@ -32179,12 +33391,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            KeyUsage.decode = function decode(reader, length) {
+                            KeyUsage.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.KeyUsage();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.baseKeyUsage = $root.google.cloud.security.privateca.v1beta1.KeyUsage.KeyUsageOptions.decode(reader, reader.uint32());
@@ -32522,12 +33736,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KeyUsageOptions.decode = function decode(reader, length) {
+                                KeyUsageOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.KeyUsage.KeyUsageOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.digitalSignature = reader.bool();
@@ -32877,12 +34093,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                ExtendedKeyUsageOptions.decode = function decode(reader, length) {
+                                ExtendedKeyUsageOptions.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.KeyUsage.ExtendedKeyUsageOptions();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.serverAuth = reader.bool();
@@ -33210,12 +34428,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Subject.decode = function decode(reader, length) {
+                            Subject.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.Subject();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.countryCode = reader.string();
@@ -33540,12 +34760,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SubjectAltNames.decode = function decode(reader, length) {
+                            SubjectAltNames.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.SubjectAltNames();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.dnsNames && message.dnsNames.length))
@@ -34623,12 +35845,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateCertificateRequest.decode = function decode(reader, length) {
+                            CreateCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CreateCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -34868,12 +36092,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCertificateRequest.decode = function decode(reader, length) {
+                            GetCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.GetCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -35115,12 +36341,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificatesRequest.decode = function decode(reader, length) {
+                            ListCertificatesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListCertificatesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -35393,12 +36621,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificatesResponse.decode = function decode(reader, length) {
+                            ListCertificatesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListCertificatesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.certificates && message.certificates.length))
@@ -35677,12 +36907,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RevokeCertificateRequest.decode = function decode(reader, length) {
+                            RevokeCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.RevokeCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -35981,12 +37213,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCertificateRequest.decode = function decode(reader, length) {
+                            UpdateCertificateRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.UpdateCertificateRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificate = $root.google.cloud.security.privateca.v1beta1.Certificate.decode(reader, reader.uint32());
@@ -36252,12 +37486,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ActivateCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            ActivateCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ActivateCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -36530,12 +37766,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            CreateCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.CreateCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -36786,12 +38024,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DisableCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            DisableCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.DisableCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -37013,12 +38253,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            EnableCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            EnableCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.EnableCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -37229,12 +38471,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FetchCertificateAuthorityCsrRequest.decode = function decode(reader, length) {
+                            FetchCertificateAuthorityCsrRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -37432,12 +38676,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FetchCertificateAuthorityCsrResponse.decode = function decode(reader, length) {
+                            FetchCertificateAuthorityCsrResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.pemCsr = reader.string();
@@ -37635,12 +38881,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            GetCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.GetCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -37882,12 +39130,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateAuthoritiesRequest.decode = function decode(reader, length) {
+                            ListCertificateAuthoritiesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -38160,12 +39410,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateAuthoritiesResponse.decode = function decode(reader, length) {
+                            ListCertificateAuthoritiesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.certificateAuthorities && message.certificateAuthorities.length))
@@ -38433,12 +39685,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RestoreCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            RestoreCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.RestoreCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -38660,12 +39914,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ScheduleDeleteCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            ScheduleDeleteCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ScheduleDeleteCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -38898,12 +40154,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCertificateAuthorityRequest.decode = function decode(reader, length) {
+                            UpdateCertificateAuthorityRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.UpdateCertificateAuthorityRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificateAuthority = $root.google.cloud.security.privateca.v1beta1.CertificateAuthority.decode(reader, reader.uint32());
@@ -39136,12 +40394,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetCertificateRevocationListRequest.decode = function decode(reader, length) {
+                            GetCertificateRevocationListRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.GetCertificateRevocationListRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -39383,12 +40643,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateRevocationListsRequest.decode = function decode(reader, length) {
+                            ListCertificateRevocationListsRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -39661,12 +40923,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListCertificateRevocationListsResponse.decode = function decode(reader, length) {
+                            ListCertificateRevocationListsResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.certificateRevocationLists && message.certificateRevocationLists.length))
@@ -39945,12 +41209,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateCertificateRevocationListRequest.decode = function decode(reader, length) {
+                            UpdateCertificateRevocationListRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.UpdateCertificateRevocationListRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.certificateRevocationList = $root.google.cloud.security.privateca.v1beta1.CertificateRevocationList.decode(reader, reader.uint32());
@@ -40183,12 +41449,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetReusableConfigRequest.decode = function decode(reader, length) {
+                            GetReusableConfigRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.GetReusableConfigRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -40430,12 +41698,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListReusableConfigsRequest.decode = function decode(reader, length) {
+                            ListReusableConfigsRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -40708,12 +41978,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListReusableConfigsResponse.decode = function decode(reader, length) {
+                            ListReusableConfigsResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.ListReusableConfigsResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.reusableConfigs && message.reusableConfigs.length))
@@ -41036,12 +42308,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OperationMetadata.decode = function decode(reader, length) {
+                            OperationMetadata.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.security.privateca.v1beta1.OperationMetadata();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -41444,12 +42718,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -41839,12 +43115,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -42068,12 +43346,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -42418,12 +43698,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -42802,12 +44084,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -43034,12 +44318,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -43403,12 +44689,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -43747,6 +45035,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -43848,6 +45137,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -43894,6 +45191,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -43921,12 +45220,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -43972,6 +45273,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -44066,6 +45371,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -44160,6 +45468,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -44189,6 +45499,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -44219,6 +45530,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -44360,12 +45673,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -44627,12 +45942,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -44835,12 +46152,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45043,12 +46362,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45251,12 +46572,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45524,12 +46847,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -45903,12 +47228,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -46111,12 +47438,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -46343,12 +47672,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -46621,12 +47952,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -46862,6 +48195,265 @@
                 return values;
             })();
     
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
             return api;
         })();
     
@@ -46961,12 +48553,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -47361,12 +48955,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48028,12 +49624,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -48513,12 +50111,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -48757,12 +50357,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -49013,12 +50615,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -49358,12 +50962,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -49737,12 +51343,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -50262,12 +51870,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -50533,12 +52143,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -50852,12 +52464,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -51093,12 +52707,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -51350,12 +52966,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -51658,12 +53276,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -52162,12 +53782,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -52782,12 +54404,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -53036,6 +54660,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
                 /**
@@ -53178,6 +54803,14 @@
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -53230,14 +54863,13 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -53265,12 +54897,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -53348,6 +54982,10 @@
                             }
                         case 1055: {
                                 message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -53496,6 +55134,11 @@
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
                         if (error)
                             return ".google.api.resourceReference." + error;
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     return null;
                 };
@@ -53716,6 +55359,11 @@
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     return message;
                 };
     
@@ -53750,6 +55398,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -53793,6 +55442,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     
@@ -53996,12 +55647,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -54292,12 +55945,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -54578,12 +56233,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -54890,12 +56547,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -55081,6 +56740,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -55140,6 +56800,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -55174,6 +56842,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -55201,12 +56871,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -55228,6 +56900,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -55288,6 +56964,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -55324,6 +57003,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -55347,6 +57028,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -55361,6 +57043,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -55548,12 +57232,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -55982,12 +57668,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -56321,12 +58009,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -56597,12 +58287,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -57132,12 +58824,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -57516,12 +59210,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -57806,12 +59502,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -58081,12 +59779,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -58392,12 +60092,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -58660,12 +60362,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -58986,12 +60690,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -59227,12 +60933,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -59468,12 +61176,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -59682,12 +61392,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -59870,12 +61582,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -60087,12 +61801,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DoubleValue.decode = function decode(reader, length) {
+                DoubleValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.double();
@@ -60290,12 +62006,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FloatValue.decode = function decode(reader, length) {
+                FloatValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.float();
@@ -60493,12 +62211,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int64Value.decode = function decode(reader, length) {
+                Int64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int64();
@@ -60710,12 +62430,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt64Value.decode = function decode(reader, length) {
+                UInt64Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint64();
@@ -60927,12 +62649,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int32Value.decode = function decode(reader, length) {
+                Int32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.int32();
@@ -61130,12 +62854,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt32Value.decode = function decode(reader, length) {
+                UInt32Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.uint32();
@@ -61333,12 +63059,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BoolValue.decode = function decode(reader, length) {
+                BoolValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bool();
@@ -61536,12 +63264,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                StringValue.decode = function decode(reader, length) {
+                StringValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.string();
@@ -61739,12 +63469,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BytesValue.decode = function decode(reader, length) {
+                BytesValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.value = reader.bytes();
@@ -61996,12 +63728,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Expr.decode = function decode(reader, length) {
+                Expr.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Expr();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.expression = reader.string();
@@ -62506,12 +64240,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62786,12 +64522,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63022,12 +64760,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -63275,12 +65015,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -63510,12 +65252,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63713,12 +65457,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -63927,12 +65673,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -64159,12 +65907,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -64411,12 +66161,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

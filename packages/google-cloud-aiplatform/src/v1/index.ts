@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {DataFoundryServiceClient} from './data_foundry_service_client';
 export {DatasetServiceClient} from './dataset_service_client';
 export {DeploymentResourcePoolServiceClient} from './deployment_resource_pool_service_client';
 export {EndpointServiceClient} from './endpoint_service_client';
@@ -43,6 +44,7 @@ export {PredictionServiceClient} from './prediction_service_client';
 export {ReasoningEngineExecutionServiceClient} from './reasoning_engine_execution_service_client';
 export {ReasoningEngineServiceClient} from './reasoning_engine_service_client';
 export {ScheduleServiceClient} from './schedule_service_client';
+export {SessionServiceClient} from './session_service_client';
 export {SpecialistPoolServiceClient} from './specialist_pool_service_client';
 export {TensorboardServiceClient} from './tensorboard_service_client';
 export {VertexRagDataServiceClient} from './vertex_rag_data_service_client';

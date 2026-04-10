@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,8 +44,16 @@ function main(name) {
    */
   // const appInstanceId = 'abc123'
   /**
-   *  The un-hashed, unencrypted, user-provided
-   *  data (https://support.google.com/analytics/answer/14077171).
+   *  User-provided
+   *  data (https://support.google.com/analytics/answer/14077171).  May contain
+   *  either one email address or one phone number.
+   *  Email addresses should be normalized as such:
+   *  * lowercase
+   *  * remove periods before @ for gmail.com/googlemail.com addresses
+   *  * remove all spaces
+   *  Phone numbers should be normalized as such:
+   *  * remove all non digit characters
+   *  * add + prefix
    */
   // const userProvidedData = 'abc123'
   /**

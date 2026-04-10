@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1857,6 +1857,15 @@ export namespace google {
                     /** OAuthSettings loginHint */
                     loginHint?: (google.protobuf.IStringValue|null);
 
+                    /** OAuthSettings clientId */
+                    clientId?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecret */
+                    clientSecret?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecretSha256 */
+                    clientSecretSha256?: (google.protobuf.IStringValue|null);
+
                     /** OAuthSettings programmaticClients */
                     programmaticClients?: (string[]|null);
                 }
@@ -1872,6 +1881,15 @@ export namespace google {
 
                     /** OAuthSettings loginHint. */
                     public loginHint?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientId. */
+                    public clientId?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecret. */
+                    public clientSecret?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings clientSecretSha256. */
+                    public clientSecretSha256?: (google.protobuf.IStringValue|null);
 
                     /** OAuthSettings programmaticClients. */
                     public programmaticClients: string[];
@@ -2319,9 +2337,6 @@ export namespace google {
                     /** AllowedDomainsSettings domains. */
                     public domains: string[];
 
-                    /** AllowedDomainsSettings _enable. */
-                    public _enable?: "enable";
-
                     /**
                      * Creates a new AllowedDomainsSettings instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2643,9 +2658,6 @@ export namespace google {
                     /** AccessDeniedPageSettings remediationTokenGenerationEnabled. */
                     public remediationTokenGenerationEnabled?: (google.protobuf.IBoolValue|null);
 
-                    /** AccessDeniedPageSettings _remediationTokenGenerationEnabled. */
-                    public _remediationTokenGenerationEnabled?: "remediationTokenGenerationEnabled";
-
                     /**
                      * Creates a new AccessDeniedPageSettings instance using the specified properties.
                      * @param [properties] Properties to set
@@ -2754,12 +2766,6 @@ export namespace google {
 
                     /** AttributePropagationSettings enable. */
                     public enable?: (boolean|null);
-
-                    /** AttributePropagationSettings _expression. */
-                    public _expression?: "expression";
-
-                    /** AttributePropagationSettings _enable. */
-                    public _enable?: "enable";
 
                     /**
                      * Creates a new AttributePropagationSettings instance using the specified properties.

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,22 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,10 +34,10 @@ const version = require('../../../package.json').version;
 
 /**
  *  The primary resources offered by this service are EntryGroups, EntryTypes,
- *  AspectTypes, and Entries. They collectively let data administrators organize,
- *  manage, secure, and catalog data located across cloud projects in their
- *  organization in a variety of storage systems, including Cloud Storage and
- *  BigQuery.
+ *  AspectTypes, Entries and EntryLinks. They collectively let data
+ *  administrators organize, manage, secure, and catalog data located across
+ *  cloud projects in their organization in a variety of storage systems,
+ *  including Cloud Storage and BigQuery.
  * @class
  * @memberof v1
  */
@@ -117,41 +106,20 @@ export class CatalogServiceClient {
    *     const client = new CatalogServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CatalogServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataplex.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -177,7 +145,7 @@ export class CatalogServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -193,9 +161,13 @@ export class CatalogServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -225,11 +197,17 @@ export class CatalogServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataAssetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}'
+      ),
       dataAttributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
       ),
       dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+      ),
+      dataProductPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}'
       ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}'
@@ -252,11 +230,23 @@ export class CatalogServiceClient {
       entryGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
+      entryLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}'
+      ),
       entryTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryTypes/{entry_type}'
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
+      ),
+      glossaryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}'
+      ),
+      glossaryCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}'
+      ),
+      glossaryTermPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}'
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
@@ -267,6 +257,9 @@ export class CatalogServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      metadataFeedPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}'
+      ),
       metadataJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
       ),
@@ -276,14 +269,12 @@ export class CatalogServiceClient {
       projectLocationLakeActionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}'
       ),
-      projectLocationLakeZoneActionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
-        ),
-      projectLocationLakeZoneAssetActionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
-        ),
+      projectLocationLakeZoneActionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
+      ),
+      projectLocationLakeZoneAssetActionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
+      ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}'
       ),
@@ -299,422 +290,156 @@ export class CatalogServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEntryTypes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'entryTypes'
-      ),
-      listAspectTypes: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'aspectTypes'
-      ),
-      listEntryGroups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'entryGroups'
-      ),
-      listEntries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'entries'
-      ),
-      searchEntries: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'results'
-      ),
-      listMetadataJobs: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'metadataJobs'
-      ),
+      listEntryTypes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entryTypes'),
+      listAspectTypes:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'aspectTypes'),
+      listEntryGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entryGroups'),
+      listEntries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entries'),
+      searchEntries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'results'),
+      listMetadataJobs:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataJobs'),
+      lookupEntryLinks:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'entryLinks'),
+      listMetadataFeeds:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataFeeds')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const createEntryTypeResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.EntryType'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.EntryType') as gax.protobuf.Type;
     const createEntryTypeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const updateEntryTypeResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.EntryType'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.EntryType') as gax.protobuf.Type;
     const updateEntryTypeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteEntryTypeResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteEntryTypeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const createAspectTypeResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.AspectType'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.AspectType') as gax.protobuf.Type;
     const createAspectTypeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const updateAspectTypeResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.AspectType'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.AspectType') as gax.protobuf.Type;
     const updateAspectTypeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteAspectTypeResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteAspectTypeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const createEntryGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.EntryGroup'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.EntryGroup') as gax.protobuf.Type;
     const createEntryGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const updateEntryGroupResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.EntryGroup'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.EntryGroup') as gax.protobuf.Type;
     const updateEntryGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const deleteEntryGroupResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteEntryGroupMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
     const createMetadataJobResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.MetadataJob'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.MetadataJob') as gax.protobuf.Type;
     const createMetadataJobMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+    const createMetadataFeedResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.MetadataFeed') as gax.protobuf.Type;
+    const createMetadataFeedMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteMetadataFeedResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteMetadataFeedMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateMetadataFeedResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.MetadataFeed') as gax.protobuf.Type;
+    const updateMetadataFeedMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEntryType: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEntryTypeResponse.decode.bind(createEntryTypeResponse),
-        createEntryTypeMetadata.decode.bind(createEntryTypeMetadata)
-      ),
+        createEntryTypeMetadata.decode.bind(createEntryTypeMetadata)),
       updateEntryType: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateEntryTypeResponse.decode.bind(updateEntryTypeResponse),
-        updateEntryTypeMetadata.decode.bind(updateEntryTypeMetadata)
-      ),
+        updateEntryTypeMetadata.decode.bind(updateEntryTypeMetadata)),
       deleteEntryType: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEntryTypeResponse.decode.bind(deleteEntryTypeResponse),
-        deleteEntryTypeMetadata.decode.bind(deleteEntryTypeMetadata)
-      ),
+        deleteEntryTypeMetadata.decode.bind(deleteEntryTypeMetadata)),
       createAspectType: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAspectTypeResponse.decode.bind(createAspectTypeResponse),
-        createAspectTypeMetadata.decode.bind(createAspectTypeMetadata)
-      ),
+        createAspectTypeMetadata.decode.bind(createAspectTypeMetadata)),
       updateAspectType: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAspectTypeResponse.decode.bind(updateAspectTypeResponse),
-        updateAspectTypeMetadata.decode.bind(updateAspectTypeMetadata)
-      ),
+        updateAspectTypeMetadata.decode.bind(updateAspectTypeMetadata)),
       deleteAspectType: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAspectTypeResponse.decode.bind(deleteAspectTypeResponse),
-        deleteAspectTypeMetadata.decode.bind(deleteAspectTypeMetadata)
-      ),
+        deleteAspectTypeMetadata.decode.bind(deleteAspectTypeMetadata)),
       createEntryGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEntryGroupResponse.decode.bind(createEntryGroupResponse),
-        createEntryGroupMetadata.decode.bind(createEntryGroupMetadata)
-      ),
+        createEntryGroupMetadata.decode.bind(createEntryGroupMetadata)),
       updateEntryGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateEntryGroupResponse.decode.bind(updateEntryGroupResponse),
-        updateEntryGroupMetadata.decode.bind(updateEntryGroupMetadata)
-      ),
+        updateEntryGroupMetadata.decode.bind(updateEntryGroupMetadata)),
       deleteEntryGroup: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEntryGroupResponse.decode.bind(deleteEntryGroupResponse),
-        deleteEntryGroupMetadata.decode.bind(deleteEntryGroupMetadata)
-      ),
+        deleteEntryGroupMetadata.decode.bind(deleteEntryGroupMetadata)),
       createMetadataJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createMetadataJobResponse.decode.bind(createMetadataJobResponse),
-        createMetadataJobMetadata.decode.bind(createMetadataJobMetadata)
-      ),
+        createMetadataJobMetadata.decode.bind(createMetadataJobMetadata)),
+      createMetadataFeed: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createMetadataFeedResponse.decode.bind(createMetadataFeedResponse),
+        createMetadataFeedMetadata.decode.bind(createMetadataFeedMetadata)),
+      deleteMetadataFeed: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteMetadataFeedResponse.decode.bind(deleteMetadataFeedResponse),
+        deleteMetadataFeedMetadata.decode.bind(deleteMetadataFeedMetadata)),
+      updateMetadataFeed: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateMetadataFeedResponse.decode.bind(updateMetadataFeedResponse),
+        updateMetadataFeedMetadata.decode.bind(updateMetadataFeedMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataplex.v1.CatalogService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dataplex.v1.CatalogService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -745,60 +470,28 @@ export class CatalogServiceClient {
     // Put together the "service stub" for
     // google.cloud.dataplex.v1.CatalogService.
     this.catalogServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataplex.v1.CatalogService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataplex.v1.CatalogService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataplex.v1.CatalogService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const catalogServiceStubMethods = [
-      'createEntryType',
-      'updateEntryType',
-      'deleteEntryType',
-      'listEntryTypes',
-      'getEntryType',
-      'createAspectType',
-      'updateAspectType',
-      'deleteAspectType',
-      'listAspectTypes',
-      'getAspectType',
-      'createEntryGroup',
-      'updateEntryGroup',
-      'deleteEntryGroup',
-      'listEntryGroups',
-      'getEntryGroup',
-      'createEntry',
-      'updateEntry',
-      'deleteEntry',
-      'listEntries',
-      'getEntry',
-      'lookupEntry',
-      'searchEntries',
-      'createMetadataJob',
-      'getMetadataJob',
-      'listMetadataJobs',
-      'cancelMetadataJob',
-    ];
+    const catalogServiceStubMethods =
+        ['createEntryType', 'updateEntryType', 'deleteEntryType', 'listEntryTypes', 'getEntryType', 'createAspectType', 'updateAspectType', 'deleteAspectType', 'listAspectTypes', 'getAspectType', 'createEntryGroup', 'updateEntryGroup', 'deleteEntryGroup', 'listEntryGroups', 'getEntryGroup', 'createEntry', 'updateEntry', 'deleteEntry', 'listEntries', 'getEntry', 'lookupEntry', 'searchEntries', 'createMetadataJob', 'getMetadataJob', 'listMetadataJobs', 'cancelMetadataJob', 'createEntryLink', 'updateEntryLink', 'deleteEntryLink', 'lookupEntryLinks', 'lookupContext', 'getEntryLink', 'createMetadataFeed', 'getMetadataFeed', 'listMetadataFeeds', 'deleteMetadataFeed', 'updateMetadataFeed'];
     for (const methodName of catalogServiceStubMethods) {
       const callPromise = this.catalogServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -823,14 +516,8 @@ export class CatalogServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataplex.googleapis.com';
   }
@@ -841,14 +528,8 @@ export class CatalogServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataplex.googleapis.com';
   }
@@ -879,7 +560,12 @@ export class CatalogServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
+      'https://www.googleapis.com/auth/dataplex.read-write',
+      'https://www.googleapis.com/auth/dataplex.readonly'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -888,9 +574,8 @@ export class CatalogServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -901,3101 +586,3208 @@ export class CatalogServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Gets an EntryType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the EntryType:
-   *   `projects/{project_number}/locations/{location_id}/entryTypes/{entry_type_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryType|EntryType}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.get_entry_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_GetEntryType_async
-   */
+/**
+ * Gets an EntryType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the EntryType:
+ *   `projects/{project_number}/locations/{location_id}/entryTypes/{entry_type_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryType|EntryType}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_entry_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetEntryType_async
+ */
   getEntryType(
-    request?: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryType,
-      protos.google.cloud.dataplex.v1.IGetEntryTypeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryType,
+        protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|undefined, {}|undefined
+      ]>;
   getEntryType(
-    request: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntryType,
-      protos.google.cloud.dataplex.v1.IGetEntryTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntryType(
-    request: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntryType,
-      protos.google.cloud.dataplex.v1.IGetEntryTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntryType(
-    request?: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntryType,
-          | protos.google.cloud.dataplex.v1.IGetEntryTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntryType,
-      protos.google.cloud.dataplex.v1.IGetEntryTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryType,
-      protos.google.cloud.dataplex.v1.IGetEntryTypeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryType(
+      request: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryType,
+          protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryType(
+      request?: protos.google.cloud.dataplex.v1.IGetEntryTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryType,
+          protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryType,
+          protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryType,
+        protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEntryType request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntryType,
-          | protos.google.cloud.dataplex.v1.IGetEntryTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryType,
+        protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEntryType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEntryType(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntryType,
-          protos.google.cloud.dataplex.v1.IGetEntryTypeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEntryType response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEntryType(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryType,
+        protos.google.cloud.dataplex.v1.IGetEntryTypeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEntryType response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an AspectType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the AspectType:
-   *   `projects/{project_number}/locations/{location_id}/aspectTypes/{aspect_type_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.AspectType|AspectType}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.get_aspect_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_GetAspectType_async
-   */
+/**
+ * Gets an AspectType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the AspectType:
+ *   `projects/{project_number}/locations/{location_id}/aspectTypes/{aspect_type_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.AspectType|AspectType}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_aspect_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetAspectType_async
+ */
   getAspectType(
-    request?: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IAspectType,
-      protos.google.cloud.dataplex.v1.IGetAspectTypeRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IAspectType,
+        protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|undefined, {}|undefined
+      ]>;
   getAspectType(
-    request: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IAspectType,
-      protos.google.cloud.dataplex.v1.IGetAspectTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAspectType(
-    request: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IAspectType,
-      protos.google.cloud.dataplex.v1.IGetAspectTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAspectType(
-    request?: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IAspectType,
-          | protos.google.cloud.dataplex.v1.IGetAspectTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IAspectType,
-      protos.google.cloud.dataplex.v1.IGetAspectTypeRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IAspectType,
-      protos.google.cloud.dataplex.v1.IGetAspectTypeRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAspectType(
+      request: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IAspectType,
+          protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|null|undefined,
+          {}|null|undefined>): void;
+  getAspectType(
+      request?: protos.google.cloud.dataplex.v1.IGetAspectTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IAspectType,
+          protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IAspectType,
+          protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IAspectType,
+        protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getAspectType request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IAspectType,
-          | protos.google.cloud.dataplex.v1.IGetAspectTypeRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IAspectType,
+        protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAspectType response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getAspectType(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IAspectType,
-          protos.google.cloud.dataplex.v1.IGetAspectTypeRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getAspectType response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getAspectType(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IAspectType,
+        protos.google.cloud.dataplex.v1.IGetAspectTypeRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getAspectType response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an EntryGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the EntryGroup:
-   *   `projects/{project_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.get_entry_group.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_GetEntryGroup_async
-   */
+/**
+ * Gets an EntryGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the EntryGroup:
+ *   `projects/{project_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_entry_group.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetEntryGroup_async
+ */
   getEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryGroup,
-      protos.google.cloud.dataplex.v1.IGetEntryGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryGroup,
+        protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|undefined, {}|undefined
+      ]>;
   getEntryGroup(
-    request: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntryGroup,
-      protos.google.cloud.dataplex.v1.IGetEntryGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntryGroup(
-    request: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntryGroup,
-      protos.google.cloud.dataplex.v1.IGetEntryGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntryGroup,
-          | protos.google.cloud.dataplex.v1.IGetEntryGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntryGroup,
-      protos.google.cloud.dataplex.v1.IGetEntryGroupRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryGroup,
-      protos.google.cloud.dataplex.v1.IGetEntryGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryGroup(
+      request: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryGroup,
+          protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryGroup(
+      request?: protos.google.cloud.dataplex.v1.IGetEntryGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryGroup,
+          protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryGroup,
+          protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryGroup,
+        protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEntryGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntryGroup,
-          | protos.google.cloud.dataplex.v1.IGetEntryGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryGroup,
+        protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEntryGroup response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEntryGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntryGroup,
-          protos.google.cloud.dataplex.v1.IGetEntryGroupRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEntryGroup response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEntryGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryGroup,
+        protos.google.cloud.dataplex.v1.IGetEntryGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEntryGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Creates an Entry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent Entry Group:
-   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
-   * @param {string} request.entryId
-   *   Required. Entry identifier. It has to be unique within an Entry Group.
-   *
-   *   Entries corresponding to Google Cloud resources use an Entry ID format
-   *   based on [full resource
-   *   names](https://cloud.google.com/apis/design/resource_names#full_resource_name).
-   *   The format is a full resource name of the resource without the
-   *   prefix double slashes in the API service name part of the full resource
-   *   name. This allows retrieval of entries using their associated resource
-   *   name.
-   *
-   *   For example, if the full resource name of a resource is
-   *   `//library.googleapis.com/shelves/shelf1/books/book2`,
-   *   then the suggested entry_id is
-   *   `library.googleapis.com/shelves/shelf1/books/book2`.
-   *
-   *   It is also suggested to follow the same convention for entries
-   *   corresponding to resources from providers or systems other than Google
-   *   Cloud.
-   *
-   *   The maximum size of the field is 4000 characters.
-   * @param {google.cloud.dataplex.v1.Entry} request.entry
-   *   Required. Entry resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_entry.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateEntry_async
-   */
+/**
+ * Creates an Entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent Entry Group:
+ *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
+ * @param {string} request.entryId
+ *   Required. Entry identifier. It has to be unique within an Entry Group.
+ *
+ *   Entries corresponding to Google Cloud resources use an Entry ID format
+ *   based on [full resource
+ *   names](https://cloud.google.com/apis/design/resource_names#full_resource_name).
+ *   The format is a full resource name of the resource without the
+ *   prefix double slashes in the API service name part of the full resource
+ *   name. This allows retrieval of entries using their associated resource
+ *   name.
+ *
+ *   For example, if the full resource name of a resource is
+ *   `//library.googleapis.com/shelves/shelf1/books/book2`,
+ *   then the suggested entry_id is
+ *   `library.googleapis.com/shelves/shelf1/books/book2`.
+ *
+ *   It is also suggested to follow the same convention for entries
+ *   corresponding to resources from providers or systems other than Google
+ *   Cloud.
+ *
+ *   The maximum size of the field is 4000 characters.
+ * @param {google.cloud.dataplex.v1.Entry} request.entry
+ *   Required. Entry resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_entry.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateEntry_async
+ */
   createEntry(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ICreateEntryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ICreateEntryRequest|undefined, {}|undefined
+      ]>;
   createEntry(
-    request: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ICreateEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEntry(
-    request: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ICreateEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createEntry(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.ICreateEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ICreateEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ICreateEntryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.ICreateEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntry(
+      request: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ICreateEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntry(
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ICreateEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ICreateEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ICreateEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.ICreateEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ICreateEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntry,
-          protos.google.cloud.dataplex.v1.ICreateEntryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEntry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ICreateEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createEntry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Updates an Entry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataplex.v1.Entry} request.entry
-   *   Required. Entry resource.
-   * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Mask of fields to update. To update Aspects, the update_mask must
-   *   contain the value "aspects".
-   *
-   *   If the update_mask is empty, the service will update all modifiable fields
-   *   present in the request.
-   * @param {boolean} [request.allowMissing]
-   *   Optional. If set to true and the entry doesn't exist, the service will
-   *   create it.
-   * @param {boolean} [request.deleteMissingAspects]
-   *   Optional. If set to true and the aspect_keys specify aspect ranges, the
-   *   service deletes any existing aspects from that range that weren't provided
-   *   in the request.
-   * @param {string[]} [request.aspectKeys]
-   *   Optional. The map keys of the Aspects which the service should modify. It
-   *   supports the following syntaxes:
-   *
-   *   * `<aspect_type_reference>` - matches an aspect of the given type and empty
-   *   path.
-   *   * `<aspect_type_reference>@path` - matches an aspect of the given type and
-   *   specified path. For example, to attach an aspect to a field that is
-   *   specified by the `schema` aspect, the path should have the format
-   *   `Schema.<field_name>`.
-   *   * `<aspect_type_reference>@*` - matches aspects of the given type for all
-   *   paths.
-   *   * `*@path` - matches aspects of all types on the given path.
-   *
-   *   The service will not remove existing aspects matching the syntax unless
-   *   `delete_missing_aspects` is set to true.
-   *
-   *   If this field is left empty, the service treats it as specifying
-   *   exactly those Aspects present in the request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.update_entry.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_UpdateEntry_async
-   */
+/**
+ * Updates an Entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.Entry} request.entry
+ *   Required. Entry resource.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Mask of fields to update. To update Aspects, the update_mask must
+ *   contain the value "aspects".
+ *
+ *   If the update_mask is empty, the service will update all modifiable fields
+ *   present in the request.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the entry doesn't exist, the service will
+ *   create it.
+ * @param {boolean} [request.deleteMissingAspects]
+ *   Optional. If set to true and the aspect_keys specify aspect ranges, the
+ *   service deletes any existing aspects from that range that weren't provided
+ *   in the request.
+ * @param {string[]} [request.aspectKeys]
+ *   Optional. The map keys of the Aspects which the service should modify. It
+ *   supports the following syntaxes:
+ *
+ *   * `<aspect_type_reference>` - matches an aspect of the given type and empty
+ *   path.
+ *   * `<aspect_type_reference>@path` - matches an aspect of the given type and
+ *   specified path. For example, to attach an aspect to a field that is
+ *   specified by the `schema` aspect, the path should have the format
+ *   `Schema.<field_name>`.
+ *   * `<aspect_type_reference>@*` - matches aspects of the given type for all
+ *   paths.
+ *   * `*@path` - matches aspects of all types on the given path.
+ *
+ *   The service will not remove existing aspects matching the syntax unless
+ *   `delete_missing_aspects` is set to true.
+ *
+ *   If this field is left empty, the service treats it as specifying
+ *   exactly those Aspects present in the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_entry.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateEntry_async
+ */
   updateEntry(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IUpdateEntryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IUpdateEntryRequest|undefined, {}|undefined
+      ]>;
   updateEntry(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IUpdateEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEntry(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IUpdateEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEntry(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.IUpdateEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IUpdateEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IUpdateEntryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IUpdateEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntry(
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IUpdateEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntry(
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IUpdateEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IUpdateEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IUpdateEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'entry.name': request.entry!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entry.name': request.entry!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.IUpdateEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IUpdateEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntry,
-          protos.google.cloud.dataplex.v1.IUpdateEntryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEntry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IUpdateEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateEntry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Deletes an Entry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Entry:
-   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.delete_entry.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_DeleteEntry_async
-   */
+/**
+ * Deletes an Entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Entry:
+ *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_entry.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteEntry_async
+ */
   deleteEntry(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IDeleteEntryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IDeleteEntryRequest|undefined, {}|undefined
+      ]>;
   deleteEntry(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IDeleteEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEntry(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IDeleteEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteEntry(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.IDeleteEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IDeleteEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IDeleteEntryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IDeleteEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntry(
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IDeleteEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntry(
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IDeleteEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IDeleteEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IDeleteEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.IDeleteEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IDeleteEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .deleteEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntry,
-          protos.google.cloud.dataplex.v1.IDeleteEntryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEntry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.deleteEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IDeleteEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteEntry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets an Entry.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Entry:
-   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
-   * @param {google.cloud.dataplex.v1.EntryView} [request.view]
-   *   Optional. View to control which parts of an entry the service should
-   *   return.
-   * @param {string[]} [request.aspectTypes]
-   *   Optional. Limits the aspects returned to the provided aspect types.
-   *   It only works for CUSTOM view.
-   * @param {string[]} [request.paths]
-   *   Optional. Limits the aspects returned to those associated with the provided
-   *   paths within the Entry. It only works for CUSTOM view.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.get_entry.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_GetEntry_async
-   */
+/**
+ * Gets an Entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Entry:
+ *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
+ * @param {google.cloud.dataplex.v1.EntryView} [request.view]
+ *   Optional. View to control which parts of an entry the service should
+ *   return.
+ * @param {string[]} [request.aspectTypes]
+ *   Optional. Limits the aspects returned to the provided aspect types.
+ *   It only works for CUSTOM view.
+ * @param {string[]} [request.paths]
+ *   Optional. Limits the aspects returned to those associated with the provided
+ *   paths within the Entry. It only works for CUSTOM view.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_entry.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetEntry_async
+ */
   getEntry(
-    request?: protos.google.cloud.dataplex.v1.IGetEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IGetEntryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IGetEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IGetEntryRequest|undefined, {}|undefined
+      ]>;
   getEntry(
-    request: protos.google.cloud.dataplex.v1.IGetEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IGetEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntry(
-    request: protos.google.cloud.dataplex.v1.IGetEntryRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IGetEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEntry(
-    request?: protos.google.cloud.dataplex.v1.IGetEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IGetEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntry,
-          protos.google.cloud.dataplex.v1.IGetEntryRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IGetEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.IGetEntryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IGetEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntry(
+      request: protos.google.cloud.dataplex.v1.IGetEntryRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IGetEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntry(
+      request?: protos.google.cloud.dataplex.v1.IGetEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IGetEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IGetEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IGetEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntry,
-          protos.google.cloud.dataplex.v1.IGetEntryRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IGetEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntry,
-          protos.google.cloud.dataplex.v1.IGetEntryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getEntry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.IGetEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEntry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Looks up an entry by name using the permission on the source system.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project to which the request should be attributed in the
-   *   following form: `projects/{project}/locations/{location}`.
-   * @param {google.cloud.dataplex.v1.EntryView} [request.view]
-   *   Optional. View to control which parts of an entry the service should
-   *   return.
-   * @param {string[]} [request.aspectTypes]
-   *   Optional. Limits the aspects returned to the provided aspect types.
-   *   It only works for CUSTOM view.
-   * @param {string[]} [request.paths]
-   *   Optional. Limits the aspects returned to those associated with the provided
-   *   paths within the Entry. It only works for CUSTOM view.
-   * @param {string} request.entry
-   *   Required. The resource name of the Entry:
-   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.lookup_entry.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_LookupEntry_async
-   */
+/**
+ * Looks up an entry by name using the permission on the source system.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed in the
+ *   following form: `projects/{project}/locations/{location}`.
+ * @param {google.cloud.dataplex.v1.EntryView} [request.view]
+ *   Optional. View to control which parts of an entry the service should
+ *   return.
+ * @param {string[]} [request.aspectTypes]
+ *   Optional. Limits the aspects returned to the provided aspect types.
+ *   It only works for CUSTOM view.
+ * @param {string[]} [request.paths]
+ *   Optional. Limits the aspects returned to those associated with the provided
+ *   paths within the Entry. It only works for CUSTOM view.
+ * @param {string} request.entry
+ *   Required. The resource name of the Entry:
+ *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.lookup_entry.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_LookupEntry_async
+ */
   lookupEntry(
-    request?: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ILookupEntryRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ILookupEntryRequest|undefined, {}|undefined
+      ]>;
   lookupEntry(
-    request: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ILookupEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupEntry(
-    request: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ILookupEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  lookupEntry(
-    request?: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.ILookupEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ILookupEntryRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry,
-      protos.google.cloud.dataplex.v1.ILookupEntryRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.ILookupEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupEntry(
+      request: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ILookupEntryRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupEntry(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ILookupEntryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.ILookupEntryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ILookupEntryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('lookupEntry request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IEntry,
-          | protos.google.cloud.dataplex.v1.ILookupEntryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ILookupEntryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('lookupEntry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .lookupEntry(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IEntry,
-          protos.google.cloud.dataplex.v1.ILookupEntryRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('lookupEntry response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.lookupEntry(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntry,
+        protos.google.cloud.dataplex.v1.ILookupEntryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('lookupEntry response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Gets a metadata job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the metadata job, in the format
-   *   `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.get_metadata_job.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_GetMetadataJob_async
-   */
+/**
+ * Gets a metadata job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the metadata job, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_metadata_job.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetMetadataJob_async
+ */
   getMetadataJob(
-    request?: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IMetadataJob,
-      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|undefined, {}|undefined
+      ]>;
   getMetadataJob(
-    request: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IMetadataJob,
-      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataJob(
-    request: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IMetadataJob,
-      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getMetadataJob(
-    request?: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.dataplex.v1.IMetadataJob,
-          | protos.google.cloud.dataplex.v1.IGetMetadataJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IMetadataJob,
-      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IMetadataJob,
-      protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataJob(
+      request: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataJob,
+          protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataJob(
+      request?: protos.google.cloud.dataplex.v1.IGetMetadataJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IMetadataJob,
+          protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataJob,
+          protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getMetadataJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IMetadataJob,
-          | protos.google.cloud.dataplex.v1.IGetMetadataJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMetadataJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getMetadataJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IMetadataJob,
-          protos.google.cloud.dataplex.v1.IGetMetadataJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getMetadataJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getMetadataJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IMetadataJob,
+        protos.google.cloud.dataplex.v1.IGetMetadataJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMetadataJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Cancels a metadata job.
-   *
-   * If you cancel a metadata import job that is in progress, the changes in the
-   * job might be partially applied. We recommend that you reset the state of
-   * the entry groups in your project by running another metadata job that
-   * reverts the changes from the canceled job.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the job, in the format
-   *   `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.cancel_metadata_job.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CancelMetadataJob_async
-   */
+/**
+ * Cancels a metadata job.
+ *
+ * If you cancel a metadata import job that is in progress, the changes in the
+ * job might be partially applied. We recommend that you reset the state of
+ * the entry groups in your project by running another metadata job that
+ * reverts the changes from the canceled job.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the job, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.cancel_metadata_job.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CancelMetadataJob_async
+ */
   cancelMetadataJob(
-    request?: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|undefined, {}|undefined
+      ]>;
   cancelMetadataJob(
-    request: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelMetadataJob(
-    request: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  cancelMetadataJob(
-    request?: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelMetadataJob(
+      request: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelMetadataJob(
+      request?: protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('cancelMetadataJob request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelMetadataJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .cancelMetadataJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('cancelMetadataJob response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.cancelMetadataJob(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.ICancelMetadataJobRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('cancelMetadataJob response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
+  }
+/**
+ * Creates an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent Entry Group:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+ * @param {string} request.entryLinkId
+ *   Required. Entry Link identifier
+ *   * Must contain only lowercase letters, numbers and hyphens.
+ *   * Must start with a letter.
+ *   * Must be between 1-63 characters.
+ *   * Must end with a number or a letter.
+ *   * Must be unique within the EntryGroup.
+ * @param {google.cloud.dataplex.v1.EntryLink} request.entryLink
+ *   Required. Entry Link resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateEntryLink_async
+ */
+  createEntryLink(
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  createEntryLink(
+      request: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntryLink(
+      request: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  createEntryLink(
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.ICreateEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.EntryLink} request.entryLink
+ *   Required. Entry Link resource.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the entry link doesn't exist, the service will
+ *   create it.
+ * @param {string[]} [request.aspectKeys]
+ *   Optional. The map keys of the Aspects which the service should modify.
+ *   It should be the aspect type reference in the format
+ *   `{project_id_or_number}.{location_id}.{aspect_type_id}`.
+ *
+ *   If this field is left empty, the service treats it as specifying
+ *   exactly those Aspects present in the request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryLink_async
+ */
+  updateEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  updateEntryLink(
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntryLink(
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entry_link.name': request.entryLink!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updateEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IUpdateEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Entry Link:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryLink_async
+ */
+  deleteEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  deleteEntryLink(
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntryLink(
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IDeleteEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Looks up LLM Context for the specified resources.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed in the
+ *   following form: `projects/{project}/locations/{location}`.
+ * @param {string[]} request.resources
+ *   Required. The entry names to lookup context for. The request should have
+ *   max 10 of those.
+ *
+ *   ## Examples:
+ *
+ *   projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}
+ * @param {number[]} [request.options]
+ *   Optional. Allows to configure the context.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.LookupContextResponse|LookupContextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.lookup_context.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_LookupContext_async
+ */
+  lookupContext(
+      request?: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|undefined, {}|undefined
+      ]>;
+  lookupContext(
+      request: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupContext(
+      request: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>): void;
+  lookupContext(
+      request?: protos.google.cloud.dataplex.v1.ILookupContextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.ILookupContextResponse,
+          protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('lookupContext request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupContext response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.lookupContext(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.ILookupContextResponse,
+        protos.google.cloud.dataplex.v1.ILookupContextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('lookupContext response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets an Entry Link.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Entry Link:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_entry_link.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetEntryLink_async
+ */
+  getEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|undefined, {}|undefined
+      ]>;
+  getEntryLink(
+      request: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryLink(
+      request: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEntryLink(
+      request?: protos.google.cloud.dataplex.v1.IGetEntryLinkRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IEntryLink,
+          protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getEntryLink request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntryLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getEntryLink(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IEntryLink,
+        protos.google.cloud.dataplex.v1.IGetEntryLinkRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getEntryLink response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the metadata feed, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.get_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_GetMetadataFeed_async
+ */
+  getMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|undefined, {}|undefined
+      ]>;
+  getMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      callback: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>): void;
+  getMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dataplex.v1.IMetadataFeed,
+          protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getMetadataFeed request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getMetadataFeed(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dataplex.v1.IMetadataFeed,
+        protos.google.cloud.dataplex.v1.IGetMetadataFeedRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getMetadataFeed response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
   }
 
-  /**
-   * Creates an EntryType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the EntryType, of the form:
-   *   projects/{project_number}/locations/{location_id}
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {string} request.entryTypeId
-   *   Required. EntryType identifier.
-   * @param {google.cloud.dataplex.v1.EntryType} request.entryType
-   *   Required. EntryType Resource.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. The service validates the request without performing any
-   *   mutations. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_entry_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateEntryType_async
-   */
+/**
+ * Creates an EntryType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the EntryType, of the form:
+ *   projects/{project_number}/locations/{location_id}
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {string} request.entryTypeId
+ *   Required. EntryType identifier.
+ * @param {google.cloud.dataplex.v1.EntryType} request.entryType
+ *   Required. EntryType Resource.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_entry_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateEntryType_async
+ */
   createEntryType(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createEntryType(
-    request: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEntryType(
-    request: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEntryType(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createEntryType response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createEntryType request %j', request);
-    return this.innerApiCalls
-      .createEntryType(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEntryType response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createEntryType(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createEntryType response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createEntryType()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_entry_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateEntryType_async
-   */
-  async checkCreateEntryTypeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataplex.v1.EntryType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createEntryType()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_entry_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateEntryType_async
+ */
+  async checkCreateEntryTypeProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.EntryType, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('createEntryType long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createEntryType,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataplex.v1.EntryType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createEntryType, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.EntryType, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Updates an EntryType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataplex.v1.EntryType} request.entryType
-   *   Required. EntryType Resource.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. The service validates the request without performing any
-   *   mutations. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.update_entry_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryType_async
-   */
+/**
+ * Updates an EntryType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.EntryType} request.entryType
+ *   Required. EntryType Resource.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask of fields to update.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_entry_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryType_async
+ */
   updateEntryType(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateEntryType(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEntryType(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEntryType(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'entry_type.name': request.entryType!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entry_type.name': request.entryType!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateEntryType response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateEntryType request %j', request);
-    return this.innerApiCalls
-      .updateEntryType(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEntryType response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateEntryType(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IEntryType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateEntryType response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateEntryType()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.update_entry_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryType_async
-   */
-  async checkUpdateEntryTypeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataplex.v1.EntryType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateEntryType()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_entry_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryType_async
+ */
+  async checkUpdateEntryTypeProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.EntryType, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('updateEntryType long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateEntryType,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataplex.v1.EntryType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateEntryType, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.EntryType, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an EntryType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the EntryType:
-   *   `projects/{project_number}/locations/{location_id}/entryTypes/{entry_type_id}`.
-   * @param {string} [request.etag]
-   *   Optional. If the client provided etag value does not match the current etag
-   *   value, the DeleteEntryTypeRequest method returns an ABORTED error response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryType_async
-   */
+/**
+ * Deletes an EntryType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the EntryType:
+ *   `projects/{project_number}/locations/{location_id}/entryTypes/{entry_type_id}`.
+ * @param {string} [request.etag]
+ *   Optional. If the client provided etag value does not match the current etag
+ *   value, the DeleteEntryTypeRequest method returns an ABORTED error response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryType_async
+ */
   deleteEntryType(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteEntryType(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEntryType(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEntryType(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEntryType response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEntryType request %j', request);
-    return this.innerApiCalls
-      .deleteEntryType(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEntryType response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteEntryType(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteEntryType response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteEntryType()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryType_async
-   */
-  async checkDeleteEntryTypeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteEntryType()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryType_async
+ */
+  async checkDeleteEntryTypeProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('deleteEntryType long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEntryType,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEntryType, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Creates an AspectType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the AspectType, of the form:
-   *   projects/{project_number}/locations/{location_id}
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {string} request.aspectTypeId
-   *   Required. AspectType identifier.
-   * @param {google.cloud.dataplex.v1.AspectType} request.aspectType
-   *   Required. AspectType Resource.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. The service validates the request without performing any
-   *   mutations. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_aspect_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateAspectType_async
-   */
+/**
+ * Creates an AspectType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the AspectType, of the form:
+ *   projects/{project_number}/locations/{location_id}
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {string} request.aspectTypeId
+ *   Required. AspectType identifier.
+ * @param {google.cloud.dataplex.v1.AspectType} request.aspectType
+ *   Required. AspectType Resource.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_aspect_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateAspectType_async
+ */
   createAspectType(
-    request?: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createAspectType(
-    request: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAspectType(
-    request: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createAspectType(
-    request?: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IAspectType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.ICreateAspectTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IAspectType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAspectType response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAspectType request %j', request);
-    return this.innerApiCalls
-      .createAspectType(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataplex.v1.IAspectType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createAspectType response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createAspectType(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createAspectType response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createAspectType()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_aspect_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateAspectType_async
-   */
-  async checkCreateAspectTypeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataplex.v1.AspectType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createAspectType()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_aspect_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateAspectType_async
+ */
+  async checkCreateAspectTypeProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.AspectType, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('createAspectType long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createAspectType,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataplex.v1.AspectType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAspectType, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.AspectType, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Updates an AspectType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataplex.v1.AspectType} request.aspectType
-   *   Required. AspectType Resource
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.update_aspect_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_UpdateAspectType_async
-   */
+/**
+ * Updates an AspectType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.AspectType} request.aspectType
+ *   Required. AspectType Resource
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask of fields to update.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the request, but do not perform mutations.
+ *   The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_aspect_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateAspectType_async
+ */
   updateAspectType(
-    request?: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateAspectType(
-    request: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAspectType(
-    request: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateAspectType(
-    request?: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IAspectType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IAspectType,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.IUpdateAspectTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'aspect_type.name': request.aspectType!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'aspect_type.name': request.aspectType!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IAspectType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAspectType response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAspectType request %j', request);
-    return this.innerApiCalls
-      .updateAspectType(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataplex.v1.IAspectType,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateAspectType response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateAspectType(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IAspectType, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateAspectType response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateAspectType()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.update_aspect_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_UpdateAspectType_async
-   */
-  async checkUpdateAspectTypeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataplex.v1.AspectType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateAspectType()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_aspect_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateAspectType_async
+ */
+  async checkUpdateAspectTypeProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.AspectType, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('updateAspectType long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateAspectType,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataplex.v1.AspectType,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAspectType, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.AspectType, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an AspectType.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the AspectType:
-   *   `projects/{project_number}/locations/{location_id}/aspectTypes/{aspect_type_id}`.
-   * @param {string} [request.etag]
-   *   Optional. If the client provided etag value does not match the current etag
-   *   value, the DeleteAspectTypeRequest method returns an ABORTED error
-   *   response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.delete_aspect_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_DeleteAspectType_async
-   */
+/**
+ * Deletes an AspectType.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the AspectType:
+ *   `projects/{project_number}/locations/{location_id}/aspectTypes/{aspect_type_id}`.
+ * @param {string} [request.etag]
+ *   Optional. If the client provided etag value does not match the current etag
+ *   value, the DeleteAspectTypeRequest method returns an ABORTED error
+ *   response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_aspect_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteAspectType_async
+ */
   deleteAspectType(
-    request?: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteAspectType(
-    request: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAspectType(
-    request: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteAspectType(
-    request?: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.IDeleteAspectTypeRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAspectType response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAspectType request %j', request);
-    return this.innerApiCalls
-      .deleteAspectType(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteAspectType response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteAspectType(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteAspectType response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteAspectType()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.delete_aspect_type.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_DeleteAspectType_async
-   */
-  async checkDeleteAspectTypeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteAspectType()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_aspect_type.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteAspectType_async
+ */
+  async checkDeleteAspectTypeProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('deleteAspectType long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteAspectType,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAspectType, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Creates an EntryGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the entryGroup, of the form:
-   *   projects/{project_number}/locations/{location_id}
-   *   where `location_id` refers to a GCP region.
-   * @param {string} request.entryGroupId
-   *   Required. EntryGroup identifier.
-   * @param {google.cloud.dataplex.v1.EntryGroup} request.entryGroup
-   *   Required. EntryGroup Resource.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. The service validates the request without performing any
-   *   mutations. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_entry_group.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateEntryGroup_async
-   */
+/**
+ * Creates an EntryGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the entryGroup, of the form:
+ *   projects/{project_number}/locations/{location_id}
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {string} request.entryGroupId
+ *   Required. EntryGroup identifier.
+ * @param {google.cloud.dataplex.v1.EntryGroup} request.entryGroup
+ *   Required. EntryGroup Resource.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_entry_group.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateEntryGroup_async
+ */
   createEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createEntryGroup(
-    request: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEntryGroup(
-    request: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryGroup,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.ICreateEntryGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryGroup,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createEntryGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createEntryGroup request %j', request);
-    return this.innerApiCalls
-      .createEntryGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryGroup,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createEntryGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createEntryGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createEntryGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createEntryGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_entry_group.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateEntryGroup_async
-   */
-  async checkCreateEntryGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataplex.v1.EntryGroup,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createEntryGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_entry_group.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateEntryGroup_async
+ */
+  async checkCreateEntryGroupProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.EntryGroup, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('createEntryGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createEntryGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataplex.v1.EntryGroup,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createEntryGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.EntryGroup, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Updates an EntryGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.dataplex.v1.EntryGroup} request.entryGroup
-   *   Required. EntryGroup Resource.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. The service validates the request, without performing any
-   *   mutations. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.update_entry_group.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryGroup_async
-   */
+/**
+ * Updates an EntryGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.EntryGroup} request.entryGroup
+ *   Required. EntryGroup Resource.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. Mask of fields to update.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request, without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_entry_group.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryGroup_async
+ */
   updateEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   updateEntryGroup(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEntryGroup(
-    request: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   updateEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryGroup,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IEntryGroup,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.IUpdateEntryGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'entry_group.name': request.entryGroup!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'entry_group.name': request.entryGroup!.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryGroup,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateEntryGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateEntryGroup request %j', request);
-    return this.innerApiCalls
-      .updateEntryGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataplex.v1.IEntryGroup,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateEntryGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.updateEntryGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IEntryGroup, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateEntryGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `updateEntryGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.update_entry_group.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryGroup_async
-   */
-  async checkUpdateEntryGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataplex.v1.EntryGroup,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `updateEntryGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_entry_group.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateEntryGroup_async
+ */
+  async checkUpdateEntryGroupProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.EntryGroup, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('updateEntryGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateEntryGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataplex.v1.EntryGroup,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateEntryGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.EntryGroup, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Deletes an EntryGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the EntryGroup:
-   *   `projects/{project_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
-   * @param {string} [request.etag]
-   *   Optional. If the client provided etag value does not match the current etag
-   *   value, the DeleteEntryGroupRequest method returns an ABORTED error
-   *   response.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_group.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryGroup_async
-   */
+/**
+ * Deletes an EntryGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the EntryGroup:
+ *   `projects/{project_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+ * @param {string} [request.etag]
+ *   Optional. If the client provided etag value does not match the current etag
+ *   value, the DeleteEntryGroupRequest method returns an ABORTED error
+ *   response.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_group.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryGroup_async
+ */
   deleteEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteEntryGroup(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEntryGroup(
-    request: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEntryGroup(
-    request?: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.IDeleteEntryGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEntryGroup response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEntryGroup request %j', request);
-    return this.innerApiCalls
-      .deleteEntryGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteEntryGroup response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.deleteEntryGroup(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteEntryGroup response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `deleteEntryGroup()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_group.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryGroup_async
-   */
-  async checkDeleteEntryGroupProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `deleteEntryGroup()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_entry_group.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteEntryGroup_async
+ */
+  async checkDeleteEntryGroupProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('deleteEntryGroup long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEntryGroup,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEntryGroup, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Creates a metadata job. For example, use a metadata job to import Dataplex
-   * Catalog entries and aspects from a third-party system into Dataplex.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent location, in the format
-   *   `projects/{project_id_or_number}/locations/{location_id}`
-   * @param {google.cloud.dataplex.v1.MetadataJob} request.metadataJob
-   *   Required. The metadata job resource.
-   * @param {string} [request.metadataJobId]
-   *   Optional. The metadata job ID. If not provided, a unique ID is generated
-   *   with the prefix `metadata-job-`.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. The service validates the request without performing any
-   *   mutations. The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_job.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataJob_async
-   */
+/**
+ * Creates a metadata job. For example, use a metadata job to import metadata
+ * from a third-party system into Dataplex Universal Catalog.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {google.cloud.dataplex.v1.MetadataJob} request.metadataJob
+ *   Required. The metadata job resource.
+ * @param {string} [request.metadataJobId]
+ *   Optional. The metadata job ID. If not provided, a unique ID is generated
+ *   with the prefix `metadata-job-`.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_job.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataJob_async
+ */
   createMetadataJob(
-    request?: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IMetadataJob,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createMetadataJob(
-    request: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IMetadataJob,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMetadataJob(
-    request: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IMetadataJob,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createMetadataJob(
-    request?: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IMetadataJob,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.dataplex.v1.IMetadataJob,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.dataplex.v1.IMetadataJob,
-        protos.google.cloud.dataplex.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.cloud.dataplex.v1.ICreateMetadataJobRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.cloud.dataplex.v1.IMetadataJob,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMetadataJob response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMetadataJob request %j', request);
-    return this.innerApiCalls
-      .createMetadataJob(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.dataplex.v1.IMetadataJob,
-            protos.google.cloud.dataplex.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createMetadataJob response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.createMetadataJob(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IMetadataJob, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createMetadataJob response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `createMetadataJob()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_job.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataJob_async
-   */
-  async checkCreateMetadataJobProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.dataplex.v1.MetadataJob,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `createMetadataJob()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_job.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataJob_async
+ */
+  async checkCreateMetadataJobProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.MetadataJob, protos.google.cloud.dataplex.v1.OperationMetadata>>{
     this._log.info('createMetadataJob long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createMetadataJob,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.dataplex.v1.MetadataJob,
-      protos.google.cloud.dataplex.v1.OperationMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMetadataJob, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.MetadataJob, protos.google.cloud.dataplex.v1.OperationMetadata>;
   }
-  /**
-   * Lists EntryType resources in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the EntryType location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of EntryTypes to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntryTypes` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provided to `ListEntryTypes` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * labels.key1 = "value1"
-   *   * labels:key1
-   *   * name = "value"
-   *
-   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
-   * @param {string} [request.orderBy]
-   *   Optional. Orders the result by `name` or `create_time` fields.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.EntryType|EntryType}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEntryTypesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listEntryTypes(
-    request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryType[],
-      protos.google.cloud.dataplex.v1.IListEntryTypesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntryTypesResponse,
-    ]
-  >;
-  listEntryTypes(
-    request: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-      | protos.google.cloud.dataplex.v1.IListEntryTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IEntryType
-    >
-  ): void;
-  listEntryTypes(
-    request: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-      | protos.google.cloud.dataplex.v1.IListEntryTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IEntryType
-    >
-  ): void;
-  listEntryTypes(
-    request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-          | protos.google.cloud.dataplex.v1.IListEntryTypesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntryType
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-      | protos.google.cloud.dataplex.v1.IListEntryTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IEntryType
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryType[],
-      protos.google.cloud.dataplex.v1.IListEntryTypesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntryTypesResponse,
-    ]
-  > | void {
+/**
+ * Creates a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {google.cloud.dataplex.v1.MetadataFeed} request.metadataFeed
+ *   Required. The metadata job resource.
+ * @param {string} [request.metadataFeedId]
+ *   Optional. The metadata job ID. If not provided, a unique ID is generated
+ *   with the prefix `metadata-job-`.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. The service validates the request without performing any
+ *   mutations. The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataFeed_async
+ */
+  createMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.ICreateMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMetadataFeed response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMetadataFeed request %j', request);
+    return this.innerApiCalls.createMetadataFeed(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createMetadataFeed response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createMetadataFeed()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.create_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_CreateMetadataFeed_async
+ */
+  async checkCreateMetadataFeedProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+    this._log.info('createMetadataFeed long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMetadataFeed, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>;
+  }
+/**
+ * Deletes a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the metadata feed, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}/MetadataFeeds/{metadata_feed_id}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteMetadataFeed_async
+ */
+  deleteMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IDeleteMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMetadataFeed response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMetadataFeed request %j', request);
+    return this.innerApiCalls.deleteMetadataFeed(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteMetadataFeed response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteMetadataFeed()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.delete_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_DeleteMetadataFeed_async
+ */
+  async checkDeleteMetadataFeedProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+    this._log.info('deleteMetadataFeed long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMetadataFeed, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
+  }
+/**
+ * Updates a MetadataFeed.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.dataplex.v1.MetadataFeed} request.metadataFeed
+ *   Required. Update description.
+ *   Only fields specified in `update_mask` are updated.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Mask of fields to update.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. Only validate the request, but do not perform mutations.
+ *   The default is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateMetadataFeed_async
+ */
+  updateMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateMetadataFeed(
+      request: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateMetadataFeed(
+      request?: protos.google.cloud.dataplex.v1.IUpdateMetadataFeedRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'metadata_feed.name': request.metadataFeed!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMetadataFeed response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMetadataFeed request %j', request);
+    return this.innerApiCalls.updateMetadataFeed(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dataplex.v1.IMetadataFeed, protos.google.cloud.dataplex.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateMetadataFeed response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateMetadataFeed()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.update_metadata_feed.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_UpdateMetadataFeed_async
+ */
+  async checkUpdateMetadataFeedProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+    this._log.info('updateMetadataFeed long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMetadataFeed, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.MetadataFeed, protos.google.cloud.dataplex.v1.OperationMetadata>;
+  }
+ /**
+ * Lists EntryType resources in a project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the EntryType location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of EntryTypes to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntryTypes` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provided to `ListEntryTypes` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * labels.key1 = "value1"
+ *   * labels:key1
+ *   * name = "value"
+ *
+ *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
+ * @param {string} [request.orderBy]
+ *   Optional. Orders the result by `name` or `create_time` fields.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.EntryType|EntryType}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEntryTypesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listEntryTypes(
+      request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryType[],
+        protos.google.cloud.dataplex.v1.IListEntryTypesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntryTypesResponse
+      ]>;
+  listEntryTypes(
+      request: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-          | protos.google.cloud.dataplex.v1.IListEntryTypesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntryType
-        >
-      | undefined = callback
+          protos.google.cloud.dataplex.v1.IListEntryTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryType>): void;
+  listEntryTypes(
+      request: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+          protos.google.cloud.dataplex.v1.IListEntryTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryType>): void;
+  listEntryTypes(
+      request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+          protos.google.cloud.dataplex.v1.IListEntryTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryType>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+          protos.google.cloud.dataplex.v1.IListEntryTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryType>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryType[],
+        protos.google.cloud.dataplex.v1.IListEntryTypesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntryTypesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+      protos.google.cloud.dataplex.v1.IListEntryTypesResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IEntryType>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEntryTypes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4004,76 +3796,73 @@ export class CatalogServiceClient {
     this._log.info('listEntryTypes request %j', request);
     return this.innerApiCalls
       .listEntryTypes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IEntryType[],
-          protos.google.cloud.dataplex.v1.IListEntryTypesRequest | null,
-          protos.google.cloud.dataplex.v1.IListEntryTypesResponse,
-        ]) => {
-          this._log.info('listEntryTypes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IEntryType[],
+        protos.google.cloud.dataplex.v1.IListEntryTypesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntryTypesResponse
+      ]) => {
+        this._log.info('listEntryTypes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEntryTypes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the EntryType location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of EntryTypes to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntryTypes` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provided to `ListEntryTypes` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * labels.key1 = "value1"
-   *   * labels:key1
-   *   * name = "value"
-   *
-   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
-   * @param {string} [request.orderBy]
-   *   Optional. Orders the result by `name` or `create_time` fields.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.EntryType|EntryType} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEntryTypesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEntryTypes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the EntryType location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of EntryTypes to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntryTypes` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provided to `ListEntryTypes` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * labels.key1 = "value1"
+ *   * labels:key1
+ *   * name = "value"
+ *
+ *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
+ * @param {string} [request.orderBy]
+ *   Optional. Orders the result by `name` or `create_time` fields.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.EntryType|EntryType} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEntryTypesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntryTypesStream(
-    request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntryTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntryTypes stream %j', request);
     return this.descriptors.page.listEntryTypes.createStream(
       this.innerApiCalls.listEntryTypes as GaxCall,
@@ -4082,67 +3871,66 @@ export class CatalogServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listEntryTypes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the EntryType location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of EntryTypes to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntryTypes` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provided to `ListEntryTypes` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * labels.key1 = "value1"
-   *   * labels:key1
-   *   * name = "value"
-   *
-   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
-   * @param {string} [request.orderBy]
-   *   Optional. Orders the result by `name` or `create_time` fields.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.EntryType|EntryType}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.list_entry_types.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_ListEntryTypes_async
-   */
+/**
+ * Equivalent to `listEntryTypes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the EntryType location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of EntryTypes to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
+ *   1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntryTypes` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provided to `ListEntryTypes` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * labels.key1 = "value1"
+ *   * labels:key1
+ *   * name = "value"
+ *
+ *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
+ * @param {string} [request.orderBy]
+ *   Optional. Orders the result by `name` or `create_time` fields.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.EntryType|EntryType}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.list_entry_types.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_ListEntryTypes_async
+ */
   listEntryTypesAsync(
-    request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IEntryType> {
+      request?: protos.google.cloud.dataplex.v1.IListEntryTypesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IEntryType>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntryTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntryTypes iterate %j', request);
     return this.descriptors.page.listEntryTypes.asyncIterate(
       this.innerApiCalls['listEntryTypes'] as GaxCall,
@@ -4150,132 +3938,107 @@ export class CatalogServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntryType>;
   }
-  /**
-   * Lists AspectType resources in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the AspectType location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of AspectTypes to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAspectTypes` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provide to `ListAspectTypes` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * labels.key1 = "value1"
-   *   * labels:key1
-   *   * name = "value"
-   *
-   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
-   * @param {string} [request.orderBy]
-   *   Optional. Orders the result by `name` or `create_time` fields.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.AspectType|AspectType}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAspectTypesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists AspectType resources in a project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the AspectType location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of AspectTypes to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListAspectTypes` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provide to `ListAspectTypes` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * labels.key1 = "value1"
+ *   * labels:key1
+ *   * name = "value"
+ *
+ *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
+ * @param {string} [request.orderBy]
+ *   Optional. Orders the result by `name` or `create_time` fields.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.AspectType|AspectType}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listAspectTypesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAspectTypes(
-    request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IAspectType[],
-      protos.google.cloud.dataplex.v1.IListAspectTypesRequest | null,
-      protos.google.cloud.dataplex.v1.IListAspectTypesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IAspectType[],
+        protos.google.cloud.dataplex.v1.IListAspectTypesRequest|null,
+        protos.google.cloud.dataplex.v1.IListAspectTypesResponse
+      ]>;
   listAspectTypes(
-    request: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-      | protos.google.cloud.dataplex.v1.IListAspectTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IAspectType
-    >
-  ): void;
-  listAspectTypes(
-    request: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-      | protos.google.cloud.dataplex.v1.IListAspectTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IAspectType
-    >
-  ): void;
-  listAspectTypes(
-    request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-          | protos.google.cloud.dataplex.v1.IListAspectTypesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IAspectType
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-      | protos.google.cloud.dataplex.v1.IListAspectTypesResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IAspectType
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IAspectType[],
-      protos.google.cloud.dataplex.v1.IListAspectTypesRequest | null,
-      protos.google.cloud.dataplex.v1.IListAspectTypesResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IListAspectTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IAspectType>): void;
+  listAspectTypes(
+      request: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+          protos.google.cloud.dataplex.v1.IListAspectTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IAspectType>): void;
+  listAspectTypes(
+      request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+          protos.google.cloud.dataplex.v1.IListAspectTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IAspectType>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+          protos.google.cloud.dataplex.v1.IListAspectTypesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IAspectType>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IAspectType[],
+        protos.google.cloud.dataplex.v1.IListAspectTypesRequest|null,
+        protos.google.cloud.dataplex.v1.IListAspectTypesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-          | protos.google.cloud.dataplex.v1.IListAspectTypesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IAspectType
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+      protos.google.cloud.dataplex.v1.IListAspectTypesResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IAspectType>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAspectTypes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4284,76 +4047,73 @@ export class CatalogServiceClient {
     this._log.info('listAspectTypes request %j', request);
     return this.innerApiCalls
       .listAspectTypes(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IAspectType[],
-          protos.google.cloud.dataplex.v1.IListAspectTypesRequest | null,
-          protos.google.cloud.dataplex.v1.IListAspectTypesResponse,
-        ]) => {
-          this._log.info('listAspectTypes values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IAspectType[],
+        protos.google.cloud.dataplex.v1.IListAspectTypesRequest|null,
+        protos.google.cloud.dataplex.v1.IListAspectTypesResponse
+      ]) => {
+        this._log.info('listAspectTypes values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listAspectTypes`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the AspectType location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of AspectTypes to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAspectTypes` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provide to `ListAspectTypes` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * labels.key1 = "value1"
-   *   * labels:key1
-   *   * name = "value"
-   *
-   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
-   * @param {string} [request.orderBy]
-   *   Optional. Orders the result by `name` or `create_time` fields.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.AspectType|AspectType} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAspectTypesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listAspectTypes`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the AspectType location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of AspectTypes to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListAspectTypes` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provide to `ListAspectTypes` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * labels.key1 = "value1"
+ *   * labels:key1
+ *   * name = "value"
+ *
+ *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
+ * @param {string} [request.orderBy]
+ *   Optional. Orders the result by `name` or `create_time` fields.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.AspectType|AspectType} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listAspectTypesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listAspectTypesStream(
-    request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAspectTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAspectTypes stream %j', request);
     return this.descriptors.page.listAspectTypes.createStream(
       this.innerApiCalls.listAspectTypes as GaxCall,
@@ -4362,67 +4122,66 @@ export class CatalogServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listAspectTypes`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the AspectType location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of AspectTypes to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListAspectTypes` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provide to `ListAspectTypes` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * labels.key1 = "value1"
-   *   * labels:key1
-   *   * name = "value"
-   *
-   *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
-   * @param {string} [request.orderBy]
-   *   Optional. Orders the result by `name` or `create_time` fields.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.AspectType|AspectType}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.list_aspect_types.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_ListAspectTypes_async
-   */
+/**
+ * Equivalent to `listAspectTypes`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the AspectType location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of AspectTypes to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListAspectTypes` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provide to `ListAspectTypes` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * labels.key1 = "value1"
+ *   * labels:key1
+ *   * name = "value"
+ *
+ *   These restrictions can be conjoined with AND, OR, and NOT conjunctions.
+ * @param {string} [request.orderBy]
+ *   Optional. Orders the result by `name` or `create_time` fields.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.AspectType|AspectType}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.list_aspect_types.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_ListAspectTypes_async
+ */
   listAspectTypesAsync(
-    request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IAspectType> {
+      request?: protos.google.cloud.dataplex.v1.IListAspectTypesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IAspectType>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listAspectTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listAspectTypes iterate %j', request);
     return this.descriptors.page.listAspectTypes.asyncIterate(
       this.innerApiCalls['listAspectTypes'] as GaxCall,
@@ -4430,124 +4189,99 @@ export class CatalogServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAspectType>;
   }
-  /**
-   * Lists EntryGroup resources in a project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the entryGroup location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of EntryGroups to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntryGroups` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provide to `ListEntryGroups` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request.
-   * @param {string} [request.orderBy]
-   *   Optional. Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEntryGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists EntryGroup resources in a project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the entryGroup location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of EntryGroups to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntryGroups` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provide to `ListEntryGroups` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request.
+ * @param {string} [request.orderBy]
+ *   Optional. Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEntryGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntryGroups(
-    request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryGroup[],
-      protos.google.cloud.dataplex.v1.IListEntryGroupsRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntryGroupsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryGroup[],
+        protos.google.cloud.dataplex.v1.IListEntryGroupsRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
+      ]>;
   listEntryGroups(
-    request: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-      | protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IEntryGroup
-    >
-  ): void;
-  listEntryGroups(
-    request: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-      | protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IEntryGroup
-    >
-  ): void;
-  listEntryGroups(
-    request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-          | protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntryGroup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-      | protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IEntryGroup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntryGroup[],
-      protos.google.cloud.dataplex.v1.IListEntryGroupsRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntryGroupsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IListEntryGroupsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryGroup>): void;
+  listEntryGroups(
+      request: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+          protos.google.cloud.dataplex.v1.IListEntryGroupsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryGroup>): void;
+  listEntryGroups(
+      request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+          protos.google.cloud.dataplex.v1.IListEntryGroupsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+          protos.google.cloud.dataplex.v1.IListEntryGroupsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryGroup>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryGroup[],
+        protos.google.cloud.dataplex.v1.IListEntryGroupsRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-          | protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntryGroup
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+      protos.google.cloud.dataplex.v1.IListEntryGroupsResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IEntryGroup>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEntryGroups values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4556,68 +4290,65 @@ export class CatalogServiceClient {
     this._log.info('listEntryGroups request %j', request);
     return this.innerApiCalls
       .listEntryGroups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IEntryGroup[],
-          protos.google.cloud.dataplex.v1.IListEntryGroupsRequest | null,
-          protos.google.cloud.dataplex.v1.IListEntryGroupsResponse,
-        ]) => {
-          this._log.info('listEntryGroups values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IEntryGroup[],
+        protos.google.cloud.dataplex.v1.IListEntryGroupsRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntryGroupsResponse
+      ]) => {
+        this._log.info('listEntryGroups values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEntryGroups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the entryGroup location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of EntryGroups to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntryGroups` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provide to `ListEntryGroups` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request.
-   * @param {string} [request.orderBy]
-   *   Optional. Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEntryGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEntryGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the entryGroup location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of EntryGroups to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntryGroups` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provide to `ListEntryGroups` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request.
+ * @param {string} [request.orderBy]
+ *   Optional. Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEntryGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntryGroupsStream(
-    request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntryGroups stream %j', request);
     return this.descriptors.page.listEntryGroups.createStream(
       this.innerApiCalls.listEntryGroups as GaxCall,
@@ -4626,59 +4357,58 @@ export class CatalogServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listEntryGroups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the entryGroup location, of the form:
-   *   `projects/{project_number}/locations/{location_id}`
-   *   where `location_id` refers to a Google Cloud region.
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of EntryGroups to return. The service may return
-   *   fewer than this value. If unspecified, the service returns at most 10
-   *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
-   *   to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntryGroups` call.
-   *   Provide this to retrieve the subsequent page. When paginating, all other
-   *   parameters you provide to `ListEntryGroups` must match the call that
-   *   provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request.
-   * @param {string} [request.orderBy]
-   *   Optional. Order by fields for the result.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.list_entry_groups.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_ListEntryGroups_async
-   */
+/**
+ * Equivalent to `listEntryGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the entryGroup location, of the form:
+ *   `projects/{project_number}/locations/{location_id}`
+ *   where `location_id` refers to a Google Cloud region.
+ * @param {number} [request.pageSize]
+ *   Optional. Maximum number of EntryGroups to return. The service may return
+ *   fewer than this value. If unspecified, the service returns at most 10
+ *   EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntryGroups` call.
+ *   Provide this to retrieve the subsequent page. When paginating, all other
+ *   parameters you provide to `ListEntryGroups` must match the call that
+ *   provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request.
+ * @param {string} [request.orderBy]
+ *   Optional. Order by fields for the result.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.EntryGroup|EntryGroup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.list_entry_groups.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_ListEntryGroups_async
+ */
   listEntryGroupsAsync(
-    request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IEntryGroup> {
+      request?: protos.google.cloud.dataplex.v1.IListEntryGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IEntryGroup>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntryGroups iterate %j', request);
     return this.descriptors.page.listEntryGroups.asyncIterate(
       this.innerApiCalls['listEntryGroups'] as GaxCall,
@@ -4686,133 +4416,118 @@ export class CatalogServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntryGroup>;
   }
-  /**
-   * Lists Entries within an EntryGroup.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent Entry Group:
-   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of items to return per page. If there are remaining
-   *   results, the service returns a next_page_token. If unspecified, the service
-   *   returns at most 10 Entries. The maximum value is 100; values above 100 will
-   *   be coerced to 100.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntries` call. Provide
-   *   this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter on the entries to return. Filters are case-sensitive.
-   *   You can filter the request by the following fields:
-   *
-   *   * entry_type
-   *   * entry_source.display_name
-   *
-   *   The comparison operators are =, !=, <, >, <=, >=. The service compares
-   *   strings according to lexical order.
-   *
-   *   You can use the logical operators AND, OR, NOT in the filter.
-   *
-   *   You can use Wildcard "*", but for entry_type you need to provide the
-   *   full project id or number.
-   *
-   *   Example filter expressions:
-   *
-   *   * "entry_source.display_name=AnExampleDisplayName"
-   *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-   *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
-   *   entry_type=projects/another-project/locations/*"
-   *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists Entries within an EntryGroup.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent Entry Group:
+ *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of items to return per page. If there are remaining
+ *   results, the service returns a next_page_token. If unspecified, the service
+ *   returns at most 10 Entries. The maximum value is 100; values above 100 will
+ *   be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntries` call. Provide
+ *   this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter on the entries to return. Filters are case-sensitive.
+ *   You can filter the request by the following fields:
+ *
+ *   * entry_type
+ *   * entry_source.display_name
+ *   * parent_entry
+ *
+ *   The comparison operators are =, !=, <, >, <=, >=. The service compares
+ *   strings according to lexical order.
+ *
+ *   You can use the logical operators AND, OR, NOT in the filter.
+ *
+ *   You can use Wildcard "*", but for entry_type and parent_entry you need to
+ *   provide the full project id or number.
+ *
+ *   You cannot use parent_entry in conjunction with other fields.
+ *
+ *   Example filter expressions:
+ *
+ *   * "entry_source.display_name=AnExampleDisplayName"
+ *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
+ *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+ *   entry_type=projects/another-project/locations/*"
+ *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
+ *   * "parent_entry=projects/example-project/locations/us/entryGroups/example-entry-group/entries/example-entry"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntries(
-    request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry[],
-      protos.google.cloud.dataplex.v1.IListEntriesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry[],
+        protos.google.cloud.dataplex.v1.IListEntriesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntriesResponse
+      ]>;
   listEntries(
-    request: protos.google.cloud.dataplex.v1.IListEntriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntriesRequest,
-      protos.google.cloud.dataplex.v1.IListEntriesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntry
-    >
-  ): void;
-  listEntries(
-    request: protos.google.cloud.dataplex.v1.IListEntriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntriesRequest,
-      protos.google.cloud.dataplex.v1.IListEntriesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntry
-    >
-  ): void;
-  listEntries(
-    request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataplex.v1.IListEntriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.IListEntriesRequest,
-          | protos.google.cloud.dataplex.v1.IListEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntry
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListEntriesRequest,
-      protos.google.cloud.dataplex.v1.IListEntriesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IEntry
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IEntry[],
-      protos.google.cloud.dataplex.v1.IListEntriesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IListEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntry>): void;
+  listEntries(
+      request: protos.google.cloud.dataplex.v1.IListEntriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntriesRequest,
+          protos.google.cloud.dataplex.v1.IListEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntry>): void;
+  listEntries(
+      request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntriesRequest,
+          protos.google.cloud.dataplex.v1.IListEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntry>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListEntriesRequest,
+          protos.google.cloud.dataplex.v1.IListEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntry>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntry[],
+        protos.google.cloud.dataplex.v1.IListEntriesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListEntriesRequest,
-          | protos.google.cloud.dataplex.v1.IListEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IEntry
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListEntriesRequest,
+      protos.google.cloud.dataplex.v1.IListEntriesResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IEntry>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4821,83 +4536,84 @@ export class CatalogServiceClient {
     this._log.info('listEntries request %j', request);
     return this.innerApiCalls
       .listEntries(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IEntry[],
-          protos.google.cloud.dataplex.v1.IListEntriesRequest | null,
-          protos.google.cloud.dataplex.v1.IListEntriesResponse,
-        ]) => {
-          this._log.info('listEntries values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IEntry[],
+        protos.google.cloud.dataplex.v1.IListEntriesRequest|null,
+        protos.google.cloud.dataplex.v1.IListEntriesResponse
+      ]) => {
+        this._log.info('listEntries values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listEntries`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent Entry Group:
-   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of items to return per page. If there are remaining
-   *   results, the service returns a next_page_token. If unspecified, the service
-   *   returns at most 10 Entries. The maximum value is 100; values above 100 will
-   *   be coerced to 100.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntries` call. Provide
-   *   this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter on the entries to return. Filters are case-sensitive.
-   *   You can filter the request by the following fields:
-   *
-   *   * entry_type
-   *   * entry_source.display_name
-   *
-   *   The comparison operators are =, !=, <, >, <=, >=. The service compares
-   *   strings according to lexical order.
-   *
-   *   You can use the logical operators AND, OR, NOT in the filter.
-   *
-   *   You can use Wildcard "*", but for entry_type you need to provide the
-   *   full project id or number.
-   *
-   *   Example filter expressions:
-   *
-   *   * "entry_source.display_name=AnExampleDisplayName"
-   *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-   *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
-   *   entry_type=projects/another-project/locations/*"
-   *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listEntries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent Entry Group:
+ *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of items to return per page. If there are remaining
+ *   results, the service returns a next_page_token. If unspecified, the service
+ *   returns at most 10 Entries. The maximum value is 100; values above 100 will
+ *   be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntries` call. Provide
+ *   this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter on the entries to return. Filters are case-sensitive.
+ *   You can filter the request by the following fields:
+ *
+ *   * entry_type
+ *   * entry_source.display_name
+ *   * parent_entry
+ *
+ *   The comparison operators are =, !=, <, >, <=, >=. The service compares
+ *   strings according to lexical order.
+ *
+ *   You can use the logical operators AND, OR, NOT in the filter.
+ *
+ *   You can use Wildcard "*", but for entry_type and parent_entry you need to
+ *   provide the full project id or number.
+ *
+ *   You cannot use parent_entry in conjunction with other fields.
+ *
+ *   Example filter expressions:
+ *
+ *   * "entry_source.display_name=AnExampleDisplayName"
+ *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
+ *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+ *   entry_type=projects/another-project/locations/*"
+ *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
+ *   * "parent_entry=projects/example-project/locations/us/entryGroups/example-entry-group/entries/example-entry"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listEntriesStream(
-    request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntries stream %j', request);
     return this.descriptors.page.listEntries.createStream(
       this.innerApiCalls.listEntries as GaxCall,
@@ -4906,74 +4622,77 @@ export class CatalogServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listEntries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent Entry Group:
-   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
-   * @param {number} [request.pageSize]
-   *   Optional. Number of items to return per page. If there are remaining
-   *   results, the service returns a next_page_token. If unspecified, the service
-   *   returns at most 10 Entries. The maximum value is 100; values above 100 will
-   *   be coerced to 100.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListEntries` call. Provide
-   *   this to retrieve the subsequent page.
-   * @param {string} [request.filter]
-   *   Optional. A filter on the entries to return. Filters are case-sensitive.
-   *   You can filter the request by the following fields:
-   *
-   *   * entry_type
-   *   * entry_source.display_name
-   *
-   *   The comparison operators are =, !=, <, >, <=, >=. The service compares
-   *   strings according to lexical order.
-   *
-   *   You can use the logical operators AND, OR, NOT in the filter.
-   *
-   *   You can use Wildcard "*", but for entry_type you need to provide the
-   *   full project id or number.
-   *
-   *   Example filter expressions:
-   *
-   *   * "entry_source.display_name=AnExampleDisplayName"
-   *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-   *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
-   *   entry_type=projects/another-project/locations/*"
-   *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.Entry|Entry}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.list_entries.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_ListEntries_async
-   */
+/**
+ * Equivalent to `listEntries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent Entry Group:
+ *   `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Number of items to return per page. If there are remaining
+ *   results, the service returns a next_page_token. If unspecified, the service
+ *   returns at most 10 Entries. The maximum value is 100; values above 100 will
+ *   be coerced to 100.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `ListEntries` call. Provide
+ *   this to retrieve the subsequent page.
+ * @param {string} [request.filter]
+ *   Optional. A filter on the entries to return. Filters are case-sensitive.
+ *   You can filter the request by the following fields:
+ *
+ *   * entry_type
+ *   * entry_source.display_name
+ *   * parent_entry
+ *
+ *   The comparison operators are =, !=, <, >, <=, >=. The service compares
+ *   strings according to lexical order.
+ *
+ *   You can use the logical operators AND, OR, NOT in the filter.
+ *
+ *   You can use Wildcard "*", but for entry_type and parent_entry you need to
+ *   provide the full project id or number.
+ *
+ *   You cannot use parent_entry in conjunction with other fields.
+ *
+ *   Example filter expressions:
+ *
+ *   * "entry_source.display_name=AnExampleDisplayName"
+ *   * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
+ *   * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+ *   entry_type=projects/another-project/locations/*"
+ *   * "NOT entry_source.display_name=AnotherExampleDisplayName"
+ *   * "parent_entry=projects/example-project/locations/us/entryGroups/example-entry-group/entries/example-entry"
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.Entry|Entry}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.list_entries.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_ListEntries_async
+ */
   listEntriesAsync(
-    request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IEntry> {
+      request?: protos.google.cloud.dataplex.v1.IListEntriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IEntry>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listEntries iterate %j', request);
     return this.descriptors.page.listEntries.asyncIterate(
       this.innerApiCalls['listEntries'] as GaxCall,
@@ -4981,126 +4700,110 @@ export class CatalogServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntry>;
   }
-  /**
-   * Searches for Entries matching the given query and scope.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project to which the request should be attributed in the
-   *   following form: `projects/{project}/locations/{location}`.
-   * @param {string} request.query
-   *   Required. The query against which entries in scope should be matched.
-   *   The query syntax is defined in [Search syntax for Dataplex
-   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results in the search page. If <=0, then defaults
-   *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
-   *   page_size > 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `SearchEntries` call. Provide
-   *   this to retrieve the subsequent page.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results.
-   *   Supported values are:
-   *
-   *   * `relevance` (default)
-   *   * `last_modified_timestamp`
-   *   * `last_modified_timestamp asc`
-   * @param {string} [request.scope]
-   *   Optional. The scope under which the search should be operating. It must
-   *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
-   *   unspecified, it defaults to the organization where the project provided in
-   *   `name` is located.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.SearchEntriesResult|SearchEntriesResult}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Searches for Entries matching the given query and scope.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed in the
+ *   following form: `projects/{project}/locations/global`.
+ * @param {string} request.query
+ *   Required. The query against which entries in scope should be matched.
+ *   The query syntax is defined in [Search syntax for Dataplex Universal
+ *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results in the search page. If <=0, then defaults
+ *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
+ *   page_size > 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `SearchEntries` call. Provide
+ *   this to retrieve the subsequent page.
+ * @param {string} [request.orderBy]
+ *   Optional. Specifies the ordering of results.
+ *   Supported values are:
+ *
+ *   * `relevance`
+ *   * `last_modified_timestamp`
+ *   * `last_modified_timestamp asc`
+ * @param {string} [request.scope]
+ *   Optional. The scope under which the search should be operating. It must
+ *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+ *   unspecified, it defaults to the organization where the project provided in
+ *   `name` is located.
+ * @param {boolean} [request.semanticSearch]
+ *   Optional. Specifies whether the search should understand the meaning and
+ *   intent behind the query, rather than just matching keywords.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.SearchEntriesResult|SearchEntriesResult}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchEntries(
-    request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.ISearchEntriesResult[],
-      protos.google.cloud.dataplex.v1.ISearchEntriesRequest | null,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.ISearchEntriesResult[],
+        protos.google.cloud.dataplex.v1.ISearchEntriesRequest|null,
+        protos.google.cloud.dataplex.v1.ISearchEntriesResponse
+      ]>;
   searchEntries(
-    request: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResult
-    >
-  ): void;
-  searchEntries(
-    request: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResult
-    >
-  ): void;
-  searchEntries(
-    request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-          | protos.google.cloud.dataplex.v1.ISearchEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.ISearchEntriesResult
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResult
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.ISearchEntriesResult[],
-      protos.google.cloud.dataplex.v1.ISearchEntriesRequest | null,
-      protos.google.cloud.dataplex.v1.ISearchEntriesResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.ISearchEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResult>): void;
+  searchEntries(
+      request: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResult>): void;
+  searchEntries(
+      request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResult>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.ISearchEntriesResult>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.ISearchEntriesResult[],
+        protos.google.cloud.dataplex.v1.ISearchEntriesRequest|null,
+        protos.google.cloud.dataplex.v1.ISearchEntriesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-          | protos.google.cloud.dataplex.v1.ISearchEntriesResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.ISearchEntriesResult
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+      protos.google.cloud.dataplex.v1.ISearchEntriesResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.ISearchEntriesResult>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchEntries values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5109,76 +4812,76 @@ export class CatalogServiceClient {
     this._log.info('searchEntries request %j', request);
     return this.innerApiCalls
       .searchEntries(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.ISearchEntriesResult[],
-          protos.google.cloud.dataplex.v1.ISearchEntriesRequest | null,
-          protos.google.cloud.dataplex.v1.ISearchEntriesResponse,
-        ]) => {
-          this._log.info('searchEntries values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.ISearchEntriesResult[],
+        protos.google.cloud.dataplex.v1.ISearchEntriesRequest|null,
+        protos.google.cloud.dataplex.v1.ISearchEntriesResponse
+      ]) => {
+        this._log.info('searchEntries values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchEntries`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project to which the request should be attributed in the
-   *   following form: `projects/{project}/locations/{location}`.
-   * @param {string} request.query
-   *   Required. The query against which entries in scope should be matched.
-   *   The query syntax is defined in [Search syntax for Dataplex
-   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results in the search page. If <=0, then defaults
-   *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
-   *   page_size > 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `SearchEntries` call. Provide
-   *   this to retrieve the subsequent page.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results.
-   *   Supported values are:
-   *
-   *   * `relevance` (default)
-   *   * `last_modified_timestamp`
-   *   * `last_modified_timestamp asc`
-   * @param {string} [request.scope]
-   *   Optional. The scope under which the search should be operating. It must
-   *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
-   *   unspecified, it defaults to the organization where the project provided in
-   *   `name` is located.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.SearchEntriesResult|SearchEntriesResult} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchEntriesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchEntries`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed in the
+ *   following form: `projects/{project}/locations/global`.
+ * @param {string} request.query
+ *   Required. The query against which entries in scope should be matched.
+ *   The query syntax is defined in [Search syntax for Dataplex Universal
+ *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results in the search page. If <=0, then defaults
+ *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
+ *   page_size > 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `SearchEntries` call. Provide
+ *   this to retrieve the subsequent page.
+ * @param {string} [request.orderBy]
+ *   Optional. Specifies the ordering of results.
+ *   Supported values are:
+ *
+ *   * `relevance`
+ *   * `last_modified_timestamp`
+ *   * `last_modified_timestamp asc`
+ * @param {string} [request.scope]
+ *   Optional. The scope under which the search should be operating. It must
+ *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+ *   unspecified, it defaults to the organization where the project provided in
+ *   `name` is located.
+ * @param {boolean} [request.semanticSearch]
+ *   Optional. Specifies whether the search should understand the meaning and
+ *   intent behind the query, rather than just matching keywords.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.SearchEntriesResult|SearchEntriesResult} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchEntriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchEntriesStream(
-    request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['searchEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchEntries stream %j', request);
     return this.descriptors.page.searchEntries.createStream(
       this.innerApiCalls.searchEntries as GaxCall,
@@ -5187,67 +4890,69 @@ export class CatalogServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchEntries`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The project to which the request should be attributed in the
-   *   following form: `projects/{project}/locations/{location}`.
-   * @param {string} request.query
-   *   Required. The query against which entries in scope should be matched.
-   *   The query syntax is defined in [Search syntax for Dataplex
-   *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
-   * @param {number} [request.pageSize]
-   *   Optional. Number of results in the search page. If <=0, then defaults
-   *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
-   *   page_size > 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `SearchEntries` call. Provide
-   *   this to retrieve the subsequent page.
-   * @param {string} [request.orderBy]
-   *   Optional. Specifies the ordering of results.
-   *   Supported values are:
-   *
-   *   * `relevance` (default)
-   *   * `last_modified_timestamp`
-   *   * `last_modified_timestamp asc`
-   * @param {string} [request.scope]
-   *   Optional. The scope under which the search should be operating. It must
-   *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
-   *   unspecified, it defaults to the organization where the project provided in
-   *   `name` is located.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.SearchEntriesResult|SearchEntriesResult}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.search_entries.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_SearchEntries_async
-   */
+/**
+ * Equivalent to `searchEntries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed in the
+ *   following form: `projects/{project}/locations/global`.
+ * @param {string} request.query
+ *   Required. The query against which entries in scope should be matched.
+ *   The query syntax is defined in [Search syntax for Dataplex Universal
+ *   Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
+ * @param {number} [request.pageSize]
+ *   Optional. Number of results in the search page. If <=0, then defaults
+ *   to 10. Max limit for page_size is 1000. Throws an invalid argument for
+ *   page_size > 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. Page token received from a previous `SearchEntries` call. Provide
+ *   this to retrieve the subsequent page.
+ * @param {string} [request.orderBy]
+ *   Optional. Specifies the ordering of results.
+ *   Supported values are:
+ *
+ *   * `relevance`
+ *   * `last_modified_timestamp`
+ *   * `last_modified_timestamp asc`
+ * @param {string} [request.scope]
+ *   Optional. The scope under which the search should be operating. It must
+ *   either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+ *   unspecified, it defaults to the organization where the project provided in
+ *   `name` is located.
+ * @param {boolean} [request.semanticSearch]
+ *   Optional. Specifies whether the search should understand the meaning and
+ *   intent behind the query, rather than just matching keywords.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.SearchEntriesResult|SearchEntriesResult}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.search_entries.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_SearchEntries_async
+ */
   searchEntriesAsync(
-    request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.ISearchEntriesResult> {
+      request?: protos.google.cloud.dataplex.v1.ISearchEntriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.ISearchEntriesResult>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['searchEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchEntries iterate %j', request);
     return this.descriptors.page.searchEntries.asyncIterate(
       this.innerApiCalls['searchEntries'] as GaxCall,
@@ -5255,131 +4960,106 @@ export class CatalogServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.ISearchEntriesResult>;
   }
-  /**
-   * Lists metadata jobs.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent location, in the format
-   *   `projects/{project_id_or_number}/locations/{location_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of metadata jobs to return. The service might
-   *   return fewer jobs than this value. If unspecified, at most 10 jobs are
-   *   returned. The maximum value is 1,000.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token received from a previous `ListMetadataJobs` call.
-   *   Provide this token to retrieve the subsequent page of results. When
-   *   paginating, all other parameters that are provided to the
-   *   `ListMetadataJobs` request must match the call that provided the page
-   *   token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * `labels.key1 = "value1"`
-   *   * `labels:key1`
-   *   * `name = "value"`
-   *
-   *   You can combine filters with `AND`, `OR`, and `NOT` operators.
-   * @param {string} [request.orderBy]
-   *   Optional. The field to sort the results by, either `name` or `create_time`.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listMetadataJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Lists metadata jobs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata jobs to return. The service might
+ *   return fewer jobs than this value. If unspecified, at most 10 jobs are
+ *   returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataJobs` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataJobs` request must match the call that provided the page
+ *   token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMetadataJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataJobs(
-    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IMetadataJob[],
-      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest | null,
-      protos.google.cloud.dataplex.v1.IListMetadataJobsResponse,
-    ]
-  >;
+      request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataJob[],
+        protos.google.cloud.dataplex.v1.IListMetadataJobsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+      ]>;
   listMetadataJobs(
-    request: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-      | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IMetadataJob
-    >
-  ): void;
-  listMetadataJobs(
-    request: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-      | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IMetadataJob
-    >
-  ): void;
-  listMetadataJobs(
-    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-          | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IMetadataJob
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-      | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
-      | null
-      | undefined,
-      protos.google.cloud.dataplex.v1.IMetadataJob
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IMetadataJob[],
-      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest | null,
-      protos.google.cloud.dataplex.v1.IListMetadataJobsResponse,
-    ]
-  > | void {
+          protos.google.cloud.dataplex.v1.IListMetadataJobsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataJob>): void;
+  listMetadataJobs(
+      request: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataJobsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataJob>): void;
+  listMetadataJobs(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataJobsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataJob>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataJobsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataJob>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataJob[],
+        protos.google.cloud.dataplex.v1.IListMetadataJobsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-          | protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IMetadataJob
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      protos.google.cloud.dataplex.v1.IListMetadataJobsResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IMetadataJob>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMetadataJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5388,75 +5068,72 @@ export class CatalogServiceClient {
     this._log.info('listMetadataJobs request %j', request);
     return this.innerApiCalls
       .listMetadataJobs(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IMetadataJob[],
-          protos.google.cloud.dataplex.v1.IListMetadataJobsRequest | null,
-          protos.google.cloud.dataplex.v1.IListMetadataJobsResponse,
-        ]) => {
-          this._log.info('listMetadataJobs values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IMetadataJob[],
+        protos.google.cloud.dataplex.v1.IListMetadataJobsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataJobsResponse
+      ]) => {
+        this._log.info('listMetadataJobs values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listMetadataJobs`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent location, in the format
-   *   `projects/{project_id_or_number}/locations/{location_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of metadata jobs to return. The service might
-   *   return fewer jobs than this value. If unspecified, at most 10 jobs are
-   *   returned. The maximum value is 1,000.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token received from a previous `ListMetadataJobs` call.
-   *   Provide this token to retrieve the subsequent page of results. When
-   *   paginating, all other parameters that are provided to the
-   *   `ListMetadataJobs` request must match the call that provided the page
-   *   token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * `labels.key1 = "value1"`
-   *   * `labels:key1`
-   *   * `name = "value"`
-   *
-   *   You can combine filters with `AND`, `OR`, and `NOT` operators.
-   * @param {string} [request.orderBy]
-   *   Optional. The field to sort the results by, either `name` or `create_time`.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listMetadataJobsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listMetadataJobs`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata jobs to return. The service might
+ *   return fewer jobs than this value. If unspecified, at most 10 jobs are
+ *   returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataJobs` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataJobs` request must match the call that provided the page
+ *   token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMetadataJobsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listMetadataJobsStream(
-    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMetadataJobs stream %j', request);
     return this.descriptors.page.listMetadataJobs.createStream(
       this.innerApiCalls.listMetadataJobs as GaxCall,
@@ -5465,66 +5142,65 @@ export class CatalogServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listMetadataJobs`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent location, in the format
-   *   `projects/{project_id_or_number}/locations/{location_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of metadata jobs to return. The service might
-   *   return fewer jobs than this value. If unspecified, at most 10 jobs are
-   *   returned. The maximum value is 1,000.
-   * @param {string} [request.pageToken]
-   *   Optional. The page token received from a previous `ListMetadataJobs` call.
-   *   Provide this token to retrieve the subsequent page of results. When
-   *   paginating, all other parameters that are provided to the
-   *   `ListMetadataJobs` request must match the call that provided the page
-   *   token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The service supports the following formats:
-   *
-   *   * `labels.key1 = "value1"`
-   *   * `labels:key1`
-   *   * `name = "value"`
-   *
-   *   You can combine filters with `AND`, `OR`, and `NOT` operators.
-   * @param {string} [request.orderBy]
-   *   Optional. The field to sort the results by, either `name` or `create_time`.
-   *   If not specified, the ordering is undefined.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/catalog_service.list_metadata_jobs.js</caption>
-   * region_tag:dataplex_v1_generated_CatalogService_ListMetadataJobs_async
-   */
+/**
+ * Equivalent to `listMetadataJobs`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata jobs to return. The service might
+ *   return fewer jobs than this value. If unspecified, at most 10 jobs are
+ *   returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataJobs` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataJobs` request must match the call that provided the page
+ *   token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.MetadataJob|MetadataJob}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.list_metadata_jobs.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_ListMetadataJobs_async
+ */
   listMetadataJobsAsync(
-    request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataJob> {
+      request?: protos.google.cloud.dataplex.v1.IListMetadataJobsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataJob>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listMetadataJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listMetadataJobs iterate %j', request);
     return this.descriptors.page.listMetadataJobs.asyncIterate(
       this.innerApiCalls['listMetadataJobs'] as GaxCall,
@@ -5532,7 +5208,494 @@ export class CatalogServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataJob>;
   }
-  /**
+ /**
+ * Looks up Entry Links referencing the specified Entry.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed to
+ *   Format: `projects/{project_id_or_number}/locations/{location_id}`.
+ * @param {string} request.entry
+ *   Required. The resource name of the referred Entry.
+ *   Format:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+ *   Entry Links which references this entry will be returned in the response.
+ * @param {google.cloud.dataplex.v1.LookupEntryLinksRequest.EntryMode} request.entryMode
+ *   Mode of entry reference.
+ * @param {string[]} request.entryLinkTypes
+ *   Entry link types to filter the response by. If empty, all entry link types
+ *   will be returned. At most 10 entry link types can be specified.
+ * @param {number} request.pageSize
+ *   Maximum number of EntryLinks to return. The service may return fewer
+ *   than this value. If unspecified, at most 10 EntryLinks will be returned.
+ *   The maximum value is 10; values above 10 will be coerced to 10.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `LookupEntryLinks` call. Provide this
+ *   to retrieve the subsequent page. When paginating, all other parameters that
+ *   are provided to the `LookupEntryLinks` request must match the call that
+ *   provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `lookupEntryLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  lookupEntryLinks(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink[],
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest|null,
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse
+      ]>;
+  lookupEntryLinks(
+      request: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>): void;
+  lookupEntryLinks(
+      request: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>): void;
+  lookupEntryLinks(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+          protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IEntryLink>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IEntryLink[],
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest|null,
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IEntryLink>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('lookupEntryLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('lookupEntryLinks request %j', request);
+    return this.innerApiCalls
+      .lookupEntryLinks(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IEntryLink[],
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest|null,
+        protos.google.cloud.dataplex.v1.ILookupEntryLinksResponse
+      ]) => {
+        this._log.info('lookupEntryLinks values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `lookupEntryLinks`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed to
+ *   Format: `projects/{project_id_or_number}/locations/{location_id}`.
+ * @param {string} request.entry
+ *   Required. The resource name of the referred Entry.
+ *   Format:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+ *   Entry Links which references this entry will be returned in the response.
+ * @param {google.cloud.dataplex.v1.LookupEntryLinksRequest.EntryMode} request.entryMode
+ *   Mode of entry reference.
+ * @param {string[]} request.entryLinkTypes
+ *   Entry link types to filter the response by. If empty, all entry link types
+ *   will be returned. At most 10 entry link types can be specified.
+ * @param {number} request.pageSize
+ *   Maximum number of EntryLinks to return. The service may return fewer
+ *   than this value. If unspecified, at most 10 EntryLinks will be returned.
+ *   The maximum value is 10; values above 10 will be coerced to 10.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `LookupEntryLinks` call. Provide this
+ *   to retrieve the subsequent page. When paginating, all other parameters that
+ *   are provided to the `LookupEntryLinks` request must match the call that
+ *   provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `lookupEntryLinksAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  lookupEntryLinksStream(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['lookupEntryLinks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('lookupEntryLinks stream %j', request);
+    return this.descriptors.page.lookupEntryLinks.createStream(
+      this.innerApiCalls.lookupEntryLinks as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `lookupEntryLinks`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The project to which the request should be attributed to
+ *   Format: `projects/{project_id_or_number}/locations/{location_id}`.
+ * @param {string} request.entry
+ *   Required. The resource name of the referred Entry.
+ *   Format:
+ *   `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
+ *   Entry Links which references this entry will be returned in the response.
+ * @param {google.cloud.dataplex.v1.LookupEntryLinksRequest.EntryMode} request.entryMode
+ *   Mode of entry reference.
+ * @param {string[]} request.entryLinkTypes
+ *   Entry link types to filter the response by. If empty, all entry link types
+ *   will be returned. At most 10 entry link types can be specified.
+ * @param {number} request.pageSize
+ *   Maximum number of EntryLinks to return. The service may return fewer
+ *   than this value. If unspecified, at most 10 EntryLinks will be returned.
+ *   The maximum value is 10; values above 10 will be coerced to 10.
+ * @param {string} request.pageToken
+ *   Page token received from a previous `LookupEntryLinks` call. Provide this
+ *   to retrieve the subsequent page. When paginating, all other parameters that
+ *   are provided to the `LookupEntryLinks` request must match the call that
+ *   provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.EntryLink|EntryLink}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.lookup_entry_links.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_LookupEntryLinks_async
+ */
+  lookupEntryLinksAsync(
+      request?: protos.google.cloud.dataplex.v1.ILookupEntryLinksRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IEntryLink>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    const defaultCallSettings = this._defaults['lookupEntryLinks'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('lookupEntryLinks iterate %j', request);
+    return this.descriptors.page.lookupEntryLinks.asyncIterate(
+      this.innerApiCalls['lookupEntryLinks'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntryLink>;
+  }
+ /**
+ * Retrieve a list of MetadataFeeds.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata feeds to return. The service
+ *   might return fewer feeds than this value. If unspecified, at most 10 feeds
+ *   are returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataFeeds` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataFeeds` request must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listMetadataFeedsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listMetadataFeeds(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed[],
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse
+      ]>;
+  listMetadataFeeds(
+      request: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>): void;
+  listMetadataFeeds(
+      request: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>): void;
+  listMetadataFeeds(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>,
+      callback?: PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+          protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+          protos.google.cloud.dataplex.v1.IMetadataFeed>):
+      Promise<[
+        protos.google.cloud.dataplex.v1.IMetadataFeed[],
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse|null|undefined,
+      protos.google.cloud.dataplex.v1.IMetadataFeed>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataFeeds values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataFeeds request %j', request);
+    return this.innerApiCalls
+      .listMetadataFeeds(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.dataplex.v1.IMetadataFeed[],
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest|null,
+        protos.google.cloud.dataplex.v1.IListMetadataFeedsResponse
+      ]) => {
+        this._log.info('listMetadataFeeds values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listMetadataFeeds`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata feeds to return. The service
+ *   might return fewer feeds than this value. If unspecified, at most 10 feeds
+ *   are returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataFeeds` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataFeeds` request must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listMetadataFeedsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listMetadataFeedsStream(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listMetadataFeeds'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataFeeds stream %j', request);
+    return this.descriptors.page.listMetadataFeeds.createStream(
+      this.innerApiCalls.listMetadataFeeds as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listMetadataFeeds`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the parent location, in the format
+ *   `projects/{project_id_or_number}/locations/{location_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of metadata feeds to return. The service
+ *   might return fewer feeds than this value. If unspecified, at most 10 feeds
+ *   are returned. The maximum value is 1,000.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListMetadataFeeds` call.
+ *   Provide this token to retrieve the subsequent page of results. When
+ *   paginating, all other parameters that are provided to the
+ *   `ListMetadataFeeds` request must match the call that provided the
+ *   page token.
+ * @param {string} [request.filter]
+ *   Optional. Filter request. Filters are case-sensitive.
+ *   The service supports the following formats:
+ *
+ *   * `labels.key1 = "value1"`
+ *   * `labels:key1`
+ *   * `name = "value"`
+ *
+ *   You can combine filters with `AND`, `OR`, and `NOT` operators.
+ * @param {string} [request.orderBy]
+ *   Optional. The field to sort the results by, either `name` or `create_time`.
+ *   If not specified, the ordering is undefined.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.dataplex.v1.MetadataFeed|MetadataFeed}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/catalog_service.list_metadata_feeds.js</caption>
+ * region_tag:dataplex_v1_generated_CatalogService_ListMetadataFeeds_async
+ */
+  listMetadataFeedsAsync(
+      request?: protos.google.cloud.dataplex.v1.IListMetadataFeedsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataFeed>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listMetadataFeeds'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listMetadataFeeds iterate %j', request);
+    return this.descriptors.page.listMetadataFeeds.asyncIterate(
+      this.innerApiCalls['listMetadataFeeds'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IMetadataFeed>;
+  }
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -5572,7 +5735,7 @@ export class CatalogServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -5610,7 +5773,7 @@ export class CatalogServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -5655,20 +5818,20 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5705,13 +5868,13 @@ export class CatalogServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5745,7 +5908,7 @@ export class CatalogServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -5760,20 +5923,20 @@ export class CatalogServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5817,20 +5980,20 @@ export class CatalogServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5846,7 +6009,7 @@ export class CatalogServiceClient {
    * @param {string} aspect_type
    * @returns {string} Resource name string.
    */
-  aspectTypePath(project: string, location: string, aspectType: string) {
+  aspectTypePath(project:string,location:string,aspectType:string) {
     return this.pathTemplates.aspectTypePathTemplate.render({
       project: project,
       location: location,
@@ -5862,8 +6025,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .project;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).project;
   }
 
   /**
@@ -5874,8 +6036,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .location;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).location;
   }
 
   /**
@@ -5886,8 +6047,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the aspect_type.
    */
   matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .aspect_type;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).aspect_type;
   }
 
   /**
@@ -5900,13 +6060,7 @@ export class CatalogServiceClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    asset: string
-  ) {
+  assetPath(project:string,location:string,lake:string,zone:string,asset:string) {
     return this.pathTemplates.assetPathTemplate.render({
       project: project,
       location: location,
@@ -5980,12 +6134,7 @@ export class CatalogServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(
-    project: string,
-    location: string,
-    lake: string,
-    content: string
-  ) {
+  contentPath(project:string,location:string,lake:string,content:string) {
     return this.pathTemplates.contentPathTemplate.render({
       project: project,
       location: location,
@@ -6039,6 +6188,68 @@ export class CatalogServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataAsset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @param {string} data_asset
+   * @returns {string} Resource name string.
+   */
+  dataAssetPath(project:string,location:string,dataProduct:string,dataAsset:string) {
+    return this.pathTemplates.dataAssetPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+      data_asset: dataAsset,
+    });
+  }
+
+  /**
+   * Parse the project from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).project;
+  }
+
+  /**
+   * Parse the location from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).location;
+  }
+
+  /**
+   * Parse the data_product from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_product;
+  }
+
+  /**
+   * Parse the data_asset from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_asset.
+   */
+  matchDataAssetFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_asset;
+  }
+
+  /**
    * Return a fully-qualified dataAttribute resource name string.
    *
    * @param {string} project
@@ -6047,12 +6258,7 @@ export class CatalogServiceClient {
    * @param {string} data_attribute_id
    * @returns {string} Resource name string.
    */
-  dataAttributePath(
-    project: string,
-    location: string,
-    dataTaxonomy: string,
-    dataAttributeId: string
-  ) {
+  dataAttributePath(project:string,location:string,dataTaxonomy:string,dataAttributeId:string) {
     return this.pathTemplates.dataAttributePathTemplate.render({
       project: project,
       location: location,
@@ -6069,8 +6275,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .project;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).project;
   }
 
   /**
@@ -6081,8 +6286,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .location;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).location;
   }
 
   /**
@@ -6093,8 +6297,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the dataTaxonomy.
    */
   matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .dataTaxonomy;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).dataTaxonomy;
   }
 
   /**
@@ -6105,8 +6308,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the data_attribute_id.
    */
   matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .data_attribute_id;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).data_attribute_id;
   }
 
   /**
@@ -6117,11 +6319,7 @@ export class CatalogServiceClient {
    * @param {string} data_attribute_binding_id
    * @returns {string} Resource name string.
    */
-  dataAttributeBindingPath(
-    project: string,
-    location: string,
-    dataAttributeBindingId: string
-  ) {
+  dataAttributeBindingPath(project:string,location:string,dataAttributeBindingId:string) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.render({
       project: project,
       location: location,
@@ -6137,9 +6335,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).project;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).project;
   }
 
   /**
@@ -6150,9 +6346,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).location;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).location;
   }
 
   /**
@@ -6162,12 +6356,57 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing DataAttributeBinding resource.
    * @returns {string} A string representing the data_attribute_binding_id.
    */
-  matchDataAttributeBindingIdFromDataAttributeBindingName(
-    dataAttributeBindingName: string
-  ) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).data_attribute_binding_id;
+  matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
+  }
+
+  /**
+   * Return a fully-qualified dataProduct resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @returns {string} Resource name string.
+   */
+  dataProductPath(project:string,location:string,dataProduct:string) {
+    return this.pathTemplates.dataProductPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+    });
+  }
+
+  /**
+   * Parse the project from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).project;
+  }
+
+  /**
+   * Parse the location from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).location;
+  }
+
+  /**
+   * Parse the data_product from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).data_product;
   }
 
   /**
@@ -6178,7 +6417,7 @@ export class CatalogServiceClient {
    * @param {string} dataScan
    * @returns {string} Resource name string.
    */
-  dataScanPath(project: string, location: string, dataScan: string) {
+  dataScanPath(project:string,location:string,dataScan:string) {
     return this.pathTemplates.dataScanPathTemplate.render({
       project: project,
       location: location,
@@ -6228,12 +6467,7 @@ export class CatalogServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  dataScanJobPath(
-    project: string,
-    location: string,
-    dataScan: string,
-    job: string
-  ) {
+  dataScanJobPath(project:string,location:string,dataScan:string,job:string) {
     return this.pathTemplates.dataScanJobPathTemplate.render({
       project: project,
       location: location,
@@ -6250,8 +6484,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .project;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).project;
   }
 
   /**
@@ -6262,8 +6495,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .location;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).location;
   }
 
   /**
@@ -6274,8 +6506,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the dataScan.
    */
   matchDataScanFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .dataScan;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).dataScan;
   }
 
   /**
@@ -6286,8 +6517,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .job;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).job;
   }
 
   /**
@@ -6298,7 +6528,7 @@ export class CatalogServiceClient {
    * @param {string} data_taxonomy_id
    * @returns {string} Resource name string.
    */
-  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
+  dataTaxonomyPath(project:string,location:string,dataTaxonomyId:string) {
     return this.pathTemplates.dataTaxonomyPathTemplate.render({
       project: project,
       location: location,
@@ -6314,8 +6544,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .project;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).project;
   }
 
   /**
@@ -6326,8 +6555,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .location;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).location;
   }
 
   /**
@@ -6338,8 +6566,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the data_taxonomy_id.
    */
   matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .data_taxonomy_id;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).data_taxonomy_id;
   }
 
   /**
@@ -6350,11 +6577,7 @@ export class CatalogServiceClient {
    * @param {string} encryption_config
    * @returns {string} Resource name string.
    */
-  encryptionConfigPath(
-    organization: string,
-    location: string,
-    encryptionConfig: string
-  ) {
+  encryptionConfigPath(organization:string,location:string,encryptionConfig:string) {
     return this.pathTemplates.encryptionConfigPathTemplate.render({
       organization: organization,
       location: location,
@@ -6370,9 +6593,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).organization;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).organization;
   }
 
   /**
@@ -6383,9 +6604,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).location;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).location;
   }
 
   /**
@@ -6396,9 +6615,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the encryption_config.
    */
   matchEncryptionConfigFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).encryption_config;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).encryption_config;
   }
 
   /**
@@ -6411,13 +6628,7 @@ export class CatalogServiceClient {
    * @param {string} entity
    * @returns {string} Resource name string.
    */
-  entityPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    entity: string
-  ) {
+  entityPath(project:string,location:string,lake:string,zone:string,entity:string) {
     return this.pathTemplates.entityPathTemplate.render({
       project: project,
       location: location,
@@ -6491,12 +6702,7 @@ export class CatalogServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  entryPath(
-    project: string,
-    location: string,
-    entryGroup: string,
-    entry: string
-  ) {
+  entryPath(project:string,location:string,entryGroup:string,entry:string) {
     return this.pathTemplates.entryPathTemplate.render({
       project: project,
       location: location,
@@ -6557,7 +6763,7 @@ export class CatalogServiceClient {
    * @param {string} entry_group
    * @returns {string} Resource name string.
    */
-  entryGroupPath(project: string, location: string, entryGroup: string) {
+  entryGroupPath(project:string,location:string,entryGroup:string) {
     return this.pathTemplates.entryGroupPathTemplate.render({
       project: project,
       location: location,
@@ -6573,8 +6779,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .project;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).project;
   }
 
   /**
@@ -6585,8 +6790,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .location;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).location;
   }
 
   /**
@@ -6597,8 +6801,69 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .entry_group;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).entry_group;
+  }
+
+  /**
+   * Return a fully-qualified entryLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry_link
+   * @returns {string} Resource name string.
+   */
+  entryLinkPath(project:string,location:string,entryGroup:string,entryLink:string) {
+    return this.pathTemplates.entryLinkPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+      entry_link: entryLink,
+    });
+  }
+
+  /**
+   * Parse the project from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).project;
+  }
+
+  /**
+   * Parse the location from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).location;
+  }
+
+  /**
+   * Parse the entry_group from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_group;
+  }
+
+  /**
+   * Parse the entry_link from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_link.
+   */
+  matchEntryLinkFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_link;
   }
 
   /**
@@ -6609,7 +6874,7 @@ export class CatalogServiceClient {
    * @param {string} entry_type
    * @returns {string} Resource name string.
    */
-  entryTypePath(project: string, location: string, entryType: string) {
+  entryTypePath(project:string,location:string,entryType:string) {
     return this.pathTemplates.entryTypePathTemplate.render({
       project: project,
       location: location,
@@ -6625,8 +6890,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .project;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).project;
   }
 
   /**
@@ -6637,8 +6901,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .location;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).location;
   }
 
   /**
@@ -6649,8 +6912,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the entry_type.
    */
   matchEntryTypeFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .entry_type;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).entry_type;
   }
 
   /**
@@ -6662,12 +6924,7 @@ export class CatalogServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(
-    project: string,
-    location: string,
-    lake: string,
-    environment: string
-  ) {
+  environmentPath(project:string,location:string,lake:string,environment:string) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -6684,8 +6941,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
   }
 
   /**
@@ -6696,8 +6952,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
   }
 
   /**
@@ -6708,8 +6963,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the lake.
    */
   matchLakeFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .lake;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).lake;
   }
 
   /**
@@ -6720,8 +6974,180 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+  }
+
+  /**
+   * Return a fully-qualified glossary resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @returns {string} Resource name string.
+   */
+  glossaryPath(project:string,location:string,glossary:string) {
+    return this.pathTemplates.glossaryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+    });
+  }
+
+  /**
+   * Parse the project from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).project;
+  }
+
+  /**
+   * Parse the location from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).location;
+  }
+
+  /**
+   * Parse the glossary from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).glossary;
+  }
+
+  /**
+   * Return a fully-qualified glossaryCategory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_category
+   * @returns {string} Resource name string.
+   */
+  glossaryCategoryPath(project:string,location:string,glossary:string,glossaryCategory:string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_category: glossaryCategory,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary;
+  }
+
+  /**
+   * Parse the glossary_category from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary_category.
+   */
+  matchGlossaryCategoryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary_category;
+  }
+
+  /**
+   * Return a fully-qualified glossaryTerm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_term
+   * @returns {string} Resource name string.
+   */
+  glossaryTermPath(project:string,location:string,glossary:string,glossaryTerm:string) {
+    return this.pathTemplates.glossaryTermPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_term: glossaryTerm,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary;
+  }
+
+  /**
+   * Parse the glossary_term from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary_term.
+   */
+  matchGlossaryTermFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary_term;
   }
 
   /**
@@ -6734,13 +7160,7 @@ export class CatalogServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(
-    project: string,
-    location: string,
-    lake: string,
-    task: string,
-    job: string
-  ) {
+  jobPath(project:string,location:string,lake:string,task:string,job:string) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -6813,7 +7233,7 @@ export class CatalogServiceClient {
    * @param {string} lake
    * @returns {string} Resource name string.
    */
-  lakePath(project: string, location: string, lake: string) {
+  lakePath(project:string,location:string,lake:string) {
     return this.pathTemplates.lakePathTemplate.render({
       project: project,
       location: location,
@@ -6861,7 +7281,7 @@ export class CatalogServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -6891,6 +7311,55 @@ export class CatalogServiceClient {
   }
 
   /**
+   * Return a fully-qualified metadataFeed resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_feed
+   * @returns {string} Resource name string.
+   */
+  metadataFeedPath(project:string,location:string,metadataFeed:string) {
+    return this.pathTemplates.metadataFeedPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_feed: metadataFeed,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).project;
+  }
+
+  /**
+   * Parse the location from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).location;
+  }
+
+  /**
+   * Parse the metadata_feed from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the metadata_feed.
+   */
+  matchMetadataFeedFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).metadata_feed;
+  }
+
+  /**
    * Return a fully-qualified metadataJob resource name string.
    *
    * @param {string} project
@@ -6898,7 +7367,7 @@ export class CatalogServiceClient {
    * @param {string} metadataJob
    * @returns {string} Resource name string.
    */
-  metadataJobPath(project: string, location: string, metadataJob: string) {
+  metadataJobPath(project:string,location:string,metadataJob:string) {
     return this.pathTemplates.metadataJobPathTemplate.render({
       project: project,
       location: location,
@@ -6914,8 +7383,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .project;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).project;
   }
 
   /**
@@ -6926,8 +7394,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .location;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).location;
   }
 
   /**
@@ -6938,8 +7405,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the metadataJob.
    */
   matchMetadataJobFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .metadataJob;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).metadataJob;
   }
 
   /**
@@ -6953,14 +7419,7 @@ export class CatalogServiceClient {
    * @param {string} partition
    * @returns {string} Resource name string.
    */
-  partitionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    entity: string,
-    partition: string
-  ) {
+  partitionPath(project:string,location:string,lake:string,zone:string,entity:string,partition:string) {
     return this.pathTemplates.partitionPathTemplate.render({
       project: project,
       location: location,
@@ -6979,8 +7438,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .project;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).project;
   }
 
   /**
@@ -6991,8 +7449,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .location;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).location;
   }
 
   /**
@@ -7036,8 +7493,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the partition.
    */
   matchPartitionFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .partition;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).partition;
   }
 
   /**
@@ -7049,12 +7505,7 @@ export class CatalogServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    action: string
-  ) {
+  projectLocationLakeActionPath(project:string,location:string,lake:string,action:string) {
     return this.pathTemplates.projectLocationLakeActionPathTemplate.render({
       project: project,
       location: location,
@@ -7070,12 +7521,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).project;
+  matchProjectFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).project;
   }
 
   /**
@@ -7085,12 +7532,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).location;
+  matchLocationFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).location;
   }
 
   /**
@@ -7100,12 +7543,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).lake;
   }
 
   /**
@@ -7115,12 +7554,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).action;
+  matchActionFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).action;
   }
 
   /**
@@ -7133,13 +7568,7 @@ export class CatalogServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    action: string
-  ) {
+  projectLocationLakeZoneActionPath(project:string,location:string,lake:string,zone:string,action:string) {
     return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.render({
       project: project,
       location: location,
@@ -7156,12 +7585,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).project;
+  matchProjectFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).project;
   }
 
   /**
@@ -7171,12 +7596,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).location;
+  matchLocationFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).location;
   }
 
   /**
@@ -7186,12 +7607,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).lake;
   }
 
   /**
@@ -7201,12 +7618,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).zone;
+  matchZoneFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).zone;
   }
 
   /**
@@ -7216,12 +7629,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).action;
+  matchActionFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).action;
   }
 
   /**
@@ -7235,24 +7644,15 @@ export class CatalogServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneAssetActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    asset: string,
-    action: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        lake: lake,
-        zone: zone,
-        asset: asset,
-        action: action,
-      }
-    );
+  projectLocationLakeZoneAssetActionPath(project:string,location:string,lake:string,zone:string,asset:string,action:string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render({
+      project: project,
+      location: location,
+      lake: lake,
+      zone: zone,
+      asset: asset,
+      action: action,
+    });
   }
 
   /**
@@ -7262,12 +7662,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).project;
+  matchProjectFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).project;
   }
 
   /**
@@ -7277,12 +7673,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).location;
+  matchLocationFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).location;
   }
 
   /**
@@ -7292,12 +7684,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).lake;
   }
 
   /**
@@ -7307,12 +7695,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).zone;
+  matchZoneFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).zone;
   }
 
   /**
@@ -7322,12 +7706,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).asset;
+  matchAssetFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).asset;
   }
 
   /**
@@ -7337,12 +7717,8 @@ export class CatalogServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).action;
+  matchActionFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).action;
   }
 
   /**
@@ -7355,13 +7731,7 @@ export class CatalogServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(
-    project: string,
-    location: string,
-    lake: string,
-    environment: string,
-    session: string
-  ) {
+  sessionPath(project:string,location:string,lake:string,environment:string,session:string) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -7412,8 +7782,7 @@ export class CatalogServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromSessionName(sessionName: string) {
-    return this.pathTemplates.sessionPathTemplate.match(sessionName)
-      .environment;
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).environment;
   }
 
   /**
@@ -7436,7 +7805,7 @@ export class CatalogServiceClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(project: string, location: string, lake: string, task: string) {
+  taskPath(project:string,location:string,lake:string,task:string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -7498,7 +7867,7 @@ export class CatalogServiceClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project: string, location: string, lake: string, zone: string) {
+  zonePath(project:string,location:string,lake:string,zone:string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -7563,9 +7932,7 @@ export class CatalogServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

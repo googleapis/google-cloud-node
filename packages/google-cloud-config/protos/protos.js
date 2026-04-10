@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -857,6 +857,204 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|listResourceChanges}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef ListResourceChangesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.ListResourceChangesResponse} [response] ListResourceChangesResponse
+                         */
+    
+                        /**
+                         * Calls ListResourceChanges.
+                         * @function listResourceChanges
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListResourceChangesRequest} request ListResourceChangesRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.ListResourceChangesCallback} callback Node-style callback called with the error, if any, and ListResourceChangesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.listResourceChanges = function listResourceChanges(request, callback) {
+                            return this.rpcCall(listResourceChanges, $root.google.cloud.config.v1.ListResourceChangesRequest, $root.google.cloud.config.v1.ListResourceChangesResponse, request, callback);
+                        }, "name", { value: "ListResourceChanges" });
+    
+                        /**
+                         * Calls ListResourceChanges.
+                         * @function listResourceChanges
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListResourceChangesRequest} request ListResourceChangesRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.ListResourceChangesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|getResourceChange}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef GetResourceChangeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.ResourceChange} [response] ResourceChange
+                         */
+    
+                        /**
+                         * Calls GetResourceChange.
+                         * @function getResourceChange
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetResourceChangeRequest} request GetResourceChangeRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.GetResourceChangeCallback} callback Node-style callback called with the error, if any, and ResourceChange
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.getResourceChange = function getResourceChange(request, callback) {
+                            return this.rpcCall(getResourceChange, $root.google.cloud.config.v1.GetResourceChangeRequest, $root.google.cloud.config.v1.ResourceChange, request, callback);
+                        }, "name", { value: "GetResourceChange" });
+    
+                        /**
+                         * Calls GetResourceChange.
+                         * @function getResourceChange
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetResourceChangeRequest} request GetResourceChangeRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.ResourceChange>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|listResourceDrifts}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef ListResourceDriftsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.ListResourceDriftsResponse} [response] ListResourceDriftsResponse
+                         */
+    
+                        /**
+                         * Calls ListResourceDrifts.
+                         * @function listResourceDrifts
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListResourceDriftsRequest} request ListResourceDriftsRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.ListResourceDriftsCallback} callback Node-style callback called with the error, if any, and ListResourceDriftsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.listResourceDrifts = function listResourceDrifts(request, callback) {
+                            return this.rpcCall(listResourceDrifts, $root.google.cloud.config.v1.ListResourceDriftsRequest, $root.google.cloud.config.v1.ListResourceDriftsResponse, request, callback);
+                        }, "name", { value: "ListResourceDrifts" });
+    
+                        /**
+                         * Calls ListResourceDrifts.
+                         * @function listResourceDrifts
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListResourceDriftsRequest} request ListResourceDriftsRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.ListResourceDriftsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|getResourceDrift}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef GetResourceDriftCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.ResourceDrift} [response] ResourceDrift
+                         */
+    
+                        /**
+                         * Calls GetResourceDrift.
+                         * @function getResourceDrift
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetResourceDriftRequest} request GetResourceDriftRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.GetResourceDriftCallback} callback Node-style callback called with the error, if any, and ResourceDrift
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.getResourceDrift = function getResourceDrift(request, callback) {
+                            return this.rpcCall(getResourceDrift, $root.google.cloud.config.v1.GetResourceDriftRequest, $root.google.cloud.config.v1.ResourceDrift, request, callback);
+                        }, "name", { value: "GetResourceDrift" });
+    
+                        /**
+                         * Calls GetResourceDrift.
+                         * @function getResourceDrift
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetResourceDriftRequest} request GetResourceDriftRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.ResourceDrift>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|getAutoMigrationConfig}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef GetAutoMigrationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.AutoMigrationConfig} [response] AutoMigrationConfig
+                         */
+    
+                        /**
+                         * Calls GetAutoMigrationConfig.
+                         * @function getAutoMigrationConfig
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetAutoMigrationConfigRequest} request GetAutoMigrationConfigRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.GetAutoMigrationConfigCallback} callback Node-style callback called with the error, if any, and AutoMigrationConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.getAutoMigrationConfig = function getAutoMigrationConfig(request, callback) {
+                            return this.rpcCall(getAutoMigrationConfig, $root.google.cloud.config.v1.GetAutoMigrationConfigRequest, $root.google.cloud.config.v1.AutoMigrationConfig, request, callback);
+                        }, "name", { value: "GetAutoMigrationConfig" });
+    
+                        /**
+                         * Calls GetAutoMigrationConfig.
+                         * @function getAutoMigrationConfig
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetAutoMigrationConfigRequest} request GetAutoMigrationConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.AutoMigrationConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|updateAutoMigrationConfig}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef UpdateAutoMigrationConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAutoMigrationConfig.
+                         * @function updateAutoMigrationConfig
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IUpdateAutoMigrationConfigRequest} request UpdateAutoMigrationConfigRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.UpdateAutoMigrationConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.updateAutoMigrationConfig = function updateAutoMigrationConfig(request, callback) {
+                            return this.rpcCall(updateAutoMigrationConfig, $root.google.cloud.config.v1.UpdateAutoMigrationConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAutoMigrationConfig" });
+    
+                        /**
+                         * Calls UpdateAutoMigrationConfig.
+                         * @function updateAutoMigrationConfig
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IUpdateAutoMigrationConfigRequest} request UpdateAutoMigrationConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return Config;
                     })();
     
@@ -905,6 +1103,7 @@
                          * @property {string|null} [tfVersion] Deployment tfVersion
                          * @property {google.cloud.config.v1.QuotaValidation|null} [quotaValidation] Deployment quotaValidation
                          * @property {Object.<string,string>|null} [annotations] Deployment annotations
+                         * @property {google.cloud.config.v1.IProviderConfig|null} [providerConfig] Deployment providerConfig
                          */
     
                         /**
@@ -1109,6 +1308,14 @@
                          */
                         Deployment.prototype.annotations = $util.emptyObject;
     
+                        /**
+                         * Deployment providerConfig.
+                         * @member {google.cloud.config.v1.IProviderConfig|null|undefined} providerConfig
+                         * @memberof google.cloud.config.v1.Deployment
+                         * @instance
+                         */
+                        Deployment.prototype.providerConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1123,56 +1330,31 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Deployment _artifactsGcsBucket.
-                         * @member {"artifactsGcsBucket"|undefined} _artifactsGcsBucket
-                         * @memberof google.cloud.config.v1.Deployment
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Deployment.prototype, "_artifactsGcsBucket", {
                             get: $util.oneOfGetter($oneOfFields = ["artifactsGcsBucket"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Deployment _serviceAccount.
-                         * @member {"serviceAccount"|undefined} _serviceAccount
-                         * @memberof google.cloud.config.v1.Deployment
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Deployment.prototype, "_serviceAccount", {
                             get: $util.oneOfGetter($oneOfFields = ["serviceAccount"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Deployment _importExistingResources.
-                         * @member {"importExistingResources"|undefined} _importExistingResources
-                         * @memberof google.cloud.config.v1.Deployment
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Deployment.prototype, "_importExistingResources", {
                             get: $util.oneOfGetter($oneOfFields = ["importExistingResources"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Deployment _workerPool.
-                         * @member {"workerPool"|undefined} _workerPool
-                         * @memberof google.cloud.config.v1.Deployment
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Deployment.prototype, "_workerPool", {
                             get: $util.oneOfGetter($oneOfFields = ["workerPool"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Deployment _tfVersionConstraint.
-                         * @member {"tfVersionConstraint"|undefined} _tfVersionConstraint
-                         * @memberof google.cloud.config.v1.Deployment
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Deployment.prototype, "_tfVersionConstraint", {
                             get: $util.oneOfGetter($oneOfFields = ["tfVersionConstraint"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -1251,6 +1433,8 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 24, wireType 2 =*/194).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.providerConfig != null && Object.hasOwnProperty.call(message, "providerConfig"))
+                                $root.google.cloud.config.v1.ProviderConfig.encode(message.providerConfig, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             return writer;
                         };
     
@@ -1278,12 +1462,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Deployment.decode = function decode(reader, length) {
+                        Deployment.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.Deployment(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 6: {
                                         message.terraformBlueprint = $root.google.cloud.config.v1.TerraformBlueprint.decode(reader, reader.uint32());
@@ -1417,6 +1603,10 @@
                                         message.annotations[key] = value;
                                         break;
                                     }
+                                case 25: {
+                                        message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1513,6 +1703,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 10:
                                     break;
                                 }
                             if (message.deleteResults != null && message.hasOwnProperty("deleteResults")) {
@@ -1595,6 +1786,11 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
+                            }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig")) {
+                                var error = $root.google.cloud.config.v1.ProviderConfig.verify(message.providerConfig);
+                                if (error)
+                                    return "providerConfig." + error;
                             }
                             return null;
                         };
@@ -1714,6 +1910,10 @@
                             case 8:
                                 message.errorCode = 8;
                                 break;
+                            case "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED":
+                            case 10:
+                                message.errorCode = 10;
+                                break;
                             }
                             if (object.deleteResults != null) {
                                 if (typeof object.deleteResults !== "object")
@@ -1811,6 +2011,11 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.providerConfig != null) {
+                                if (typeof object.providerConfig !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Deployment.providerConfig: object expected");
+                                message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.fromObject(object.providerConfig);
+                            }
                             return message;
                         };
     
@@ -1848,6 +2053,7 @@
                                 object.lockState = options.enums === String ? "LOCK_STATE_UNSPECIFIED" : 0;
                                 object.tfVersion = "";
                                 object.quotaValidation = options.enums === String ? "QUOTA_VALIDATION_UNSPECIFIED" : 0;
+                                object.providerConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1923,6 +2129,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig"))
+                                object.providerConfig = $root.google.cloud.config.v1.ProviderConfig.toObject(message.providerConfig, options);
                             return object;
                         };
     
@@ -1989,6 +2197,7 @@
                          * @property {number} DELETE_BUILD_RUN_FAILED=6 DELETE_BUILD_RUN_FAILED value
                          * @property {number} BUCKET_CREATION_PERMISSION_DENIED=7 BUCKET_CREATION_PERMISSION_DENIED value
                          * @property {number} BUCKET_CREATION_FAILED=8 BUCKET_CREATION_FAILED value
+                         * @property {number} EXTERNAL_VALUE_SOURCE_IMPORT_FAILED=10 EXTERNAL_VALUE_SOURCE_IMPORT_FAILED value
                          */
                         Deployment.ErrorCode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -1999,6 +2208,7 @@
                             values[valuesById[6] = "DELETE_BUILD_RUN_FAILED"] = 6;
                             values[valuesById[7] = "BUCKET_CREATION_PERMISSION_DENIED"] = 7;
                             values[valuesById[8] = "BUCKET_CREATION_FAILED"] = 8;
+                            values[valuesById[10] = "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED"] = 10;
                             return values;
                         })();
     
@@ -2154,12 +2364,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TerraformBlueprint.decode = function decode(reader, length) {
+                        TerraformBlueprint.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.TerraformBlueprint(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gcsSource = reader.string();
@@ -2436,12 +2648,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TerraformVariable.decode = function decode(reader, length) {
+                        TerraformVariable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.TerraformVariable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 5: {
                                         message.inputValue = $root.google.protobuf.Value.decode(reader, reader.uint32());
@@ -2670,12 +2884,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ApplyResults.decode = function decode(reader, length) {
+                        ApplyResults.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ApplyResults(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.content = reader.string();
@@ -2948,12 +3164,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TerraformOutput.decode = function decode(reader, length) {
+                        TerraformOutput.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.TerraformOutput();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.sensitive = reader.bool();
@@ -3213,12 +3431,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDeploymentsRequest.decode = function decode(reader, length) {
+                        ListDeploymentsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListDeploymentsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -3491,12 +3711,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDeploymentsResponse.decode = function decode(reader, length) {
+                        ListDeploymentsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListDeploymentsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.deployments && message.deployments.length))
@@ -3753,12 +3975,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDeploymentRequest.decode = function decode(reader, length) {
+                        GetDeploymentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetDeploymentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4000,12 +4224,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRevisionsRequest.decode = function decode(reader, length) {
+                        ListRevisionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListRevisionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -4278,12 +4504,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRevisionsResponse.decode = function decode(reader, length) {
+                        ListRevisionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListRevisionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.revisions && message.revisions.length))
@@ -4540,12 +4768,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetRevisionRequest.decode = function decode(reader, length) {
+                        GetRevisionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetRevisionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4776,12 +5006,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDeploymentRequest.decode = function decode(reader, length) {
+                        CreateDeploymentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.CreateDeploymentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -5043,12 +5275,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDeploymentRequest.decode = function decode(reader, length) {
+                        UpdateDeploymentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.UpdateDeploymentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -5314,12 +5548,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDeploymentRequest.decode = function decode(reader, length) {
+                        DeleteDeploymentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeleteDeploymentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5696,12 +5932,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 8: {
                                         message.deploymentMetadata = $root.google.cloud.config.v1.DeploymentOperationMetadata.decode(reader, reader.uint32());
@@ -5970,6 +6208,7 @@
                          * @property {string|null} [tfVersion] Revision tfVersion
                          * @property {string|null} [quotaValidationResults] Revision quotaValidationResults
                          * @property {google.cloud.config.v1.QuotaValidation|null} [quotaValidation] Revision quotaValidation
+                         * @property {google.cloud.config.v1.IProviderConfig|null} [providerConfig] Revision providerConfig
                          */
     
                         /**
@@ -6148,6 +6387,14 @@
                          */
                         Revision.prototype.quotaValidation = 0;
     
+                        /**
+                         * Revision providerConfig.
+                         * @member {google.cloud.config.v1.IProviderConfig|null|undefined} providerConfig
+                         * @memberof google.cloud.config.v1.Revision
+                         * @instance
+                         */
+                        Revision.prototype.providerConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6225,6 +6472,8 @@
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.tfVersion);
                             if (message.quotaValidation != null && Object.hasOwnProperty.call(message, "quotaValidation"))
                                 writer.uint32(/* id 20, wireType 0 =*/160).int32(message.quotaValidation);
+                            if (message.providerConfig != null && Object.hasOwnProperty.call(message, "providerConfig"))
+                                $root.google.cloud.config.v1.ProviderConfig.encode(message.providerConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             if (message.quotaValidationResults != null && Object.hasOwnProperty.call(message, "quotaValidationResults"))
                                 writer.uint32(/* id 29, wireType 2 =*/234).string(message.quotaValidationResults);
                             return writer;
@@ -6254,12 +6503,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Revision.decode = function decode(reader, length) {
+                        Revision.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.Revision();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 6: {
                                         message.terraformBlueprint = $root.google.cloud.config.v1.TerraformBlueprint.decode(reader, reader.uint32());
@@ -6341,6 +6592,10 @@
                                     }
                                 case 20: {
                                         message.quotaValidation = reader.int32();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -6437,6 +6692,7 @@
                                 case 4:
                                 case 5:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.build != null && message.hasOwnProperty("build"))
@@ -6484,6 +6740,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig")) {
+                                var error = $root.google.cloud.config.v1.ProviderConfig.verify(message.providerConfig);
+                                if (error)
+                                    return "providerConfig." + error;
+                            }
                             return null;
                         };
     
@@ -6598,6 +6859,10 @@
                             case 7:
                                 message.errorCode = 7;
                                 break;
+                            case "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED":
+                            case 8:
+                                message.errorCode = 8;
+                                break;
                             }
                             if (object.build != null)
                                 message.build = String(object.build);
@@ -6647,6 +6912,11 @@
                                 message.quotaValidation = 2;
                                 break;
                             }
+                            if (object.providerConfig != null) {
+                                if (typeof object.providerConfig !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Revision.providerConfig: object expected");
+                                message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.fromObject(object.providerConfig);
+                            }
                             return message;
                         };
     
@@ -6683,6 +6953,7 @@
                                 object.tfVersionConstraint = "";
                                 object.tfVersion = "";
                                 object.quotaValidation = options.enums === String ? "QUOTA_VALIDATION_UNSPECIFIED" : 0;
+                                object.providerConfig = null;
                                 object.quotaValidationResults = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -6729,6 +7000,8 @@
                                 object.tfVersion = message.tfVersion;
                             if (message.quotaValidation != null && message.hasOwnProperty("quotaValidation"))
                                 object.quotaValidation = options.enums === String ? $root.google.cloud.config.v1.QuotaValidation[message.quotaValidation] === undefined ? message.quotaValidation : $root.google.cloud.config.v1.QuotaValidation[message.quotaValidation] : message.quotaValidation;
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig"))
+                                object.providerConfig = $root.google.cloud.config.v1.ProviderConfig.toObject(message.providerConfig, options);
                             if (message.quotaValidationResults != null && message.hasOwnProperty("quotaValidationResults"))
                                 object.quotaValidationResults = message.quotaValidationResults;
                             return object;
@@ -6805,6 +7078,7 @@
                          * @property {number} APPLY_BUILD_API_FAILED=4 APPLY_BUILD_API_FAILED value
                          * @property {number} APPLY_BUILD_RUN_FAILED=5 APPLY_BUILD_RUN_FAILED value
                          * @property {number} QUOTA_VALIDATION_FAILED=7 QUOTA_VALIDATION_FAILED value
+                         * @property {number} EXTERNAL_VALUE_SOURCE_IMPORT_FAILED=8 EXTERNAL_VALUE_SOURCE_IMPORT_FAILED value
                          */
                         Revision.ErrorCode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6813,6 +7087,7 @@
                             values[valuesById[4] = "APPLY_BUILD_API_FAILED"] = 4;
                             values[valuesById[5] = "APPLY_BUILD_RUN_FAILED"] = 5;
                             values[valuesById[7] = "QUOTA_VALIDATION_FAILED"] = 7;
+                            values[valuesById[8] = "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED"] = 8;
                             return values;
                         })();
     
@@ -6937,12 +7212,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TerraformError.decode = function decode(reader, length) {
+                        TerraformError.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.TerraformError();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resourceAddress = reader.string();
@@ -7150,34 +7427,19 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * GitSource _repo.
-                         * @member {"repo"|undefined} _repo
-                         * @memberof google.cloud.config.v1.GitSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GitSource.prototype, "_repo", {
                             get: $util.oneOfGetter($oneOfFields = ["repo"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GitSource _directory.
-                         * @member {"directory"|undefined} _directory
-                         * @memberof google.cloud.config.v1.GitSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GitSource.prototype, "_directory", {
                             get: $util.oneOfGetter($oneOfFields = ["directory"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * GitSource _ref.
-                         * @member {"ref"|undefined} _ref
-                         * @memberof google.cloud.config.v1.GitSource
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(GitSource.prototype, "_ref", {
                             get: $util.oneOfGetter($oneOfFields = ["ref"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -7240,12 +7502,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GitSource.decode = function decode(reader, length) {
+                        GitSource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GitSource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.repo = reader.string();
@@ -7512,12 +7776,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeploymentOperationMetadata.decode = function decode(reader, length) {
+                        DeploymentOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.step = reader.int32();
@@ -7915,12 +8181,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Resource.decode = function decode(reader, length) {
+                        Resource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.Resource(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -8348,12 +8616,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ResourceTerraformInfo.decode = function decode(reader, length) {
+                        ResourceTerraformInfo.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ResourceTerraformInfo();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.address = reader.string();
@@ -8576,12 +8846,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ResourceCAIInfo.decode = function decode(reader, length) {
+                        ResourceCAIInfo.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ResourceCAIInfo();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fullResourceName = reader.string();
@@ -8779,12 +9051,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetResourceRequest.decode = function decode(reader, length) {
+                        GetResourceRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetResourceRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -9026,12 +9300,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListResourcesRequest.decode = function decode(reader, length) {
+                        ListResourcesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListResourcesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -9304,12 +9580,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListResourcesResponse.decode = function decode(reader, length) {
+                        ListResourcesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListResourcesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.resources && message.resources.length))
@@ -9566,12 +9844,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Statefile.decode = function decode(reader, length) {
+                        Statefile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.Statefile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.signedUri = reader.string();
@@ -9780,12 +10060,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportDeploymentStatefileRequest.decode = function decode(reader, length) {
+                        ExportDeploymentStatefileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ExportDeploymentStatefileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -9996,12 +10278,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportRevisionStatefileRequest.decode = function decode(reader, length) {
+                        ExportRevisionStatefileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ExportRevisionStatefileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -10221,12 +10505,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImportStatefileRequest.decode = function decode(reader, length) {
+                        ImportStatefileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ImportStatefileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -10474,12 +10760,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteStatefileRequest.decode = function decode(reader, length) {
+                        DeleteStatefileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeleteStatefileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10704,12 +10992,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LockDeploymentRequest.decode = function decode(reader, length) {
+                        LockDeploymentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.LockDeploymentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10918,12 +11208,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UnlockDeploymentRequest.decode = function decode(reader, length) {
+                        UnlockDeploymentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.UnlockDeploymentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -11148,12 +11440,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportLockInfoRequest.decode = function decode(reader, length) {
+                        ExportLockInfoRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ExportLockInfoRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -11406,12 +11700,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LockInfo.decode = function decode(reader, length) {
+                        LockInfo.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.LockInfo();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.lockId = reader.int64();
@@ -11630,6 +11926,7 @@
                          * @property {string|null} [tfVersion] Preview tfVersion
                          * @property {string|null} [tfVersionConstraint] Preview tfVersionConstraint
                          * @property {Object.<string,string>|null} [annotations] Preview annotations
+                         * @property {google.cloud.config.v1.IProviderConfig|null} [providerConfig] Preview providerConfig
                          */
     
                         /**
@@ -11810,6 +12107,14 @@
                          */
                         Preview.prototype.annotations = $util.emptyObject;
     
+                        /**
+                         * Preview providerConfig.
+                         * @member {google.cloud.config.v1.IProviderConfig|null|undefined} providerConfig
+                         * @memberof google.cloud.config.v1.Preview
+                         * @instance
+                         */
+                        Preview.prototype.providerConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11824,34 +12129,19 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Preview _artifactsGcsBucket.
-                         * @member {"artifactsGcsBucket"|undefined} _artifactsGcsBucket
-                         * @memberof google.cloud.config.v1.Preview
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Preview.prototype, "_artifactsGcsBucket", {
                             get: $util.oneOfGetter($oneOfFields = ["artifactsGcsBucket"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Preview _workerPool.
-                         * @member {"workerPool"|undefined} _workerPool
-                         * @memberof google.cloud.config.v1.Preview
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Preview.prototype, "_workerPool", {
                             get: $util.oneOfGetter($oneOfFields = ["workerPool"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Preview _tfVersionConstraint.
-                         * @member {"tfVersionConstraint"|undefined} _tfVersionConstraint
-                         * @memberof google.cloud.config.v1.Preview
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Preview.prototype, "_tfVersionConstraint", {
                             get: $util.oneOfGetter($oneOfFields = ["tfVersionConstraint"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -11924,6 +12214,8 @@
                             if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
                                 for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 20, wireType 2 =*/162).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.providerConfig != null && Object.hasOwnProperty.call(message, "providerConfig"))
+                                $root.google.cloud.config.v1.ProviderConfig.encode(message.providerConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -11951,12 +12243,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Preview.decode = function decode(reader, length) {
+                        Preview.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.Preview(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 6: {
                                         message.terraformBlueprint = $root.google.cloud.config.v1.TerraformBlueprint.decode(reader, reader.uint32());
@@ -12078,6 +12372,10 @@
                                         message.annotations[key] = value;
                                         break;
                                     }
+                                case 21: {
+                                        message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12188,6 +12486,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.errorStatus != null && message.hasOwnProperty("errorStatus")) {
@@ -12233,6 +12532,11 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.annotations[key[i]]))
                                         return "annotations: string{k:string} expected";
+                            }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig")) {
+                                var error = $root.google.cloud.config.v1.ProviderConfig.verify(message.providerConfig);
+                                if (error)
+                                    return "providerConfig." + error;
                             }
                             return null;
                         };
@@ -12371,6 +12675,10 @@
                             case 6:
                                 message.errorCode = 6;
                                 break;
+                            case "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED":
+                            case 7:
+                                message.errorCode = 7;
+                                break;
                             }
                             if (object.errorStatus != null) {
                                 if (typeof object.errorStatus !== "object")
@@ -12409,6 +12717,11 @@
                                 for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
                                     message.annotations[keys[i]] = String(object.annotations[keys[i]]);
                             }
+                            if (object.providerConfig != null) {
+                                if (typeof object.providerConfig !== "object")
+                                    throw TypeError(".google.cloud.config.v1.Preview.providerConfig: object expected");
+                                message.providerConfig = $root.google.cloud.config.v1.ProviderConfig.fromObject(object.providerConfig);
+                            }
                             return message;
                         };
     
@@ -12445,6 +12758,7 @@
                                 object.previewArtifacts = null;
                                 object.logs = "";
                                 object.tfVersion = "";
+                                object.providerConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12508,6 +12822,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.annotations[keys2[j]] = message.annotations[keys2[j]];
                             }
+                            if (message.providerConfig != null && message.hasOwnProperty("providerConfig"))
+                                object.providerConfig = $root.google.cloud.config.v1.ProviderConfig.toObject(message.providerConfig, options);
                             return object;
                         };
     
@@ -12590,6 +12906,7 @@
                          * @property {number} DEPLOYMENT_LOCK_ACQUIRE_FAILED=4 DEPLOYMENT_LOCK_ACQUIRE_FAILED value
                          * @property {number} PREVIEW_BUILD_API_FAILED=5 PREVIEW_BUILD_API_FAILED value
                          * @property {number} PREVIEW_BUILD_RUN_FAILED=6 PREVIEW_BUILD_RUN_FAILED value
+                         * @property {number} EXTERNAL_VALUE_SOURCE_IMPORT_FAILED=7 EXTERNAL_VALUE_SOURCE_IMPORT_FAILED value
                          */
                         Preview.ErrorCode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -12600,6 +12917,7 @@
                             values[valuesById[4] = "DEPLOYMENT_LOCK_ACQUIRE_FAILED"] = 4;
                             values[valuesById[5] = "PREVIEW_BUILD_API_FAILED"] = 5;
                             values[valuesById[6] = "PREVIEW_BUILD_RUN_FAILED"] = 6;
+                            values[valuesById[7] = "EXTERNAL_VALUE_SOURCE_IMPORT_FAILED"] = 7;
                             return values;
                         })();
     
@@ -12724,12 +13042,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PreviewOperationMetadata.decode = function decode(reader, length) {
+                        PreviewOperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.PreviewOperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.step = reader.int32();
@@ -13076,12 +13396,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PreviewArtifacts.decode = function decode(reader, length) {
+                        PreviewArtifacts.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.PreviewArtifacts();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.content = reader.string();
@@ -13325,12 +13647,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePreviewRequest.decode = function decode(reader, length) {
+                        CreatePreviewRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.CreatePreviewRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -13570,12 +13894,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPreviewRequest.decode = function decode(reader, length) {
+                        GetPreviewRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetPreviewRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -13817,12 +14143,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPreviewsRequest.decode = function decode(reader, length) {
+                        ListPreviewsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListPreviewsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -14095,12 +14423,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPreviewsResponse.decode = function decode(reader, length) {
+                        ListPreviewsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListPreviewsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.previews && message.previews.length))
@@ -14368,12 +14698,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePreviewRequest.decode = function decode(reader, length) {
+                        DeletePreviewRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeletePreviewRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -14584,12 +14916,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportPreviewResultRequest.decode = function decode(reader, length) {
+                        ExportPreviewResultRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ExportPreviewResultRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -14787,12 +15121,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExportPreviewResultResponse.decode = function decode(reader, length) {
+                        ExportPreviewResultResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ExportPreviewResultResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.result = $root.google.cloud.config.v1.PreviewResult.decode(reader, reader.uint32());
@@ -15006,12 +15342,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PreviewResult.decode = function decode(reader, length) {
+                        PreviewResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.PreviewResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.binarySignedUri = reader.string();
@@ -15222,12 +15560,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetTerraformVersionRequest.decode = function decode(reader, length) {
+                        GetTerraformVersionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetTerraformVersionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15469,12 +15809,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTerraformVersionsRequest.decode = function decode(reader, length) {
+                        ListTerraformVersionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListTerraformVersionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -15747,12 +16089,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTerraformVersionsResponse.decode = function decode(reader, length) {
+                        ListTerraformVersionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListTerraformVersionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.terraformVersions && message.terraformVersions.length))
@@ -15995,23 +16339,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * TerraformVersion _deprecateTime.
-                         * @member {"deprecateTime"|undefined} _deprecateTime
-                         * @memberof google.cloud.config.v1.TerraformVersion
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TerraformVersion.prototype, "_deprecateTime", {
                             get: $util.oneOfGetter($oneOfFields = ["deprecateTime"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * TerraformVersion _obsoleteTime.
-                         * @member {"obsoleteTime"|undefined} _obsoleteTime
-                         * @memberof google.cloud.config.v1.TerraformVersion
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(TerraformVersion.prototype, "_obsoleteTime", {
                             get: $util.oneOfGetter($oneOfFields = ["obsoleteTime"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -16078,12 +16412,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TerraformVersion.decode = function decode(reader, length) {
+                        TerraformVersion.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.TerraformVersion();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -16318,6 +16654,4460 @@
                         return TerraformVersion;
                     })();
     
+                    v1.ResourceChangeTerraformInfo = (function() {
+    
+                        /**
+                         * Properties of a ResourceChangeTerraformInfo.
+                         * @memberof google.cloud.config.v1
+                         * @interface IResourceChangeTerraformInfo
+                         * @property {string|null} [address] ResourceChangeTerraformInfo address
+                         * @property {string|null} [type] ResourceChangeTerraformInfo type
+                         * @property {string|null} [resourceName] ResourceChangeTerraformInfo resourceName
+                         * @property {string|null} [provider] ResourceChangeTerraformInfo provider
+                         * @property {Array.<string>|null} [actions] ResourceChangeTerraformInfo actions
+                         */
+    
+                        /**
+                         * Constructs a new ResourceChangeTerraformInfo.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ResourceChangeTerraformInfo.
+                         * @implements IResourceChangeTerraformInfo
+                         * @constructor
+                         * @param {google.cloud.config.v1.IResourceChangeTerraformInfo=} [properties] Properties to set
+                         */
+                        function ResourceChangeTerraformInfo(properties) {
+                            this.actions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceChangeTerraformInfo address.
+                         * @member {string} address
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @instance
+                         */
+                        ResourceChangeTerraformInfo.prototype.address = "";
+    
+                        /**
+                         * ResourceChangeTerraformInfo type.
+                         * @member {string} type
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @instance
+                         */
+                        ResourceChangeTerraformInfo.prototype.type = "";
+    
+                        /**
+                         * ResourceChangeTerraformInfo resourceName.
+                         * @member {string} resourceName
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @instance
+                         */
+                        ResourceChangeTerraformInfo.prototype.resourceName = "";
+    
+                        /**
+                         * ResourceChangeTerraformInfo provider.
+                         * @member {string} provider
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @instance
+                         */
+                        ResourceChangeTerraformInfo.prototype.provider = "";
+    
+                        /**
+                         * ResourceChangeTerraformInfo actions.
+                         * @member {Array.<string>} actions
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @instance
+                         */
+                        ResourceChangeTerraformInfo.prototype.actions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ResourceChangeTerraformInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceChangeTerraformInfo=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ResourceChangeTerraformInfo} ResourceChangeTerraformInfo instance
+                         */
+                        ResourceChangeTerraformInfo.create = function create(properties) {
+                            return new ResourceChangeTerraformInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceChangeTerraformInfo message. Does not implicitly {@link google.cloud.config.v1.ResourceChangeTerraformInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceChangeTerraformInfo} message ResourceChangeTerraformInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceChangeTerraformInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                            if (message.resourceName != null && Object.hasOwnProperty.call(message, "resourceName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.resourceName);
+                            if (message.provider != null && Object.hasOwnProperty.call(message, "provider"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.provider);
+                            if (message.actions != null && message.actions.length)
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.actions[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceChangeTerraformInfo message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceChangeTerraformInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceChangeTerraformInfo} message ResourceChangeTerraformInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceChangeTerraformInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceChangeTerraformInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ResourceChangeTerraformInfo} ResourceChangeTerraformInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceChangeTerraformInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ResourceChangeTerraformInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.address = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resourceName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.provider = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.actions && message.actions.length))
+                                            message.actions = [];
+                                        message.actions.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceChangeTerraformInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ResourceChangeTerraformInfo} ResourceChangeTerraformInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceChangeTerraformInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceChangeTerraformInfo message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceChangeTerraformInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.address != null && message.hasOwnProperty("address"))
+                                if (!$util.isString(message.address))
+                                    return "address: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                if (!$util.isString(message.resourceName))
+                                    return "resourceName: string expected";
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                if (!$util.isString(message.provider))
+                                    return "provider: string expected";
+                            if (message.actions != null && message.hasOwnProperty("actions")) {
+                                if (!Array.isArray(message.actions))
+                                    return "actions: array expected";
+                                for (var i = 0; i < message.actions.length; ++i)
+                                    if (!$util.isString(message.actions[i]))
+                                        return "actions: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceChangeTerraformInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ResourceChangeTerraformInfo} ResourceChangeTerraformInfo
+                         */
+                        ResourceChangeTerraformInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ResourceChangeTerraformInfo)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ResourceChangeTerraformInfo();
+                            if (object.address != null)
+                                message.address = String(object.address);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.resourceName != null)
+                                message.resourceName = String(object.resourceName);
+                            if (object.provider != null)
+                                message.provider = String(object.provider);
+                            if (object.actions) {
+                                if (!Array.isArray(object.actions))
+                                    throw TypeError(".google.cloud.config.v1.ResourceChangeTerraformInfo.actions: array expected");
+                                message.actions = [];
+                                for (var i = 0; i < object.actions.length; ++i)
+                                    message.actions[i] = String(object.actions[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceChangeTerraformInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.ResourceChangeTerraformInfo} message ResourceChangeTerraformInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceChangeTerraformInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.actions = [];
+                            if (options.defaults) {
+                                object.address = "";
+                                object.type = "";
+                                object.resourceName = "";
+                                object.provider = "";
+                            }
+                            if (message.address != null && message.hasOwnProperty("address"))
+                                object.address = message.address;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                object.resourceName = message.resourceName;
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                object.provider = message.provider;
+                            if (message.actions && message.actions.length) {
+                                object.actions = [];
+                                for (var j = 0; j < message.actions.length; ++j)
+                                    object.actions[j] = message.actions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceChangeTerraformInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceChangeTerraformInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceChangeTerraformInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ResourceChangeTerraformInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceChangeTerraformInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ResourceChangeTerraformInfo";
+                        };
+    
+                        return ResourceChangeTerraformInfo;
+                    })();
+    
+                    v1.ResourceChange = (function() {
+    
+                        /**
+                         * Properties of a ResourceChange.
+                         * @memberof google.cloud.config.v1
+                         * @interface IResourceChange
+                         * @property {string|null} [name] ResourceChange name
+                         * @property {google.cloud.config.v1.IResourceChangeTerraformInfo|null} [terraformInfo] ResourceChange terraformInfo
+                         * @property {google.cloud.config.v1.ResourceChange.Intent|null} [intent] ResourceChange intent
+                         * @property {Array.<google.cloud.config.v1.IPropertyChange>|null} [propertyChanges] ResourceChange propertyChanges
+                         */
+    
+                        /**
+                         * Constructs a new ResourceChange.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ResourceChange.
+                         * @implements IResourceChange
+                         * @constructor
+                         * @param {google.cloud.config.v1.IResourceChange=} [properties] Properties to set
+                         */
+                        function ResourceChange(properties) {
+                            this.propertyChanges = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceChange name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @instance
+                         */
+                        ResourceChange.prototype.name = "";
+    
+                        /**
+                         * ResourceChange terraformInfo.
+                         * @member {google.cloud.config.v1.IResourceChangeTerraformInfo|null|undefined} terraformInfo
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @instance
+                         */
+                        ResourceChange.prototype.terraformInfo = null;
+    
+                        /**
+                         * ResourceChange intent.
+                         * @member {google.cloud.config.v1.ResourceChange.Intent} intent
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @instance
+                         */
+                        ResourceChange.prototype.intent = 0;
+    
+                        /**
+                         * ResourceChange propertyChanges.
+                         * @member {Array.<google.cloud.config.v1.IPropertyChange>} propertyChanges
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @instance
+                         */
+                        ResourceChange.prototype.propertyChanges = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ResourceChange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceChange=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ResourceChange} ResourceChange instance
+                         */
+                        ResourceChange.create = function create(properties) {
+                            return new ResourceChange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceChange message. Does not implicitly {@link google.cloud.config.v1.ResourceChange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceChange} message ResourceChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceChange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.terraformInfo != null && Object.hasOwnProperty.call(message, "terraformInfo"))
+                                $root.google.cloud.config.v1.ResourceChangeTerraformInfo.encode(message.terraformInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.intent != null && Object.hasOwnProperty.call(message, "intent"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.intent);
+                            if (message.propertyChanges != null && message.propertyChanges.length)
+                                for (var i = 0; i < message.propertyChanges.length; ++i)
+                                    $root.google.cloud.config.v1.PropertyChange.encode(message.propertyChanges[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceChange message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceChange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceChange} message ResourceChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceChange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceChange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ResourceChange} ResourceChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceChange.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ResourceChange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.terraformInfo = $root.google.cloud.config.v1.ResourceChangeTerraformInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.intent = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.propertyChanges && message.propertyChanges.length))
+                                            message.propertyChanges = [];
+                                        message.propertyChanges.push($root.google.cloud.config.v1.PropertyChange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceChange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ResourceChange} ResourceChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceChange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceChange message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceChange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.terraformInfo != null && message.hasOwnProperty("terraformInfo")) {
+                                var error = $root.google.cloud.config.v1.ResourceChangeTerraformInfo.verify(message.terraformInfo);
+                                if (error)
+                                    return "terraformInfo." + error;
+                            }
+                            if (message.intent != null && message.hasOwnProperty("intent"))
+                                switch (message.intent) {
+                                default:
+                                    return "intent: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.propertyChanges != null && message.hasOwnProperty("propertyChanges")) {
+                                if (!Array.isArray(message.propertyChanges))
+                                    return "propertyChanges: array expected";
+                                for (var i = 0; i < message.propertyChanges.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.PropertyChange.verify(message.propertyChanges[i]);
+                                    if (error)
+                                        return "propertyChanges." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceChange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ResourceChange} ResourceChange
+                         */
+                        ResourceChange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ResourceChange)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ResourceChange();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.terraformInfo != null) {
+                                if (typeof object.terraformInfo !== "object")
+                                    throw TypeError(".google.cloud.config.v1.ResourceChange.terraformInfo: object expected");
+                                message.terraformInfo = $root.google.cloud.config.v1.ResourceChangeTerraformInfo.fromObject(object.terraformInfo);
+                            }
+                            switch (object.intent) {
+                            default:
+                                if (typeof object.intent === "number") {
+                                    message.intent = object.intent;
+                                    break;
+                                }
+                                break;
+                            case "INTENT_UNSPECIFIED":
+                            case 0:
+                                message.intent = 0;
+                                break;
+                            case "CREATE":
+                            case 1:
+                                message.intent = 1;
+                                break;
+                            case "UPDATE":
+                            case 2:
+                                message.intent = 2;
+                                break;
+                            case "DELETE":
+                            case 3:
+                                message.intent = 3;
+                                break;
+                            case "RECREATE":
+                            case 4:
+                                message.intent = 4;
+                                break;
+                            case "UNCHANGED":
+                            case 5:
+                                message.intent = 5;
+                                break;
+                            }
+                            if (object.propertyChanges) {
+                                if (!Array.isArray(object.propertyChanges))
+                                    throw TypeError(".google.cloud.config.v1.ResourceChange.propertyChanges: array expected");
+                                message.propertyChanges = [];
+                                for (var i = 0; i < object.propertyChanges.length; ++i) {
+                                    if (typeof object.propertyChanges[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ResourceChange.propertyChanges: object expected");
+                                    message.propertyChanges[i] = $root.google.cloud.config.v1.PropertyChange.fromObject(object.propertyChanges[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceChange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {google.cloud.config.v1.ResourceChange} message ResourceChange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceChange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.propertyChanges = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.terraformInfo = null;
+                                object.intent = options.enums === String ? "INTENT_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.terraformInfo != null && message.hasOwnProperty("terraformInfo"))
+                                object.terraformInfo = $root.google.cloud.config.v1.ResourceChangeTerraformInfo.toObject(message.terraformInfo, options);
+                            if (message.intent != null && message.hasOwnProperty("intent"))
+                                object.intent = options.enums === String ? $root.google.cloud.config.v1.ResourceChange.Intent[message.intent] === undefined ? message.intent : $root.google.cloud.config.v1.ResourceChange.Intent[message.intent] : message.intent;
+                            if (message.propertyChanges && message.propertyChanges.length) {
+                                object.propertyChanges = [];
+                                for (var j = 0; j < message.propertyChanges.length; ++j)
+                                    object.propertyChanges[j] = $root.google.cloud.config.v1.PropertyChange.toObject(message.propertyChanges[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceChange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceChange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceChange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ResourceChange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ResourceChange";
+                        };
+    
+                        /**
+                         * Intent enum.
+                         * @name google.cloud.config.v1.ResourceChange.Intent
+                         * @enum {number}
+                         * @property {number} INTENT_UNSPECIFIED=0 INTENT_UNSPECIFIED value
+                         * @property {number} CREATE=1 CREATE value
+                         * @property {number} UPDATE=2 UPDATE value
+                         * @property {number} DELETE=3 DELETE value
+                         * @property {number} RECREATE=4 RECREATE value
+                         * @property {number} UNCHANGED=5 UNCHANGED value
+                         */
+                        ResourceChange.Intent = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INTENT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATE"] = 1;
+                            values[valuesById[2] = "UPDATE"] = 2;
+                            values[valuesById[3] = "DELETE"] = 3;
+                            values[valuesById[4] = "RECREATE"] = 4;
+                            values[valuesById[5] = "UNCHANGED"] = 5;
+                            return values;
+                        })();
+    
+                        return ResourceChange;
+                    })();
+    
+                    v1.PropertyChange = (function() {
+    
+                        /**
+                         * Properties of a PropertyChange.
+                         * @memberof google.cloud.config.v1
+                         * @interface IPropertyChange
+                         * @property {string|null} [path] PropertyChange path
+                         * @property {Array.<string>|null} [beforeSensitivePaths] PropertyChange beforeSensitivePaths
+                         * @property {google.protobuf.IValue|null} [before] PropertyChange before
+                         * @property {Array.<string>|null} [afterSensitivePaths] PropertyChange afterSensitivePaths
+                         * @property {google.protobuf.IValue|null} [after] PropertyChange after
+                         */
+    
+                        /**
+                         * Constructs a new PropertyChange.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a PropertyChange.
+                         * @implements IPropertyChange
+                         * @constructor
+                         * @param {google.cloud.config.v1.IPropertyChange=} [properties] Properties to set
+                         */
+                        function PropertyChange(properties) {
+                            this.beforeSensitivePaths = [];
+                            this.afterSensitivePaths = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PropertyChange path.
+                         * @member {string} path
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @instance
+                         */
+                        PropertyChange.prototype.path = "";
+    
+                        /**
+                         * PropertyChange beforeSensitivePaths.
+                         * @member {Array.<string>} beforeSensitivePaths
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @instance
+                         */
+                        PropertyChange.prototype.beforeSensitivePaths = $util.emptyArray;
+    
+                        /**
+                         * PropertyChange before.
+                         * @member {google.protobuf.IValue|null|undefined} before
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @instance
+                         */
+                        PropertyChange.prototype.before = null;
+    
+                        /**
+                         * PropertyChange afterSensitivePaths.
+                         * @member {Array.<string>} afterSensitivePaths
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @instance
+                         */
+                        PropertyChange.prototype.afterSensitivePaths = $util.emptyArray;
+    
+                        /**
+                         * PropertyChange after.
+                         * @member {google.protobuf.IValue|null|undefined} after
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @instance
+                         */
+                        PropertyChange.prototype.after = null;
+    
+                        /**
+                         * Creates a new PropertyChange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {google.cloud.config.v1.IPropertyChange=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.PropertyChange} PropertyChange instance
+                         */
+                        PropertyChange.create = function create(properties) {
+                            return new PropertyChange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PropertyChange message. Does not implicitly {@link google.cloud.config.v1.PropertyChange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {google.cloud.config.v1.IPropertyChange} message PropertyChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertyChange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                            if (message.beforeSensitivePaths != null && message.beforeSensitivePaths.length)
+                                for (var i = 0; i < message.beforeSensitivePaths.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.beforeSensitivePaths[i]);
+                            if (message.before != null && Object.hasOwnProperty.call(message, "before"))
+                                $root.google.protobuf.Value.encode(message.before, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.afterSensitivePaths != null && message.afterSensitivePaths.length)
+                                for (var i = 0; i < message.afterSensitivePaths.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.afterSensitivePaths[i]);
+                            if (message.after != null && Object.hasOwnProperty.call(message, "after"))
+                                $root.google.protobuf.Value.encode(message.after, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PropertyChange message, length delimited. Does not implicitly {@link google.cloud.config.v1.PropertyChange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {google.cloud.config.v1.IPropertyChange} message PropertyChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertyChange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PropertyChange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.PropertyChange} PropertyChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertyChange.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.PropertyChange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.beforeSensitivePaths && message.beforeSensitivePaths.length))
+                                            message.beforeSensitivePaths = [];
+                                        message.beforeSensitivePaths.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.before = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.afterSensitivePaths && message.afterSensitivePaths.length))
+                                            message.afterSensitivePaths = [];
+                                        message.afterSensitivePaths.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.after = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PropertyChange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.PropertyChange} PropertyChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertyChange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PropertyChange message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PropertyChange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            if (message.beforeSensitivePaths != null && message.hasOwnProperty("beforeSensitivePaths")) {
+                                if (!Array.isArray(message.beforeSensitivePaths))
+                                    return "beforeSensitivePaths: array expected";
+                                for (var i = 0; i < message.beforeSensitivePaths.length; ++i)
+                                    if (!$util.isString(message.beforeSensitivePaths[i]))
+                                        return "beforeSensitivePaths: string[] expected";
+                            }
+                            if (message.before != null && message.hasOwnProperty("before")) {
+                                var error = $root.google.protobuf.Value.verify(message.before);
+                                if (error)
+                                    return "before." + error;
+                            }
+                            if (message.afterSensitivePaths != null && message.hasOwnProperty("afterSensitivePaths")) {
+                                if (!Array.isArray(message.afterSensitivePaths))
+                                    return "afterSensitivePaths: array expected";
+                                for (var i = 0; i < message.afterSensitivePaths.length; ++i)
+                                    if (!$util.isString(message.afterSensitivePaths[i]))
+                                        return "afterSensitivePaths: string[] expected";
+                            }
+                            if (message.after != null && message.hasOwnProperty("after")) {
+                                var error = $root.google.protobuf.Value.verify(message.after);
+                                if (error)
+                                    return "after." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PropertyChange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.PropertyChange} PropertyChange
+                         */
+                        PropertyChange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.PropertyChange)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.PropertyChange();
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            if (object.beforeSensitivePaths) {
+                                if (!Array.isArray(object.beforeSensitivePaths))
+                                    throw TypeError(".google.cloud.config.v1.PropertyChange.beforeSensitivePaths: array expected");
+                                message.beforeSensitivePaths = [];
+                                for (var i = 0; i < object.beforeSensitivePaths.length; ++i)
+                                    message.beforeSensitivePaths[i] = String(object.beforeSensitivePaths[i]);
+                            }
+                            if (object.before != null) {
+                                if (typeof object.before !== "object")
+                                    throw TypeError(".google.cloud.config.v1.PropertyChange.before: object expected");
+                                message.before = $root.google.protobuf.Value.fromObject(object.before);
+                            }
+                            if (object.afterSensitivePaths) {
+                                if (!Array.isArray(object.afterSensitivePaths))
+                                    throw TypeError(".google.cloud.config.v1.PropertyChange.afterSensitivePaths: array expected");
+                                message.afterSensitivePaths = [];
+                                for (var i = 0; i < object.afterSensitivePaths.length; ++i)
+                                    message.afterSensitivePaths[i] = String(object.afterSensitivePaths[i]);
+                            }
+                            if (object.after != null) {
+                                if (typeof object.after !== "object")
+                                    throw TypeError(".google.cloud.config.v1.PropertyChange.after: object expected");
+                                message.after = $root.google.protobuf.Value.fromObject(object.after);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PropertyChange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {google.cloud.config.v1.PropertyChange} message PropertyChange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PropertyChange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.beforeSensitivePaths = [];
+                                object.afterSensitivePaths = [];
+                            }
+                            if (options.defaults) {
+                                object.path = "";
+                                object.before = null;
+                                object.after = null;
+                            }
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            if (message.beforeSensitivePaths && message.beforeSensitivePaths.length) {
+                                object.beforeSensitivePaths = [];
+                                for (var j = 0; j < message.beforeSensitivePaths.length; ++j)
+                                    object.beforeSensitivePaths[j] = message.beforeSensitivePaths[j];
+                            }
+                            if (message.before != null && message.hasOwnProperty("before"))
+                                object.before = $root.google.protobuf.Value.toObject(message.before, options);
+                            if (message.afterSensitivePaths && message.afterSensitivePaths.length) {
+                                object.afterSensitivePaths = [];
+                                for (var j = 0; j < message.afterSensitivePaths.length; ++j)
+                                    object.afterSensitivePaths[j] = message.afterSensitivePaths[j];
+                            }
+                            if (message.after != null && message.hasOwnProperty("after"))
+                                object.after = $root.google.protobuf.Value.toObject(message.after, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PropertyChange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PropertyChange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PropertyChange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.PropertyChange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PropertyChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.PropertyChange";
+                        };
+    
+                        return PropertyChange;
+                    })();
+    
+                    v1.ListResourceChangesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListResourceChangesRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListResourceChangesRequest
+                         * @property {string|null} [parent] ListResourceChangesRequest parent
+                         * @property {number|null} [pageSize] ListResourceChangesRequest pageSize
+                         * @property {string|null} [pageToken] ListResourceChangesRequest pageToken
+                         * @property {string|null} [filter] ListResourceChangesRequest filter
+                         * @property {string|null} [orderBy] ListResourceChangesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListResourceChangesRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListResourceChangesRequest.
+                         * @implements IListResourceChangesRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListResourceChangesRequest=} [properties] Properties to set
+                         */
+                        function ListResourceChangesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListResourceChangesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @instance
+                         */
+                        ListResourceChangesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListResourceChangesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @instance
+                         */
+                        ListResourceChangesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListResourceChangesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @instance
+                         */
+                        ListResourceChangesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListResourceChangesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @instance
+                         */
+                        ListResourceChangesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListResourceChangesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @instance
+                         */
+                        ListResourceChangesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListResourceChangesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceChangesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListResourceChangesRequest} ListResourceChangesRequest instance
+                         */
+                        ListResourceChangesRequest.create = function create(properties) {
+                            return new ListResourceChangesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceChangesRequest message. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceChangesRequest} message ListResourceChangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceChangesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceChangesRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceChangesRequest} message ListResourceChangesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceChangesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListResourceChangesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListResourceChangesRequest} ListResourceChangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceChangesRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListResourceChangesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListResourceChangesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListResourceChangesRequest} ListResourceChangesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceChangesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListResourceChangesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListResourceChangesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListResourceChangesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListResourceChangesRequest} ListResourceChangesRequest
+                         */
+                        ListResourceChangesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListResourceChangesRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListResourceChangesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListResourceChangesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ListResourceChangesRequest} message ListResourceChangesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListResourceChangesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListResourceChangesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListResourceChangesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListResourceChangesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListResourceChangesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListResourceChangesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListResourceChangesRequest";
+                        };
+    
+                        return ListResourceChangesRequest;
+                    })();
+    
+                    v1.ListResourceChangesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListResourceChangesResponse.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListResourceChangesResponse
+                         * @property {Array.<google.cloud.config.v1.IResourceChange>|null} [resourceChanges] ListResourceChangesResponse resourceChanges
+                         * @property {string|null} [nextPageToken] ListResourceChangesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListResourceChangesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListResourceChangesResponse.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListResourceChangesResponse.
+                         * @implements IListResourceChangesResponse
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListResourceChangesResponse=} [properties] Properties to set
+                         */
+                        function ListResourceChangesResponse(properties) {
+                            this.resourceChanges = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListResourceChangesResponse resourceChanges.
+                         * @member {Array.<google.cloud.config.v1.IResourceChange>} resourceChanges
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @instance
+                         */
+                        ListResourceChangesResponse.prototype.resourceChanges = $util.emptyArray;
+    
+                        /**
+                         * ListResourceChangesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @instance
+                         */
+                        ListResourceChangesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListResourceChangesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @instance
+                         */
+                        ListResourceChangesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListResourceChangesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceChangesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListResourceChangesResponse} ListResourceChangesResponse instance
+                         */
+                        ListResourceChangesResponse.create = function create(properties) {
+                            return new ListResourceChangesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceChangesResponse message. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceChangesResponse} message ListResourceChangesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceChangesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceChanges != null && message.resourceChanges.length)
+                                for (var i = 0; i < message.resourceChanges.length; ++i)
+                                    $root.google.cloud.config.v1.ResourceChange.encode(message.resourceChanges[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceChangesResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceChangesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceChangesResponse} message ListResourceChangesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceChangesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListResourceChangesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListResourceChangesResponse} ListResourceChangesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceChangesResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListResourceChangesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.resourceChanges && message.resourceChanges.length))
+                                            message.resourceChanges = [];
+                                        message.resourceChanges.push($root.google.cloud.config.v1.ResourceChange.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListResourceChangesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListResourceChangesResponse} ListResourceChangesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceChangesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListResourceChangesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListResourceChangesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceChanges != null && message.hasOwnProperty("resourceChanges")) {
+                                if (!Array.isArray(message.resourceChanges))
+                                    return "resourceChanges: array expected";
+                                for (var i = 0; i < message.resourceChanges.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.ResourceChange.verify(message.resourceChanges[i]);
+                                    if (error)
+                                        return "resourceChanges." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListResourceChangesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListResourceChangesResponse} ListResourceChangesResponse
+                         */
+                        ListResourceChangesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListResourceChangesResponse)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListResourceChangesResponse();
+                            if (object.resourceChanges) {
+                                if (!Array.isArray(object.resourceChanges))
+                                    throw TypeError(".google.cloud.config.v1.ListResourceChangesResponse.resourceChanges: array expected");
+                                message.resourceChanges = [];
+                                for (var i = 0; i < object.resourceChanges.length; ++i) {
+                                    if (typeof object.resourceChanges[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ListResourceChangesResponse.resourceChanges: object expected");
+                                    message.resourceChanges[i] = $root.google.cloud.config.v1.ResourceChange.fromObject(object.resourceChanges[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.config.v1.ListResourceChangesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListResourceChangesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {google.cloud.config.v1.ListResourceChangesResponse} message ListResourceChangesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListResourceChangesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.resourceChanges = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.resourceChanges && message.resourceChanges.length) {
+                                object.resourceChanges = [];
+                                for (var j = 0; j < message.resourceChanges.length; ++j)
+                                    object.resourceChanges[j] = $root.google.cloud.config.v1.ResourceChange.toObject(message.resourceChanges[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListResourceChangesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListResourceChangesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListResourceChangesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListResourceChangesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListResourceChangesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListResourceChangesResponse";
+                        };
+    
+                        return ListResourceChangesResponse;
+                    })();
+    
+                    v1.GetResourceChangeRequest = (function() {
+    
+                        /**
+                         * Properties of a GetResourceChangeRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IGetResourceChangeRequest
+                         * @property {string|null} [name] GetResourceChangeRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetResourceChangeRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a GetResourceChangeRequest.
+                         * @implements IGetResourceChangeRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IGetResourceChangeRequest=} [properties] Properties to set
+                         */
+                        function GetResourceChangeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetResourceChangeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @instance
+                         */
+                        GetResourceChangeRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetResourceChangeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetResourceChangeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.GetResourceChangeRequest} GetResourceChangeRequest instance
+                         */
+                        GetResourceChangeRequest.create = function create(properties) {
+                            return new GetResourceChangeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetResourceChangeRequest message. Does not implicitly {@link google.cloud.config.v1.GetResourceChangeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetResourceChangeRequest} message GetResourceChangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetResourceChangeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetResourceChangeRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetResourceChangeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetResourceChangeRequest} message GetResourceChangeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetResourceChangeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetResourceChangeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.GetResourceChangeRequest} GetResourceChangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetResourceChangeRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetResourceChangeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetResourceChangeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.GetResourceChangeRequest} GetResourceChangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetResourceChangeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetResourceChangeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetResourceChangeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetResourceChangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.GetResourceChangeRequest} GetResourceChangeRequest
+                         */
+                        GetResourceChangeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.GetResourceChangeRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.GetResourceChangeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetResourceChangeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {google.cloud.config.v1.GetResourceChangeRequest} message GetResourceChangeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetResourceChangeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetResourceChangeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetResourceChangeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetResourceChangeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.GetResourceChangeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetResourceChangeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.GetResourceChangeRequest";
+                        };
+    
+                        return GetResourceChangeRequest;
+                    })();
+    
+                    v1.ResourceDriftTerraformInfo = (function() {
+    
+                        /**
+                         * Properties of a ResourceDriftTerraformInfo.
+                         * @memberof google.cloud.config.v1
+                         * @interface IResourceDriftTerraformInfo
+                         * @property {string|null} [address] ResourceDriftTerraformInfo address
+                         * @property {string|null} [type] ResourceDriftTerraformInfo type
+                         * @property {string|null} [resourceName] ResourceDriftTerraformInfo resourceName
+                         * @property {string|null} [provider] ResourceDriftTerraformInfo provider
+                         */
+    
+                        /**
+                         * Constructs a new ResourceDriftTerraformInfo.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ResourceDriftTerraformInfo.
+                         * @implements IResourceDriftTerraformInfo
+                         * @constructor
+                         * @param {google.cloud.config.v1.IResourceDriftTerraformInfo=} [properties] Properties to set
+                         */
+                        function ResourceDriftTerraformInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceDriftTerraformInfo address.
+                         * @member {string} address
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @instance
+                         */
+                        ResourceDriftTerraformInfo.prototype.address = "";
+    
+                        /**
+                         * ResourceDriftTerraformInfo type.
+                         * @member {string} type
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @instance
+                         */
+                        ResourceDriftTerraformInfo.prototype.type = "";
+    
+                        /**
+                         * ResourceDriftTerraformInfo resourceName.
+                         * @member {string} resourceName
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @instance
+                         */
+                        ResourceDriftTerraformInfo.prototype.resourceName = "";
+    
+                        /**
+                         * ResourceDriftTerraformInfo provider.
+                         * @member {string} provider
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @instance
+                         */
+                        ResourceDriftTerraformInfo.prototype.provider = "";
+    
+                        /**
+                         * Creates a new ResourceDriftTerraformInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceDriftTerraformInfo=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ResourceDriftTerraformInfo} ResourceDriftTerraformInfo instance
+                         */
+                        ResourceDriftTerraformInfo.create = function create(properties) {
+                            return new ResourceDriftTerraformInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceDriftTerraformInfo message. Does not implicitly {@link google.cloud.config.v1.ResourceDriftTerraformInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceDriftTerraformInfo} message ResourceDriftTerraformInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceDriftTerraformInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                            if (message.resourceName != null && Object.hasOwnProperty.call(message, "resourceName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.resourceName);
+                            if (message.provider != null && Object.hasOwnProperty.call(message, "provider"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.provider);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceDriftTerraformInfo message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceDriftTerraformInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceDriftTerraformInfo} message ResourceDriftTerraformInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceDriftTerraformInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceDriftTerraformInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ResourceDriftTerraformInfo} ResourceDriftTerraformInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceDriftTerraformInfo.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ResourceDriftTerraformInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.address = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resourceName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.provider = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceDriftTerraformInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ResourceDriftTerraformInfo} ResourceDriftTerraformInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceDriftTerraformInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceDriftTerraformInfo message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceDriftTerraformInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.address != null && message.hasOwnProperty("address"))
+                                if (!$util.isString(message.address))
+                                    return "address: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                if (!$util.isString(message.resourceName))
+                                    return "resourceName: string expected";
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                if (!$util.isString(message.provider))
+                                    return "provider: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceDriftTerraformInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ResourceDriftTerraformInfo} ResourceDriftTerraformInfo
+                         */
+                        ResourceDriftTerraformInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ResourceDriftTerraformInfo)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ResourceDriftTerraformInfo();
+                            if (object.address != null)
+                                message.address = String(object.address);
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.resourceName != null)
+                                message.resourceName = String(object.resourceName);
+                            if (object.provider != null)
+                                message.provider = String(object.provider);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceDriftTerraformInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {google.cloud.config.v1.ResourceDriftTerraformInfo} message ResourceDriftTerraformInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceDriftTerraformInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.address = "";
+                                object.type = "";
+                                object.resourceName = "";
+                                object.provider = "";
+                            }
+                            if (message.address != null && message.hasOwnProperty("address"))
+                                object.address = message.address;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                object.resourceName = message.resourceName;
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                object.provider = message.provider;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceDriftTerraformInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceDriftTerraformInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceDriftTerraformInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ResourceDriftTerraformInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceDriftTerraformInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ResourceDriftTerraformInfo";
+                        };
+    
+                        return ResourceDriftTerraformInfo;
+                    })();
+    
+                    v1.ResourceDrift = (function() {
+    
+                        /**
+                         * Properties of a ResourceDrift.
+                         * @memberof google.cloud.config.v1
+                         * @interface IResourceDrift
+                         * @property {string|null} [name] ResourceDrift name
+                         * @property {google.cloud.config.v1.IResourceDriftTerraformInfo|null} [terraformInfo] ResourceDrift terraformInfo
+                         * @property {Array.<google.cloud.config.v1.IPropertyDrift>|null} [propertyDrifts] ResourceDrift propertyDrifts
+                         */
+    
+                        /**
+                         * Constructs a new ResourceDrift.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ResourceDrift.
+                         * @implements IResourceDrift
+                         * @constructor
+                         * @param {google.cloud.config.v1.IResourceDrift=} [properties] Properties to set
+                         */
+                        function ResourceDrift(properties) {
+                            this.propertyDrifts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceDrift name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @instance
+                         */
+                        ResourceDrift.prototype.name = "";
+    
+                        /**
+                         * ResourceDrift terraformInfo.
+                         * @member {google.cloud.config.v1.IResourceDriftTerraformInfo|null|undefined} terraformInfo
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @instance
+                         */
+                        ResourceDrift.prototype.terraformInfo = null;
+    
+                        /**
+                         * ResourceDrift propertyDrifts.
+                         * @member {Array.<google.cloud.config.v1.IPropertyDrift>} propertyDrifts
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @instance
+                         */
+                        ResourceDrift.prototype.propertyDrifts = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ResourceDrift instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceDrift=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ResourceDrift} ResourceDrift instance
+                         */
+                        ResourceDrift.create = function create(properties) {
+                            return new ResourceDrift(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceDrift message. Does not implicitly {@link google.cloud.config.v1.ResourceDrift.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceDrift} message ResourceDrift message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceDrift.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.terraformInfo != null && Object.hasOwnProperty.call(message, "terraformInfo"))
+                                $root.google.cloud.config.v1.ResourceDriftTerraformInfo.encode(message.terraformInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.propertyDrifts != null && message.propertyDrifts.length)
+                                for (var i = 0; i < message.propertyDrifts.length; ++i)
+                                    $root.google.cloud.config.v1.PropertyDrift.encode(message.propertyDrifts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceDrift message, length delimited. Does not implicitly {@link google.cloud.config.v1.ResourceDrift.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {google.cloud.config.v1.IResourceDrift} message ResourceDrift message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceDrift.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceDrift message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ResourceDrift} ResourceDrift
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceDrift.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ResourceDrift();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.terraformInfo = $root.google.cloud.config.v1.ResourceDriftTerraformInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.propertyDrifts && message.propertyDrifts.length))
+                                            message.propertyDrifts = [];
+                                        message.propertyDrifts.push($root.google.cloud.config.v1.PropertyDrift.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceDrift message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ResourceDrift} ResourceDrift
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceDrift.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceDrift message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceDrift.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.terraformInfo != null && message.hasOwnProperty("terraformInfo")) {
+                                var error = $root.google.cloud.config.v1.ResourceDriftTerraformInfo.verify(message.terraformInfo);
+                                if (error)
+                                    return "terraformInfo." + error;
+                            }
+                            if (message.propertyDrifts != null && message.hasOwnProperty("propertyDrifts")) {
+                                if (!Array.isArray(message.propertyDrifts))
+                                    return "propertyDrifts: array expected";
+                                for (var i = 0; i < message.propertyDrifts.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.PropertyDrift.verify(message.propertyDrifts[i]);
+                                    if (error)
+                                        return "propertyDrifts." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceDrift message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ResourceDrift} ResourceDrift
+                         */
+                        ResourceDrift.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ResourceDrift)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ResourceDrift();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.terraformInfo != null) {
+                                if (typeof object.terraformInfo !== "object")
+                                    throw TypeError(".google.cloud.config.v1.ResourceDrift.terraformInfo: object expected");
+                                message.terraformInfo = $root.google.cloud.config.v1.ResourceDriftTerraformInfo.fromObject(object.terraformInfo);
+                            }
+                            if (object.propertyDrifts) {
+                                if (!Array.isArray(object.propertyDrifts))
+                                    throw TypeError(".google.cloud.config.v1.ResourceDrift.propertyDrifts: array expected");
+                                message.propertyDrifts = [];
+                                for (var i = 0; i < object.propertyDrifts.length; ++i) {
+                                    if (typeof object.propertyDrifts[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ResourceDrift.propertyDrifts: object expected");
+                                    message.propertyDrifts[i] = $root.google.cloud.config.v1.PropertyDrift.fromObject(object.propertyDrifts[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceDrift message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {google.cloud.config.v1.ResourceDrift} message ResourceDrift
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceDrift.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.propertyDrifts = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.terraformInfo = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.terraformInfo != null && message.hasOwnProperty("terraformInfo"))
+                                object.terraformInfo = $root.google.cloud.config.v1.ResourceDriftTerraformInfo.toObject(message.terraformInfo, options);
+                            if (message.propertyDrifts && message.propertyDrifts.length) {
+                                object.propertyDrifts = [];
+                                for (var j = 0; j < message.propertyDrifts.length; ++j)
+                                    object.propertyDrifts[j] = $root.google.cloud.config.v1.PropertyDrift.toObject(message.propertyDrifts[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceDrift to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceDrift.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceDrift
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ResourceDrift
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceDrift.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ResourceDrift";
+                        };
+    
+                        return ResourceDrift;
+                    })();
+    
+                    v1.PropertyDrift = (function() {
+    
+                        /**
+                         * Properties of a PropertyDrift.
+                         * @memberof google.cloud.config.v1
+                         * @interface IPropertyDrift
+                         * @property {string|null} [path] PropertyDrift path
+                         * @property {Array.<string>|null} [beforeSensitivePaths] PropertyDrift beforeSensitivePaths
+                         * @property {google.protobuf.IValue|null} [before] PropertyDrift before
+                         * @property {Array.<string>|null} [afterSensitivePaths] PropertyDrift afterSensitivePaths
+                         * @property {google.protobuf.IValue|null} [after] PropertyDrift after
+                         */
+    
+                        /**
+                         * Constructs a new PropertyDrift.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a PropertyDrift.
+                         * @implements IPropertyDrift
+                         * @constructor
+                         * @param {google.cloud.config.v1.IPropertyDrift=} [properties] Properties to set
+                         */
+                        function PropertyDrift(properties) {
+                            this.beforeSensitivePaths = [];
+                            this.afterSensitivePaths = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PropertyDrift path.
+                         * @member {string} path
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @instance
+                         */
+                        PropertyDrift.prototype.path = "";
+    
+                        /**
+                         * PropertyDrift beforeSensitivePaths.
+                         * @member {Array.<string>} beforeSensitivePaths
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @instance
+                         */
+                        PropertyDrift.prototype.beforeSensitivePaths = $util.emptyArray;
+    
+                        /**
+                         * PropertyDrift before.
+                         * @member {google.protobuf.IValue|null|undefined} before
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @instance
+                         */
+                        PropertyDrift.prototype.before = null;
+    
+                        /**
+                         * PropertyDrift afterSensitivePaths.
+                         * @member {Array.<string>} afterSensitivePaths
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @instance
+                         */
+                        PropertyDrift.prototype.afterSensitivePaths = $util.emptyArray;
+    
+                        /**
+                         * PropertyDrift after.
+                         * @member {google.protobuf.IValue|null|undefined} after
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @instance
+                         */
+                        PropertyDrift.prototype.after = null;
+    
+                        /**
+                         * Creates a new PropertyDrift instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {google.cloud.config.v1.IPropertyDrift=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.PropertyDrift} PropertyDrift instance
+                         */
+                        PropertyDrift.create = function create(properties) {
+                            return new PropertyDrift(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PropertyDrift message. Does not implicitly {@link google.cloud.config.v1.PropertyDrift.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {google.cloud.config.v1.IPropertyDrift} message PropertyDrift message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertyDrift.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                            if (message.beforeSensitivePaths != null && message.beforeSensitivePaths.length)
+                                for (var i = 0; i < message.beforeSensitivePaths.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.beforeSensitivePaths[i]);
+                            if (message.before != null && Object.hasOwnProperty.call(message, "before"))
+                                $root.google.protobuf.Value.encode(message.before, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.afterSensitivePaths != null && message.afterSensitivePaths.length)
+                                for (var i = 0; i < message.afterSensitivePaths.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.afterSensitivePaths[i]);
+                            if (message.after != null && Object.hasOwnProperty.call(message, "after"))
+                                $root.google.protobuf.Value.encode(message.after, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PropertyDrift message, length delimited. Does not implicitly {@link google.cloud.config.v1.PropertyDrift.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {google.cloud.config.v1.IPropertyDrift} message PropertyDrift message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PropertyDrift.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PropertyDrift message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.PropertyDrift} PropertyDrift
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertyDrift.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.PropertyDrift();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.path = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.beforeSensitivePaths && message.beforeSensitivePaths.length))
+                                            message.beforeSensitivePaths = [];
+                                        message.beforeSensitivePaths.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.before = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.afterSensitivePaths && message.afterSensitivePaths.length))
+                                            message.afterSensitivePaths = [];
+                                        message.afterSensitivePaths.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.after = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PropertyDrift message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.PropertyDrift} PropertyDrift
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PropertyDrift.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PropertyDrift message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PropertyDrift.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                if (!$util.isString(message.path))
+                                    return "path: string expected";
+                            if (message.beforeSensitivePaths != null && message.hasOwnProperty("beforeSensitivePaths")) {
+                                if (!Array.isArray(message.beforeSensitivePaths))
+                                    return "beforeSensitivePaths: array expected";
+                                for (var i = 0; i < message.beforeSensitivePaths.length; ++i)
+                                    if (!$util.isString(message.beforeSensitivePaths[i]))
+                                        return "beforeSensitivePaths: string[] expected";
+                            }
+                            if (message.before != null && message.hasOwnProperty("before")) {
+                                var error = $root.google.protobuf.Value.verify(message.before);
+                                if (error)
+                                    return "before." + error;
+                            }
+                            if (message.afterSensitivePaths != null && message.hasOwnProperty("afterSensitivePaths")) {
+                                if (!Array.isArray(message.afterSensitivePaths))
+                                    return "afterSensitivePaths: array expected";
+                                for (var i = 0; i < message.afterSensitivePaths.length; ++i)
+                                    if (!$util.isString(message.afterSensitivePaths[i]))
+                                        return "afterSensitivePaths: string[] expected";
+                            }
+                            if (message.after != null && message.hasOwnProperty("after")) {
+                                var error = $root.google.protobuf.Value.verify(message.after);
+                                if (error)
+                                    return "after." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PropertyDrift message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.PropertyDrift} PropertyDrift
+                         */
+                        PropertyDrift.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.PropertyDrift)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.PropertyDrift();
+                            if (object.path != null)
+                                message.path = String(object.path);
+                            if (object.beforeSensitivePaths) {
+                                if (!Array.isArray(object.beforeSensitivePaths))
+                                    throw TypeError(".google.cloud.config.v1.PropertyDrift.beforeSensitivePaths: array expected");
+                                message.beforeSensitivePaths = [];
+                                for (var i = 0; i < object.beforeSensitivePaths.length; ++i)
+                                    message.beforeSensitivePaths[i] = String(object.beforeSensitivePaths[i]);
+                            }
+                            if (object.before != null) {
+                                if (typeof object.before !== "object")
+                                    throw TypeError(".google.cloud.config.v1.PropertyDrift.before: object expected");
+                                message.before = $root.google.protobuf.Value.fromObject(object.before);
+                            }
+                            if (object.afterSensitivePaths) {
+                                if (!Array.isArray(object.afterSensitivePaths))
+                                    throw TypeError(".google.cloud.config.v1.PropertyDrift.afterSensitivePaths: array expected");
+                                message.afterSensitivePaths = [];
+                                for (var i = 0; i < object.afterSensitivePaths.length; ++i)
+                                    message.afterSensitivePaths[i] = String(object.afterSensitivePaths[i]);
+                            }
+                            if (object.after != null) {
+                                if (typeof object.after !== "object")
+                                    throw TypeError(".google.cloud.config.v1.PropertyDrift.after: object expected");
+                                message.after = $root.google.protobuf.Value.fromObject(object.after);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PropertyDrift message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {google.cloud.config.v1.PropertyDrift} message PropertyDrift
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PropertyDrift.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.beforeSensitivePaths = [];
+                                object.afterSensitivePaths = [];
+                            }
+                            if (options.defaults) {
+                                object.path = "";
+                                object.before = null;
+                                object.after = null;
+                            }
+                            if (message.path != null && message.hasOwnProperty("path"))
+                                object.path = message.path;
+                            if (message.beforeSensitivePaths && message.beforeSensitivePaths.length) {
+                                object.beforeSensitivePaths = [];
+                                for (var j = 0; j < message.beforeSensitivePaths.length; ++j)
+                                    object.beforeSensitivePaths[j] = message.beforeSensitivePaths[j];
+                            }
+                            if (message.before != null && message.hasOwnProperty("before"))
+                                object.before = $root.google.protobuf.Value.toObject(message.before, options);
+                            if (message.afterSensitivePaths && message.afterSensitivePaths.length) {
+                                object.afterSensitivePaths = [];
+                                for (var j = 0; j < message.afterSensitivePaths.length; ++j)
+                                    object.afterSensitivePaths[j] = message.afterSensitivePaths[j];
+                            }
+                            if (message.after != null && message.hasOwnProperty("after"))
+                                object.after = $root.google.protobuf.Value.toObject(message.after, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PropertyDrift to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PropertyDrift.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PropertyDrift
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.PropertyDrift
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PropertyDrift.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.PropertyDrift";
+                        };
+    
+                        return PropertyDrift;
+                    })();
+    
+                    v1.ListResourceDriftsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListResourceDriftsRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListResourceDriftsRequest
+                         * @property {string|null} [parent] ListResourceDriftsRequest parent
+                         * @property {number|null} [pageSize] ListResourceDriftsRequest pageSize
+                         * @property {string|null} [pageToken] ListResourceDriftsRequest pageToken
+                         * @property {string|null} [filter] ListResourceDriftsRequest filter
+                         * @property {string|null} [orderBy] ListResourceDriftsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListResourceDriftsRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListResourceDriftsRequest.
+                         * @implements IListResourceDriftsRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListResourceDriftsRequest=} [properties] Properties to set
+                         */
+                        function ListResourceDriftsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListResourceDriftsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @instance
+                         */
+                        ListResourceDriftsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListResourceDriftsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @instance
+                         */
+                        ListResourceDriftsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListResourceDriftsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @instance
+                         */
+                        ListResourceDriftsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListResourceDriftsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @instance
+                         */
+                        ListResourceDriftsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListResourceDriftsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @instance
+                         */
+                        ListResourceDriftsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListResourceDriftsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceDriftsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListResourceDriftsRequest} ListResourceDriftsRequest instance
+                         */
+                        ListResourceDriftsRequest.create = function create(properties) {
+                            return new ListResourceDriftsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceDriftsRequest message. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceDriftsRequest} message ListResourceDriftsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceDriftsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceDriftsRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceDriftsRequest} message ListResourceDriftsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceDriftsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListResourceDriftsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListResourceDriftsRequest} ListResourceDriftsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceDriftsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListResourceDriftsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListResourceDriftsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListResourceDriftsRequest} ListResourceDriftsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceDriftsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListResourceDriftsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListResourceDriftsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListResourceDriftsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListResourceDriftsRequest} ListResourceDriftsRequest
+                         */
+                        ListResourceDriftsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListResourceDriftsRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListResourceDriftsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListResourceDriftsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ListResourceDriftsRequest} message ListResourceDriftsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListResourceDriftsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListResourceDriftsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListResourceDriftsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListResourceDriftsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListResourceDriftsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListResourceDriftsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListResourceDriftsRequest";
+                        };
+    
+                        return ListResourceDriftsRequest;
+                    })();
+    
+                    v1.ListResourceDriftsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListResourceDriftsResponse.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListResourceDriftsResponse
+                         * @property {Array.<google.cloud.config.v1.IResourceDrift>|null} [resourceDrifts] ListResourceDriftsResponse resourceDrifts
+                         * @property {string|null} [nextPageToken] ListResourceDriftsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListResourceDriftsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListResourceDriftsResponse.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListResourceDriftsResponse.
+                         * @implements IListResourceDriftsResponse
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListResourceDriftsResponse=} [properties] Properties to set
+                         */
+                        function ListResourceDriftsResponse(properties) {
+                            this.resourceDrifts = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListResourceDriftsResponse resourceDrifts.
+                         * @member {Array.<google.cloud.config.v1.IResourceDrift>} resourceDrifts
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @instance
+                         */
+                        ListResourceDriftsResponse.prototype.resourceDrifts = $util.emptyArray;
+    
+                        /**
+                         * ListResourceDriftsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @instance
+                         */
+                        ListResourceDriftsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListResourceDriftsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @instance
+                         */
+                        ListResourceDriftsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListResourceDriftsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceDriftsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListResourceDriftsResponse} ListResourceDriftsResponse instance
+                         */
+                        ListResourceDriftsResponse.create = function create(properties) {
+                            return new ListResourceDriftsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceDriftsResponse message. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceDriftsResponse} message ListResourceDriftsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceDriftsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceDrifts != null && message.resourceDrifts.length)
+                                for (var i = 0; i < message.resourceDrifts.length; ++i)
+                                    $root.google.cloud.config.v1.ResourceDrift.encode(message.resourceDrifts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListResourceDriftsResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListResourceDriftsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListResourceDriftsResponse} message ListResourceDriftsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListResourceDriftsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListResourceDriftsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListResourceDriftsResponse} ListResourceDriftsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceDriftsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListResourceDriftsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.resourceDrifts && message.resourceDrifts.length))
+                                            message.resourceDrifts = [];
+                                        message.resourceDrifts.push($root.google.cloud.config.v1.ResourceDrift.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListResourceDriftsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListResourceDriftsResponse} ListResourceDriftsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListResourceDriftsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListResourceDriftsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListResourceDriftsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceDrifts != null && message.hasOwnProperty("resourceDrifts")) {
+                                if (!Array.isArray(message.resourceDrifts))
+                                    return "resourceDrifts: array expected";
+                                for (var i = 0; i < message.resourceDrifts.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.ResourceDrift.verify(message.resourceDrifts[i]);
+                                    if (error)
+                                        return "resourceDrifts." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListResourceDriftsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListResourceDriftsResponse} ListResourceDriftsResponse
+                         */
+                        ListResourceDriftsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListResourceDriftsResponse)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListResourceDriftsResponse();
+                            if (object.resourceDrifts) {
+                                if (!Array.isArray(object.resourceDrifts))
+                                    throw TypeError(".google.cloud.config.v1.ListResourceDriftsResponse.resourceDrifts: array expected");
+                                message.resourceDrifts = [];
+                                for (var i = 0; i < object.resourceDrifts.length; ++i) {
+                                    if (typeof object.resourceDrifts[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ListResourceDriftsResponse.resourceDrifts: object expected");
+                                    message.resourceDrifts[i] = $root.google.cloud.config.v1.ResourceDrift.fromObject(object.resourceDrifts[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.config.v1.ListResourceDriftsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListResourceDriftsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.ListResourceDriftsResponse} message ListResourceDriftsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListResourceDriftsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.resourceDrifts = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.resourceDrifts && message.resourceDrifts.length) {
+                                object.resourceDrifts = [];
+                                for (var j = 0; j < message.resourceDrifts.length; ++j)
+                                    object.resourceDrifts[j] = $root.google.cloud.config.v1.ResourceDrift.toObject(message.resourceDrifts[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListResourceDriftsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListResourceDriftsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListResourceDriftsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListResourceDriftsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListResourceDriftsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListResourceDriftsResponse";
+                        };
+    
+                        return ListResourceDriftsResponse;
+                    })();
+    
+                    v1.GetResourceDriftRequest = (function() {
+    
+                        /**
+                         * Properties of a GetResourceDriftRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IGetResourceDriftRequest
+                         * @property {string|null} [name] GetResourceDriftRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetResourceDriftRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a GetResourceDriftRequest.
+                         * @implements IGetResourceDriftRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IGetResourceDriftRequest=} [properties] Properties to set
+                         */
+                        function GetResourceDriftRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetResourceDriftRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @instance
+                         */
+                        GetResourceDriftRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetResourceDriftRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetResourceDriftRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.GetResourceDriftRequest} GetResourceDriftRequest instance
+                         */
+                        GetResourceDriftRequest.create = function create(properties) {
+                            return new GetResourceDriftRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetResourceDriftRequest message. Does not implicitly {@link google.cloud.config.v1.GetResourceDriftRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetResourceDriftRequest} message GetResourceDriftRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetResourceDriftRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetResourceDriftRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetResourceDriftRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetResourceDriftRequest} message GetResourceDriftRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetResourceDriftRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetResourceDriftRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.GetResourceDriftRequest} GetResourceDriftRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetResourceDriftRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetResourceDriftRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetResourceDriftRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.GetResourceDriftRequest} GetResourceDriftRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetResourceDriftRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetResourceDriftRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetResourceDriftRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetResourceDriftRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.GetResourceDriftRequest} GetResourceDriftRequest
+                         */
+                        GetResourceDriftRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.GetResourceDriftRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.GetResourceDriftRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetResourceDriftRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {google.cloud.config.v1.GetResourceDriftRequest} message GetResourceDriftRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetResourceDriftRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetResourceDriftRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetResourceDriftRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetResourceDriftRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.GetResourceDriftRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetResourceDriftRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.GetResourceDriftRequest";
+                        };
+    
+                        return GetResourceDriftRequest;
+                    })();
+    
+                    v1.ProviderConfig = (function() {
+    
+                        /**
+                         * Properties of a ProviderConfig.
+                         * @memberof google.cloud.config.v1
+                         * @interface IProviderConfig
+                         * @property {google.cloud.config.v1.ProviderConfig.ProviderSource|null} [sourceType] ProviderConfig sourceType
+                         */
+    
+                        /**
+                         * Constructs a new ProviderConfig.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ProviderConfig.
+                         * @implements IProviderConfig
+                         * @constructor
+                         * @param {google.cloud.config.v1.IProviderConfig=} [properties] Properties to set
+                         */
+                        function ProviderConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProviderConfig sourceType.
+                         * @member {google.cloud.config.v1.ProviderConfig.ProviderSource|null|undefined} sourceType
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @instance
+                         */
+                        ProviderConfig.prototype.sourceType = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ProviderConfig.prototype, "_sourceType", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ProviderConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IProviderConfig=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig instance
+                         */
+                        ProviderConfig.create = function create(properties) {
+                            return new ProviderConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProviderConfig message. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IProviderConfig} message ProviderConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProviderConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceType != null && Object.hasOwnProperty.call(message, "sourceType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.sourceType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProviderConfig message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProviderConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IProviderConfig} message ProviderConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProviderConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProviderConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProviderConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ProviderConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProviderConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProviderConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProviderConfig message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProviderConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.sourceType != null && message.hasOwnProperty("sourceType")) {
+                                properties._sourceType = 1;
+                                switch (message.sourceType) {
+                                default:
+                                    return "sourceType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProviderConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ProviderConfig} ProviderConfig
+                         */
+                        ProviderConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ProviderConfig)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ProviderConfig();
+                            switch (object.sourceType) {
+                            default:
+                                if (typeof object.sourceType === "number") {
+                                    message.sourceType = object.sourceType;
+                                    break;
+                                }
+                                break;
+                            case "PROVIDER_SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.sourceType = 0;
+                                break;
+                            case "SERVICE_MAINTAINED":
+                            case 1:
+                                message.sourceType = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProviderConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {google.cloud.config.v1.ProviderConfig} message ProviderConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProviderConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.sourceType != null && message.hasOwnProperty("sourceType")) {
+                                object.sourceType = options.enums === String ? $root.google.cloud.config.v1.ProviderConfig.ProviderSource[message.sourceType] === undefined ? message.sourceType : $root.google.cloud.config.v1.ProviderConfig.ProviderSource[message.sourceType] : message.sourceType;
+                                if (options.oneofs)
+                                    object._sourceType = "sourceType";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProviderConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProviderConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProviderConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ProviderConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProviderConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ProviderConfig";
+                        };
+    
+                        /**
+                         * ProviderSource enum.
+                         * @name google.cloud.config.v1.ProviderConfig.ProviderSource
+                         * @enum {number}
+                         * @property {number} PROVIDER_SOURCE_UNSPECIFIED=0 PROVIDER_SOURCE_UNSPECIFIED value
+                         * @property {number} SERVICE_MAINTAINED=1 SERVICE_MAINTAINED value
+                         */
+                        ProviderConfig.ProviderSource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVIDER_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVICE_MAINTAINED"] = 1;
+                            return values;
+                        })();
+    
+                        return ProviderConfig;
+                    })();
+    
+                    v1.GetAutoMigrationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAutoMigrationConfigRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IGetAutoMigrationConfigRequest
+                         * @property {string|null} [name] GetAutoMigrationConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAutoMigrationConfigRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a GetAutoMigrationConfigRequest.
+                         * @implements IGetAutoMigrationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IGetAutoMigrationConfigRequest=} [properties] Properties to set
+                         */
+                        function GetAutoMigrationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAutoMigrationConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @instance
+                         */
+                        GetAutoMigrationConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAutoMigrationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetAutoMigrationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.GetAutoMigrationConfigRequest} GetAutoMigrationConfigRequest instance
+                         */
+                        GetAutoMigrationConfigRequest.create = function create(properties) {
+                            return new GetAutoMigrationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAutoMigrationConfigRequest message. Does not implicitly {@link google.cloud.config.v1.GetAutoMigrationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetAutoMigrationConfigRequest} message GetAutoMigrationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAutoMigrationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAutoMigrationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetAutoMigrationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetAutoMigrationConfigRequest} message GetAutoMigrationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAutoMigrationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAutoMigrationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.GetAutoMigrationConfigRequest} GetAutoMigrationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAutoMigrationConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetAutoMigrationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAutoMigrationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.GetAutoMigrationConfigRequest} GetAutoMigrationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAutoMigrationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAutoMigrationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAutoMigrationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAutoMigrationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.GetAutoMigrationConfigRequest} GetAutoMigrationConfigRequest
+                         */
+                        GetAutoMigrationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.GetAutoMigrationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.GetAutoMigrationConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAutoMigrationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.GetAutoMigrationConfigRequest} message GetAutoMigrationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAutoMigrationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAutoMigrationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAutoMigrationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAutoMigrationConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.GetAutoMigrationConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAutoMigrationConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.GetAutoMigrationConfigRequest";
+                        };
+    
+                        return GetAutoMigrationConfigRequest;
+                    })();
+    
+                    v1.AutoMigrationConfig = (function() {
+    
+                        /**
+                         * Properties of an AutoMigrationConfig.
+                         * @memberof google.cloud.config.v1
+                         * @interface IAutoMigrationConfig
+                         * @property {string|null} [name] AutoMigrationConfig name
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AutoMigrationConfig updateTime
+                         * @property {boolean|null} [autoMigrationEnabled] AutoMigrationConfig autoMigrationEnabled
+                         */
+    
+                        /**
+                         * Constructs a new AutoMigrationConfig.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents an AutoMigrationConfig.
+                         * @implements IAutoMigrationConfig
+                         * @constructor
+                         * @param {google.cloud.config.v1.IAutoMigrationConfig=} [properties] Properties to set
+                         */
+                        function AutoMigrationConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutoMigrationConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @instance
+                         */
+                        AutoMigrationConfig.prototype.name = "";
+    
+                        /**
+                         * AutoMigrationConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @instance
+                         */
+                        AutoMigrationConfig.prototype.updateTime = null;
+    
+                        /**
+                         * AutoMigrationConfig autoMigrationEnabled.
+                         * @member {boolean} autoMigrationEnabled
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @instance
+                         */
+                        AutoMigrationConfig.prototype.autoMigrationEnabled = false;
+    
+                        /**
+                         * Creates a new AutoMigrationConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IAutoMigrationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.AutoMigrationConfig} AutoMigrationConfig instance
+                         */
+                        AutoMigrationConfig.create = function create(properties) {
+                            return new AutoMigrationConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutoMigrationConfig message. Does not implicitly {@link google.cloud.config.v1.AutoMigrationConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IAutoMigrationConfig} message AutoMigrationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutoMigrationConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.autoMigrationEnabled != null && Object.hasOwnProperty.call(message, "autoMigrationEnabled"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.autoMigrationEnabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutoMigrationConfig message, length delimited. Does not implicitly {@link google.cloud.config.v1.AutoMigrationConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {google.cloud.config.v1.IAutoMigrationConfig} message AutoMigrationConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutoMigrationConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutoMigrationConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.AutoMigrationConfig} AutoMigrationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutoMigrationConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.AutoMigrationConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.autoMigrationEnabled = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutoMigrationConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.AutoMigrationConfig} AutoMigrationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutoMigrationConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutoMigrationConfig message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutoMigrationConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.autoMigrationEnabled != null && message.hasOwnProperty("autoMigrationEnabled"))
+                                if (typeof message.autoMigrationEnabled !== "boolean")
+                                    return "autoMigrationEnabled: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutoMigrationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.AutoMigrationConfig} AutoMigrationConfig
+                         */
+                        AutoMigrationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.AutoMigrationConfig)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.AutoMigrationConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.config.v1.AutoMigrationConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.autoMigrationEnabled != null)
+                                message.autoMigrationEnabled = Boolean(object.autoMigrationEnabled);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutoMigrationConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {google.cloud.config.v1.AutoMigrationConfig} message AutoMigrationConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutoMigrationConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.updateTime = null;
+                                object.autoMigrationEnabled = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.autoMigrationEnabled != null && message.hasOwnProperty("autoMigrationEnabled"))
+                                object.autoMigrationEnabled = message.autoMigrationEnabled;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutoMigrationConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutoMigrationConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutoMigrationConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.AutoMigrationConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutoMigrationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.AutoMigrationConfig";
+                        };
+    
+                        return AutoMigrationConfig;
+                    })();
+    
+                    v1.UpdateAutoMigrationConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAutoMigrationConfigRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IUpdateAutoMigrationConfigRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAutoMigrationConfigRequest updateMask
+                         * @property {google.cloud.config.v1.IAutoMigrationConfig|null} [autoMigrationConfig] UpdateAutoMigrationConfigRequest autoMigrationConfig
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAutoMigrationConfigRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents an UpdateAutoMigrationConfigRequest.
+                         * @implements IUpdateAutoMigrationConfigRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IUpdateAutoMigrationConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateAutoMigrationConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAutoMigrationConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @instance
+                         */
+                        UpdateAutoMigrationConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAutoMigrationConfigRequest autoMigrationConfig.
+                         * @member {google.cloud.config.v1.IAutoMigrationConfig|null|undefined} autoMigrationConfig
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @instance
+                         */
+                        UpdateAutoMigrationConfigRequest.prototype.autoMigrationConfig = null;
+    
+                        /**
+                         * Creates a new UpdateAutoMigrationConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IUpdateAutoMigrationConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.UpdateAutoMigrationConfigRequest} UpdateAutoMigrationConfigRequest instance
+                         */
+                        UpdateAutoMigrationConfigRequest.create = function create(properties) {
+                            return new UpdateAutoMigrationConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAutoMigrationConfigRequest message. Does not implicitly {@link google.cloud.config.v1.UpdateAutoMigrationConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IUpdateAutoMigrationConfigRequest} message UpdateAutoMigrationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAutoMigrationConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.autoMigrationConfig != null && Object.hasOwnProperty.call(message, "autoMigrationConfig"))
+                                $root.google.cloud.config.v1.AutoMigrationConfig.encode(message.autoMigrationConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAutoMigrationConfigRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.UpdateAutoMigrationConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IUpdateAutoMigrationConfigRequest} message UpdateAutoMigrationConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAutoMigrationConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAutoMigrationConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.UpdateAutoMigrationConfigRequest} UpdateAutoMigrationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAutoMigrationConfigRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.UpdateAutoMigrationConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.autoMigrationConfig = $root.google.cloud.config.v1.AutoMigrationConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAutoMigrationConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.UpdateAutoMigrationConfigRequest} UpdateAutoMigrationConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAutoMigrationConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAutoMigrationConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAutoMigrationConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.autoMigrationConfig != null && message.hasOwnProperty("autoMigrationConfig")) {
+                                var error = $root.google.cloud.config.v1.AutoMigrationConfig.verify(message.autoMigrationConfig);
+                                if (error)
+                                    return "autoMigrationConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAutoMigrationConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.UpdateAutoMigrationConfigRequest} UpdateAutoMigrationConfigRequest
+                         */
+                        UpdateAutoMigrationConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.UpdateAutoMigrationConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.UpdateAutoMigrationConfigRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.config.v1.UpdateAutoMigrationConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.autoMigrationConfig != null) {
+                                if (typeof object.autoMigrationConfig !== "object")
+                                    throw TypeError(".google.cloud.config.v1.UpdateAutoMigrationConfigRequest.autoMigrationConfig: object expected");
+                                message.autoMigrationConfig = $root.google.cloud.config.v1.AutoMigrationConfig.fromObject(object.autoMigrationConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAutoMigrationConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {google.cloud.config.v1.UpdateAutoMigrationConfigRequest} message UpdateAutoMigrationConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAutoMigrationConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.autoMigrationConfig = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.autoMigrationConfig != null && message.hasOwnProperty("autoMigrationConfig"))
+                                object.autoMigrationConfig = $root.google.cloud.config.v1.AutoMigrationConfig.toObject(message.autoMigrationConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAutoMigrationConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAutoMigrationConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAutoMigrationConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.UpdateAutoMigrationConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAutoMigrationConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.UpdateAutoMigrationConfigRequest";
+                        };
+    
+                        return UpdateAutoMigrationConfigRequest;
+                    })();
+    
                     return v1;
                 })();
     
@@ -16434,12 +21224,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -16784,12 +21576,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -17168,12 +21962,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -17400,12 +22196,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -17769,12 +22567,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -18113,6 +22913,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -18214,6 +23015,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -18260,6 +23069,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -18287,12 +23098,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -18338,6 +23151,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -18432,6 +23249,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -18526,6 +23346,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -18555,6 +23377,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -18585,6 +23408,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -18726,12 +23551,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -18993,12 +23820,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -19201,12 +24030,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -19409,12 +24240,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -19617,12 +24450,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -19890,12 +24725,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -20269,12 +25106,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -20477,12 +25316,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -20709,12 +25550,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -20987,12 +25830,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -21341,12 +26186,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldInfo.decode = function decode(reader, length) {
+                FieldInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
@@ -21671,12 +26518,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -22066,12 +26915,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -22296,12 +27147,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -22696,12 +27549,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -23363,12 +28218,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -23848,12 +28705,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -24092,12 +28951,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -24348,12 +29209,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -24693,12 +29556,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -25072,12 +29937,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -25597,12 +30464,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -25868,12 +30737,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -26187,12 +31058,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -26428,12 +31301,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -26685,12 +31560,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -26993,12 +31870,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -27497,12 +32376,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -28117,12 +32998,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -28574,12 +33457,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
@@ -28611,12 +33491,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -29359,12 +34241,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -29655,12 +34539,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -29941,12 +34827,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -30253,12 +35141,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -30444,6 +35334,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -30503,6 +35394,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -30537,6 +35436,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -30564,12 +35465,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -30591,6 +35494,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -30651,6 +35558,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -30687,6 +35597,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -30710,6 +35622,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -30724,6 +35637,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -30911,12 +35826,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -31345,12 +36262,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -31684,12 +36603,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -31960,12 +36881,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -32495,12 +37418,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -32879,12 +37804,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -33169,12 +38096,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -33444,12 +38373,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -33755,12 +38686,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -34023,12 +38956,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -34349,12 +39284,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -34590,12 +39527,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -34804,12 +39743,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -34992,12 +39933,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -35213,12 +40156,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Struct.decode = function decode(reader, length) {
+                Struct.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Struct(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (message.fields === $util.emptyObject)
@@ -35523,12 +40468,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Value.decode = function decode(reader, length) {
+                Value.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.nullValue = reader.int32();
@@ -35860,12 +40807,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListValue.decode = function decode(reader, length) {
+                ListValue.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ListValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.values && message.values.length))
@@ -36093,12 +41042,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -36593,12 +41544,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -36873,12 +41826,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -37109,12 +42064,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -37362,12 +42319,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -37597,12 +42556,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -37800,12 +42761,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -38014,12 +42977,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -38246,12 +43211,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -38498,12 +43465,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

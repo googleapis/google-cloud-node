@@ -12,6 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 begin-after-commit-hash: 397c0bfd367a2427104f988d5329bc117caafd95
-

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -800,7 +800,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -813,7 +813,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.
@@ -3057,11 +3057,11 @@ export namespace google {
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
 
             /** FieldOptions .google.api.fieldInfo */
             ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
@@ -3690,6 +3690,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -3938,7 +3941,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -3969,7 +3972,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -5678,6 +5681,9 @@ export namespace google {
 
                         /** Section uncollapsibleWidgetsCount */
                         uncollapsibleWidgetsCount?: (number|null);
+
+                        /** Section collapseControl */
+                        collapseControl?: (google.apps.card.v1.ICollapseControl|null);
                     }
 
                     /** Represents a Section. */
@@ -5700,6 +5706,9 @@ export namespace google {
 
                         /** Section uncollapsibleWidgetsCount. */
                         public uncollapsibleWidgetsCount: number;
+
+                        /** Section collapseControl. */
+                        public collapseControl?: (google.apps.card.v1.ICollapseControl|null);
 
                         /**
                          * Creates a new Section instance using the specified properties.
@@ -5889,6 +5898,118 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a NestedWidget. */
+                    interface INestedWidget {
+
+                        /** NestedWidget textParagraph */
+                        textParagraph?: (google.apps.card.v1.ITextParagraph|null);
+
+                        /** NestedWidget buttonList */
+                        buttonList?: (google.apps.card.v1.IButtonList|null);
+
+                        /** NestedWidget image */
+                        image?: (google.apps.card.v1.IImage|null);
+                    }
+
+                    /** Represents a NestedWidget. */
+                    class NestedWidget implements INestedWidget {
+
+                        /**
+                         * Constructs a new NestedWidget.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.apps.card.v1.Card.INestedWidget);
+
+                        /** NestedWidget textParagraph. */
+                        public textParagraph?: (google.apps.card.v1.ITextParagraph|null);
+
+                        /** NestedWidget buttonList. */
+                        public buttonList?: (google.apps.card.v1.IButtonList|null);
+
+                        /** NestedWidget image. */
+                        public image?: (google.apps.card.v1.IImage|null);
+
+                        /** NestedWidget data. */
+                        public data?: ("textParagraph"|"buttonList"|"image");
+
+                        /**
+                         * Creates a new NestedWidget instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NestedWidget instance
+                         */
+                        public static create(properties?: google.apps.card.v1.Card.INestedWidget): google.apps.card.v1.Card.NestedWidget;
+
+                        /**
+                         * Encodes the specified NestedWidget message. Does not implicitly {@link google.apps.card.v1.Card.NestedWidget.verify|verify} messages.
+                         * @param message NestedWidget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.apps.card.v1.Card.INestedWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NestedWidget message, length delimited. Does not implicitly {@link google.apps.card.v1.Card.NestedWidget.verify|verify} messages.
+                         * @param message NestedWidget message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.apps.card.v1.Card.INestedWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NestedWidget message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NestedWidget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.Card.NestedWidget;
+
+                        /**
+                         * Decodes a NestedWidget message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NestedWidget
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.Card.NestedWidget;
+
+                        /**
+                         * Verifies a NestedWidget message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NestedWidget message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NestedWidget
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.apps.card.v1.Card.NestedWidget;
+
+                        /**
+                         * Creates a plain object from a NestedWidget message. Also converts values to other types if specified.
+                         * @param message NestedWidget
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.apps.card.v1.Card.NestedWidget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NestedWidget to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NestedWidget
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a CardFixedFooter. */
                     interface ICardFixedFooter {
 
@@ -6033,6 +6154,12 @@ export namespace google {
                     /** Widget columns */
                     columns?: (google.apps.card.v1.IColumns|null);
 
+                    /** Widget carousel */
+                    carousel?: (google.apps.card.v1.ICarousel|null);
+
+                    /** Widget chipList */
+                    chipList?: (google.apps.card.v1.IChipList|null);
+
                     /** Widget horizontalAlignment */
                     horizontalAlignment?: (google.apps.card.v1.Widget.HorizontalAlignment|keyof typeof google.apps.card.v1.Widget.HorizontalAlignment|null);
                 }
@@ -6076,11 +6203,17 @@ export namespace google {
                     /** Widget columns. */
                     public columns?: (google.apps.card.v1.IColumns|null);
 
+                    /** Widget carousel. */
+                    public carousel?: (google.apps.card.v1.ICarousel|null);
+
+                    /** Widget chipList. */
+                    public chipList?: (google.apps.card.v1.IChipList|null);
+
                     /** Widget horizontalAlignment. */
                     public horizontalAlignment: (google.apps.card.v1.Widget.HorizontalAlignment|keyof typeof google.apps.card.v1.Widget.HorizontalAlignment);
 
                     /** Widget data. */
-                    public data?: ("textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker"|"divider"|"grid"|"columns");
+                    public data?: ("textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker"|"divider"|"grid"|"columns"|"carousel"|"chipList");
 
                     /**
                      * Creates a new Widget instance using the specified properties.
@@ -6175,6 +6308,14 @@ export namespace google {
                         CENTER = 2,
                         END = 3
                     }
+
+                    /** VerticalAlignment enum. */
+                    enum VerticalAlignment {
+                        VERTICAL_ALIGNMENT_UNSPECIFIED = 0,
+                        TOP = 1,
+                        MIDDLE = 2,
+                        BOTTOM = 3
+                    }
                 }
 
                 /** Properties of a TextParagraph. */
@@ -6182,6 +6323,12 @@ export namespace google {
 
                     /** TextParagraph text */
                     text?: (string|null);
+
+                    /** TextParagraph maxLines */
+                    maxLines?: (number|null);
+
+                    /** TextParagraph textSyntax */
+                    textSyntax?: (google.apps.card.v1.TextParagraph.TextSyntax|keyof typeof google.apps.card.v1.TextParagraph.TextSyntax|null);
                 }
 
                 /** Represents a TextParagraph. */
@@ -6195,6 +6342,12 @@ export namespace google {
 
                     /** TextParagraph text. */
                     public text: string;
+
+                    /** TextParagraph maxLines. */
+                    public maxLines: number;
+
+                    /** TextParagraph textSyntax. */
+                    public textSyntax: (google.apps.card.v1.TextParagraph.TextSyntax|keyof typeof google.apps.card.v1.TextParagraph.TextSyntax);
 
                     /**
                      * Creates a new TextParagraph instance using the specified properties.
@@ -6272,6 +6425,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TextParagraph {
+
+                    /** TextSyntax enum. */
+                    enum TextSyntax {
+                        TEXT_SYNTAX_UNSPECIFIED = 0,
+                        HTML = 1,
+                        MARKDOWN = 2
+                    }
                 }
 
                 /** Properties of an Image. */
@@ -6483,17 +6646,29 @@ export namespace google {
                     /** DecoratedText startIcon */
                     startIcon?: (google.apps.card.v1.IIcon|null);
 
+                    /** DecoratedText startIconVerticalAlignment */
+                    startIconVerticalAlignment?: (google.apps.card.v1.Widget.VerticalAlignment|keyof typeof google.apps.card.v1.Widget.VerticalAlignment|null);
+
                     /** DecoratedText topLabel */
                     topLabel?: (string|null);
 
+                    /** DecoratedText topLabelText */
+                    topLabelText?: (google.apps.card.v1.ITextParagraph|null);
+
                     /** DecoratedText text */
                     text?: (string|null);
+
+                    /** DecoratedText contentText */
+                    contentText?: (google.apps.card.v1.ITextParagraph|null);
 
                     /** DecoratedText wrapText */
                     wrapText?: (boolean|null);
 
                     /** DecoratedText bottomLabel */
                     bottomLabel?: (string|null);
+
+                    /** DecoratedText bottomLabelText */
+                    bottomLabelText?: (google.apps.card.v1.ITextParagraph|null);
 
                     /** DecoratedText onClick */
                     onClick?: (google.apps.card.v1.IOnClick|null);
@@ -6523,17 +6698,29 @@ export namespace google {
                     /** DecoratedText startIcon. */
                     public startIcon?: (google.apps.card.v1.IIcon|null);
 
+                    /** DecoratedText startIconVerticalAlignment. */
+                    public startIconVerticalAlignment: (google.apps.card.v1.Widget.VerticalAlignment|keyof typeof google.apps.card.v1.Widget.VerticalAlignment);
+
                     /** DecoratedText topLabel. */
                     public topLabel: string;
 
+                    /** DecoratedText topLabelText. */
+                    public topLabelText?: (google.apps.card.v1.ITextParagraph|null);
+
                     /** DecoratedText text. */
                     public text: string;
+
+                    /** DecoratedText contentText. */
+                    public contentText?: (google.apps.card.v1.ITextParagraph|null);
 
                     /** DecoratedText wrapText. */
                     public wrapText: boolean;
 
                     /** DecoratedText bottomLabel. */
                     public bottomLabel: string;
+
+                    /** DecoratedText bottomLabelText. */
+                    public bottomLabelText?: (google.apps.card.v1.ITextParagraph|null);
 
                     /** DecoratedText onClick. */
                     public onClick?: (google.apps.card.v1.IOnClick|null);
@@ -6789,6 +6976,9 @@ export namespace google {
                     /** TextInput autoCompleteAction */
                     autoCompleteAction?: (google.apps.card.v1.IAction|null);
 
+                    /** TextInput validation */
+                    validation?: (google.apps.card.v1.IValidation|null);
+
                     /** TextInput placeholderText */
                     placeholderText?: (string|null);
                 }
@@ -6825,6 +7015,9 @@ export namespace google {
 
                     /** TextInput autoCompleteAction. */
                     public autoCompleteAction?: (google.apps.card.v1.IAction|null);
+
+                    /** TextInput validation. */
+                    public validation?: (google.apps.card.v1.IValidation|null);
 
                     /** TextInput placeholderText. */
                     public placeholderText: string;
@@ -7269,7 +7462,7 @@ export namespace google {
                     public onChangeAction?: (google.apps.card.v1.IAction|null);
 
                     /** SelectionInput multiSelectMaxSelectedItems. */
-                    public multiSelectMaxSelectedItems: number;
+                    public multiSelectMaxSelectedItems?: (number|null);
 
                     /** SelectionInput multiSelectMinQueryLength. */
                     public multiSelectMinQueryLength: number;
@@ -7410,10 +7603,13 @@ export namespace google {
                         public selected: boolean;
 
                         /** SelectionItem startIconUri. */
-                        public startIconUri: string;
+                        public startIconUri?: (string|null);
 
                         /** SelectionItem bottomText. */
                         public bottomText: string;
+
+                        /** SelectionItem startIcon. */
+                        public startIcon?: "startIconUri";
 
                         /**
                          * Creates a new SelectionItem instance using the specified properties.
@@ -7644,7 +7840,7 @@ export namespace google {
                     public type: (google.apps.card.v1.DateTimePicker.DateTimePickerType|keyof typeof google.apps.card.v1.DateTimePicker.DateTimePickerType);
 
                     /** DateTimePicker valueMsEpoch. */
-                    public valueMsEpoch: (number|Long|string);
+                    public valueMsEpoch?: (number|Long|string|null);
 
                     /** DateTimePicker timezoneOffsetDate. */
                     public timezoneOffsetDate: number;
@@ -7740,6 +7936,221 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an OverflowMenu. */
+                interface IOverflowMenu {
+
+                    /** OverflowMenu items */
+                    items?: (google.apps.card.v1.OverflowMenu.IOverflowMenuItem[]|null);
+                }
+
+                /** Represents an OverflowMenu. */
+                class OverflowMenu implements IOverflowMenu {
+
+                    /**
+                     * Constructs a new OverflowMenu.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.card.v1.IOverflowMenu);
+
+                    /** OverflowMenu items. */
+                    public items: google.apps.card.v1.OverflowMenu.IOverflowMenuItem[];
+
+                    /**
+                     * Creates a new OverflowMenu instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OverflowMenu instance
+                     */
+                    public static create(properties?: google.apps.card.v1.IOverflowMenu): google.apps.card.v1.OverflowMenu;
+
+                    /**
+                     * Encodes the specified OverflowMenu message. Does not implicitly {@link google.apps.card.v1.OverflowMenu.verify|verify} messages.
+                     * @param message OverflowMenu message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.card.v1.IOverflowMenu, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OverflowMenu message, length delimited. Does not implicitly {@link google.apps.card.v1.OverflowMenu.verify|verify} messages.
+                     * @param message OverflowMenu message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.card.v1.IOverflowMenu, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OverflowMenu message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OverflowMenu
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.OverflowMenu;
+
+                    /**
+                     * Decodes an OverflowMenu message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OverflowMenu
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.OverflowMenu;
+
+                    /**
+                     * Verifies an OverflowMenu message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OverflowMenu message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OverflowMenu
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.card.v1.OverflowMenu;
+
+                    /**
+                     * Creates a plain object from an OverflowMenu message. Also converts values to other types if specified.
+                     * @param message OverflowMenu
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.card.v1.OverflowMenu, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OverflowMenu to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OverflowMenu
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OverflowMenu {
+
+                    /** Properties of an OverflowMenuItem. */
+                    interface IOverflowMenuItem {
+
+                        /** OverflowMenuItem startIcon */
+                        startIcon?: (google.apps.card.v1.IIcon|null);
+
+                        /** OverflowMenuItem text */
+                        text?: (string|null);
+
+                        /** OverflowMenuItem onClick */
+                        onClick?: (google.apps.card.v1.IOnClick|null);
+
+                        /** OverflowMenuItem disabled */
+                        disabled?: (boolean|null);
+                    }
+
+                    /** Represents an OverflowMenuItem. */
+                    class OverflowMenuItem implements IOverflowMenuItem {
+
+                        /**
+                         * Constructs a new OverflowMenuItem.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.apps.card.v1.OverflowMenu.IOverflowMenuItem);
+
+                        /** OverflowMenuItem startIcon. */
+                        public startIcon?: (google.apps.card.v1.IIcon|null);
+
+                        /** OverflowMenuItem text. */
+                        public text: string;
+
+                        /** OverflowMenuItem onClick. */
+                        public onClick?: (google.apps.card.v1.IOnClick|null);
+
+                        /** OverflowMenuItem disabled. */
+                        public disabled: boolean;
+
+                        /**
+                         * Creates a new OverflowMenuItem instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OverflowMenuItem instance
+                         */
+                        public static create(properties?: google.apps.card.v1.OverflowMenu.IOverflowMenuItem): google.apps.card.v1.OverflowMenu.OverflowMenuItem;
+
+                        /**
+                         * Encodes the specified OverflowMenuItem message. Does not implicitly {@link google.apps.card.v1.OverflowMenu.OverflowMenuItem.verify|verify} messages.
+                         * @param message OverflowMenuItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.apps.card.v1.OverflowMenu.IOverflowMenuItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OverflowMenuItem message, length delimited. Does not implicitly {@link google.apps.card.v1.OverflowMenu.OverflowMenuItem.verify|verify} messages.
+                         * @param message OverflowMenuItem message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.apps.card.v1.OverflowMenu.IOverflowMenuItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OverflowMenuItem message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OverflowMenuItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.OverflowMenu.OverflowMenuItem;
+
+                        /**
+                         * Decodes an OverflowMenuItem message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OverflowMenuItem
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.OverflowMenu.OverflowMenuItem;
+
+                        /**
+                         * Verifies an OverflowMenuItem message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OverflowMenuItem message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OverflowMenuItem
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.apps.card.v1.OverflowMenu.OverflowMenuItem;
+
+                        /**
+                         * Creates a plain object from an OverflowMenuItem message. Also converts values to other types if specified.
+                         * @param message OverflowMenuItem
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.apps.card.v1.OverflowMenu.OverflowMenuItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OverflowMenuItem to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OverflowMenuItem
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a Button. */
                 interface IButton {
 
@@ -7760,6 +8171,9 @@ export namespace google {
 
                     /** Button altText */
                     altText?: (string|null);
+
+                    /** Button type */
+                    type?: (google.apps.card.v1.Button.Type|keyof typeof google.apps.card.v1.Button.Type|null);
                 }
 
                 /** Represents a Button. */
@@ -7788,6 +8202,9 @@ export namespace google {
 
                     /** Button altText. */
                     public altText: string;
+
+                    /** Button type. */
+                    public type: (google.apps.card.v1.Button.Type|keyof typeof google.apps.card.v1.Button.Type);
 
                     /**
                      * Creates a new Button instance using the specified properties.
@@ -7865,6 +8282,18 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Button {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        OUTLINED = 1,
+                        FILLED = 2,
+                        FILLED_TONAL = 3,
+                        BORDERLESS = 4
+                    }
                 }
 
                 /** Properties of an Icon. */
@@ -8964,6 +9393,9 @@ export namespace google {
 
                             /** Widgets dateTimePicker */
                             dateTimePicker?: (google.apps.card.v1.IDateTimePicker|null);
+
+                            /** Widgets chipList */
+                            chipList?: (google.apps.card.v1.IChipList|null);
                         }
 
                         /** Represents a Widgets. */
@@ -8996,8 +9428,11 @@ export namespace google {
                             /** Widgets dateTimePicker. */
                             public dateTimePicker?: (google.apps.card.v1.IDateTimePicker|null);
 
+                            /** Widgets chipList. */
+                            public chipList?: (google.apps.card.v1.IChipList|null);
+
                             /** Widgets data. */
-                            public data?: ("textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker");
+                            public data?: ("textParagraph"|"image"|"decoratedText"|"buttonList"|"textInput"|"selectionInput"|"dateTimePicker"|"chipList");
 
                             /**
                              * Creates a new Widgets instance using the specified properties.
@@ -9079,6 +9514,318 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a Carousel. */
+                interface ICarousel {
+
+                    /** Carousel carouselCards */
+                    carouselCards?: (google.apps.card.v1.Carousel.ICarouselCard[]|null);
+                }
+
+                /** Represents a Carousel. */
+                class Carousel implements ICarousel {
+
+                    /**
+                     * Constructs a new Carousel.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.card.v1.ICarousel);
+
+                    /** Carousel carouselCards. */
+                    public carouselCards: google.apps.card.v1.Carousel.ICarouselCard[];
+
+                    /**
+                     * Creates a new Carousel instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Carousel instance
+                     */
+                    public static create(properties?: google.apps.card.v1.ICarousel): google.apps.card.v1.Carousel;
+
+                    /**
+                     * Encodes the specified Carousel message. Does not implicitly {@link google.apps.card.v1.Carousel.verify|verify} messages.
+                     * @param message Carousel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.card.v1.ICarousel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Carousel message, length delimited. Does not implicitly {@link google.apps.card.v1.Carousel.verify|verify} messages.
+                     * @param message Carousel message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.card.v1.ICarousel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Carousel message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Carousel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.Carousel;
+
+                    /**
+                     * Decodes a Carousel message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Carousel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.Carousel;
+
+                    /**
+                     * Verifies a Carousel message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Carousel message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Carousel
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.card.v1.Carousel;
+
+                    /**
+                     * Creates a plain object from a Carousel message. Also converts values to other types if specified.
+                     * @param message Carousel
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.card.v1.Carousel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Carousel to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Carousel
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Carousel {
+
+                    /** Properties of a CarouselCard. */
+                    interface ICarouselCard {
+
+                        /** CarouselCard widgets */
+                        widgets?: (google.apps.card.v1.Card.INestedWidget[]|null);
+
+                        /** CarouselCard footerWidgets */
+                        footerWidgets?: (google.apps.card.v1.Card.INestedWidget[]|null);
+                    }
+
+                    /** Represents a CarouselCard. */
+                    class CarouselCard implements ICarouselCard {
+
+                        /**
+                         * Constructs a new CarouselCard.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.apps.card.v1.Carousel.ICarouselCard);
+
+                        /** CarouselCard widgets. */
+                        public widgets: google.apps.card.v1.Card.INestedWidget[];
+
+                        /** CarouselCard footerWidgets. */
+                        public footerWidgets: google.apps.card.v1.Card.INestedWidget[];
+
+                        /**
+                         * Creates a new CarouselCard instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CarouselCard instance
+                         */
+                        public static create(properties?: google.apps.card.v1.Carousel.ICarouselCard): google.apps.card.v1.Carousel.CarouselCard;
+
+                        /**
+                         * Encodes the specified CarouselCard message. Does not implicitly {@link google.apps.card.v1.Carousel.CarouselCard.verify|verify} messages.
+                         * @param message CarouselCard message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.apps.card.v1.Carousel.ICarouselCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CarouselCard message, length delimited. Does not implicitly {@link google.apps.card.v1.Carousel.CarouselCard.verify|verify} messages.
+                         * @param message CarouselCard message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.apps.card.v1.Carousel.ICarouselCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CarouselCard message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CarouselCard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.Carousel.CarouselCard;
+
+                        /**
+                         * Decodes a CarouselCard message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CarouselCard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.Carousel.CarouselCard;
+
+                        /**
+                         * Verifies a CarouselCard message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CarouselCard message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CarouselCard
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.apps.card.v1.Carousel.CarouselCard;
+
+                        /**
+                         * Creates a plain object from a CarouselCard message. Also converts values to other types if specified.
+                         * @param message CarouselCard
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.apps.card.v1.Carousel.CarouselCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CarouselCard to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CarouselCard
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a CollapseControl. */
+                interface ICollapseControl {
+
+                    /** CollapseControl horizontalAlignment */
+                    horizontalAlignment?: (google.apps.card.v1.Widget.HorizontalAlignment|keyof typeof google.apps.card.v1.Widget.HorizontalAlignment|null);
+
+                    /** CollapseControl expandButton */
+                    expandButton?: (google.apps.card.v1.IButton|null);
+
+                    /** CollapseControl collapseButton */
+                    collapseButton?: (google.apps.card.v1.IButton|null);
+                }
+
+                /** Represents a CollapseControl. */
+                class CollapseControl implements ICollapseControl {
+
+                    /**
+                     * Constructs a new CollapseControl.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.card.v1.ICollapseControl);
+
+                    /** CollapseControl horizontalAlignment. */
+                    public horizontalAlignment: (google.apps.card.v1.Widget.HorizontalAlignment|keyof typeof google.apps.card.v1.Widget.HorizontalAlignment);
+
+                    /** CollapseControl expandButton. */
+                    public expandButton?: (google.apps.card.v1.IButton|null);
+
+                    /** CollapseControl collapseButton. */
+                    public collapseButton?: (google.apps.card.v1.IButton|null);
+
+                    /**
+                     * Creates a new CollapseControl instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CollapseControl instance
+                     */
+                    public static create(properties?: google.apps.card.v1.ICollapseControl): google.apps.card.v1.CollapseControl;
+
+                    /**
+                     * Encodes the specified CollapseControl message. Does not implicitly {@link google.apps.card.v1.CollapseControl.verify|verify} messages.
+                     * @param message CollapseControl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.card.v1.ICollapseControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CollapseControl message, length delimited. Does not implicitly {@link google.apps.card.v1.CollapseControl.verify|verify} messages.
+                     * @param message CollapseControl message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.card.v1.ICollapseControl, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CollapseControl message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CollapseControl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.CollapseControl;
+
+                    /**
+                     * Decodes a CollapseControl message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CollapseControl
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.CollapseControl;
+
+                    /**
+                     * Verifies a CollapseControl message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CollapseControl message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CollapseControl
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.card.v1.CollapseControl;
+
+                    /**
+                     * Creates a plain object from a CollapseControl message. Also converts values to other types if specified.
+                     * @param message CollapseControl
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.card.v1.CollapseControl, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CollapseControl to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CollapseControl
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an OnClick. */
                 interface IOnClick {
 
@@ -9093,6 +9840,9 @@ export namespace google {
 
                     /** OnClick card */
                     card?: (google.apps.card.v1.ICard|null);
+
+                    /** OnClick overflowMenu */
+                    overflowMenu?: (google.apps.card.v1.IOverflowMenu|null);
                 }
 
                 /** Represents an OnClick. */
@@ -9116,8 +9866,11 @@ export namespace google {
                     /** OnClick card. */
                     public card?: (google.apps.card.v1.ICard|null);
 
+                    /** OnClick overflowMenu. */
+                    public overflowMenu?: (google.apps.card.v1.IOverflowMenu|null);
+
                     /** OnClick data. */
-                    public data?: ("action"|"openLink"|"openDynamicLinkAction"|"card");
+                    public data?: ("action"|"openLink"|"openDynamicLinkAction"|"card"|"overflowMenu");
 
                     /**
                      * Creates a new OnClick instance using the specified properties.
@@ -9338,6 +10091,12 @@ export namespace google {
 
                     /** Action interaction */
                     interaction?: (google.apps.card.v1.Action.Interaction|keyof typeof google.apps.card.v1.Action.Interaction|null);
+
+                    /** Action requiredWidgets */
+                    requiredWidgets?: (string[]|null);
+
+                    /** Action allWidgetsAreRequired */
+                    allWidgetsAreRequired?: (boolean|null);
                 }
 
                 /** Represents an Action. */
@@ -9363,6 +10122,12 @@ export namespace google {
 
                     /** Action interaction. */
                     public interaction: (google.apps.card.v1.Action.Interaction|keyof typeof google.apps.card.v1.Action.Interaction);
+
+                    /** Action requiredWidgets. */
+                    public requiredWidgets: string[];
+
+                    /** Action allWidgetsAreRequired. */
+                    public allWidgetsAreRequired: boolean;
 
                     /**
                      * Creates a new Action instance using the specified properties.
@@ -9558,6 +10323,362 @@ export namespace google {
                         INTERACTION_UNSPECIFIED = 0,
                         OPEN_DIALOG = 1
                     }
+                }
+
+                /** Properties of a Validation. */
+                interface IValidation {
+
+                    /** Validation characterLimit */
+                    characterLimit?: (number|null);
+
+                    /** Validation inputType */
+                    inputType?: (google.apps.card.v1.Validation.InputType|keyof typeof google.apps.card.v1.Validation.InputType|null);
+                }
+
+                /** Represents a Validation. */
+                class Validation implements IValidation {
+
+                    /**
+                     * Constructs a new Validation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.card.v1.IValidation);
+
+                    /** Validation characterLimit. */
+                    public characterLimit: number;
+
+                    /** Validation inputType. */
+                    public inputType: (google.apps.card.v1.Validation.InputType|keyof typeof google.apps.card.v1.Validation.InputType);
+
+                    /**
+                     * Creates a new Validation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Validation instance
+                     */
+                    public static create(properties?: google.apps.card.v1.IValidation): google.apps.card.v1.Validation;
+
+                    /**
+                     * Encodes the specified Validation message. Does not implicitly {@link google.apps.card.v1.Validation.verify|verify} messages.
+                     * @param message Validation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.card.v1.IValidation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Validation message, length delimited. Does not implicitly {@link google.apps.card.v1.Validation.verify|verify} messages.
+                     * @param message Validation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.card.v1.IValidation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Validation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Validation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.Validation;
+
+                    /**
+                     * Decodes a Validation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Validation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.Validation;
+
+                    /**
+                     * Verifies a Validation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Validation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Validation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.card.v1.Validation;
+
+                    /**
+                     * Creates a plain object from a Validation message. Also converts values to other types if specified.
+                     * @param message Validation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.card.v1.Validation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Validation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Validation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Validation {
+
+                    /** InputType enum. */
+                    enum InputType {
+                        INPUT_TYPE_UNSPECIFIED = 0,
+                        TEXT = 1,
+                        INTEGER = 2,
+                        FLOAT = 3,
+                        EMAIL = 4,
+                        EMOJI_PICKER = 5
+                    }
+                }
+
+                /** Properties of a ChipList. */
+                interface IChipList {
+
+                    /** ChipList layout */
+                    layout?: (google.apps.card.v1.ChipList.Layout|keyof typeof google.apps.card.v1.ChipList.Layout|null);
+
+                    /** ChipList chips */
+                    chips?: (google.apps.card.v1.IChip[]|null);
+                }
+
+                /** Represents a ChipList. */
+                class ChipList implements IChipList {
+
+                    /**
+                     * Constructs a new ChipList.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.card.v1.IChipList);
+
+                    /** ChipList layout. */
+                    public layout: (google.apps.card.v1.ChipList.Layout|keyof typeof google.apps.card.v1.ChipList.Layout);
+
+                    /** ChipList chips. */
+                    public chips: google.apps.card.v1.IChip[];
+
+                    /**
+                     * Creates a new ChipList instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChipList instance
+                     */
+                    public static create(properties?: google.apps.card.v1.IChipList): google.apps.card.v1.ChipList;
+
+                    /**
+                     * Encodes the specified ChipList message. Does not implicitly {@link google.apps.card.v1.ChipList.verify|verify} messages.
+                     * @param message ChipList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.card.v1.IChipList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChipList message, length delimited. Does not implicitly {@link google.apps.card.v1.ChipList.verify|verify} messages.
+                     * @param message ChipList message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.card.v1.IChipList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChipList message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChipList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.ChipList;
+
+                    /**
+                     * Decodes a ChipList message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChipList
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.ChipList;
+
+                    /**
+                     * Verifies a ChipList message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChipList message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChipList
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.card.v1.ChipList;
+
+                    /**
+                     * Creates a plain object from a ChipList message. Also converts values to other types if specified.
+                     * @param message ChipList
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.card.v1.ChipList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChipList to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChipList
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ChipList {
+
+                    /** Layout enum. */
+                    enum Layout {
+                        LAYOUT_UNSPECIFIED = 0,
+                        WRAPPED = 1,
+                        HORIZONTAL_SCROLLABLE = 2
+                    }
+                }
+
+                /** Properties of a Chip. */
+                interface IChip {
+
+                    /** Chip icon */
+                    icon?: (google.apps.card.v1.IIcon|null);
+
+                    /** Chip label */
+                    label?: (string|null);
+
+                    /** Chip onClick */
+                    onClick?: (google.apps.card.v1.IOnClick|null);
+
+                    /** Chip enabled */
+                    enabled?: (boolean|null);
+
+                    /** Chip disabled */
+                    disabled?: (boolean|null);
+
+                    /** Chip altText */
+                    altText?: (string|null);
+                }
+
+                /** Represents a Chip. */
+                class Chip implements IChip {
+
+                    /**
+                     * Constructs a new Chip.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.apps.card.v1.IChip);
+
+                    /** Chip icon. */
+                    public icon?: (google.apps.card.v1.IIcon|null);
+
+                    /** Chip label. */
+                    public label: string;
+
+                    /** Chip onClick. */
+                    public onClick?: (google.apps.card.v1.IOnClick|null);
+
+                    /** Chip enabled. */
+                    public enabled: boolean;
+
+                    /** Chip disabled. */
+                    public disabled: boolean;
+
+                    /** Chip altText. */
+                    public altText: string;
+
+                    /**
+                     * Creates a new Chip instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Chip instance
+                     */
+                    public static create(properties?: google.apps.card.v1.IChip): google.apps.card.v1.Chip;
+
+                    /**
+                     * Encodes the specified Chip message. Does not implicitly {@link google.apps.card.v1.Chip.verify|verify} messages.
+                     * @param message Chip message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.apps.card.v1.IChip, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Chip message, length delimited. Does not implicitly {@link google.apps.card.v1.Chip.verify|verify} messages.
+                     * @param message Chip message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.apps.card.v1.IChip, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Chip message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Chip
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.apps.card.v1.Chip;
+
+                    /**
+                     * Decodes a Chip message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Chip
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.apps.card.v1.Chip;
+
+                    /**
+                     * Verifies a Chip message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Chip message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Chip
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.apps.card.v1.Chip;
+
+                    /**
+                     * Creates a plain object from a Chip message. Also converts values to other types if specified.
+                     * @param message Chip
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.apps.card.v1.Chip, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Chip to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Chip
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }
@@ -9845,9 +10966,6 @@ export namespace google {
 
                 /** Annotation customEmojiMetadata. */
                 public customEmojiMetadata?: (google.chat.v1.ICustomEmojiMetadata|null);
-
-                /** Annotation _startIndex. */
-                public _startIndex?: "startIndex";
 
                 /** Annotation metadata. */
                 public metadata?: ("userMention"|"slashCommand"|"richLinkMetadata"|"customEmojiMetadata");
@@ -10188,6 +11306,12 @@ export namespace google {
 
                 /** RichLinkMetadata chatSpaceLinkData */
                 chatSpaceLinkData?: (google.chat.v1.IChatSpaceLinkData|null);
+
+                /** RichLinkMetadata meetSpaceLinkData */
+                meetSpaceLinkData?: (google.chat.v1.IMeetSpaceLinkData|null);
+
+                /** RichLinkMetadata calendarEventLinkData */
+                calendarEventLinkData?: (google.chat.v1.ICalendarEventLinkData|null);
             }
 
             /** Represents a RichLinkMetadata. */
@@ -10211,8 +11335,14 @@ export namespace google {
                 /** RichLinkMetadata chatSpaceLinkData. */
                 public chatSpaceLinkData?: (google.chat.v1.IChatSpaceLinkData|null);
 
+                /** RichLinkMetadata meetSpaceLinkData. */
+                public meetSpaceLinkData?: (google.chat.v1.IMeetSpaceLinkData|null);
+
+                /** RichLinkMetadata calendarEventLinkData. */
+                public calendarEventLinkData?: (google.chat.v1.ICalendarEventLinkData|null);
+
                 /** RichLinkMetadata data. */
-                public data?: ("driveLinkData"|"chatSpaceLinkData");
+                public data?: ("driveLinkData"|"chatSpaceLinkData"|"meetSpaceLinkData"|"calendarEventLinkData");
 
                 /**
                  * Creates a new RichLinkMetadata instance using the specified properties.
@@ -10298,7 +11428,10 @@ export namespace google {
                 enum RichLinkType {
                     RICH_LINK_TYPE_UNSPECIFIED = 0,
                     DRIVE_FILE = 1,
-                    CHAT_SPACE = 2
+                    CHAT_SPACE = 2,
+                    GMAIL_MESSAGE = 3,
+                    MEET_SPACE = 4,
+                    CALENDAR_EVENT = 5
                 }
             }
 
@@ -10605,6 +11738,236 @@ export namespace google {
 
                 /**
                  * Gets the default type url for ChatSpaceLinkData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MeetSpaceLinkData. */
+            interface IMeetSpaceLinkData {
+
+                /** MeetSpaceLinkData meetingCode */
+                meetingCode?: (string|null);
+
+                /** MeetSpaceLinkData type */
+                type?: (google.chat.v1.MeetSpaceLinkData.Type|keyof typeof google.chat.v1.MeetSpaceLinkData.Type|null);
+
+                /** MeetSpaceLinkData huddleStatus */
+                huddleStatus?: (google.chat.v1.MeetSpaceLinkData.HuddleStatus|keyof typeof google.chat.v1.MeetSpaceLinkData.HuddleStatus|null);
+            }
+
+            /** Represents a MeetSpaceLinkData. */
+            class MeetSpaceLinkData implements IMeetSpaceLinkData {
+
+                /**
+                 * Constructs a new MeetSpaceLinkData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMeetSpaceLinkData);
+
+                /** MeetSpaceLinkData meetingCode. */
+                public meetingCode: string;
+
+                /** MeetSpaceLinkData type. */
+                public type: (google.chat.v1.MeetSpaceLinkData.Type|keyof typeof google.chat.v1.MeetSpaceLinkData.Type);
+
+                /** MeetSpaceLinkData huddleStatus. */
+                public huddleStatus: (google.chat.v1.MeetSpaceLinkData.HuddleStatus|keyof typeof google.chat.v1.MeetSpaceLinkData.HuddleStatus);
+
+                /**
+                 * Creates a new MeetSpaceLinkData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MeetSpaceLinkData instance
+                 */
+                public static create(properties?: google.chat.v1.IMeetSpaceLinkData): google.chat.v1.MeetSpaceLinkData;
+
+                /**
+                 * Encodes the specified MeetSpaceLinkData message. Does not implicitly {@link google.chat.v1.MeetSpaceLinkData.verify|verify} messages.
+                 * @param message MeetSpaceLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMeetSpaceLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MeetSpaceLinkData message, length delimited. Does not implicitly {@link google.chat.v1.MeetSpaceLinkData.verify|verify} messages.
+                 * @param message MeetSpaceLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMeetSpaceLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MeetSpaceLinkData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MeetSpaceLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MeetSpaceLinkData;
+
+                /**
+                 * Decodes a MeetSpaceLinkData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MeetSpaceLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MeetSpaceLinkData;
+
+                /**
+                 * Verifies a MeetSpaceLinkData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MeetSpaceLinkData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MeetSpaceLinkData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MeetSpaceLinkData;
+
+                /**
+                 * Creates a plain object from a MeetSpaceLinkData message. Also converts values to other types if specified.
+                 * @param message MeetSpaceLinkData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MeetSpaceLinkData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MeetSpaceLinkData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MeetSpaceLinkData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace MeetSpaceLinkData {
+
+                /** Type enum. */
+                enum Type {
+                    TYPE_UNSPECIFIED = 0,
+                    MEETING = 1,
+                    HUDDLE = 2
+                }
+
+                /** HuddleStatus enum. */
+                enum HuddleStatus {
+                    HUDDLE_STATUS_UNSPECIFIED = 0,
+                    STARTED = 1,
+                    ENDED = 2,
+                    MISSED = 3
+                }
+            }
+
+            /** Properties of a CalendarEventLinkData. */
+            interface ICalendarEventLinkData {
+
+                /** CalendarEventLinkData calendarId */
+                calendarId?: (string|null);
+
+                /** CalendarEventLinkData eventId */
+                eventId?: (string|null);
+            }
+
+            /** Represents a CalendarEventLinkData. */
+            class CalendarEventLinkData implements ICalendarEventLinkData {
+
+                /**
+                 * Constructs a new CalendarEventLinkData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ICalendarEventLinkData);
+
+                /** CalendarEventLinkData calendarId. */
+                public calendarId: string;
+
+                /** CalendarEventLinkData eventId. */
+                public eventId: string;
+
+                /**
+                 * Creates a new CalendarEventLinkData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CalendarEventLinkData instance
+                 */
+                public static create(properties?: google.chat.v1.ICalendarEventLinkData): google.chat.v1.CalendarEventLinkData;
+
+                /**
+                 * Encodes the specified CalendarEventLinkData message. Does not implicitly {@link google.chat.v1.CalendarEventLinkData.verify|verify} messages.
+                 * @param message CalendarEventLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ICalendarEventLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CalendarEventLinkData message, length delimited. Does not implicitly {@link google.chat.v1.CalendarEventLinkData.verify|verify} messages.
+                 * @param message CalendarEventLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ICalendarEventLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CalendarEventLinkData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CalendarEventLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CalendarEventLinkData;
+
+                /**
+                 * Decodes a CalendarEventLinkData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CalendarEventLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CalendarEventLinkData;
+
+                /**
+                 * Verifies a CalendarEventLinkData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CalendarEventLinkData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CalendarEventLinkData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.CalendarEventLinkData;
+
+                /**
+                 * Creates a plain object from a CalendarEventLinkData message. Also converts values to other types if specified.
+                 * @param message CalendarEventLinkData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.CalendarEventLinkData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CalendarEventLinkData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CalendarEventLinkData
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -11611,7 +12974,7 @@ export namespace google {
                 interface ICustomEmojiPayload {
 
                     /** CustomEmojiPayload fileContent */
-                    fileContent?: (Uint8Array|string|null);
+                    fileContent?: (Uint8Array|Buffer|string|null);
 
                     /** CustomEmojiPayload filename */
                     filename?: (string|null);
@@ -11627,7 +12990,7 @@ export namespace google {
                     constructor(properties?: google.chat.v1.CustomEmoji.ICustomEmojiPayload);
 
                     /** CustomEmojiPayload fileContent. */
-                    public fileContent: (Uint8Array|string);
+                    public fileContent: (Uint8Array|Buffer|string);
 
                     /** CustomEmojiPayload filename. */
                     public filename: string;
@@ -11735,9 +13098,6 @@ export namespace google {
 
                 /** EmojiReactionSummary reactionCount. */
                 public reactionCount?: (number|null);
-
-                /** EmojiReactionSummary _reactionCount. */
-                public _reactionCount?: "reactionCount";
 
                 /**
                  * Creates a new EmojiReactionSummary instance using the specified properties.
@@ -13778,7 +15138,8 @@ export namespace google {
                 enum MembershipRole {
                     MEMBERSHIP_ROLE_UNSPECIFIED = 0,
                     ROLE_MEMBER = 1,
-                    ROLE_MANAGER = 2
+                    ROLE_MANAGER = 2,
+                    ROLE_ASSISTANT_MANAGER = 4
                 }
             }
 
@@ -14891,6 +16252,15 @@ export namespace google {
 
                 /** QuotedMessageMetadata lastUpdateTime */
                 lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                /** QuotedMessageMetadata quoteType */
+                quoteType?: (google.chat.v1.QuotedMessageMetadata.QuoteType|keyof typeof google.chat.v1.QuotedMessageMetadata.QuoteType|null);
+
+                /** QuotedMessageMetadata quotedMessageSnapshot */
+                quotedMessageSnapshot?: (google.chat.v1.IQuotedMessageSnapshot|null);
+
+                /** QuotedMessageMetadata forwardedMetadata */
+                forwardedMetadata?: (google.chat.v1.IForwardedMetadata|null);
             }
 
             /** Represents a QuotedMessageMetadata. */
@@ -14907,6 +16277,15 @@ export namespace google {
 
                 /** QuotedMessageMetadata lastUpdateTime. */
                 public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                /** QuotedMessageMetadata quoteType. */
+                public quoteType: (google.chat.v1.QuotedMessageMetadata.QuoteType|keyof typeof google.chat.v1.QuotedMessageMetadata.QuoteType);
+
+                /** QuotedMessageMetadata quotedMessageSnapshot. */
+                public quotedMessageSnapshot?: (google.chat.v1.IQuotedMessageSnapshot|null);
+
+                /** QuotedMessageMetadata forwardedMetadata. */
+                public forwardedMetadata?: (google.chat.v1.IForwardedMetadata|null);
 
                 /**
                  * Creates a new QuotedMessageMetadata instance using the specified properties.
@@ -14980,6 +16359,239 @@ export namespace google {
 
                 /**
                  * Gets the default type url for QuotedMessageMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace QuotedMessageMetadata {
+
+                /** QuoteType enum. */
+                enum QuoteType {
+                    QUOTE_TYPE_UNSPECIFIED = 0,
+                    REPLY = 1
+                }
+            }
+
+            /** Properties of a QuotedMessageSnapshot. */
+            interface IQuotedMessageSnapshot {
+
+                /** QuotedMessageSnapshot sender */
+                sender?: (string|null);
+
+                /** QuotedMessageSnapshot text */
+                text?: (string|null);
+
+                /** QuotedMessageSnapshot formattedText */
+                formattedText?: (string|null);
+
+                /** QuotedMessageSnapshot annotations */
+                annotations?: (google.chat.v1.IAnnotation[]|null);
+
+                /** QuotedMessageSnapshot attachments */
+                attachments?: (google.chat.v1.IAttachment[]|null);
+            }
+
+            /** Represents a QuotedMessageSnapshot. */
+            class QuotedMessageSnapshot implements IQuotedMessageSnapshot {
+
+                /**
+                 * Constructs a new QuotedMessageSnapshot.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IQuotedMessageSnapshot);
+
+                /** QuotedMessageSnapshot sender. */
+                public sender: string;
+
+                /** QuotedMessageSnapshot text. */
+                public text: string;
+
+                /** QuotedMessageSnapshot formattedText. */
+                public formattedText: string;
+
+                /** QuotedMessageSnapshot annotations. */
+                public annotations: google.chat.v1.IAnnotation[];
+
+                /** QuotedMessageSnapshot attachments. */
+                public attachments: google.chat.v1.IAttachment[];
+
+                /**
+                 * Creates a new QuotedMessageSnapshot instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns QuotedMessageSnapshot instance
+                 */
+                public static create(properties?: google.chat.v1.IQuotedMessageSnapshot): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Encodes the specified QuotedMessageSnapshot message. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                 * @param message QuotedMessageSnapshot message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IQuotedMessageSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QuotedMessageSnapshot message, length delimited. Does not implicitly {@link google.chat.v1.QuotedMessageSnapshot.verify|verify} messages.
+                 * @param message QuotedMessageSnapshot message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IQuotedMessageSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QuotedMessageSnapshot message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QuotedMessageSnapshot
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Decodes a QuotedMessageSnapshot message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QuotedMessageSnapshot
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Verifies a QuotedMessageSnapshot message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QuotedMessageSnapshot message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QuotedMessageSnapshot
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.QuotedMessageSnapshot;
+
+                /**
+                 * Creates a plain object from a QuotedMessageSnapshot message. Also converts values to other types if specified.
+                 * @param message QuotedMessageSnapshot
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.QuotedMessageSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QuotedMessageSnapshot to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for QuotedMessageSnapshot
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ForwardedMetadata. */
+            interface IForwardedMetadata {
+
+                /** ForwardedMetadata space */
+                space?: (string|null);
+
+                /** ForwardedMetadata spaceDisplayName */
+                spaceDisplayName?: (string|null);
+            }
+
+            /** Represents a ForwardedMetadata. */
+            class ForwardedMetadata implements IForwardedMetadata {
+
+                /**
+                 * Constructs a new ForwardedMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IForwardedMetadata);
+
+                /** ForwardedMetadata space. */
+                public space: string;
+
+                /** ForwardedMetadata spaceDisplayName. */
+                public spaceDisplayName: string;
+
+                /**
+                 * Creates a new ForwardedMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ForwardedMetadata instance
+                 */
+                public static create(properties?: google.chat.v1.IForwardedMetadata): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Encodes the specified ForwardedMetadata message. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                 * @param message ForwardedMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IForwardedMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ForwardedMetadata message, length delimited. Does not implicitly {@link google.chat.v1.ForwardedMetadata.verify|verify} messages.
+                 * @param message ForwardedMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IForwardedMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ForwardedMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ForwardedMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Decodes a ForwardedMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ForwardedMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Verifies a ForwardedMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ForwardedMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ForwardedMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ForwardedMetadata;
+
+                /**
+                 * Creates a plain object from a ForwardedMetadata message. Also converts values to other types if specified.
+                 * @param message ForwardedMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ForwardedMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ForwardedMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ForwardedMetadata
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -18649,6 +20261,9 @@ export namespace google {
                 /** Space accessSettings */
                 accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
 
+                /** Space customer */
+                customer?: (string|null);
+
                 /** Space spaceUri */
                 spaceUri?: (string|null);
 
@@ -18718,6 +20333,9 @@ export namespace google {
 
                 /** Space accessSettings. */
                 public accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
+
+                /** Space customer. */
+                public customer?: (string|null);
 
                 /** Space spaceUri. */
                 public spaceUri: string;
@@ -19224,30 +20842,6 @@ export namespace google {
                     /** PermissionSettings replyMessages. */
                     public replyMessages?: (google.chat.v1.Space.IPermissionSetting|null);
 
-                    /** PermissionSettings _manageMembersAndGroups. */
-                    public _manageMembersAndGroups?: "manageMembersAndGroups";
-
-                    /** PermissionSettings _modifySpaceDetails. */
-                    public _modifySpaceDetails?: "modifySpaceDetails";
-
-                    /** PermissionSettings _toggleHistory. */
-                    public _toggleHistory?: "toggleHistory";
-
-                    /** PermissionSettings _useAtMentionAll. */
-                    public _useAtMentionAll?: "useAtMentionAll";
-
-                    /** PermissionSettings _manageApps. */
-                    public _manageApps?: "manageApps";
-
-                    /** PermissionSettings _manageWebhooks. */
-                    public _manageWebhooks?: "manageWebhooks";
-
-                    /** PermissionSettings _postMessages. */
-                    public _postMessages?: "postMessages";
-
-                    /** PermissionSettings _replyMessages. */
-                    public _replyMessages?: "replyMessages";
-
                     /**
                      * Creates a new PermissionSettings instance using the specified properties.
                      * @param [properties] Properties to set
@@ -19332,6 +20926,9 @@ export namespace google {
                     /** PermissionSetting managersAllowed */
                     managersAllowed?: (boolean|null);
 
+                    /** PermissionSetting assistantManagersAllowed */
+                    assistantManagersAllowed?: (boolean|null);
+
                     /** PermissionSetting membersAllowed */
                     membersAllowed?: (boolean|null);
                 }
@@ -19347,6 +20944,9 @@ export namespace google {
 
                     /** PermissionSetting managersAllowed. */
                     public managersAllowed: boolean;
+
+                    /** PermissionSetting assistantManagersAllowed. */
+                    public assistantManagersAllowed?: (boolean|null);
 
                     /** PermissionSetting membersAllowed. */
                     public membersAllowed: boolean;
@@ -22900,12 +24500,6 @@ export namespace google {
                 /** SpaceNotificationSetting muteSetting. */
                 public muteSetting?: (google.chat.v1.SpaceNotificationSetting.MuteSetting|keyof typeof google.chat.v1.SpaceNotificationSetting.MuteSetting|null);
 
-                /** SpaceNotificationSetting _notificationSetting. */
-                public _notificationSetting?: "notificationSetting";
-
-                /** SpaceNotificationSetting _muteSetting. */
-                public _muteSetting?: "muteSetting";
-
                 /**
                  * Creates a new SpaceNotificationSetting instance using the specified properties.
                  * @param [properties] Properties to set
@@ -23845,6 +25439,19 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
+
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -24095,19 +25702,6 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
         }
 
         /** Properties of a FieldInfo. */
@@ -24871,6 +26465,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -24911,6 +26508,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.

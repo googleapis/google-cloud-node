@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,20 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -110,36 +101,17 @@ export class ReportServiceClient {
    *     const client = new ReportServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ReportServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'admanager.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -148,9 +120,7 @@ export class ReportServiceClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -176,7 +146,7 @@ export class ReportServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,7 +160,10 @@ export class ReportServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -211,14 +184,53 @@ export class ReportServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      adBreakPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}'
+      ),
+      adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}'
+      ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}'
+      ),
+      applicationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/applications/{application}'
+      ),
+      audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/audienceSegments/{audience_segment}'
+      ),
+      bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/bandwidthGroups/{bandwidth_group}'
+      ),
+      browserPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/browsers/{browser}'
+      ),
+      browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/browserLanguages/{browser_language}'
+      ),
+      cmsMetadataKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}'
+      ),
+      cmsMetadataValuePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cmsMetadataValues/{cms_metadata_value}'
       ),
       companyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/companies/{company}'
       ),
       contactPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contacts/{contact}'
+      ),
+      contentPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/content/{content}'
+      ),
+      contentBundlePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/contentBundles/{content_bundle}'
+      ),
+      contentLabelPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/contentLabels/{content_label}'
+      ),
+      creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeTemplates/{creative_template}'
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}'
@@ -227,16 +239,49 @@ export class ReportServiceClient {
         'networks/{network_code}/customTargetingKeys/{custom_targeting_key}'
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customTargetingKeys/{custom_targeting_key}/customTargetingValues/{custom_targeting_value}'
+        'networks/{network_code}/customTargetingValues/{custom_targeting_value}'
+      ),
+      deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/deviceCapabilities/{device_capability}'
+      ),
+      deviceCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/deviceCategories/{device_category}'
+      ),
+      deviceManufacturerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/deviceManufacturers/{device_manufacturer}'
       ),
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}'
       ),
+      geoTargetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/geoTargets/{geo_target}'
+      ),
       labelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/labels/{label}'
       ),
+      lineItemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}'
+      ),
+      liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreamEvents/{live_stream_event}'
+      ),
+      mobileCarrierPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/mobileCarriers/{mobile_carrier}'
+      ),
+      mobileDevicePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/mobileDevices/{mobile_device}'
+      ),
+      mobileDeviceSubmodelPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}'
+      ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}'
+      ),
+      operatingSystemPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/operatingSystems/{operating_system}'
+      ),
+      operatingSystemVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/operatingSystemVersions/{operating_system_version}'
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}'
@@ -244,11 +289,23 @@ export class ReportServiceClient {
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}'
       ),
+      privateAuctionPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/privateAuctions/{private_auction}'
+      ),
+      privateAuctionDealPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/privateAuctionDeals/{private_auction_deal}'
+      ),
+      programmaticBuyerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/programmaticBuyers/{programmatic_buyer}'
+      ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/reports/{report}'
       ),
       rolePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/roles/{role}'
+      ),
+      sitePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/sites/{site}'
       ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/taxonomyCategories/{taxonomy_category}'
@@ -259,69 +316,50 @@ export class ReportServiceClient {
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}'
       ),
+      webPropertyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/webProperties/{web_property}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listReports: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'reports'
-      ),
-      fetchReportResultRows: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'rows'
-      ),
+      listReports:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reports'),
+      fetchReportResultRows:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rows')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=networks/*/operations/reports/runs/*}',
-          additional_bindings: [
-            {get: '/v1/{name=networks/*/operations/reports/exports/*}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=networks/*/operations/reports/runs/*}',}];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
     const runReportResponse = protoFilesRoot.lookup(
-      '.google.ads.admanager.v1.RunReportResponse'
-    ) as gax.protobuf.Type;
+      '.google.ads.admanager.v1.RunReportResponse') as gax.protobuf.Type;
     const runReportMetadata = protoFilesRoot.lookup(
-      '.google.ads.admanager.v1.RunReportMetadata'
-    ) as gax.protobuf.Type;
+      '.google.ads.admanager.v1.RunReportMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       runReport: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runReportResponse.decode.bind(runReportResponse),
-        runReportMetadata.decode.bind(runReportMetadata)
-      ),
+        runReportMetadata.decode.bind(runReportMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.ads.admanager.v1.ReportService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.ads.admanager.v1.ReportService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -352,40 +390,28 @@ export class ReportServiceClient {
     // Put together the "service stub" for
     // google.ads.admanager.v1.ReportService.
     this.reportServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.ads.admanager.v1.ReportService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.ads.admanager.v1.ReportService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.ads.admanager.v1.ReportService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const reportServiceStubMethods = [
-      'getReport',
-      'listReports',
-      'createReport',
-      'updateReport',
-      'runReport',
-      'fetchReportResultRows',
-    ];
+    const reportServiceStubMethods =
+        ['getReport', 'listReports', 'createReport', 'updateReport', 'runReport', 'fetchReportResultRows'];
     for (const methodName of reportServiceStubMethods) {
       const callPromise = this.reportServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -410,14 +436,8 @@ export class ReportServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'admanager.googleapis.com';
   }
@@ -428,14 +448,8 @@ export class ReportServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'admanager.googleapis.com';
   }
@@ -466,7 +480,9 @@ export class ReportServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [];
+    return [
+      'https://www.googleapis.com/auth/admanager'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -475,9 +491,8 @@ export class ReportServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -488,640 +503,509 @@ export class ReportServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * API to retrieve a `Report` object.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the report.
-   *   Format: `networks/{network_code}/reports/{report_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Report|Report}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/report_service.get_report.js</caption>
-   * region_tag:admanager_v1_generated_ReportService_GetReport_async
-   */
+/**
+ * API to retrieve a `Report` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the report.
+ *   Format: `networks/{network_code}/reports/{report_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Report|Report}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/report_service.get_report.js</caption>
+ * region_tag:admanager_v1_generated_ReportService_GetReport_async
+ */
   getReport(
-    request?: protos.google.ads.admanager.v1.IGetReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IGetReportRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IGetReportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IGetReportRequest|undefined, {}|undefined
+      ]>;
   getReport(
-    request: protos.google.ads.admanager.v1.IGetReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IGetReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReport(
-    request: protos.google.ads.admanager.v1.IGetReportRequest,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IGetReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getReport(
-    request?: protos.google.ads.admanager.v1.IGetReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ads.admanager.v1.IGetReportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ads.admanager.v1.IReport,
-          protos.google.ads.admanager.v1.IGetReportRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IGetReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IGetReportRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReport(
+      request: protos.google.ads.admanager.v1.IGetReportRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReport(
+      request?: protos.google.ads.admanager.v1.IGetReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IGetReportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IGetReportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getReport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ads.admanager.v1.IReport,
-          protos.google.ads.admanager.v1.IGetReportRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IGetReportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ads.admanager.v1.IReport,
-          protos.google.ads.admanager.v1.IGetReportRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getReport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getReport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IGetReportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * API to create a `Report` object.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent resource where this `Report` will be created.
-   *   Format: `networks/{network_code}`
-   * @param {google.ads.admanager.v1.Report} request.report
-   *   Required. The `Report` to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Report|Report}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/report_service.create_report.js</caption>
-   * region_tag:admanager_v1_generated_ReportService_CreateReport_async
-   */
+/**
+ * API to create a `Report` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this `Report` will be created.
+ *   Format: `networks/{network_code}`
+ * @param {google.ads.admanager.v1.Report} request.report
+ *   Required. The `Report` to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Report|Report}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/report_service.create_report.js</caption>
+ * region_tag:admanager_v1_generated_ReportService_CreateReport_async
+ */
   createReport(
-    request?: protos.google.ads.admanager.v1.ICreateReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.ICreateReportRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.ICreateReportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.ICreateReportRequest|undefined, {}|undefined
+      ]>;
   createReport(
-    request: protos.google.ads.admanager.v1.ICreateReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.ICreateReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReport(
-    request: protos.google.ads.admanager.v1.ICreateReportRequest,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.ICreateReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createReport(
-    request?: protos.google.ads.admanager.v1.ICreateReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ads.admanager.v1.ICreateReportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ads.admanager.v1.IReport,
-          | protos.google.ads.admanager.v1.ICreateReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.ICreateReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.ICreateReportRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.ICreateReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReport(
+      request: protos.google.ads.admanager.v1.ICreateReportRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.ICreateReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReport(
+      request?: protos.google.ads.admanager.v1.ICreateReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.ICreateReportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.ICreateReportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.ICreateReportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('createReport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ads.admanager.v1.IReport,
-          | protos.google.ads.admanager.v1.ICreateReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.ICreateReportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .createReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ads.admanager.v1.IReport,
-          protos.google.ads.admanager.v1.ICreateReportRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createReport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.createReport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.ICreateReportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createReport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * API to update a `Report` object.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.ads.admanager.v1.Report} request.report
-   *   Required. The `Report` to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The list of fields to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Report|Report}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/report_service.update_report.js</caption>
-   * region_tag:admanager_v1_generated_ReportService_UpdateReport_async
-   */
+/**
+ * API to update a `Report` object.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.ads.admanager.v1.Report} request.report
+ *   Required. The `Report` to update.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Report|Report}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/report_service.update_report.js</caption>
+ * region_tag:admanager_v1_generated_ReportService_UpdateReport_async
+ */
   updateReport(
-    request?: protos.google.ads.admanager.v1.IUpdateReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IUpdateReportRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IUpdateReportRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IUpdateReportRequest|undefined, {}|undefined
+      ]>;
   updateReport(
-    request: protos.google.ads.admanager.v1.IUpdateReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IUpdateReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReport(
-    request: protos.google.ads.admanager.v1.IUpdateReportRequest,
-    callback: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IUpdateReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateReport(
-    request?: protos.google.ads.admanager.v1.IUpdateReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.ads.admanager.v1.IUpdateReportRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.ads.admanager.v1.IReport,
-          | protos.google.ads.admanager.v1.IUpdateReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IUpdateReportRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport,
-      protos.google.ads.admanager.v1.IUpdateReportRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.IUpdateReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReport(
+      request: protos.google.ads.admanager.v1.IUpdateReportRequest,
+      callback: Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IUpdateReportRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateReport(
+      request?: protos.google.ads.admanager.v1.IUpdateReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IUpdateReportRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.ads.admanager.v1.IReport,
+          protos.google.ads.admanager.v1.IUpdateReportRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IUpdateReportRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'report.name': request.report!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'report.name': request.report!.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('updateReport request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.ads.admanager.v1.IReport,
-          | protos.google.ads.admanager.v1.IUpdateReportRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IUpdateReportRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .updateReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.ads.admanager.v1.IReport,
-          protos.google.ads.admanager.v1.IUpdateReportRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateReport response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.updateReport(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.ads.admanager.v1.IReport,
+        protos.google.ads.admanager.v1.IUpdateReportRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateReport response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Initiates the execution of an existing report asynchronously. Users can
-   * get the report by polling this operation via
-   * `OperationsService.GetOperation`.
-   * Poll every 5 seconds initially, with an exponential
-   * backoff. Once a report is complete, the operation will contain a
-   * `RunReportResponse` in its response field containing a report_result that
-   * can be passed to the `FetchReportResultRows` method to retrieve the report
-   * data.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The report to run.
-   *   Format: `networks/{network_code}/reports/{report_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/report_service.run_report.js</caption>
-   * region_tag:admanager_v1_generated_ReportService_RunReport_async
-   */
+/**
+ * Initiates the execution of an existing report asynchronously. Users can
+ * get the report by polling this operation using
+ * `OperationsService.GetOperation`.
+ * Poll every 5 seconds initially, with an exponential
+ * backoff. Once a report is complete, the operation will contain a
+ * `RunReportResponse` in its response field containing a report_result that
+ * can be passed to the `FetchReportResultRows` method to retrieve the report
+ * data.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The report to run.
+ *   Format: `networks/{network_code}/reports/{report_id}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/report_service.run_report.js</caption>
+ * region_tag:admanager_v1_generated_ReportService_RunReport_async
+ */
   runReport(
-    request?: protos.google.ads.admanager.v1.IRunReportRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.ads.admanager.v1.IRunReportResponse,
-        protos.google.ads.admanager.v1.IRunReportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IRunReportRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   runReport(
-    request: protos.google.ads.admanager.v1.IRunReportRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.ads.admanager.v1.IRunReportResponse,
-        protos.google.ads.admanager.v1.IRunReportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.ads.admanager.v1.IRunReportRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runReport(
-    request: protos.google.ads.admanager.v1.IRunReportRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.ads.admanager.v1.IRunReportResponse,
-        protos.google.ads.admanager.v1.IRunReportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.ads.admanager.v1.IRunReportRequest,
+      callback: Callback<
+          LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   runReport(
-    request?: protos.google.ads.admanager.v1.IRunReportRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.ads.admanager.v1.IRunReportResponse,
-            protos.google.ads.admanager.v1.IRunReportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.ads.admanager.v1.IRunReportResponse,
-        protos.google.ads.admanager.v1.IRunReportMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.ads.admanager.v1.IRunReportResponse,
-        protos.google.ads.admanager.v1.IRunReportMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
+      request?: protos.google.ads.admanager.v1.IRunReportRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.ads.admanager.v1.IRunReportResponse,
-            protos.google.ads.admanager.v1.IRunReportMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('runReport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('runReport request %j', request);
-    return this.innerApiCalls
-      .runReport(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.ads.admanager.v1.IRunReportResponse,
-            protos.google.ads.admanager.v1.IRunReportMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('runReport response %j', rawResponse);
-          return [response, rawResponse, _];
-        }
-      );
+    return this.innerApiCalls.runReport(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.ads.admanager.v1.IRunReportResponse, protos.google.ads.admanager.v1.IRunReportMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('runReport response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
   }
-  /**
-   * Check the status of the long running operation returned by `runReport()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/report_service.run_report.js</caption>
-   * region_tag:admanager_v1_generated_ReportService_RunReport_async
-   */
-  async checkRunReportProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.ads.admanager.v1.RunReportResponse,
-      protos.google.ads.admanager.v1.RunReportMetadata
-    >
-  > {
+/**
+ * Check the status of the long running operation returned by `runReport()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/report_service.run_report.js</caption>
+ * region_tag:admanager_v1_generated_ReportService_RunReport_async
+ */
+  async checkRunReportProgress(name: string): Promise<LROperation<protos.google.ads.admanager.v1.RunReportResponse, protos.google.ads.admanager.v1.RunReportMetadata>>{
     this._log.info('runReport long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.runReport,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.ads.admanager.v1.RunReportResponse,
-      protos.google.ads.admanager.v1.RunReportMetadata
-    >;
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.runReport, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.ads.admanager.v1.RunReportResponse, protos.google.ads.admanager.v1.RunReportMetadata>;
   }
-  /**
-   * API to retrieve a list of `Report` objects.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of reports.
-   *   Format: `networks/{network_code}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Reports` to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Reports` will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListReports` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListReports` must
-   *   match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Expression to filter the response.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters
-   * @param {string} [request.orderBy]
-   *   Optional. Expression to specify sorting order.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters#order
-   * @param {number} [request.skip]
-   *   Optional. Number of individual resources to skip while paginating.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.Report|Report}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listReportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * API to retrieve a list of `Report` objects.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of reports.
+ *   Format: `networks/{network_code}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Reports` to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 `Reports` will be
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListReports` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListReports` must
+ *   match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Expression to filter the response.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters
+ * @param {string} [request.orderBy]
+ *   Optional. Expression to specify sorting order.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters#order
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.Report|Report}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReports(
-    request?: protos.google.ads.admanager.v1.IListReportsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport[],
-      protos.google.ads.admanager.v1.IListReportsRequest | null,
-      protos.google.ads.admanager.v1.IListReportsResponse,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IListReportsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport[],
+        protos.google.ads.admanager.v1.IListReportsRequest|null,
+        protos.google.ads.admanager.v1.IListReportsResponse
+      ]>;
   listReports(
-    request: protos.google.ads.admanager.v1.IListReportsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.ads.admanager.v1.IListReportsRequest,
-      protos.google.ads.admanager.v1.IListReportsResponse | null | undefined,
-      protos.google.ads.admanager.v1.IReport
-    >
-  ): void;
-  listReports(
-    request: protos.google.ads.admanager.v1.IListReportsRequest,
-    callback: PaginationCallback<
-      protos.google.ads.admanager.v1.IListReportsRequest,
-      protos.google.ads.admanager.v1.IListReportsResponse | null | undefined,
-      protos.google.ads.admanager.v1.IReport
-    >
-  ): void;
-  listReports(
-    request?: protos.google.ads.admanager.v1.IListReportsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.ads.admanager.v1.IListReportsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.ads.admanager.v1.IListReportsRequest,
-          | protos.google.ads.admanager.v1.IListReportsResponse
-          | null
-          | undefined,
-          protos.google.ads.admanager.v1.IReport
-        >,
-    callback?: PaginationCallback<
-      protos.google.ads.admanager.v1.IListReportsRequest,
-      protos.google.ads.admanager.v1.IListReportsResponse | null | undefined,
-      protos.google.ads.admanager.v1.IReport
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.IReport[],
-      protos.google.ads.admanager.v1.IListReportsRequest | null,
-      protos.google.ads.admanager.v1.IListReportsResponse,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.IListReportsResponse|null|undefined,
+          protos.google.ads.admanager.v1.IReport>): void;
+  listReports(
+      request: protos.google.ads.admanager.v1.IListReportsRequest,
+      callback: PaginationCallback<
+          protos.google.ads.admanager.v1.IListReportsRequest,
+          protos.google.ads.admanager.v1.IListReportsResponse|null|undefined,
+          protos.google.ads.admanager.v1.IReport>): void;
+  listReports(
+      request?: protos.google.ads.admanager.v1.IListReportsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ads.admanager.v1.IListReportsRequest,
+          protos.google.ads.admanager.v1.IListReportsResponse|null|undefined,
+          protos.google.ads.admanager.v1.IReport>,
+      callback?: PaginationCallback<
+          protos.google.ads.admanager.v1.IListReportsRequest,
+          protos.google.ads.admanager.v1.IListReportsResponse|null|undefined,
+          protos.google.ads.admanager.v1.IReport>):
+      Promise<[
+        protos.google.ads.admanager.v1.IReport[],
+        protos.google.ads.admanager.v1.IListReportsRequest|null,
+        protos.google.ads.admanager.v1.IListReportsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.ads.admanager.v1.IListReportsRequest,
-          | protos.google.ads.admanager.v1.IListReportsResponse
-          | null
-          | undefined,
-          protos.google.ads.admanager.v1.IReport
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListReportsRequest,
+      protos.google.ads.admanager.v1.IListReportsResponse|null|undefined,
+      protos.google.ads.admanager.v1.IReport>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1130,74 +1014,71 @@ export class ReportServiceClient {
     this._log.info('listReports request %j', request);
     return this.innerApiCalls
       .listReports(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.ads.admanager.v1.IReport[],
-          protos.google.ads.admanager.v1.IListReportsRequest | null,
-          protos.google.ads.admanager.v1.IListReportsResponse,
-        ]) => {
-          this._log.info('listReports values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.ads.admanager.v1.IReport[],
+        protos.google.ads.admanager.v1.IListReportsRequest|null,
+        protos.google.ads.admanager.v1.IListReportsResponse
+      ]) => {
+        this._log.info('listReports values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `listReports`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of reports.
-   *   Format: `networks/{network_code}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Reports` to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Reports` will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListReports` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListReports` must
-   *   match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Expression to filter the response.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters
-   * @param {string} [request.orderBy]
-   *   Optional. Expression to specify sorting order.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters#order
-   * @param {number} [request.skip]
-   *   Optional. Number of individual resources to skip while paginating.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.Report|Report} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listReportsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `listReports`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of reports.
+ *   Format: `networks/{network_code}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Reports` to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 `Reports` will be
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListReports` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListReports` must
+ *   match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Expression to filter the response.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters
+ * @param {string} [request.orderBy]
+ *   Optional. Expression to specify sorting order.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters#order
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.Report|Report} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReportsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   listReportsStream(
-    request?: protos.google.ads.admanager.v1.IListReportsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.ads.admanager.v1.IListReportsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
@@ -1206,65 +1087,64 @@ export class ReportServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listReports`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of reports.
-   *   Format: `networks/{network_code}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of `Reports` to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 `Reports` will be
-   *   returned. The maximum value is 1000; values above 1000 will be coerced to
-   *   1000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListReports` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListReports` must
-   *   match the call that provided the page token.
-   * @param {string} [request.filter]
-   *   Optional. Expression to filter the response.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters
-   * @param {string} [request.orderBy]
-   *   Optional. Expression to specify sorting order.
-   *   See syntax details at
-   *   https://developers.google.com/ad-manager/api/beta/filters#order
-   * @param {number} [request.skip]
-   *   Optional. Number of individual resources to skip while paginating.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.ads.admanager.v1.Report|Report}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/report_service.list_reports.js</caption>
-   * region_tag:admanager_v1_generated_ReportService_ListReports_async
-   */
+/**
+ * Equivalent to `listReports`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent, which owns this collection of reports.
+ *   Format: `networks/{network_code}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of `Reports` to return. The service may return
+ *   fewer than this value. If unspecified, at most 50 `Reports` will be
+ *   returned. The maximum value is 1000; values greater than 1000 will be
+ *   coerced to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListReports` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListReports` must
+ *   match the call that provided the page token.
+ * @param {string} [request.filter]
+ *   Optional. Expression to filter the response.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters
+ * @param {string} [request.orderBy]
+ *   Optional. Expression to specify sorting order.
+ *   See syntax details at
+ *   https://developers.google.com/ad-manager/api/beta/filters#order
+ * @param {number} [request.skip]
+ *   Optional. Number of individual resources to skip while paginating.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ads.admanager.v1.Report|Report}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/report_service.list_reports.js</caption>
+ * region_tag:admanager_v1_generated_ReportService_ListReports_async
+ */
   listReportsAsync(
-    request?: protos.google.ads.admanager.v1.IListReportsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.ads.admanager.v1.IReport> {
+      request?: protos.google.ads.admanager.v1.IListReportsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ads.admanager.v1.IReport>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
@@ -1272,120 +1152,96 @@ export class ReportServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.ads.admanager.v1.IReport>;
   }
-  /**
-   * Returns the result rows from a completed report.
-   * The caller must have previously called `RunReport` and waited for that
-   * operation to complete. The rows will be returned according to the order
-   * specified by the `sorts` member of the report definition.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The report result being fetched.
-   *   Format:
-   *   `networks/{network_code}/reports/{report_id}/results/{report_result_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of rows to return. The service may return
-   *   fewer than this value. If unspecified, at most 1,000 rows will be returned.
-   *   The maximum value is 10,000; values above 10,000 will be reduced to 10,000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `FetchReportResultRows`
-   *   call. Provide this to retrieve the second and subsequent batches of rows.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.Report.DataTable.Row|Row}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `fetchReportResultRowsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns the result rows from a completed report.
+ * The caller must have previously called `RunReport` and waited for that
+ * operation to complete. The rows will be returned according to the order
+ * specified by the `sorts` member of the report definition.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The report result being fetched.
+ *   Format:
+ *   `networks/{network_code}/reports/{report_id}/results/{report_result_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of rows to return. The service may return
+ *   fewer than this value. If unspecified, at most 1,000 rows will be returned.
+ *   The maximum value is 10,000; values greater than 10,000 will be reduced to
+ *   10,000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `FetchReportResultRows`
+ *   call. Provide this to retrieve the second and subsequent batches of rows.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.ReportDataTable.Row|Row}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `fetchReportResultRowsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchReportResultRows(
-    request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.Report.DataTable.IRow[],
-      protos.google.ads.admanager.v1.IFetchReportResultRowsRequest | null,
-      protos.google.ads.admanager.v1.IFetchReportResultRowsResponse,
-    ]
-  >;
+      request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.ads.admanager.v1.ReportDataTable.IRow[],
+        protos.google.ads.admanager.v1.IFetchReportResultRowsRequest|null,
+        protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
+      ]>;
   fetchReportResultRows(
-    request: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-      | protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
-      | null
-      | undefined,
-      protos.google.ads.admanager.v1.Report.DataTable.IRow
-    >
-  ): void;
-  fetchReportResultRows(
-    request: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-    callback: PaginationCallback<
-      protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-      | protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
-      | null
-      | undefined,
-      protos.google.ads.admanager.v1.Report.DataTable.IRow
-    >
-  ): void;
-  fetchReportResultRows(
-    request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-          | protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
-          | null
-          | undefined,
-          protos.google.ads.admanager.v1.Report.DataTable.IRow
-        >,
-    callback?: PaginationCallback<
-      protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-      | protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
-      | null
-      | undefined,
-      protos.google.ads.admanager.v1.Report.DataTable.IRow
-    >
-  ): Promise<
-    [
-      protos.google.ads.admanager.v1.Report.DataTable.IRow[],
-      protos.google.ads.admanager.v1.IFetchReportResultRowsRequest | null,
-      protos.google.ads.admanager.v1.IFetchReportResultRowsResponse,
-    ]
-  > | void {
+          protos.google.ads.admanager.v1.IFetchReportResultRowsResponse|null|undefined,
+          protos.google.ads.admanager.v1.ReportDataTable.IRow>): void;
+  fetchReportResultRows(
+      request: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+      callback: PaginationCallback<
+          protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+          protos.google.ads.admanager.v1.IFetchReportResultRowsResponse|null|undefined,
+          protos.google.ads.admanager.v1.ReportDataTable.IRow>): void;
+  fetchReportResultRows(
+      request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+          protos.google.ads.admanager.v1.IFetchReportResultRowsResponse|null|undefined,
+          protos.google.ads.admanager.v1.ReportDataTable.IRow>,
+      callback?: PaginationCallback<
+          protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+          protos.google.ads.admanager.v1.IFetchReportResultRowsResponse|null|undefined,
+          protos.google.ads.admanager.v1.ReportDataTable.IRow>):
+      Promise<[
+        protos.google.ads.admanager.v1.ReportDataTable.IRow[],
+        protos.google.ads.admanager.v1.IFetchReportResultRowsRequest|null,
+        protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-          | protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
-          | null
-          | undefined,
-          protos.google.ads.admanager.v1.Report.DataTable.IRow
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+      protos.google.ads.admanager.v1.IFetchReportResultRowsResponse|null|undefined,
+      protos.google.ads.admanager.v1.ReportDataTable.IRow>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchReportResultRows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1394,61 +1250,59 @@ export class ReportServiceClient {
     this._log.info('fetchReportResultRows request %j', request);
     return this.innerApiCalls
       .fetchReportResultRows(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.ads.admanager.v1.Report.DataTable.IRow[],
-          protos.google.ads.admanager.v1.IFetchReportResultRowsRequest | null,
-          protos.google.ads.admanager.v1.IFetchReportResultRowsResponse,
-        ]) => {
-          this._log.info('fetchReportResultRows values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.ads.admanager.v1.ReportDataTable.IRow[],
+        protos.google.ads.admanager.v1.IFetchReportResultRowsRequest|null,
+        protos.google.ads.admanager.v1.IFetchReportResultRowsResponse
+      ]) => {
+        this._log.info('fetchReportResultRows values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `fetchReportResultRows`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The report result being fetched.
-   *   Format:
-   *   `networks/{network_code}/reports/{report_id}/results/{report_result_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of rows to return. The service may return
-   *   fewer than this value. If unspecified, at most 1,000 rows will be returned.
-   *   The maximum value is 10,000; values above 10,000 will be reduced to 10,000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `FetchReportResultRows`
-   *   call. Provide this to retrieve the second and subsequent batches of rows.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.Report.DataTable.Row|Row} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `fetchReportResultRowsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `fetchReportResultRows`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The report result being fetched.
+ *   Format:
+ *   `networks/{network_code}/reports/{report_id}/results/{report_result_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of rows to return. The service may return
+ *   fewer than this value. If unspecified, at most 1,000 rows will be returned.
+ *   The maximum value is 10,000; values greater than 10,000 will be reduced to
+ *   10,000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `FetchReportResultRows`
+ *   call. Provide this to retrieve the second and subsequent batches of rows.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.ReportDataTable.Row|Row} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `fetchReportResultRowsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   fetchReportResultRowsStream(
-    request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchReportResultRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchReportResultRows stream %j', request);
     return this.descriptors.page.fetchReportResultRows.createStream(
       this.innerApiCalls.fetchReportResultRows as GaxCall,
@@ -1457,60 +1311,60 @@ export class ReportServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `fetchReportResultRows`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The report result being fetched.
-   *   Format:
-   *   `networks/{network_code}/reports/{report_id}/results/{report_result_id}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of rows to return. The service may return
-   *   fewer than this value. If unspecified, at most 1,000 rows will be returned.
-   *   The maximum value is 10,000; values above 10,000 will be reduced to 10,000.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `FetchReportResultRows`
-   *   call. Provide this to retrieve the second and subsequent batches of rows.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.ads.admanager.v1.Report.DataTable.Row|Row}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/report_service.fetch_report_result_rows.js</caption>
-   * region_tag:admanager_v1_generated_ReportService_FetchReportResultRows_async
-   */
+/**
+ * Equivalent to `fetchReportResultRows`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The report result being fetched.
+ *   Format:
+ *   `networks/{network_code}/reports/{report_id}/results/{report_result_id}`
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of rows to return. The service may return
+ *   fewer than this value. If unspecified, at most 1,000 rows will be returned.
+ *   The maximum value is 10,000; values greater than 10,000 will be reduced to
+ *   10,000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `FetchReportResultRows`
+ *   call. Provide this to retrieve the second and subsequent batches of rows.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.ads.admanager.v1.ReportDataTable.Row|Row}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/report_service.fetch_report_result_rows.js</caption>
+ * region_tag:admanager_v1_generated_ReportService_FetchReportResultRows_async
+ */
   fetchReportResultRowsAsync(
-    request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.ads.admanager.v1.Report.DataTable.IRow> {
+      request?: protos.google.ads.admanager.v1.IFetchReportResultRowsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.ads.admanager.v1.ReportDataTable.IRow>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
     const defaultCallSettings = this._defaults['fetchReportResultRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('fetchReportResultRows iterate %j', request);
     return this.descriptors.page.fetchReportResultRows.asyncIterate(
       this.innerApiCalls['fetchReportResultRows'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.ads.admanager.v1.Report.DataTable.IRow>;
+    ) as AsyncIterable<protos.google.ads.admanager.v1.ReportDataTable.IRow>;
   }
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1555,20 +1409,20 @@ export class ReportServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1605,13 +1459,13 @@ export class ReportServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1645,7 +1499,7 @@ export class ReportServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1660,20 +1514,20 @@ export class ReportServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1717,20 +1571,20 @@ export class ReportServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1739,13 +1593,111 @@ export class ReportServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified adBreak resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset_key
+   * @param {string} ad_break
+   * @returns {string} Resource name string.
+   */
+  adBreakPath(networkCode:string,assetKey:string,adBreak:string) {
+    return this.pathTemplates.adBreakPathTemplate.render({
+      network_code: networkCode,
+      asset_key: assetKey,
+      ad_break: adBreak,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdBreak resource.
+   *
+   * @param {string} adBreakName
+   *   A fully-qualified path representing AdBreak resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdBreakName(adBreakName: string) {
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).network_code;
+  }
+
+  /**
+   * Parse the asset_key from AdBreak resource.
+   *
+   * @param {string} adBreakName
+   *   A fully-qualified path representing AdBreak resource.
+   * @returns {string} A string representing the asset_key.
+   */
+  matchAssetKeyFromAdBreakName(adBreakName: string) {
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).asset_key;
+  }
+
+  /**
+   * Parse the ad_break from AdBreak resource.
+   *
+   * @param {string} adBreakName
+   *   A fully-qualified path representing AdBreak resource.
+   * @returns {string} A string representing the ad_break.
+   */
+  matchAdBreakFromAdBreakName(adBreakName: string) {
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).ad_break;
+  }
+
+  /**
+   * Return a fully-qualified adReviewCenterAd resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} web_property_code
+   * @param {string} ad_review_center_ad
+   * @returns {string} Resource name string.
+   */
+  adReviewCenterAdPath(networkCode:string,webPropertyCode:string,adReviewCenterAd:string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.render({
+      network_code: networkCode,
+      web_property_code: webPropertyCode,
+      ad_review_center_ad: adReviewCenterAd,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdReviewCenterAd resource.
+   *
+   * @param {string} adReviewCenterAdName
+   *   A fully-qualified path representing AdReviewCenterAd resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).network_code;
+  }
+
+  /**
+   * Parse the web_property_code from AdReviewCenterAd resource.
+   *
+   * @param {string} adReviewCenterAdName
+   *   A fully-qualified path representing AdReviewCenterAd resource.
+   * @returns {string} A string representing the web_property_code.
+   */
+  matchWebPropertyCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).web_property_code;
+  }
+
+  /**
+   * Parse the ad_review_center_ad from AdReviewCenterAd resource.
+   *
+   * @param {string} adReviewCenterAdName
+   *   A fully-qualified path representing AdReviewCenterAd resource.
+   * @returns {string} A string representing the ad_review_center_ad.
+   */
+  matchAdReviewCenterAdFromAdReviewCenterAdName(adReviewCenterAdName: string) {
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).ad_review_center_ad;
+  }
+
+  /**
    * Return a fully-qualified adUnit resource name string.
    *
    * @param {string} network_code
    * @param {string} ad_unit
    * @returns {string} Resource name string.
    */
-  adUnitPath(networkCode: string, adUnit: string) {
+  adUnitPath(networkCode:string,adUnit:string) {
     return this.pathTemplates.adUnitPathTemplate.render({
       network_code: networkCode,
       ad_unit: adUnit,
@@ -1775,13 +1727,265 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified application resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} application
+   * @returns {string} Resource name string.
+   */
+  applicationPath(networkCode:string,application:string) {
+    return this.pathTemplates.applicationPathTemplate.render({
+      network_code: networkCode,
+      application: application,
+    });
+  }
+
+  /**
+   * Parse the network_code from Application resource.
+   *
+   * @param {string} applicationName
+   *   A fully-qualified path representing Application resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromApplicationName(applicationName: string) {
+    return this.pathTemplates.applicationPathTemplate.match(applicationName).network_code;
+  }
+
+  /**
+   * Parse the application from Application resource.
+   *
+   * @param {string} applicationName
+   *   A fully-qualified path representing Application resource.
+   * @returns {string} A string representing the application.
+   */
+  matchApplicationFromApplicationName(applicationName: string) {
+    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
+  }
+
+  /**
+   * Return a fully-qualified audienceSegment resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} audience_segment
+   * @returns {string} Resource name string.
+   */
+  audienceSegmentPath(networkCode:string,audienceSegment:string) {
+    return this.pathTemplates.audienceSegmentPathTemplate.render({
+      network_code: networkCode,
+      audience_segment: audienceSegment,
+    });
+  }
+
+  /**
+   * Parse the network_code from AudienceSegment resource.
+   *
+   * @param {string} audienceSegmentName
+   *   A fully-qualified path representing AudienceSegment resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAudienceSegmentName(audienceSegmentName: string) {
+    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).network_code;
+  }
+
+  /**
+   * Parse the audience_segment from AudienceSegment resource.
+   *
+   * @param {string} audienceSegmentName
+   *   A fully-qualified path representing AudienceSegment resource.
+   * @returns {string} A string representing the audience_segment.
+   */
+  matchAudienceSegmentFromAudienceSegmentName(audienceSegmentName: string) {
+    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).audience_segment;
+  }
+
+  /**
+   * Return a fully-qualified bandwidthGroup resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} bandwidth_group
+   * @returns {string} Resource name string.
+   */
+  bandwidthGroupPath(networkCode:string,bandwidthGroup:string) {
+    return this.pathTemplates.bandwidthGroupPathTemplate.render({
+      network_code: networkCode,
+      bandwidth_group: bandwidthGroup,
+    });
+  }
+
+  /**
+   * Parse the network_code from BandwidthGroup resource.
+   *
+   * @param {string} bandwidthGroupName
+   *   A fully-qualified path representing BandwidthGroup resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBandwidthGroupName(bandwidthGroupName: string) {
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).network_code;
+  }
+
+  /**
+   * Parse the bandwidth_group from BandwidthGroup resource.
+   *
+   * @param {string} bandwidthGroupName
+   *   A fully-qualified path representing BandwidthGroup resource.
+   * @returns {string} A string representing the bandwidth_group.
+   */
+  matchBandwidthGroupFromBandwidthGroupName(bandwidthGroupName: string) {
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).bandwidth_group;
+  }
+
+  /**
+   * Return a fully-qualified browser resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} browser
+   * @returns {string} Resource name string.
+   */
+  browserPath(networkCode:string,browser:string) {
+    return this.pathTemplates.browserPathTemplate.render({
+      network_code: networkCode,
+      browser: browser,
+    });
+  }
+
+  /**
+   * Parse the network_code from Browser resource.
+   *
+   * @param {string} browserName
+   *   A fully-qualified path representing Browser resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBrowserName(browserName: string) {
+    return this.pathTemplates.browserPathTemplate.match(browserName).network_code;
+  }
+
+  /**
+   * Parse the browser from Browser resource.
+   *
+   * @param {string} browserName
+   *   A fully-qualified path representing Browser resource.
+   * @returns {string} A string representing the browser.
+   */
+  matchBrowserFromBrowserName(browserName: string) {
+    return this.pathTemplates.browserPathTemplate.match(browserName).browser;
+  }
+
+  /**
+   * Return a fully-qualified browserLanguage resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} browser_language
+   * @returns {string} Resource name string.
+   */
+  browserLanguagePath(networkCode:string,browserLanguage:string) {
+    return this.pathTemplates.browserLanguagePathTemplate.render({
+      network_code: networkCode,
+      browser_language: browserLanguage,
+    });
+  }
+
+  /**
+   * Parse the network_code from BrowserLanguage resource.
+   *
+   * @param {string} browserLanguageName
+   *   A fully-qualified path representing BrowserLanguage resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBrowserLanguageName(browserLanguageName: string) {
+    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).network_code;
+  }
+
+  /**
+   * Parse the browser_language from BrowserLanguage resource.
+   *
+   * @param {string} browserLanguageName
+   *   A fully-qualified path representing BrowserLanguage resource.
+   * @returns {string} A string representing the browser_language.
+   */
+  matchBrowserLanguageFromBrowserLanguageName(browserLanguageName: string) {
+    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified cmsMetadataKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cms_metadata_key
+   * @returns {string} Resource name string.
+   */
+  cmsMetadataKeyPath(networkCode:string,cmsMetadataKey:string) {
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.render({
+      network_code: networkCode,
+      cms_metadata_key: cmsMetadataKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from CmsMetadataKey resource.
+   *
+   * @param {string} cmsMetadataKeyName
+   *   A fully-qualified path representing CmsMetadataKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).network_code;
+  }
+
+  /**
+   * Parse the cms_metadata_key from CmsMetadataKey resource.
+   *
+   * @param {string} cmsMetadataKeyName
+   *   A fully-qualified path representing CmsMetadataKey resource.
+   * @returns {string} A string representing the cms_metadata_key.
+   */
+  matchCmsMetadataKeyFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).cms_metadata_key;
+  }
+
+  /**
+   * Return a fully-qualified cmsMetadataValue resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cms_metadata_value
+   * @returns {string} Resource name string.
+   */
+  cmsMetadataValuePath(networkCode:string,cmsMetadataValue:string) {
+    return this.pathTemplates.cmsMetadataValuePathTemplate.render({
+      network_code: networkCode,
+      cms_metadata_value: cmsMetadataValue,
+    });
+  }
+
+  /**
+   * Parse the network_code from CmsMetadataValue resource.
+   *
+   * @param {string} cmsMetadataValueName
+   *   A fully-qualified path representing CmsMetadataValue resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCmsMetadataValueName(cmsMetadataValueName: string) {
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).network_code;
+  }
+
+  /**
+   * Parse the cms_metadata_value from CmsMetadataValue resource.
+   *
+   * @param {string} cmsMetadataValueName
+   *   A fully-qualified path representing CmsMetadataValue resource.
+   * @returns {string} A string representing the cms_metadata_value.
+   */
+  matchCmsMetadataValueFromCmsMetadataValueName(cmsMetadataValueName: string) {
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).cms_metadata_value;
+  }
+
+  /**
    * Return a fully-qualified company resource name string.
    *
    * @param {string} network_code
    * @param {string} company
    * @returns {string} Resource name string.
    */
-  companyPath(networkCode: string, company: string) {
+  companyPath(networkCode:string,company:string) {
     return this.pathTemplates.companyPathTemplate.render({
       network_code: networkCode,
       company: company,
@@ -1796,8 +2000,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCompanyName(companyName: string) {
-    return this.pathTemplates.companyPathTemplate.match(companyName)
-      .network_code;
+    return this.pathTemplates.companyPathTemplate.match(companyName).network_code;
   }
 
   /**
@@ -1818,7 +2021,7 @@ export class ReportServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  contactPath(networkCode: string, contact: string) {
+  contactPath(networkCode:string,contact:string) {
     return this.pathTemplates.contactPathTemplate.render({
       network_code: networkCode,
       contact: contact,
@@ -1833,8 +2036,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContactName(contactName: string) {
-    return this.pathTemplates.contactPathTemplate.match(contactName)
-      .network_code;
+    return this.pathTemplates.contactPathTemplate.match(contactName).network_code;
   }
 
   /**
@@ -1849,13 +2051,157 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified content resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} content
+   * @returns {string} Resource name string.
+   */
+  contentPath(networkCode:string,content:string) {
+    return this.pathTemplates.contentPathTemplate.render({
+      network_code: networkCode,
+      content: content,
+    });
+  }
+
+  /**
+   * Parse the network_code from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).network_code;
+  }
+
+  /**
+   * Parse the content from Content resource.
+   *
+   * @param {string} contentName
+   *   A fully-qualified path representing Content resource.
+   * @returns {string} A string representing the content.
+   */
+  matchContentFromContentName(contentName: string) {
+    return this.pathTemplates.contentPathTemplate.match(contentName).content;
+  }
+
+  /**
+   * Return a fully-qualified contentBundle resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} content_bundle
+   * @returns {string} Resource name string.
+   */
+  contentBundlePath(networkCode:string,contentBundle:string) {
+    return this.pathTemplates.contentBundlePathTemplate.render({
+      network_code: networkCode,
+      content_bundle: contentBundle,
+    });
+  }
+
+  /**
+   * Parse the network_code from ContentBundle resource.
+   *
+   * @param {string} contentBundleName
+   *   A fully-qualified path representing ContentBundle resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromContentBundleName(contentBundleName: string) {
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).network_code;
+  }
+
+  /**
+   * Parse the content_bundle from ContentBundle resource.
+   *
+   * @param {string} contentBundleName
+   *   A fully-qualified path representing ContentBundle resource.
+   * @returns {string} A string representing the content_bundle.
+   */
+  matchContentBundleFromContentBundleName(contentBundleName: string) {
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).content_bundle;
+  }
+
+  /**
+   * Return a fully-qualified contentLabel resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} content_label
+   * @returns {string} Resource name string.
+   */
+  contentLabelPath(networkCode:string,contentLabel:string) {
+    return this.pathTemplates.contentLabelPathTemplate.render({
+      network_code: networkCode,
+      content_label: contentLabel,
+    });
+  }
+
+  /**
+   * Parse the network_code from ContentLabel resource.
+   *
+   * @param {string} contentLabelName
+   *   A fully-qualified path representing ContentLabel resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromContentLabelName(contentLabelName: string) {
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).network_code;
+  }
+
+  /**
+   * Parse the content_label from ContentLabel resource.
+   *
+   * @param {string} contentLabelName
+   *   A fully-qualified path representing ContentLabel resource.
+   * @returns {string} A string representing the content_label.
+   */
+  matchContentLabelFromContentLabelName(contentLabelName: string) {
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).content_label;
+  }
+
+  /**
+   * Return a fully-qualified creativeTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_template
+   * @returns {string} Resource name string.
+   */
+  creativeTemplatePath(networkCode:string,creativeTemplate:string) {
+    return this.pathTemplates.creativeTemplatePathTemplate.render({
+      network_code: networkCode,
+      creative_template: creativeTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeTemplate resource.
+   *
+   * @param {string} creativeTemplateName
+   *   A fully-qualified path representing CreativeTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeTemplateName(creativeTemplateName: string) {
+    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).network_code;
+  }
+
+  /**
+   * Parse the creative_template from CreativeTemplate resource.
+   *
+   * @param {string} creativeTemplateName
+   *   A fully-qualified path representing CreativeTemplate resource.
+   * @returns {string} A string representing the creative_template.
+   */
+  matchCreativeTemplateFromCreativeTemplateName(creativeTemplateName: string) {
+    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).creative_template;
+  }
+
+  /**
    * Return a fully-qualified customField resource name string.
    *
    * @param {string} network_code
    * @param {string} custom_field
    * @returns {string} Resource name string.
    */
-  customFieldPath(networkCode: string, customField: string) {
+  customFieldPath(networkCode:string,customField:string) {
     return this.pathTemplates.customFieldPathTemplate.render({
       network_code: networkCode,
       custom_field: customField,
@@ -1870,8 +2216,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
-      .network_code;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).network_code;
   }
 
   /**
@@ -1882,8 +2227,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the custom_field.
    */
   matchCustomFieldFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
-      .custom_field;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).custom_field;
   }
 
   /**
@@ -1893,7 +2237,7 @@ export class ReportServiceClient {
    * @param {string} custom_targeting_key
    * @returns {string} Resource name string.
    */
-  customTargetingKeyPath(networkCode: string, customTargetingKey: string) {
+  customTargetingKeyPath(networkCode:string,customTargetingKey:string) {
     return this.pathTemplates.customTargetingKeyPathTemplate.render({
       network_code: networkCode,
       custom_targeting_key: customTargetingKey,
@@ -1908,9 +2252,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomTargetingKeyName(customTargetingKeyName: string) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(
-      customTargetingKeyName
-    ).network_code;
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).network_code;
   }
 
   /**
@@ -1920,30 +2262,20 @@ export class ReportServiceClient {
    *   A fully-qualified path representing CustomTargetingKey resource.
    * @returns {string} A string representing the custom_targeting_key.
    */
-  matchCustomTargetingKeyFromCustomTargetingKeyName(
-    customTargetingKeyName: string
-  ) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(
-      customTargetingKeyName
-    ).custom_targeting_key;
+  matchCustomTargetingKeyFromCustomTargetingKeyName(customTargetingKeyName: string) {
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).custom_targeting_key;
   }
 
   /**
    * Return a fully-qualified customTargetingValue resource name string.
    *
    * @param {string} network_code
-   * @param {string} custom_targeting_key
    * @param {string} custom_targeting_value
    * @returns {string} Resource name string.
    */
-  customTargetingValuePath(
-    networkCode: string,
-    customTargetingKey: string,
-    customTargetingValue: string
-  ) {
+  customTargetingValuePath(networkCode:string,customTargetingValue:string) {
     return this.pathTemplates.customTargetingValuePathTemplate.render({
       network_code: networkCode,
-      custom_targeting_key: customTargetingKey,
       custom_targeting_value: customTargetingValue,
     });
   }
@@ -1955,27 +2287,8 @@ export class ReportServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).network_code;
-  }
-
-  /**
-   * Parse the custom_targeting_key from CustomTargetingValue resource.
-   *
-   * @param {string} customTargetingValueName
-   *   A fully-qualified path representing CustomTargetingValue resource.
-   * @returns {string} A string representing the custom_targeting_key.
-   */
-  matchCustomTargetingKeyFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).custom_targeting_key;
+  matchNetworkCodeFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).network_code;
   }
 
   /**
@@ -1985,12 +2298,116 @@ export class ReportServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the custom_targeting_value.
    */
-  matchCustomTargetingValueFromCustomTargetingValueName(
-    customTargetingValueName: string
-  ) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(
-      customTargetingValueName
-    ).custom_targeting_value;
+  matchCustomTargetingValueFromCustomTargetingValueName(customTargetingValueName: string) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified deviceCapability resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} device_capability
+   * @returns {string} Resource name string.
+   */
+  deviceCapabilityPath(networkCode:string,deviceCapability:string) {
+    return this.pathTemplates.deviceCapabilityPathTemplate.render({
+      network_code: networkCode,
+      device_capability: deviceCapability,
+    });
+  }
+
+  /**
+   * Parse the network_code from DeviceCapability resource.
+   *
+   * @param {string} deviceCapabilityName
+   *   A fully-qualified path representing DeviceCapability resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDeviceCapabilityName(deviceCapabilityName: string) {
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).network_code;
+  }
+
+  /**
+   * Parse the device_capability from DeviceCapability resource.
+   *
+   * @param {string} deviceCapabilityName
+   *   A fully-qualified path representing DeviceCapability resource.
+   * @returns {string} A string representing the device_capability.
+   */
+  matchDeviceCapabilityFromDeviceCapabilityName(deviceCapabilityName: string) {
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).device_capability;
+  }
+
+  /**
+   * Return a fully-qualified deviceCategory resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} device_category
+   * @returns {string} Resource name string.
+   */
+  deviceCategoryPath(networkCode:string,deviceCategory:string) {
+    return this.pathTemplates.deviceCategoryPathTemplate.render({
+      network_code: networkCode,
+      device_category: deviceCategory,
+    });
+  }
+
+  /**
+   * Parse the network_code from DeviceCategory resource.
+   *
+   * @param {string} deviceCategoryName
+   *   A fully-qualified path representing DeviceCategory resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDeviceCategoryName(deviceCategoryName: string) {
+    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).network_code;
+  }
+
+  /**
+   * Parse the device_category from DeviceCategory resource.
+   *
+   * @param {string} deviceCategoryName
+   *   A fully-qualified path representing DeviceCategory resource.
+   * @returns {string} A string representing the device_category.
+   */
+  matchDeviceCategoryFromDeviceCategoryName(deviceCategoryName: string) {
+    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).device_category;
+  }
+
+  /**
+   * Return a fully-qualified deviceManufacturer resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} device_manufacturer
+   * @returns {string} Resource name string.
+   */
+  deviceManufacturerPath(networkCode:string,deviceManufacturer:string) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.render({
+      network_code: networkCode,
+      device_manufacturer: deviceManufacturer,
+    });
+  }
+
+  /**
+   * Parse the network_code from DeviceManufacturer resource.
+   *
+   * @param {string} deviceManufacturerName
+   *   A fully-qualified path representing DeviceManufacturer resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDeviceManufacturerName(deviceManufacturerName: string) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).network_code;
+  }
+
+  /**
+   * Parse the device_manufacturer from DeviceManufacturer resource.
+   *
+   * @param {string} deviceManufacturerName
+   *   A fully-qualified path representing DeviceManufacturer resource.
+   * @returns {string} A string representing the device_manufacturer.
+   */
+  matchDeviceManufacturerFromDeviceManufacturerName(deviceManufacturerName: string) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).device_manufacturer;
   }
 
   /**
@@ -2000,7 +2417,7 @@ export class ReportServiceClient {
    * @param {string} entity_signals_mapping
    * @returns {string} Resource name string.
    */
-  entitySignalsMappingPath(networkCode: string, entitySignalsMapping: string) {
+  entitySignalsMappingPath(networkCode:string,entitySignalsMapping:string) {
     return this.pathTemplates.entitySignalsMappingPathTemplate.render({
       network_code: networkCode,
       entity_signals_mapping: entitySignalsMapping,
@@ -2014,12 +2431,8 @@ export class ReportServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromEntitySignalsMappingName(
-    entitySignalsMappingName: string
-  ) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
-      entitySignalsMappingName
-    ).network_code;
+  matchNetworkCodeFromEntitySignalsMappingName(entitySignalsMappingName: string) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).network_code;
   }
 
   /**
@@ -2029,12 +2442,44 @@ export class ReportServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the entity_signals_mapping.
    */
-  matchEntitySignalsMappingFromEntitySignalsMappingName(
-    entitySignalsMappingName: string
-  ) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
-      entitySignalsMappingName
-    ).entity_signals_mapping;
+  matchEntitySignalsMappingFromEntitySignalsMappingName(entitySignalsMappingName: string) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).entity_signals_mapping;
+  }
+
+  /**
+   * Return a fully-qualified geoTarget resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} geo_target
+   * @returns {string} Resource name string.
+   */
+  geoTargetPath(networkCode:string,geoTarget:string) {
+    return this.pathTemplates.geoTargetPathTemplate.render({
+      network_code: networkCode,
+      geo_target: geoTarget,
+    });
+  }
+
+  /**
+   * Parse the network_code from GeoTarget resource.
+   *
+   * @param {string} geoTargetName
+   *   A fully-qualified path representing GeoTarget resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromGeoTargetName(geoTargetName: string) {
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).network_code;
+  }
+
+  /**
+   * Parse the geo_target from GeoTarget resource.
+   *
+   * @param {string} geoTargetName
+   *   A fully-qualified path representing GeoTarget resource.
+   * @returns {string} A string representing the geo_target.
+   */
+  matchGeoTargetFromGeoTargetName(geoTargetName: string) {
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).geo_target;
   }
 
   /**
@@ -2044,7 +2489,7 @@ export class ReportServiceClient {
    * @param {string} label
    * @returns {string} Resource name string.
    */
-  labelPath(networkCode: string, label: string) {
+  labelPath(networkCode:string,label:string) {
     return this.pathTemplates.labelPathTemplate.render({
       network_code: networkCode,
       label: label,
@@ -2074,12 +2519,192 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified lineItem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @returns {string} Resource name string.
+   */
+  lineItemPath(networkCode:string,lineItem:string) {
+    return this.pathTemplates.lineItemPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItem resource.
+   *
+   * @param {string} lineItemName
+   *   A fully-qualified path representing LineItem resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemName(lineItemName: string) {
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
+  }
+
+  /**
+   * Return a fully-qualified liveStreamEvent resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} live_stream_event
+   * @returns {string} Resource name string.
+   */
+  liveStreamEventPath(networkCode:string,liveStreamEvent:string) {
+    return this.pathTemplates.liveStreamEventPathTemplate.render({
+      network_code: networkCode,
+      live_stream_event: liveStreamEvent,
+    });
+  }
+
+  /**
+   * Parse the network_code from LiveStreamEvent resource.
+   *
+   * @param {string} liveStreamEventName
+   *   A fully-qualified path representing LiveStreamEvent resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLiveStreamEventName(liveStreamEventName: string) {
+    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).network_code;
+  }
+
+  /**
+   * Parse the live_stream_event from LiveStreamEvent resource.
+   *
+   * @param {string} liveStreamEventName
+   *   A fully-qualified path representing LiveStreamEvent resource.
+   * @returns {string} A string representing the live_stream_event.
+   */
+  matchLiveStreamEventFromLiveStreamEventName(liveStreamEventName: string) {
+    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).live_stream_event;
+  }
+
+  /**
+   * Return a fully-qualified mobileCarrier resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} mobile_carrier
+   * @returns {string} Resource name string.
+   */
+  mobileCarrierPath(networkCode:string,mobileCarrier:string) {
+    return this.pathTemplates.mobileCarrierPathTemplate.render({
+      network_code: networkCode,
+      mobile_carrier: mobileCarrier,
+    });
+  }
+
+  /**
+   * Parse the network_code from MobileCarrier resource.
+   *
+   * @param {string} mobileCarrierName
+   *   A fully-qualified path representing MobileCarrier resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromMobileCarrierName(mobileCarrierName: string) {
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).network_code;
+  }
+
+  /**
+   * Parse the mobile_carrier from MobileCarrier resource.
+   *
+   * @param {string} mobileCarrierName
+   *   A fully-qualified path representing MobileCarrier resource.
+   * @returns {string} A string representing the mobile_carrier.
+   */
+  matchMobileCarrierFromMobileCarrierName(mobileCarrierName: string) {
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).mobile_carrier;
+  }
+
+  /**
+   * Return a fully-qualified mobileDevice resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} mobile_device
+   * @returns {string} Resource name string.
+   */
+  mobileDevicePath(networkCode:string,mobileDevice:string) {
+    return this.pathTemplates.mobileDevicePathTemplate.render({
+      network_code: networkCode,
+      mobile_device: mobileDevice,
+    });
+  }
+
+  /**
+   * Parse the network_code from MobileDevice resource.
+   *
+   * @param {string} mobileDeviceName
+   *   A fully-qualified path representing MobileDevice resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromMobileDeviceName(mobileDeviceName: string) {
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).network_code;
+  }
+
+  /**
+   * Parse the mobile_device from MobileDevice resource.
+   *
+   * @param {string} mobileDeviceName
+   *   A fully-qualified path representing MobileDevice resource.
+   * @returns {string} A string representing the mobile_device.
+   */
+  matchMobileDeviceFromMobileDeviceName(mobileDeviceName: string) {
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).mobile_device;
+  }
+
+  /**
+   * Return a fully-qualified mobileDeviceSubmodel resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} mobile_device_submodel
+   * @returns {string} Resource name string.
+   */
+  mobileDeviceSubmodelPath(networkCode:string,mobileDeviceSubmodel:string) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.render({
+      network_code: networkCode,
+      mobile_device_submodel: mobileDeviceSubmodel,
+    });
+  }
+
+  /**
+   * Parse the network_code from MobileDeviceSubmodel resource.
+   *
+   * @param {string} mobileDeviceSubmodelName
+   *   A fully-qualified path representing MobileDeviceSubmodel resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).network_code;
+  }
+
+  /**
+   * Parse the mobile_device_submodel from MobileDeviceSubmodel resource.
+   *
+   * @param {string} mobileDeviceSubmodelName
+   *   A fully-qualified path representing MobileDeviceSubmodel resource.
+   * @returns {string} A string representing the mobile_device_submodel.
+   */
+  matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).mobile_device_submodel;
+  }
+
+  /**
    * Return a fully-qualified network resource name string.
    *
    * @param {string} network_code
    * @returns {string} Resource name string.
    */
-  networkPath(networkCode: string) {
+  networkPath(networkCode:string) {
     return this.pathTemplates.networkPathTemplate.render({
       network_code: networkCode,
     });
@@ -2093,8 +2718,79 @@ export class ReportServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromNetworkName(networkName: string) {
-    return this.pathTemplates.networkPathTemplate.match(networkName)
-      .network_code;
+    return this.pathTemplates.networkPathTemplate.match(networkName).network_code;
+  }
+
+  /**
+   * Return a fully-qualified operatingSystem resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} operating_system
+   * @returns {string} Resource name string.
+   */
+  operatingSystemPath(networkCode:string,operatingSystem:string) {
+    return this.pathTemplates.operatingSystemPathTemplate.render({
+      network_code: networkCode,
+      operating_system: operatingSystem,
+    });
+  }
+
+  /**
+   * Parse the network_code from OperatingSystem resource.
+   *
+   * @param {string} operatingSystemName
+   *   A fully-qualified path representing OperatingSystem resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromOperatingSystemName(operatingSystemName: string) {
+    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).network_code;
+  }
+
+  /**
+   * Parse the operating_system from OperatingSystem resource.
+   *
+   * @param {string} operatingSystemName
+   *   A fully-qualified path representing OperatingSystem resource.
+   * @returns {string} A string representing the operating_system.
+   */
+  matchOperatingSystemFromOperatingSystemName(operatingSystemName: string) {
+    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).operating_system;
+  }
+
+  /**
+   * Return a fully-qualified operatingSystemVersion resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} operating_system_version
+   * @returns {string} Resource name string.
+   */
+  operatingSystemVersionPath(networkCode:string,operatingSystemVersion:string) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.render({
+      network_code: networkCode,
+      operating_system_version: operatingSystemVersion,
+    });
+  }
+
+  /**
+   * Parse the network_code from OperatingSystemVersion resource.
+   *
+   * @param {string} operatingSystemVersionName
+   *   A fully-qualified path representing OperatingSystemVersion resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromOperatingSystemVersionName(operatingSystemVersionName: string) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).network_code;
+  }
+
+  /**
+   * Parse the operating_system_version from OperatingSystemVersion resource.
+   *
+   * @param {string} operatingSystemVersionName
+   *   A fully-qualified path representing OperatingSystemVersion resource.
+   * @returns {string} A string representing the operating_system_version.
+   */
+  matchOperatingSystemVersionFromOperatingSystemVersionName(operatingSystemVersionName: string) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).operating_system_version;
   }
 
   /**
@@ -2104,7 +2800,7 @@ export class ReportServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(networkCode: string, order: string) {
+  orderPath(networkCode:string,order:string) {
     return this.pathTemplates.orderPathTemplate.render({
       network_code: networkCode,
       order: order,
@@ -2140,7 +2836,7 @@ export class ReportServiceClient {
    * @param {string} placement
    * @returns {string} Resource name string.
    */
-  placementPath(networkCode: string, placement: string) {
+  placementPath(networkCode:string,placement:string) {
     return this.pathTemplates.placementPathTemplate.render({
       network_code: networkCode,
       placement: placement,
@@ -2155,8 +2851,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName)
-      .network_code;
+    return this.pathTemplates.placementPathTemplate.match(placementName).network_code;
   }
 
   /**
@@ -2167,8 +2862,115 @@ export class ReportServiceClient {
    * @returns {string} A string representing the placement.
    */
   matchPlacementFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName)
-      .placement;
+    return this.pathTemplates.placementPathTemplate.match(placementName).placement;
+  }
+
+  /**
+   * Return a fully-qualified privateAuction resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} private_auction
+   * @returns {string} Resource name string.
+   */
+  privateAuctionPath(networkCode:string,privateAuction:string) {
+    return this.pathTemplates.privateAuctionPathTemplate.render({
+      network_code: networkCode,
+      private_auction: privateAuction,
+    });
+  }
+
+  /**
+   * Parse the network_code from PrivateAuction resource.
+   *
+   * @param {string} privateAuctionName
+   *   A fully-qualified path representing PrivateAuction resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPrivateAuctionName(privateAuctionName: string) {
+    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).network_code;
+  }
+
+  /**
+   * Parse the private_auction from PrivateAuction resource.
+   *
+   * @param {string} privateAuctionName
+   *   A fully-qualified path representing PrivateAuction resource.
+   * @returns {string} A string representing the private_auction.
+   */
+  matchPrivateAuctionFromPrivateAuctionName(privateAuctionName: string) {
+    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).private_auction;
+  }
+
+  /**
+   * Return a fully-qualified privateAuctionDeal resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} private_auction_deal
+   * @returns {string} Resource name string.
+   */
+  privateAuctionDealPath(networkCode:string,privateAuctionDeal:string) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.render({
+      network_code: networkCode,
+      private_auction_deal: privateAuctionDeal,
+    });
+  }
+
+  /**
+   * Parse the network_code from PrivateAuctionDeal resource.
+   *
+   * @param {string} privateAuctionDealName
+   *   A fully-qualified path representing PrivateAuctionDeal resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPrivateAuctionDealName(privateAuctionDealName: string) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).network_code;
+  }
+
+  /**
+   * Parse the private_auction_deal from PrivateAuctionDeal resource.
+   *
+   * @param {string} privateAuctionDealName
+   *   A fully-qualified path representing PrivateAuctionDeal resource.
+   * @returns {string} A string representing the private_auction_deal.
+   */
+  matchPrivateAuctionDealFromPrivateAuctionDealName(privateAuctionDealName: string) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).private_auction_deal;
+  }
+
+  /**
+   * Return a fully-qualified programmaticBuyer resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} programmatic_buyer
+   * @returns {string} Resource name string.
+   */
+  programmaticBuyerPath(networkCode:string,programmaticBuyer:string) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.render({
+      network_code: networkCode,
+      programmatic_buyer: programmaticBuyer,
+    });
+  }
+
+  /**
+   * Parse the network_code from ProgrammaticBuyer resource.
+   *
+   * @param {string} programmaticBuyerName
+   *   A fully-qualified path representing ProgrammaticBuyer resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromProgrammaticBuyerName(programmaticBuyerName: string) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).network_code;
+  }
+
+  /**
+   * Parse the programmatic_buyer from ProgrammaticBuyer resource.
+   *
+   * @param {string} programmaticBuyerName
+   *   A fully-qualified path representing ProgrammaticBuyer resource.
+   * @returns {string} A string representing the programmatic_buyer.
+   */
+  matchProgrammaticBuyerFromProgrammaticBuyerName(programmaticBuyerName: string) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).programmatic_buyer;
   }
 
   /**
@@ -2178,7 +2980,7 @@ export class ReportServiceClient {
    * @param {string} report
    * @returns {string} Resource name string.
    */
-  reportPath(networkCode: string, report: string) {
+  reportPath(networkCode:string,report:string) {
     return this.pathTemplates.reportPathTemplate.render({
       network_code: networkCode,
       report: report,
@@ -2214,7 +3016,7 @@ export class ReportServiceClient {
    * @param {string} role
    * @returns {string} Resource name string.
    */
-  rolePath(networkCode: string, role: string) {
+  rolePath(networkCode:string,role:string) {
     return this.pathTemplates.rolePathTemplate.render({
       network_code: networkCode,
       role: role,
@@ -2244,13 +3046,49 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified site resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} site
+   * @returns {string} Resource name string.
+   */
+  sitePath(networkCode:string,site:string) {
+    return this.pathTemplates.sitePathTemplate.render({
+      network_code: networkCode,
+      site: site,
+    });
+  }
+
+  /**
+   * Parse the network_code from Site resource.
+   *
+   * @param {string} siteName
+   *   A fully-qualified path representing Site resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSiteName(siteName: string) {
+    return this.pathTemplates.sitePathTemplate.match(siteName).network_code;
+  }
+
+  /**
+   * Parse the site from Site resource.
+   *
+   * @param {string} siteName
+   *   A fully-qualified path representing Site resource.
+   * @returns {string} A string representing the site.
+   */
+  matchSiteFromSiteName(siteName: string) {
+    return this.pathTemplates.sitePathTemplate.match(siteName).site;
+  }
+
+  /**
    * Return a fully-qualified taxonomyCategory resource name string.
    *
    * @param {string} network_code
    * @param {string} taxonomy_category
    * @returns {string} Resource name string.
    */
-  taxonomyCategoryPath(networkCode: string, taxonomyCategory: string) {
+  taxonomyCategoryPath(networkCode:string,taxonomyCategory:string) {
     return this.pathTemplates.taxonomyCategoryPathTemplate.render({
       network_code: networkCode,
       taxonomy_category: taxonomyCategory,
@@ -2265,9 +3103,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
-      taxonomyCategoryName
-    ).network_code;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).network_code;
   }
 
   /**
@@ -2278,9 +3114,7 @@ export class ReportServiceClient {
    * @returns {string} A string representing the taxonomy_category.
    */
   matchTaxonomyCategoryFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
-      taxonomyCategoryName
-    ).taxonomy_category;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).taxonomy_category;
   }
 
   /**
@@ -2290,7 +3124,7 @@ export class ReportServiceClient {
    * @param {string} team
    * @returns {string} Resource name string.
    */
-  teamPath(networkCode: string, team: string) {
+  teamPath(networkCode:string,team:string) {
     return this.pathTemplates.teamPathTemplate.render({
       network_code: networkCode,
       team: team,
@@ -2326,7 +3160,7 @@ export class ReportServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(networkCode: string, user: string) {
+  userPath(networkCode:string,user:string) {
     return this.pathTemplates.userPathTemplate.render({
       network_code: networkCode,
       user: user,
@@ -2356,6 +3190,42 @@ export class ReportServiceClient {
   }
 
   /**
+   * Return a fully-qualified webProperty resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} web_property
+   * @returns {string} Resource name string.
+   */
+  webPropertyPath(networkCode:string,webProperty:string) {
+    return this.pathTemplates.webPropertyPathTemplate.render({
+      network_code: networkCode,
+      web_property: webProperty,
+    });
+  }
+
+  /**
+   * Parse the network_code from WebProperty resource.
+   *
+   * @param {string} webPropertyName
+   *   A fully-qualified path representing WebProperty resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromWebPropertyName(webPropertyName: string) {
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).network_code;
+  }
+
+  /**
+   * Parse the web_property from WebProperty resource.
+   *
+   * @param {string} webPropertyName
+   *   A fully-qualified path representing WebProperty resource.
+   * @returns {string} A string representing the web_property.
+   */
+  matchWebPropertyFromWebPropertyName(webPropertyName: string) {
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).web_property;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -2367,7 +3237,7 @@ export class ReportServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

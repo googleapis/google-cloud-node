@@ -20,6 +20,16 @@
                 "getLbRouteExtension"
               ]
             },
+            "GetLbEdgeExtension": {
+              "methods": [
+                "getLbEdgeExtension"
+              ]
+            },
+            "GetAuthzExtension": {
+              "methods": [
+                "getAuthzExtension"
+              ]
+            },
             "CreateLbTrafficExtension": {
               "methods": [
                 "createLbTrafficExtension"
@@ -50,6 +60,36 @@
                 "deleteLbRouteExtension"
               ]
             },
+            "CreateLbEdgeExtension": {
+              "methods": [
+                "createLbEdgeExtension"
+              ]
+            },
+            "UpdateLbEdgeExtension": {
+              "methods": [
+                "updateLbEdgeExtension"
+              ]
+            },
+            "DeleteLbEdgeExtension": {
+              "methods": [
+                "deleteLbEdgeExtension"
+              ]
+            },
+            "CreateAuthzExtension": {
+              "methods": [
+                "createAuthzExtension"
+              ]
+            },
+            "UpdateAuthzExtension": {
+              "methods": [
+                "updateAuthzExtension"
+              ]
+            },
+            "DeleteAuthzExtension": {
+              "methods": [
+                "deleteAuthzExtension"
+              ]
+            },
             "ListLbTrafficExtensions": {
               "methods": [
                 "listLbTrafficExtensions",
@@ -62,6 +102,20 @@
                 "listLbRouteExtensions",
                 "listLbRouteExtensionsStream",
                 "listLbRouteExtensionsAsync"
+              ]
+            },
+            "ListLbEdgeExtensions": {
+              "methods": [
+                "listLbEdgeExtensions",
+                "listLbEdgeExtensionsStream",
+                "listLbEdgeExtensionsAsync"
+              ]
+            },
+            "ListAuthzExtensions": {
+              "methods": [
+                "listAuthzExtensions",
+                "listAuthzExtensionsStream",
+                "listAuthzExtensionsAsync"
               ]
             }
           }
@@ -79,6 +133,16 @@
                 "getLbRouteExtension"
               ]
             },
+            "GetLbEdgeExtension": {
+              "methods": [
+                "getLbEdgeExtension"
+              ]
+            },
+            "GetAuthzExtension": {
+              "methods": [
+                "getAuthzExtension"
+              ]
+            },
             "CreateLbTrafficExtension": {
               "methods": [
                 "createLbTrafficExtension"
@@ -109,6 +173,36 @@
                 "deleteLbRouteExtension"
               ]
             },
+            "CreateLbEdgeExtension": {
+              "methods": [
+                "createLbEdgeExtension"
+              ]
+            },
+            "UpdateLbEdgeExtension": {
+              "methods": [
+                "updateLbEdgeExtension"
+              ]
+            },
+            "DeleteLbEdgeExtension": {
+              "methods": [
+                "deleteLbEdgeExtension"
+              ]
+            },
+            "CreateAuthzExtension": {
+              "methods": [
+                "createAuthzExtension"
+              ]
+            },
+            "UpdateAuthzExtension": {
+              "methods": [
+                "updateAuthzExtension"
+              ]
+            },
+            "DeleteAuthzExtension": {
+              "methods": [
+                "deleteAuthzExtension"
+              ]
+            },
             "ListLbTrafficExtensions": {
               "methods": [
                 "listLbTrafficExtensions",
@@ -121,6 +215,20 @@
                 "listLbRouteExtensions",
                 "listLbRouteExtensionsStream",
                 "listLbRouteExtensionsAsync"
+              ]
+            },
+            "ListLbEdgeExtensions": {
+              "methods": [
+                "listLbEdgeExtensions",
+                "listLbEdgeExtensionsStream",
+                "listLbEdgeExtensionsAsync"
+              ]
+            },
+            "ListAuthzExtensions": {
+              "methods": [
+                "listAuthzExtensions",
+                "listAuthzExtensionsStream",
+                "listAuthzExtensionsAsync"
               ]
             }
           }
@@ -137,6 +245,16 @@
                 "getEndpointPolicy"
               ]
             },
+            "GetWasmPluginVersion": {
+              "methods": [
+                "getWasmPluginVersion"
+              ]
+            },
+            "GetWasmPlugin": {
+              "methods": [
+                "getWasmPlugin"
+              ]
+            },
             "GetGateway": {
               "methods": [
                 "getGateway"
@@ -172,6 +290,21 @@
                 "getMesh"
               ]
             },
+            "GetServiceLbPolicy": {
+              "methods": [
+                "getServiceLbPolicy"
+              ]
+            },
+            "GetGatewayRouteView": {
+              "methods": [
+                "getGatewayRouteView"
+              ]
+            },
+            "GetMeshRouteView": {
+              "methods": [
+                "getMeshRouteView"
+              ]
+            },
             "CreateEndpointPolicy": {
               "methods": [
                 "createEndpointPolicy"
@@ -185,6 +318,31 @@
             "DeleteEndpointPolicy": {
               "methods": [
                 "deleteEndpointPolicy"
+              ]
+            },
+            "CreateWasmPluginVersion": {
+              "methods": [
+                "createWasmPluginVersion"
+              ]
+            },
+            "DeleteWasmPluginVersion": {
+              "methods": [
+                "deleteWasmPluginVersion"
+              ]
+            },
+            "CreateWasmPlugin": {
+              "methods": [
+                "createWasmPlugin"
+              ]
+            },
+            "UpdateWasmPlugin": {
+              "methods": [
+                "updateWasmPlugin"
+              ]
+            },
+            "DeleteWasmPlugin": {
+              "methods": [
+                "deleteWasmPlugin"
               ]
             },
             "CreateGateway": {
@@ -267,6 +425,11 @@
                 "createServiceBinding"
               ]
             },
+            "UpdateServiceBinding": {
+              "methods": [
+                "updateServiceBinding"
+              ]
+            },
             "DeleteServiceBinding": {
               "methods": [
                 "deleteServiceBinding"
@@ -287,11 +450,40 @@
                 "deleteMesh"
               ]
             },
+            "CreateServiceLbPolicy": {
+              "methods": [
+                "createServiceLbPolicy"
+              ]
+            },
+            "UpdateServiceLbPolicy": {
+              "methods": [
+                "updateServiceLbPolicy"
+              ]
+            },
+            "DeleteServiceLbPolicy": {
+              "methods": [
+                "deleteServiceLbPolicy"
+              ]
+            },
             "ListEndpointPolicies": {
               "methods": [
                 "listEndpointPolicies",
                 "listEndpointPoliciesStream",
                 "listEndpointPoliciesAsync"
+              ]
+            },
+            "ListWasmPluginVersions": {
+              "methods": [
+                "listWasmPluginVersions",
+                "listWasmPluginVersionsStream",
+                "listWasmPluginVersionsAsync"
+              ]
+            },
+            "ListWasmPlugins": {
+              "methods": [
+                "listWasmPlugins",
+                "listWasmPluginsStream",
+                "listWasmPluginsAsync"
               ]
             },
             "ListGateways": {
@@ -341,6 +533,27 @@
                 "listMeshes",
                 "listMeshesStream",
                 "listMeshesAsync"
+              ]
+            },
+            "ListServiceLbPolicies": {
+              "methods": [
+                "listServiceLbPolicies",
+                "listServiceLbPoliciesStream",
+                "listServiceLbPoliciesAsync"
+              ]
+            },
+            "ListGatewayRouteViews": {
+              "methods": [
+                "listGatewayRouteViews",
+                "listGatewayRouteViewsStream",
+                "listGatewayRouteViewsAsync"
+              ]
+            },
+            "ListMeshRouteViews": {
+              "methods": [
+                "listMeshRouteViews",
+                "listMeshRouteViewsStream",
+                "listMeshRouteViewsAsync"
               ]
             }
           }
@@ -353,6 +566,16 @@
                 "getEndpointPolicy"
               ]
             },
+            "GetWasmPluginVersion": {
+              "methods": [
+                "getWasmPluginVersion"
+              ]
+            },
+            "GetWasmPlugin": {
+              "methods": [
+                "getWasmPlugin"
+              ]
+            },
             "GetGateway": {
               "methods": [
                 "getGateway"
@@ -388,6 +611,21 @@
                 "getMesh"
               ]
             },
+            "GetServiceLbPolicy": {
+              "methods": [
+                "getServiceLbPolicy"
+              ]
+            },
+            "GetGatewayRouteView": {
+              "methods": [
+                "getGatewayRouteView"
+              ]
+            },
+            "GetMeshRouteView": {
+              "methods": [
+                "getMeshRouteView"
+              ]
+            },
             "CreateEndpointPolicy": {
               "methods": [
                 "createEndpointPolicy"
@@ -401,6 +639,31 @@
             "DeleteEndpointPolicy": {
               "methods": [
                 "deleteEndpointPolicy"
+              ]
+            },
+            "CreateWasmPluginVersion": {
+              "methods": [
+                "createWasmPluginVersion"
+              ]
+            },
+            "DeleteWasmPluginVersion": {
+              "methods": [
+                "deleteWasmPluginVersion"
+              ]
+            },
+            "CreateWasmPlugin": {
+              "methods": [
+                "createWasmPlugin"
+              ]
+            },
+            "UpdateWasmPlugin": {
+              "methods": [
+                "updateWasmPlugin"
+              ]
+            },
+            "DeleteWasmPlugin": {
+              "methods": [
+                "deleteWasmPlugin"
               ]
             },
             "CreateGateway": {
@@ -483,6 +746,11 @@
                 "createServiceBinding"
               ]
             },
+            "UpdateServiceBinding": {
+              "methods": [
+                "updateServiceBinding"
+              ]
+            },
             "DeleteServiceBinding": {
               "methods": [
                 "deleteServiceBinding"
@@ -503,11 +771,40 @@
                 "deleteMesh"
               ]
             },
+            "CreateServiceLbPolicy": {
+              "methods": [
+                "createServiceLbPolicy"
+              ]
+            },
+            "UpdateServiceLbPolicy": {
+              "methods": [
+                "updateServiceLbPolicy"
+              ]
+            },
+            "DeleteServiceLbPolicy": {
+              "methods": [
+                "deleteServiceLbPolicy"
+              ]
+            },
             "ListEndpointPolicies": {
               "methods": [
                 "listEndpointPolicies",
                 "listEndpointPoliciesStream",
                 "listEndpointPoliciesAsync"
+              ]
+            },
+            "ListWasmPluginVersions": {
+              "methods": [
+                "listWasmPluginVersions",
+                "listWasmPluginVersionsStream",
+                "listWasmPluginVersionsAsync"
+              ]
+            },
+            "ListWasmPlugins": {
+              "methods": [
+                "listWasmPlugins",
+                "listWasmPluginsStream",
+                "listWasmPluginsAsync"
               ]
             },
             "ListGateways": {
@@ -557,6 +854,27 @@
                 "listMeshes",
                 "listMeshesStream",
                 "listMeshesAsync"
+              ]
+            },
+            "ListServiceLbPolicies": {
+              "methods": [
+                "listServiceLbPolicies",
+                "listServiceLbPoliciesStream",
+                "listServiceLbPoliciesAsync"
+              ]
+            },
+            "ListGatewayRouteViews": {
+              "methods": [
+                "listGatewayRouteViews",
+                "listGatewayRouteViewsStream",
+                "listGatewayRouteViewsAsync"
+              ]
+            },
+            "ListMeshRouteViews": {
+              "methods": [
+                "listMeshRouteViews",
+                "listMeshRouteViewsStream",
+                "listMeshRouteViewsAsync"
               ]
             }
           }

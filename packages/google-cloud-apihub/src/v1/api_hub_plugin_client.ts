@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
-
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -67,6 +60,7 @@ export class ApiHubPluginClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   apiHubPluginStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -108,36 +102,17 @@ export class ApiHubPluginClient {
    *     const client = new ApiHubPluginClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ApiHubPluginClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'apihub.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
@@ -146,9 +121,7 @@ export class ApiHubPluginClient {
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -174,7 +147,7 @@ export class ApiHubPluginClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -190,9 +163,13 @@ export class ApiHubPluginClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -225,6 +202,9 @@ export class ApiHubPluginClient {
       attributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/attributes/{attribute}'
       ),
+      curationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/curations/{curation}'
+      ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
       ),
@@ -234,14 +214,29 @@ export class ApiHubPluginClient {
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}'
       ),
+      discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+      ),
+      discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
+      ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/externalApis/{external_api}'
       ),
       hostProjectRegistrationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hostProjectRegistrations/{host_project_registration}'
       ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/plugins/{plugin}'
+      ),
+      pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
       ),
       runtimeProjectAttachmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}'
@@ -257,13 +252,85 @@ export class ApiHubPluginClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listPlugins:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'plugins'),
+      listPluginInstances:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'pluginInstances')
+    };
+
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+    }
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    const deletePluginResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deletePluginMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
+    const createPluginInstanceResponse = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.PluginInstance') as gax.protobuf.Type;
+    const createPluginInstanceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
+    const executePluginInstanceActionResponse = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.ExecutePluginInstanceActionResponse') as gax.protobuf.Type;
+    const executePluginInstanceActionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
+    const enablePluginInstanceActionResponse = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.EnablePluginInstanceActionResponse') as gax.protobuf.Type;
+    const enablePluginInstanceActionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
+    const disablePluginInstanceActionResponse = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.DisablePluginInstanceActionResponse') as gax.protobuf.Type;
+    const disablePluginInstanceActionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
+    const deletePluginInstanceResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deletePluginInstanceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apihub.v1.OperationMetadata') as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      deletePlugin: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePluginResponse.decode.bind(deletePluginResponse),
+        deletePluginMetadata.decode.bind(deletePluginMetadata)),
+      createPluginInstance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createPluginInstanceResponse.decode.bind(createPluginInstanceResponse),
+        createPluginInstanceMetadata.decode.bind(createPluginInstanceMetadata)),
+      executePluginInstanceAction: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        executePluginInstanceActionResponse.decode.bind(executePluginInstanceActionResponse),
+        executePluginInstanceActionMetadata.decode.bind(executePluginInstanceActionMetadata)),
+      enablePluginInstanceAction: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        enablePluginInstanceActionResponse.decode.bind(enablePluginInstanceActionResponse),
+        enablePluginInstanceActionMetadata.decode.bind(enablePluginInstanceActionMetadata)),
+      disablePluginInstanceAction: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        disablePluginInstanceActionResponse.decode.bind(disablePluginInstanceActionResponse),
+        disablePluginInstanceActionMetadata.decode.bind(disablePluginInstanceActionMetadata)),
+      deletePluginInstance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePluginInstanceResponse.decode.bind(deletePluginInstanceResponse),
+        deletePluginInstanceMetadata.decode.bind(deletePluginInstanceMetadata))
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.apihub.v1.ApiHubPlugin',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.apihub.v1.ApiHubPlugin', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -294,39 +361,33 @@ export class ApiHubPluginClient {
     // Put together the "service stub" for
     // google.cloud.apihub.v1.ApiHubPlugin.
     this.apiHubPluginStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.apihub.v1.ApiHubPlugin'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.apihub.v1.ApiHubPlugin') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apihub.v1.ApiHubPlugin,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const apiHubPluginStubMethods = [
-      'getPlugin',
-      'enablePlugin',
-      'disablePlugin',
-    ];
+    const apiHubPluginStubMethods =
+        ['getPlugin', 'enablePlugin', 'disablePlugin', 'createPlugin', 'listPlugins', 'deletePlugin', 'createPluginInstance', 'executePluginInstanceAction', 'getPluginInstance', 'listPluginInstances', 'enablePluginInstanceAction', 'disablePluginInstanceAction', 'updatePluginInstance', 'deletePluginInstance'];
     for (const methodName of apiHubPluginStubMethods) {
       const callPromise = this.apiHubPluginStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -346,14 +407,8 @@ export class ApiHubPluginClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apihub.googleapis.com';
   }
@@ -364,14 +419,8 @@ export class ApiHubPluginClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'apihub.googleapis.com';
   }
@@ -402,7 +451,9 @@ export class ApiHubPluginClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -411,9 +462,8 @@ export class ApiHubPluginClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -424,341 +474,1891 @@ export class ApiHubPluginClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Get details about an API Hub plugin.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the plugin to retrieve.
-   *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_hub_plugin.get_plugin.js</caption>
-   * region_tag:apihub_v1_generated_ApiHubPlugin_GetPlugin_async
-   */
+/**
+ * Get an API Hub plugin.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin to retrieve.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.get_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_GetPlugin_async
+ */
   getPlugin(
-    request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|undefined, {}|undefined
+      ]>;
   getPlugin(
-    request: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPlugin(
-    request: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getPlugin(
-    request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPlugin(
+      request: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPlugin(
+      request?: protos.google.cloud.apihub.v1.IGetPluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getPlugin request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getPlugin(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getPlugin response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getPlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IGetPluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Enables a plugin.
-   * The `state` of the plugin after enabling is `ENABLED`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the plugin to enable.
-   *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_hub_plugin.enable_plugin.js</caption>
-   * region_tag:apihub_v1_generated_ApiHubPlugin_EnablePlugin_async
-   */
+/**
+ * Enables a plugin.
+ * The `state` of the plugin after enabling is `ENABLED`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin to enable.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.enable_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_EnablePlugin_async
+ */
   enablePlugin(
-    request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|undefined, {}|undefined
+      ]>;
   enablePlugin(
-    request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  enablePlugin(
-    request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  enablePlugin(
-    request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  enablePlugin(
+      request: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  enablePlugin(
+      request?: protos.google.cloud.apihub.v1.IEnablePluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('enablePlugin request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('enablePlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .enablePlugin(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('enablePlugin response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.enablePlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IEnablePluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('enablePlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
-  /**
-   * Disables a plugin.
-   * The `state` of the plugin after disabling is `DISABLED`
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the plugin to disable.
-   *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/api_hub_plugin.disable_plugin.js</caption>
-   * region_tag:apihub_v1_generated_ApiHubPlugin_DisablePlugin_async
-   */
+/**
+ * Disables a plugin.
+ * The `state` of the plugin after disabling is `DISABLED`
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin to disable.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.disable_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DisablePlugin_async
+ */
   disablePlugin(
-    request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|undefined, {}|undefined
+      ]>;
   disablePlugin(
-    request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  disablePlugin(
-    request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    callback: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  disablePlugin(
-    request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.apihub.v1.IPlugin,
-          | protos.google.cloud.apihub.v1.IDisablePluginRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.apihub.v1.IPlugin,
-      protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  disablePlugin(
+      request: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  disablePlugin(
+      request?: protos.google.cloud.apihub.v1.IDisablePluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('disablePlugin request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.apihub.v1.IPlugin,
-          | protos.google.cloud.apihub.v1.IDisablePluginRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('disablePlugin response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .disablePlugin(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.apihub.v1.IPlugin,
-          protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('disablePlugin response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.disablePlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.IDisablePluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('disablePlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
+  }
+/**
+ * Create an API Hub plugin resource in the API hub.
+ * Once a plugin is created, it can be used to create plugin instances.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this plugin will be created.
+ *   Format: `projects/{project}/locations/{location}`.
+ * @param {string} [request.pluginId]
+ *   Optional. The ID to use for the Plugin resource, which will become the
+ *   final component of the Plugin's resource name. This field is optional.
+ *
+ *   * If provided, the same will be used. The service will throw an error if
+ *   the specified id is already used by another Plugin resource in the API hub
+ *   instance.
+ *   * If not provided, a system generated id will be used.
+ *
+ *   This value should be 4-63 characters, overall resource name which will be
+ *   of format
+ *   `projects/{project}/locations/{location}/plugins/{plugin}`,
+ *   its length is limited to 1000 characters and valid characters are
+ *   /{@link protos.A-Z|a-z}[0-9]-_/.
+ * @param {google.cloud.apihub.v1.Plugin} request.plugin
+ *   Required. The plugin to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.create_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_CreatePlugin_async
+ */
+  createPlugin(
+      request?: protos.google.cloud.apihub.v1.ICreatePluginRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.ICreatePluginRequest|undefined, {}|undefined
+      ]>;
+  createPlugin(
+      request: protos.google.cloud.apihub.v1.ICreatePluginRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.ICreatePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPlugin(
+      request: protos.google.cloud.apihub.v1.ICreatePluginRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.ICreatePluginRequest|null|undefined,
+          {}|null|undefined>): void;
+  createPlugin(
+      request?: protos.google.cloud.apihub.v1.ICreatePluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.ICreatePluginRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.ICreatePluginRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.ICreatePluginRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createPlugin request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.ICreatePluginRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPlugin response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createPlugin(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPlugin,
+        protos.google.cloud.apihub.v1.ICreatePluginRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createPlugin response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Get an API Hub plugin instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin instance to retrieve.
+ *   Format:
+ *   `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.PluginInstance|PluginInstance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.get_plugin_instance.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_GetPluginInstance_async
+ */
+  getPluginInstance(
+      request?: protos.google.cloud.apihub.v1.IGetPluginInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|undefined, {}|undefined
+      ]>;
+  getPluginInstance(
+      request: protos.google.cloud.apihub.v1.IGetPluginInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPluginInstance(
+      request: protos.google.cloud.apihub.v1.IGetPluginInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getPluginInstance(
+      request?: protos.google.cloud.apihub.v1.IGetPluginInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getPluginInstance request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPluginInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getPluginInstance(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IGetPluginInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getPluginInstance response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Updates a plugin instance in the API hub.
+ * The following fields in the
+ * {@link protos.google.cloud.apihub.v1.PluginInstance|plugin_instance} can be updated
+ * currently:
+ *
+ * * {@link protos.google.cloud.apihub.v1.PluginInstance.display_name|display_name}
+ * * {@link protos.PluginInstance.actions.schedule_cron_expression|schedule_cron_expression}
+ *
+ * The
+ * {@link protos.google.cloud.apihub.v1.UpdatePluginInstanceRequest.update_mask|update_mask}
+ * should be used to specify the fields being updated.
+ *
+ * To update the
+ * {@link protos.google.cloud.apihub.v1.PluginInstance.auth_config|auth_config} and
+ * {@link protos.google.cloud.apihub.v1.PluginInstance.additional_config|additional_config}
+ * of the plugin instance, use the
+ * {@link protos.google.cloud.apihub.v1.ApiHubPlugin.ApplyPluginInstanceConfig|ApplyPluginInstanceConfig}
+ * method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.apihub.v1.PluginInstance} request.pluginInstance
+ *   Required. The plugin instance to update.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.PluginInstance|PluginInstance}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.update_plugin_instance.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_UpdatePluginInstance_async
+ */
+  updatePluginInstance(
+      request?: protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|undefined, {}|undefined
+      ]>;
+  updatePluginInstance(
+      request: protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePluginInstance(
+      request: protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest,
+      callback: Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePluginInstance(
+      request?: protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.apihub.v1.IPluginInstance,
+          protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'plugin_instance.name': request.pluginInstance!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('updatePluginInstance request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePluginInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updatePluginInstance(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.apihub.v1.IPluginInstance,
+        protos.google.cloud.apihub.v1.IUpdatePluginInstanceRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updatePluginInstance response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
   }
 
-  /**
+/**
+ * Delete a Plugin in API hub.
+ * Note, only user owned plugins can be deleted via this method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Plugin resource to delete.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.delete_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DeletePlugin_async
+ */
+  deletePlugin(
+      request?: protos.google.cloud.apihub.v1.IDeletePluginRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deletePlugin(
+      request: protos.google.cloud.apihub.v1.IDeletePluginRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deletePlugin(
+      request: protos.google.cloud.apihub.v1.IDeletePluginRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deletePlugin(
+      request?: protos.google.cloud.apihub.v1.IDeletePluginRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePlugin response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePlugin request %j', request);
+    return this.innerApiCalls.deletePlugin(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePlugin response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deletePlugin()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.delete_plugin.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DeletePlugin_async
+ */
+  async checkDeletePluginProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apihub.v1.OperationMetadata>>{
+    this._log.info('deletePlugin long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePlugin, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apihub.v1.OperationMetadata>;
+  }
+/**
+ * Creates a Plugin instance in the API hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent of the plugin instance resource.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`
+ * @param {string} [request.pluginInstanceId]
+ *   Optional. The ID to use for the plugin instance, which will become the
+ *   final component of the plugin instance's resource name. This field is
+ *   optional.
+ *
+ *   * If provided, the same will be used. The service will throw an error if
+ *   the specified id is already used by another plugin instance in the plugin
+ *   resource.
+ *   * If not provided, a system generated id will be used.
+ *
+ *   This value should be 4-63 characters, and valid characters
+ *   are /{@link protos.A-Z|a-z}[0-9]-_/.
+ * @param {google.cloud.apihub.v1.PluginInstance} request.pluginInstance
+ *   Required. The plugin instance to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.create_plugin_instance.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_CreatePluginInstance_async
+ */
+  createPluginInstance(
+      request?: protos.google.cloud.apihub.v1.ICreatePluginInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createPluginInstance(
+      request: protos.google.cloud.apihub.v1.ICreatePluginInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createPluginInstance(
+      request: protos.google.cloud.apihub.v1.ICreatePluginInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createPluginInstance(
+      request?: protos.google.cloud.apihub.v1.ICreatePluginInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPluginInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPluginInstance request %j', request);
+    return this.innerApiCalls.createPluginInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apihub.v1.IPluginInstance, protos.google.cloud.apihub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createPluginInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createPluginInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.create_plugin_instance.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_CreatePluginInstance_async
+ */
+  async checkCreatePluginInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.apihub.v1.PluginInstance, protos.google.cloud.apihub.v1.OperationMetadata>>{
+    this._log.info('createPluginInstance long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPluginInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apihub.v1.PluginInstance, protos.google.cloud.apihub.v1.OperationMetadata>;
+  }
+/**
+ * Executes a plugin instance in the API hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin instance to execute.
+ *   Format:
+ *   `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+ * @param {google.cloud.apihub.v1.ActionExecutionDetail} request.actionExecutionDetail
+ *   Required. The execution details for the action to execute.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.execute_plugin_instance_action.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_ExecutePluginInstanceAction_async
+ */
+  executePluginInstanceAction(
+      request?: protos.google.cloud.apihub.v1.IExecutePluginInstanceActionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  executePluginInstanceAction(
+      request: protos.google.cloud.apihub.v1.IExecutePluginInstanceActionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  executePluginInstanceAction(
+      request: protos.google.cloud.apihub.v1.IExecutePluginInstanceActionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  executePluginInstanceAction(
+      request?: protos.google.cloud.apihub.v1.IExecutePluginInstanceActionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('executePluginInstanceAction response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('executePluginInstanceAction request %j', request);
+    return this.innerApiCalls.executePluginInstanceAction(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apihub.v1.IExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('executePluginInstanceAction response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `executePluginInstanceAction()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.execute_plugin_instance_action.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_ExecutePluginInstanceAction_async
+ */
+  async checkExecutePluginInstanceActionProgress(name: string): Promise<LROperation<protos.google.cloud.apihub.v1.ExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.OperationMetadata>>{
+    this._log.info('executePluginInstanceAction long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.executePluginInstanceAction, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apihub.v1.ExecutePluginInstanceActionResponse, protos.google.cloud.apihub.v1.OperationMetadata>;
+  }
+/**
+ * Enables a plugin instance in the API hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin instance to enable.
+ *   Format:
+ *   `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+ * @param {string} request.actionId
+ *   Required. The action id to enable.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.enable_plugin_instance_action.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_EnablePluginInstanceAction_async
+ */
+  enablePluginInstanceAction(
+      request?: protos.google.cloud.apihub.v1.IEnablePluginInstanceActionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  enablePluginInstanceAction(
+      request: protos.google.cloud.apihub.v1.IEnablePluginInstanceActionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  enablePluginInstanceAction(
+      request: protos.google.cloud.apihub.v1.IEnablePluginInstanceActionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  enablePluginInstanceAction(
+      request?: protos.google.cloud.apihub.v1.IEnablePluginInstanceActionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('enablePluginInstanceAction response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enablePluginInstanceAction request %j', request);
+    return this.innerApiCalls.enablePluginInstanceAction(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apihub.v1.IEnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('enablePluginInstanceAction response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `enablePluginInstanceAction()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.enable_plugin_instance_action.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_EnablePluginInstanceAction_async
+ */
+  async checkEnablePluginInstanceActionProgress(name: string): Promise<LROperation<protos.google.cloud.apihub.v1.EnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.OperationMetadata>>{
+    this._log.info('enablePluginInstanceAction long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.enablePluginInstanceAction, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apihub.v1.EnablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.OperationMetadata>;
+  }
+/**
+ * Disables a plugin instance in the API hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin instance to disable.
+ *   Format:
+ *   `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+ * @param {string} request.actionId
+ *   Required. The action id to disable.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.disable_plugin_instance_action.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DisablePluginInstanceAction_async
+ */
+  disablePluginInstanceAction(
+      request?: protos.google.cloud.apihub.v1.IDisablePluginInstanceActionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  disablePluginInstanceAction(
+      request: protos.google.cloud.apihub.v1.IDisablePluginInstanceActionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  disablePluginInstanceAction(
+      request: protos.google.cloud.apihub.v1.IDisablePluginInstanceActionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  disablePluginInstanceAction(
+      request?: protos.google.cloud.apihub.v1.IDisablePluginInstanceActionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('disablePluginInstanceAction response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('disablePluginInstanceAction request %j', request);
+    return this.innerApiCalls.disablePluginInstanceAction(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.apihub.v1.IDisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('disablePluginInstanceAction response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `disablePluginInstanceAction()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.disable_plugin_instance_action.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DisablePluginInstanceAction_async
+ */
+  async checkDisablePluginInstanceActionProgress(name: string): Promise<LROperation<protos.google.cloud.apihub.v1.DisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.OperationMetadata>>{
+    this._log.info('disablePluginInstanceAction long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.disablePluginInstanceAction, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.apihub.v1.DisablePluginInstanceActionResponse, protos.google.cloud.apihub.v1.OperationMetadata>;
+  }
+/**
+ * Deletes a plugin instance in the API hub.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the plugin instance to delete.
+ *   Format:
+ *   `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.delete_plugin_instance.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DeletePluginInstance_async
+ */
+  deletePluginInstance(
+      request?: protos.google.cloud.apihub.v1.IDeletePluginInstanceRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deletePluginInstance(
+      request: protos.google.cloud.apihub.v1.IDeletePluginInstanceRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deletePluginInstance(
+      request: protos.google.cloud.apihub.v1.IDeletePluginInstanceRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deletePluginInstance(
+      request?: protos.google.cloud.apihub.v1.IDeletePluginInstanceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePluginInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePluginInstance request %j', request);
+    return this.innerApiCalls.deletePluginInstance(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.apihub.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deletePluginInstance response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deletePluginInstance()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.delete_plugin_instance.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_DeletePluginInstance_async
+ */
+  async checkDeletePluginInstanceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.apihub.v1.OperationMetadata>>{
+    this._log.info('deletePluginInstance long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePluginInstance, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.apihub.v1.OperationMetadata>;
+  }
+ /**
+ * List all the plugins in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this plugin will be created.
+ *   Format: `projects/{project}/locations/{location}`.
+ * @param {string} [request.filter]
+ *   Optional. An expression that filters the list of plugins.
+ *
+ *   A filter expression consists of a field name, a comparison
+ *   operator, and a value for filtering. The value must be a string. The
+ *   comparison operator must be one of: `<`, `>` or
+ *   `=`. Filters are not case sensitive.
+ *
+ *   The following fields in the `Plugins` are eligible for filtering:
+ *
+ *     * `plugin_category` - The category of the Plugin. Allowed
+ *     comparison operators: `=`.
+ *
+ *   Expressions are combined with either `AND` logic operator or `OR` logical
+ *   operator but not both of them together i.e. only one of the `AND` or `OR`
+ *   operator can be used throughout the filter string and both the operators
+ *   cannot be used together. No other logical operators are
+ *   supported. At most three filter fields are allowed in the filter
+ *   string and if provided more than that then `INVALID_ARGUMENT` error is
+ *   returned by the API.
+ *   Here are a few examples:
+ *
+ *     * `plugin_category = ON_RAMP` - The plugin is of category
+ *     on ramp.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hub plugins to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 hub plugins will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPlugins` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters (except page_size) provided to
+ *   `ListPlugins` must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.Plugin|Plugin}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPluginsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listPlugins(
+      request?: protos.google.cloud.apihub.v1.IListPluginsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin[],
+        protos.google.cloud.apihub.v1.IListPluginsRequest|null,
+        protos.google.cloud.apihub.v1.IListPluginsResponse
+      ]>;
+  listPlugins(
+      request: protos.google.cloud.apihub.v1.IListPluginsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginsRequest,
+          protos.google.cloud.apihub.v1.IListPluginsResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPlugin>): void;
+  listPlugins(
+      request: protos.google.cloud.apihub.v1.IListPluginsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginsRequest,
+          protos.google.cloud.apihub.v1.IListPluginsResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPlugin>): void;
+  listPlugins(
+      request?: protos.google.cloud.apihub.v1.IListPluginsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginsRequest,
+          protos.google.cloud.apihub.v1.IListPluginsResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPlugin>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginsRequest,
+          protos.google.cloud.apihub.v1.IListPluginsResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPlugin>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPlugin[],
+        protos.google.cloud.apihub.v1.IListPluginsRequest|null,
+        protos.google.cloud.apihub.v1.IListPluginsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListPluginsRequest,
+      protos.google.cloud.apihub.v1.IListPluginsResponse|null|undefined,
+      protos.google.cloud.apihub.v1.IPlugin>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPlugins values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPlugins request %j', request);
+    return this.innerApiCalls
+      .listPlugins(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apihub.v1.IPlugin[],
+        protos.google.cloud.apihub.v1.IListPluginsRequest|null,
+        protos.google.cloud.apihub.v1.IListPluginsResponse
+      ]) => {
+        this._log.info('listPlugins values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listPlugins`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this plugin will be created.
+ *   Format: `projects/{project}/locations/{location}`.
+ * @param {string} [request.filter]
+ *   Optional. An expression that filters the list of plugins.
+ *
+ *   A filter expression consists of a field name, a comparison
+ *   operator, and a value for filtering. The value must be a string. The
+ *   comparison operator must be one of: `<`, `>` or
+ *   `=`. Filters are not case sensitive.
+ *
+ *   The following fields in the `Plugins` are eligible for filtering:
+ *
+ *     * `plugin_category` - The category of the Plugin. Allowed
+ *     comparison operators: `=`.
+ *
+ *   Expressions are combined with either `AND` logic operator or `OR` logical
+ *   operator but not both of them together i.e. only one of the `AND` or `OR`
+ *   operator can be used throughout the filter string and both the operators
+ *   cannot be used together. No other logical operators are
+ *   supported. At most three filter fields are allowed in the filter
+ *   string and if provided more than that then `INVALID_ARGUMENT` error is
+ *   returned by the API.
+ *   Here are a few examples:
+ *
+ *     * `plugin_category = ON_RAMP` - The plugin is of category
+ *     on ramp.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hub plugins to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 hub plugins will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPlugins` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters (except page_size) provided to
+ *   `ListPlugins` must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.Plugin|Plugin} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPluginsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listPluginsStream(
+      request?: protos.google.cloud.apihub.v1.IListPluginsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listPlugins'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listPlugins stream %j', request);
+    return this.descriptors.page.listPlugins.createStream(
+      this.innerApiCalls.listPlugins as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listPlugins`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this plugin will be created.
+ *   Format: `projects/{project}/locations/{location}`.
+ * @param {string} [request.filter]
+ *   Optional. An expression that filters the list of plugins.
+ *
+ *   A filter expression consists of a field name, a comparison
+ *   operator, and a value for filtering. The value must be a string. The
+ *   comparison operator must be one of: `<`, `>` or
+ *   `=`. Filters are not case sensitive.
+ *
+ *   The following fields in the `Plugins` are eligible for filtering:
+ *
+ *     * `plugin_category` - The category of the Plugin. Allowed
+ *     comparison operators: `=`.
+ *
+ *   Expressions are combined with either `AND` logic operator or `OR` logical
+ *   operator but not both of them together i.e. only one of the `AND` or `OR`
+ *   operator can be used throughout the filter string and both the operators
+ *   cannot be used together. No other logical operators are
+ *   supported. At most three filter fields are allowed in the filter
+ *   string and if provided more than that then `INVALID_ARGUMENT` error is
+ *   returned by the API.
+ *   Here are a few examples:
+ *
+ *     * `plugin_category = ON_RAMP` - The plugin is of category
+ *     on ramp.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hub plugins to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 hub plugins will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPlugins` call.
+ *   Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters (except page_size) provided to
+ *   `ListPlugins` must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apihub.v1.Plugin|Plugin}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.list_plugins.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_ListPlugins_async
+ */
+  listPluginsAsync(
+      request?: protos.google.cloud.apihub.v1.IListPluginsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apihub.v1.IPlugin>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listPlugins'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listPlugins iterate %j', request);
+    return this.descriptors.page.listPlugins.asyncIterate(
+      this.innerApiCalls['listPlugins'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.apihub.v1.IPlugin>;
+  }
+ /**
+ * List all the plugins in a given project and location.
+ * `-` can be used as wildcard value for {plugin_id}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this plugin will be created.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ *   To list plugin instances for multiple plugins,
+ *   use the - character instead of the plugin ID.
+ * @param {string} [request.filter]
+ *   Optional. An expression that filters the list of plugin instances.
+ *
+ *   A filter expression consists of a field name, a comparison
+ *   operator, and a value for filtering. The value must be a string. The
+ *   comparison operator must be one of: `<`, `>` or
+ *   `=`. Filters are not case sensitive.
+ *
+ *   The following fields in the `PluginInstances` are eligible for filtering:
+ *
+ *     * `state` - The state of the Plugin Instance. Allowed
+ *     comparison operators: `=`.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"plugin-instance-1\"` is
+ *   equivalent to `name =
+ *   \"projects/test-project-id/locations/test-location-id/plugins/plugin-1/instances/plugin-instance-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id/plugins/plugin-1`.
+ *
+ *   Expressions are combined with either `AND` logic operator or `OR` logical
+ *   operator but not both of them together i.e. only one of the `AND` or `OR`
+ *   operator can be used throughout the filter string and both the operators
+ *   cannot be used together. No other logical operators are
+ *   supported. At most three filter fields are allowed in the filter
+ *   string and if provided more than that then `INVALID_ARGUMENT` error is
+ *   returned by the API.
+ *   Here are a few examples:
+ *
+ *     * `state = ENABLED` - The plugin instance is in enabled state.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hub plugins to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 hub plugins will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPluginInstances`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListPluginInstances`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.PluginInstance|PluginInstance}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listPluginInstancesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listPluginInstances(
+      request?: protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPluginInstance[],
+        protos.google.cloud.apihub.v1.IListPluginInstancesRequest|null,
+        protos.google.cloud.apihub.v1.IListPluginInstancesResponse
+      ]>;
+  listPluginInstances(
+      request: protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+          protos.google.cloud.apihub.v1.IListPluginInstancesResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPluginInstance>): void;
+  listPluginInstances(
+      request: protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+          protos.google.cloud.apihub.v1.IListPluginInstancesResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPluginInstance>): void;
+  listPluginInstances(
+      request?: protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+          protos.google.cloud.apihub.v1.IListPluginInstancesResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPluginInstance>,
+      callback?: PaginationCallback<
+          protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+          protos.google.cloud.apihub.v1.IListPluginInstancesResponse|null|undefined,
+          protos.google.cloud.apihub.v1.IPluginInstance>):
+      Promise<[
+        protos.google.cloud.apihub.v1.IPluginInstance[],
+        protos.google.cloud.apihub.v1.IListPluginInstancesRequest|null,
+        protos.google.cloud.apihub.v1.IListPluginInstancesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+      protos.google.cloud.apihub.v1.IListPluginInstancesResponse|null|undefined,
+      protos.google.cloud.apihub.v1.IPluginInstance>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPluginInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPluginInstances request %j', request);
+    return this.innerApiCalls
+      .listPluginInstances(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.apihub.v1.IPluginInstance[],
+        protos.google.cloud.apihub.v1.IListPluginInstancesRequest|null,
+        protos.google.cloud.apihub.v1.IListPluginInstancesResponse
+      ]) => {
+        this._log.info('listPluginInstances values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listPluginInstances`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this plugin will be created.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ *   To list plugin instances for multiple plugins,
+ *   use the - character instead of the plugin ID.
+ * @param {string} [request.filter]
+ *   Optional. An expression that filters the list of plugin instances.
+ *
+ *   A filter expression consists of a field name, a comparison
+ *   operator, and a value for filtering. The value must be a string. The
+ *   comparison operator must be one of: `<`, `>` or
+ *   `=`. Filters are not case sensitive.
+ *
+ *   The following fields in the `PluginInstances` are eligible for filtering:
+ *
+ *     * `state` - The state of the Plugin Instance. Allowed
+ *     comparison operators: `=`.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"plugin-instance-1\"` is
+ *   equivalent to `name =
+ *   \"projects/test-project-id/locations/test-location-id/plugins/plugin-1/instances/plugin-instance-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id/plugins/plugin-1`.
+ *
+ *   Expressions are combined with either `AND` logic operator or `OR` logical
+ *   operator but not both of them together i.e. only one of the `AND` or `OR`
+ *   operator can be used throughout the filter string and both the operators
+ *   cannot be used together. No other logical operators are
+ *   supported. At most three filter fields are allowed in the filter
+ *   string and if provided more than that then `INVALID_ARGUMENT` error is
+ *   returned by the API.
+ *   Here are a few examples:
+ *
+ *     * `state = ENABLED` - The plugin instance is in enabled state.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hub plugins to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 hub plugins will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPluginInstances`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListPluginInstances`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.PluginInstance|PluginInstance} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listPluginInstancesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listPluginInstancesStream(
+      request?: protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listPluginInstances'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listPluginInstances stream %j', request);
+    return this.descriptors.page.listPluginInstances.createStream(
+      this.innerApiCalls.listPluginInstances as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listPluginInstances`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource where this plugin will be created.
+ *   Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+ *   To list plugin instances for multiple plugins,
+ *   use the - character instead of the plugin ID.
+ * @param {string} [request.filter]
+ *   Optional. An expression that filters the list of plugin instances.
+ *
+ *   A filter expression consists of a field name, a comparison
+ *   operator, and a value for filtering. The value must be a string. The
+ *   comparison operator must be one of: `<`, `>` or
+ *   `=`. Filters are not case sensitive.
+ *
+ *   The following fields in the `PluginInstances` are eligible for filtering:
+ *
+ *     * `state` - The state of the Plugin Instance. Allowed
+ *     comparison operators: `=`.
+ *
+ *   A filter function is also supported in the filter string. The filter
+ *   function is `id(name)`. The `id(name)` function returns the id of the
+ *   resource name. For example, `id(name) = \"plugin-instance-1\"` is
+ *   equivalent to `name =
+ *   \"projects/test-project-id/locations/test-location-id/plugins/plugin-1/instances/plugin-instance-1\"`
+ *   provided the parent is
+ *   `projects/test-project-id/locations/test-location-id/plugins/plugin-1`.
+ *
+ *   Expressions are combined with either `AND` logic operator or `OR` logical
+ *   operator but not both of them together i.e. only one of the `AND` or `OR`
+ *   operator can be used throughout the filter string and both the operators
+ *   cannot be used together. No other logical operators are
+ *   supported. At most three filter fields are allowed in the filter
+ *   string and if provided more than that then `INVALID_ARGUMENT` error is
+ *   returned by the API.
+ *   Here are a few examples:
+ *
+ *     * `state = ENABLED` - The plugin instance is in enabled state.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of hub plugins to return. The service may
+ *   return fewer than this value. If unspecified, at most 50 hub plugins will
+ *   be returned. The maximum value is 1000; values above 1000 will be coerced
+ *   to 1000.
+ * @param {string} [request.pageToken]
+ *   Optional. A page token, received from a previous `ListPluginInstances`
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to `ListPluginInstances`
+ *   must match the call that provided the page token.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.apihub.v1.PluginInstance|PluginInstance}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/api_hub_plugin.list_plugin_instances.js</caption>
+ * region_tag:apihub_v1_generated_ApiHubPlugin_ListPluginInstances_async
+ */
+  listPluginInstancesAsync(
+      request?: protos.google.cloud.apihub.v1.IListPluginInstancesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.apihub.v1.IPluginInstance>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listPluginInstances'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listPluginInstances iterate %j', request);
+    return this.descriptors.page.listPluginInstances.asyncIterate(
+      this.innerApiCalls['listPluginInstances'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.apihub.v1.IPluginInstance>;
+  }
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -798,7 +2398,7 @@ export class ApiHubPluginClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -836,6 +2436,230 @@ export class ApiHubPluginClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+/**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+   cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -848,7 +2672,7 @@ export class ApiHubPluginClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project: string, location: string, api: string) {
+  apiPath(project:string,location:string,api:string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       location: location,
@@ -897,11 +2721,7 @@ export class ApiHubPluginClient {
    * @param {string} api_hub_instance
    * @returns {string} Resource name string.
    */
-  apiHubInstancePath(
-    project: string,
-    location: string,
-    apiHubInstance: string
-  ) {
+  apiHubInstancePath(project:string,location:string,apiHubInstance:string) {
     return this.pathTemplates.apiHubInstancePathTemplate.render({
       project: project,
       location: location,
@@ -917,9 +2737,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).project;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).project;
   }
 
   /**
@@ -930,9 +2748,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).location;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).location;
   }
 
   /**
@@ -943,9 +2759,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the api_hub_instance.
    */
   matchApiHubInstanceFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(
-      apiHubInstanceName
-    ).api_hub_instance;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).api_hub_instance;
   }
 
   /**
@@ -958,13 +2772,7 @@ export class ApiHubPluginClient {
    * @param {string} operation
    * @returns {string} Resource name string.
    */
-  apiOperationPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    operation: string
-  ) {
+  apiOperationPath(project:string,location:string,api:string,version:string,operation:string) {
     return this.pathTemplates.apiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -982,8 +2790,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .project;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).project;
   }
 
   /**
@@ -994,8 +2801,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .location;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).location;
   }
 
   /**
@@ -1006,8 +2812,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the api.
    */
   matchApiFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .api;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).api;
   }
 
   /**
@@ -1018,8 +2823,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .version;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).version;
   }
 
   /**
@@ -1030,8 +2834,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the operation.
    */
   matchOperationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
-      .operation;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).operation;
   }
 
   /**
@@ -1042,7 +2845,7 @@ export class ApiHubPluginClient {
    * @param {string} attribute
    * @returns {string} Resource name string.
    */
-  attributePath(project: string, location: string, attribute: string) {
+  attributePath(project:string,location:string,attribute:string) {
     return this.pathTemplates.attributePathTemplate.render({
       project: project,
       location: location,
@@ -1058,8 +2861,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .project;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).project;
   }
 
   /**
@@ -1070,8 +2872,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .location;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).location;
   }
 
   /**
@@ -1082,8 +2883,56 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the attribute.
    */
   matchAttributeFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName)
-      .attribute;
+    return this.pathTemplates.attributePathTemplate.match(attributeName).attribute;
+  }
+
+  /**
+   * Return a fully-qualified curation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} curation
+   * @returns {string} Resource name string.
+   */
+  curationPath(project:string,location:string,curation:string) {
+    return this.pathTemplates.curationPathTemplate.render({
+      project: project,
+      location: location,
+      curation: curation,
+    });
+  }
+
+  /**
+   * Parse the project from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).project;
+  }
+
+  /**
+   * Parse the location from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).location;
+  }
+
+  /**
+   * Parse the curation from Curation resource.
+   *
+   * @param {string} curationName
+   *   A fully-qualified path representing Curation resource.
+   * @returns {string} A string representing the curation.
+   */
+  matchCurationFromCurationName(curationName: string) {
+    return this.pathTemplates.curationPathTemplate.match(curationName).curation;
   }
 
   /**
@@ -1096,13 +2945,7 @@ export class ApiHubPluginClient {
    * @param {string} definition
    * @returns {string} Resource name string.
    */
-  definitionPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    definition: string
-  ) {
+  definitionPath(project:string,location:string,api:string,version:string,definition:string) {
     return this.pathTemplates.definitionPathTemplate.render({
       project: project,
       location: location,
@@ -1120,8 +2963,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .project;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).project;
   }
 
   /**
@@ -1132,8 +2974,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .location;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).location;
   }
 
   /**
@@ -1155,8 +2996,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .version;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).version;
   }
 
   /**
@@ -1167,8 +3007,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the definition.
    */
   matchDefinitionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName)
-      .definition;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName).definition;
   }
 
   /**
@@ -1179,7 +3018,7 @@ export class ApiHubPluginClient {
    * @param {string} dependency
    * @returns {string} Resource name string.
    */
-  dependencyPath(project: string, location: string, dependency: string) {
+  dependencyPath(project:string,location:string,dependency:string) {
     return this.pathTemplates.dependencyPathTemplate.render({
       project: project,
       location: location,
@@ -1195,8 +3034,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .project;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).project;
   }
 
   /**
@@ -1207,8 +3045,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .location;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).location;
   }
 
   /**
@@ -1219,8 +3056,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the dependency.
    */
   matchDependencyFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
-      .dependency;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).dependency;
   }
 
   /**
@@ -1231,7 +3067,7 @@ export class ApiHubPluginClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project: string, location: string, deployment: string) {
+  deploymentPath(project:string,location:string,deployment:string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1247,8 +3083,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
   }
 
   /**
@@ -1259,8 +3094,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
   }
 
   /**
@@ -1271,8 +3105,118 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
-      .deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiObservation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiObservation resource.
+   *
+   * @param {string} discoveredApiObservationName
+   *   A fully-qualified path representing DiscoveredApiObservation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  }
+
+  /**
+   * Return a fully-qualified discoveredApiOperation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} discovered_api_observation
+   * @param {string} discovered_api_operation
+   * @returns {string} Resource name string.
+   */
+  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.render({
+      project: project,
+      location: location,
+      discovered_api_observation: discoveredApiObservation,
+      discovered_api_operation: discoveredApiOperation,
+    });
+  }
+
+  /**
+   * Parse the project from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  }
+
+  /**
+   * Parse the location from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  }
+
+  /**
+   * Parse the discovered_api_observation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_observation.
+   */
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  }
+
+  /**
+   * Parse the discovered_api_operation from DiscoveredApiOperation resource.
+   *
+   * @param {string} discoveredApiOperationName
+   *   A fully-qualified path representing DiscoveredApiOperation resource.
+   * @returns {string} A string representing the discovered_api_operation.
+   */
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
   }
 
   /**
@@ -1283,7 +3227,7 @@ export class ApiHubPluginClient {
    * @param {string} external_api
    * @returns {string} Resource name string.
    */
-  externalApiPath(project: string, location: string, externalApi: string) {
+  externalApiPath(project:string,location:string,externalApi:string) {
     return this.pathTemplates.externalApiPathTemplate.render({
       project: project,
       location: location,
@@ -1299,8 +3243,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .project;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).project;
   }
 
   /**
@@ -1311,8 +3254,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .location;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).location;
   }
 
   /**
@@ -1323,8 +3265,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the external_api.
    */
   matchExternalApiFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
-      .external_api;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).external_api;
   }
 
   /**
@@ -1335,11 +3276,7 @@ export class ApiHubPluginClient {
    * @param {string} host_project_registration
    * @returns {string} Resource name string.
    */
-  hostProjectRegistrationPath(
-    project: string,
-    location: string,
-    hostProjectRegistration: string
-  ) {
+  hostProjectRegistrationPath(project:string,location:string,hostProjectRegistration:string) {
     return this.pathTemplates.hostProjectRegistrationPathTemplate.render({
       project: project,
       location: location,
@@ -1354,12 +3291,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).project;
+  matchProjectFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).project;
   }
 
   /**
@@ -1369,12 +3302,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).location;
+  matchLocationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).location;
   }
 
   /**
@@ -1384,12 +3313,44 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the host_project_registration.
    */
-  matchHostProjectRegistrationFromHostProjectRegistrationName(
-    hostProjectRegistrationName: string
-  ) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
-      hostProjectRegistrationName
-    ).host_project_registration;
+  matchHostProjectRegistrationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).host_project_registration;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project:string,location:string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -1400,7 +3361,7 @@ export class ApiHubPluginClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  pluginPath(project: string, location: string, plugin: string) {
+  pluginPath(project:string,location:string,plugin:string) {
     return this.pathTemplates.pluginPathTemplate.render({
       project: project,
       location: location,
@@ -1442,6 +3403,91 @@ export class ApiHubPluginClient {
   }
 
   /**
+   * Return a fully-qualified pluginInstance resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} plugin
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+    return this.pathTemplates.pluginInstancePathTemplate.render({
+      project: project,
+      location: location,
+      plugin: plugin,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+  }
+
+  /**
+   * Parse the location from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+  }
+
+  /**
+   * Parse the plugin from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the plugin.
+   */
+  matchPluginFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+  }
+
+  /**
+   * Parse the instance from PluginInstance resource.
+   *
+   * @param {string} pluginInstanceName
+   *   A fully-qualified path representing PluginInstance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
+    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project:string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
    * Return a fully-qualified runtimeProjectAttachment resource name string.
    *
    * @param {string} project
@@ -1449,11 +3495,7 @@ export class ApiHubPluginClient {
    * @param {string} runtime_project_attachment
    * @returns {string} Resource name string.
    */
-  runtimeProjectAttachmentPath(
-    project: string,
-    location: string,
-    runtimeProjectAttachment: string
-  ) {
+  runtimeProjectAttachmentPath(project:string,location:string,runtimeProjectAttachment:string) {
     return this.pathTemplates.runtimeProjectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -1468,12 +3510,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).project;
+  matchProjectFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).project;
   }
 
   /**
@@ -1483,12 +3521,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).location;
+  matchLocationFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).location;
   }
 
   /**
@@ -1498,12 +3532,8 @@ export class ApiHubPluginClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the runtime_project_attachment.
    */
-  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(
-    runtimeProjectAttachmentName: string
-  ) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
-      runtimeProjectAttachmentName
-    ).runtime_project_attachment;
+  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).runtime_project_attachment;
   }
 
   /**
@@ -1516,13 +3546,7 @@ export class ApiHubPluginClient {
    * @param {string} spec
    * @returns {string} Resource name string.
    */
-  specPath(
-    project: string,
-    location: string,
-    api: string,
-    version: string,
-    spec: string
-  ) {
+  specPath(project:string,location:string,api:string,version:string,spec:string) {
     return this.pathTemplates.specPathTemplate.render({
       project: project,
       location: location,
@@ -1595,7 +3619,7 @@ export class ApiHubPluginClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  styleGuidePath(project: string, location: string, plugin: string) {
+  styleGuidePath(project:string,location:string,plugin:string) {
     return this.pathTemplates.styleGuidePathTemplate.render({
       project: project,
       location: location,
@@ -1611,8 +3635,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .project;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).project;
   }
 
   /**
@@ -1623,8 +3646,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .location;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).location;
   }
 
   /**
@@ -1635,8 +3657,7 @@ export class ApiHubPluginClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
-      .plugin;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).plugin;
   }
 
   /**
@@ -1648,7 +3669,7 @@ export class ApiHubPluginClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project: string, location: string, api: string, version: string) {
+  versionPath(project:string,location:string,api:string,version:string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -1713,7 +3734,8 @@ export class ApiHubPluginClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close();
+        this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

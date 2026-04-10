@@ -91,6 +91,8 @@ const VertexRagServiceClient = v1.VertexRagServiceClient;
 type VertexRagServiceClient = v1.VertexRagServiceClient;
 const VertexRagDataServiceClient = v1.VertexRagDataServiceClient;
 type VertexRagDataServiceClient = v1.VertexRagDataServiceClient;
+const DataFoundryServiceClient = v1.DataFoundryServiceClient;
+type DataFoundryServiceClient = v1.DataFoundryServiceClient;
 export {
   v1beta1,
   v1,
@@ -126,6 +128,7 @@ export {
   ReasoningEngineExecutionServiceClient,
   ReasoningEngineServiceClient,
   VertexRagDataServiceClient,
+  DataFoundryServiceClient,
 };
 export default {
   v1beta1,
@@ -162,6 +165,7 @@ export default {
   VertexRagServiceClient,
   ReasoningEngineServiceClient,
   VertexRagDataServiceClient,
+  DataFoundryServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

@@ -27,6 +27,34 @@
         "ListPlacements": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "CreatePlacement": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdatePlacement": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCreatePlacements": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchUpdatePlacements": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchActivatePlacements": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeactivatePlacements": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchArchivePlacements": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

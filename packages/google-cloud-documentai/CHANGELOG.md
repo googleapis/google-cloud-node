@@ -1,5 +1,49 @@
 # Changelog
 
+## [9.6.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.5.0...documentai-v9.6.0) (2026-03-18)
+
+
+### Features
+
+* [documentai] Add a field for upgrading previous processor version when fine tuning ([#7607](https://github.com/googleapis/google-cloud-node/issues/7607)) ([44f9995](https://github.com/googleapis/google-cloud-node/commit/44f9995d777dcc45bae426fa7ed1d9abd9751544))
+* [documentai] Added a field for enabling image and table annotation for layout parser processor ([#7318](https://github.com/googleapis/google-cloud-node/issues/7318)) ([bdd6c7a](https://github.com/googleapis/google-cloud-node/commit/bdd6c7ac2f1e00c2e175a894c4f20e1b4364881d))
+
+## [9.5.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.4.0...documentai-v9.5.0) (2025-10-13)
+
+
+### Features
+
+* [documentai] Added new messages `EntityValidationOutput` and `EntitiesRevision` ([#6796](https://github.com/googleapis/google-cloud-node/issues/6796)) ([40bfb8b](https://github.com/googleapis/google-cloud-node/commit/40bfb8b69831e8b84f429871328a594d3bc0e1f2))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+* Remove unmaintained modules ([#6789](https://github.com/googleapis/google-cloud-node/issues/6789)) ([5540190](https://github.com/googleapis/google-cloud-node/commit/5540190bfce6a97615191ecd36835376b919f487))
+
+## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.3.0...documentai-v9.4.0) (2025-08-21)
+
+
+### Features
+
+* [documentai] Added config options for derived fields and signature detection. Some annotation changes changes to mark fields explicitly output only (no changes in semantics just readability) ([#6607](https://github.com/googleapis/google-cloud-node/issues/6607)) ([6c132f3](https://github.com/googleapis/google-cloud-node/commit/6c132f36ebf611a13fd1c4e1b44920d4334a1a7b))
+
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.2.0...documentai-v9.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6420](https://github.com/googleapis/google-cloud-node/issues/6420)) ([fe8d6cc](https://github.com/googleapis/google-cloud-node/commit/fe8d6cc157bea696790f2844fa7d410a481c79ed))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.1.0...documentai-v9.2.0) (2025-06-03)
+
+
+### Features
+
+* [documentai] Added config options to enable table annotation and image extraction ([#6287](https://github.com/googleapis/google-cloud-node/issues/6287)) ([18185f8](https://github.com/googleapis/google-cloud-node/commit/18185f8a2318aeac3207c8daebe020dcbaa9bbb0))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.0.0...documentai-v9.1.0) (2025-03-19)
 
 

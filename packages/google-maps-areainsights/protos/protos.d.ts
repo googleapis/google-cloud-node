@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -198,9 +198,6 @@ export namespace google {
 
                     /** ComputeInsightsResponse placeInsights. */
                     public placeInsights: google.maps.areainsights.v1.IPlaceInsight[];
-
-                    /** ComputeInsightsResponse _count. */
-                    public _count?: "count";
 
                     /**
                      * Creates a new ComputeInsightsResponse instance using the specified properties.
@@ -1161,12 +1158,6 @@ export namespace google {
 
                     /** RatingFilter maxRating. */
                     public maxRating?: (number|null);
-
-                    /** RatingFilter _minRating. */
-                    public _minRating?: "minRating";
-
-                    /** RatingFilter _maxRating. */
-                    public _maxRating?: "maxRating";
 
                     /**
                      * Creates a new RatingFilter instance using the specified properties.

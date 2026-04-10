@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -175,6 +175,9 @@ export namespace google {
 
                     /** AutoscalingPolicy labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** AutoscalingPolicy clusterType */
+                    clusterType?: (google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType|keyof typeof google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType|null);
                 }
 
                 /** Represents an AutoscalingPolicy. */
@@ -203,6 +206,9 @@ export namespace google {
 
                     /** AutoscalingPolicy labels. */
                     public labels: { [k: string]: string };
+
+                    /** AutoscalingPolicy clusterType. */
+                    public clusterType: (google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType|keyof typeof google.cloud.dataproc.v1.AutoscalingPolicy.ClusterType);
 
                     /** AutoscalingPolicy algorithm. */
                     public algorithm?: "basicAlgorithm";
@@ -283,6 +289,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutoscalingPolicy {
+
+                    /** ClusterType enum. */
+                    enum ClusterType {
+                        CLUSTER_TYPE_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        ZERO_SCALE = 2
+                    }
                 }
 
                 /** Properties of a BasicAutoscalingAlgorithm. */
@@ -4728,7 +4744,9 @@ export namespace google {
                         SCENARIO_UNSPECIFIED = 0,
                         SCALING = 2,
                         BROADCAST_HASH_JOIN = 3,
-                        MEMORY = 4
+                        MEMORY = 4,
+                        NONE = 5,
+                        AUTO = 6
                     }
                 }
 
@@ -4930,13 +4948,17 @@ export namespace google {
                 enum Component {
                     COMPONENT_UNSPECIFIED = 0,
                     ANACONDA = 5,
+                    DELTA = 20,
                     DOCKER = 13,
                     DRUID = 9,
                     FLINK = 14,
                     HBASE = 11,
                     HIVE_WEBHCAT = 3,
                     HUDI = 18,
+                    ICEBERG = 19,
                     JUPYTER = 1,
+                    JUPYTER_KERNEL_GATEWAY = 22,
+                    PIG = 21,
                     PRESTO = 6,
                     TRINO = 17,
                     RANGER = 12,
@@ -5292,6 +5314,12 @@ export namespace google {
                 /** Properties of a ClusterConfig. */
                 interface IClusterConfig {
 
+                    /** ClusterConfig clusterType */
+                    clusterType?: (google.cloud.dataproc.v1.ClusterConfig.ClusterType|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterType|null);
+
+                    /** ClusterConfig clusterTier */
+                    clusterTier?: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier|null);
+
                     /** ClusterConfig configBucket */
                     configBucket?: (string|null);
 
@@ -5349,6 +5377,12 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataproc.v1.IClusterConfig);
+
+                    /** ClusterConfig clusterType. */
+                    public clusterType: (google.cloud.dataproc.v1.ClusterConfig.ClusterType|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterType);
+
+                    /** ClusterConfig clusterTier. */
+                    public clusterTier: (google.cloud.dataproc.v1.ClusterConfig.ClusterTier|keyof typeof google.cloud.dataproc.v1.ClusterConfig.ClusterTier);
 
                     /** ClusterConfig configBucket. */
                     public configBucket: string;
@@ -5474,6 +5508,24 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ClusterConfig {
+
+                    /** ClusterType enum. */
+                    enum ClusterType {
+                        CLUSTER_TYPE_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        SINGLE_NODE = 2,
+                        ZERO_SCALE = 3
+                    }
+
+                    /** ClusterTier enum. */
+                    enum ClusterTier {
+                        CLUSTER_TIER_UNSPECIFIED = 0,
+                        CLUSTER_TIER_STANDARD = 1,
+                        CLUSTER_TIER_PREMIUM = 2
+                    }
                 }
 
                 /** Properties of a VirtualClusterConfig. */
@@ -6085,9 +6137,6 @@ export namespace google {
                     /** GceClusterConfig confidentialInstanceConfig. */
                     public confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
 
-                    /** GceClusterConfig _internalIpOnly. */
-                    public _internalIpOnly?: "internalIpOnly";
-
                     /**
                      * Creates a new GceClusterConfig instance using the specified properties.
                      * @param [properties] Properties to set
@@ -6304,15 +6353,6 @@ export namespace google {
 
                     /** ShieldedInstanceConfig enableIntegrityMonitoring. */
                     public enableIntegrityMonitoring?: (boolean|null);
-
-                    /** ShieldedInstanceConfig _enableSecureBoot. */
-                    public _enableSecureBoot?: "enableSecureBoot";
-
-                    /** ShieldedInstanceConfig _enableVtpm. */
-                    public _enableVtpm?: "enableVtpm";
-
-                    /** ShieldedInstanceConfig _enableIntegrityMonitoring. */
-                    public _enableIntegrityMonitoring?: "enableIntegrityMonitoring";
 
                     /**
                      * Creates a new ShieldedInstanceConfig instance using the specified properties.
@@ -6693,9 +6733,6 @@ export namespace google {
 
                     /** StartupConfig requiredRegistrationFraction. */
                     public requiredRegistrationFraction?: (number|null);
-
-                    /** StartupConfig _requiredRegistrationFraction. */
-                    public _requiredRegistrationFraction?: "requiredRegistrationFraction";
 
                     /**
                      * Creates a new StartupConfig instance using the specified properties.
@@ -7135,12 +7172,6 @@ export namespace google {
                         /** ProvisioningModelMix standardCapacityPercentAboveBase. */
                         public standardCapacityPercentAboveBase?: (number|null);
 
-                        /** ProvisioningModelMix _standardCapacityBase. */
-                        public _standardCapacityBase?: "standardCapacityBase";
-
-                        /** ProvisioningModelMix _standardCapacityPercentAboveBase. */
-                        public _standardCapacityPercentAboveBase?: "standardCapacityPercentAboveBase";
-
                         /**
                          * Creates a new ProvisioningModelMix instance using the specified properties.
                          * @param [properties] Properties to set
@@ -7346,12 +7377,6 @@ export namespace google {
 
                         /** InstanceSelectionResult vmCount. */
                         public vmCount?: (number|null);
-
-                        /** InstanceSelectionResult _machineType. */
-                        public _machineType?: "machineType";
-
-                        /** InstanceSelectionResult _vmCount. */
-                        public _vmCount?: "vmCount";
 
                         /**
                          * Creates a new InstanceSelectionResult instance using the specified properties.
@@ -7583,12 +7608,6 @@ export namespace google {
 
                     /** DiskConfig bootDiskProvisionedThroughput. */
                     public bootDiskProvisionedThroughput?: (number|Long|string|null);
-
-                    /** DiskConfig _bootDiskProvisionedIops. */
-                    public _bootDiskProvisionedIops?: "bootDiskProvisionedIops";
-
-                    /** DiskConfig _bootDiskProvisionedThroughput. */
-                    public _bootDiskProvisionedThroughput?: "bootDiskProvisionedThroughput";
 
                     /**
                      * Creates a new DiskConfig instance using the specified properties.
@@ -20745,6 +20764,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -20785,6 +20807,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -25003,6 +25028,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -25254,7 +25282,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -25285,7 +25313,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -26618,7 +26646,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -26634,7 +26662,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -27591,7 +27619,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -27604,7 +27632,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

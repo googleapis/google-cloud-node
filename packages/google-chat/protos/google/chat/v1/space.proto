@@ -163,8 +163,7 @@ message Space {
     // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
     // with [administrator
     // approval](https://support.google.com/a?p=chat-app-auth)
-    // with the `chat.app.spaces` scope in [Developer
-    // Preview](https://developers.google.com/workspace/preview).
+    // with the `chat.app.spaces` scope.
     //
     // This field is not populated when using the `chat.bot` scope with [app
     // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
@@ -233,10 +232,20 @@ message Space {
 
   // Represents a space permission setting.
   message PermissionSetting {
-    // Optional. Whether spaces managers have this permission.
+    // Optional. Whether space owners
+    // ([`ROLE_MANAGER`][google.chat.v1.Membership.MembershipRole.ROLE_MANAGER])
+    // have this permission.
     bool managers_allowed = 1 [(google.api.field_behavior) = OPTIONAL];
 
-    // Optional. Whether non-manager members have this permission.
+    // Optional. Whether space managers
+    // [`ROLE_ASSISTANT_MANAGER`][google.chat.v1.Membership.MembershipRole.ROLE_ASSISTANT_MANAGER])
+    // have this permission.
+    optional bool assistant_managers_allowed = 3
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether basic space members
+    // ([`ROLE_MEMBER`][google.chat.v1.Membership.MembershipRole.ROLE_MEMBER])
+    // have this permission.
     bool members_allowed = 2 [(google.api.field_behavior) = OPTIONAL];
   }
 
@@ -350,20 +359,46 @@ message Space {
   // Only populated when the `space_type` is `SPACE`.
   AccessSettings access_settings = 23 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Immutable. The customer id of the domain of the space.
+  // Required only when creating a space with [app
+  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+  // and `SpaceType` is `SPACE`, otherwise should not be set.
+  //
+  // In the format `customers/{customer}`, where `customer` is the `id` from the
+  // [Admin SDK customer
+  // resource](https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers).
+  // Private apps can also use the `customers/my_customer` alias to create
+  // the space in the same Google Workspace organization as the app.
+  //
+  // This field isn't populated for direct messages (DMs) or when the space is
+  // created by non-Google Workspace users.
+  optional string customer = 24 [
+    (google.api.field_behavior) = IMMUTABLE,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
   // Output only. The URI for a user to access the space.
   string space_uri = 25 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Represents the [permission settings]
   // (https://support.google.com/chat/answer/13340792) of a space. Only
   // populated when the `space_type` is `SPACE`.
-  //
-  // Requires [user
-  // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
   oneof space_permission_settings {
     // Optional. Input only. Predefined space permission settings, input only
     // when creating a space. If the field is not set, a collaboration space is
     // created. After you create the space, settings are populated in the
     // `PermissionSettings` field.
+    //
+    // Setting predefined permission settings supports:
+    //
+    // - [App
+    // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+    // with [administrator
+    // approval](https://support.google.com/a?p=chat-app-auth) with the
+    // `chat.app.spaces` or `chat.app.spaces.create` scopes.
+    //
+    // - [User
+    // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
     PredefinedPermissionSettings predefined_permission_settings = 26 [
       (google.api.field_behavior) = INPUT_ONLY,
       (google.api.field_behavior) = OPTIONAL
@@ -372,6 +407,18 @@ message Space {
     // Optional. Space permission settings for existing spaces. Input for
     // updating exact space permission settings, where existing permission
     // settings are replaced. Output lists current permission settings.
+    //
+    // Reading and updating permission settings supports:
+    //
+    // - [App
+    // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+    // with [administrator
+    // approval](https://support.google.com/a?p=chat-app-auth) with the
+    // `chat.app.spaces` scope. Only populated and settable when the Chat app
+    // created the space.
+    //
+    // - [User
+    // authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
     PermissionSettings permission_settings = 27
         [(google.api.field_behavior) = OPTIONAL];
   }
@@ -517,8 +564,10 @@ message UpdateSpaceRequest {
   //
   // You can update the following fields for a space:
   //
-  // `space_details`: Updates the space's description. Supports up to 150
-  // characters.
+  // `space_details`: Updates the space's description and guidelines. You must
+  // pass both description and guidelines in the update request as
+  // [`SpaceDetails`][google.chat.v1.Space.SpaceDetails]. If you only want to
+  // update one of the fields, pass the existing value for the other field.
   //
   // `display_name`: Only supports updating the display name for spaces where
   // `spaceType` field is `SPACE`.
@@ -562,8 +611,7 @@ message UpdateSpaceRequest {
   // of a space.
   // When updating permission settings, you can only specify
   // `permissionSettings` field masks; you cannot update other field masks
-  // at the same time. `permissionSettings` is not supported with
-  // `useAdminAccess`.
+  // at the same time.
   // The supported field masks include:
   //
   // - `permission_settings.manageMembersAndGroups`

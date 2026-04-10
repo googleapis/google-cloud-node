@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,6 +48,10 @@ function main(location) {
    *  imagery is returned if `required_quality` is set to `MEDIUM`.
    */
   // const exactQualityRequired = true
+  /**
+   *  Optional. Specifies the pre-GA features to enable.
+   */
+  // const experiments = [1,2,3,4]
 
   // Imports the Solar library
   const {SolarClient} = require('@googlemaps/solar').v1;

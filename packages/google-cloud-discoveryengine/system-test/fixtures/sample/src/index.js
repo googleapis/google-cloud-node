@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,32 +16,32 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
+  const assistantServiceClient = new discoveryengine.AssistantServiceClient();
+  const cmekConfigServiceClient = new discoveryengine.CmekConfigServiceClient();
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const controlServiceClient = new discoveryengine.ControlServiceClient();
-  const conversationalSearchServiceClient =
-    new discoveryengine.ConversationalSearchServiceClient();
+  const conversationalSearchServiceClient = new discoveryengine.ConversationalSearchServiceClient();
   const dataStoreServiceClient = new discoveryengine.DataStoreServiceClient();
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
   const engineServiceClient = new discoveryengine.EngineServiceClient();
-  const groundedGenerationServiceClient =
-    new discoveryengine.GroundedGenerationServiceClient();
+  const groundedGenerationServiceClient = new discoveryengine.GroundedGenerationServiceClient();
+  const identityMappingStoreServiceClient = new discoveryengine.IdentityMappingStoreServiceClient();
   const projectServiceClient = new discoveryengine.ProjectServiceClient();
   const rankServiceClient = new discoveryengine.RankServiceClient();
-  const recommendationServiceClient =
-    new discoveryengine.RecommendationServiceClient();
+  const recommendationServiceClient = new discoveryengine.RecommendationServiceClient();
   const schemaServiceClient = new discoveryengine.SchemaServiceClient();
   const searchServiceClient = new discoveryengine.SearchServiceClient();
-  const searchTuningServiceClient =
-    new discoveryengine.SearchTuningServiceClient();
-  const servingConfigServiceClient =
-    new discoveryengine.ServingConfigServiceClient();
-  const siteSearchEngineServiceClient =
-    new discoveryengine.SiteSearchEngineServiceClient();
+  const searchTuningServiceClient = new discoveryengine.SearchTuningServiceClient();
+  const servingConfigServiceClient = new discoveryengine.ServingConfigServiceClient();
+  const sessionServiceClient = new discoveryengine.SessionServiceClient();
+  const siteSearchEngineServiceClient = new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
+  const userLicenseServiceClient = new discoveryengine.UserLicenseServiceClient();
 }
 
 main();

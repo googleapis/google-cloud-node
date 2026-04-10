@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -89,6 +86,7 @@
               }
             },
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -98,6 +96,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -113,6 +112,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -130,18 +130,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -182,6 +176,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -264,6 +259,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -337,6 +333,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -416,6 +413,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -428,6 +426,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -469,6 +468,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -485,6 +485,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -502,6 +503,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -536,6 +538,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -677,6 +680,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -750,6 +754,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -811,10 +816,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -898,6 +900,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -917,6 +920,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -960,6 +964,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -993,6 +998,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -1019,6 +1025,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -1061,6 +1068,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -1110,6 +1118,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -1182,8 +1191,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -1239,6 +1260,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -1270,6 +1292,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -1283,12 +1306,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -1308,6 +1337,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -1321,7 +1351,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",
@@ -1485,6 +1518,10 @@
                             "uncollapsibleWidgetsCount": {
                               "type": "int32",
                               "id": 6
+                            },
+                            "collapseControl": {
+                              "type": "CollapseControl",
+                              "id": 8
                             }
                           }
                         },
@@ -1504,6 +1541,31 @@
                             "onClick": {
                               "type": "OnClick",
                               "id": 2
+                            }
+                          }
+                        },
+                        "NestedWidget": {
+                          "oneofs": {
+                            "data": {
+                              "oneof": [
+                                "textParagraph",
+                                "buttonList",
+                                "image"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "textParagraph": {
+                              "type": "TextParagraph",
+                              "id": 1
+                            },
+                            "buttonList": {
+                              "type": "ButtonList",
+                              "id": 3
+                            },
+                            "image": {
+                              "type": "Image",
+                              "id": 10
                             }
                           }
                         },
@@ -1541,7 +1603,9 @@
                             "dateTimePicker",
                             "divider",
                             "grid",
-                            "columns"
+                            "columns",
+                            "carousel",
+                            "chipList"
                           ]
                         }
                       },
@@ -1586,6 +1650,14 @@
                           "type": "Columns",
                           "id": 11
                         },
+                        "carousel": {
+                          "type": "Carousel",
+                          "id": 13
+                        },
+                        "chipList": {
+                          "type": "ChipList",
+                          "id": 14
+                        },
                         "horizontalAlignment": {
                           "type": "HorizontalAlignment",
                           "id": 8
@@ -1605,6 +1677,14 @@
                             "CENTER": 2,
                             "END": 3
                           }
+                        },
+                        "VerticalAlignment": {
+                          "values": {
+                            "VERTICAL_ALIGNMENT_UNSPECIFIED": 0,
+                            "TOP": 1,
+                            "MIDDLE": 2,
+                            "BOTTOM": 3
+                          }
                         }
                       }
                     },
@@ -1613,6 +1693,23 @@
                         "text": {
                           "type": "string",
                           "id": 1
+                        },
+                        "maxLines": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "textSyntax": {
+                          "type": "TextSyntax",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "TextSyntax": {
+                          "values": {
+                            "TEXT_SYNTAX_UNSPECIFIED": 0,
+                            "HTML": 1,
+                            "MARKDOWN": 2
+                          }
                         }
                       }
                     },
@@ -1657,13 +1754,25 @@
                           "type": "Icon",
                           "id": 12
                         },
+                        "startIconVerticalAlignment": {
+                          "type": "Widget.VerticalAlignment",
+                          "id": 13
+                        },
                         "topLabel": {
                           "type": "string",
                           "id": 3
                         },
+                        "topLabelText": {
+                          "type": "TextParagraph",
+                          "id": 17
+                        },
                         "text": {
                           "type": "string",
                           "id": 4
+                        },
+                        "contentText": {
+                          "type": "TextParagraph",
+                          "id": 18
                         },
                         "wrapText": {
                           "type": "bool",
@@ -1672,6 +1781,10 @@
                         "bottomLabel": {
                           "type": "string",
                           "id": 6
+                        },
+                        "bottomLabelText": {
+                          "type": "TextParagraph",
+                          "id": 19
                         },
                         "onClick": {
                           "type": "OnClick",
@@ -1760,6 +1873,10 @@
                           "type": "Action",
                           "id": 8
                         },
+                        "validation": {
+                          "type": "Validation",
+                          "id": 11
+                        },
                         "placeholderText": {
                           "type": "string",
                           "id": 12
@@ -1811,6 +1928,11 @@
                     },
                     "SelectionInput": {
                       "oneofs": {
+                        "_multiSelectMaxSelectedItems": {
+                          "oneof": [
+                            "multiSelectMaxSelectedItems"
+                          ]
+                        },
                         "multiSelectDataSource": {
                           "oneof": [
                             "externalDataSource",
@@ -1842,7 +1964,10 @@
                         },
                         "multiSelectMaxSelectedItems": {
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "multiSelectMinQueryLength": {
                           "type": "int32",
@@ -1868,6 +1993,13 @@
                           }
                         },
                         "SelectionItem": {
+                          "oneofs": {
+                            "startIcon": {
+                              "oneof": [
+                                "startIconUri"
+                              ]
+                            }
+                          },
                           "fields": {
                             "text": {
                               "type": "string",
@@ -1917,6 +2049,13 @@
                       }
                     },
                     "DateTimePicker": {
+                      "oneofs": {
+                        "_valueMsEpoch": {
+                          "oneof": [
+                            "valueMsEpoch"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1932,7 +2071,10 @@
                         },
                         "valueMsEpoch": {
                           "type": "int64",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "timezoneOffsetDate": {
                           "type": "int32",
@@ -1949,6 +2091,37 @@
                             "DATE_AND_TIME": 0,
                             "DATE_ONLY": 1,
                             "TIME_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "OverflowMenu": {
+                      "fields": {
+                        "items": {
+                          "rule": "repeated",
+                          "type": "OverflowMenuItem",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "OverflowMenuItem": {
+                          "fields": {
+                            "startIcon": {
+                              "type": "Icon",
+                              "id": 1
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "onClick": {
+                              "type": "OnClick",
+                              "id": 3
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 4
+                            }
                           }
                         }
                       }
@@ -1978,6 +2151,21 @@
                         "altText": {
                           "type": "string",
                           "id": 6
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "OUTLINED": 1,
+                            "FILLED": 2,
+                            "FILLED_TONAL": 3,
+                            "BORDERLESS": 4
+                          }
                         }
                       }
                     },
@@ -2217,7 +2405,8 @@
                                     "buttonList",
                                     "textInput",
                                     "selectionInput",
-                                    "dateTimePicker"
+                                    "dateTimePicker",
+                                    "chipList"
                                   ]
                                 }
                               },
@@ -2249,10 +2438,55 @@
                                 "dateTimePicker": {
                                   "type": "DateTimePicker",
                                   "id": 7
+                                },
+                                "chipList": {
+                                  "type": "ChipList",
+                                  "id": 8
                                 }
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "Carousel": {
+                      "fields": {
+                        "carouselCards": {
+                          "rule": "repeated",
+                          "type": "CarouselCard",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "CarouselCard": {
+                          "fields": {
+                            "widgets": {
+                              "rule": "repeated",
+                              "type": "Card.NestedWidget",
+                              "id": 1
+                            },
+                            "footerWidgets": {
+                              "rule": "repeated",
+                              "type": "Card.NestedWidget",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CollapseControl": {
+                      "fields": {
+                        "horizontalAlignment": {
+                          "type": "Widget.HorizontalAlignment",
+                          "id": 1
+                        },
+                        "expandButton": {
+                          "type": "Button",
+                          "id": 2
+                        },
+                        "collapseButton": {
+                          "type": "Button",
+                          "id": 3
                         }
                       }
                     },
@@ -2263,7 +2497,8 @@
                             "action",
                             "openLink",
                             "openDynamicLinkAction",
-                            "card"
+                            "card",
+                            "overflowMenu"
                           ]
                         }
                       },
@@ -2283,6 +2518,10 @@
                         "card": {
                           "type": "Card",
                           "id": 4
+                        },
+                        "overflowMenu": {
+                          "type": "OverflowMenu",
+                          "id": 8
                         }
                       }
                     },
@@ -2338,6 +2577,15 @@
                         "interaction": {
                           "type": "Interaction",
                           "id": 5
+                        },
+                        "requiredWidgets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "allWidgetsAreRequired": {
+                          "type": "bool",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -2364,6 +2612,83 @@
                             "INTERACTION_UNSPECIFIED": 0,
                             "OPEN_DIALOG": 1
                           }
+                        }
+                      }
+                    },
+                    "Validation": {
+                      "fields": {
+                        "characterLimit": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "inputType": {
+                          "type": "InputType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InputType": {
+                          "values": {
+                            "INPUT_TYPE_UNSPECIFIED": 0,
+                            "TEXT": 1,
+                            "INTEGER": 2,
+                            "FLOAT": 3,
+                            "EMAIL": 4,
+                            "EMOJI_PICKER": 5
+                          }
+                        }
+                      }
+                    },
+                    "ChipList": {
+                      "fields": {
+                        "layout": {
+                          "type": "Layout",
+                          "id": 1
+                        },
+                        "chips": {
+                          "rule": "repeated",
+                          "type": "Chip",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Layout": {
+                          "values": {
+                            "LAYOUT_UNSPECIFIED": 0,
+                            "WRAPPED": 1,
+                            "HORIZONTAL_SCROLLABLE": 2
+                          }
+                        }
+                      }
+                    },
+                    "Chip": {
+                      "fields": {
+                        "icon": {
+                          "type": "Icon",
+                          "id": 1
+                        },
+                        "label": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "onClick": {
+                          "type": "OnClick",
+                          "id": 3
+                        },
+                        "enabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "disabled": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "altText": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     }
@@ -2540,7 +2865,9 @@
                     "data": {
                       "oneof": [
                         "driveLinkData",
-                        "chatSpaceLinkData"
+                        "chatSpaceLinkData",
+                        "meetSpaceLinkData",
+                        "calendarEventLinkData"
                       ]
                     }
                   },
@@ -2560,6 +2887,14 @@
                     "chatSpaceLinkData": {
                       "type": "ChatSpaceLinkData",
                       "id": 4
+                    },
+                    "meetSpaceLinkData": {
+                      "type": "MeetSpaceLinkData",
+                      "id": 5
+                    },
+                    "calendarEventLinkData": {
+                      "type": "CalendarEventLinkData",
+                      "id": 6
                     }
                   },
                   "nested": {
@@ -2567,7 +2902,10 @@
                       "values": {
                         "RICH_LINK_TYPE_UNSPECIFIED": 0,
                         "DRIVE_FILE": 1,
-                        "CHAT_SPACE": 2
+                        "CHAT_SPACE": 2,
+                        "GMAIL_MESSAGE": 3,
+                        "MEET_SPACE": 4,
+                        "CALENDAR_EVENT": 5
                       }
                     }
                   }
@@ -2617,6 +2955,54 @@
                     }
                   }
                 },
+                "MeetSpaceLinkData": {
+                  "fields": {
+                    "meetingCode": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "type": {
+                      "type": "Type",
+                      "id": 2
+                    },
+                    "huddleStatus": {
+                      "type": "HuddleStatus",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Type": {
+                      "values": {
+                        "TYPE_UNSPECIFIED": 0,
+                        "MEETING": 1,
+                        "HUDDLE": 2
+                      }
+                    },
+                    "HuddleStatus": {
+                      "values": {
+                        "HUDDLE_STATUS_UNSPECIFIED": 0,
+                        "STARTED": 1,
+                        "ENDED": 2,
+                        "MISSED": 3
+                      }
+                    }
+                  }
+                },
+                "CalendarEventLinkData": {
+                  "fields": {
+                    "calendarId": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "eventId": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
                 "AnnotationType": {
                   "values": {
                     "ANNOTATION_TYPE_UNSPECIFIED": 0,
@@ -2644,7 +3030,7 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "(google.api.field_behavior)": "OPTIONAL"
+                        "(google.api.field_behavior)": "IDENTIFIER"
                       }
                     },
                     "contentName": {
@@ -3111,7 +3497,7 @@
                 "ChatService": {
                   "options": {
                     "(google.api.default_host)": "chat.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.app.delete,https://www.googleapis.com/auth/chat.app.memberships,https://www.googleapis.com/auth/chat.app.messages.readonly,https://www.googleapis.com/auth/chat.app.spaces,https://www.googleapis.com/auth/chat.app.spaces.create,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
                   },
                   "methods": {
                     "CreateMessage": {
@@ -3839,7 +4225,8 @@
                       "values": {
                         "MEMBERSHIP_ROLE_UNSPECIFIED": 0,
                         "ROLE_MEMBER": 1,
-                        "ROLE_MANAGER": 2
+                        "ROLE_MANAGER": 2,
+                        "ROLE_ASSISTANT_MANAGER": 4
                       }
                     }
                   }
@@ -4184,7 +4571,7 @@
                       "type": "QuotedMessageMetadata",
                       "id": 39,
                       "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     },
                     "attachedGifs": {
@@ -4226,12 +4613,101 @@
                       "type": "string",
                       "id": 1,
                       "options": {
-                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).type": "chat.googleapis.com/Message"
                       }
                     },
                     "lastUpdateTime": {
                       "type": "google.protobuf.Timestamp",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "quoteType": {
+                      "type": "QuoteType",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "quotedMessageSnapshot": {
+                      "type": "QuotedMessageSnapshot",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "forwardedMetadata": {
+                      "type": "ForwardedMetadata",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "QuoteType": {
+                      "values": {
+                        "QUOTE_TYPE_UNSPECIFIED": 0,
+                        "REPLY": 1
+                      }
+                    }
+                  }
+                },
+                "QuotedMessageSnapshot": {
+                  "fields": {
+                    "sender": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "text": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "formattedText": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "annotations": {
+                      "rule": "repeated",
+                      "type": "Annotation",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "attachments": {
+                      "rule": "repeated",
+                      "type": "Attachment",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "ForwardedMetadata": {
+                  "fields": {
+                    "space": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Space"
+                      }
+                    },
+                    "spaceDisplayName": {
+                      "type": "string",
                       "id": 2,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
@@ -4955,6 +5431,11 @@
                     "(google.api.resource).pattern": "spaces/{space}"
                   },
                   "oneofs": {
+                    "_customer": {
+                      "oneof": [
+                        "customer"
+                      ]
+                    },
                     "spacePermissionSettings": {
                       "oneof": [
                         "predefinedPermissionSettings",
@@ -5075,6 +5556,14 @@
                       "id": 23,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "customer": {
+                      "type": "string",
+                      "id": 24,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
                       }
                     },
                     "spaceUri": {
@@ -5311,12 +5800,27 @@
                       }
                     },
                     "PermissionSetting": {
+                      "oneofs": {
+                        "_assistantManagersAllowed": {
+                          "oneof": [
+                            "assistantManagersAllowed"
+                          ]
+                        }
+                      },
                       "fields": {
                         "managersAllowed": {
                           "type": "bool",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assistantManagersAllowed": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "membersAllowed": {
@@ -6094,14 +6598,36 @@
         },
         "api": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api;api",
             "java_multiple_files": true,
             "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -6177,25 +6703,6 @@
                   "type": "string",
                   "id": 2
                 }
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
               }
             },
             "fieldInfo": {
@@ -6325,6 +6832,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -6433,6 +6945,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },

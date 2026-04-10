@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3070,6 +3070,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listAttachments(request: google.cloud.support.v2beta.IListAttachmentsRequest): Promise<google.cloud.support.v2beta.ListAttachmentsResponse>;
+
+                    /**
+                     * Calls GetAttachment.
+                     * @param request GetAttachmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Attachment
+                     */
+                    public getAttachment(request: google.cloud.support.v2beta.IGetAttachmentRequest, callback: google.cloud.support.v2beta.CaseAttachmentService.GetAttachmentCallback): void;
+
+                    /**
+                     * Calls GetAttachment.
+                     * @param request GetAttachmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAttachment(request: google.cloud.support.v2beta.IGetAttachmentRequest): Promise<google.cloud.support.v2beta.Attachment>;
                 }
 
                 namespace CaseAttachmentService {
@@ -3080,6 +3094,13 @@ export namespace google {
                      * @param [response] ListAttachmentsResponse
                      */
                     type ListAttachmentsCallback = (error: (Error|null), response?: google.cloud.support.v2beta.ListAttachmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CaseAttachmentService|getAttachment}.
+                     * @param error Error, if any
+                     * @param [response] Attachment
+                     */
+                    type GetAttachmentCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Attachment) => void;
                 }
 
                 /** Properties of a ListAttachmentsRequest. */
@@ -3185,6 +3206,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListAttachmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAttachmentRequest. */
+                interface IGetAttachmentRequest {
+
+                    /** GetAttachmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAttachmentRequest. */
+                class GetAttachmentRequest implements IGetAttachmentRequest {
+
+                    /**
+                     * Constructs a new GetAttachmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IGetAttachmentRequest);
+
+                    /** GetAttachmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAttachmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAttachmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IGetAttachmentRequest): google.cloud.support.v2beta.GetAttachmentRequest;
+
+                    /**
+                     * Encodes the specified GetAttachmentRequest message. Does not implicitly {@link google.cloud.support.v2beta.GetAttachmentRequest.verify|verify} messages.
+                     * @param message GetAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IGetAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAttachmentRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.GetAttachmentRequest.verify|verify} messages.
+                     * @param message GetAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IGetAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAttachmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.GetAttachmentRequest;
+
+                    /**
+                     * Decodes a GetAttachmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.GetAttachmentRequest;
+
+                    /**
+                     * Verifies a GetAttachmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAttachmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.GetAttachmentRequest;
+
+                    /**
+                     * Creates a plain object from a GetAttachmentRequest message. Also converts values to other types if specified.
+                     * @param message GetAttachmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.GetAttachmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAttachmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAttachmentRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4145,9 +4263,6 @@ export namespace google {
 
                     /** ListCasesRequest productLine. */
                     public productLine?: (google.cloud.support.v2beta.ProductLine|keyof typeof google.cloud.support.v2beta.ProductLine|null);
-
-                    /** ListCasesRequest _productLine. */
-                    public _productLine?: "productLine";
 
                     /**
                      * Creates a new ListCasesRequest instance using the specified properties.
@@ -5351,6 +5466,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public createComment(request: google.cloud.support.v2beta.ICreateCommentRequest): Promise<google.cloud.support.v2beta.Comment>;
+
+                    /**
+                     * Calls GetComment.
+                     * @param request GetCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Comment
+                     */
+                    public getComment(request: google.cloud.support.v2beta.IGetCommentRequest, callback: google.cloud.support.v2beta.CommentService.GetCommentCallback): void;
+
+                    /**
+                     * Calls GetComment.
+                     * @param request GetCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getComment(request: google.cloud.support.v2beta.IGetCommentRequest): Promise<google.cloud.support.v2beta.Comment>;
                 }
 
                 namespace CommentService {
@@ -5368,6 +5497,13 @@ export namespace google {
                      * @param [response] Comment
                      */
                     type CreateCommentCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Comment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.CommentService|getComment}.
+                     * @param error Error, if any
+                     * @param [response] Comment
+                     */
+                    type GetCommentCallback = (error: (Error|null), response?: google.cloud.support.v2beta.Comment) => void;
                 }
 
                 /** Properties of a ListCommentsRequest. */
@@ -5679,6 +5815,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CreateCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCommentRequest. */
+                interface IGetCommentRequest {
+
+                    /** GetCommentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCommentRequest. */
+                class GetCommentRequest implements IGetCommentRequest {
+
+                    /**
+                     * Constructs a new GetCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IGetCommentRequest);
+
+                    /** GetCommentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IGetCommentRequest): google.cloud.support.v2beta.GetCommentRequest;
+
+                    /**
+                     * Encodes the specified GetCommentRequest message. Does not implicitly {@link google.cloud.support.v2beta.GetCommentRequest.verify|verify} messages.
+                     * @param message GetCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IGetCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCommentRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.GetCommentRequest.verify|verify} messages.
+                     * @param message GetCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IGetCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.GetCommentRequest;
+
+                    /**
+                     * Decodes a GetCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.GetCommentRequest;
+
+                    /**
+                     * Verifies a GetCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.GetCommentRequest;
+
+                    /**
+                     * Creates a plain object from a GetCommentRequest message. Also converts values to other types if specified.
+                     * @param message GetCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.GetCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCommentRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7225,6 +7458,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -7265,6 +7501,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -11218,6 +11457,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -11466,7 +11708,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -11497,7 +11739,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;

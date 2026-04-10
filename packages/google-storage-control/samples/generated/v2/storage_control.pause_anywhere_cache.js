@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,10 +41,10 @@ function main(name) {
   // const requestId = 'abc123'
 
   // Imports the Control library
-  const {StorageControlClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
-  const controlClient = new StorageControlClient();
+  const storageControlClient = new StorageControlClient();
 
   async function callPauseAnywhereCache() {
     // Construct request
@@ -53,7 +53,7 @@ function main(name) {
     };
 
     // Run request
-    const response = await controlClient.pauseAnywhereCache(request);
+    const response = await storageControlClient.pauseAnywhereCache(request);
     console.log(response);
   }
 

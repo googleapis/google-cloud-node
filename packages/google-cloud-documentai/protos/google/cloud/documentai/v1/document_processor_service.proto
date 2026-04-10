@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -347,6 +347,19 @@ message ProcessOptions {
 
     // Optional. Config for chunking in layout parser processor.
     ChunkingConfig chunking_config = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether to include images in layout parser processor response.
+    bool return_images = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether to include bounding boxes in layout parser processor
+    // response.
+    bool return_bounding_boxes = 3 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether to include image annotations in layout parser response.
+    bool enable_image_annotation = 4 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Whether to include table annotations in layout parser response.
+    bool enable_table_annotation = 6 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // A list of individual page numbers.
@@ -1001,8 +1014,8 @@ message TrainProcessorVersionRequest {
       TEMPLATE_BASED = 2;
     }
 
-    // Training method to use for CDE training.
-    TrainingMethod training_method = 3;
+    // Optional. Training method to use for CDE training.
+    TrainingMethod training_method = 3 [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Options to control foundation model tuning of the processor.

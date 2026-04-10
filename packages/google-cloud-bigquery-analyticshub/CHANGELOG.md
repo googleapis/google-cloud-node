@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.3.1...bigquery-analyticshub-v2.4.0) (2025-11-11)
+
+
+### Features
+
+* [bigquery-analyticshub] add Stored Procedure Sharing support for analyticshub listings ([#6866](https://github.com/googleapis/google-cloud-node/issues/6866)) ([e4faaba](https://github.com/googleapis/google-cloud-node/commit/e4faaba9f6d3c28cf81d816fbd3758af80b6a45d))
+
+## [2.3.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.3.0...bigquery-analyticshub-v2.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.2.0...bigquery-analyticshub-v2.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6418](https://github.com/googleapis/google-cloud-node/issues/6418)) ([fcfb2c0](https://github.com/googleapis/google-cloud-node/commit/fcfb2c018539983a8ce32205a2ea9e99ef28e88a))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.1.0...bigquery-analyticshub-v2.2.0) (2025-05-20)
+
+
+### Features
+
+* [bigquery-analyticshub] Add support for Analytics Hub & Marketplace Integration ([#6347](https://github.com/googleapis/google-cloud-node/issues/6347)) ([9e88f29](https://github.com/googleapis/google-cloud-node/commit/9e88f290fd76cdb8a721a0c4ed9592e6f020cadc))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v2.0.1...bigquery-analyticshub-v2.1.0) (2025-05-09)
 
 

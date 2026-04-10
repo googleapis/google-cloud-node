@@ -24,6 +24,7 @@ import "google/cloud/aiplatform/v1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1/execution.proto";
 import "google/cloud/aiplatform/v1/pipeline_failure_policy.proto";
 import "google/cloud/aiplatform/v1/pipeline_state.proto";
+import "google/cloud/aiplatform/v1/service_networking.proto";
 import "google/cloud/aiplatform/v1/value.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -197,6 +198,10 @@ message PipelineJob {
   // Example: ['vertex-ai-ip-range'].
   repeated string reserved_ip_ranges = 25;
 
+  // Optional. Configuration for PSC-I for PipelineJob.
+  PscInterfaceConfig psc_interface_config = 31
+      [(google.api.field_behavior) = OPTIONAL];
+
   // A template uri from where the
   // [PipelineJob.pipeline_spec][google.cloud.aiplatform.v1.PipelineJob.pipeline_spec],
   // if empty, will be downloaded. Currently, only uri from Vertex Template
@@ -356,6 +361,16 @@ message PipelineTaskDetail {
   // Output only. The runtime output artifacts of the task.
   map<string, ArtifactList> outputs = 11
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The unique name of a task.
+  // This field is used by rerun pipeline job.
+  // Console UI and Vertex AI SDK will support triggering pipeline job reruns.
+  // The name is constructed by concatenating all the parent tasks name with
+  // the task name. For example, if a task named "child_task" has a parent task
+  // named "parent_task_1" and parent task 1 has a parent task named
+  // "parent_task_2", the task unique name will be
+  // "parent_task_2.parent_task_1.child_task".
+  string task_unique_name = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // The runtime detail of a pipeline executor.

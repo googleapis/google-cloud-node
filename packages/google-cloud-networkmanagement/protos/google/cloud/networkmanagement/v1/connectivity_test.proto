@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -116,21 +116,37 @@ message ConnectivityTest {
 
 // Source or destination of the Connectivity Test.
 message Endpoint {
-  // The type definition of an endpoint's network. Use one of the
-  // following choices:
+  // The type of the network of the IP address endpoint. Relevant for the source
+  // IP address endpoints.
   enum NetworkType {
-    // Default type if unspecified.
+    // Unspecified. The test will analyze all possible IP address locations.
+    // This might take longer and produce inaccurate or ambiguous results, so
+    // prefer specifying an explicit network type.
+    //
+    // The `project_id` field should be set to the project where the GCP
+    // endpoint is located, or where the non-GCP endpoint should be reachable
+    // from (via routes to non-GCP networks). The project might also be inferred
+    // from the Connectivity Test project or other projects referenced in the
+    // request.
     NETWORK_TYPE_UNSPECIFIED = 0;
 
-    // A network hosted within Google Cloud.
-    // To receive more detailed output, specify the URI for the source or
-    // destination network.
+    // A VPC network. Should be used for internal IP addresses in VPC networks.
+    // The `network` field should be set to the URI of this network. Only
+    // endpoints within this network will be considered.
     GCP_NETWORK = 1;
 
-    // A network hosted outside of Google Cloud.
-    // This can be an on-premises network, an internet resource or a network
-    // hosted by another cloud provider.
+    // A non-GCP network (for example, an on-premises network or another cloud
+    // provider network). Should be used for internal IP addresses outside of
+    // Google Cloud. The `network` field should be set to the URI of the VPC
+    // network containing a corresponding Cloud VPN tunnel, Cloud Interconnect
+    // VLAN attachment, or a router appliance instance. Only endpoints reachable
+    // from the provided VPC network via the routes to non-GCP networks will be
+    // considered.
     NON_GCP_NETWORK = 2;
+
+    // Internet. Should be used for internet-routable external IP addresses or
+    // IP addresses for global Google APIs and services.
+    INTERNET = 3;
   }
 
   // Type of the target of a forwarding rule.
@@ -173,6 +189,11 @@ message Endpoint {
     // URI. The format is:
     // projects/{project}/locations/{location}/revisions/{revision}
     string uri = 1;
+
+    // Output only. The URI of the Cloud Run service that the revision belongs
+    // to. The format is:
+    // projects/{project}/locations/{location}/services/{service}
+    string service_uri = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
   // The IP address of the endpoint, which can be an external or internal IP.
@@ -190,8 +211,8 @@ message Endpoint {
   // used for protocol forwarding, Private Service Connect and other network
   // services to provide forwarding information in the control plane. Applicable
   // only to destination endpoint. Format:
-  //  projects/{project}/global/forwardingRules/{id} or
-  //  projects/{project}/regions/{region}/forwardingRules/{id}
+  // `projects/{project}/global/forwardingRules/{id}` or
+  // `projects/{project}/regions/{region}/forwardingRules/{id}`
   string forwarding_rule = 13;
 
   // Output only. Specifies the type of the target of the forwarding rule.
@@ -228,6 +249,10 @@ message Endpoint {
   // Applicable only to destination endpoint.
   string redis_cluster = 18;
 
+  // A [GKE Pod](https://cloud.google.com/kubernetes-engine/docs/concepts/pod)
+  // URI.
+  string gke_pod = 21;
+
   // A [Cloud Function](https://cloud.google.com/functions). Applicable only to
   // source endpoint.
   CloudFunctionEndpoint cloud_function = 10;
@@ -242,23 +267,18 @@ message Endpoint {
   // Applicable only to source endpoint.
   CloudRunRevisionEndpoint cloud_run_revision = 12;
 
-  // A VPC network URI.
+  // A VPC network URI. For source endpoints, used according to the
+  // `network_type`. For destination endpoints, used only when the source is an
+  // external IP address endpoint, and the destination is an internal IP address
+  // endpoint.
   string network = 4;
 
-  // Type of the network where the endpoint is located.
-  // Applicable only to source endpoint, as destination network type can be
-  // inferred from the source.
+  // For source endpoints, type of the network where the endpoint is located.
+  // Not relevant for destination endpoints.
   NetworkType network_type = 5;
 
-  // Project ID where the endpoint is located.
-  // The project ID can be derived from the URI if you provide a endpoint or
-  // network URI.
-  // The following are two cases where you may need to provide the project ID:
-  // 1. Only the IP address is specified, and the IP address is within a Google
-  // Cloud project.
-  // 2. When you are using Shared VPC and the IP address that you provide is
-  // from the service project. In this case, the network that the IP address
-  // resides in is defined in the host project.
+  // For source endpoints, endpoint project ID. Used according to the
+  // `network_type`. Not relevant for destination endpoints.
   string project_id = 6;
 }
 
@@ -376,6 +396,34 @@ message ProbingDetails {
     string metropolitan_area = 1;
   }
 
+  // Probing results for a single edge device.
+  message SingleEdgeResponse {
+    // The overall result of active probing for this egress device.
+    ProbingResult result = 1;
+
+    // Number of probes sent.
+    int32 sent_probe_count = 2;
+
+    // Number of probes that reached the destination.
+    int32 successful_probe_count = 3;
+
+    // Latency as measured by active probing in one direction: from the source
+    // to the destination endpoint.
+    LatencyDistribution probing_latency = 4;
+
+    // The EdgeLocation from which a packet, destined to the internet, will
+    // egress the Google network.
+    // This will only be populated for a connectivity test which has an internet
+    // destination address.
+    // The absence of this field *must not* be used as an indication that the
+    // destination is part of the Google network.
+    EdgeLocation destination_egress_location = 5;
+
+    // Router name in the format '{router}.{metroshard}'. For example:
+    // pf01.aaa01, pr02.aaa01.
+    string destination_router = 6;
+  }
+
   // The overall result of active probing.
   ProbingResult result = 1;
 
@@ -402,11 +450,17 @@ message ProbingDetails {
   // from the source to the destination endpoint.
   LatencyDistribution probing_latency = 8;
 
-  // The EdgeLocation from which a packet destined for/originating from the
-  // internet will egress/ingress the Google network.
+  // The EdgeLocation from which a packet, destined to the internet, will egress
+  // the Google network.
   // This will only be populated for a connectivity test which has an internet
-  // destination/source address.
+  // destination address.
   // The absence of this field *must not* be used as an indication that the
-  // destination/source is part of the Google network.
+  // destination is part of the Google network.
   EdgeLocation destination_egress_location = 9;
+
+  // Probing results for all edge devices.
+  repeated SingleEdgeResponse edge_responses = 10;
+
+  // Whether all relevant edge devices were probed.
+  bool probed_all_devices = 11;
 }

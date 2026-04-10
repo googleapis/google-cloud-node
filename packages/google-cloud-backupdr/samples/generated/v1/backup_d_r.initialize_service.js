@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -54,6 +54,10 @@ function main(name, resourceType) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. The configuration for initializing a Cloud SQL instance.
+   */
+  // const cloudSqlInstanceInitializationConfig = {}
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;

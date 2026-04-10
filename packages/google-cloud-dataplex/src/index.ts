@@ -18,6 +18,8 @@
 
 import * as v1 from './v1';
 
+const BusinessGlossaryServiceClient = v1.BusinessGlossaryServiceClient;
+type BusinessGlossaryServiceClient = v1.BusinessGlossaryServiceClient;
 const CatalogServiceClient = v1.CatalogServiceClient;
 type CatalogServiceClient = v1.CatalogServiceClient;
 const CmekServiceClient = v1.CmekServiceClient;
@@ -26,6 +28,8 @@ const ContentServiceClient = v1.ContentServiceClient;
 type ContentServiceClient = v1.ContentServiceClient;
 const DataplexServiceClient = v1.DataplexServiceClient;
 type DataplexServiceClient = v1.DataplexServiceClient;
+const DataProductServiceClient = v1.DataProductServiceClient;
+type DataProductServiceClient = v1.DataProductServiceClient;
 const DataScanServiceClient = v1.DataScanServiceClient;
 type DataScanServiceClient = v1.DataScanServiceClient;
 const DataTaxonomyServiceClient = v1.DataTaxonomyServiceClient;
@@ -33,25 +37,7 @@ type DataTaxonomyServiceClient = v1.DataTaxonomyServiceClient;
 const MetadataServiceClient = v1.MetadataServiceClient;
 type MetadataServiceClient = v1.MetadataServiceClient;
 
-export {
-  v1,
-  CatalogServiceClient,
-  CmekServiceClient,
-  ContentServiceClient,
-  DataplexServiceClient,
-  DataScanServiceClient,
-  DataTaxonomyServiceClient,
-  MetadataServiceClient,
-};
-export default {
-  v1,
-  CatalogServiceClient,
-  CmekServiceClient,
-  ContentServiceClient,
-  DataplexServiceClient,
-  DataScanServiceClient,
-  DataTaxonomyServiceClient,
-  MetadataServiceClient,
-};
+export {v1, BusinessGlossaryServiceClient, CatalogServiceClient, CmekServiceClient, ContentServiceClient, DataplexServiceClient, DataProductServiceClient, DataScanServiceClient, DataTaxonomyServiceClient, MetadataServiceClient};
+export default {v1, BusinessGlossaryServiceClient, CatalogServiceClient, CmekServiceClient, ContentServiceClient, DataplexServiceClient, DataProductServiceClient, DataScanServiceClient, DataTaxonomyServiceClient, MetadataServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

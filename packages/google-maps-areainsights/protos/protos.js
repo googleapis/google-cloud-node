@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -461,12 +461,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ComputeInsightsResponse _count.
-                         * @member {"count"|undefined} _count
-                         * @memberof google.maps.areainsights.v1.ComputeInsightsResponse
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ComputeInsightsResponse.prototype, "_count", {
                             get: $util.oneOfGetter($oneOfFields = ["count"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -2953,23 +2948,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * RatingFilter _minRating.
-                         * @member {"minRating"|undefined} _minRating
-                         * @memberof google.maps.areainsights.v1.RatingFilter
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(RatingFilter.prototype, "_minRating", {
                             get: $util.oneOfGetter($oneOfFields = ["minRating"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * RatingFilter _maxRating.
-                         * @member {"maxRating"|undefined} _maxRating
-                         * @memberof google.maps.areainsights.v1.RatingFilter
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(RatingFilter.prototype, "_maxRating", {
                             get: $util.oneOfGetter($oneOfFields = ["maxRating"]),
                             set: $util.oneOfSetter($oneOfFields)

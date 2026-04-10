@@ -490,6 +490,15 @@
                         }
                       }
                     },
+                    "Chokepoint": {
+                      "fields": {
+                        "relatedFindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "CloudArmor": {
                       "fields": {
                         "securityPolicy": {
@@ -590,6 +599,11 @@
                         "parentType": {
                           "type": "ParentType",
                           "id": 2
+                        },
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -598,6 +612,41 @@
                             "PARENT_TYPE_UNSPECIFIED": 0,
                             "ORGANIZATION": 1,
                             "PROJECT": 2
+                          }
+                        }
+                      }
+                    },
+                    "InfoType": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sensitivityScore": {
+                          "type": "SensitivityScore",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SensitivityScore": {
+                      "fields": {
+                        "score": {
+                          "type": "SensitivityScoreLevel",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SensitivityScoreLevel": {
+                          "values": {
+                            "SENSITIVITY_SCORE_LEVEL_UNSPECIFIED": 0,
+                            "SENSITIVITY_LOW": 10,
+                            "SENSITIVITY_UNKNOWN": 12,
+                            "SENSITIVITY_MODERATE": 20,
+                            "SENSITIVITY_HIGH": 30
                           }
                         }
                       }
@@ -1093,6 +1142,64 @@
                         }
                       }
                     },
+                    "ExternalExposure": {
+                      "fields": {
+                        "privateIpAddress": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "privatePort": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "exposedService": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "publicIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "publicPort": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "exposedEndpoint": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "loadBalancerFirewallPolicy": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "serviceFirewallPolicy": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "forwardingRule": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "backendService": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "instanceGroup": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "networkEndpointGroup": {
+                          "type": "string",
+                          "id": 12
+                        }
+                      }
+                    },
                     "ExternalSystem": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ExternalSystem",
@@ -1462,6 +1569,14 @@
                           "rule": "repeated",
                           "type": "GroupMembership",
                           "id": 65
+                        },
+                        "chokepoint": {
+                          "type": "Chokepoint",
+                          "id": 77
+                        },
+                        "externalExposure": {
+                          "type": "ExternalExposure",
+                          "id": 84
                         }
                       },
                       "nested": {
@@ -1498,7 +1613,10 @@
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
                             "POSTURE_VIOLATION": 6,
-                            "TOXIC_COMBINATION": 7
+                            "TOXIC_COMBINATION": 7,
+                            "SENSITIVE_DATA_RISK": 8,
+                            "CHOKEPOINT": 9,
+                            "EXTERNAL_EXPOSURE": 10
                           }
                         },
                         "MuteInfo": {
@@ -1557,7 +1675,8 @@
                         "GroupType": {
                           "values": {
                             "GROUP_TYPE_UNSPECIFIED": 0,
-                            "GROUP_TYPE_TOXIC_COMBINATION": 1
+                            "GROUP_TYPE_TOXIC_COMBINATION": 1,
+                            "GROUP_TYPE_CHOKEPOINT": 3
                           }
                         }
                       }
@@ -9395,6 +9514,57 @@
                         }
                       }
                     },
+                    "AffectedResources": {
+                      "fields": {
+                        "count": {
+                          "type": "int64",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AiModel": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "domain": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "library": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "publisher": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "deploymentPlatform": {
+                          "type": "DeploymentPlatform",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "DeploymentPlatform": {
+                          "values": {
+                            "DEPLOYMENT_PLATFORM_UNSPECIFIED": 0,
+                            "VERTEX_AI": 1,
+                            "GKE": 2,
+                            "GCE": 3,
+                            "FINE_TUNED_MODEL": 4
+                          }
+                        }
+                      }
+                    },
                     "Application": {
                       "fields": {
                         "baseUri": {
@@ -9672,6 +9842,15 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "Chokepoint": {
+                      "fields": {
+                        "relatedFindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -10203,6 +10382,11 @@
                         "diskPath": {
                           "type": "DiskPath",
                           "id": 7
+                        },
+                        "operations": {
+                          "rule": "repeated",
+                          "type": "FileOperation",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -10215,6 +10399,26 @@
                             "relativePath": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "FileOperation": {
+                          "fields": {
+                            "type": {
+                              "type": "OperationType",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "OperationType": {
+                              "values": {
+                                "OPERATION_TYPE_UNSPECIFIED": 0,
+                                "OPEN": 1,
+                                "READ": 2,
+                                "RENAME": 3,
+                                "WRITE": 4,
+                                "EXECUTE": 5
+                              }
                             }
                           }
                         }
@@ -10230,7 +10434,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "canonicalName": {
                           "type": "string",
@@ -10435,9 +10642,17 @@
                           "type": "OrgPolicy",
                           "id": 43
                         },
+                        "job": {
+                          "type": "Job",
+                          "id": 44
+                        },
                         "application": {
                           "type": "Application",
                           "id": 45
+                        },
+                        "ipRules": {
+                          "type": "IpRules",
+                          "id": 46
                         },
                         "backupDisasterRecovery": {
                           "type": "BackupDisasterRecovery",
@@ -10488,10 +10703,31 @@
                           "type": "DataFlowEvent",
                           "id": 62
                         },
+                        "networks": {
+                          "rule": "repeated",
+                          "type": "Network",
+                          "id": 63
+                        },
                         "dataRetentionDeletionEvents": {
                           "rule": "repeated",
                           "type": "DataRetentionDeletionEvent",
                           "id": 64
+                        },
+                        "affectedResources": {
+                          "type": "AffectedResources",
+                          "id": 65
+                        },
+                        "aiModel": {
+                          "type": "AiModel",
+                          "id": 66
+                        },
+                        "chokepoint": {
+                          "type": "Chokepoint",
+                          "id": 69
+                        },
+                        "vertexAi": {
+                          "type": "VertexAi",
+                          "id": 72
                         }
                       },
                       "nested": {
@@ -10568,7 +10804,8 @@
                             "SCC_ERROR": 5,
                             "POSTURE_VIOLATION": 6,
                             "TOXIC_COMBINATION": 7,
-                            "SENSITIVE_DATA_RISK": 8
+                            "SENSITIVE_DATA_RISK": 8,
+                            "CHOKEPOINT": 9
                           }
                         }
                       }
@@ -10588,7 +10825,8 @@
                         "GroupType": {
                           "values": {
                             "GROUP_TYPE_UNSPECIFIED": 0,
-                            "GROUP_TYPE_TOXIC_COMBINATION": 1
+                            "GROUP_TYPE_TOXIC_COMBINATION": 1,
+                            "GROUP_TYPE_CHOKEPOINT": 3
                           }
                         }
                       }
@@ -10710,6 +10948,140 @@
                             }
                           }
                         }
+                      }
+                    },
+                    "IpRules": {
+                      "oneofs": {
+                        "rules": {
+                          "oneof": [
+                            "allowed",
+                            "denied"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "direction": {
+                          "type": "Direction",
+                          "id": 1
+                        },
+                        "allowed": {
+                          "type": "Allowed",
+                          "id": 2
+                        },
+                        "denied": {
+                          "type": "Denied",
+                          "id": 3
+                        },
+                        "sourceIpRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "destinationIpRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "exposedServices": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Direction": {
+                          "values": {
+                            "DIRECTION_UNSPECIFIED": 0,
+                            "INGRESS": 1,
+                            "EGRESS": 2
+                          }
+                        }
+                      }
+                    },
+                    "IpRule": {
+                      "fields": {
+                        "protocol": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "portRanges": {
+                          "rule": "repeated",
+                          "type": "PortRange",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PortRange": {
+                          "fields": {
+                            "min": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "max": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Allowed": {
+                      "fields": {
+                        "ipRules": {
+                          "rule": "repeated",
+                          "type": "IpRule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Denied": {
+                      "fields": {
+                        "ipRules": {
+                          "rule": "repeated",
+                          "type": "IpRule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Job": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "JobState",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorCode": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "JobState": {
+                      "values": {
+                        "JOB_STATE_UNSPECIFIED": 0,
+                        "PENDING": 1,
+                        "RUNNING": 2,
+                        "SUCCEEDED": 3,
+                        "FAILED": 4
                       }
                     },
                     "KernelRootkit": {
@@ -11057,11 +11429,30 @@
                         "Technique": {
                           "values": {
                             "TECHNIQUE_UNSPECIFIED": 0,
+                            "DATA_OBFUSCATION": 70,
+                            "DATA_OBFUSCATION_STEGANOGRAPHY": 71,
+                            "OS_CREDENTIAL_DUMPING": 114,
+                            "OS_CREDENTIAL_DUMPING_PROC_FILESYSTEM": 115,
+                            "OS_CREDENTIAL_DUMPING_ETC_PASSWORD_AND_ETC_SHADOW": 122,
+                            "DATA_FROM_LOCAL_SYSTEM": 117,
+                            "AUTOMATED_EXFILTRATION": 68,
+                            "OBFUSCATED_FILES_OR_INFO": 72,
+                            "STEGANOGRAPHY": 73,
+                            "COMPILE_AFTER_DELIVERY": 74,
+                            "COMMAND_OBFUSCATION": 75,
+                            "SCHEDULED_TRANSFER": 120,
+                            "SYSTEM_OWNER_USER_DISCOVERY": 118,
                             "MASQUERADING": 49,
                             "MATCH_LEGITIMATE_NAME_OR_LOCATION": 50,
                             "BOOT_OR_LOGON_INITIALIZATION_SCRIPTS": 37,
                             "STARTUP_ITEMS": 38,
                             "NETWORK_SERVICE_DISCOVERY": 32,
+                            "SCHEDULED_TASK_JOB": 89,
+                            "SCHEDULED_TASK_JOB_CRON": 119,
+                            "CONTAINER_ORCHESTRATION_JOB": 90,
+                            "PROCESS_INJECTION": 93,
+                            "INPUT_CAPTURE": 103,
+                            "INPUT_CAPTURE_KEYLOGGING": 104,
                             "PROCESS_DISCOVERY": 56,
                             "COMMAND_AND_SCRIPTING_INTERPRETER": 6,
                             "UNIX_SHELL": 7,
@@ -11069,7 +11460,12 @@
                             "EXPLOITATION_FOR_PRIVILEGE_ESCALATION": 63,
                             "PERMISSION_GROUPS_DISCOVERY": 18,
                             "CLOUD_GROUPS": 19,
+                            "INDICATOR_REMOVAL": 123,
+                            "INDICATOR_REMOVAL_CLEAR_LINUX_OR_MAC_SYSTEM_LOGS": 124,
+                            "INDICATOR_REMOVAL_CLEAR_COMMAND_HISTORY": 125,
                             "INDICATOR_REMOVAL_FILE_DELETION": 64,
+                            "INDICATOR_REMOVAL_TIMESTOMP": 128,
+                            "INDICATOR_REMOVAL_CLEAR_MAILBOX_DATA": 126,
                             "APPLICATION_LAYER_PROTOCOL": 45,
                             "DNS": 46,
                             "SOFTWARE_DEPLOYMENT_TOOLS": 47,
@@ -11077,53 +11473,108 @@
                             "DEFAULT_ACCOUNTS": 35,
                             "LOCAL_ACCOUNTS": 15,
                             "CLOUD_ACCOUNTS": 16,
+                            "FILE_AND_DIRECTORY_DISCOVERY": 121,
+                            "ACCOUNT_DISCOVERY_LOCAL_ACCOUNT": 116,
                             "PROXY": 9,
                             "EXTERNAL_PROXY": 10,
                             "MULTI_HOP_PROXY": 11,
                             "ACCOUNT_MANIPULATION": 22,
                             "ADDITIONAL_CLOUD_CREDENTIALS": 40,
+                            "ADDITIONAL_CLOUD_ROLES": 67,
                             "SSH_AUTHORIZED_KEYS": 23,
                             "ADDITIONAL_CONTAINER_CLUSTER_ROLES": 58,
+                            "MULTI_STAGE_CHANNELS": 76,
                             "INGRESS_TOOL_TRANSFER": 3,
                             "NATIVE_API": 4,
                             "BRUTE_FORCE": 44,
+                            "AUTOMATED_COLLECTION": 94,
                             "SHARED_MODULES": 5,
+                            "DATA_ENCODING": 77,
+                            "STANDARD_ENCODING": 78,
                             "ACCESS_TOKEN_MANIPULATION": 33,
                             "TOKEN_IMPERSONATION_OR_THEFT": 39,
+                            "CREATE_ACCOUNT": 79,
+                            "LOCAL_ACCOUNT": 80,
+                            "DEOBFUSCATE_DECODE_FILES_OR_INFO": 95,
                             "EXPLOIT_PUBLIC_FACING_APPLICATION": 27,
+                            "SUPPLY_CHAIN_COMPROMISE": 129,
+                            "COMPROMISE_SOFTWARE_DEPENDENCIES_AND_DEVELOPMENT_TOOLS": 130,
+                            "EXPLOITATION_FOR_CLIENT_EXECUTION": 134,
+                            "USER_EXECUTION": 69,
+                            "LINUX_AND_MAC_FILE_AND_DIRECTORY_PERMISSIONS_MODIFICATION": 135,
                             "DOMAIN_POLICY_MODIFICATION": 30,
                             "DATA_DESTRUCTION": 29,
+                            "DATA_ENCRYPTED_FOR_IMPACT": 132,
                             "SERVICE_STOP": 52,
                             "INHIBIT_SYSTEM_RECOVERY": 36,
+                            "FIRMWARE_CORRUPTION": 81,
                             "RESOURCE_HIJACKING": 8,
                             "NETWORK_DENIAL_OF_SERVICE": 17,
                             "CLOUD_SERVICE_DISCOVERY": 48,
                             "STEAL_APPLICATION_ACCESS_TOKEN": 42,
                             "ACCOUNT_ACCESS_REMOVAL": 51,
+                            "TRANSFER_DATA_TO_CLOUD_ACCOUNT": 91,
                             "STEAL_WEB_SESSION_COOKIE": 25,
                             "CREATE_OR_MODIFY_SYSTEM_PROCESS": 24,
                             "EVENT_TRIGGERED_EXECUTION": 65,
+                            "BOOT_OR_LOGON_AUTOSTART_EXECUTION": 82,
+                            "KERNEL_MODULES_AND_EXTENSIONS": 83,
+                            "SHORTCUT_MODIFICATION": 127,
                             "ABUSE_ELEVATION_CONTROL_MECHANISM": 34,
+                            "ABUSE_ELEVATION_CONTROL_MECHANISM_SETUID_AND_SETGID": 136,
+                            "ABUSE_ELEVATION_CONTROL_MECHANISM_SUDO_AND_SUDO_CACHING": 109,
                             "UNSECURED_CREDENTIALS": 13,
+                            "CREDENTIALS_IN_FILES": 105,
+                            "BASH_HISTORY": 96,
+                            "PRIVATE_KEYS": 97,
+                            "SUBVERT_TRUST_CONTROL": 106,
+                            "INSTALL_ROOT_CERTIFICATE": 107,
+                            "COMPROMISE_HOST_SOFTWARE_BINARY": 84,
+                            "CREDENTIALS_FROM_PASSWORD_STORES": 98,
                             "MODIFY_AUTHENTICATION_PROCESS": 28,
+                            "PLUGGABLE_AUTHENTICATION_MODULES": 108,
+                            "MULTI_FACTOR_AUTHENTICATION": 137,
                             "IMPAIR_DEFENSES": 31,
                             "DISABLE_OR_MODIFY_TOOLS": 55,
+                            "INDICATOR_BLOCKING": 110,
+                            "DISABLE_OR_MODIFY_LINUX_AUDIT_SYSTEM": 111,
+                            "HIDE_ARTIFACTS": 85,
+                            "HIDDEN_FILES_AND_DIRECTORIES": 86,
+                            "HIDDEN_USERS": 87,
                             "EXFILTRATION_OVER_WEB_SERVICE": 20,
                             "EXFILTRATION_TO_CLOUD_STORAGE": 21,
                             "DYNAMIC_RESOLUTION": 12,
                             "LATERAL_TOOL_TRANSFER": 41,
+                            "HIJACK_EXECUTION_FLOW": 112,
+                            "HIJACK_EXECUTION_FLOW_DYNAMIC_LINKER_HIJACKING": 113,
                             "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE": 26,
                             "CREATE_SNAPSHOT": 54,
                             "CLOUD_INFRASTRUCTURE_DISCOVERY": 53,
+                            "DEVELOP_CAPABILITIES": 99,
+                            "DEVELOP_CAPABILITIES_MALWARE": 100,
                             "OBTAIN_CAPABILITIES": 43,
+                            "OBTAIN_CAPABILITIES_MALWARE": 101,
+                            "OBTAIN_CAPABILITIES_VULNERABILITIES": 133,
                             "ACTIVE_SCANNING": 1,
                             "SCANNING_IP_BLOCKS": 2,
+                            "STAGE_CAPABILITIES": 88,
+                            "UPLOAD_MALWARE": 102,
                             "CONTAINER_ADMINISTRATION_COMMAND": 60,
                             "DEPLOY_CONTAINER": 66,
                             "ESCAPE_TO_HOST": 61,
                             "CONTAINER_AND_RESOURCE_DISCOVERY": 57,
-                            "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES": 62
+                            "REFLECTIVE_CODE_LOADING": 92,
+                            "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES": 62,
+                            "FINANCIAL_THEFT": 131
                           }
+                        }
+                      }
+                    },
+                    "Network": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -11206,6 +11657,10 @@
                         "parentPid": {
                           "type": "int64",
                           "id": 10
+                        },
+                        "userId": {
+                          "type": "int64",
+                          "id": 11
                         }
                       }
                     },
@@ -11310,6 +11765,50 @@
                         }
                       }
                     },
+                    "VertexAi": {
+                      "fields": {
+                        "datasets": {
+                          "rule": "repeated",
+                          "type": "Dataset",
+                          "id": 1
+                        },
+                        "pipelines": {
+                          "rule": "repeated",
+                          "type": "Pipeline",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Dataset": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "source": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "Pipeline": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "Vulnerability": {
                       "fields": {
                         "cve": {
@@ -11327,6 +11826,19 @@
                         "securityBulletin": {
                           "type": "SecurityBulletin",
                           "id": 4
+                        },
+                        "providerRiskScore": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "reachable": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "cwes": {
+                          "rule": "repeated",
+                          "type": "Cwe",
+                          "id": 7
                         }
                       }
                     },
@@ -11532,6 +12044,19 @@
                         }
                       }
                     },
+                    "Cwe": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "references": {
+                          "rule": "repeated",
+                          "type": "Reference",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Folder": {
                       "fields": {
                         "resourceFolder": {
@@ -11659,6 +12184,13 @@
                         "streamingConfig": {
                           "type": "StreamingConfig",
                           "id": 5
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -13651,6 +14183,45 @@
                         }
                       }
                     },
+                    "BigQueryDestination": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExportFindingsMetadata": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "bigQueryDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exportStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bigQueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExportFindingsResponse": {
+                      "fields": {}
+                    },
                     "GetBigQueryExportRequest": {
                       "fields": {
                         "name": {
@@ -14537,7 +15108,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -14550,6 +15124,30 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             },
             "http": {
@@ -14653,6 +15251,11 @@
             "oauthScopes": {
               "type": "string",
               "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
               "extend": "google.protobuf.ServiceOptions"
             },
             "CommonLanguageSettings": {
@@ -14763,6 +15366,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -14974,6 +15581,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -14983,6 +15591,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -14998,6 +15607,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15015,18 +15625,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -15067,6 +15671,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15149,6 +15754,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -15222,6 +15828,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15301,6 +15908,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15313,6 +15921,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15354,6 +15963,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15370,6 +15980,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15387,6 +15998,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -15421,6 +16033,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -15562,6 +16175,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -15635,6 +16249,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -15696,10 +16311,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -15783,6 +16395,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -15802,6 +16415,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -15845,6 +16459,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -15878,6 +16493,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -15904,6 +16520,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -15946,6 +16563,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -15995,6 +16613,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -16067,8 +16686,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -16124,6 +16755,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -16155,6 +16787,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -16168,12 +16801,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -16193,6 +16832,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -16206,7 +16846,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

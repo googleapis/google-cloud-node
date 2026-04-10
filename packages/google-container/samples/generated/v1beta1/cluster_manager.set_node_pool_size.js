@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(projectId, zone, clusterId, nodePoolId, nodeCount) {
+function main(nodeCount) {
   // [START container_v1beta1_generated_ClusterManager_SetNodePoolSize_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -48,10 +48,6 @@ function main(projectId, zone, clusterId, nodePoolId, nodeCount) {
   async function callSetNodePoolSize() {
     // Construct request
     const request = {
-      projectId,
-      zone,
-      clusterId,
-      nodePoolId,
       nodeCount,
     };
 

@@ -1,6 +1,10 @@
 [
   "../../protos/google/cloud/discoveryengine/v1/answer.proto",
+  "../../protos/google/cloud/discoveryengine/v1/assist_answer.proto",
+  "../../protos/google/cloud/discoveryengine/v1/assistant.proto",
+  "../../protos/google/cloud/discoveryengine/v1/assistant_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/chunk.proto",
+  "../../protos/google/cloud/discoveryengine/v1/cmek_config_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/common.proto",
   "../../protos/google/cloud/discoveryengine/v1/completion.proto",
   "../../protos/google/cloud/discoveryengine/v1/completion_service.proto",
@@ -18,6 +22,8 @@
   "../../protos/google/cloud/discoveryengine/v1/engine_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/grounded_generation_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/grounding.proto",
+  "../../protos/google/cloud/discoveryengine/v1/identity_mapping_store.proto",
+  "../../protos/google/cloud/discoveryengine/v1/identity_mapping_store_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/import_config.proto",
   "../../protos/google/cloud/discoveryengine/v1/project.proto",
   "../../protos/google/cloud/discoveryengine/v1/project_service.proto",
@@ -32,8 +38,11 @@
   "../../protos/google/cloud/discoveryengine/v1/serving_config.proto",
   "../../protos/google/cloud/discoveryengine/v1/serving_config_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/session.proto",
+  "../../protos/google/cloud/discoveryengine/v1/session_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/site_search_engine.proto",
   "../../protos/google/cloud/discoveryengine/v1/site_search_engine_service.proto",
   "../../protos/google/cloud/discoveryengine/v1/user_event.proto",
-  "../../protos/google/cloud/discoveryengine/v1/user_event_service.proto"
+  "../../protos/google/cloud/discoveryengine/v1/user_event_service.proto",
+  "../../protos/google/cloud/discoveryengine/v1/user_license.proto",
+  "../../protos/google/cloud/discoveryengine/v1/user_license_service.proto"
 ]

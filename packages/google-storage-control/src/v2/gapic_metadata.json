@@ -95,9 +95,29 @@
                 "updateOrganizationIntelligenceConfig"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
+              ]
+            },
+            "DeleteFolderRecursive": {
+              "methods": [
+                "deleteFolderRecursive"
               ]
             },
             "CreateAnywhereCache": {
@@ -221,9 +241,29 @@
                 "updateOrganizationIntelligenceConfig"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
+              ]
+            },
+            "DeleteFolderRecursive": {
+              "methods": [
+                "deleteFolderRecursive"
               ]
             },
             "CreateAnywhereCache": {

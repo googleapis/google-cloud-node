@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main(monitoringService) {
   /**
    *  Required. The monitoring service the cluster should use to write metrics.
    *  Currently available options:
-   *  * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+   *  * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
    *  service with a Kubernetes-native resource model
    *  * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
    *    longer available as of GKE 1.15).

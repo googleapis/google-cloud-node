@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.2.1...gkemulticloud-v2.3.0) (2026-01-12)
+
+
+### Features
+
+* [gkemulticloud] added custom tolerations and labels support for Attached Clusters ([#6917](https://github.com/googleapis/google-cloud-node/issues/6917)) ([c9004db](https://github.com/googleapis/google-cloud-node/commit/c9004db0788709eb24f695a7412880e31ee29051))
+
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.2.0...gkemulticloud-v2.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.1.0...gkemulticloud-v2.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6421](https://github.com/googleapis/google-cloud-node/issues/6421)) ([0cba45c](https://github.com/googleapis/google-cloud-node/commit/0cba45c3abc98d4f1ffdf75da3610e6e52267737))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.0.1...gkemulticloud-v2.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/gkemulticloud-v2.0.0...gkemulticloud-v2.0.1) (2025-03-21)
 
 

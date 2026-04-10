@@ -1,5 +1,41 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.3.0...binary-authorization-v4.4.0) (2026-03-18)
+
+
+### Features
+
+* [binaryauthorization] Added line_number to FileLocation ([#7609](https://github.com/googleapis/google-cloud-node/issues/7609)) ([c156f91](https://github.com/googleapis/google-cloud-node/commit/c156f91425669f249c9a49befda2d200ac482182))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.2.0...binary-authorization-v4.3.0) (2026-02-19)
+
+
+### Features
+
+* [binaryauthorization] A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#7259](https://github.com/googleapis/google-cloud-node/issues/7259)) ([9658565](https://github.com/googleapis/google-cloud-node/commit/965856505ac13a44afeda20d587510ba7f892b3c))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.1.1...binary-authorization-v4.2.0) (2026-01-31)
+
+
+### Features
+
+* [binaryauthorization] A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence` ([#7040](https://github.com/googleapis/google-cloud-node/issues/7040)) ([2dabb7a](https://github.com/googleapis/google-cloud-node/commit/2dabb7ab19e4dd1cc955ea51791ab5c4f4fa80dc))
+
+## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.1.0...binary-authorization-v4.1.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.0.1...binary-authorization-v4.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v4.0.0...binary-authorization-v4.0.1) (2025-03-19)
 
 

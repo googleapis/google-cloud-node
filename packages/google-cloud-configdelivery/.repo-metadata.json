@@ -1,0 +1,17 @@
+{
+  "name": "configdelivery",
+  "name_pretty": "Config Delivery API",
+  "product_documentation": "https://cloud.google.com/kubernetes-engine/enterprise/config-sync/docs/concepts/fleet-packages",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/configdelivery/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/configdelivery",
+  "api_id": "configdelivery.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "configdelivery"
+}
+

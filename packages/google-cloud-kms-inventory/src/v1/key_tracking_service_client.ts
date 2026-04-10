@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,18 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -108,41 +101,20 @@ export class KeyTrackingServiceClient {
    *     const client = new KeyTrackingServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof KeyTrackingServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'kmsinventory.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -168,7 +140,7 @@ export class KeyTrackingServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -182,7 +154,10 @@ export class KeyTrackingServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -218,16 +193,20 @@ export class KeyTrackingServiceClient {
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/protectedResourcesSummary'
-        ),
-      projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/protectedResourcesSummary'
-        ),
+      organizationProtectedResourceScopePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/protectedResourceScope'
+      ),
+      projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/protectedResourcesSummary'
+      ),
+      projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/protectedResourcesSummary'
+      ),
       publicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
+      ),
+      retiredResourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/retiredResources/{retired_resource}'
       ),
     };
 
@@ -235,20 +214,14 @@ export class KeyTrackingServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      searchProtectedResources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'protectedResources'
-      ),
+      searchProtectedResources:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'protectedResources')
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.kms.inventory.v1.KeyTrackingService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.kms.inventory.v1.KeyTrackingService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -279,39 +252,32 @@ export class KeyTrackingServiceClient {
     // Put together the "service stub" for
     // google.cloud.kms.inventory.v1.KeyTrackingService.
     this.keyTrackingServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.kms.inventory.v1.KeyTrackingService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.kms.inventory.v1
-            .KeyTrackingService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.kms.inventory.v1.KeyTrackingService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.kms.inventory.v1.KeyTrackingService,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const keyTrackingServiceStubMethods = [
-      'getProtectedResourcesSummary',
-      'searchProtectedResources',
-    ];
+    const keyTrackingServiceStubMethods =
+        ['getProtectedResourcesSummary', 'searchProtectedResources'];
     for (const methodName of keyTrackingServiceStubMethods) {
       const callPromise = this.keyTrackingServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -331,14 +297,8 @@ export class KeyTrackingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'kmsinventory.googleapis.com';
   }
@@ -349,14 +309,8 @@ export class KeyTrackingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'kmsinventory.googleapis.com';
   }
@@ -387,7 +341,9 @@ export class KeyTrackingServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -396,9 +352,8 @@ export class KeyTrackingServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -409,274 +364,232 @@ export class KeyTrackingServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Returns aggregate information about the resources protected by the given
-   * Cloud KMS {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}. Only resources within
-   * the same Cloud organization as the key will be returned. The project that
-   * holds the key must be part of an organization in order for this call to
-   * succeed.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.inventory.v1.ProtectedResourcesSummary|ProtectedResourcesSummary}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_tracking_service.get_protected_resources_summary.js</caption>
-   * region_tag:kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async
-   */
+/**
+ * Returns aggregate information about the resources protected by the given
+ * Cloud KMS {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}. By default,
+ * summary of resources within the same Cloud organization as the key will be
+ * returned, which requires the KMS organization service account to be
+ * configured(refer
+ * https://docs.cloud.google.com/kms/docs/view-key-usage#required-roles).
+ * If the KMS organization service account is not configured or key's project
+ * is not part of an organization, set
+ * {@link protos.google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest.fallback_scope|fallback_scope}
+ * to `FALLBACK_SCOPE_PROJECT` to retrieve a summary of protected resources
+ * within the key's project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ * @param {google.cloud.kms.inventory.v1.FallbackScope} [request.fallbackScope]
+ *   Optional. The scope to use if the kms organization service account is not
+ *   configured.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.kms.inventory.v1.ProtectedResourcesSummary|ProtectedResourcesSummary}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_tracking_service.get_protected_resources_summary.js</caption>
+ * region_tag:kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async
+ */
   getProtectedResourcesSummary(
-    request?: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-      (
-        | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+        protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|undefined, {}|undefined
+      ]>;
   getProtectedResourcesSummary(
-    request: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-      | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProtectedResourcesSummary(
-    request: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
-    callback: Callback<
-      protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-      | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getProtectedResourcesSummary(
-    request?: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-          | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-      | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-      (
-        | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProtectedResourcesSummary(
+      request: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
+      callback: Callback<
+          protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+          protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|null|undefined,
+          {}|null|undefined>): void;
+  getProtectedResourcesSummary(
+      request?: protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+          protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+          protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+        protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getProtectedResourcesSummary request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-          | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+        protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProtectedResourcesSummary response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getProtectedResourcesSummary(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
-          (
-            | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getProtectedResourcesSummary response %j', response);
-          return [response, options, rawResponse];
+    return this.innerApiCalls.getProtectedResourcesSummary(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+        protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getProtectedResourcesSummary response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
-      );
+        throw error;
+      });
   }
 
-  /**
-   * Returns metadata about the resources protected by the given Cloud KMS
-   * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} in the given Cloud organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. Resource name of the organization.
-   *   Example: organizations/123
-   * @param {string} request.cryptoKey
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   * @param {number} request.pageSize
-   *   The maximum number of resources to return. The service may return fewer
-   *   than this value.
-   *   If unspecified, at most 500 resources will be returned.
-   *   The maximum value is 500; values above 500 will be coerced to 500.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
-   *   must match the call that provided the page token.
-   * @param {string[]} [request.resourceTypes]
-   *   Optional. A list of resource types that this request searches for. If
-   *   empty, it will search all the [trackable resource
-   *   types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types).
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * `compute.googleapis.com.*` snapshots resources whose type starts
-   *   with `compute.googleapis.com`.
-   *   * `.*Image` snapshots resources whose type ends with `Image`.
-   *   * `.*Image.*` snapshots resources whose type contains `Image`.
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported resource type, an INVALID_ARGUMENT error will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `searchProtectedResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+ /**
+ * Returns metadata about the resources protected by the given Cloud KMS
+ * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} in the given Cloud
+ * organization/project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be an organization or a project. Resources protected
+ *   by the crypto key in provided scope will be returned.
+ *
+ *   The following values are allowed:
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ * @param {string} request.cryptoKey
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ * @param {number} request.pageSize
+ *   The maximum number of resources to return. The service may return fewer
+ *   than this value.
+ *   If unspecified, at most 500 resources will be returned.
+ *   The maximum value is 500; values above 500 will be coerced to 500.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+ *   must match the call that provided the page token.
+ * @param {string[]} [request.resourceTypes]
+ *   Optional. A list of resource types that this request searches for. If
+ *   empty, it will search all the [trackable resource
+ *   types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types).
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * `compute.googleapis.com.*` snapshots resources whose type starts
+ *   with `compute.googleapis.com`.
+ *   * `.*Image` snapshots resources whose type ends with `Image`.
+ *   * `.*Image.*` snapshots resources whose type contains `Image`.
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported resource type, an INVALID_ARGUMENT error will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `searchProtectedResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchProtectedResources(
-    request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.inventory.v1.IProtectedResource[],
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
-    ]
-  >;
+      request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.kms.inventory.v1.IProtectedResource[],
+        protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest|null,
+        protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+      ]>;
   searchProtectedResources(
-    request: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-      | protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.kms.inventory.v1.IProtectedResource
-    >
-  ): void;
-  searchProtectedResources(
-    request: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-      | protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.kms.inventory.v1.IProtectedResource
-    >
-  ): void;
-  searchProtectedResources(
-    request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-          | protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.kms.inventory.v1.IProtectedResource
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-      | protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
-      | null
-      | undefined,
-      protos.google.cloud.kms.inventory.v1.IProtectedResource
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.inventory.v1.IProtectedResource[],
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
-    ]
-  > | void {
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse|null|undefined,
+          protos.google.cloud.kms.inventory.v1.IProtectedResource>): void;
+  searchProtectedResources(
+      request: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse|null|undefined,
+          protos.google.cloud.kms.inventory.v1.IProtectedResource>): void;
+  searchProtectedResources(
+      request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse|null|undefined,
+          protos.google.cloud.kms.inventory.v1.IProtectedResource>,
+      callback?: PaginationCallback<
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse|null|undefined,
+          protos.google.cloud.kms.inventory.v1.IProtectedResource>):
+      Promise<[
+        protos.google.cloud.kms.inventory.v1.IProtectedResource[],
+        protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest|null,
+        protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
     });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-          | protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
-          | null
-          | undefined,
-          protos.google.cloud.kms.inventory.v1.IProtectedResource
-        >
-      | undefined = callback
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse|null|undefined,
+      protos.google.cloud.kms.inventory.v1.IProtectedResource>|undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchProtectedResources values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -685,84 +598,87 @@ export class KeyTrackingServiceClient {
     this._log.info('searchProtectedResources request %j', request);
     return this.innerApiCalls
       .searchProtectedResources(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.kms.inventory.v1.IProtectedResource[],
-          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
-          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
-        ]) => {
-          this._log.info('searchProtectedResources values %j', response);
-          return [response, input, output];
-        }
-      );
+      ?.then(([response, input, output]: [
+        protos.google.cloud.kms.inventory.v1.IProtectedResource[],
+        protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest|null,
+        protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+      ]) => {
+        this._log.info('searchProtectedResources values %j', response);
+        return [response, input, output];
+      });
   }
 
-  /**
-   * Equivalent to `searchProtectedResources`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. Resource name of the organization.
-   *   Example: organizations/123
-   * @param {string} request.cryptoKey
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   * @param {number} request.pageSize
-   *   The maximum number of resources to return. The service may return fewer
-   *   than this value.
-   *   If unspecified, at most 500 resources will be returned.
-   *   The maximum value is 500; values above 500 will be coerced to 500.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
-   *   must match the call that provided the page token.
-   * @param {string[]} [request.resourceTypes]
-   *   Optional. A list of resource types that this request searches for. If
-   *   empty, it will search all the [trackable resource
-   *   types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types).
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * `compute.googleapis.com.*` snapshots resources whose type starts
-   *   with `compute.googleapis.com`.
-   *   * `.*Image` snapshots resources whose type ends with `Image`.
-   *   * `.*Image.*` snapshots resources whose type contains `Image`.
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported resource type, an INVALID_ARGUMENT error will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `searchProtectedResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `searchProtectedResources`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be an organization or a project. Resources protected
+ *   by the crypto key in provided scope will be returned.
+ *
+ *   The following values are allowed:
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ * @param {string} request.cryptoKey
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ * @param {number} request.pageSize
+ *   The maximum number of resources to return. The service may return fewer
+ *   than this value.
+ *   If unspecified, at most 500 resources will be returned.
+ *   The maximum value is 500; values above 500 will be coerced to 500.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+ *   must match the call that provided the page token.
+ * @param {string[]} [request.resourceTypes]
+ *   Optional. A list of resource types that this request searches for. If
+ *   empty, it will search all the [trackable resource
+ *   types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types).
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * `compute.googleapis.com.*` snapshots resources whose type starts
+ *   with `compute.googleapis.com`.
+ *   * `.*Image` snapshots resources whose type ends with `Image`.
+ *   * `.*Image.*` snapshots resources whose type contains `Image`.
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported resource type, an INVALID_ARGUMENT error will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `searchProtectedResourcesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
   searchProtectedResourcesStream(
-    request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-    options?: CallOptions
-  ): Transform {
+      request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['searchProtectedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchProtectedResources stream %j', request);
     return this.descriptors.page.searchProtectedResources.createStream(
       this.innerApiCalls.searchProtectedResources as GaxCall,
@@ -771,75 +687,80 @@ export class KeyTrackingServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `searchProtectedResources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.scope
-   *   Required. Resource name of the organization.
-   *   Example: organizations/123
-   * @param {string} request.cryptoKey
-   *   Required. The resource name of the
-   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
-   * @param {number} request.pageSize
-   *   The maximum number of resources to return. The service may return fewer
-   *   than this value.
-   *   If unspecified, at most 500 resources will be returned.
-   *   The maximum value is 500; values above 500 will be coerced to 500.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
-   *   must match the call that provided the page token.
-   * @param {string[]} [request.resourceTypes]
-   *   Optional. A list of resource types that this request searches for. If
-   *   empty, it will search all the [trackable resource
-   *   types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types).
-   *
-   *   Regular expressions are also supported. For example:
-   *
-   *   * `compute.googleapis.com.*` snapshots resources whose type starts
-   *   with `compute.googleapis.com`.
-   *   * `.*Image` snapshots resources whose type ends with `Image`.
-   *   * `.*Image.*` snapshots resources whose type contains `Image`.
-   *
-   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
-   *   regular expression syntax. If the regular expression does not match any
-   *   supported resource type, an INVALID_ARGUMENT error will be returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/key_tracking_service.search_protected_resources.js</caption>
-   * region_tag:kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_async
-   */
+/**
+ * Equivalent to `searchProtectedResources`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.scope
+ *   Required. A scope can be an organization or a project. Resources protected
+ *   by the crypto key in provided scope will be returned.
+ *
+ *   The following values are allowed:
+ *
+ *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+ *   * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+ *   * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+ * @param {string} request.cryptoKey
+ *   Required. The resource name of the
+ *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+ * @param {number} request.pageSize
+ *   The maximum number of resources to return. The service may return fewer
+ *   than this value.
+ *   If unspecified, at most 500 resources will be returned.
+ *   The maximum value is 500; values above 500 will be coerced to 500.
+ * @param {string} request.pageToken
+ *   A page token, received from a previous
+ *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+ *   call. Provide this to retrieve the subsequent page.
+ *
+ *   When paginating, all other parameters provided to
+ *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+ *   must match the call that provided the page token.
+ * @param {string[]} [request.resourceTypes]
+ *   Optional. A list of resource types that this request searches for. If
+ *   empty, it will search all the [trackable resource
+ *   types](https://cloud.google.com/kms/docs/view-key-usage#tracked-resource-types).
+ *
+ *   Regular expressions are also supported. For example:
+ *
+ *   * `compute.googleapis.com.*` snapshots resources whose type starts
+ *   with `compute.googleapis.com`.
+ *   * `.*Image` snapshots resources whose type ends with `Image`.
+ *   * `.*Image.*` snapshots resources whose type contains `Image`.
+ *
+ *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+ *   regular expression syntax. If the regular expression does not match any
+ *   supported resource type, an INVALID_ARGUMENT error will be returned.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/key_tracking_service.search_protected_resources.js</caption>
+ * region_tag:kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_async
+ */
   searchProtectedResourcesAsync(
-    request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.kms.inventory.v1.IProtectedResource> {
+      request?: protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.kms.inventory.v1.IProtectedResource>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        scope: request.scope ?? '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'scope': request.scope ?? '',
+    });
     const defaultCallSettings = this._defaults['searchProtectedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
+    this.initialize().catch(err => {throw err});
     this._log.info('searchProtectedResources iterate %j', request);
     return this.descriptors.page.searchProtectedResources.asyncIterate(
       this.innerApiCalls['searchProtectedResources'] as GaxCall,
@@ -860,12 +781,7 @@ export class KeyTrackingServiceClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
+  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -882,8 +798,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
   }
 
   /**
@@ -894,8 +809,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
   }
 
   /**
@@ -906,8 +820,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
   }
 
   /**
@@ -918,8 +831,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
   }
 
   /**
@@ -932,13 +844,7 @@ export class KeyTrackingServiceClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  cryptoKeyVersionPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  cryptoKeyVersionPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
       project: project,
       location: location,
@@ -956,9 +862,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).project;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).project;
   }
 
   /**
@@ -969,9 +873,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).location;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).location;
   }
 
   /**
@@ -982,9 +884,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).key_ring;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).key_ring;
   }
 
   /**
@@ -995,9 +895,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key;
   }
 
   /**
@@ -1008,9 +906,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the crypto_key_version.
    */
   matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
-    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
-      cryptoKeyVersionName
-    ).crypto_key_version;
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(cryptoKeyVersionName).crypto_key_version;
   }
 
   /**
@@ -1022,12 +918,7 @@ export class KeyTrackingServiceClient {
    * @param {string} import_job
    * @returns {string} Resource name string.
    */
-  importJobPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    importJob: string
-  ) {
+  importJobPath(project:string,location:string,keyRing:string,importJob:string) {
     return this.pathTemplates.importJobPathTemplate.render({
       project: project,
       location: location,
@@ -1044,8 +935,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .project;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).project;
   }
 
   /**
@@ -1056,8 +946,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .location;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).location;
   }
 
   /**
@@ -1068,8 +957,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .key_ring;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).key_ring;
   }
 
   /**
@@ -1080,8 +968,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the import_job.
    */
   matchImportJobFromImportJobName(importJobName: string) {
-    return this.pathTemplates.importJobPathTemplate.match(importJobName)
-      .import_job;
+    return this.pathTemplates.importJobPathTemplate.match(importJobName).import_job;
   }
 
   /**
@@ -1092,7 +979,7 @@ export class KeyTrackingServiceClient {
    * @param {string} key_ring
    * @returns {string} Resource name string.
    */
-  keyRingPath(project: string, location: string, keyRing: string) {
+  keyRingPath(project:string,location:string,keyRing:string) {
     return this.pathTemplates.keyRingPathTemplate.render({
       project: project,
       location: location,
@@ -1139,7 +1026,7 @@ export class KeyTrackingServiceClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization: string) {
+  organizationPath(organization:string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -1153,8 +1040,30 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationProtectedResourceScope resource name string.
+   *
+   * @param {string} organization
+   * @returns {string} Resource name string.
+   */
+  organizationProtectedResourceScopePath(organization:string) {
+    return this.pathTemplates.organizationProtectedResourceScopePathTemplate.render({
+      organization: organization,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationProtectedResourceScope resource.
+   *
+   * @param {string} organizationProtectedResourceScopeName
+   *   A fully-qualified path representing organization_protectedResourceScope resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationProtectedResourceScopeName(organizationProtectedResourceScopeName: string) {
+    return this.pathTemplates.organizationProtectedResourceScopePathTemplate.match(organizationProtectedResourceScopeName).organization;
   }
 
   /**
@@ -1167,22 +1076,14 @@ export class KeyTrackingServiceClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        key_ring: keyRing,
-        crypto_key: cryptoKey,
-        crypto_key_version: cryptoKeyVersion,
-      }
-    );
+  projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+      crypto_key_version: cryptoKeyVersion,
+    });
   }
 
   /**
@@ -1192,12 +1093,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_crypto_key_version_protectedResourcesSummary resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName
-    ).project;
+  matchProjectFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName).project;
   }
 
   /**
@@ -1207,12 +1104,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_crypto_key_version_protectedResourcesSummary resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName
-    ).location;
+  matchLocationFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName).location;
   }
 
   /**
@@ -1222,12 +1115,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_crypto_key_version_protectedResourcesSummary resource.
    * @returns {string} A string representing the key_ring.
    */
-  matchKeyRingFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName
-    ).key_ring;
+  matchKeyRingFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName).key_ring;
   }
 
   /**
@@ -1237,12 +1126,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_crypto_key_version_protectedResourcesSummary resource.
    * @returns {string} A string representing the crypto_key.
    */
-  matchCryptoKeyFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName
-    ).crypto_key;
+  matchCryptoKeyFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName).crypto_key;
   }
 
   /**
@@ -1252,12 +1137,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_crypto_key_version_protectedResourcesSummary resource.
    * @returns {string} A string representing the crypto_key_version.
    */
-  matchCryptoKeyVersionFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName
-    ).crypto_key_version;
+  matchCryptoKeyVersionFromProjectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryName).crypto_key_version;
   }
 
   /**
@@ -1269,20 +1150,13 @@ export class KeyTrackingServiceClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        key_ring: keyRing,
-        crypto_key: cryptoKey,
-      }
-    );
+  projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPath(project:string,location:string,keyRing:string,cryptoKey:string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
   }
 
   /**
@@ -1292,12 +1166,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_protectedResourcesSummary resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName
-    ).project;
+  matchProjectFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName).project;
   }
 
   /**
@@ -1307,12 +1177,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_protectedResourcesSummary resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName
-    ).location;
+  matchLocationFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName).location;
   }
 
   /**
@@ -1322,12 +1188,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_protectedResourcesSummary resource.
    * @returns {string} A string representing the key_ring.
    */
-  matchKeyRingFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName
-    ).key_ring;
+  matchKeyRingFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName).key_ring;
   }
 
   /**
@@ -1337,12 +1199,8 @@ export class KeyTrackingServiceClient {
    *   A fully-qualified path representing project_location_key_ring_crypto_key_protectedResourcesSummary resource.
    * @returns {string} A string representing the crypto_key.
    */
-  matchCryptoKeyFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(
-    projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string
-  ) {
-    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(
-      projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName
-    ).crypto_key;
+  matchCryptoKeyFromProjectLocationKeyRingCryptoKeyProtectedResourcesSummaryName(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName: string) {
+    return this.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match(projectLocationKeyRingCryptoKeyProtectedResourcesSummaryName).crypto_key;
   }
 
   /**
@@ -1355,13 +1213,7 @@ export class KeyTrackingServiceClient {
    * @param {string} crypto_key_version
    * @returns {string} Resource name string.
    */
-  publicKeyPath(
-    project: string,
-    location: string,
-    keyRing: string,
-    cryptoKey: string,
-    cryptoKeyVersion: string
-  ) {
+  publicKeyPath(project:string,location:string,keyRing:string,cryptoKey:string,cryptoKeyVersion:string) {
     return this.pathTemplates.publicKeyPathTemplate.render({
       project: project,
       location: location,
@@ -1379,8 +1231,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .project;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).project;
   }
 
   /**
@@ -1391,8 +1242,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .location;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).location;
   }
 
   /**
@@ -1403,8 +1253,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .key_ring;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).key_ring;
   }
 
   /**
@@ -1415,8 +1264,7 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .crypto_key;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key;
   }
 
   /**
@@ -1427,8 +1275,56 @@ export class KeyTrackingServiceClient {
    * @returns {string} A string representing the crypto_key_version.
    */
   matchCryptoKeyVersionFromPublicKeyName(publicKeyName: string) {
-    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName)
-      .crypto_key_version;
+    return this.pathTemplates.publicKeyPathTemplate.match(publicKeyName).crypto_key_version;
+  }
+
+  /**
+   * Return a fully-qualified retiredResource resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} retired_resource
+   * @returns {string} Resource name string.
+   */
+  retiredResourcePath(project:string,location:string,retiredResource:string) {
+    return this.pathTemplates.retiredResourcePathTemplate.render({
+      project: project,
+      location: location,
+      retired_resource: retiredResource,
+    });
+  }
+
+  /**
+   * Parse the project from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).project;
+  }
+
+  /**
+   * Parse the location from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).location;
+  }
+
+  /**
+   * Parse the retired_resource from RetiredResource resource.
+   *
+   * @param {string} retiredResourceName
+   *   A fully-qualified path representing RetiredResource resource.
+   * @returns {string} A string representing the retired_resource.
+   */
+  matchRetiredResourceFromRetiredResourceName(retiredResourceName: string) {
+    return this.pathTemplates.retiredResourcePathTemplate.match(retiredResourceName).retired_resource;
   }
 
   /**

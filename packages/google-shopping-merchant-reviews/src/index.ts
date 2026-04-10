@@ -24,10 +24,6 @@ const ProductReviewsServiceClient = v1beta.ProductReviewsServiceClient;
 type ProductReviewsServiceClient = v1beta.ProductReviewsServiceClient;
 
 export {v1beta, MerchantReviewsServiceClient, ProductReviewsServiceClient};
-export default {
-  v1beta,
-  MerchantReviewsServiceClient,
-  ProductReviewsServiceClient,
-};
+export default {v1beta, MerchantReviewsServiceClient, ProductReviewsServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

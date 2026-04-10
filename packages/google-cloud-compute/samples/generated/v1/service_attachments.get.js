@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,6 +40,10 @@ function main(project, region, serviceAttachment) {
    *  Name of the ServiceAttachment resource to return.
    */
   // const serviceAttachment = 'abc123'
+  /**
+   *  Indicates whether NAT IPs should be included in the response.
+   */
+  // const showNatIps = true
 
   // Imports the Compute library
   const {ServiceAttachmentsClient} = require('@google-cloud/compute').v1;

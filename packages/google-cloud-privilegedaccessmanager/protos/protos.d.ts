@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3226,6 +3226,9 @@ export namespace google {
                             /** Event externallyModified */
                             externallyModified?: (google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IExternallyModified|null);
 
+                            /** Event withdrawn */
+                            withdrawn?: (google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn|null);
+
                             /** Event eventTime */
                             eventTime?: (google.protobuf.ITimestamp|null);
                         }
@@ -3269,11 +3272,14 @@ export namespace google {
                             /** Event externallyModified. */
                             public externallyModified?: (google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IExternallyModified|null);
 
+                            /** Event withdrawn. */
+                            public withdrawn?: (google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn|null);
+
                             /** Event eventTime. */
                             public eventTime?: (google.protobuf.ITimestamp|null);
 
                             /** Event event. */
-                            public event?: ("requested"|"approved"|"denied"|"revoked"|"scheduled"|"activated"|"activationFailed"|"expired"|"ended"|"externallyModified");
+                            public event?: ("requested"|"approved"|"denied"|"revoked"|"scheduled"|"activated"|"activationFailed"|"expired"|"ended"|"externallyModified"|"withdrawn");
 
                             /**
                              * Creates a new Event instance using the specified properties.
@@ -3755,6 +3761,97 @@ export namespace google {
 
                                 /**
                                  * Gets the default type url for Revoked
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a Withdrawn. */
+                            interface IWithdrawn {
+                            }
+
+                            /** Represents a Withdrawn. */
+                            class Withdrawn implements IWithdrawn {
+
+                                /**
+                                 * Constructs a new Withdrawn.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn);
+
+                                /**
+                                 * Creates a new Withdrawn instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Withdrawn instance
+                                 */
+                                public static create(properties?: google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn): google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn;
+
+                                /**
+                                 * Encodes the specified Withdrawn message. Does not implicitly {@link google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.verify|verify} messages.
+                                 * @param message Withdrawn message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Withdrawn message, length delimited. Does not implicitly {@link google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn.verify|verify} messages.
+                                 * @param message Withdrawn message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.IWithdrawn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Withdrawn message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Withdrawn
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn;
+
+                                /**
+                                 * Decodes a Withdrawn message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Withdrawn
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn;
+
+                                /**
+                                 * Verifies a Withdrawn message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Withdrawn message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Withdrawn
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn;
+
+                                /**
+                                 * Creates a plain object from a Withdrawn message. Also converts values to other types if specified.
+                                 * @param message Withdrawn
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.privilegedaccessmanager.v1.Grant.Timeline.Event.Withdrawn, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Withdrawn to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Withdrawn
                                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns The default type url
                                  */
@@ -4436,7 +4533,9 @@ export namespace google {
                         EXPIRED = 8,
                         REVOKING = 9,
                         REVOKED = 10,
-                        ENDED = 11
+                        ENDED = 11,
+                        WITHDRAWING = 12,
+                        WITHDRAWN = 13
                     }
                 }
 
@@ -6311,6 +6410,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -6351,6 +6453,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -10569,6 +10674,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -10820,7 +10928,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -10851,7 +10959,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -11990,7 +12098,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -12006,7 +12114,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

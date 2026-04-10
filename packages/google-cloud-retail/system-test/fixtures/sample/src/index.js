@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const retail = require('@google-cloud/retail');
 
@@ -24,8 +25,8 @@ function main() {
   const catalogServiceClient = new retail.CatalogServiceClient();
   const completionServiceClient = new retail.CompletionServiceClient();
   const controlServiceClient = new retail.ControlServiceClient();
-  const generativeQuestionServiceClient =
-    new retail.GenerativeQuestionServiceClient();
+  const conversationalSearchServiceClient = new retail.ConversationalSearchServiceClient();
+  const generativeQuestionServiceClient = new retail.GenerativeQuestionServiceClient();
   const modelServiceClient = new retail.ModelServiceClient();
   const predictionServiceClient = new retail.PredictionServiceClient();
   const productServiceClient = new retail.ProductServiceClient();

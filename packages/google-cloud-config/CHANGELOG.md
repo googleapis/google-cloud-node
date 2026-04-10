@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.11.1](https://github.com/googleapis/google-cloud-node/compare/config-v0.11.0...config-v0.11.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.10.0...config-v0.11.0) (2025-09-04)
+
+
+### Features
+
+* [infra-manager] added support for service maintained provider ([#6651](https://github.com/googleapis/google-cloud-node/issues/6651)) ([4aff726](https://github.com/googleapis/google-cloud-node/commit/4aff726fbe811a53f24c6b5c883052716f897205))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.9.0...config-v0.10.0) (2025-07-17)
+
+
+### Features
+
+* [infra-manager] added resource change and drift details for the preview ([#6475](https://github.com/googleapis/google-cloud-node/issues/6475)) ([c949b3f](https://github.com/googleapis/google-cloud-node/commit/c949b3f677349035c669b1052ce49f0f8a6fbf06))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.8.1...config-v0.9.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/config-v0.8.0...config-v0.8.1) (2025-03-19)
 
 

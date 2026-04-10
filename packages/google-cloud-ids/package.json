@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/ids",
-  "version": "4.0.1",
+  "version": "4.2.1",
   "description": "ids client for Node.js",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^5.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -55,17 +55,25 @@
     "gapic-tools": "^1.0.0",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "linkinator": "^6.1.2",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "pack-n-play": "^3.0.0",
-    "sinon": "^19.0.2",
+    "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-ids"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-ids",
+  "overrides": {
+    "@sinonjs/fake-timers": "15.2.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.2.1"
+    }
+  }
 }

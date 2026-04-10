@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -357,6 +357,9 @@ export namespace google {
 
                         /** GetProtectedResourcesSummaryRequest name */
                         name?: (string|null);
+
+                        /** GetProtectedResourcesSummaryRequest fallbackScope */
+                        fallbackScope?: (google.cloud.kms.inventory.v1.FallbackScope|keyof typeof google.cloud.kms.inventory.v1.FallbackScope|null);
                     }
 
                     /** Represents a GetProtectedResourcesSummaryRequest. */
@@ -370,6 +373,9 @@ export namespace google {
 
                         /** GetProtectedResourcesSummaryRequest name. */
                         public name: string;
+
+                        /** GetProtectedResourcesSummaryRequest fallbackScope. */
+                        public fallbackScope: (google.cloud.kms.inventory.v1.FallbackScope|keyof typeof google.cloud.kms.inventory.v1.FallbackScope);
 
                         /**
                          * Creates a new GetProtectedResourcesSummaryRequest instance using the specified properties.
@@ -469,6 +475,9 @@ export namespace google {
 
                         /** ProtectedResourcesSummary locations */
                         locations?: ({ [k: string]: (number|Long|string) }|null);
+
+                        /** ProtectedResourcesSummary warnings */
+                        warnings?: (google.cloud.kms.inventory.v1.IWarning[]|null);
                     }
 
                     /** Represents a ProtectedResourcesSummary. */
@@ -497,6 +506,9 @@ export namespace google {
 
                         /** ProtectedResourcesSummary locations. */
                         public locations: { [k: string]: (number|Long|string) };
+
+                        /** ProtectedResourcesSummary warnings. */
+                        public warnings: google.cloud.kms.inventory.v1.IWarning[];
 
                         /**
                          * Creates a new ProtectedResourcesSummary instance using the specified properties.
@@ -950,6 +962,126 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a Warning. */
+                    interface IWarning {
+
+                        /** Warning warningCode */
+                        warningCode?: (google.cloud.kms.inventory.v1.Warning.WarningCode|keyof typeof google.cloud.kms.inventory.v1.Warning.WarningCode|null);
+
+                        /** Warning displayMessage */
+                        displayMessage?: (string|null);
+                    }
+
+                    /** Represents a Warning. */
+                    class Warning implements IWarning {
+
+                        /**
+                         * Constructs a new Warning.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.inventory.v1.IWarning);
+
+                        /** Warning warningCode. */
+                        public warningCode: (google.cloud.kms.inventory.v1.Warning.WarningCode|keyof typeof google.cloud.kms.inventory.v1.Warning.WarningCode);
+
+                        /** Warning displayMessage. */
+                        public displayMessage: string;
+
+                        /**
+                         * Creates a new Warning instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Warning instance
+                         */
+                        public static create(properties?: google.cloud.kms.inventory.v1.IWarning): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Encodes the specified Warning message. Does not implicitly {@link google.cloud.kms.inventory.v1.Warning.verify|verify} messages.
+                         * @param message Warning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.inventory.v1.IWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Warning message, length delimited. Does not implicitly {@link google.cloud.kms.inventory.v1.Warning.verify|verify} messages.
+                         * @param message Warning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.inventory.v1.IWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Warning message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Warning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Decodes a Warning message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Warning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Verifies a Warning message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Warning message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Warning
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.inventory.v1.Warning;
+
+                        /**
+                         * Creates a plain object from a Warning message. Also converts values to other types if specified.
+                         * @param message Warning
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.inventory.v1.Warning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Warning to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Warning
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Warning {
+
+                        /** WarningCode enum. */
+                        enum WarningCode {
+                            WARNING_CODE_UNSPECIFIED = 0,
+                            INSUFFICIENT_PERMISSIONS_PARTIAL_DATA = 1,
+                            RESOURCE_LIMIT_EXCEEDED_PARTIAL_DATA = 2,
+                            ORG_LESS_PROJECT_PARTIAL_DATA = 3
+                        }
+                    }
+
+                    /** FallbackScope enum. */
+                    enum FallbackScope {
+                        FALLBACK_SCOPE_UNSPECIFIED = 0,
+                        FALLBACK_SCOPE_PROJECT = 1
+                    }
                 }
             }
 
@@ -1234,7 +1366,8 @@ export namespace google {
                         ASYMMETRIC_SIGN = 5,
                         ASYMMETRIC_DECRYPT = 6,
                         RAW_ENCRYPT_DECRYPT = 7,
-                        MAC = 9
+                        MAC = 9,
+                        KEY_ENCAPSULATION = 10
                     }
                 }
 
@@ -1348,7 +1481,7 @@ export namespace google {
                     format?: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|null);
 
                     /** KeyOperationAttestation content */
-                    content?: (Uint8Array|string|null);
+                    content?: (Uint8Array|Buffer|string|null);
 
                     /** KeyOperationAttestation certChains */
                     certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -1367,7 +1500,7 @@ export namespace google {
                     public format: (google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat|keyof typeof google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat);
 
                     /** KeyOperationAttestation content. */
-                    public content: (Uint8Array|string);
+                    public content: (Uint8Array|Buffer|string);
 
                     /** KeyOperationAttestation certChains. */
                     public certChains?: (google.cloud.kms.v1.KeyOperationAttestation.ICertificateChains|null);
@@ -1796,8 +1929,17 @@ export namespace google {
                         HMAC_SHA512 = 35,
                         HMAC_SHA224 = 36,
                         EXTERNAL_SYMMETRIC_ENCRYPTION = 18,
+                        ML_KEM_768 = 47,
+                        ML_KEM_1024 = 48,
+                        KEM_XWING = 63,
+                        PQ_SIGN_ML_DSA_44 = 68,
                         PQ_SIGN_ML_DSA_65 = 56,
-                        PQ_SIGN_SLH_DSA_SHA2_128S = 57
+                        PQ_SIGN_ML_DSA_87 = 69,
+                        PQ_SIGN_SLH_DSA_SHA2_128S = 57,
+                        PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60,
+                        PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70,
+                        PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67,
+                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
                     }
 
                     /** CryptoKeyVersionState enum. */
@@ -1826,7 +1968,7 @@ export namespace google {
                 interface IChecksummedData {
 
                     /** ChecksummedData data */
-                    data?: (Uint8Array|string|null);
+                    data?: (Uint8Array|Buffer|string|null);
 
                     /** ChecksummedData crc32cChecksum */
                     crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -1842,7 +1984,7 @@ export namespace google {
                     constructor(properties?: google.cloud.kms.v1.IChecksummedData);
 
                     /** ChecksummedData data. */
-                    public data: (Uint8Array|string);
+                    public data: (Uint8Array|Buffer|string);
 
                     /** ChecksummedData crc32cChecksum. */
                     public crc32cChecksum?: (google.protobuf.IInt64Value|null);
@@ -2064,7 +2206,9 @@ export namespace google {
                     enum PublicKeyFormat {
                         PUBLIC_KEY_FORMAT_UNSPECIFIED = 0,
                         PEM = 1,
-                        NIST_PQC = 3
+                        DER = 2,
+                        NIST_PQC = 3,
+                        XWING_RAW_BYTES = 4
                     }
                 }
 
@@ -2100,6 +2244,9 @@ export namespace google {
 
                     /** ImportJob attestation */
                     attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend */
+                    cryptoKeyBackend?: (string|null);
                 }
 
                 /** Represents an ImportJob. */
@@ -2140,6 +2287,9 @@ export namespace google {
 
                     /** ImportJob attestation. */
                     public attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
+
+                    /** ImportJob cryptoKeyBackend. */
+                    public cryptoKeyBackend: string;
 
                     /**
                      * Creates a new ImportJob instance using the specified properties.
@@ -2538,13 +2688,129 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RetiredResource. */
+                interface IRetiredResource {
+
+                    /** RetiredResource name */
+                    name?: (string|null);
+
+                    /** RetiredResource originalResource */
+                    originalResource?: (string|null);
+
+                    /** RetiredResource resourceType */
+                    resourceType?: (string|null);
+
+                    /** RetiredResource deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a RetiredResource. */
+                class RetiredResource implements IRetiredResource {
+
+                    /**
+                     * Constructs a new RetiredResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IRetiredResource);
+
+                    /** RetiredResource name. */
+                    public name: string;
+
+                    /** RetiredResource originalResource. */
+                    public originalResource: string;
+
+                    /** RetiredResource resourceType. */
+                    public resourceType: string;
+
+                    /** RetiredResource deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new RetiredResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetiredResource instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IRetiredResource): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Encodes the specified RetiredResource message. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetiredResource message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RetiredResource.verify|verify} messages.
+                     * @param message RetiredResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IRetiredResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Decodes a RetiredResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetiredResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Verifies a RetiredResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetiredResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetiredResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.RetiredResource;
+
+                    /**
+                     * Creates a plain object from a RetiredResource message. Also converts values to other types if specified.
+                     * @param message RetiredResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.RetiredResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetiredResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetiredResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** ProtectionLevel enum. */
                 enum ProtectionLevel {
                     PROTECTION_LEVEL_UNSPECIFIED = 0,
                     SOFTWARE = 1,
                     HSM = 2,
                     EXTERNAL = 3,
-                    EXTERNAL_VPC = 4
+                    EXTERNAL_VPC = 4,
+                    HSM_SINGLE_TENANT = 5
                 }
 
                 /** AccessReason enum. */
@@ -3221,6 +3487,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -3261,6 +3530,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -7479,6 +7751,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -7727,7 +8002,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7758,7 +8033,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -9773,7 +10048,7 @@ export namespace google {
         interface IBytesValue {
 
             /** BytesValue value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents a BytesValue. */
@@ -9786,7 +10061,7 @@ export namespace google {
             constructor(properties?: google.protobuf.IBytesValue);
 
             /** BytesValue value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new BytesValue instance using the specified properties.

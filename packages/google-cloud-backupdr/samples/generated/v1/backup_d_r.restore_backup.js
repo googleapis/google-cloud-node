@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,9 +52,33 @@ function main(name) {
    */
   // const computeInstanceTargetEnvironment = {}
   /**
+   *  Disk target environment to be used during restore.
+   */
+  // const diskTargetEnvironment = {}
+  /**
+   *  Region disk target environment to be used during restore.
+   */
+  // const regionDiskTargetEnvironment = {}
+  /**
    *  Compute Engine instance properties to be overridden during restore.
    */
   // const computeInstanceRestoreProperties = {}
+  /**
+   *  Disk properties to be overridden during restore.
+   */
+  // const diskRestoreProperties = {}
+  /**
+   *  Optional. A field mask used to clear server-side default values
+   *  for fields within the `instance_properties` oneof.
+   *  When a field in this mask is cleared, the server will not apply its
+   *  default logic (like inheriting a value from the source) for that field.
+   *  The most common current use case is clearing default encryption keys.
+   *  Examples of field mask paths:
+   *  - Compute Instance Disks:
+   *  `compute_instance_restore_properties.disks.*.disk_encryption_key`
+   *  - Single Disk: `disk_restore_properties.disk_encryption_key`
+   */
+  // const clearOverridesFieldMask = {}
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;

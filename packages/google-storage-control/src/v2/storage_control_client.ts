@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,6 +45,7 @@ const version = require('../../../package.json').version;
  *  StorageControl service includes selected control plane operations.
  * @class
  * @memberof v2
+ * @internal
  */
 export class StorageControlClient {
   private _terminated = false;
@@ -112,7 +113,7 @@ export class StorageControlClient {
    */
   constructor(
     opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
+    gaxInstance?: typeof gax | typeof gax.fallback,
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof StorageControlClient;
@@ -122,7 +123,7 @@ export class StorageControlClient {
       opts?.universe_domain !== opts?.universeDomain
     ) {
       throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
+        'Please set either universe_domain or universeDomain, but not both.',
       );
     }
     const universeDomainEnvVar =
@@ -206,34 +207,34 @@ export class StorageControlClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       anywhereCachePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}'
+        'projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}',
       ),
       bucketPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}'
+        'projects/{project}/buckets/{bucket}',
       ),
       folderPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}/folders/{folder=**}'
+        'projects/{project}/buckets/{bucket}/folders/{folder=**}',
       ),
       folderLocationIntelligenceConfigPathTemplate:
         new this._gaxModule.PathTemplate(
-          'folders/{folder}/locations/{location}/intelligenceConfig'
+          'folders/{folder}/locations/{location}/intelligenceConfig',
         ),
       managedFolderPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}/managedFolders/{managed_folder=**}'
+        'projects/{project}/buckets/{bucket}/managedFolders/{managed_folder=**}',
       ),
       orgLocationIntelligenceConfigPathTemplate:
         new this._gaxModule.PathTemplate(
-          'organizations/{org}/locations/{location}/intelligenceConfig'
+          'organizations/{org}/locations/{location}/intelligenceConfig',
         ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       projectLocationIntelligenceConfigPathTemplate:
         new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/intelligenceConfig'
+          'projects/{project}/locations/{location}/intelligenceConfig',
         ),
       storageLayoutPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}/storageLayout'
+        'projects/{project}/buckets/{bucket}/storageLayout',
       ),
     };
 
@@ -244,21 +245,21 @@ export class StorageControlClient {
       listFolders: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'folders'
+        'folders',
       ),
       listManagedFolders: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'managedFolders'
+        'managedFolders',
       ),
       listAnywhereCaches: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'anywhereCaches'
+        'anywhereCaches',
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -274,39 +275,54 @@ export class StorageControlClient {
       .lro(lroOptions)
       .operationsClient(opts);
     const renameFolderResponse = protoFilesRoot.lookup(
-      '.google.storage.control.v2.Folder'
+      '.google.storage.control.v2.Folder',
     ) as gax.protobuf.Type;
     const renameFolderMetadata = protoFilesRoot.lookup(
-      '.google.storage.control.v2.RenameFolderMetadata'
+      '.google.storage.control.v2.RenameFolderMetadata',
+    ) as gax.protobuf.Type;
+    const deleteFolderRecursiveResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteFolderRecursiveMetadata = protoFilesRoot.lookup(
+      '.google.storage.control.v2.DeleteFolderRecursiveMetadata',
     ) as gax.protobuf.Type;
     const createAnywhereCacheResponse = protoFilesRoot.lookup(
-      '.google.storage.control.v2.AnywhereCache'
+      '.google.storage.control.v2.AnywhereCache',
     ) as gax.protobuf.Type;
     const createAnywhereCacheMetadata = protoFilesRoot.lookup(
-      '.google.storage.control.v2.CreateAnywhereCacheMetadata'
+      '.google.storage.control.v2.CreateAnywhereCacheMetadata',
     ) as gax.protobuf.Type;
     const updateAnywhereCacheResponse = protoFilesRoot.lookup(
-      '.google.storage.control.v2.AnywhereCache'
+      '.google.storage.control.v2.AnywhereCache',
     ) as gax.protobuf.Type;
     const updateAnywhereCacheMetadata = protoFilesRoot.lookup(
-      '.google.storage.control.v2.UpdateAnywhereCacheMetadata'
+      '.google.storage.control.v2.UpdateAnywhereCacheMetadata',
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       renameFolder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         renameFolderResponse.decode.bind(renameFolderResponse),
-        renameFolderMetadata.decode.bind(renameFolderMetadata)
+        renameFolderMetadata.decode.bind(renameFolderMetadata),
+      ),
+      deleteFolderRecursive: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteFolderRecursiveResponse.decode.bind(
+          deleteFolderRecursiveResponse,
+        ),
+        deleteFolderRecursiveMetadata.decode.bind(
+          deleteFolderRecursiveMetadata,
+        ),
       ),
       createAnywhereCache: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAnywhereCacheResponse.decode.bind(createAnywhereCacheResponse),
-        createAnywhereCacheMetadata.decode.bind(createAnywhereCacheMetadata)
+        createAnywhereCacheMetadata.decode.bind(createAnywhereCacheMetadata),
       ),
       updateAnywhereCache: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAnywhereCacheResponse.decode.bind(updateAnywhereCacheResponse),
-        updateAnywhereCacheMetadata.decode.bind(updateAnywhereCacheMetadata)
+        updateAnywhereCacheMetadata.decode.bind(updateAnywhereCacheMetadata),
       ),
     };
 
@@ -315,7 +331,7 @@ export class StorageControlClient {
       'google.storage.control.v2.StorageControl',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -349,12 +365,12 @@ export class StorageControlClient {
     this.storageControlStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.storage.control.v2.StorageControl'
+            'google.storage.control.v2.StorageControl',
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.storage.control.v2.StorageControl,
       this._opts,
-      this._providedCustomServicePath
+      this._providedCustomServicePath,
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -365,6 +381,7 @@ export class StorageControlClient {
       'getFolder',
       'listFolders',
       'renameFolder',
+      'deleteFolderRecursive',
       'getStorageLayout',
       'createManagedFolder',
       'deleteManagedFolder',
@@ -383,6 +400,9 @@ export class StorageControlClient {
       'updateFolderIntelligenceConfig',
       'getOrganizationIntelligenceConfig',
       'updateOrganizationIntelligenceConfig',
+      'getIamPolicy',
+      'setIamPolicy',
+      'testIamPermissions',
     ];
     for (const methodName of storageControlStubMethods) {
       const callPromise = this.storageControlStub.then(
@@ -396,7 +416,7 @@ export class StorageControlClient {
           },
         (err: Error | null | undefined) => () => {
           throw err;
-        }
+        },
       );
 
       const descriptor =
@@ -407,7 +427,7 @@ export class StorageControlClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -428,7 +448,7 @@ export class StorageControlClient {
     ) {
       process.emitWarning(
         'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
+        'DeprecationWarning',
       );
     }
     return 'storage.googleapis.com';
@@ -446,7 +466,7 @@ export class StorageControlClient {
     ) {
       process.emitWarning(
         'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
+        'DeprecationWarning',
       );
     }
     return 'storage.googleapis.com';
@@ -494,7 +514,7 @@ export class StorageControlClient {
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
   getProjectId(
-    callback?: Callback<string, undefined, undefined>
+    callback?: Callback<string, undefined, undefined>,
   ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
@@ -543,7 +563,7 @@ export class StorageControlClient {
    */
   createFolder(
     request?: protos.google.storage.control.v2.ICreateFolderRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IFolder,
@@ -558,7 +578,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IFolder,
       protos.google.storage.control.v2.ICreateFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createFolder(
     request: protos.google.storage.control.v2.ICreateFolderRequest,
@@ -566,7 +586,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IFolder,
       protos.google.storage.control.v2.ICreateFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createFolder(
     request?: protos.google.storage.control.v2.ICreateFolderRequest,
@@ -583,7 +603,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IFolder,
       protos.google.storage.control.v2.ICreateFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IFolder,
@@ -646,8 +666,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('createFolder response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Permanently deletes an empty folder. This operation is only applicable to a
@@ -678,7 +714,7 @@ export class StorageControlClient {
    */
   deleteFolder(
     request?: protos.google.storage.control.v2.IDeleteFolderRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -693,7 +729,7 @@ export class StorageControlClient {
       protos.google.protobuf.IEmpty,
       protos.google.storage.control.v2.IDeleteFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteFolder(
     request: protos.google.storage.control.v2.IDeleteFolderRequest,
@@ -701,7 +737,7 @@ export class StorageControlClient {
       protos.google.protobuf.IEmpty,
       protos.google.storage.control.v2.IDeleteFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteFolder(
     request?: protos.google.storage.control.v2.IDeleteFolderRequest,
@@ -718,7 +754,7 @@ export class StorageControlClient {
       protos.google.protobuf.IEmpty,
       protos.google.storage.control.v2.IDeleteFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -783,8 +819,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('deleteFolder response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Returns metadata for the specified folder. This operation is only
@@ -815,7 +867,7 @@ export class StorageControlClient {
    */
   getFolder(
     request?: protos.google.storage.control.v2.IGetFolderRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IFolder,
@@ -830,7 +882,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IFolder,
       protos.google.storage.control.v2.IGetFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getFolder(
     request: protos.google.storage.control.v2.IGetFolderRequest,
@@ -838,7 +890,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IFolder,
       protos.google.storage.control.v2.IGetFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getFolder(
     request?: protos.google.storage.control.v2.IGetFolderRequest,
@@ -853,7 +905,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IFolder,
       protos.google.storage.control.v2.IGetFolderRequest | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IFolder,
@@ -916,8 +968,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('getFolder response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Returns the storage layout configuration for a given bucket.
@@ -944,7 +1012,7 @@ export class StorageControlClient {
    */
   getStorageLayout(
     request?: protos.google.storage.control.v2.IGetStorageLayoutRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IStorageLayout,
@@ -961,7 +1029,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getStorageLayout(
     request: protos.google.storage.control.v2.IGetStorageLayoutRequest,
@@ -971,7 +1039,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getStorageLayout(
     request?: protos.google.storage.control.v2.IGetStorageLayoutRequest,
@@ -990,7 +1058,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IStorageLayout,
@@ -1055,8 +1123,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('getStorageLayout response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Creates a new managed folder.
@@ -1087,7 +1171,7 @@ export class StorageControlClient {
    */
   createManagedFolder(
     request?: protos.google.storage.control.v2.ICreateManagedFolderRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IManagedFolder,
@@ -1104,7 +1188,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createManagedFolder(
     request: protos.google.storage.control.v2.ICreateManagedFolderRequest,
@@ -1114,7 +1198,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createManagedFolder(
     request?: protos.google.storage.control.v2.ICreateManagedFolderRequest,
@@ -1133,7 +1217,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IManagedFolder,
@@ -1199,8 +1283,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('createManagedFolder response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Permanently deletes an empty managed folder.
@@ -1236,7 +1336,7 @@ export class StorageControlClient {
    */
   deleteManagedFolder(
     request?: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1253,7 +1353,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteManagedFolder(
     request: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
@@ -1263,7 +1363,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   deleteManagedFolder(
     request?: protos.google.storage.control.v2.IDeleteManagedFolderRequest,
@@ -1282,7 +1382,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.protobuf.IEmpty,
@@ -1350,8 +1450,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('deleteManagedFolder response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Returns metadata for the specified managed folder.
@@ -1382,7 +1498,7 @@ export class StorageControlClient {
    */
   getManagedFolder(
     request?: protos.google.storage.control.v2.IGetManagedFolderRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IManagedFolder,
@@ -1399,7 +1515,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getManagedFolder(
     request: protos.google.storage.control.v2.IGetManagedFolderRequest,
@@ -1409,7 +1525,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getManagedFolder(
     request?: protos.google.storage.control.v2.IGetManagedFolderRequest,
@@ -1428,7 +1544,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IManagedFolder,
@@ -1493,8 +1609,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('getManagedFolder response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Disables an Anywhere Cache instance. A disabled instance is read-only. The
@@ -1522,7 +1654,7 @@ export class StorageControlClient {
    */
   disableAnywhereCache(
     request?: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -1539,7 +1671,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   disableAnywhereCache(
     request: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
@@ -1549,7 +1681,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   disableAnywhereCache(
     request?: protos.google.storage.control.v2.IDisableAnywhereCacheRequest,
@@ -1568,7 +1700,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -1636,8 +1768,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('disableAnywhereCache response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Pauses an Anywhere Cache instance.
@@ -1662,7 +1810,7 @@ export class StorageControlClient {
    */
   pauseAnywhereCache(
     request?: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -1679,7 +1827,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   pauseAnywhereCache(
     request: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
@@ -1689,7 +1837,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   pauseAnywhereCache(
     request?: protos.google.storage.control.v2.IPauseAnywhereCacheRequest,
@@ -1708,7 +1856,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -1776,8 +1924,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('pauseAnywhereCache response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Resumes a disabled or paused Anywhere Cache instance.
@@ -1802,7 +1966,7 @@ export class StorageControlClient {
    */
   resumeAnywhereCache(
     request?: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -1819,7 +1983,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   resumeAnywhereCache(
     request: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
@@ -1829,7 +1993,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   resumeAnywhereCache(
     request?: protos.google.storage.control.v2.IResumeAnywhereCacheRequest,
@@ -1848,7 +2012,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -1916,8 +2080,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('resumeAnywhereCache response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Gets an Anywhere Cache instance.
@@ -1941,7 +2121,7 @@ export class StorageControlClient {
    */
   getAnywhereCache(
     request?: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -1958,7 +2138,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getAnywhereCache(
     request: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
@@ -1968,7 +2148,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getAnywhereCache(
     request?: protos.google.storage.control.v2.IGetAnywhereCacheRequest,
@@ -1987,7 +2167,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache,
@@ -2052,8 +2232,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('getAnywhereCache response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Returns the Project scoped singleton IntelligenceConfig resource.
@@ -2076,7 +2272,7 @@ export class StorageControlClient {
    */
   getProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2096,7 +2292,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getProjectIntelligenceConfig(
     request: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
@@ -2106,7 +2302,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetProjectIntelligenceConfigRequest,
@@ -2125,7 +2321,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2182,8 +2378,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('getProjectIntelligenceConfig response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Updates the Project scoped singleton IntelligenceConfig resource.
@@ -2210,7 +2422,7 @@ export class StorageControlClient {
    */
   updateProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2230,7 +2442,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateProjectIntelligenceConfig(
     request: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
@@ -2240,7 +2452,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateProjectIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateProjectIntelligenceConfigRequest,
@@ -2259,7 +2471,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2301,7 +2513,7 @@ export class StorageControlClient {
       ? (error, response, options, rawResponse) => {
           this._log.info(
             'updateProjectIntelligenceConfig response %j',
-            response
+            response,
           );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
@@ -2319,11 +2531,27 @@ export class StorageControlClient {
         ]) => {
           this._log.info(
             'updateProjectIntelligenceConfig response %j',
-            response
+            response,
           );
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Returns the Folder scoped singleton IntelligenceConfig resource.
@@ -2346,7 +2574,7 @@ export class StorageControlClient {
    */
   getFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2366,7 +2594,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getFolderIntelligenceConfig(
     request: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
@@ -2376,7 +2604,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetFolderIntelligenceConfigRequest,
@@ -2395,7 +2623,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2452,8 +2680,24 @@ export class StorageControlClient {
         ]) => {
           this._log.info('getFolderIntelligenceConfig response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Updates the Folder scoped singleton IntelligenceConfig resource.
@@ -2480,7 +2724,7 @@ export class StorageControlClient {
    */
   updateFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2500,7 +2744,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateFolderIntelligenceConfig(
     request: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
@@ -2510,7 +2754,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateFolderIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateFolderIntelligenceConfigRequest,
@@ -2529,7 +2773,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2571,7 +2815,7 @@ export class StorageControlClient {
       ? (error, response, options, rawResponse) => {
           this._log.info(
             'updateFolderIntelligenceConfig response %j',
-            response
+            response,
           );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
@@ -2589,11 +2833,27 @@ export class StorageControlClient {
         ]) => {
           this._log.info(
             'updateFolderIntelligenceConfig response %j',
-            response
+            response,
           );
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Returns the Organization scoped singleton IntelligenceConfig resource.
@@ -2616,7 +2876,7 @@ export class StorageControlClient {
    */
   getOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2636,7 +2896,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getOrganizationIntelligenceConfig(
     request: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
@@ -2646,7 +2906,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   getOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IGetOrganizationIntelligenceConfigRequest,
@@ -2665,7 +2925,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2707,7 +2967,7 @@ export class StorageControlClient {
       ? (error, response, options, rawResponse) => {
           this._log.info(
             'getOrganizationIntelligenceConfig response %j',
-            response
+            response,
           );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
@@ -2725,11 +2985,27 @@ export class StorageControlClient {
         ]) => {
           this._log.info(
             'getOrganizationIntelligenceConfig response %j',
-            response
+            response,
           );
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
   }
   /**
    * Updates the Organization scoped singleton IntelligenceConfig resource.
@@ -2756,7 +3032,7 @@ export class StorageControlClient {
    */
   updateOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2776,7 +3052,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateOrganizationIntelligenceConfig(
     request: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
@@ -2786,7 +3062,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateOrganizationIntelligenceConfig(
     request?: protos.google.storage.control.v2.IUpdateOrganizationIntelligenceConfigRequest,
@@ -2805,7 +3081,7 @@ export class StorageControlClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IIntelligenceConfig,
@@ -2847,7 +3123,7 @@ export class StorageControlClient {
       ? (error, response, options, rawResponse) => {
           this._log.info(
             'updateOrganizationIntelligenceConfig response %j',
-            response
+            response,
           );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
@@ -2865,11 +3141,516 @@ export class StorageControlClient {
         ]) => {
           this._log.info(
             'updateOrganizationIntelligenceConfig response %j',
-            response
+            response,
           );
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
-      );
+        throw error;
+      });
+  }
+  /**
+   * Gets the IAM policy for a specified bucket.
+   * The `resource` field in the request should be
+   * `projects/_/buckets/{bucket}` for a bucket, or
+   * `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+   * for a managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.get_iam_policy.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.resource;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    {
+      const fieldValue = request.resource;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates an IAM policy for the specified bucket.
+   * The `resource` field in the request should be
+   * `projects/_/buckets/{bucket}` for a bucket, or
+   * `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+   * for a managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.set_iam_policy.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.resource;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    {
+      const fieldValue = request.resource;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Tests a set of permissions on the given bucket, object, or managed folder
+   * to see which, if any, are held by the caller.
+   * The `resource` field in the request should be
+   * `projects/_/buckets/{bucket}` for a bucket,
+   * `projects/_/buckets/{bucket}/objects/{object}` for an object, or
+   * `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+   * for a managed folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.test_iam_permissions.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_TestIamPermissions_async
+   */
+  testIamPermissions(
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  testIamPermissions(
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  testIamPermissions(
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.resource;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue.toString().match(RegExp('(?<bucket>(?:.*)?)'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    {
+      const fieldValue = request.resource;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)/objects(?:/.*)?'),
+          );
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    {
+      const fieldValue = request.resource;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(
+            RegExp(
+              '(?<bucket>projects/[^/]+/buckets/[^/]+)/managedFolders(?:/.*)?',
+            ),
+          );
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -2908,7 +3689,7 @@ export class StorageControlClient {
    */
   renameFolder(
     request?: protos.google.storage.control.v2.IRenameFolderRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       LROperation<
@@ -2929,7 +3710,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   renameFolder(
     request: protos.google.storage.control.v2.IRenameFolderRequest,
@@ -2940,7 +3721,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   renameFolder(
     request?: protos.google.storage.control.v2.IRenameFolderRequest,
@@ -2961,7 +3742,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       LROperation<
@@ -3033,7 +3814,7 @@ export class StorageControlClient {
         ]) => {
           this._log.info('renameFolder response %j', rawResponse);
           return [response, rawResponse, _];
-        }
+        },
       );
   }
   /**
@@ -3048,7 +3829,7 @@ export class StorageControlClient {
    * region_tag:storage_v2_generated_StorageControl_RenameFolder_async
    */
   async checkRenameFolderProgress(
-    name: string
+    name: string,
   ): Promise<
     LROperation<
       protos.google.storage.control.v2.Folder,
@@ -3058,17 +3839,212 @@ export class StorageControlClient {
     this._log.info('renameFolder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.renameFolder,
-      this._gaxModule.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.storage.control.v2.Folder,
       protos.google.storage.control.v2.RenameFolderMetadata
+    >;
+  }
+  /**
+   * Deletes a folder recursively. This operation is only applicable to a
+   * hierarchical namespace enabled bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the folder being deleted, however all of its contents
+   *   will be deleted too. Format:
+   *   `projects/{project}/buckets/{bucket}/folders/{folder}`
+   * @param {number} [request.ifMetagenerationMatch]
+   *   Optional. Makes the operation only succeed conditional on whether the root
+   *   folder's current metageneration matches the given value.
+   * @param {number} [request.ifMetagenerationNotMatch]
+   *   Optional. Makes the operation only succeed conditional on whether the root
+   *   folder's current metageneration does not match the given value.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. UUID is the recommended
+   *   format, but other formats are still accepted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_folder_recursive.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteFolderRecursive_async
+   */
+  deleteFolderRecursive(
+    request?: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteFolderRecursive(
+    request: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolderRecursive(
+    request: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolderRecursive(
+    request?: protos.google.storage.control.v2.IDeleteFolderRecursiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    const routingParameter = {};
+    {
+      const fieldValue = request.name;
+      if (fieldValue !== undefined && fieldValue !== null) {
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?'));
+        if (match) {
+          const parameterValue = match.groups?.['bucket'] ?? fieldValue;
+          Object.assign(routingParameter, {bucket: parameterValue});
+        }
+      }
+    }
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFolderRecursive response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFolderRecursive request %j', request);
+    return this.innerApiCalls
+      .deleteFolderRecursive(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.storage.control.v2.IDeleteFolderRecursiveMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFolderRecursive response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteFolderRecursive()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/storage_control.delete_folder_recursive.js</caption>
+   * region_tag:storage_v2_generated_StorageControl_DeleteFolderRecursive_async
+   */
+  async checkDeleteFolderRecursiveProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.storage.control.v2.DeleteFolderRecursiveMetadata
+    >
+  > {
+    this._log.info('deleteFolderRecursive long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFolderRecursive,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.storage.control.v2.DeleteFolderRecursiveMetadata
     >;
   }
   /**
@@ -3101,7 +4077,7 @@ export class StorageControlClient {
    */
   createAnywhereCache(
     request?: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       LROperation<
@@ -3122,7 +4098,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createAnywhereCache(
     request: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
@@ -3133,7 +4109,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   createAnywhereCache(
     request?: protos.google.storage.control.v2.ICreateAnywhereCacheRequest,
@@ -3154,7 +4130,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       LROperation<
@@ -3224,7 +4200,7 @@ export class StorageControlClient {
         ]) => {
           this._log.info('createAnywhereCache response %j', rawResponse);
           return [response, rawResponse, _];
-        }
+        },
       );
   }
   /**
@@ -3239,7 +4215,7 @@ export class StorageControlClient {
    * region_tag:storage_v2_generated_StorageControl_CreateAnywhereCache_async
    */
   async checkCreateAnywhereCacheProgress(
-    name: string
+    name: string,
   ): Promise<
     LROperation<
       protos.google.storage.control.v2.AnywhereCache,
@@ -3249,13 +4225,13 @@ export class StorageControlClient {
     this._log.info('createAnywhereCache long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createAnywhereCache,
-      this._gaxModule.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.storage.control.v2.AnywhereCache,
@@ -3297,7 +4273,7 @@ export class StorageControlClient {
    */
   updateAnywhereCache(
     request?: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       LROperation<
@@ -3318,7 +4294,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateAnywhereCache(
     request: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
@@ -3329,7 +4305,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): void;
   updateAnywhereCache(
     request?: protos.google.storage.control.v2.IUpdateAnywhereCacheRequest,
@@ -3350,7 +4326,7 @@ export class StorageControlClient {
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<
     [
       LROperation<
@@ -3422,7 +4398,7 @@ export class StorageControlClient {
         ]) => {
           this._log.info('updateAnywhereCache response %j', rawResponse);
           return [response, rawResponse, _];
-        }
+        },
       );
   }
   /**
@@ -3437,7 +4413,7 @@ export class StorageControlClient {
    * region_tag:storage_v2_generated_StorageControl_UpdateAnywhereCache_async
    */
   async checkUpdateAnywhereCacheProgress(
-    name: string
+    name: string,
   ): Promise<
     LROperation<
       protos.google.storage.control.v2.AnywhereCache,
@@ -3447,13 +4423,13 @@ export class StorageControlClient {
     this._log.info('updateAnywhereCache long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateAnywhereCache,
-      this._gaxModule.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.storage.control.v2.AnywhereCache,
@@ -3509,7 +4485,7 @@ export class StorageControlClient {
    */
   listFolders(
     request?: protos.google.storage.control.v2.IListFoldersRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IFolder[],
@@ -3524,7 +4500,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IListFoldersRequest,
       protos.google.storage.control.v2.IListFoldersResponse | null | undefined,
       protos.google.storage.control.v2.IFolder
-    >
+    >,
   ): void;
   listFolders(
     request: protos.google.storage.control.v2.IListFoldersRequest,
@@ -3532,7 +4508,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IListFoldersRequest,
       protos.google.storage.control.v2.IListFoldersResponse | null | undefined,
       protos.google.storage.control.v2.IFolder
-    >
+    >,
   ): void;
   listFolders(
     request?: protos.google.storage.control.v2.IListFoldersRequest,
@@ -3549,7 +4525,7 @@ export class StorageControlClient {
       protos.google.storage.control.v2.IListFoldersRequest,
       protos.google.storage.control.v2.IListFoldersResponse | null | undefined,
       protos.google.storage.control.v2.IFolder
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IFolder[],
@@ -3609,7 +4585,7 @@ export class StorageControlClient {
         ]) => {
           this._log.info('listFolders values %j', response);
           return [response, input, output];
-        }
+        },
       );
   }
 
@@ -3659,7 +4635,7 @@ export class StorageControlClient {
    */
   listFoldersStream(
     request?: protos.google.storage.control.v2.IListFoldersRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Transform {
     request = request || {};
     options = options || {};
@@ -3687,7 +4663,7 @@ export class StorageControlClient {
     return this.descriptors.page.listFolders.createStream(
       this.innerApiCalls.listFolders as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
@@ -3740,7 +4716,7 @@ export class StorageControlClient {
    */
   listFoldersAsync(
     request?: protos.google.storage.control.v2.IListFoldersRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<protos.google.storage.control.v2.IFolder> {
     request = request || {};
     options = options || {};
@@ -3768,7 +4744,7 @@ export class StorageControlClient {
     return this.descriptors.page.listFolders.asyncIterate(
       this.innerApiCalls['listFolders'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.storage.control.v2.IFolder>;
   }
   /**
@@ -3804,7 +4780,7 @@ export class StorageControlClient {
    */
   listManagedFolders(
     request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IManagedFolder[],
@@ -3821,7 +4797,7 @@ export class StorageControlClient {
       | null
       | undefined,
       protos.google.storage.control.v2.IManagedFolder
-    >
+    >,
   ): void;
   listManagedFolders(
     request: protos.google.storage.control.v2.IListManagedFoldersRequest,
@@ -3831,7 +4807,7 @@ export class StorageControlClient {
       | null
       | undefined,
       protos.google.storage.control.v2.IManagedFolder
-    >
+    >,
   ): void;
   listManagedFolders(
     request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
@@ -3850,7 +4826,7 @@ export class StorageControlClient {
       | null
       | undefined,
       protos.google.storage.control.v2.IManagedFolder
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IManagedFolder[],
@@ -3913,7 +4889,7 @@ export class StorageControlClient {
         ]) => {
           this._log.info('listManagedFolders values %j', response);
           return [response, input, output];
-        }
+        },
       );
   }
 
@@ -3948,7 +4924,7 @@ export class StorageControlClient {
    */
   listManagedFoldersStream(
     request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Transform {
     request = request || {};
     if (!request.requestId) {
@@ -3979,7 +4955,7 @@ export class StorageControlClient {
     return this.descriptors.page.listManagedFolders.createStream(
       this.innerApiCalls.listManagedFolders as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
@@ -4017,7 +4993,7 @@ export class StorageControlClient {
    */
   listManagedFoldersAsync(
     request?: protos.google.storage.control.v2.IListManagedFoldersRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<protos.google.storage.control.v2.IManagedFolder> {
     request = request || {};
     if (!request.requestId) {
@@ -4048,7 +5024,7 @@ export class StorageControlClient {
     return this.descriptors.page.listManagedFolders.asyncIterate(
       this.innerApiCalls['listManagedFolders'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.storage.control.v2.IManagedFolder>;
   }
   /**
@@ -4081,7 +5057,7 @@ export class StorageControlClient {
    */
   listAnywhereCaches(
     request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache[],
@@ -4098,7 +5074,7 @@ export class StorageControlClient {
       | null
       | undefined,
       protos.google.storage.control.v2.IAnywhereCache
-    >
+    >,
   ): void;
   listAnywhereCaches(
     request: protos.google.storage.control.v2.IListAnywhereCachesRequest,
@@ -4108,7 +5084,7 @@ export class StorageControlClient {
       | null
       | undefined,
       protos.google.storage.control.v2.IAnywhereCache
-    >
+    >,
   ): void;
   listAnywhereCaches(
     request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
@@ -4127,7 +5103,7 @@ export class StorageControlClient {
       | null
       | undefined,
       protos.google.storage.control.v2.IAnywhereCache
-    >
+    >,
   ): Promise<
     [
       protos.google.storage.control.v2.IAnywhereCache[],
@@ -4190,7 +5166,7 @@ export class StorageControlClient {
         ]) => {
           this._log.info('listAnywhereCaches values %j', response);
           return [response, input, output];
-        }
+        },
       );
   }
 
@@ -4222,7 +5198,7 @@ export class StorageControlClient {
    */
   listAnywhereCachesStream(
     request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): Transform {
     request = request || {};
     if (!request.requestId) {
@@ -4253,7 +5229,7 @@ export class StorageControlClient {
     return this.descriptors.page.listAnywhereCaches.createStream(
       this.innerApiCalls.listAnywhereCaches as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
@@ -4288,7 +5264,7 @@ export class StorageControlClient {
    */
   listAnywhereCachesAsync(
     request?: protos.google.storage.control.v2.IListAnywhereCachesRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<protos.google.storage.control.v2.IAnywhereCache> {
     request = request || {};
     if (!request.requestId) {
@@ -4319,7 +5295,7 @@ export class StorageControlClient {
     return this.descriptors.page.listAnywhereCaches.asyncIterate(
       this.innerApiCalls['listAnywhereCaches'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.storage.control.v2.IAnywhereCache>;
   }
   /**
@@ -4365,7 +5341,7 @@ export class StorageControlClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -4415,7 +5391,7 @@ export class StorageControlClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -4470,7 +5446,7 @@ export class StorageControlClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -4527,7 +5503,7 @@ export class StorageControlClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
     let options: gax.CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
@@ -4699,7 +5675,7 @@ export class StorageControlClient {
       {
         folder: folder,
         location: location,
-      }
+      },
     );
   }
 
@@ -4711,10 +5687,10 @@ export class StorageControlClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderLocationIntelligenceConfigName(
-    folderLocationIntelligenceConfigName: string
+    folderLocationIntelligenceConfigName: string,
   ) {
     return this.pathTemplates.folderLocationIntelligenceConfigPathTemplate.match(
-      folderLocationIntelligenceConfigName
+      folderLocationIntelligenceConfigName,
     ).folder;
   }
 
@@ -4726,10 +5702,10 @@ export class StorageControlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFolderLocationIntelligenceConfigName(
-    folderLocationIntelligenceConfigName: string
+    folderLocationIntelligenceConfigName: string,
   ) {
     return this.pathTemplates.folderLocationIntelligenceConfigPathTemplate.match(
-      folderLocationIntelligenceConfigName
+      folderLocationIntelligenceConfigName,
     ).location;
   }
 
@@ -4807,10 +5783,10 @@ export class StorageControlClient {
    * @returns {string} A string representing the org.
    */
   matchOrgFromOrgLocationIntelligenceConfigName(
-    orgLocationIntelligenceConfigName: string
+    orgLocationIntelligenceConfigName: string,
   ) {
     return this.pathTemplates.orgLocationIntelligenceConfigPathTemplate.match(
-      orgLocationIntelligenceConfigName
+      orgLocationIntelligenceConfigName,
     ).org;
   }
 
@@ -4822,10 +5798,10 @@ export class StorageControlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrgLocationIntelligenceConfigName(
-    orgLocationIntelligenceConfigName: string
+    orgLocationIntelligenceConfigName: string,
   ) {
     return this.pathTemplates.orgLocationIntelligenceConfigPathTemplate.match(
-      orgLocationIntelligenceConfigName
+      orgLocationIntelligenceConfigName,
     ).location;
   }
 
@@ -4864,7 +5840,7 @@ export class StorageControlClient {
       {
         project: project,
         location: location,
-      }
+      },
     );
   }
 
@@ -4876,10 +5852,10 @@ export class StorageControlClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationIntelligenceConfigName(
-    projectLocationIntelligenceConfigName: string
+    projectLocationIntelligenceConfigName: string,
   ) {
     return this.pathTemplates.projectLocationIntelligenceConfigPathTemplate.match(
-      projectLocationIntelligenceConfigName
+      projectLocationIntelligenceConfigName,
     ).project;
   }
 
@@ -4891,10 +5867,10 @@ export class StorageControlClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationIntelligenceConfigName(
-    projectLocationIntelligenceConfigName: string
+    projectLocationIntelligenceConfigName: string,
   ) {
     return this.pathTemplates.projectLocationIntelligenceConfigPathTemplate.match(
-      projectLocationIntelligenceConfigName
+      projectLocationIntelligenceConfigName,
     ).location;
   }
 

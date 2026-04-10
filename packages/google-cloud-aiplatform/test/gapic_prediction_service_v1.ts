@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -900,6 +900,114 @@ describe('v1.PredictionServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.generateContent(request), expectedError);
+        });
+    });
+
+    describe('embedContent', () => {
+        it('invokes embedContent without error', async () => {
+            const client = new predictionserviceModule.v1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.EmbedContentResponse()
+            );
+            client.innerApiCalls.embedContent = stubSimpleCall(expectedResponse);
+            const [response] = await client.embedContent(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes embedContent without error using callback', async () => {
+            const client = new predictionserviceModule.v1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.EmbedContentResponse()
+            );
+            client.innerApiCalls.embedContent = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.embedContent(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IEmbedContentResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes embedContent with error', async () => {
+            const client = new predictionserviceModule.v1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedHeaderRequestParams = `model=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.embedContent = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.embedContent(request), expectedError);
+            const actualRequest = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.embedContent as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes embedContent with closed client', async () => {
+            const client = new predictionserviceModule.v1.PredictionServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.EmbedContentRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.EmbedContentRequest', ['model']);
+            request.model = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.embedContent(request), expectedError);
         });
     });
 
@@ -3807,8 +3915,8 @@ describe('v1.PredictionServiceClient', () => {
             });
         });
 
-        describe('projectLocationFeatureGroupFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeatureGroupFeature";
+        describe('projectLocationFeatureGroupFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeatureGroupFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -3820,49 +3928,49 @@ describe('v1.PredictionServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeatureGroupFeaturePath', () => {
-                const result = client.projectLocationFeatureGroupFeaturePath("projectValue", "locationValue", "featureGroupValue", "featureValue");
+            it('projectLocationFeatureGroupFeaturesPath', () => {
+                const result = client.projectLocationFeatureGroupFeaturesPath("projectValue", "locationValue", "featureGroupValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
 
-        describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeature";
+        describe('projectLocationFeaturestoreEntityTypeFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -3875,50 +3983,50 @@ describe('v1.PredictionServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeaturestoreEntityTypeFeaturePath', () => {
-                const result = client.projectLocationFeaturestoreEntityTypeFeaturePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
+            it('projectLocationFeaturestoreEntityTypeFeaturesPath', () => {
+                const result = client.projectLocationFeaturestoreEntityTypeFeaturesPath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -4057,6 +4165,44 @@ describe('v1.PredictionServiceClient', () => {
                 const result = client.matchRagCorpusFromRagCorpusName(fakePath);
                 assert.strictEqual(result, "ragCorpusValue");
                 assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragEngineConfig', async () => {
+            const fakePath = "/rendered/path/ragEngineConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new predictionserviceModule.v1.PredictionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragEngineConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragEngineConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragEngineConfigPath', () => {
+                const result = client.ragEngineConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagEngineConfigName', () => {
+                const result = client.matchProjectFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagEngineConfigName', () => {
+                const result = client.matchLocationFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -4257,6 +4403,122 @@ describe('v1.PredictionServiceClient', () => {
                 const result = client.matchScheduleFromScheduleName(fakePath);
                 assert.strictEqual(result, "scheduleValue");
                 assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('session', async () => {
+            const fakePath = "/rendered/path/session";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                session: "sessionValue",
+            };
+            const client = new predictionserviceModule.v1.PredictionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sessionPath', () => {
+                const result = client.sessionPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSessionName', () => {
+                const result = client.matchProjectFromSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSessionName', () => {
+                const result = client.matchLocationFromSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromSessionName', () => {
+                const result = client.matchReasoningEngineFromSessionName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromSessionName', () => {
+                const result = client.matchSessionFromSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sessionEvent', async () => {
+            const fakePath = "/rendered/path/sessionEvent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                session: "sessionValue",
+                event: "eventValue",
+            };
+            const client = new predictionserviceModule.v1.PredictionServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sessionEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sessionEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sessionEventPath', () => {
+                const result = client.sessionEventPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue", "eventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sessionEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSessionEventName', () => {
+                const result = client.matchProjectFromSessionEventName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSessionEventName', () => {
+                const result = client.matchLocationFromSessionEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromSessionEventName', () => {
+                const result = client.matchReasoningEngineFromSessionEventName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromSessionEventName', () => {
+                const result = client.matchSessionFromSessionEventName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEventFromSessionEventName', () => {
+                const result = client.matchEventFromSessionEventName(fakePath);
+                assert.strictEqual(result, "eventValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

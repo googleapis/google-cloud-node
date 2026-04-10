@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,12 +33,12 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  Optional. Requested page size. If unspecified, a default size of 30 will be
+   *  used. The maximum value is 100; values above 100 will be coerced to 100.
    */
   // const pageSize = 1234
   /**
-   *  A token identifying a page of results the server should return.
+   *  Optional. A token identifying a page of results the server should return.
    */
   // const pageToken = 'abc123'
   /**
@@ -49,10 +49,9 @@ function main(parent) {
    *  Optional. The name of the instance in which the repository is hosted,
    *  formatted as
    *  `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
-   *  When listing repositories via
-   *  securesourcemanager.googleapis.com (Control Plane API), this field is
-   *  required. When listing repositories via *.sourcemanager.dev (Data Plane
-   *  API), this field is ignored.
+   *  When listing repositories via securesourcemanager.googleapis.com, this
+   *  field is required. When listing repositories via *.sourcemanager.dev, this
+   *  field is ignored.
    */
   // const instance = 'abc123'
 

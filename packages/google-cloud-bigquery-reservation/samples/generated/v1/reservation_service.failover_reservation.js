@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,12 @@ function main(name) {
    *     `projects/myproject/locations/US/reservations/team1-prod`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. A parameter that determines how writes that are pending
+   *  replication are handled after a failover is initiated. If not specified,
+   *  HARD failover mode is used by default.
+   */
+  // const failoverMode = {}
 
   // Imports the Reservation library
   const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;

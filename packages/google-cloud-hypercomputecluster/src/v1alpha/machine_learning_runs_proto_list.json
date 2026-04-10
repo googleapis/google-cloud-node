@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/hypercomputecluster/v1alpha/hypercompute_cluster.proto",
+  "../../protos/google/cloud/hypercomputecluster/v1alpha/machine_learning_runs.proto",
+  "../../protos/google/cloud/hypercomputecluster/v1alpha/operation_metadata.proto"
+]

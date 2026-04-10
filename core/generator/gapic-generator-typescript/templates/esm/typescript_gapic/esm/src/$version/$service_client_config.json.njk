@@ -1,0 +1,66 @@
+{#-
+
+Copyright 2019 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-#}
+{
+  "interfaces": {
+    "{{ api.naming.protoPackage }}.{{ service.name }}": {
+      "retry_codes": {
+{%- set retryCodesComma = joiner() %}
+{%- for prettyName in service.retryableCodeMap.getPrettyCodesNames() %}
+        {{- retryCodesComma() }}
+        "{{ prettyName }}": {{ service.retryableCodeMap.getCodesJSON(prettyName) | safe }}
+{%- endfor %}
+      },
+      "retry_params": {
+{%- set retryParamsComma = joiner() %}
+{%- for prettyName in service.retryableCodeMap.getPrettyParamsNames() %}
+        {{- retryParamsComma() }}
+        "{{ prettyName }}": {{ service.retryableCodeMap.getParamsJSON(prettyName) | safe }}
+{%- endfor %}
+      },
+      "methods": {
+{%- set comma = joiner() %}
+{%- for method in service.method %}
+        {{- comma() }}
+        "{{ method.name }}": {
+{%- set optionComma = joiner() %}
+{%- if method.timeoutMillis %}
+          {{- optionComma() }}
+          "timeout_millis": {{ method.timeoutMillis }}
+{%- endif %}
+          {{- optionComma() }}
+          "retry_codes_name": "{{ method.retryableCodesName }}"
+          {{- optionComma() }}
+          "retry_params_name": "{{ method.retryParamsName }}"
+{%- if method.bundleConfig %}
+          {{- optionComma() }}
+          "bundling": {
+            "element_count_threshold": {{ method.bundleConfig.thresholds.element_count_threshold }}
+            {{- optionComma() }}
+            "request_byte_threshold": {{ method.bundleConfig.thresholds.request_byte_threshold }}
+            {{- optionComma() }}
+            "delay_threshold_millis": {{ method.bundleConfig.thresholds.delay_threshold_millis }}
+            {{- optionComma() }}
+            "element_count_limit": {{ method.bundleConfig.thresholds.element_count_limit }}
+          }
+{%- endif %}
+        }
+{%- endfor %}
+      }
+    }
+  }
+}

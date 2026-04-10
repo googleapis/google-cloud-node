@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,6 +36,11 @@ function main() {
    *  Project ID of the project that contains the instance.
    */
   // const project = 'my-project'
+  /**
+   *  The timestamp used to identify the time when the source instance is
+   *  deleted. If this instance is deleted, then you must set the timestamp.
+   */
+  // const sourceInstanceDeletionTime = {}
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

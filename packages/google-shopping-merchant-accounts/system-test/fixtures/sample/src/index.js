@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,37 +16,32 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const accounts = require('@google-shopping/accounts');
 
 function main() {
   const accountIssueServiceClient = new accounts.AccountIssueServiceClient();
+  const accountRelationshipsServiceClient = new accounts.AccountRelationshipsServiceClient();
+  const accountServicesServiceClient = new accounts.AccountServicesServiceClient();
   const accountsServiceClient = new accounts.AccountsServiceClient();
-  const accountTaxServiceClient = new accounts.AccountTaxServiceClient();
-  const autofeedSettingsServiceClient =
-    new accounts.AutofeedSettingsServiceClient();
-  const automaticImprovementsServiceClient =
-    new accounts.AutomaticImprovementsServiceClient();
-  const businessIdentityServiceClient =
-    new accounts.BusinessIdentityServiceClient();
+  const autofeedSettingsServiceClient = new accounts.AutofeedSettingsServiceClient();
+  const automaticImprovementsServiceClient = new accounts.AutomaticImprovementsServiceClient();
+  const businessIdentityServiceClient = new accounts.BusinessIdentityServiceClient();
   const businessInfoServiceClient = new accounts.BusinessInfoServiceClient();
-  const emailPreferencesServiceClient =
-    new accounts.EmailPreferencesServiceClient();
+  const checkoutSettingsServiceClient = new accounts.CheckoutSettingsServiceClient();
+  const developerRegistrationServiceClient = new accounts.DeveloperRegistrationServiceClient();
+  const emailPreferencesServiceClient = new accounts.EmailPreferencesServiceClient();
   const gbpAccountsServiceClient = new accounts.GbpAccountsServiceClient();
   const homepageServiceClient = new accounts.HomepageServiceClient();
   const lfpProvidersServiceClient = new accounts.LfpProvidersServiceClient();
-  const omnichannelSettingsServiceClient =
-    new accounts.OmnichannelSettingsServiceClient();
-  const onlineReturnPolicyServiceClient =
-    new accounts.OnlineReturnPolicyServiceClient();
+  const omnichannelSettingsServiceClient = new accounts.OmnichannelSettingsServiceClient();
+  const onlineReturnPolicyServiceClient = new accounts.OnlineReturnPolicyServiceClient();
   const programsServiceClient = new accounts.ProgramsServiceClient();
   const regionsServiceClient = new accounts.RegionsServiceClient();
-  const shippingSettingsServiceClient =
-    new accounts.ShippingSettingsServiceClient();
-  const termsOfServiceAgreementStateServiceClient =
-    new accounts.TermsOfServiceAgreementStateServiceClient();
-  const termsOfServiceServiceClient =
-    new accounts.TermsOfServiceServiceClient();
+  const shippingSettingsServiceClient = new accounts.ShippingSettingsServiceClient();
+  const termsOfServiceAgreementStateServiceClient = new accounts.TermsOfServiceAgreementStateServiceClient();
+  const termsOfServiceServiceClient = new accounts.TermsOfServiceServiceClient();
   const userServiceClient = new accounts.UserServiceClient();
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,10 +17,12 @@ syntax = "proto3";
 package google.cloud.aiplatform.v1;
 
 import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/cloud/aiplatform/v1/openapi.proto";
 import "google/cloud/aiplatform/v1/tool.proto";
 import "google/cloud/aiplatform/v1/vertex_rag_data.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
 import "google/type/date.proto";
 
 option csharp_namespace = "Google.Cloud.AIPlatform.V1";
@@ -30,6 +32,10 @@ option java_outer_classname = "ContentProto";
 option java_package = "com.google.cloud.aiplatform.v1";
 option php_namespace = "Google\\Cloud\\AIPlatform\\V1";
 option ruby_package = "Google::Cloud::AIPlatform::V1";
+option (google.api.resource_definition) = {
+  type: "modelarmor.googleapis.com/Template"
+  pattern: "projects/{project}/locations/{location}/templates/{template}"
+};
 
 // Harm categories that will block the content.
 enum HarmCategory {
@@ -51,6 +57,9 @@ enum HarmCategory {
   // Deprecated: Election filter is not longer supported.
   // The harm category is civic integrity.
   HARM_CATEGORY_CIVIC_INTEGRITY = 5 [deprecated = true];
+
+  // The harm category is for jailbreak prompts.
+  HARM_CATEGORY_JAILBREAK = 6;
 }
 
 // Content Part modality
@@ -99,6 +108,33 @@ message Content {
 // A `Part` must have a fixed IANA MIME type identifying the type and subtype
 // of the media if `inline_data` or `file_data` field is filled with raw bytes.
 message Part {
+  // per part media resolution.
+  // Media resolution for the input media.
+  message MediaResolution {
+    // The media resolution level.
+    enum Level {
+      // Media resolution has not been set.
+      MEDIA_RESOLUTION_UNSPECIFIED = 0;
+
+      // Media resolution set to low.
+      MEDIA_RESOLUTION_LOW = 1;
+
+      // Media resolution set to medium.
+      MEDIA_RESOLUTION_MEDIUM = 2;
+
+      // Media resolution set to high.
+      MEDIA_RESOLUTION_HIGH = 3;
+
+      // Media resolution set to ultra high. This is for image only.
+      MEDIA_RESOLUTION_ULTRA_HIGH = 4;
+    }
+
+    oneof value {
+      // The tokenization quality used for given media.
+      Level level = 1;
+    }
+  }
+
   oneof data {
     // Optional. Text part (can be code).
     string text = 1 [(google.api.field_behavior) = OPTIONAL];
@@ -129,11 +165,22 @@ message Part {
         [(google.api.field_behavior) = OPTIONAL];
   }
 
+  // Indicates if the part is thought from the model.
+  bool thought = 10 [(google.api.field_behavior) = OPTIONAL];
+
+  // An opaque signature for the thought so it can be reused in subsequent
+  // requests.
+  bytes thought_signature = 11 [(google.api.field_behavior) = OPTIONAL];
+
   oneof metadata {
     // Optional. Video metadata. The metadata should only be specified while the
     // video data is presented in inline_data or file_data.
     VideoMetadata video_metadata = 4 [(google.api.field_behavior) = OPTIONAL];
   }
+
+  // per part media resolution.
+  // Media resolution for the input media.
+  MediaResolution media_resolution = 12;
 }
 
 // Content blob.
@@ -166,6 +213,126 @@ message VideoMetadata {
   // Optional. The end offset of the video.
   google.protobuf.Duration end_offset = 2
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The frame rate of the video sent to the model. If not specified,
+  // the default value is 1.0. The valid range is (0.0, 24.0].
+  double fps = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Configuration for a prebuilt voice.
+message PrebuiltVoiceConfig {
+  // The name of the prebuilt voice to use.
+  optional string voice_name = 1;
+}
+
+// The configuration for the replicated voice to use.
+message ReplicatedVoiceConfig {
+  // Optional. The mimetype of the voice sample. The only currently supported
+  // value is `audio/wav`. This represents 16-bit signed little-endian wav data,
+  // with a 24kHz sampling rate. `mime_type` will default to `audio/wav` if not
+  // set.
+  string mime_type = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The sample of the custom voice.
+  bytes voice_sample_audio = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Configuration for a voice.
+message VoiceConfig {
+  // The configuration for the speaker to use.
+  oneof voice_config {
+    // The configuration for a prebuilt voice.
+    PrebuiltVoiceConfig prebuilt_voice_config = 1;
+
+    // Optional. The configuration for a replicated voice. This enables users to
+    // replicate a voice from an audio sample.
+    ReplicatedVoiceConfig replicated_voice_config = 3
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+}
+
+// Configuration for a single speaker in a multi-speaker setup.
+message SpeakerVoiceConfig {
+  // Required. The name of the speaker. This should be the same as the speaker
+  // name used in the prompt.
+  string speaker = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The configuration for the voice of this speaker.
+  VoiceConfig voice_config = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Configuration for a multi-speaker text-to-speech request.
+message MultiSpeakerVoiceConfig {
+  // Required. A list of configurations for the voices of the speakers. Exactly
+  // two speaker voice configurations must be provided.
+  repeated SpeakerVoiceConfig speaker_voice_configs = 2
+      [(google.api.field_behavior) = REQUIRED];
+}
+
+// Configuration for speech generation.
+message SpeechConfig {
+  // The configuration for the voice to use.
+  VoiceConfig voice_config = 1;
+
+  // Optional. The language code (ISO 639-1) for the speech synthesis.
+  string language_code = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // The configuration for a multi-speaker text-to-speech request.
+  // This field is mutually exclusive with `voice_config`.
+  MultiSpeakerVoiceConfig multi_speaker_voice_config = 3;
+}
+
+// Config for image generation features.
+message ImageConfig {
+  // The image output format for generated images.
+  message ImageOutputOptions {
+    // Optional. The image format that the output should be saved as.
+    optional string mime_type = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The compression quality of the output image.
+    optional int32 compression_quality = 2
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Enum for controlling the generation of people in images.
+  enum PersonGeneration {
+    // The default behavior is unspecified. The model will decide whether to
+    // generate images of people.
+    PERSON_GENERATION_UNSPECIFIED = 0;
+
+    // Allows the model to generate images of people, including adults and
+    // children.
+    ALLOW_ALL = 1;
+
+    // Allows the model to generate images of adults, but not children.
+    ALLOW_ADULT = 2;
+
+    // Prevents the model from generating images of people.
+    ALLOW_NONE = 3;
+  }
+
+  // Optional. The image output format for generated images.
+  optional ImageOutputOptions image_output_options = 1
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The desired aspect ratio for the generated images. The following
+  // aspect ratios are supported:
+  //
+  // "1:1"
+  // "2:3", "3:2"
+  // "3:4", "4:3"
+  // "4:5", "5:4"
+  // "9:16", "16:9"
+  // "21:9"
+  optional string aspect_ratio = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Controls whether the model can generate people.
+  optional PersonGeneration person_generation = 3
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Specifies the size of generated images. Supported values are
+  // `1K`, `2K`, `4K`. If not specified, the model will use default value `1K`.
+  optional string image_size = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Generation config.
@@ -214,9 +381,65 @@ message GenerationConfig {
 
   // Config for thinking features.
   message ThinkingConfig {
+    // The thinking level for the model.
+    enum ThinkingLevel {
+      // Unspecified thinking level.
+      THINKING_LEVEL_UNSPECIFIED = 0;
+
+      // Low thinking level.
+      LOW = 1;
+
+      // Medium thinking level.
+      MEDIUM = 2;
+
+      // High thinking level.
+      HIGH = 3;
+
+      // MINIMAL thinking level.
+      MINIMAL = 4;
+    }
+
+    // Indicates whether to include thoughts in the response.
+    // If true, thoughts are returned only when available.
+    optional bool include_thoughts = 1 [(google.api.field_behavior) = OPTIONAL];
+
     // Optional. Indicates the thinking budget in tokens.
     // This is only applied when enable_thinking is true.
     optional int32 thinking_budget = 3 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The number of thoughts tokens that the model should generate.
+    optional ThinkingLevel thinking_level = 4
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // The modalities of the response.
+  enum Modality {
+    // Unspecified modality. Will be processed as text.
+    MODALITY_UNSPECIFIED = 0;
+
+    // Text modality.
+    TEXT = 1;
+
+    // Image modality.
+    IMAGE = 2;
+
+    // Audio modality.
+    AUDIO = 3;
+  }
+
+  // Media resolution for the input media.
+  enum MediaResolution {
+    // Media resolution has not been set.
+    MEDIA_RESOLUTION_UNSPECIFIED = 0;
+
+    // Media resolution set to low (64 tokens).
+    MEDIA_RESOLUTION_LOW = 1;
+
+    // Media resolution set to medium (256 tokens).
+    MEDIA_RESOLUTION_MEDIUM = 2;
+
+    // Media resolution set to high (zoomed reframing with 256 tokens).
+    MEDIA_RESOLUTION_HIGH = 3;
   }
 
   // Optional. Controls the randomness of predictions.
@@ -270,14 +493,82 @@ message GenerationConfig {
   // `application/json`: Schema for JSON response.
   optional Schema response_schema = 16 [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. Output schema of the generated response. This is an alternative
+  // to `response_schema` that accepts [JSON Schema](https://json-schema.org/).
+  //
+  // If set, `response_schema` must be omitted, but `response_mime_type` is
+  // required.
+  //
+  // While the full JSON Schema may be sent, not all features are supported.
+  // Specifically, only the following properties are supported:
+  //
+  // - `$id`
+  // - `$defs`
+  // - `$ref`
+  // - `$anchor`
+  // - `type`
+  // - `format`
+  // - `title`
+  // - `description`
+  // - `enum` (for strings and numbers)
+  // - `items`
+  // - `prefixItems`
+  // - `minItems`
+  // - `maxItems`
+  // - `minimum`
+  // - `maximum`
+  // - `anyOf`
+  // - `oneOf` (interpreted the same as `anyOf`)
+  // - `properties`
+  // - `additionalProperties`
+  // - `required`
+  //
+  // The non-standard `propertyOrdering` property may also be set.
+  //
+  // Cyclic references are unrolled to a limited degree and, as such, may only
+  // be used within non-required properties. (Nullable properties are not
+  // sufficient.) If `$ref` is set on a sub-schema, no other properties, except
+  // for than those starting as a `$`, may be set.
+  optional google.protobuf.Value response_json_schema = 28
+      [(google.api.field_behavior) = OPTIONAL];
+
   // Optional. Routing configuration.
   optional RoutingConfig routing_config = 17
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If enabled, audio timestamps will be included in the request to
+  // the model. This can be useful for synchronizing audio with other modalities
+  // in the response.
+  optional bool audio_timestamp = 20 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The modalities of the response. The model will generate a
+  // response that includes all the specified modalities. For example, if this
+  // is set to `[TEXT, IMAGE]`, the response will include both text and an
+  // image.
+  repeated Modality response_modalities = 21
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The token resolution at which input media content is sampled.
+  // This is used to control the trade-off between the quality of the response
+  // and the number of tokens used to represent the media. A higher resolution
+  // allows the model to perceive more detail, which can lead to a more nuanced
+  // response, but it will also use more tokens. This does not affect the
+  // image dimensions sent to the model.
+  optional MediaResolution media_resolution = 22
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The speech generation config.
+  optional SpeechConfig speech_config = 23
       [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Config for thinking features.
   // An error will be returned if this field is set for models that don't
   // support thinking.
   ThinkingConfig thinking_config = 25 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Config for image generation features.
+  optional ImageConfig image_config = 30
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Safety settings.
@@ -452,6 +743,9 @@ message Candidate {
 
     // The function call generated by the model is invalid.
     MALFORMED_FUNCTION_CALL = 9;
+
+    // The model response was blocked by Model Armor.
+    MODEL_ARMOR = 10;
   }
 
   // Output only. Index of the candidate.
@@ -492,6 +786,38 @@ message Candidate {
   // Output only. Metadata specifies sources used to ground generated content.
   GroundingMetadata grounding_metadata = 7
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Metadata related to url context retrieval tool.
+  UrlContextMetadata url_context_metadata = 11
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Metadata related to url context retrieval tool.
+message UrlContextMetadata {
+  // Output only. List of url context.
+  repeated UrlMetadata url_metadata = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// Context of the a single url retrieval.
+message UrlMetadata {
+  // Status of the url retrieval.
+  enum UrlRetrievalStatus {
+    // Default value. This value is unused.
+    URL_RETRIEVAL_STATUS_UNSPECIFIED = 0;
+
+    // Url retrieval is successful.
+    URL_RETRIEVAL_STATUS_SUCCESS = 1;
+
+    // Url retrieval is failed due to error.
+    URL_RETRIEVAL_STATUS_ERROR = 2;
+  }
+
+  // Retrieved url by the tool.
+  string retrieved_url = 1;
+
+  // Status of the url retrieval.
+  UrlRetrievalStatus url_retrieval_status = 2;
 }
 
 // Logprobs Result
@@ -567,6 +893,48 @@ message GroundingChunk {
 
     // Text of the attribution.
     optional string text = 3;
+
+    // Output only. The full document name for the referenced Vertex AI Search
+    // document.
+    optional string document_name = 6
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Chunk from Google Maps.
+  message Maps {
+    message PlaceAnswerSources {
+      // Encapsulates a review snippet.
+      message ReviewSnippet {
+        // Id of the review referencing the place.
+        string review_id = 1;
+
+        // A link to show the review on Google Maps.
+        string google_maps_uri = 2;
+
+        // Title of the review.
+        string title = 3;
+      }
+
+      // Snippets of reviews that are used to generate the answer.
+      repeated ReviewSnippet review_snippets = 1;
+    }
+    // URI reference of the chunk.
+    optional string uri = 1;
+
+    // Title of the chunk.
+    optional string title = 2;
+
+    // Text of the chunk.
+    optional string text = 3;
+
+    // This Place's resource name, in `places/{place_id}` format.  Can be used
+    // to look up the Place.
+    optional string place_id = 4;
+
+    // Sources used to generate the place answer.
+    // This includes review snippets and photos that were used to generate the
+    // answer, as well as uris to flag content.
+    PlaceAnswerSources place_answer_sources = 5;
   }
 
   // Chunk type.
@@ -576,6 +944,9 @@ message GroundingChunk {
 
     // Grounding chunk from context retrieved by the retrieval tools.
     RetrievedContext retrieved_context = 2;
+
+    // Grounding chunk from Google Maps.
+    Maps maps = 3;
   }
 }
 
@@ -618,6 +989,31 @@ message GroundingMetadata {
     (google.api.field_behavior) = OPTIONAL,
     (google.api.field_behavior) = OUTPUT_ONLY
   ];
+
+  // Optional. Output only. Resource name of the Google Maps widget context
+  // token to be used with the PlacesContextElement widget to render contextual
+  // data. This is populated only for Google Maps grounding.
+  optional string google_maps_widget_context_token = 8 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Source content flagging uri for a place or review. This is currently
+  // populated only for Google Maps grounding.
+  message SourceFlaggingUri {
+    // Id of the place or review.
+    string source_id = 1;
+
+    // A link where users can flag a problem with the source (place or review).
+    // (-- The link is generated by Google and it does not contain
+    // information from the user query. It may contain information of the
+    // content it is flagging, which can be used to identify places. --)
+    string flag_content_uri = 2;
+  }
+
+  // List of source flagging uris. This is currently populated only for Google
+  // Maps grounding.
+  repeated SourceFlaggingUri source_flagging_uris = 9;
 }
 
 // Google search entry point.
@@ -640,6 +1036,27 @@ message RetrievalMetadata {
   // compared to the threshold to determine whether to trigger Google Search.
   float google_search_dynamic_retrieval_score = 2
       [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Configuration for Model Armor integrations of prompt and responses.
+message ModelArmorConfig {
+  // Optional. The name of the Model Armor template to use for prompt
+  // sanitization.
+  string prompt_template_name = 1 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "modelarmor.googleapis.com/Template"
+    }
+  ];
+
+  // Optional. The name of the Model Armor template to use for response
+  // sanitization.
+  string response_template_name = 2 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = {
+      type: "modelarmor.googleapis.com/Template"
+    }
+  ];
 }
 
 // Represents token counting info for a single modality.

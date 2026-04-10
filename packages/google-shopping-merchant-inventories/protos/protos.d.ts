@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,6 +25,1537 @@ export namespace google {
 
             /** Namespace inventories. */
             namespace inventories {
+
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Properties of a LocalInventoryAttributes. */
+                    interface ILocalInventoryAttributes {
+
+                        /** LocalInventoryAttributes price */
+                        price?: (google.shopping.type.IPrice|null);
+
+                        /** LocalInventoryAttributes salePrice */
+                        salePrice?: (google.shopping.type.IPrice|null);
+
+                        /** LocalInventoryAttributes salePriceEffectiveDate */
+                        salePriceEffectiveDate?: (google.type.IInterval|null);
+
+                        /** LocalInventoryAttributes availability */
+                        availability?: (google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability|keyof typeof google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability|null);
+
+                        /** LocalInventoryAttributes quantity */
+                        quantity?: (number|Long|string|null);
+
+                        /** LocalInventoryAttributes pickupMethod */
+                        pickupMethod?: (google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod|keyof typeof google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod|null);
+
+                        /** LocalInventoryAttributes pickupSla */
+                        pickupSla?: (google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla|keyof typeof google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla|null);
+
+                        /** LocalInventoryAttributes instoreProductLocation */
+                        instoreProductLocation?: (string|null);
+                    }
+
+                    /** Represents a LocalInventoryAttributes. */
+                    class LocalInventoryAttributes implements ILocalInventoryAttributes {
+
+                        /**
+                         * Constructs a new LocalInventoryAttributes.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.ILocalInventoryAttributes);
+
+                        /** LocalInventoryAttributes price. */
+                        public price?: (google.shopping.type.IPrice|null);
+
+                        /** LocalInventoryAttributes salePrice. */
+                        public salePrice?: (google.shopping.type.IPrice|null);
+
+                        /** LocalInventoryAttributes salePriceEffectiveDate. */
+                        public salePriceEffectiveDate?: (google.type.IInterval|null);
+
+                        /** LocalInventoryAttributes availability. */
+                        public availability?: (google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability|keyof typeof google.shopping.merchant.inventories.v1.LocalInventoryAttributes.Availability|null);
+
+                        /** LocalInventoryAttributes quantity. */
+                        public quantity?: (number|Long|string|null);
+
+                        /** LocalInventoryAttributes pickupMethod. */
+                        public pickupMethod?: (google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod|keyof typeof google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupMethod|null);
+
+                        /** LocalInventoryAttributes pickupSla. */
+                        public pickupSla?: (google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla|keyof typeof google.shopping.merchant.inventories.v1.LocalInventoryAttributes.PickupSla|null);
+
+                        /** LocalInventoryAttributes instoreProductLocation. */
+                        public instoreProductLocation?: (string|null);
+
+                        /**
+                         * Creates a new LocalInventoryAttributes instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocalInventoryAttributes instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.ILocalInventoryAttributes): google.shopping.merchant.inventories.v1.LocalInventoryAttributes;
+
+                        /**
+                         * Encodes the specified LocalInventoryAttributes message. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventoryAttributes.verify|verify} messages.
+                         * @param message LocalInventoryAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.ILocalInventoryAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocalInventoryAttributes message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventoryAttributes.verify|verify} messages.
+                         * @param message LocalInventoryAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.ILocalInventoryAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocalInventoryAttributes message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocalInventoryAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.LocalInventoryAttributes;
+
+                        /**
+                         * Decodes a LocalInventoryAttributes message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocalInventoryAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.LocalInventoryAttributes;
+
+                        /**
+                         * Verifies a LocalInventoryAttributes message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocalInventoryAttributes message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocalInventoryAttributes
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.LocalInventoryAttributes;
+
+                        /**
+                         * Creates a plain object from a LocalInventoryAttributes message. Also converts values to other types if specified.
+                         * @param message LocalInventoryAttributes
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.LocalInventoryAttributes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocalInventoryAttributes to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocalInventoryAttributes
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LocalInventoryAttributes {
+
+                        /** Availability enum. */
+                        enum Availability {
+                            LOCAL_INVENTORY_AVAILABILITY_UNSPECIFIED = 0,
+                            IN_STOCK = 1,
+                            LIMITED_AVAILABILITY = 2,
+                            ON_DISPLAY_TO_ORDER = 3,
+                            OUT_OF_STOCK = 4
+                        }
+
+                        /** PickupMethod enum. */
+                        enum PickupMethod {
+                            PICKUP_METHOD_UNSPECIFIED = 0,
+                            BUY = 1,
+                            RESERVE = 2,
+                            SHIP_TO_STORE = 3,
+                            NOT_SUPPORTED = 4
+                        }
+
+                        /** PickupSla enum. */
+                        enum PickupSla {
+                            PICKUP_SLA_UNSPECIFIED = 0,
+                            SAME_DAY = 1,
+                            NEXT_DAY = 2,
+                            TWO_DAY = 3,
+                            THREE_DAY = 4,
+                            FOUR_DAY = 5,
+                            FIVE_DAY = 6,
+                            SIX_DAY = 7,
+                            SEVEN_DAY = 8,
+                            MULTI_WEEK = 9
+                        }
+                    }
+
+                    /** Properties of a RegionalInventoryAttributes. */
+                    interface IRegionalInventoryAttributes {
+
+                        /** RegionalInventoryAttributes price */
+                        price?: (google.shopping.type.IPrice|null);
+
+                        /** RegionalInventoryAttributes salePrice */
+                        salePrice?: (google.shopping.type.IPrice|null);
+
+                        /** RegionalInventoryAttributes salePriceEffectiveDate */
+                        salePriceEffectiveDate?: (google.type.IInterval|null);
+
+                        /** RegionalInventoryAttributes availability */
+                        availability?: (google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|keyof typeof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|null);
+                    }
+
+                    /** Represents a RegionalInventoryAttributes. */
+                    class RegionalInventoryAttributes implements IRegionalInventoryAttributes {
+
+                        /**
+                         * Constructs a new RegionalInventoryAttributes.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes);
+
+                        /** RegionalInventoryAttributes price. */
+                        public price?: (google.shopping.type.IPrice|null);
+
+                        /** RegionalInventoryAttributes salePrice. */
+                        public salePrice?: (google.shopping.type.IPrice|null);
+
+                        /** RegionalInventoryAttributes salePriceEffectiveDate. */
+                        public salePriceEffectiveDate?: (google.type.IInterval|null);
+
+                        /** RegionalInventoryAttributes availability. */
+                        public availability?: (google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|keyof typeof google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.Availability|null);
+
+                        /**
+                         * Creates a new RegionalInventoryAttributes instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RegionalInventoryAttributes instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes): google.shopping.merchant.inventories.v1.RegionalInventoryAttributes;
+
+                        /**
+                         * Encodes the specified RegionalInventoryAttributes message. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.verify|verify} messages.
+                         * @param message RegionalInventoryAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RegionalInventoryAttributes message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventoryAttributes.verify|verify} messages.
+                         * @param message RegionalInventoryAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RegionalInventoryAttributes message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RegionalInventoryAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.RegionalInventoryAttributes;
+
+                        /**
+                         * Decodes a RegionalInventoryAttributes message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RegionalInventoryAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.RegionalInventoryAttributes;
+
+                        /**
+                         * Verifies a RegionalInventoryAttributes message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RegionalInventoryAttributes message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RegionalInventoryAttributes
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.RegionalInventoryAttributes;
+
+                        /**
+                         * Creates a plain object from a RegionalInventoryAttributes message. Also converts values to other types if specified.
+                         * @param message RegionalInventoryAttributes
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.RegionalInventoryAttributes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RegionalInventoryAttributes to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RegionalInventoryAttributes
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RegionalInventoryAttributes {
+
+                        /** Availability enum. */
+                        enum Availability {
+                            REGIONAL_INVENTORY_AVAILABILITY_UNSPECIFIED = 0,
+                            IN_STOCK = 1,
+                            OUT_OF_STOCK = 2
+                        }
+                    }
+
+                    /** Represents a LocalInventoryService */
+                    class LocalInventoryService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new LocalInventoryService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new LocalInventoryService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): LocalInventoryService;
+
+                        /**
+                         * Calls ListLocalInventories.
+                         * @param request ListLocalInventoriesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListLocalInventoriesResponse
+                         */
+                        public listLocalInventories(request: google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest, callback: google.shopping.merchant.inventories.v1.LocalInventoryService.ListLocalInventoriesCallback): void;
+
+                        /**
+                         * Calls ListLocalInventories.
+                         * @param request ListLocalInventoriesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listLocalInventories(request: google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest): Promise<google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse>;
+
+                        /**
+                         * Calls InsertLocalInventory.
+                         * @param request InsertLocalInventoryRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and LocalInventory
+                         */
+                        public insertLocalInventory(request: google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest, callback: google.shopping.merchant.inventories.v1.LocalInventoryService.InsertLocalInventoryCallback): void;
+
+                        /**
+                         * Calls InsertLocalInventory.
+                         * @param request InsertLocalInventoryRequest message or plain object
+                         * @returns Promise
+                         */
+                        public insertLocalInventory(request: google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest): Promise<google.shopping.merchant.inventories.v1.LocalInventory>;
+
+                        /**
+                         * Calls DeleteLocalInventory.
+                         * @param request DeleteLocalInventoryRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteLocalInventory(request: google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest, callback: google.shopping.merchant.inventories.v1.LocalInventoryService.DeleteLocalInventoryCallback): void;
+
+                        /**
+                         * Calls DeleteLocalInventory.
+                         * @param request DeleteLocalInventoryRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteLocalInventory(request: google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace LocalInventoryService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.inventories.v1.LocalInventoryService|listLocalInventories}.
+                         * @param error Error, if any
+                         * @param [response] ListLocalInventoriesResponse
+                         */
+                        type ListLocalInventoriesCallback = (error: (Error|null), response?: google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.inventories.v1.LocalInventoryService|insertLocalInventory}.
+                         * @param error Error, if any
+                         * @param [response] LocalInventory
+                         */
+                        type InsertLocalInventoryCallback = (error: (Error|null), response?: google.shopping.merchant.inventories.v1.LocalInventory) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.inventories.v1.LocalInventoryService|deleteLocalInventory}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteLocalInventoryCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a LocalInventory. */
+                    interface ILocalInventory {
+
+                        /** LocalInventory name */
+                        name?: (string|null);
+
+                        /** LocalInventory account */
+                        account?: (number|Long|string|null);
+
+                        /** LocalInventory storeCode */
+                        storeCode?: (string|null);
+
+                        /** LocalInventory localInventoryAttributes */
+                        localInventoryAttributes?: (google.shopping.merchant.inventories.v1.ILocalInventoryAttributes|null);
+                    }
+
+                    /** Represents a LocalInventory. */
+                    class LocalInventory implements ILocalInventory {
+
+                        /**
+                         * Constructs a new LocalInventory.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.ILocalInventory);
+
+                        /** LocalInventory name. */
+                        public name: string;
+
+                        /** LocalInventory account. */
+                        public account: (number|Long|string);
+
+                        /** LocalInventory storeCode. */
+                        public storeCode: string;
+
+                        /** LocalInventory localInventoryAttributes. */
+                        public localInventoryAttributes?: (google.shopping.merchant.inventories.v1.ILocalInventoryAttributes|null);
+
+                        /**
+                         * Creates a new LocalInventory instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocalInventory instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.ILocalInventory): google.shopping.merchant.inventories.v1.LocalInventory;
+
+                        /**
+                         * Encodes the specified LocalInventory message. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventory.verify|verify} messages.
+                         * @param message LocalInventory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.ILocalInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocalInventory message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.LocalInventory.verify|verify} messages.
+                         * @param message LocalInventory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.ILocalInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocalInventory message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocalInventory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.LocalInventory;
+
+                        /**
+                         * Decodes a LocalInventory message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocalInventory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.LocalInventory;
+
+                        /**
+                         * Verifies a LocalInventory message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocalInventory message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocalInventory
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.LocalInventory;
+
+                        /**
+                         * Creates a plain object from a LocalInventory message. Also converts values to other types if specified.
+                         * @param message LocalInventory
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.LocalInventory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocalInventory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocalInventory
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListLocalInventoriesRequest. */
+                    interface IListLocalInventoriesRequest {
+
+                        /** ListLocalInventoriesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListLocalInventoriesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListLocalInventoriesRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListLocalInventoriesRequest. */
+                    class ListLocalInventoriesRequest implements IListLocalInventoriesRequest {
+
+                        /**
+                         * Constructs a new ListLocalInventoriesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest);
+
+                        /** ListLocalInventoriesRequest parent. */
+                        public parent: string;
+
+                        /** ListLocalInventoriesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListLocalInventoriesRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListLocalInventoriesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListLocalInventoriesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest): google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest;
+
+                        /**
+                         * Encodes the specified ListLocalInventoriesRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest.verify|verify} messages.
+                         * @param message ListLocalInventoriesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListLocalInventoriesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest.verify|verify} messages.
+                         * @param message ListLocalInventoriesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IListLocalInventoriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListLocalInventoriesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListLocalInventoriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest;
+
+                        /**
+                         * Decodes a ListLocalInventoriesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListLocalInventoriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest;
+
+                        /**
+                         * Verifies a ListLocalInventoriesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListLocalInventoriesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListLocalInventoriesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest;
+
+                        /**
+                         * Creates a plain object from a ListLocalInventoriesRequest message. Also converts values to other types if specified.
+                         * @param message ListLocalInventoriesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.ListLocalInventoriesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListLocalInventoriesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListLocalInventoriesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListLocalInventoriesResponse. */
+                    interface IListLocalInventoriesResponse {
+
+                        /** ListLocalInventoriesResponse localInventories */
+                        localInventories?: (google.shopping.merchant.inventories.v1.ILocalInventory[]|null);
+
+                        /** ListLocalInventoriesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListLocalInventoriesResponse. */
+                    class ListLocalInventoriesResponse implements IListLocalInventoriesResponse {
+
+                        /**
+                         * Constructs a new ListLocalInventoriesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse);
+
+                        /** ListLocalInventoriesResponse localInventories. */
+                        public localInventories: google.shopping.merchant.inventories.v1.ILocalInventory[];
+
+                        /** ListLocalInventoriesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListLocalInventoriesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListLocalInventoriesResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse): google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse;
+
+                        /**
+                         * Encodes the specified ListLocalInventoriesResponse message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse.verify|verify} messages.
+                         * @param message ListLocalInventoriesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListLocalInventoriesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse.verify|verify} messages.
+                         * @param message ListLocalInventoriesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IListLocalInventoriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListLocalInventoriesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListLocalInventoriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse;
+
+                        /**
+                         * Decodes a ListLocalInventoriesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListLocalInventoriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse;
+
+                        /**
+                         * Verifies a ListLocalInventoriesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListLocalInventoriesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListLocalInventoriesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse;
+
+                        /**
+                         * Creates a plain object from a ListLocalInventoriesResponse message. Also converts values to other types if specified.
+                         * @param message ListLocalInventoriesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.ListLocalInventoriesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListLocalInventoriesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListLocalInventoriesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InsertLocalInventoryRequest. */
+                    interface IInsertLocalInventoryRequest {
+
+                        /** InsertLocalInventoryRequest parent */
+                        parent?: (string|null);
+
+                        /** InsertLocalInventoryRequest localInventory */
+                        localInventory?: (google.shopping.merchant.inventories.v1.ILocalInventory|null);
+                    }
+
+                    /** Represents an InsertLocalInventoryRequest. */
+                    class InsertLocalInventoryRequest implements IInsertLocalInventoryRequest {
+
+                        /**
+                         * Constructs a new InsertLocalInventoryRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest);
+
+                        /** InsertLocalInventoryRequest parent. */
+                        public parent: string;
+
+                        /** InsertLocalInventoryRequest localInventory. */
+                        public localInventory?: (google.shopping.merchant.inventories.v1.ILocalInventory|null);
+
+                        /**
+                         * Creates a new InsertLocalInventoryRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InsertLocalInventoryRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest): google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest;
+
+                        /**
+                         * Encodes the specified InsertLocalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest.verify|verify} messages.
+                         * @param message InsertLocalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InsertLocalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest.verify|verify} messages.
+                         * @param message InsertLocalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IInsertLocalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InsertLocalInventoryRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InsertLocalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest;
+
+                        /**
+                         * Decodes an InsertLocalInventoryRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InsertLocalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest;
+
+                        /**
+                         * Verifies an InsertLocalInventoryRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InsertLocalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InsertLocalInventoryRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest;
+
+                        /**
+                         * Creates a plain object from an InsertLocalInventoryRequest message. Also converts values to other types if specified.
+                         * @param message InsertLocalInventoryRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.InsertLocalInventoryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InsertLocalInventoryRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InsertLocalInventoryRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteLocalInventoryRequest. */
+                    interface IDeleteLocalInventoryRequest {
+
+                        /** DeleteLocalInventoryRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteLocalInventoryRequest. */
+                    class DeleteLocalInventoryRequest implements IDeleteLocalInventoryRequest {
+
+                        /**
+                         * Constructs a new DeleteLocalInventoryRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest);
+
+                        /** DeleteLocalInventoryRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteLocalInventoryRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteLocalInventoryRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest): google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest;
+
+                        /**
+                         * Encodes the specified DeleteLocalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest.verify|verify} messages.
+                         * @param message DeleteLocalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteLocalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest.verify|verify} messages.
+                         * @param message DeleteLocalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IDeleteLocalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteLocalInventoryRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteLocalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest;
+
+                        /**
+                         * Decodes a DeleteLocalInventoryRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteLocalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest;
+
+                        /**
+                         * Verifies a DeleteLocalInventoryRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteLocalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteLocalInventoryRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteLocalInventoryRequest message. Also converts values to other types if specified.
+                         * @param message DeleteLocalInventoryRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.DeleteLocalInventoryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteLocalInventoryRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteLocalInventoryRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Represents a RegionalInventoryService */
+                    class RegionalInventoryService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new RegionalInventoryService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new RegionalInventoryService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): RegionalInventoryService;
+
+                        /**
+                         * Calls ListRegionalInventories.
+                         * @param request ListRegionalInventoriesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListRegionalInventoriesResponse
+                         */
+                        public listRegionalInventories(request: google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest, callback: google.shopping.merchant.inventories.v1.RegionalInventoryService.ListRegionalInventoriesCallback): void;
+
+                        /**
+                         * Calls ListRegionalInventories.
+                         * @param request ListRegionalInventoriesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listRegionalInventories(request: google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest): Promise<google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse>;
+
+                        /**
+                         * Calls InsertRegionalInventory.
+                         * @param request InsertRegionalInventoryRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RegionalInventory
+                         */
+                        public insertRegionalInventory(request: google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest, callback: google.shopping.merchant.inventories.v1.RegionalInventoryService.InsertRegionalInventoryCallback): void;
+
+                        /**
+                         * Calls InsertRegionalInventory.
+                         * @param request InsertRegionalInventoryRequest message or plain object
+                         * @returns Promise
+                         */
+                        public insertRegionalInventory(request: google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest): Promise<google.shopping.merchant.inventories.v1.RegionalInventory>;
+
+                        /**
+                         * Calls DeleteRegionalInventory.
+                         * @param request DeleteRegionalInventoryRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteRegionalInventory(request: google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest, callback: google.shopping.merchant.inventories.v1.RegionalInventoryService.DeleteRegionalInventoryCallback): void;
+
+                        /**
+                         * Calls DeleteRegionalInventory.
+                         * @param request DeleteRegionalInventoryRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteRegionalInventory(request: google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace RegionalInventoryService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.inventories.v1.RegionalInventoryService|listRegionalInventories}.
+                         * @param error Error, if any
+                         * @param [response] ListRegionalInventoriesResponse
+                         */
+                        type ListRegionalInventoriesCallback = (error: (Error|null), response?: google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.inventories.v1.RegionalInventoryService|insertRegionalInventory}.
+                         * @param error Error, if any
+                         * @param [response] RegionalInventory
+                         */
+                        type InsertRegionalInventoryCallback = (error: (Error|null), response?: google.shopping.merchant.inventories.v1.RegionalInventory) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.inventories.v1.RegionalInventoryService|deleteRegionalInventory}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteRegionalInventoryCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a RegionalInventory. */
+                    interface IRegionalInventory {
+
+                        /** RegionalInventory name */
+                        name?: (string|null);
+
+                        /** RegionalInventory account */
+                        account?: (number|Long|string|null);
+
+                        /** RegionalInventory region */
+                        region?: (string|null);
+
+                        /** RegionalInventory regionalInventoryAttributes */
+                        regionalInventoryAttributes?: (google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes|null);
+                    }
+
+                    /** Represents a RegionalInventory. */
+                    class RegionalInventory implements IRegionalInventory {
+
+                        /**
+                         * Constructs a new RegionalInventory.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IRegionalInventory);
+
+                        /** RegionalInventory name. */
+                        public name: string;
+
+                        /** RegionalInventory account. */
+                        public account: (number|Long|string);
+
+                        /** RegionalInventory region. */
+                        public region: string;
+
+                        /** RegionalInventory regionalInventoryAttributes. */
+                        public regionalInventoryAttributes?: (google.shopping.merchant.inventories.v1.IRegionalInventoryAttributes|null);
+
+                        /**
+                         * Creates a new RegionalInventory instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RegionalInventory instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IRegionalInventory): google.shopping.merchant.inventories.v1.RegionalInventory;
+
+                        /**
+                         * Encodes the specified RegionalInventory message. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventory.verify|verify} messages.
+                         * @param message RegionalInventory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IRegionalInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RegionalInventory message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.RegionalInventory.verify|verify} messages.
+                         * @param message RegionalInventory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IRegionalInventory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RegionalInventory message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RegionalInventory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.RegionalInventory;
+
+                        /**
+                         * Decodes a RegionalInventory message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RegionalInventory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.RegionalInventory;
+
+                        /**
+                         * Verifies a RegionalInventory message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RegionalInventory message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RegionalInventory
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.RegionalInventory;
+
+                        /**
+                         * Creates a plain object from a RegionalInventory message. Also converts values to other types if specified.
+                         * @param message RegionalInventory
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.RegionalInventory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RegionalInventory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RegionalInventory
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListRegionalInventoriesRequest. */
+                    interface IListRegionalInventoriesRequest {
+
+                        /** ListRegionalInventoriesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListRegionalInventoriesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListRegionalInventoriesRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListRegionalInventoriesRequest. */
+                    class ListRegionalInventoriesRequest implements IListRegionalInventoriesRequest {
+
+                        /**
+                         * Constructs a new ListRegionalInventoriesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest);
+
+                        /** ListRegionalInventoriesRequest parent. */
+                        public parent: string;
+
+                        /** ListRegionalInventoriesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListRegionalInventoriesRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListRegionalInventoriesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListRegionalInventoriesRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest): google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest;
+
+                        /**
+                         * Encodes the specified ListRegionalInventoriesRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest.verify|verify} messages.
+                         * @param message ListRegionalInventoriesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListRegionalInventoriesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest.verify|verify} messages.
+                         * @param message ListRegionalInventoriesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IListRegionalInventoriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListRegionalInventoriesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListRegionalInventoriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest;
+
+                        /**
+                         * Decodes a ListRegionalInventoriesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListRegionalInventoriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest;
+
+                        /**
+                         * Verifies a ListRegionalInventoriesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListRegionalInventoriesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListRegionalInventoriesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest;
+
+                        /**
+                         * Creates a plain object from a ListRegionalInventoriesRequest message. Also converts values to other types if specified.
+                         * @param message ListRegionalInventoriesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.ListRegionalInventoriesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListRegionalInventoriesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListRegionalInventoriesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListRegionalInventoriesResponse. */
+                    interface IListRegionalInventoriesResponse {
+
+                        /** ListRegionalInventoriesResponse regionalInventories */
+                        regionalInventories?: (google.shopping.merchant.inventories.v1.IRegionalInventory[]|null);
+
+                        /** ListRegionalInventoriesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListRegionalInventoriesResponse. */
+                    class ListRegionalInventoriesResponse implements IListRegionalInventoriesResponse {
+
+                        /**
+                         * Constructs a new ListRegionalInventoriesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse);
+
+                        /** ListRegionalInventoriesResponse regionalInventories. */
+                        public regionalInventories: google.shopping.merchant.inventories.v1.IRegionalInventory[];
+
+                        /** ListRegionalInventoriesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListRegionalInventoriesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListRegionalInventoriesResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse): google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse;
+
+                        /**
+                         * Encodes the specified ListRegionalInventoriesResponse message. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse.verify|verify} messages.
+                         * @param message ListRegionalInventoriesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListRegionalInventoriesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse.verify|verify} messages.
+                         * @param message ListRegionalInventoriesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IListRegionalInventoriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListRegionalInventoriesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListRegionalInventoriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse;
+
+                        /**
+                         * Decodes a ListRegionalInventoriesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListRegionalInventoriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse;
+
+                        /**
+                         * Verifies a ListRegionalInventoriesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListRegionalInventoriesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListRegionalInventoriesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse;
+
+                        /**
+                         * Creates a plain object from a ListRegionalInventoriesResponse message. Also converts values to other types if specified.
+                         * @param message ListRegionalInventoriesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.ListRegionalInventoriesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListRegionalInventoriesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListRegionalInventoriesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InsertRegionalInventoryRequest. */
+                    interface IInsertRegionalInventoryRequest {
+
+                        /** InsertRegionalInventoryRequest parent */
+                        parent?: (string|null);
+
+                        /** InsertRegionalInventoryRequest regionalInventory */
+                        regionalInventory?: (google.shopping.merchant.inventories.v1.IRegionalInventory|null);
+                    }
+
+                    /** Represents an InsertRegionalInventoryRequest. */
+                    class InsertRegionalInventoryRequest implements IInsertRegionalInventoryRequest {
+
+                        /**
+                         * Constructs a new InsertRegionalInventoryRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest);
+
+                        /** InsertRegionalInventoryRequest parent. */
+                        public parent: string;
+
+                        /** InsertRegionalInventoryRequest regionalInventory. */
+                        public regionalInventory?: (google.shopping.merchant.inventories.v1.IRegionalInventory|null);
+
+                        /**
+                         * Creates a new InsertRegionalInventoryRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InsertRegionalInventoryRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest): google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest;
+
+                        /**
+                         * Encodes the specified InsertRegionalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest.verify|verify} messages.
+                         * @param message InsertRegionalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InsertRegionalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest.verify|verify} messages.
+                         * @param message InsertRegionalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IInsertRegionalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InsertRegionalInventoryRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InsertRegionalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest;
+
+                        /**
+                         * Decodes an InsertRegionalInventoryRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InsertRegionalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest;
+
+                        /**
+                         * Verifies an InsertRegionalInventoryRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InsertRegionalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InsertRegionalInventoryRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest;
+
+                        /**
+                         * Creates a plain object from an InsertRegionalInventoryRequest message. Also converts values to other types if specified.
+                         * @param message InsertRegionalInventoryRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.InsertRegionalInventoryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InsertRegionalInventoryRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InsertRegionalInventoryRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteRegionalInventoryRequest. */
+                    interface IDeleteRegionalInventoryRequest {
+
+                        /** DeleteRegionalInventoryRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteRegionalInventoryRequest. */
+                    class DeleteRegionalInventoryRequest implements IDeleteRegionalInventoryRequest {
+
+                        /**
+                         * Constructs a new DeleteRegionalInventoryRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest);
+
+                        /** DeleteRegionalInventoryRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteRegionalInventoryRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteRegionalInventoryRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest): google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest;
+
+                        /**
+                         * Encodes the specified DeleteRegionalInventoryRequest message. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest.verify|verify} messages.
+                         * @param message DeleteRegionalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteRegionalInventoryRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest.verify|verify} messages.
+                         * @param message DeleteRegionalInventoryRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.inventories.v1.IDeleteRegionalInventoryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteRegionalInventoryRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteRegionalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest;
+
+                        /**
+                         * Decodes a DeleteRegionalInventoryRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteRegionalInventoryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest;
+
+                        /**
+                         * Verifies a DeleteRegionalInventoryRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteRegionalInventoryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteRegionalInventoryRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteRegionalInventoryRequest message. Also converts values to other types if specified.
+                         * @param message DeleteRegionalInventoryRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.inventories.v1.DeleteRegionalInventoryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteRegionalInventoryRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteRegionalInventoryRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
 
                 /** Namespace v1beta. */
                 namespace v1beta {
@@ -200,21 +1731,6 @@ export namespace google {
 
                         /** LocalInventory customAttributes. */
                         public customAttributes: google.shopping.type.ICustomAttribute[];
-
-                        /** LocalInventory _availability. */
-                        public _availability?: "availability";
-
-                        /** LocalInventory _quantity. */
-                        public _quantity?: "quantity";
-
-                        /** LocalInventory _pickupMethod. */
-                        public _pickupMethod?: "pickupMethod";
-
-                        /** LocalInventory _pickupSla. */
-                        public _pickupSla?: "pickupSla";
-
-                        /** LocalInventory _instoreProductLocation. */
-                        public _instoreProductLocation?: "instoreProductLocation";
 
                         /**
                          * Creates a new LocalInventory instance using the specified properties.
@@ -854,9 +2370,6 @@ export namespace google {
                         /** RegionalInventory customAttributes. */
                         public customAttributes: google.shopping.type.ICustomAttribute[];
 
-                        /** RegionalInventory _availability. */
-                        public _availability?: "availability";
-
                         /**
                          * Creates a new RegionalInventory instance using the specified properties.
                          * @param [properties] Properties to set
@@ -1378,9 +2891,6 @@ export namespace google {
                 /** Weight unit. */
                 public unit: (google.shopping.type.Weight.WeightUnit|keyof typeof google.shopping.type.Weight.WeightUnit);
 
-                /** Weight _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
                 /**
                  * Creates a new Weight instance using the specified properties.
                  * @param [properties] Properties to set
@@ -1494,12 +3004,6 @@ export namespace google {
                 /** Price currencyCode. */
                 public currencyCode?: (string|null);
 
-                /** Price _amountMicros. */
-                public _amountMicros?: "amountMicros";
-
-                /** Price _currencyCode. */
-                public _currencyCode?: "currencyCode";
-
                 /**
                  * Creates a new Price instance using the specified properties.
                  * @param [properties] Properties to set
@@ -1608,12 +3112,6 @@ export namespace google {
 
                 /** CustomAttribute groupValues. */
                 public groupValues: google.shopping.type.ICustomAttribute[];
-
-                /** CustomAttribute _name. */
-                public _name?: "name";
-
-                /** CustomAttribute _value. */
-                public _value?: "value";
 
                 /**
                  * Creates a new CustomAttribute instance using the specified properties.
@@ -1794,7 +3292,13 @@ export namespace google {
                     LOCAL_INVENTORY_ADS = 3,
                     FREE_LISTINGS = 4,
                     FREE_LOCAL_LISTINGS = 5,
-                    YOUTUBE_SHOPPING = 6
+                    YOUTUBE_SHOPPING = 6,
+                    YOUTUBE_SHOPPING_CHECKOUT = 7,
+                    YOUTUBE_AFFILIATE = 8,
+                    FREE_VEHICLE_LISTINGS = 9,
+                    VEHICLE_ADS = 10,
+                    CLOUD_RETAIL = 11,
+                    LOCAL_CLOUD_RETAIL = 12
                 }
             }
 
@@ -1903,11 +3407,16 @@ export namespace google {
                     LOCAL_INVENTORY_ADS = 5,
                     VEHICLE_INVENTORY_ADS = 6,
                     FREE_LISTINGS = 7,
+                    FREE_LISTINGS_UCP_CHECKOUT = 19,
                     FREE_LOCAL_LISTINGS = 8,
                     FREE_LOCAL_VEHICLE_LISTINGS = 9,
+                    YOUTUBE_AFFILIATE = 18,
                     YOUTUBE_SHOPPING = 10,
                     CLOUD_RETAIL = 11,
-                    LOCAL_CLOUD_RETAIL = 12
+                    LOCAL_CLOUD_RETAIL = 12,
+                    PRODUCT_REVIEWS = 15,
+                    MERCHANT_REVIEWS = 16,
+                    YOUTUBE_CHECKOUT = 17
                 }
             }
 
@@ -2016,6 +3525,19 @@ export namespace google {
 
     /** Namespace api. */
     namespace api {
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -2669,6 +4191,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -2709,6 +4234,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -3862,19 +5390,6 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -6927,6 +8442,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -7175,7 +8693,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -7206,7 +8724,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -8235,6 +9753,109 @@ export namespace google {
             }
         }
 
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -8423,109 +10044,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

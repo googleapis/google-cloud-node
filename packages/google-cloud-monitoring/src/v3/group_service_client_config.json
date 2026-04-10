@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -31,12 +34,12 @@
       "methods": {
         "ListGroups": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "GetGroup": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "CreateGroup": {
@@ -45,18 +48,18 @@
           "retry_params_name": "default"
         },
         "UpdateGroup": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "timeout_millis": 180000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "DeleteGroup": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ListGroupMembers": {
           "timeout_millis": 30000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "unavailable",
           "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         }
       }

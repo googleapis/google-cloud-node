@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,8 @@ function main(name) {
    */
   /**
    *  Required. Name of the AutokeyConfig google.cloud.kms.v1.AutokeyConfig 
-   *  resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig`.
+   *  resource, e.g. `folders/{FOLDER_NUMBER}/autokeyConfig` or
+   *  `projects/{PROJECT_NUMBER}/autokeyConfig`.
    */
   // const name = 'abc123'
 

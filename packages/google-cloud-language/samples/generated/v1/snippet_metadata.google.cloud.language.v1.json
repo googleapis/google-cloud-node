@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-language",
-        "version": "7.0.1",
+        "version": "7.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

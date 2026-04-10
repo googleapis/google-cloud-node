@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -76,6 +76,9 @@ export namespace google {
 
                         /** Job optimization */
                         optimization?: (google.cloud.video.transcoder.v1.Job.OptimizationStrategy|keyof typeof google.cloud.video.transcoder.v1.Job.OptimizationStrategy|null);
+
+                        /** Job fillContentGaps */
+                        fillContentGaps?: (boolean|null);
                     }
 
                     /** Represents a Job. */
@@ -131,6 +134,9 @@ export namespace google {
 
                         /** Job optimization. */
                         public optimization: (google.cloud.video.transcoder.v1.Job.OptimizationStrategy|keyof typeof google.cloud.video.transcoder.v1.Job.OptimizationStrategy);
+
+                        /** Job fillContentGaps. */
+                        public fillContentGaps: boolean;
 
                         /** Job jobConfig. */
                         public jobConfig?: ("templateId"|"config");
@@ -516,6 +522,9 @@ export namespace google {
 
                         /** Input preprocessingConfig */
                         preprocessingConfig?: (google.cloud.video.transcoder.v1.IPreprocessingConfig|null);
+
+                        /** Input attributes */
+                        attributes?: (google.cloud.video.transcoder.v1.IInputAttributes|null);
                     }
 
                     /** Represents an Input. */
@@ -535,6 +544,9 @@ export namespace google {
 
                         /** Input preprocessingConfig. */
                         public preprocessingConfig?: (google.cloud.video.transcoder.v1.IPreprocessingConfig|null);
+
+                        /** Input attributes. */
+                        public attributes?: (google.cloud.video.transcoder.v1.IInputAttributes|null);
 
                         /**
                          * Creates a new Input instance using the specified properties.
@@ -1061,6 +1073,9 @@ export namespace google {
 
                         /** MuxStream encryptionId */
                         encryptionId?: (string|null);
+
+                        /** MuxStream fmp4 */
+                        fmp4?: (google.cloud.video.transcoder.v1.MuxStream.IFmp4Config|null);
                     }
 
                     /** Represents a MuxStream. */
@@ -1089,6 +1104,12 @@ export namespace google {
 
                         /** MuxStream encryptionId. */
                         public encryptionId: string;
+
+                        /** MuxStream fmp4. */
+                        public fmp4?: (google.cloud.video.transcoder.v1.MuxStream.IFmp4Config|null);
+
+                        /** MuxStream containerConfig. */
+                        public containerConfig?: "fmp4";
 
                         /**
                          * Creates a new MuxStream instance using the specified properties.
@@ -1166,6 +1187,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MuxStream {
+
+                        /** Properties of a Fmp4Config. */
+                        interface IFmp4Config {
+
+                            /** Fmp4Config codecTag */
+                            codecTag?: (string|null);
+                        }
+
+                        /** Represents a Fmp4Config. */
+                        class Fmp4Config implements IFmp4Config {
+
+                            /**
+                             * Constructs a new Fmp4Config.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.MuxStream.IFmp4Config);
+
+                            /** Fmp4Config codecTag. */
+                            public codecTag: string;
+
+                            /**
+                             * Creates a new Fmp4Config instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Fmp4Config instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.MuxStream.IFmp4Config): google.cloud.video.transcoder.v1.MuxStream.Fmp4Config;
+
+                            /**
+                             * Encodes the specified Fmp4Config message. Does not implicitly {@link google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify|verify} messages.
+                             * @param message Fmp4Config message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.MuxStream.IFmp4Config, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Fmp4Config message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.MuxStream.Fmp4Config.verify|verify} messages.
+                             * @param message Fmp4Config message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.MuxStream.IFmp4Config, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Fmp4Config message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Fmp4Config
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.MuxStream.Fmp4Config;
+
+                            /**
+                             * Decodes a Fmp4Config message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Fmp4Config
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.MuxStream.Fmp4Config;
+
+                            /**
+                             * Verifies a Fmp4Config message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Fmp4Config message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Fmp4Config
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.MuxStream.Fmp4Config;
+
+                            /**
+                             * Creates a plain object from a Fmp4Config message. Also converts values to other types if specified.
+                             * @param message Fmp4Config
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.MuxStream.Fmp4Config, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Fmp4Config to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Fmp4Config
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a Manifest. */
@@ -3535,6 +3656,218 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a TrackDefinition. */
+                    interface ITrackDefinition {
+
+                        /** TrackDefinition inputTrack */
+                        inputTrack?: (number|null);
+
+                        /** TrackDefinition languages */
+                        languages?: (string[]|null);
+
+                        /** TrackDefinition detectLanguages */
+                        detectLanguages?: (boolean|null);
+
+                        /** TrackDefinition detectedLanguages */
+                        detectedLanguages?: (string[]|null);
+                    }
+
+                    /** Represents a TrackDefinition. */
+                    class TrackDefinition implements ITrackDefinition {
+
+                        /**
+                         * Constructs a new TrackDefinition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.transcoder.v1.ITrackDefinition);
+
+                        /** TrackDefinition inputTrack. */
+                        public inputTrack?: (number|null);
+
+                        /** TrackDefinition languages. */
+                        public languages: string[];
+
+                        /** TrackDefinition detectLanguages. */
+                        public detectLanguages: boolean;
+
+                        /** TrackDefinition detectedLanguages. */
+                        public detectedLanguages: string[];
+
+                        /**
+                         * Creates a new TrackDefinition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TrackDefinition instance
+                         */
+                        public static create(properties?: google.cloud.video.transcoder.v1.ITrackDefinition): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Encodes the specified TrackDefinition message. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                         * @param message TrackDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.transcoder.v1.ITrackDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TrackDefinition message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.TrackDefinition.verify|verify} messages.
+                         * @param message TrackDefinition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.transcoder.v1.ITrackDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TrackDefinition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TrackDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Decodes a TrackDefinition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TrackDefinition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Verifies a TrackDefinition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TrackDefinition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TrackDefinition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.TrackDefinition;
+
+                        /**
+                         * Creates a plain object from a TrackDefinition message. Also converts values to other types if specified.
+                         * @param message TrackDefinition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.transcoder.v1.TrackDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TrackDefinition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrackDefinition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InputAttributes. */
+                    interface IInputAttributes {
+
+                        /** InputAttributes trackDefinitions */
+                        trackDefinitions?: (google.cloud.video.transcoder.v1.ITrackDefinition[]|null);
+                    }
+
+                    /** Represents an InputAttributes. */
+                    class InputAttributes implements IInputAttributes {
+
+                        /**
+                         * Constructs a new InputAttributes.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.video.transcoder.v1.IInputAttributes);
+
+                        /** InputAttributes trackDefinitions. */
+                        public trackDefinitions: google.cloud.video.transcoder.v1.ITrackDefinition[];
+
+                        /**
+                         * Creates a new InputAttributes instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputAttributes instance
+                         */
+                        public static create(properties?: google.cloud.video.transcoder.v1.IInputAttributes): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Encodes the specified InputAttributes message. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                         * @param message InputAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.video.transcoder.v1.IInputAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputAttributes message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.InputAttributes.verify|verify} messages.
+                         * @param message InputAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.video.transcoder.v1.IInputAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputAttributes message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Decodes an InputAttributes message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Verifies an InputAttributes message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputAttributes message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputAttributes
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.InputAttributes;
+
+                        /**
+                         * Creates a plain object from an InputAttributes message. Also converts values to other types if specified.
+                         * @param message InputAttributes
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.video.transcoder.v1.InputAttributes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputAttributes to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InputAttributes
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a VideoStream. */
                     interface IVideoStream {
 
@@ -3649,6 +3982,195 @@ export namespace google {
 
                     namespace VideoStream {
 
+                        /** FrameRateConversionStrategy enum. */
+                        enum FrameRateConversionStrategy {
+                            FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED = 0,
+                            DOWNSAMPLE = 1,
+                            DROP_DUPLICATE = 2
+                        }
+
+                        /** Properties of a H264ColorFormatSDR. */
+                        interface IH264ColorFormatSDR {
+                        }
+
+                        /** Represents a H264ColorFormatSDR. */
+                        class H264ColorFormatSDR implements IH264ColorFormatSDR {
+
+                            /**
+                             * Constructs a new H264ColorFormatSDR.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR);
+
+                            /**
+                             * Creates a new H264ColorFormatSDR instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns H264ColorFormatSDR instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR;
+
+                            /**
+                             * Encodes the specified H264ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify|verify} messages.
+                             * @param message H264ColorFormatSDR message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified H264ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR.verify|verify} messages.
+                             * @param message H264ColorFormatSDR message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a H264ColorFormatSDR message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns H264ColorFormatSDR
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR;
+
+                            /**
+                             * Decodes a H264ColorFormatSDR message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns H264ColorFormatSDR
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR;
+
+                            /**
+                             * Verifies a H264ColorFormatSDR message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a H264ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns H264ColorFormatSDR
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR;
+
+                            /**
+                             * Creates a plain object from a H264ColorFormatSDR message. Also converts values to other types if specified.
+                             * @param message H264ColorFormatSDR
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this H264ColorFormatSDR to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for H264ColorFormatSDR
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a H264ColorFormatHLG. */
+                        interface IH264ColorFormatHLG {
+                        }
+
+                        /** Represents a H264ColorFormatHLG. */
+                        class H264ColorFormatHLG implements IH264ColorFormatHLG {
+
+                            /**
+                             * Constructs a new H264ColorFormatHLG.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG);
+
+                            /**
+                             * Creates a new H264ColorFormatHLG instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns H264ColorFormatHLG instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG;
+
+                            /**
+                             * Encodes the specified H264ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify|verify} messages.
+                             * @param message H264ColorFormatHLG message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified H264ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG.verify|verify} messages.
+                             * @param message H264ColorFormatHLG message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a H264ColorFormatHLG message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns H264ColorFormatHLG
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG;
+
+                            /**
+                             * Decodes a H264ColorFormatHLG message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns H264ColorFormatHLG
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG;
+
+                            /**
+                             * Verifies a H264ColorFormatHLG message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a H264ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns H264ColorFormatHLG
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG;
+
+                            /**
+                             * Creates a plain object from a H264ColorFormatHLG message. Also converts values to other types if specified.
+                             * @param message H264ColorFormatHLG
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this H264ColorFormatHLG to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for H264ColorFormatHLG
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of a H264CodecSettings. */
                         interface IH264CodecSettings {
 
@@ -3660,6 +4182,9 @@ export namespace google {
 
                             /** H264CodecSettings frameRate */
                             frameRate?: (number|null);
+
+                            /** H264CodecSettings frameRateConversionStrategy */
+                            frameRateConversionStrategy?: (google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|keyof typeof google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null);
 
                             /** H264CodecSettings bitrateBps */
                             bitrateBps?: (number|null);
@@ -3711,6 +4236,12 @@ export namespace google {
 
                             /** H264CodecSettings preset */
                             preset?: (string|null);
+
+                            /** H264CodecSettings sdr */
+                            sdr?: (google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR|null);
+
+                            /** H264CodecSettings hlg */
+                            hlg?: (google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG|null);
                         }
 
                         /** Represents a H264CodecSettings. */
@@ -3730,6 +4261,9 @@ export namespace google {
 
                             /** H264CodecSettings frameRate. */
                             public frameRate: number;
+
+                            /** H264CodecSettings frameRateConversionStrategy. */
+                            public frameRateConversionStrategy: (google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|keyof typeof google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy);
 
                             /** H264CodecSettings bitrateBps. */
                             public bitrateBps: number;
@@ -3782,8 +4316,17 @@ export namespace google {
                             /** H264CodecSettings preset. */
                             public preset: string;
 
+                            /** H264CodecSettings sdr. */
+                            public sdr?: (google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatSDR|null);
+
+                            /** H264CodecSettings hlg. */
+                            public hlg?: (google.cloud.video.transcoder.v1.VideoStream.IH264ColorFormatHLG|null);
+
                             /** H264CodecSettings gopMode. */
                             public gopMode?: ("gopFrameCount"|"gopDuration");
+
+                            /** H264CodecSettings colorFormat. */
+                            public colorFormat?: ("sdr"|"hlg");
 
                             /**
                              * Creates a new H264CodecSettings instance using the specified properties.
@@ -3863,6 +4406,279 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a H265ColorFormatSDR. */
+                        interface IH265ColorFormatSDR {
+                        }
+
+                        /** Represents a H265ColorFormatSDR. */
+                        class H265ColorFormatSDR implements IH265ColorFormatSDR {
+
+                            /**
+                             * Constructs a new H265ColorFormatSDR.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR);
+
+                            /**
+                             * Creates a new H265ColorFormatSDR instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns H265ColorFormatSDR instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR;
+
+                            /**
+                             * Encodes the specified H265ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify|verify} messages.
+                             * @param message H265ColorFormatSDR message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified H265ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR.verify|verify} messages.
+                             * @param message H265ColorFormatSDR message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a H265ColorFormatSDR message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns H265ColorFormatSDR
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR;
+
+                            /**
+                             * Decodes a H265ColorFormatSDR message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns H265ColorFormatSDR
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR;
+
+                            /**
+                             * Verifies a H265ColorFormatSDR message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a H265ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns H265ColorFormatSDR
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR;
+
+                            /**
+                             * Creates a plain object from a H265ColorFormatSDR message. Also converts values to other types if specified.
+                             * @param message H265ColorFormatSDR
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this H265ColorFormatSDR to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for H265ColorFormatSDR
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a H265ColorFormatHLG. */
+                        interface IH265ColorFormatHLG {
+                        }
+
+                        /** Represents a H265ColorFormatHLG. */
+                        class H265ColorFormatHLG implements IH265ColorFormatHLG {
+
+                            /**
+                             * Constructs a new H265ColorFormatHLG.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG);
+
+                            /**
+                             * Creates a new H265ColorFormatHLG instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns H265ColorFormatHLG instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG;
+
+                            /**
+                             * Encodes the specified H265ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify|verify} messages.
+                             * @param message H265ColorFormatHLG message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified H265ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG.verify|verify} messages.
+                             * @param message H265ColorFormatHLG message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a H265ColorFormatHLG message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns H265ColorFormatHLG
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG;
+
+                            /**
+                             * Decodes a H265ColorFormatHLG message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns H265ColorFormatHLG
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG;
+
+                            /**
+                             * Verifies a H265ColorFormatHLG message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a H265ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns H265ColorFormatHLG
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG;
+
+                            /**
+                             * Creates a plain object from a H265ColorFormatHLG message. Also converts values to other types if specified.
+                             * @param message H265ColorFormatHLG
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this H265ColorFormatHLG to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for H265ColorFormatHLG
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a H265ColorFormatHDR10. */
+                        interface IH265ColorFormatHDR10 {
+                        }
+
+                        /** Represents a H265ColorFormatHDR10. */
+                        class H265ColorFormatHDR10 implements IH265ColorFormatHDR10 {
+
+                            /**
+                             * Constructs a new H265ColorFormatHDR10.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10);
+
+                            /**
+                             * Creates a new H265ColorFormatHDR10 instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns H265ColorFormatHDR10 instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10;
+
+                            /**
+                             * Encodes the specified H265ColorFormatHDR10 message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify|verify} messages.
+                             * @param message H265ColorFormatHDR10 message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified H265ColorFormatHDR10 message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10.verify|verify} messages.
+                             * @param message H265ColorFormatHDR10 message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a H265ColorFormatHDR10 message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns H265ColorFormatHDR10
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10;
+
+                            /**
+                             * Decodes a H265ColorFormatHDR10 message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns H265ColorFormatHDR10
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10;
+
+                            /**
+                             * Verifies a H265ColorFormatHDR10 message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a H265ColorFormatHDR10 message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns H265ColorFormatHDR10
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10;
+
+                            /**
+                             * Creates a plain object from a H265ColorFormatHDR10 message. Also converts values to other types if specified.
+                             * @param message H265ColorFormatHDR10
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this H265ColorFormatHDR10 to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for H265ColorFormatHDR10
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of a H265CodecSettings. */
                         interface IH265CodecSettings {
 
@@ -3874,6 +4690,9 @@ export namespace google {
 
                             /** H265CodecSettings frameRate */
                             frameRate?: (number|null);
+
+                            /** H265CodecSettings frameRateConversionStrategy */
+                            frameRateConversionStrategy?: (google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|keyof typeof google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null);
 
                             /** H265CodecSettings bitrateBps */
                             bitrateBps?: (number|null);
@@ -3922,6 +4741,15 @@ export namespace google {
 
                             /** H265CodecSettings preset */
                             preset?: (string|null);
+
+                            /** H265CodecSettings sdr */
+                            sdr?: (google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR|null);
+
+                            /** H265CodecSettings hlg */
+                            hlg?: (google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG|null);
+
+                            /** H265CodecSettings hdr10 */
+                            hdr10?: (google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10|null);
                         }
 
                         /** Represents a H265CodecSettings. */
@@ -3941,6 +4769,9 @@ export namespace google {
 
                             /** H265CodecSettings frameRate. */
                             public frameRate: number;
+
+                            /** H265CodecSettings frameRateConversionStrategy. */
+                            public frameRateConversionStrategy: (google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|keyof typeof google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy);
 
                             /** H265CodecSettings bitrateBps. */
                             public bitrateBps: number;
@@ -3990,8 +4821,20 @@ export namespace google {
                             /** H265CodecSettings preset. */
                             public preset: string;
 
+                            /** H265CodecSettings sdr. */
+                            public sdr?: (google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatSDR|null);
+
+                            /** H265CodecSettings hlg. */
+                            public hlg?: (google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHLG|null);
+
+                            /** H265CodecSettings hdr10. */
+                            public hdr10?: (google.cloud.video.transcoder.v1.VideoStream.IH265ColorFormatHDR10|null);
+
                             /** H265CodecSettings gopMode. */
                             public gopMode?: ("gopFrameCount"|"gopDuration");
+
+                            /** H265CodecSettings colorFormat. */
+                            public colorFormat?: ("sdr"|"hlg"|"hdr10");
 
                             /**
                              * Creates a new H265CodecSettings instance using the specified properties.
@@ -4071,6 +4914,188 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a Vp9ColorFormatSDR. */
+                        interface IVp9ColorFormatSDR {
+                        }
+
+                        /** Represents a Vp9ColorFormatSDR. */
+                        class Vp9ColorFormatSDR implements IVp9ColorFormatSDR {
+
+                            /**
+                             * Constructs a new Vp9ColorFormatSDR.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR);
+
+                            /**
+                             * Creates a new Vp9ColorFormatSDR instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Vp9ColorFormatSDR instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR;
+
+                            /**
+                             * Encodes the specified Vp9ColorFormatSDR message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify|verify} messages.
+                             * @param message Vp9ColorFormatSDR message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Vp9ColorFormatSDR message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR.verify|verify} messages.
+                             * @param message Vp9ColorFormatSDR message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Vp9ColorFormatSDR message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Vp9ColorFormatSDR
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR;
+
+                            /**
+                             * Decodes a Vp9ColorFormatSDR message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Vp9ColorFormatSDR
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR;
+
+                            /**
+                             * Verifies a Vp9ColorFormatSDR message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Vp9ColorFormatSDR message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Vp9ColorFormatSDR
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR;
+
+                            /**
+                             * Creates a plain object from a Vp9ColorFormatSDR message. Also converts values to other types if specified.
+                             * @param message Vp9ColorFormatSDR
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Vp9ColorFormatSDR to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Vp9ColorFormatSDR
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Vp9ColorFormatHLG. */
+                        interface IVp9ColorFormatHLG {
+                        }
+
+                        /** Represents a Vp9ColorFormatHLG. */
+                        class Vp9ColorFormatHLG implements IVp9ColorFormatHLG {
+
+                            /**
+                             * Constructs a new Vp9ColorFormatHLG.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG);
+
+                            /**
+                             * Creates a new Vp9ColorFormatHLG instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Vp9ColorFormatHLG instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG;
+
+                            /**
+                             * Encodes the specified Vp9ColorFormatHLG message. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify|verify} messages.
+                             * @param message Vp9ColorFormatHLG message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Vp9ColorFormatHLG message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG.verify|verify} messages.
+                             * @param message Vp9ColorFormatHLG message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Vp9ColorFormatHLG message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Vp9ColorFormatHLG
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG;
+
+                            /**
+                             * Decodes a Vp9ColorFormatHLG message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Vp9ColorFormatHLG
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG;
+
+                            /**
+                             * Verifies a Vp9ColorFormatHLG message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Vp9ColorFormatHLG message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Vp9ColorFormatHLG
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG;
+
+                            /**
+                             * Creates a plain object from a Vp9ColorFormatHLG message. Also converts values to other types if specified.
+                             * @param message Vp9ColorFormatHLG
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Vp9ColorFormatHLG to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Vp9ColorFormatHLG
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of a Vp9CodecSettings. */
                         interface IVp9CodecSettings {
 
@@ -4082,6 +5107,9 @@ export namespace google {
 
                             /** Vp9CodecSettings frameRate */
                             frameRate?: (number|null);
+
+                            /** Vp9CodecSettings frameRateConversionStrategy */
+                            frameRateConversionStrategy?: (google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|keyof typeof google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|null);
 
                             /** Vp9CodecSettings bitrateBps */
                             bitrateBps?: (number|null);
@@ -4103,6 +5131,12 @@ export namespace google {
 
                             /** Vp9CodecSettings profile */
                             profile?: (string|null);
+
+                            /** Vp9CodecSettings sdr */
+                            sdr?: (google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR|null);
+
+                            /** Vp9CodecSettings hlg */
+                            hlg?: (google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG|null);
                         }
 
                         /** Represents a Vp9CodecSettings. */
@@ -4122,6 +5156,9 @@ export namespace google {
 
                             /** Vp9CodecSettings frameRate. */
                             public frameRate: number;
+
+                            /** Vp9CodecSettings frameRateConversionStrategy. */
+                            public frameRateConversionStrategy: (google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy|keyof typeof google.cloud.video.transcoder.v1.VideoStream.FrameRateConversionStrategy);
 
                             /** Vp9CodecSettings bitrateBps. */
                             public bitrateBps: number;
@@ -4144,8 +5181,17 @@ export namespace google {
                             /** Vp9CodecSettings profile. */
                             public profile: string;
 
+                            /** Vp9CodecSettings sdr. */
+                            public sdr?: (google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatSDR|null);
+
+                            /** Vp9CodecSettings hlg. */
+                            public hlg?: (google.cloud.video.transcoder.v1.VideoStream.IVp9ColorFormatHLG|null);
+
                             /** Vp9CodecSettings gopMode. */
                             public gopMode?: ("gopFrameCount"|"gopDuration");
+
+                            /** Vp9CodecSettings colorFormat. */
+                            public colorFormat?: ("sdr"|"hlg");
 
                             /**
                              * Creates a new Vp9CodecSettings instance using the specified properties.
@@ -8004,6 +9050,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -8044,6 +9093,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -11997,6 +13049,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -12245,7 +13300,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -12276,7 +13331,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -13518,7 +14573,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -13534,7 +14589,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

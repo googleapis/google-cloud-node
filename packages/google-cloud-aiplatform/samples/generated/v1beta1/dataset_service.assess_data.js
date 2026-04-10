@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,16 +45,6 @@ function main(name) {
    *  assessment.
    */
   // const batchPredictionResourceUsageAssessmentConfig = {}
-  /**
-   *  Optional. Config for assembling templates with a Gemini API structure to
-   *  assess assembled data.
-   */
-  // const geminiTemplateConfig = {}
-  /**
-   *  Optional. The column name in the underlying table that contains already
-   *  fully assembled requests.
-   */
-  // const requestColumnName = 'abc123'
   /**
    *  Required. The name of the Dataset resource. Used only for MULTIMODAL
    *  datasets. Format:

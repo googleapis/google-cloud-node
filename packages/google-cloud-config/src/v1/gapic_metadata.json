@@ -65,6 +65,21 @@
                 "getTerraformVersion"
               ]
             },
+            "GetResourceChange": {
+              "methods": [
+                "getResourceChange"
+              ]
+            },
+            "GetResourceDrift": {
+              "methods": [
+                "getResourceDrift"
+              ]
+            },
+            "GetAutoMigrationConfig": {
+              "methods": [
+                "getAutoMigrationConfig"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -100,6 +115,11 @@
                 "deletePreview"
               ]
             },
+            "UpdateAutoMigrationConfig": {
+              "methods": [
+                "updateAutoMigrationConfig"
+              ]
+            },
             "ListDeployments": {
               "methods": [
                 "listDeployments",
@@ -133,6 +153,20 @@
                 "listTerraformVersions",
                 "listTerraformVersionsStream",
                 "listTerraformVersionsAsync"
+              ]
+            },
+            "ListResourceChanges": {
+              "methods": [
+                "listResourceChanges",
+                "listResourceChangesStream",
+                "listResourceChangesAsync"
+              ]
+            },
+            "ListResourceDrifts": {
+              "methods": [
+                "listResourceDrifts",
+                "listResourceDriftsStream",
+                "listResourceDriftsAsync"
               ]
             }
           }
@@ -195,6 +229,21 @@
                 "getTerraformVersion"
               ]
             },
+            "GetResourceChange": {
+              "methods": [
+                "getResourceChange"
+              ]
+            },
+            "GetResourceDrift": {
+              "methods": [
+                "getResourceDrift"
+              ]
+            },
+            "GetAutoMigrationConfig": {
+              "methods": [
+                "getAutoMigrationConfig"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -230,6 +279,11 @@
                 "deletePreview"
               ]
             },
+            "UpdateAutoMigrationConfig": {
+              "methods": [
+                "updateAutoMigrationConfig"
+              ]
+            },
             "ListDeployments": {
               "methods": [
                 "listDeployments",
@@ -263,6 +317,20 @@
                 "listTerraformVersions",
                 "listTerraformVersionsStream",
                 "listTerraformVersionsAsync"
+              ]
+            },
+            "ListResourceChanges": {
+              "methods": [
+                "listResourceChanges",
+                "listResourceChangesStream",
+                "listResourceChangesAsync"
+              ]
+            },
+            "ListResourceDrifts": {
+              "methods": [
+                "listResourceDrifts",
+                "listResourceDriftsStream",
+                "listResourceDriftsAsync"
               ]
             }
           }

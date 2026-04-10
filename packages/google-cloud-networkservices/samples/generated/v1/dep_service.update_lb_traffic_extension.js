@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main(lbTrafficExtension) {
   /**
    *  Optional. Used to specify the fields to be overwritten in the
    *  `LbTrafficExtension` resource by the update.
-   *  The fields specified in the update_mask are relative to the resource, not
+   *  The fields specified in the `update_mask` are relative to the resource, not
    *  the full request. A field is overwritten if it is in the mask. If the
    *  user does not specify a mask, then all fields are overwritten.
    */
@@ -44,11 +44,10 @@ function main(lbTrafficExtension) {
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server can ignore
    *  the request if it has already been completed. The server guarantees
-   *  that for at least 60 minutes since the first request.
+   *  that for 60 minutes since the first request.
    *  For example, consider a situation where you make an initial request and the
    *  request times out. If you make the request again with the same request
-   *  ID, the server can check if original operation with the same request ID
-   *  was received, and if so, ignores the second request. This prevents
+   *  ID, the server ignores the second request This prevents
    *  clients from accidentally creating duplicate commitments.
    *  The request ID must be a valid UUID with the exception that zero UUID is
    *  not supported (00000000-0000-0000-0000-000000000000).

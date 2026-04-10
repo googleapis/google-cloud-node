@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,6 +36,11 @@ function main(subproperty) {
    *  Optional. The subproperty event filter to create on an ordinary property.
    */
   // const subpropertyEventFilter = {}
+  /**
+   *  Optional. The subproperty feature synchronization mode for Custom
+   *  Dimensions and Metrics
+   */
+  // const customDimensionAndMetricSynchronizationMode = {}
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;

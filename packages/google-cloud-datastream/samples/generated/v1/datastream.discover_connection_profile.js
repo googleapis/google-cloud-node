@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -66,6 +66,14 @@ function main(parent) {
    *  SQLServer RDBMS to enrich with child data objects and metadata.
    */
   // const sqlServerRdbms = {}
+  /**
+   *  Salesforce organization to enrich with child data objects and metadata.
+   */
+  // const salesforceOrg = {}
+  /**
+   *  MongoDB cluster to enrich with child data objects and metadata.
+   */
+  // const mongodbCluster = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;

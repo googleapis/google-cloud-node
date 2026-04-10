@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -107,6 +107,7 @@ function main(origins, destinations) {
    *  traffic. This setting affects the value returned in the duration field in
    *  the RouteMatrixElement google.maps.routing.v2.RouteMatrixElement  which
    *  contains the predicted time in traffic based on historical averages.
+   *  `TrafficModel` is only available for requests that have set
    *  RoutingPreference google.maps.routing.v2.RoutingPreference  to
    *  `TRAFFIC_AWARE_OPTIMAL` and
    *  RouteTravelMode google.maps.routing.v2.RouteTravelMode  to `DRIVE`.

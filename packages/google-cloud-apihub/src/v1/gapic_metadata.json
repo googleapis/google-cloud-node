@@ -75,9 +75,24 @@
                 "deleteSpec"
               ]
             },
+            "CreateApiOperation": {
+              "methods": [
+                "createApiOperation"
+              ]
+            },
             "GetApiOperation": {
               "methods": [
                 "getApiOperation"
+              ]
+            },
+            "UpdateApiOperation": {
+              "methods": [
+                "updateApiOperation"
+              ]
+            },
+            "DeleteApiOperation": {
+              "methods": [
+                "deleteApiOperation"
               ]
             },
             "GetDefinition": {
@@ -271,9 +286,24 @@
                 "deleteSpec"
               ]
             },
+            "CreateApiOperation": {
+              "methods": [
+                "createApiOperation"
+              ]
+            },
             "GetApiOperation": {
               "methods": [
                 "getApiOperation"
+              ]
+            },
+            "UpdateApiOperation": {
+              "methods": [
+                "updateApiOperation"
+              ]
+            },
+            "DeleteApiOperation": {
+              "methods": [
+                "deleteApiOperation"
               ]
             },
             "GetDefinition": {
@@ -401,6 +431,98 @@
         }
       }
     },
+    "ApiHubCollect": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiHubCollectClient",
+          "rpcs": {
+            "CollectApiData": {
+              "methods": [
+                "collectApiData"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiHubCollectClient",
+          "rpcs": {
+            "CollectApiData": {
+              "methods": [
+                "collectApiData"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApiHubCurate": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiHubCurateClient",
+          "rpcs": {
+            "CreateCuration": {
+              "methods": [
+                "createCuration"
+              ]
+            },
+            "GetCuration": {
+              "methods": [
+                "getCuration"
+              ]
+            },
+            "UpdateCuration": {
+              "methods": [
+                "updateCuration"
+              ]
+            },
+            "DeleteCuration": {
+              "methods": [
+                "deleteCuration"
+              ]
+            },
+            "ListCurations": {
+              "methods": [
+                "listCurations",
+                "listCurationsStream",
+                "listCurationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiHubCurateClient",
+          "rpcs": {
+            "CreateCuration": {
+              "methods": [
+                "createCuration"
+              ]
+            },
+            "GetCuration": {
+              "methods": [
+                "getCuration"
+              ]
+            },
+            "UpdateCuration": {
+              "methods": [
+                "updateCuration"
+              ]
+            },
+            "DeleteCuration": {
+              "methods": [
+                "deleteCuration"
+              ]
+            },
+            "ListCurations": {
+              "methods": [
+                "listCurations",
+                "listCurationsStream",
+                "listCurationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ApiHubDependencies": {
       "clients": {
         "grpc": {
@@ -469,6 +591,68 @@
         }
       }
     },
+    "ApiHubDiscovery": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiHubDiscoveryClient",
+          "rpcs": {
+            "GetDiscoveredApiObservation": {
+              "methods": [
+                "getDiscoveredApiObservation"
+              ]
+            },
+            "GetDiscoveredApiOperation": {
+              "methods": [
+                "getDiscoveredApiOperation"
+              ]
+            },
+            "ListDiscoveredApiObservations": {
+              "methods": [
+                "listDiscoveredApiObservations",
+                "listDiscoveredApiObservationsStream",
+                "listDiscoveredApiObservationsAsync"
+              ]
+            },
+            "ListDiscoveredApiOperations": {
+              "methods": [
+                "listDiscoveredApiOperations",
+                "listDiscoveredApiOperationsStream",
+                "listDiscoveredApiOperationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiHubDiscoveryClient",
+          "rpcs": {
+            "GetDiscoveredApiObservation": {
+              "methods": [
+                "getDiscoveredApiObservation"
+              ]
+            },
+            "GetDiscoveredApiOperation": {
+              "methods": [
+                "getDiscoveredApiOperation"
+              ]
+            },
+            "ListDiscoveredApiObservations": {
+              "methods": [
+                "listDiscoveredApiObservations",
+                "listDiscoveredApiObservationsStream",
+                "listDiscoveredApiObservationsAsync"
+              ]
+            },
+            "ListDiscoveredApiOperations": {
+              "methods": [
+                "listDiscoveredApiOperations",
+                "listDiscoveredApiOperationsStream",
+                "listDiscoveredApiOperationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ApiHubPlugin": {
       "clients": {
         "grpc": {
@@ -487,6 +671,65 @@
             "DisablePlugin": {
               "methods": [
                 "disablePlugin"
+              ]
+            },
+            "CreatePlugin": {
+              "methods": [
+                "createPlugin"
+              ]
+            },
+            "GetPluginInstance": {
+              "methods": [
+                "getPluginInstance"
+              ]
+            },
+            "UpdatePluginInstance": {
+              "methods": [
+                "updatePluginInstance"
+              ]
+            },
+            "DeletePlugin": {
+              "methods": [
+                "deletePlugin"
+              ]
+            },
+            "CreatePluginInstance": {
+              "methods": [
+                "createPluginInstance"
+              ]
+            },
+            "ExecutePluginInstanceAction": {
+              "methods": [
+                "executePluginInstanceAction"
+              ]
+            },
+            "EnablePluginInstanceAction": {
+              "methods": [
+                "enablePluginInstanceAction"
+              ]
+            },
+            "DisablePluginInstanceAction": {
+              "methods": [
+                "disablePluginInstanceAction"
+              ]
+            },
+            "DeletePluginInstance": {
+              "methods": [
+                "deletePluginInstance"
+              ]
+            },
+            "ListPlugins": {
+              "methods": [
+                "listPlugins",
+                "listPluginsStream",
+                "listPluginsAsync"
+              ]
+            },
+            "ListPluginInstances": {
+              "methods": [
+                "listPluginInstances",
+                "listPluginInstancesStream",
+                "listPluginInstancesAsync"
               ]
             }
           }
@@ -507,6 +750,65 @@
             "DisablePlugin": {
               "methods": [
                 "disablePlugin"
+              ]
+            },
+            "CreatePlugin": {
+              "methods": [
+                "createPlugin"
+              ]
+            },
+            "GetPluginInstance": {
+              "methods": [
+                "getPluginInstance"
+              ]
+            },
+            "UpdatePluginInstance": {
+              "methods": [
+                "updatePluginInstance"
+              ]
+            },
+            "DeletePlugin": {
+              "methods": [
+                "deletePlugin"
+              ]
+            },
+            "CreatePluginInstance": {
+              "methods": [
+                "createPluginInstance"
+              ]
+            },
+            "ExecutePluginInstanceAction": {
+              "methods": [
+                "executePluginInstanceAction"
+              ]
+            },
+            "EnablePluginInstanceAction": {
+              "methods": [
+                "enablePluginInstanceAction"
+              ]
+            },
+            "DisablePluginInstanceAction": {
+              "methods": [
+                "disablePluginInstanceAction"
+              ]
+            },
+            "DeletePluginInstance": {
+              "methods": [
+                "deletePluginInstance"
+              ]
+            },
+            "ListPlugins": {
+              "methods": [
+                "listPlugins",
+                "listPluginsStream",
+                "listPluginsAsync"
+              ]
+            },
+            "ListPluginInstances": {
+              "methods": [
+                "listPluginInstances",
+                "listPluginInstancesStream",
+                "listPluginInstancesAsync"
               ]
             }
           }
@@ -634,6 +936,11 @@
               "methods": [
                 "createApiHubInstance"
               ]
+            },
+            "DeleteApiHubInstance": {
+              "methods": [
+                "deleteApiHubInstance"
+              ]
             }
           }
         },
@@ -653,6 +960,11 @@
             "CreateApiHubInstance": {
               "methods": [
                 "createApiHubInstance"
+              ]
+            },
+            "DeleteApiHubInstance": {
+              "methods": [
+                "deleteApiHubInstance"
               ]
             }
           }

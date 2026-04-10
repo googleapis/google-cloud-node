@@ -1,5 +1,42 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.3.1...network-security-v3.4.0) (2026-04-08)
+
+
+### Features
+
+* [networksecurity] Publish proto definitions for AuthzPolicy, TlsInspectionPolicy, GatewaySecurityPolicy, GatewaySecurityPolicyRule, and UrlList ([#7862](https://github.com/googleapis/google-cloud-node/issues/7862)) ([efa3e04](https://github.com/googleapis/google-cloud-node/commit/efa3e04e34f4eb4d2f4ee757d2ef8c6b2e380a40))
+
+## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.3.0...network-security-v3.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.2.0...network-security-v3.3.0) (2025-07-17)
+
+
+### Features
+
+* [networksecurity] publish v1alpha1 Network Security API client and ClientTlsPolicy API resource ([#6486](https://github.com/googleapis/google-cloud-node/issues/6486)) ([971ea02](https://github.com/googleapis/google-cloud-node/commit/971ea02c65b80f9d92340935f619d1e2e320ce83))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.1.0...network-security-v3.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6422](https://github.com/googleapis/google-cloud-node/issues/6422)) ([1e17ea2](https://github.com/googleapis/google-cloud-node/commit/1e17ea2496a502905259010a6702e7cc68f9d1ba))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.0.1...network-security-v3.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6301](https://github.com/googleapis/google-cloud-node/issues/6301)) ([42754a7](https://github.com/googleapis/google-cloud-node/commit/42754a72b34a01d201341428b4a358ff781b0612))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.0.0...network-security-v3.0.1) (2025-03-19)
 
 

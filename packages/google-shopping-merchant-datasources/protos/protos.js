@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,6986 @@
                      * @namespace
                      */
                     var datasources = {};
+    
+                    datasources.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.shopping.merchant.datasources
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.DataSourcesService = (function() {
+    
+                            /**
+                             * Constructs a new DataSourcesService service.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a DataSourcesService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function DataSourcesService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (DataSourcesService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DataSourcesService;
+    
+                            /**
+                             * Creates new DataSourcesService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {DataSourcesService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            DataSourcesService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|getDataSource}.
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @typedef GetDataSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.datasources.v1.DataSource} [response] DataSource
+                             */
+    
+                            /**
+                             * Calls GetDataSource.
+                             * @function getDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IGetDataSourceRequest} request GetDataSourceRequest message or plain object
+                             * @param {google.shopping.merchant.datasources.v1.DataSourcesService.GetDataSourceCallback} callback Node-style callback called with the error, if any, and DataSource
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataSourcesService.prototype.getDataSource = function getDataSource(request, callback) {
+                                return this.rpcCall(getDataSource, $root.google.shopping.merchant.datasources.v1.GetDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
+                            }, "name", { value: "GetDataSource" });
+    
+                            /**
+                             * Calls GetDataSource.
+                             * @function getDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IGetDataSourceRequest} request GetDataSourceRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.datasources.v1.DataSource>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|listDataSources}.
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @typedef ListDataSourcesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.datasources.v1.ListDataSourcesResponse} [response] ListDataSourcesResponse
+                             */
+    
+                            /**
+                             * Calls ListDataSources.
+                             * @function listDataSources
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesRequest} request ListDataSourcesRequest message or plain object
+                             * @param {google.shopping.merchant.datasources.v1.DataSourcesService.ListDataSourcesCallback} callback Node-style callback called with the error, if any, and ListDataSourcesResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataSourcesService.prototype.listDataSources = function listDataSources(request, callback) {
+                                return this.rpcCall(listDataSources, $root.google.shopping.merchant.datasources.v1.ListDataSourcesRequest, $root.google.shopping.merchant.datasources.v1.ListDataSourcesResponse, request, callback);
+                            }, "name", { value: "ListDataSources" });
+    
+                            /**
+                             * Calls ListDataSources.
+                             * @function listDataSources
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesRequest} request ListDataSourcesRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.datasources.v1.ListDataSourcesResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|createDataSource}.
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @typedef CreateDataSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.datasources.v1.DataSource} [response] DataSource
+                             */
+    
+                            /**
+                             * Calls CreateDataSource.
+                             * @function createDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.ICreateDataSourceRequest} request CreateDataSourceRequest message or plain object
+                             * @param {google.shopping.merchant.datasources.v1.DataSourcesService.CreateDataSourceCallback} callback Node-style callback called with the error, if any, and DataSource
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataSourcesService.prototype.createDataSource = function createDataSource(request, callback) {
+                                return this.rpcCall(createDataSource, $root.google.shopping.merchant.datasources.v1.CreateDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
+                            }, "name", { value: "CreateDataSource" });
+    
+                            /**
+                             * Calls CreateDataSource.
+                             * @function createDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.ICreateDataSourceRequest} request CreateDataSourceRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.datasources.v1.DataSource>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|updateDataSource}.
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @typedef UpdateDataSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.datasources.v1.DataSource} [response] DataSource
+                             */
+    
+                            /**
+                             * Calls UpdateDataSource.
+                             * @function updateDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest} request UpdateDataSourceRequest message or plain object
+                             * @param {google.shopping.merchant.datasources.v1.DataSourcesService.UpdateDataSourceCallback} callback Node-style callback called with the error, if any, and DataSource
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataSourcesService.prototype.updateDataSource = function updateDataSource(request, callback) {
+                                return this.rpcCall(updateDataSource, $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest, $root.google.shopping.merchant.datasources.v1.DataSource, request, callback);
+                            }, "name", { value: "UpdateDataSource" });
+    
+                            /**
+                             * Calls UpdateDataSource.
+                             * @function updateDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest} request UpdateDataSourceRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.datasources.v1.DataSource>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|deleteDataSource}.
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @typedef DeleteDataSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteDataSource.
+                             * @function deleteDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest} request DeleteDataSourceRequest message or plain object
+                             * @param {google.shopping.merchant.datasources.v1.DataSourcesService.DeleteDataSourceCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataSourcesService.prototype.deleteDataSource = function deleteDataSource(request, callback) {
+                                return this.rpcCall(deleteDataSource, $root.google.shopping.merchant.datasources.v1.DeleteDataSourceRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteDataSource" });
+    
+                            /**
+                             * Calls DeleteDataSource.
+                             * @function deleteDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest} request DeleteDataSourceRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.datasources.v1.DataSourcesService|fetchDataSource}.
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @typedef FetchDataSourceCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls FetchDataSource.
+                             * @function fetchDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IFetchDataSourceRequest} request FetchDataSourceRequest message or plain object
+                             * @param {google.shopping.merchant.datasources.v1.DataSourcesService.FetchDataSourceCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataSourcesService.prototype.fetchDataSource = function fetchDataSource(request, callback) {
+                                return this.rpcCall(fetchDataSource, $root.google.shopping.merchant.datasources.v1.FetchDataSourceRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "FetchDataSource" });
+    
+                            /**
+                             * Calls FetchDataSource.
+                             * @function fetchDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourcesService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IFetchDataSourceRequest} request FetchDataSourceRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            return DataSourcesService;
+                        })();
+    
+                        v1.DataSource = (function() {
+    
+                            /**
+                             * Properties of a DataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IDataSource
+                             * @property {google.shopping.merchant.datasources.v1.IPrimaryProductDataSource|null} [primaryProductDataSource] DataSource primaryProductDataSource
+                             * @property {google.shopping.merchant.datasources.v1.ISupplementalProductDataSource|null} [supplementalProductDataSource] DataSource supplementalProductDataSource
+                             * @property {google.shopping.merchant.datasources.v1.ILocalInventoryDataSource|null} [localInventoryDataSource] DataSource localInventoryDataSource
+                             * @property {google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource|null} [regionalInventoryDataSource] DataSource regionalInventoryDataSource
+                             * @property {google.shopping.merchant.datasources.v1.IPromotionDataSource|null} [promotionDataSource] DataSource promotionDataSource
+                             * @property {google.shopping.merchant.datasources.v1.IProductReviewDataSource|null} [productReviewDataSource] DataSource productReviewDataSource
+                             * @property {google.shopping.merchant.datasources.v1.IMerchantReviewDataSource|null} [merchantReviewDataSource] DataSource merchantReviewDataSource
+                             * @property {string|null} [name] DataSource name
+                             * @property {number|Long|null} [dataSourceId] DataSource dataSourceId
+                             * @property {string|null} [displayName] DataSource displayName
+                             * @property {google.shopping.merchant.datasources.v1.DataSource.Input|null} [input] DataSource input
+                             * @property {google.shopping.merchant.datasources.v1.IFileInput|null} [fileInput] DataSource fileInput
+                             */
+    
+                            /**
+                             * Constructs a new DataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a DataSource.
+                             * @implements IDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IDataSource=} [properties] Properties to set
+                             */
+                            function DataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataSource primaryProductDataSource.
+                             * @member {google.shopping.merchant.datasources.v1.IPrimaryProductDataSource|null|undefined} primaryProductDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.primaryProductDataSource = null;
+    
+                            /**
+                             * DataSource supplementalProductDataSource.
+                             * @member {google.shopping.merchant.datasources.v1.ISupplementalProductDataSource|null|undefined} supplementalProductDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.supplementalProductDataSource = null;
+    
+                            /**
+                             * DataSource localInventoryDataSource.
+                             * @member {google.shopping.merchant.datasources.v1.ILocalInventoryDataSource|null|undefined} localInventoryDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.localInventoryDataSource = null;
+    
+                            /**
+                             * DataSource regionalInventoryDataSource.
+                             * @member {google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource|null|undefined} regionalInventoryDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.regionalInventoryDataSource = null;
+    
+                            /**
+                             * DataSource promotionDataSource.
+                             * @member {google.shopping.merchant.datasources.v1.IPromotionDataSource|null|undefined} promotionDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.promotionDataSource = null;
+    
+                            /**
+                             * DataSource productReviewDataSource.
+                             * @member {google.shopping.merchant.datasources.v1.IProductReviewDataSource|null|undefined} productReviewDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.productReviewDataSource = null;
+    
+                            /**
+                             * DataSource merchantReviewDataSource.
+                             * @member {google.shopping.merchant.datasources.v1.IMerchantReviewDataSource|null|undefined} merchantReviewDataSource
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.merchantReviewDataSource = null;
+    
+                            /**
+                             * DataSource name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.name = "";
+    
+                            /**
+                             * DataSource dataSourceId.
+                             * @member {number|Long} dataSourceId
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.dataSourceId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * DataSource displayName.
+                             * @member {string} displayName
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.displayName = "";
+    
+                            /**
+                             * DataSource input.
+                             * @member {google.shopping.merchant.datasources.v1.DataSource.Input} input
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.input = 0;
+    
+                            /**
+                             * DataSource fileInput.
+                             * @member {google.shopping.merchant.datasources.v1.IFileInput|null|undefined} fileInput
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            DataSource.prototype.fileInput = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataSource Type.
+                             * @member {"primaryProductDataSource"|"supplementalProductDataSource"|"localInventoryDataSource"|"regionalInventoryDataSource"|"promotionDataSource"|"productReviewDataSource"|"merchantReviewDataSource"|undefined} Type
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             */
+                            Object.defineProperty(DataSource.prototype, "Type", {
+                                get: $util.oneOfGetter($oneOfFields = ["primaryProductDataSource", "supplementalProductDataSource", "localInventoryDataSource", "regionalInventoryDataSource", "promotionDataSource", "productReviewDataSource", "merchantReviewDataSource"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.DataSource} DataSource instance
+                             */
+                            DataSource.create = function create(properties) {
+                                return new DataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDataSource} message DataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.dataSourceId);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                                if (message.primaryProductDataSource != null && Object.hasOwnProperty.call(message, "primaryProductDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.encode(message.primaryProductDataSource, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.supplementalProductDataSource != null && Object.hasOwnProperty.call(message, "supplementalProductDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.encode(message.supplementalProductDataSource, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.localInventoryDataSource != null && Object.hasOwnProperty.call(message, "localInventoryDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.encode(message.localInventoryDataSource, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.regionalInventoryDataSource != null && Object.hasOwnProperty.call(message, "regionalInventoryDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.encode(message.regionalInventoryDataSource, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.promotionDataSource != null && Object.hasOwnProperty.call(message, "promotionDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.PromotionDataSource.encode(message.promotionDataSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.productReviewDataSource != null && Object.hasOwnProperty.call(message, "productReviewDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.encode(message.productReviewDataSource, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.input != null && Object.hasOwnProperty.call(message, "input"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.input);
+                                if (message.fileInput != null && Object.hasOwnProperty.call(message, "fileInput"))
+                                    $root.google.shopping.merchant.datasources.v1.FileInput.encode(message.fileInput, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.merchantReviewDataSource != null && Object.hasOwnProperty.call(message, "merchantReviewDataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.encode(message.merchantReviewDataSource, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDataSource} message DataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.DataSource} DataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.DataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 4: {
+                                            message.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.promotionDataSource = $root.google.shopping.merchant.datasources.v1.PromotionDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.productReviewDataSource = $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dataSourceId = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.displayName = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.input = reader.int32();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.fileInput = $root.google.shopping.merchant.datasources.v1.FileInput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.DataSource} DataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.primaryProductDataSource != null && message.hasOwnProperty("primaryProductDataSource")) {
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.verify(message.primaryProductDataSource);
+                                        if (error)
+                                            return "primaryProductDataSource." + error;
+                                    }
+                                }
+                                if (message.supplementalProductDataSource != null && message.hasOwnProperty("supplementalProductDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.verify(message.supplementalProductDataSource);
+                                        if (error)
+                                            return "supplementalProductDataSource." + error;
+                                    }
+                                }
+                                if (message.localInventoryDataSource != null && message.hasOwnProperty("localInventoryDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.verify(message.localInventoryDataSource);
+                                        if (error)
+                                            return "localInventoryDataSource." + error;
+                                    }
+                                }
+                                if (message.regionalInventoryDataSource != null && message.hasOwnProperty("regionalInventoryDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.verify(message.regionalInventoryDataSource);
+                                        if (error)
+                                            return "regionalInventoryDataSource." + error;
+                                    }
+                                }
+                                if (message.promotionDataSource != null && message.hasOwnProperty("promotionDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1.PromotionDataSource.verify(message.promotionDataSource);
+                                        if (error)
+                                            return "promotionDataSource." + error;
+                                    }
+                                }
+                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.verify(message.productReviewDataSource);
+                                        if (error)
+                                            return "productReviewDataSource." + error;
+                                    }
+                                }
+                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
+                                    if (properties.Type === 1)
+                                        return "Type: multiple values";
+                                    properties.Type = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.verify(message.merchantReviewDataSource);
+                                        if (error)
+                                            return "merchantReviewDataSource." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                    if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
+                                        return "dataSourceId: integer|Long expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.input != null && message.hasOwnProperty("input"))
+                                    switch (message.input) {
+                                    default:
+                                        return "input: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.fileInput != null && message.hasOwnProperty("fileInput")) {
+                                    var error = $root.google.shopping.merchant.datasources.v1.FileInput.verify(message.fileInput);
+                                    if (error)
+                                        return "fileInput." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.DataSource} DataSource
+                             */
+                            DataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.DataSource)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.DataSource();
+                                if (object.primaryProductDataSource != null) {
+                                    if (typeof object.primaryProductDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.primaryProductDataSource: object expected");
+                                    message.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.fromObject(object.primaryProductDataSource);
+                                }
+                                if (object.supplementalProductDataSource != null) {
+                                    if (typeof object.supplementalProductDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.supplementalProductDataSource: object expected");
+                                    message.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.fromObject(object.supplementalProductDataSource);
+                                }
+                                if (object.localInventoryDataSource != null) {
+                                    if (typeof object.localInventoryDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.localInventoryDataSource: object expected");
+                                    message.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.fromObject(object.localInventoryDataSource);
+                                }
+                                if (object.regionalInventoryDataSource != null) {
+                                    if (typeof object.regionalInventoryDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.regionalInventoryDataSource: object expected");
+                                    message.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.fromObject(object.regionalInventoryDataSource);
+                                }
+                                if (object.promotionDataSource != null) {
+                                    if (typeof object.promotionDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.promotionDataSource: object expected");
+                                    message.promotionDataSource = $root.google.shopping.merchant.datasources.v1.PromotionDataSource.fromObject(object.promotionDataSource);
+                                }
+                                if (object.productReviewDataSource != null) {
+                                    if (typeof object.productReviewDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.productReviewDataSource: object expected");
+                                    message.productReviewDataSource = $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.fromObject(object.productReviewDataSource);
+                                }
+                                if (object.merchantReviewDataSource != null) {
+                                    if (typeof object.merchantReviewDataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.merchantReviewDataSource: object expected");
+                                    message.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.fromObject(object.merchantReviewDataSource);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.dataSourceId != null)
+                                    if ($util.Long)
+                                        (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                    else if (typeof object.dataSourceId === "string")
+                                        message.dataSourceId = parseInt(object.dataSourceId, 10);
+                                    else if (typeof object.dataSourceId === "number")
+                                        message.dataSourceId = object.dataSourceId;
+                                    else if (typeof object.dataSourceId === "object")
+                                        message.dataSourceId = new $util.LongBits(object.dataSourceId.low >>> 0, object.dataSourceId.high >>> 0).toNumber();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                switch (object.input) {
+                                default:
+                                    if (typeof object.input === "number") {
+                                        message.input = object.input;
+                                        break;
+                                    }
+                                    break;
+                                case "INPUT_UNSPECIFIED":
+                                case 0:
+                                    message.input = 0;
+                                    break;
+                                case "API":
+                                case 1:
+                                    message.input = 1;
+                                    break;
+                                case "FILE":
+                                case 2:
+                                    message.input = 2;
+                                    break;
+                                case "UI":
+                                case 3:
+                                    message.input = 3;
+                                    break;
+                                case "AUTOFEED":
+                                case 4:
+                                    message.input = 4;
+                                    break;
+                                }
+                                if (object.fileInput != null) {
+                                    if (typeof object.fileInput !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.DataSource.fileInput: object expected");
+                                    message.fileInput = $root.google.shopping.merchant.datasources.v1.FileInput.fromObject(object.fileInput);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.DataSource} message DataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.dataSourceId = options.longs === String ? "0" : 0;
+                                    object.displayName = "";
+                                    object.input = options.enums === String ? "INPUT_UNSPECIFIED" : 0;
+                                    object.fileInput = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                    if (typeof message.dataSourceId === "number")
+                                        object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
+                                    else
+                                        object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.primaryProductDataSource != null && message.hasOwnProperty("primaryProductDataSource")) {
+                                    object.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.toObject(message.primaryProductDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "primaryProductDataSource";
+                                }
+                                if (message.supplementalProductDataSource != null && message.hasOwnProperty("supplementalProductDataSource")) {
+                                    object.supplementalProductDataSource = $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource.toObject(message.supplementalProductDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "supplementalProductDataSource";
+                                }
+                                if (message.localInventoryDataSource != null && message.hasOwnProperty("localInventoryDataSource")) {
+                                    object.localInventoryDataSource = $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource.toObject(message.localInventoryDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "localInventoryDataSource";
+                                }
+                                if (message.regionalInventoryDataSource != null && message.hasOwnProperty("regionalInventoryDataSource")) {
+                                    object.regionalInventoryDataSource = $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.toObject(message.regionalInventoryDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "regionalInventoryDataSource";
+                                }
+                                if (message.promotionDataSource != null && message.hasOwnProperty("promotionDataSource")) {
+                                    object.promotionDataSource = $root.google.shopping.merchant.datasources.v1.PromotionDataSource.toObject(message.promotionDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "promotionDataSource";
+                                }
+                                if (message.productReviewDataSource != null && message.hasOwnProperty("productReviewDataSource")) {
+                                    object.productReviewDataSource = $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource.toObject(message.productReviewDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "productReviewDataSource";
+                                }
+                                if (message.input != null && message.hasOwnProperty("input"))
+                                    object.input = options.enums === String ? $root.google.shopping.merchant.datasources.v1.DataSource.Input[message.input] === undefined ? message.input : $root.google.shopping.merchant.datasources.v1.DataSource.Input[message.input] : message.input;
+                                if (message.fileInput != null && message.hasOwnProperty("fileInput"))
+                                    object.fileInput = $root.google.shopping.merchant.datasources.v1.FileInput.toObject(message.fileInput, options);
+                                if (message.merchantReviewDataSource != null && message.hasOwnProperty("merchantReviewDataSource")) {
+                                    object.merchantReviewDataSource = $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource.toObject(message.merchantReviewDataSource, options);
+                                    if (options.oneofs)
+                                        object.Type = "merchantReviewDataSource";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.DataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.DataSource";
+                            };
+    
+                            /**
+                             * Input enum.
+                             * @name google.shopping.merchant.datasources.v1.DataSource.Input
+                             * @enum {number}
+                             * @property {number} INPUT_UNSPECIFIED=0 INPUT_UNSPECIFIED value
+                             * @property {number} API=1 API value
+                             * @property {number} FILE=2 FILE value
+                             * @property {number} UI=3 UI value
+                             * @property {number} AUTOFEED=4 AUTOFEED value
+                             */
+                            DataSource.Input = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "INPUT_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "API"] = 1;
+                                values[valuesById[2] = "FILE"] = 2;
+                                values[valuesById[3] = "UI"] = 3;
+                                values[valuesById[4] = "AUTOFEED"] = 4;
+                                return values;
+                            })();
+    
+                            return DataSource;
+                        })();
+    
+                        v1.GetDataSourceRequest = (function() {
+    
+                            /**
+                             * Properties of a GetDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IGetDataSourceRequest
+                             * @property {string|null} [name] GetDataSourceRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a GetDataSourceRequest.
+                             * @implements IGetDataSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IGetDataSourceRequest=} [properties] Properties to set
+                             */
+                            function GetDataSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetDataSourceRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @instance
+                             */
+                            GetDataSourceRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetDataSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IGetDataSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.GetDataSourceRequest} GetDataSourceRequest instance
+                             */
+                            GetDataSourceRequest.create = function create(properties) {
+                                return new GetDataSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetDataSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IGetDataSourceRequest} message GetDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetDataSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetDataSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IGetDataSourceRequest} message GetDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetDataSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.GetDataSourceRequest} GetDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetDataSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.GetDataSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetDataSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.GetDataSourceRequest} GetDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetDataSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetDataSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetDataSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.GetDataSourceRequest} GetDataSourceRequest
+                             */
+                            GetDataSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.GetDataSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.GetDataSourceRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetDataSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.GetDataSourceRequest} message GetDataSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetDataSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetDataSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetDataSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetDataSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.GetDataSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetDataSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.GetDataSourceRequest";
+                            };
+    
+                            return GetDataSourceRequest;
+                        })();
+    
+                        v1.ListDataSourcesRequest = (function() {
+    
+                            /**
+                             * Properties of a ListDataSourcesRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IListDataSourcesRequest
+                             * @property {string|null} [parent] ListDataSourcesRequest parent
+                             * @property {number|null} [pageSize] ListDataSourcesRequest pageSize
+                             * @property {string|null} [pageToken] ListDataSourcesRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListDataSourcesRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a ListDataSourcesRequest.
+                             * @implements IListDataSourcesRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesRequest=} [properties] Properties to set
+                             */
+                            function ListDataSourcesRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListDataSourcesRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @instance
+                             */
+                            ListDataSourcesRequest.prototype.parent = "";
+    
+                            /**
+                             * ListDataSourcesRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @instance
+                             */
+                            ListDataSourcesRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListDataSourcesRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @instance
+                             */
+                            ListDataSourcesRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListDataSourcesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesRequest} ListDataSourcesRequest instance
+                             */
+                            ListDataSourcesRequest.create = function create(properties) {
+                                return new ListDataSourcesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataSourcesRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesRequest} message ListDataSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataSourcesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataSourcesRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesRequest} message ListDataSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListDataSourcesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesRequest} ListDataSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataSourcesRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.ListDataSourcesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListDataSourcesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesRequest} ListDataSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataSourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListDataSourcesRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListDataSourcesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListDataSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesRequest} ListDataSourcesRequest
+                             */
+                            ListDataSourcesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.ListDataSourcesRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.ListDataSourcesRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListDataSourcesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ListDataSourcesRequest} message ListDataSourcesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListDataSourcesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListDataSourcesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListDataSourcesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListDataSourcesRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListDataSourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.ListDataSourcesRequest";
+                            };
+    
+                            return ListDataSourcesRequest;
+                        })();
+    
+                        v1.ListDataSourcesResponse = (function() {
+    
+                            /**
+                             * Properties of a ListDataSourcesResponse.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IListDataSourcesResponse
+                             * @property {Array.<google.shopping.merchant.datasources.v1.IDataSource>|null} [dataSources] ListDataSourcesResponse dataSources
+                             * @property {string|null} [nextPageToken] ListDataSourcesResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListDataSourcesResponse.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a ListDataSourcesResponse.
+                             * @implements IListDataSourcesResponse
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesResponse=} [properties] Properties to set
+                             */
+                            function ListDataSourcesResponse(properties) {
+                                this.dataSources = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListDataSourcesResponse dataSources.
+                             * @member {Array.<google.shopping.merchant.datasources.v1.IDataSource>} dataSources
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @instance
+                             */
+                            ListDataSourcesResponse.prototype.dataSources = $util.emptyArray;
+    
+                            /**
+                             * ListDataSourcesResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @instance
+                             */
+                            ListDataSourcesResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListDataSourcesResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesResponse=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesResponse} ListDataSourcesResponse instance
+                             */
+                            ListDataSourcesResponse.create = function create(properties) {
+                                return new ListDataSourcesResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataSourcesResponse message. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesResponse} message ListDataSourcesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataSourcesResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataSources != null && message.dataSources.length)
+                                    for (var i = 0; i < message.dataSources.length; ++i)
+                                        $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListDataSourcesResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.ListDataSourcesResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IListDataSourcesResponse} message ListDataSourcesResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListDataSourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListDataSourcesResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesResponse} ListDataSourcesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataSourcesResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.ListDataSourcesResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.dataSources && message.dataSources.length))
+                                                message.dataSources = [];
+                                            message.dataSources.push($root.google.shopping.merchant.datasources.v1.DataSource.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListDataSourcesResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesResponse} ListDataSourcesResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListDataSourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListDataSourcesResponse message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListDataSourcesResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataSources != null && message.hasOwnProperty("dataSources")) {
+                                    if (!Array.isArray(message.dataSources))
+                                        return "dataSources: array expected";
+                                    for (var i = 0; i < message.dataSources.length; ++i) {
+                                        var error = $root.google.shopping.merchant.datasources.v1.DataSource.verify(message.dataSources[i]);
+                                        if (error)
+                                            return "dataSources." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListDataSourcesResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.ListDataSourcesResponse} ListDataSourcesResponse
+                             */
+                            ListDataSourcesResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.ListDataSourcesResponse)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.ListDataSourcesResponse();
+                                if (object.dataSources) {
+                                    if (!Array.isArray(object.dataSources))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.ListDataSourcesResponse.dataSources: array expected");
+                                    message.dataSources = [];
+                                    for (var i = 0; i < object.dataSources.length; ++i) {
+                                        if (typeof object.dataSources[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.datasources.v1.ListDataSourcesResponse.dataSources: object expected");
+                                        message.dataSources[i] = $root.google.shopping.merchant.datasources.v1.DataSource.fromObject(object.dataSources[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListDataSourcesResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ListDataSourcesResponse} message ListDataSourcesResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListDataSourcesResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dataSources = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.dataSources && message.dataSources.length) {
+                                    object.dataSources = [];
+                                    for (var j = 0; j < message.dataSources.length; ++j)
+                                        object.dataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSources[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListDataSourcesResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListDataSourcesResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListDataSourcesResponse
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.ListDataSourcesResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListDataSourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.ListDataSourcesResponse";
+                            };
+    
+                            return ListDataSourcesResponse;
+                        })();
+    
+                        v1.CreateDataSourceRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface ICreateDataSourceRequest
+                             * @property {string|null} [parent] CreateDataSourceRequest parent
+                             * @property {google.shopping.merchant.datasources.v1.IDataSource|null} [dataSource] CreateDataSourceRequest dataSource
+                             */
+    
+                            /**
+                             * Constructs a new CreateDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a CreateDataSourceRequest.
+                             * @implements ICreateDataSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.ICreateDataSourceRequest=} [properties] Properties to set
+                             */
+                            function CreateDataSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateDataSourceRequest parent.
+                             * @member {string} parent
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @instance
+                             */
+                            CreateDataSourceRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateDataSourceRequest dataSource.
+                             * @member {google.shopping.merchant.datasources.v1.IDataSource|null|undefined} dataSource
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @instance
+                             */
+                            CreateDataSourceRequest.prototype.dataSource = null;
+    
+                            /**
+                             * Creates a new CreateDataSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ICreateDataSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.CreateDataSourceRequest} CreateDataSourceRequest instance
+                             */
+                            CreateDataSourceRequest.create = function create(properties) {
+                                return new CreateDataSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.CreateDataSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ICreateDataSourceRequest} message CreateDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateDataSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.CreateDataSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ICreateDataSourceRequest} message CreateDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateDataSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.CreateDataSourceRequest} CreateDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateDataSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.CreateDataSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateDataSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.CreateDataSourceRequest} CreateDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateDataSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateDataSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateDataSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource")) {
+                                    var error = $root.google.shopping.merchant.datasources.v1.DataSource.verify(message.dataSource);
+                                    if (error)
+                                        return "dataSource." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.CreateDataSourceRequest} CreateDataSourceRequest
+                             */
+                            CreateDataSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.CreateDataSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.CreateDataSourceRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.dataSource != null) {
+                                    if (typeof object.dataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.CreateDataSourceRequest.dataSource: object expected");
+                                    message.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.fromObject(object.dataSource);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateDataSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.CreateDataSourceRequest} message CreateDataSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateDataSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.dataSource = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    object.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSource, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateDataSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateDataSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateDataSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.CreateDataSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateDataSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.CreateDataSourceRequest";
+                            };
+    
+                            return CreateDataSourceRequest;
+                        })();
+    
+                        v1.UpdateDataSourceRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IUpdateDataSourceRequest
+                             * @property {google.shopping.merchant.datasources.v1.IDataSource|null} [dataSource] UpdateDataSourceRequest dataSource
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDataSourceRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents an UpdateDataSourceRequest.
+                             * @implements IUpdateDataSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest=} [properties] Properties to set
+                             */
+                            function UpdateDataSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateDataSourceRequest dataSource.
+                             * @member {google.shopping.merchant.datasources.v1.IDataSource|null|undefined} dataSource
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @instance
+                             */
+                            UpdateDataSourceRequest.prototype.dataSource = null;
+    
+                            /**
+                             * UpdateDataSourceRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @instance
+                             */
+                            UpdateDataSourceRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateDataSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.UpdateDataSourceRequest} UpdateDataSourceRequest instance
+                             */
+                            UpdateDataSourceRequest.create = function create(properties) {
+                                return new UpdateDataSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest} message UpdateDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateDataSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    $root.google.shopping.merchant.datasources.v1.DataSource.encode(message.dataSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IUpdateDataSourceRequest} message UpdateDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateDataSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.UpdateDataSourceRequest} UpdateDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateDataSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateDataSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.UpdateDataSourceRequest} UpdateDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateDataSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateDataSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateDataSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource")) {
+                                    var error = $root.google.shopping.merchant.datasources.v1.DataSource.verify(message.dataSource);
+                                    if (error)
+                                        return "dataSource." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.UpdateDataSourceRequest} UpdateDataSourceRequest
+                             */
+                            UpdateDataSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.UpdateDataSourceRequest();
+                                if (object.dataSource != null) {
+                                    if (typeof object.dataSource !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.dataSource: object expected");
+                                    message.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.fromObject(object.dataSource);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.UpdateDataSourceRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateDataSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.UpdateDataSourceRequest} message UpdateDataSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateDataSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.dataSource = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    object.dataSource = $root.google.shopping.merchant.datasources.v1.DataSource.toObject(message.dataSource, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateDataSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateDataSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateDataSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.UpdateDataSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateDataSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.UpdateDataSourceRequest";
+                            };
+    
+                            return UpdateDataSourceRequest;
+                        })();
+    
+                        v1.FetchDataSourceRequest = (function() {
+    
+                            /**
+                             * Properties of a FetchDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IFetchDataSourceRequest
+                             * @property {string|null} [name] FetchDataSourceRequest name
+                             */
+    
+                            /**
+                             * Constructs a new FetchDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a FetchDataSourceRequest.
+                             * @implements IFetchDataSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IFetchDataSourceRequest=} [properties] Properties to set
+                             */
+                            function FetchDataSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FetchDataSourceRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @instance
+                             */
+                            FetchDataSourceRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new FetchDataSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFetchDataSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.FetchDataSourceRequest} FetchDataSourceRequest instance
+                             */
+                            FetchDataSourceRequest.create = function create(properties) {
+                                return new FetchDataSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FetchDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FetchDataSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFetchDataSourceRequest} message FetchDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FetchDataSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FetchDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FetchDataSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFetchDataSourceRequest} message FetchDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FetchDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FetchDataSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.FetchDataSourceRequest} FetchDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FetchDataSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.FetchDataSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FetchDataSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.FetchDataSourceRequest} FetchDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FetchDataSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FetchDataSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FetchDataSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FetchDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.FetchDataSourceRequest} FetchDataSourceRequest
+                             */
+                            FetchDataSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.FetchDataSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.FetchDataSourceRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FetchDataSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.FetchDataSourceRequest} message FetchDataSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FetchDataSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FetchDataSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FetchDataSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FetchDataSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.FetchDataSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FetchDataSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.FetchDataSourceRequest";
+                            };
+    
+                            return FetchDataSourceRequest;
+                        })();
+    
+                        v1.DeleteDataSourceRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IDeleteDataSourceRequest
+                             * @property {string|null} [name] DeleteDataSourceRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteDataSourceRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a DeleteDataSourceRequest.
+                             * @implements IDeleteDataSourceRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest=} [properties] Properties to set
+                             */
+                            function DeleteDataSourceRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteDataSourceRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @instance
+                             */
+                            DeleteDataSourceRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteDataSourceRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.DeleteDataSourceRequest} DeleteDataSourceRequest instance
+                             */
+                            DeleteDataSourceRequest.create = function create(properties) {
+                                return new DeleteDataSourceRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteDataSourceRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.DeleteDataSourceRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest} message DeleteDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteDataSourceRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteDataSourceRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.DeleteDataSourceRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDeleteDataSourceRequest} message DeleteDataSourceRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteDataSourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteDataSourceRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.DeleteDataSourceRequest} DeleteDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteDataSourceRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.DeleteDataSourceRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteDataSourceRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.DeleteDataSourceRequest} DeleteDataSourceRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteDataSourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteDataSourceRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteDataSourceRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteDataSourceRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.DeleteDataSourceRequest} DeleteDataSourceRequest
+                             */
+                            DeleteDataSourceRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.DeleteDataSourceRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.DeleteDataSourceRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteDataSourceRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.DeleteDataSourceRequest} message DeleteDataSourceRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteDataSourceRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteDataSourceRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteDataSourceRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteDataSourceRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.DeleteDataSourceRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteDataSourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.DeleteDataSourceRequest";
+                            };
+    
+                            return DeleteDataSourceRequest;
+                        })();
+    
+                        v1.PrimaryProductDataSource = (function() {
+    
+                            /**
+                             * Properties of a PrimaryProductDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IPrimaryProductDataSource
+                             * @property {boolean|null} [legacyLocal] PrimaryProductDataSource legacyLocal
+                             * @property {string|null} [feedLabel] PrimaryProductDataSource feedLabel
+                             * @property {string|null} [contentLanguage] PrimaryProductDataSource contentLanguage
+                             * @property {Array.<string>|null} [countries] PrimaryProductDataSource countries
+                             * @property {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule|null} [defaultRule] PrimaryProductDataSource defaultRule
+                             * @property {Array.<google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination>|null} [destinations] PrimaryProductDataSource destinations
+                             */
+    
+                            /**
+                             * Constructs a new PrimaryProductDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a PrimaryProductDataSource.
+                             * @implements IPrimaryProductDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IPrimaryProductDataSource=} [properties] Properties to set
+                             */
+                            function PrimaryProductDataSource(properties) {
+                                this.countries = [];
+                                this.destinations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PrimaryProductDataSource legacyLocal.
+                             * @member {boolean} legacyLocal
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @instance
+                             */
+                            PrimaryProductDataSource.prototype.legacyLocal = false;
+    
+                            /**
+                             * PrimaryProductDataSource feedLabel.
+                             * @member {string|null|undefined} feedLabel
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @instance
+                             */
+                            PrimaryProductDataSource.prototype.feedLabel = null;
+    
+                            /**
+                             * PrimaryProductDataSource contentLanguage.
+                             * @member {string|null|undefined} contentLanguage
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @instance
+                             */
+                            PrimaryProductDataSource.prototype.contentLanguage = null;
+    
+                            /**
+                             * PrimaryProductDataSource countries.
+                             * @member {Array.<string>} countries
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @instance
+                             */
+                            PrimaryProductDataSource.prototype.countries = $util.emptyArray;
+    
+                            /**
+                             * PrimaryProductDataSource defaultRule.
+                             * @member {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule|null|undefined} defaultRule
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @instance
+                             */
+                            PrimaryProductDataSource.prototype.defaultRule = null;
+    
+                            /**
+                             * PrimaryProductDataSource destinations.
+                             * @member {Array.<google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination>} destinations
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @instance
+                             */
+                            PrimaryProductDataSource.prototype.destinations = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PrimaryProductDataSource.prototype, "_feedLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(PrimaryProductDataSource.prototype, "_contentLanguage", {
+                                get: $util.oneOfGetter($oneOfFields = ["contentLanguage"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new PrimaryProductDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IPrimaryProductDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource} PrimaryProductDataSource instance
+                             */
+                            PrimaryProductDataSource.create = function create(properties) {
+                                return new PrimaryProductDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PrimaryProductDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IPrimaryProductDataSource} message PrimaryProductDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrimaryProductDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.contentLanguage);
+                                if (message.countries != null && message.countries.length)
+                                    for (var i = 0; i < message.countries.length; ++i)
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.countries[i]);
+                                if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule"))
+                                    $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.encode(message.defaultRule, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.destinations != null && message.destinations.length)
+                                    for (var i = 0; i < message.destinations.length; ++i)
+                                        $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.encode(message.destinations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.legacyLocal != null && Object.hasOwnProperty.call(message, "legacyLocal"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).bool(message.legacyLocal);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PrimaryProductDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IPrimaryProductDataSource} message PrimaryProductDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrimaryProductDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PrimaryProductDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource} PrimaryProductDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrimaryProductDataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 11: {
+                                            message.legacyLocal = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.feedLabel = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.countries && message.countries.length))
+                                                message.countries = [];
+                                            message.countries.push(reader.string());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            if (!(message.destinations && message.destinations.length))
+                                                message.destinations = [];
+                                            message.destinations.push($root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PrimaryProductDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource} PrimaryProductDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrimaryProductDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PrimaryProductDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PrimaryProductDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.legacyLocal != null && message.hasOwnProperty("legacyLocal"))
+                                    if (typeof message.legacyLocal !== "boolean")
+                                        return "legacyLocal: boolean expected";
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    properties._feedLabel = 1;
+                                    if (!$util.isString(message.feedLabel))
+                                        return "feedLabel: string expected";
+                                }
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                    properties._contentLanguage = 1;
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                }
+                                if (message.countries != null && message.hasOwnProperty("countries")) {
+                                    if (!Array.isArray(message.countries))
+                                        return "countries: array expected";
+                                    for (var i = 0; i < message.countries.length; ++i)
+                                        if (!$util.isString(message.countries[i]))
+                                            return "countries: string[] expected";
+                                }
+                                if (message.defaultRule != null && message.hasOwnProperty("defaultRule")) {
+                                    var error = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.verify(message.defaultRule);
+                                    if (error)
+                                        return "defaultRule." + error;
+                                }
+                                if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                                    if (!Array.isArray(message.destinations))
+                                        return "destinations: array expected";
+                                    for (var i = 0; i < message.destinations.length; ++i) {
+                                        var error = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.verify(message.destinations[i]);
+                                        if (error)
+                                            return "destinations." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PrimaryProductDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource} PrimaryProductDataSource
+                             */
+                            PrimaryProductDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource();
+                                if (object.legacyLocal != null)
+                                    message.legacyLocal = Boolean(object.legacyLocal);
+                                if (object.feedLabel != null)
+                                    message.feedLabel = String(object.feedLabel);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                if (object.countries) {
+                                    if (!Array.isArray(object.countries))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.countries: array expected");
+                                    message.countries = [];
+                                    for (var i = 0; i < object.countries.length; ++i)
+                                        message.countries[i] = String(object.countries[i]);
+                                }
+                                if (object.defaultRule != null) {
+                                    if (typeof object.defaultRule !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.defaultRule: object expected");
+                                    message.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.fromObject(object.defaultRule);
+                                }
+                                if (object.destinations) {
+                                    if (!Array.isArray(object.destinations))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.destinations: array expected");
+                                    message.destinations = [];
+                                    for (var i = 0; i < object.destinations.length; ++i) {
+                                        if (typeof object.destinations[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.destinations: object expected");
+                                        message.destinations[i] = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.fromObject(object.destinations[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PrimaryProductDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource} message PrimaryProductDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PrimaryProductDataSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.countries = [];
+                                    object.destinations = [];
+                                }
+                                if (options.defaults) {
+                                    object.defaultRule = null;
+                                    object.legacyLocal = false;
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    object.feedLabel = message.feedLabel;
+                                    if (options.oneofs)
+                                        object._feedLabel = "feedLabel";
+                                }
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                    object.contentLanguage = message.contentLanguage;
+                                    if (options.oneofs)
+                                        object._contentLanguage = "contentLanguage";
+                                }
+                                if (message.countries && message.countries.length) {
+                                    object.countries = [];
+                                    for (var j = 0; j < message.countries.length; ++j)
+                                        object.countries[j] = message.countries[j];
+                                }
+                                if (message.defaultRule != null && message.hasOwnProperty("defaultRule"))
+                                    object.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.toObject(message.defaultRule, options);
+                                if (message.destinations && message.destinations.length) {
+                                    object.destinations = [];
+                                    for (var j = 0; j < message.destinations.length; ++j)
+                                        object.destinations[j] = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.toObject(message.destinations[j], options);
+                                }
+                                if (message.legacyLocal != null && message.hasOwnProperty("legacyLocal"))
+                                    object.legacyLocal = message.legacyLocal;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PrimaryProductDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PrimaryProductDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PrimaryProductDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PrimaryProductDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.PrimaryProductDataSource";
+                            };
+    
+                            PrimaryProductDataSource.DefaultRule = (function() {
+    
+                                /**
+                                 * Properties of a DefaultRule.
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                                 * @interface IDefaultRule
+                                 * @property {Array.<google.shopping.merchant.datasources.v1.IDataSourceReference>|null} [takeFromDataSources] DefaultRule takeFromDataSources
+                                 */
+    
+                                /**
+                                 * Constructs a new DefaultRule.
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                                 * @classdesc Represents a DefaultRule.
+                                 * @implements IDefaultRule
+                                 * @constructor
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule=} [properties] Properties to set
+                                 */
+                                function DefaultRule(properties) {
+                                    this.takeFromDataSources = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DefaultRule takeFromDataSources.
+                                 * @member {Array.<google.shopping.merchant.datasources.v1.IDataSourceReference>} takeFromDataSources
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @instance
+                                 */
+                                DefaultRule.prototype.takeFromDataSources = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new DefaultRule instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule} DefaultRule instance
+                                 */
+                                DefaultRule.create = function create(properties) {
+                                    return new DefaultRule(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DefaultRule message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule} message DefaultRule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DefaultRule.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.takeFromDataSources != null && message.takeFromDataSources.length)
+                                        for (var i = 0; i < message.takeFromDataSources.length; ++i)
+                                            $root.google.shopping.merchant.datasources.v1.DataSourceReference.encode(message.takeFromDataSources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DefaultRule message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule} message DefaultRule message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DefaultRule.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DefaultRule message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule} DefaultRule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DefaultRule.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.takeFromDataSources && message.takeFromDataSources.length))
+                                                    message.takeFromDataSources = [];
+                                                message.takeFromDataSources.push($root.google.shopping.merchant.datasources.v1.DataSourceReference.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DefaultRule message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule} DefaultRule
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DefaultRule.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DefaultRule message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DefaultRule.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.takeFromDataSources != null && message.hasOwnProperty("takeFromDataSources")) {
+                                        if (!Array.isArray(message.takeFromDataSources))
+                                            return "takeFromDataSources: array expected";
+                                        for (var i = 0; i < message.takeFromDataSources.length; ++i) {
+                                            var error = $root.google.shopping.merchant.datasources.v1.DataSourceReference.verify(message.takeFromDataSources[i]);
+                                            if (error)
+                                                return "takeFromDataSources." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DefaultRule message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule} DefaultRule
+                                 */
+                                DefaultRule.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule();
+                                    if (object.takeFromDataSources) {
+                                        if (!Array.isArray(object.takeFromDataSources))
+                                            throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.takeFromDataSources: array expected");
+                                        message.takeFromDataSources = [];
+                                        for (var i = 0; i < object.takeFromDataSources.length; ++i) {
+                                            if (typeof object.takeFromDataSources[i] !== "object")
+                                                throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.takeFromDataSources: object expected");
+                                            message.takeFromDataSources[i] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.fromObject(object.takeFromDataSources[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DefaultRule message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule} message DefaultRule
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DefaultRule.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.takeFromDataSources = [];
+                                    if (message.takeFromDataSources && message.takeFromDataSources.length) {
+                                        object.takeFromDataSources = [];
+                                        for (var j = 0; j < message.takeFromDataSources.length; ++j)
+                                            object.takeFromDataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.toObject(message.takeFromDataSources[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DefaultRule to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DefaultRule.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DefaultRule
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DefaultRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule";
+                                };
+    
+                                return DefaultRule;
+                            })();
+    
+                            PrimaryProductDataSource.Destination = (function() {
+    
+                                /**
+                                 * Properties of a Destination.
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                                 * @interface IDestination
+                                 * @property {google.shopping.type.Destination.DestinationEnum|null} [destination] Destination destination
+                                 * @property {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State|null} [state] Destination state
+                                 */
+    
+                                /**
+                                 * Constructs a new Destination.
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
+                                 * @classdesc Represents a Destination.
+                                 * @implements IDestination
+                                 * @constructor
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination=} [properties] Properties to set
+                                 */
+                                function Destination(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Destination destination.
+                                 * @member {google.shopping.type.Destination.DestinationEnum} destination
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.destination = 0;
+    
+                                /**
+                                 * Destination state.
+                                 * @member {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State} state
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.state = 0;
+    
+                                /**
+                                 * Creates a new Destination instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination} Destination instance
+                                 */
+                                Destination.create = function create(properties) {
+                                    return new Destination(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Destination message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination} message Destination message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Destination.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.destination);
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination} message Destination message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Destination.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination} Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Destination.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.destination = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.state = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination} Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Destination.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Destination message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Destination.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                        switch (message.destination) {
+                                        default:
+                                            return "destination: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                            break;
+                                        }
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        switch (message.state) {
+                                        default:
+                                            return "state: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination} Destination
+                                 */
+                                Destination.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination();
+                                    switch (object.destination) {
+                                    default:
+                                        if (typeof object.destination === "number") {
+                                            message.destination = object.destination;
+                                            break;
+                                        }
+                                        break;
+                                    case "DESTINATION_ENUM_UNSPECIFIED":
+                                    case 0:
+                                        message.destination = 0;
+                                        break;
+                                    case "SHOPPING_ADS":
+                                    case 1:
+                                        message.destination = 1;
+                                        break;
+                                    case "DISPLAY_ADS":
+                                    case 2:
+                                        message.destination = 2;
+                                        break;
+                                    case "LOCAL_INVENTORY_ADS":
+                                    case 3:
+                                        message.destination = 3;
+                                        break;
+                                    case "FREE_LISTINGS":
+                                    case 4:
+                                        message.destination = 4;
+                                        break;
+                                    case "FREE_LOCAL_LISTINGS":
+                                    case 5:
+                                        message.destination = 5;
+                                        break;
+                                    case "YOUTUBE_SHOPPING":
+                                    case 6:
+                                        message.destination = 6;
+                                        break;
+                                    case "YOUTUBE_SHOPPING_CHECKOUT":
+                                    case 7:
+                                        message.destination = 7;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 8:
+                                        message.destination = 8;
+                                        break;
+                                    case "FREE_VEHICLE_LISTINGS":
+                                    case 9:
+                                        message.destination = 9;
+                                        break;
+                                    case "VEHICLE_ADS":
+                                    case 10:
+                                        message.destination = 10;
+                                        break;
+                                    case "CLOUD_RETAIL":
+                                    case 11:
+                                        message.destination = 11;
+                                        break;
+                                    case "LOCAL_CLOUD_RETAIL":
+                                    case 12:
+                                        message.destination = 12;
+                                        break;
+                                    }
+                                    switch (object.state) {
+                                    default:
+                                        if (typeof object.state === "number") {
+                                            message.state = object.state;
+                                            break;
+                                        }
+                                        break;
+                                    case "STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.state = 0;
+                                        break;
+                                    case "ENABLED":
+                                    case 1:
+                                        message.state = 1;
+                                        break;
+                                    case "DISABLED":
+                                    case 2:
+                                        message.state = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination} message Destination
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Destination.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.destination = options.enums === String ? "DESTINATION_ENUM_UNSPECIFIED" : 0;
+                                        object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                        object.destination = options.enums === String ? $root.google.shopping.type.Destination.DestinationEnum[message.destination] === undefined ? message.destination : $root.google.shopping.type.Destination.DestinationEnum[message.destination] : message.destination;
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        object.state = options.enums === String ? $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State[message.state] : message.state;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Destination to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Destination.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Destination
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Destination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination";
+                                };
+    
+                                /**
+                                 * State enum.
+                                 * @name google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.State
+                                 * @enum {number}
+                                 * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                                 * @property {number} ENABLED=1 ENABLED value
+                                 * @property {number} DISABLED=2 DISABLED value
+                                 */
+                                Destination.State = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "ENABLED"] = 1;
+                                    values[valuesById[2] = "DISABLED"] = 2;
+                                    return values;
+                                })();
+    
+                                return Destination;
+                            })();
+    
+                            return PrimaryProductDataSource;
+                        })();
+    
+                        v1.SupplementalProductDataSource = (function() {
+    
+                            /**
+                             * Properties of a SupplementalProductDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface ISupplementalProductDataSource
+                             * @property {string|null} [feedLabel] SupplementalProductDataSource feedLabel
+                             * @property {string|null} [contentLanguage] SupplementalProductDataSource contentLanguage
+                             * @property {Array.<google.shopping.merchant.datasources.v1.IDataSourceReference>|null} [referencingPrimaryDataSources] SupplementalProductDataSource referencingPrimaryDataSources
+                             */
+    
+                            /**
+                             * Constructs a new SupplementalProductDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a SupplementalProductDataSource.
+                             * @implements ISupplementalProductDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.ISupplementalProductDataSource=} [properties] Properties to set
+                             */
+                            function SupplementalProductDataSource(properties) {
+                                this.referencingPrimaryDataSources = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SupplementalProductDataSource feedLabel.
+                             * @member {string|null|undefined} feedLabel
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @instance
+                             */
+                            SupplementalProductDataSource.prototype.feedLabel = null;
+    
+                            /**
+                             * SupplementalProductDataSource contentLanguage.
+                             * @member {string|null|undefined} contentLanguage
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @instance
+                             */
+                            SupplementalProductDataSource.prototype.contentLanguage = null;
+    
+                            /**
+                             * SupplementalProductDataSource referencingPrimaryDataSources.
+                             * @member {Array.<google.shopping.merchant.datasources.v1.IDataSourceReference>} referencingPrimaryDataSources
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @instance
+                             */
+                            SupplementalProductDataSource.prototype.referencingPrimaryDataSources = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(SupplementalProductDataSource.prototype, "_feedLabel", {
+                                get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(SupplementalProductDataSource.prototype, "_contentLanguage", {
+                                get: $util.oneOfGetter($oneOfFields = ["contentLanguage"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SupplementalProductDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ISupplementalProductDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.SupplementalProductDataSource} SupplementalProductDataSource instance
+                             */
+                            SupplementalProductDataSource.create = function create(properties) {
+                                return new SupplementalProductDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SupplementalProductDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.SupplementalProductDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ISupplementalProductDataSource} message SupplementalProductDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SupplementalProductDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.contentLanguage);
+                                if (message.referencingPrimaryDataSources != null && message.referencingPrimaryDataSources.length)
+                                    for (var i = 0; i < message.referencingPrimaryDataSources.length; ++i)
+                                        $root.google.shopping.merchant.datasources.v1.DataSourceReference.encode(message.referencingPrimaryDataSources[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SupplementalProductDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.SupplementalProductDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ISupplementalProductDataSource} message SupplementalProductDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SupplementalProductDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SupplementalProductDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.SupplementalProductDataSource} SupplementalProductDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SupplementalProductDataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 4: {
+                                            message.feedLabel = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    case 7: {
+                                            if (!(message.referencingPrimaryDataSources && message.referencingPrimaryDataSources.length))
+                                                message.referencingPrimaryDataSources = [];
+                                            message.referencingPrimaryDataSources.push($root.google.shopping.merchant.datasources.v1.DataSourceReference.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SupplementalProductDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.SupplementalProductDataSource} SupplementalProductDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SupplementalProductDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SupplementalProductDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SupplementalProductDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    properties._feedLabel = 1;
+                                    if (!$util.isString(message.feedLabel))
+                                        return "feedLabel: string expected";
+                                }
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                    properties._contentLanguage = 1;
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                }
+                                if (message.referencingPrimaryDataSources != null && message.hasOwnProperty("referencingPrimaryDataSources")) {
+                                    if (!Array.isArray(message.referencingPrimaryDataSources))
+                                        return "referencingPrimaryDataSources: array expected";
+                                    for (var i = 0; i < message.referencingPrimaryDataSources.length; ++i) {
+                                        var error = $root.google.shopping.merchant.datasources.v1.DataSourceReference.verify(message.referencingPrimaryDataSources[i]);
+                                        if (error)
+                                            return "referencingPrimaryDataSources." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SupplementalProductDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.SupplementalProductDataSource} SupplementalProductDataSource
+                             */
+                            SupplementalProductDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.SupplementalProductDataSource();
+                                if (object.feedLabel != null)
+                                    message.feedLabel = String(object.feedLabel);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                if (object.referencingPrimaryDataSources) {
+                                    if (!Array.isArray(object.referencingPrimaryDataSources))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.SupplementalProductDataSource.referencingPrimaryDataSources: array expected");
+                                    message.referencingPrimaryDataSources = [];
+                                    for (var i = 0; i < object.referencingPrimaryDataSources.length; ++i) {
+                                        if (typeof object.referencingPrimaryDataSources[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.datasources.v1.SupplementalProductDataSource.referencingPrimaryDataSources: object expected");
+                                        message.referencingPrimaryDataSources[i] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.fromObject(object.referencingPrimaryDataSources[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SupplementalProductDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.SupplementalProductDataSource} message SupplementalProductDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SupplementalProductDataSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.referencingPrimaryDataSources = [];
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
+                                    object.feedLabel = message.feedLabel;
+                                    if (options.oneofs)
+                                        object._feedLabel = "feedLabel";
+                                }
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage")) {
+                                    object.contentLanguage = message.contentLanguage;
+                                    if (options.oneofs)
+                                        object._contentLanguage = "contentLanguage";
+                                }
+                                if (message.referencingPrimaryDataSources && message.referencingPrimaryDataSources.length) {
+                                    object.referencingPrimaryDataSources = [];
+                                    for (var j = 0; j < message.referencingPrimaryDataSources.length; ++j)
+                                        object.referencingPrimaryDataSources[j] = $root.google.shopping.merchant.datasources.v1.DataSourceReference.toObject(message.referencingPrimaryDataSources[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SupplementalProductDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SupplementalProductDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SupplementalProductDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.SupplementalProductDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SupplementalProductDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.SupplementalProductDataSource";
+                            };
+    
+                            return SupplementalProductDataSource;
+                        })();
+    
+                        v1.LocalInventoryDataSource = (function() {
+    
+                            /**
+                             * Properties of a LocalInventoryDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface ILocalInventoryDataSource
+                             * @property {string|null} [feedLabel] LocalInventoryDataSource feedLabel
+                             * @property {string|null} [contentLanguage] LocalInventoryDataSource contentLanguage
+                             */
+    
+                            /**
+                             * Constructs a new LocalInventoryDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a LocalInventoryDataSource.
+                             * @implements ILocalInventoryDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.ILocalInventoryDataSource=} [properties] Properties to set
+                             */
+                            function LocalInventoryDataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LocalInventoryDataSource feedLabel.
+                             * @member {string} feedLabel
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @instance
+                             */
+                            LocalInventoryDataSource.prototype.feedLabel = "";
+    
+                            /**
+                             * LocalInventoryDataSource contentLanguage.
+                             * @member {string} contentLanguage
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @instance
+                             */
+                            LocalInventoryDataSource.prototype.contentLanguage = "";
+    
+                            /**
+                             * Creates a new LocalInventoryDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ILocalInventoryDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.LocalInventoryDataSource} LocalInventoryDataSource instance
+                             */
+                            LocalInventoryDataSource.create = function create(properties) {
+                                return new LocalInventoryDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LocalInventoryDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.LocalInventoryDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ILocalInventoryDataSource} message LocalInventoryDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocalInventoryDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.contentLanguage);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LocalInventoryDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.LocalInventoryDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ILocalInventoryDataSource} message LocalInventoryDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocalInventoryDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LocalInventoryDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.LocalInventoryDataSource} LocalInventoryDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocalInventoryDataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 4: {
+                                            message.feedLabel = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LocalInventoryDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.LocalInventoryDataSource} LocalInventoryDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocalInventoryDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LocalInventoryDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LocalInventoryDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                    if (!$util.isString(message.feedLabel))
+                                        return "feedLabel: string expected";
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LocalInventoryDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.LocalInventoryDataSource} LocalInventoryDataSource
+                             */
+                            LocalInventoryDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.LocalInventoryDataSource();
+                                if (object.feedLabel != null)
+                                    message.feedLabel = String(object.feedLabel);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LocalInventoryDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.LocalInventoryDataSource} message LocalInventoryDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LocalInventoryDataSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.feedLabel = "";
+                                    object.contentLanguage = "";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                    object.feedLabel = message.feedLabel;
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    object.contentLanguage = message.contentLanguage;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LocalInventoryDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LocalInventoryDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LocalInventoryDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.LocalInventoryDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LocalInventoryDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.LocalInventoryDataSource";
+                            };
+    
+                            return LocalInventoryDataSource;
+                        })();
+    
+                        v1.RegionalInventoryDataSource = (function() {
+    
+                            /**
+                             * Properties of a RegionalInventoryDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IRegionalInventoryDataSource
+                             * @property {string|null} [feedLabel] RegionalInventoryDataSource feedLabel
+                             * @property {string|null} [contentLanguage] RegionalInventoryDataSource contentLanguage
+                             */
+    
+                            /**
+                             * Constructs a new RegionalInventoryDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a RegionalInventoryDataSource.
+                             * @implements IRegionalInventoryDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource=} [properties] Properties to set
+                             */
+                            function RegionalInventoryDataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RegionalInventoryDataSource feedLabel.
+                             * @member {string} feedLabel
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @instance
+                             */
+                            RegionalInventoryDataSource.prototype.feedLabel = "";
+    
+                            /**
+                             * RegionalInventoryDataSource contentLanguage.
+                             * @member {string} contentLanguage
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @instance
+                             */
+                            RegionalInventoryDataSource.prototype.contentLanguage = "";
+    
+                            /**
+                             * Creates a new RegionalInventoryDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.RegionalInventoryDataSource} RegionalInventoryDataSource instance
+                             */
+                            RegionalInventoryDataSource.create = function create(properties) {
+                                return new RegionalInventoryDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalInventoryDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource} message RegionalInventoryDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalInventoryDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.feedLabel != null && Object.hasOwnProperty.call(message, "feedLabel"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.feedLabel);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.contentLanguage);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RegionalInventoryDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.RegionalInventoryDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IRegionalInventoryDataSource} message RegionalInventoryDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RegionalInventoryDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RegionalInventoryDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.RegionalInventoryDataSource} RegionalInventoryDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalInventoryDataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 4: {
+                                            message.feedLabel = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RegionalInventoryDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.RegionalInventoryDataSource} RegionalInventoryDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RegionalInventoryDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RegionalInventoryDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RegionalInventoryDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                    if (!$util.isString(message.feedLabel))
+                                        return "feedLabel: string expected";
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RegionalInventoryDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.RegionalInventoryDataSource} RegionalInventoryDataSource
+                             */
+                            RegionalInventoryDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.RegionalInventoryDataSource();
+                                if (object.feedLabel != null)
+                                    message.feedLabel = String(object.feedLabel);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RegionalInventoryDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.RegionalInventoryDataSource} message RegionalInventoryDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RegionalInventoryDataSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.feedLabel = "";
+                                    object.contentLanguage = "";
+                                }
+                                if (message.feedLabel != null && message.hasOwnProperty("feedLabel"))
+                                    object.feedLabel = message.feedLabel;
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    object.contentLanguage = message.contentLanguage;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RegionalInventoryDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RegionalInventoryDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RegionalInventoryDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.RegionalInventoryDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RegionalInventoryDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.RegionalInventoryDataSource";
+                            };
+    
+                            return RegionalInventoryDataSource;
+                        })();
+    
+                        v1.PromotionDataSource = (function() {
+    
+                            /**
+                             * Properties of a PromotionDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IPromotionDataSource
+                             * @property {string|null} [targetCountry] PromotionDataSource targetCountry
+                             * @property {string|null} [contentLanguage] PromotionDataSource contentLanguage
+                             */
+    
+                            /**
+                             * Constructs a new PromotionDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a PromotionDataSource.
+                             * @implements IPromotionDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IPromotionDataSource=} [properties] Properties to set
+                             */
+                            function PromotionDataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PromotionDataSource targetCountry.
+                             * @member {string} targetCountry
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @instance
+                             */
+                            PromotionDataSource.prototype.targetCountry = "";
+    
+                            /**
+                             * PromotionDataSource contentLanguage.
+                             * @member {string} contentLanguage
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @instance
+                             */
+                            PromotionDataSource.prototype.contentLanguage = "";
+    
+                            /**
+                             * Creates a new PromotionDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IPromotionDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.PromotionDataSource} PromotionDataSource instance
+                             */
+                            PromotionDataSource.create = function create(properties) {
+                                return new PromotionDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PromotionDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.PromotionDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IPromotionDataSource} message PromotionDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PromotionDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.targetCountry != null && Object.hasOwnProperty.call(message, "targetCountry"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.targetCountry);
+                                if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.contentLanguage);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PromotionDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.PromotionDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IPromotionDataSource} message PromotionDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PromotionDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PromotionDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.PromotionDataSource} PromotionDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PromotionDataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.PromotionDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.targetCountry = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.contentLanguage = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PromotionDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.PromotionDataSource} PromotionDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PromotionDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PromotionDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PromotionDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                    if (!$util.isString(message.targetCountry))
+                                        return "targetCountry: string expected";
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    if (!$util.isString(message.contentLanguage))
+                                        return "contentLanguage: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PromotionDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.PromotionDataSource} PromotionDataSource
+                             */
+                            PromotionDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.PromotionDataSource)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.PromotionDataSource();
+                                if (object.targetCountry != null)
+                                    message.targetCountry = String(object.targetCountry);
+                                if (object.contentLanguage != null)
+                                    message.contentLanguage = String(object.contentLanguage);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PromotionDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.PromotionDataSource} message PromotionDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PromotionDataSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.targetCountry = "";
+                                    object.contentLanguage = "";
+                                }
+                                if (message.targetCountry != null && message.hasOwnProperty("targetCountry"))
+                                    object.targetCountry = message.targetCountry;
+                                if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                                    object.contentLanguage = message.contentLanguage;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PromotionDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PromotionDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PromotionDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.PromotionDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PromotionDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.PromotionDataSource";
+                            };
+    
+                            return PromotionDataSource;
+                        })();
+    
+                        v1.ProductReviewDataSource = (function() {
+    
+                            /**
+                             * Properties of a ProductReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IProductReviewDataSource
+                             */
+    
+                            /**
+                             * Constructs a new ProductReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a ProductReviewDataSource.
+                             * @implements IProductReviewDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IProductReviewDataSource=} [properties] Properties to set
+                             */
+                            function ProductReviewDataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new ProductReviewDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IProductReviewDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.ProductReviewDataSource} ProductReviewDataSource instance
+                             */
+                            ProductReviewDataSource.create = function create(properties) {
+                                return new ProductReviewDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProductReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.ProductReviewDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IProductReviewDataSource} message ProductReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductReviewDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProductReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.ProductReviewDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IProductReviewDataSource} message ProductReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProductReviewDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.ProductReviewDataSource} ProductReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductReviewDataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProductReviewDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.ProductReviewDataSource} ProductReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductReviewDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProductReviewDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProductReviewDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProductReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.ProductReviewDataSource} ProductReviewDataSource
+                             */
+                            ProductReviewDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource)
+                                    return object;
+                                return new $root.google.shopping.merchant.datasources.v1.ProductReviewDataSource();
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProductReviewDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.ProductReviewDataSource} message ProductReviewDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProductReviewDataSource.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this ProductReviewDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProductReviewDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProductReviewDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.ProductReviewDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProductReviewDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.ProductReviewDataSource";
+                            };
+    
+                            return ProductReviewDataSource;
+                        })();
+    
+                        v1.MerchantReviewDataSource = (function() {
+    
+                            /**
+                             * Properties of a MerchantReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IMerchantReviewDataSource
+                             */
+    
+                            /**
+                             * Constructs a new MerchantReviewDataSource.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a MerchantReviewDataSource.
+                             * @implements IMerchantReviewDataSource
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IMerchantReviewDataSource=} [properties] Properties to set
+                             */
+                            function MerchantReviewDataSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new MerchantReviewDataSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IMerchantReviewDataSource=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.MerchantReviewDataSource} MerchantReviewDataSource instance
+                             */
+                            MerchantReviewDataSource.create = function create(properties) {
+                                return new MerchantReviewDataSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MerchantReviewDataSource message. Does not implicitly {@link google.shopping.merchant.datasources.v1.MerchantReviewDataSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IMerchantReviewDataSource} message MerchantReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MerchantReviewDataSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MerchantReviewDataSource message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.MerchantReviewDataSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IMerchantReviewDataSource} message MerchantReviewDataSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MerchantReviewDataSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MerchantReviewDataSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.MerchantReviewDataSource} MerchantReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MerchantReviewDataSource.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MerchantReviewDataSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.MerchantReviewDataSource} MerchantReviewDataSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MerchantReviewDataSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MerchantReviewDataSource message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MerchantReviewDataSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MerchantReviewDataSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.MerchantReviewDataSource} MerchantReviewDataSource
+                             */
+                            MerchantReviewDataSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource)
+                                    return object;
+                                return new $root.google.shopping.merchant.datasources.v1.MerchantReviewDataSource();
+                            };
+    
+                            /**
+                             * Creates a plain object from a MerchantReviewDataSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.MerchantReviewDataSource} message MerchantReviewDataSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MerchantReviewDataSource.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this MerchantReviewDataSource to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MerchantReviewDataSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MerchantReviewDataSource
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.MerchantReviewDataSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MerchantReviewDataSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.MerchantReviewDataSource";
+                            };
+    
+                            return MerchantReviewDataSource;
+                        })();
+    
+                        v1.DataSourceReference = (function() {
+    
+                            /**
+                             * Properties of a DataSourceReference.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IDataSourceReference
+                             * @property {boolean|null} [self] DataSourceReference self
+                             * @property {string|null} [primaryDataSourceName] DataSourceReference primaryDataSourceName
+                             * @property {string|null} [supplementalDataSourceName] DataSourceReference supplementalDataSourceName
+                             */
+    
+                            /**
+                             * Constructs a new DataSourceReference.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a DataSourceReference.
+                             * @implements IDataSourceReference
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IDataSourceReference=} [properties] Properties to set
+                             */
+                            function DataSourceReference(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DataSourceReference self.
+                             * @member {boolean|null|undefined} self
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @instance
+                             */
+                            DataSourceReference.prototype.self = null;
+    
+                            /**
+                             * DataSourceReference primaryDataSourceName.
+                             * @member {string|null|undefined} primaryDataSourceName
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @instance
+                             */
+                            DataSourceReference.prototype.primaryDataSourceName = null;
+    
+                            /**
+                             * DataSourceReference supplementalDataSourceName.
+                             * @member {string|null|undefined} supplementalDataSourceName
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @instance
+                             */
+                            DataSourceReference.prototype.supplementalDataSourceName = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataSourceReference dataSourceId.
+                             * @member {"self"|"primaryDataSourceName"|"supplementalDataSourceName"|undefined} dataSourceId
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @instance
+                             */
+                            Object.defineProperty(DataSourceReference.prototype, "dataSourceId", {
+                                get: $util.oneOfGetter($oneOfFields = ["self", "primaryDataSourceName", "supplementalDataSourceName"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new DataSourceReference instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDataSourceReference=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.DataSourceReference} DataSourceReference instance
+                             */
+                            DataSourceReference.create = function create(properties) {
+                                return new DataSourceReference(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DataSourceReference message. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSourceReference.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDataSourceReference} message DataSourceReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataSourceReference.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.self != null && Object.hasOwnProperty.call(message, "self"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.self);
+                                if (message.supplementalDataSourceName != null && Object.hasOwnProperty.call(message, "supplementalDataSourceName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.supplementalDataSourceName);
+                                if (message.primaryDataSourceName != null && Object.hasOwnProperty.call(message, "primaryDataSourceName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.primaryDataSourceName);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DataSourceReference message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.DataSourceReference.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IDataSourceReference} message DataSourceReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DataSourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DataSourceReference message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.DataSourceReference} DataSourceReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataSourceReference.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.DataSourceReference();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.self = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.primaryDataSourceName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.supplementalDataSourceName = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DataSourceReference message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.DataSourceReference} DataSourceReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DataSourceReference.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DataSourceReference message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DataSourceReference.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.self != null && message.hasOwnProperty("self")) {
+                                    properties.dataSourceId = 1;
+                                    if (typeof message.self !== "boolean")
+                                        return "self: boolean expected";
+                                }
+                                if (message.primaryDataSourceName != null && message.hasOwnProperty("primaryDataSourceName")) {
+                                    if (properties.dataSourceId === 1)
+                                        return "dataSourceId: multiple values";
+                                    properties.dataSourceId = 1;
+                                    if (!$util.isString(message.primaryDataSourceName))
+                                        return "primaryDataSourceName: string expected";
+                                }
+                                if (message.supplementalDataSourceName != null && message.hasOwnProperty("supplementalDataSourceName")) {
+                                    if (properties.dataSourceId === 1)
+                                        return "dataSourceId: multiple values";
+                                    properties.dataSourceId = 1;
+                                    if (!$util.isString(message.supplementalDataSourceName))
+                                        return "supplementalDataSourceName: string expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DataSourceReference message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.DataSourceReference} DataSourceReference
+                             */
+                            DataSourceReference.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.DataSourceReference)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.DataSourceReference();
+                                if (object.self != null)
+                                    message.self = Boolean(object.self);
+                                if (object.primaryDataSourceName != null)
+                                    message.primaryDataSourceName = String(object.primaryDataSourceName);
+                                if (object.supplementalDataSourceName != null)
+                                    message.supplementalDataSourceName = String(object.supplementalDataSourceName);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DataSourceReference message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.DataSourceReference} message DataSourceReference
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DataSourceReference.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.self != null && message.hasOwnProperty("self")) {
+                                    object.self = message.self;
+                                    if (options.oneofs)
+                                        object.dataSourceId = "self";
+                                }
+                                if (message.supplementalDataSourceName != null && message.hasOwnProperty("supplementalDataSourceName")) {
+                                    object.supplementalDataSourceName = message.supplementalDataSourceName;
+                                    if (options.oneofs)
+                                        object.dataSourceId = "supplementalDataSourceName";
+                                }
+                                if (message.primaryDataSourceName != null && message.hasOwnProperty("primaryDataSourceName")) {
+                                    object.primaryDataSourceName = message.primaryDataSourceName;
+                                    if (options.oneofs)
+                                        object.dataSourceId = "primaryDataSourceName";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DataSourceReference to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DataSourceReference.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DataSourceReference
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.DataSourceReference
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DataSourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.DataSourceReference";
+                            };
+    
+                            return DataSourceReference;
+                        })();
+    
+                        v1.FileInput = (function() {
+    
+                            /**
+                             * Properties of a FileInput.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IFileInput
+                             * @property {google.shopping.merchant.datasources.v1.FileInput.IFetchSettings|null} [fetchSettings] FileInput fetchSettings
+                             * @property {string|null} [fileName] FileInput fileName
+                             * @property {google.shopping.merchant.datasources.v1.FileInput.FileInputType|null} [fileInputType] FileInput fileInputType
+                             */
+    
+                            /**
+                             * Constructs a new FileInput.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a FileInput.
+                             * @implements IFileInput
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IFileInput=} [properties] Properties to set
+                             */
+                            function FileInput(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FileInput fetchSettings.
+                             * @member {google.shopping.merchant.datasources.v1.FileInput.IFetchSettings|null|undefined} fetchSettings
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @instance
+                             */
+                            FileInput.prototype.fetchSettings = null;
+    
+                            /**
+                             * FileInput fileName.
+                             * @member {string} fileName
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @instance
+                             */
+                            FileInput.prototype.fileName = "";
+    
+                            /**
+                             * FileInput fileInputType.
+                             * @member {google.shopping.merchant.datasources.v1.FileInput.FileInputType} fileInputType
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @instance
+                             */
+                            FileInput.prototype.fileInputType = 0;
+    
+                            /**
+                             * Creates a new FileInput instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFileInput=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.FileInput} FileInput instance
+                             */
+                            FileInput.create = function create(properties) {
+                                return new FileInput(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FileInput message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFileInput} message FileInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileInput.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.fetchSettings != null && Object.hasOwnProperty.call(message, "fetchSettings"))
+                                    $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.encode(message.fetchSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.fileName);
+                                if (message.fileInputType != null && Object.hasOwnProperty.call(message, "fileInputType"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.fileInputType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FileInput message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFileInput} message FileInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileInput.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FileInput message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.FileInput} FileInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileInput.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.FileInput();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.fetchSettings = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fileName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.fileInputType = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FileInput message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.FileInput} FileInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileInput.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FileInput message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FileInput.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.fetchSettings != null && message.hasOwnProperty("fetchSettings")) {
+                                    var error = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.verify(message.fetchSettings);
+                                    if (error)
+                                        return "fetchSettings." + error;
+                                }
+                                if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                    if (!$util.isString(message.fileName))
+                                        return "fileName: string expected";
+                                if (message.fileInputType != null && message.hasOwnProperty("fileInputType"))
+                                    switch (message.fileInputType) {
+                                    default:
+                                        return "fileInputType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FileInput message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.FileInput} FileInput
+                             */
+                            FileInput.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.FileInput)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.FileInput();
+                                if (object.fetchSettings != null) {
+                                    if (typeof object.fetchSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.FileInput.fetchSettings: object expected");
+                                    message.fetchSettings = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.fromObject(object.fetchSettings);
+                                }
+                                if (object.fileName != null)
+                                    message.fileName = String(object.fileName);
+                                switch (object.fileInputType) {
+                                default:
+                                    if (typeof object.fileInputType === "number") {
+                                        message.fileInputType = object.fileInputType;
+                                        break;
+                                    }
+                                    break;
+                                case "FILE_INPUT_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.fileInputType = 0;
+                                    break;
+                                case "UPLOAD":
+                                case 1:
+                                    message.fileInputType = 1;
+                                    break;
+                                case "FETCH":
+                                case 2:
+                                    message.fileInputType = 2;
+                                    break;
+                                case "GOOGLE_SHEETS":
+                                case 3:
+                                    message.fileInputType = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FileInput message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.FileInput} message FileInput
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FileInput.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.fetchSettings = null;
+                                    object.fileName = "";
+                                    object.fileInputType = options.enums === String ? "FILE_INPUT_TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.fetchSettings != null && message.hasOwnProperty("fetchSettings"))
+                                    object.fetchSettings = $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.toObject(message.fetchSettings, options);
+                                if (message.fileName != null && message.hasOwnProperty("fileName"))
+                                    object.fileName = message.fileName;
+                                if (message.fileInputType != null && message.hasOwnProperty("fileInputType"))
+                                    object.fileInputType = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileInput.FileInputType[message.fileInputType] === undefined ? message.fileInputType : $root.google.shopping.merchant.datasources.v1.FileInput.FileInputType[message.fileInputType] : message.fileInputType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FileInput to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FileInput.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FileInput
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.FileInput
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FileInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.FileInput";
+                            };
+    
+                            FileInput.FetchSettings = (function() {
+    
+                                /**
+                                 * Properties of a FetchSettings.
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput
+                                 * @interface IFetchSettings
+                                 * @property {boolean|null} [enabled] FetchSettings enabled
+                                 * @property {number|null} [dayOfMonth] FetchSettings dayOfMonth
+                                 * @property {google.type.ITimeOfDay|null} [timeOfDay] FetchSettings timeOfDay
+                                 * @property {google.type.DayOfWeek|null} [dayOfWeek] FetchSettings dayOfWeek
+                                 * @property {string|null} [timeZone] FetchSettings timeZone
+                                 * @property {google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency|null} [frequency] FetchSettings frequency
+                                 * @property {string|null} [fetchUri] FetchSettings fetchUri
+                                 * @property {string|null} [username] FetchSettings username
+                                 * @property {string|null} [password] FetchSettings password
+                                 */
+    
+                                /**
+                                 * Constructs a new FetchSettings.
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput
+                                 * @classdesc Represents a FetchSettings.
+                                 * @implements IFetchSettings
+                                 * @constructor
+                                 * @param {google.shopping.merchant.datasources.v1.FileInput.IFetchSettings=} [properties] Properties to set
+                                 */
+                                function FetchSettings(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FetchSettings enabled.
+                                 * @member {boolean} enabled
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.enabled = false;
+    
+                                /**
+                                 * FetchSettings dayOfMonth.
+                                 * @member {number} dayOfMonth
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.dayOfMonth = 0;
+    
+                                /**
+                                 * FetchSettings timeOfDay.
+                                 * @member {google.type.ITimeOfDay|null|undefined} timeOfDay
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.timeOfDay = null;
+    
+                                /**
+                                 * FetchSettings dayOfWeek.
+                                 * @member {google.type.DayOfWeek} dayOfWeek
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.dayOfWeek = 0;
+    
+                                /**
+                                 * FetchSettings timeZone.
+                                 * @member {string} timeZone
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.timeZone = "";
+    
+                                /**
+                                 * FetchSettings frequency.
+                                 * @member {google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency} frequency
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.frequency = 0;
+    
+                                /**
+                                 * FetchSettings fetchUri.
+                                 * @member {string} fetchUri
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.fetchUri = "";
+    
+                                /**
+                                 * FetchSettings username.
+                                 * @member {string} username
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.username = "";
+    
+                                /**
+                                 * FetchSettings password.
+                                 * @member {string} password
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 */
+                                FetchSettings.prototype.password = "";
+    
+                                /**
+                                 * Creates a new FetchSettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileInput.IFetchSettings=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.datasources.v1.FileInput.FetchSettings} FetchSettings instance
+                                 */
+                                FetchSettings.create = function create(properties) {
+                                    return new FetchSettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FetchSettings message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.FetchSettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileInput.IFetchSettings} message FetchSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FetchSettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                    if (message.dayOfMonth != null && Object.hasOwnProperty.call(message, "dayOfMonth"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dayOfMonth);
+                                    if (message.timeOfDay != null && Object.hasOwnProperty.call(message, "timeOfDay"))
+                                        $root.google.type.TimeOfDay.encode(message.timeOfDay, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.dayOfWeek != null && Object.hasOwnProperty.call(message, "dayOfWeek"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.dayOfWeek);
+                                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.timeZone);
+                                    if (message.frequency != null && Object.hasOwnProperty.call(message, "frequency"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.frequency);
+                                    if (message.fetchUri != null && Object.hasOwnProperty.call(message, "fetchUri"))
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.fetchUri);
+                                    if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.username);
+                                    if (message.password != null && Object.hasOwnProperty.call(message, "password"))
+                                        writer.uint32(/* id 9, wireType 2 =*/74).string(message.password);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FetchSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileInput.FetchSettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileInput.IFetchSettings} message FetchSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FetchSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FetchSettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.datasources.v1.FileInput.FetchSettings} FetchSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FetchSettings.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.enabled = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.dayOfMonth = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.timeOfDay = $root.google.type.TimeOfDay.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.dayOfWeek = reader.int32();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.timeZone = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.frequency = reader.int32();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.fetchUri = reader.string();
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.username = reader.string();
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.password = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FetchSettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.datasources.v1.FileInput.FetchSettings} FetchSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FetchSettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FetchSettings message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FetchSettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        if (typeof message.enabled !== "boolean")
+                                            return "enabled: boolean expected";
+                                    if (message.dayOfMonth != null && message.hasOwnProperty("dayOfMonth"))
+                                        if (!$util.isInteger(message.dayOfMonth))
+                                            return "dayOfMonth: integer expected";
+                                    if (message.timeOfDay != null && message.hasOwnProperty("timeOfDay")) {
+                                        var error = $root.google.type.TimeOfDay.verify(message.timeOfDay);
+                                        if (error)
+                                            return "timeOfDay." + error;
+                                    }
+                                    if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                        switch (message.dayOfWeek) {
+                                        default:
+                                            return "dayOfWeek: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                            break;
+                                        }
+                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                        if (!$util.isString(message.timeZone))
+                                            return "timeZone: string expected";
+                                    if (message.frequency != null && message.hasOwnProperty("frequency"))
+                                        switch (message.frequency) {
+                                        default:
+                                            return "frequency: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
+                                    if (message.fetchUri != null && message.hasOwnProperty("fetchUri"))
+                                        if (!$util.isString(message.fetchUri))
+                                            return "fetchUri: string expected";
+                                    if (message.username != null && message.hasOwnProperty("username"))
+                                        if (!$util.isString(message.username))
+                                            return "username: string expected";
+                                    if (message.password != null && message.hasOwnProperty("password"))
+                                        if (!$util.isString(message.password))
+                                            return "password: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FetchSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.datasources.v1.FileInput.FetchSettings} FetchSettings
+                                 */
+                                FetchSettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings();
+                                    if (object.enabled != null)
+                                        message.enabled = Boolean(object.enabled);
+                                    if (object.dayOfMonth != null)
+                                        message.dayOfMonth = object.dayOfMonth | 0;
+                                    if (object.timeOfDay != null) {
+                                        if (typeof object.timeOfDay !== "object")
+                                            throw TypeError(".google.shopping.merchant.datasources.v1.FileInput.FetchSettings.timeOfDay: object expected");
+                                        message.timeOfDay = $root.google.type.TimeOfDay.fromObject(object.timeOfDay);
+                                    }
+                                    switch (object.dayOfWeek) {
+                                    default:
+                                        if (typeof object.dayOfWeek === "number") {
+                                            message.dayOfWeek = object.dayOfWeek;
+                                            break;
+                                        }
+                                        break;
+                                    case "DAY_OF_WEEK_UNSPECIFIED":
+                                    case 0:
+                                        message.dayOfWeek = 0;
+                                        break;
+                                    case "MONDAY":
+                                    case 1:
+                                        message.dayOfWeek = 1;
+                                        break;
+                                    case "TUESDAY":
+                                    case 2:
+                                        message.dayOfWeek = 2;
+                                        break;
+                                    case "WEDNESDAY":
+                                    case 3:
+                                        message.dayOfWeek = 3;
+                                        break;
+                                    case "THURSDAY":
+                                    case 4:
+                                        message.dayOfWeek = 4;
+                                        break;
+                                    case "FRIDAY":
+                                    case 5:
+                                        message.dayOfWeek = 5;
+                                        break;
+                                    case "SATURDAY":
+                                    case 6:
+                                        message.dayOfWeek = 6;
+                                        break;
+                                    case "SUNDAY":
+                                    case 7:
+                                        message.dayOfWeek = 7;
+                                        break;
+                                    }
+                                    if (object.timeZone != null)
+                                        message.timeZone = String(object.timeZone);
+                                    switch (object.frequency) {
+                                    default:
+                                        if (typeof object.frequency === "number") {
+                                            message.frequency = object.frequency;
+                                            break;
+                                        }
+                                        break;
+                                    case "FREQUENCY_UNSPECIFIED":
+                                    case 0:
+                                        message.frequency = 0;
+                                        break;
+                                    case "FREQUENCY_DAILY":
+                                    case 1:
+                                        message.frequency = 1;
+                                        break;
+                                    case "FREQUENCY_WEEKLY":
+                                    case 2:
+                                        message.frequency = 2;
+                                        break;
+                                    case "FREQUENCY_MONTHLY":
+                                    case 3:
+                                        message.frequency = 3;
+                                        break;
+                                    }
+                                    if (object.fetchUri != null)
+                                        message.fetchUri = String(object.fetchUri);
+                                    if (object.username != null)
+                                        message.username = String(object.username);
+                                    if (object.password != null)
+                                        message.password = String(object.password);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FetchSettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileInput.FetchSettings} message FetchSettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FetchSettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.enabled = false;
+                                        object.dayOfMonth = 0;
+                                        object.timeOfDay = null;
+                                        object.dayOfWeek = options.enums === String ? "DAY_OF_WEEK_UNSPECIFIED" : 0;
+                                        object.timeZone = "";
+                                        object.frequency = options.enums === String ? "FREQUENCY_UNSPECIFIED" : 0;
+                                        object.fetchUri = "";
+                                        object.username = "";
+                                        object.password = "";
+                                    }
+                                    if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                        object.enabled = message.enabled;
+                                    if (message.dayOfMonth != null && message.hasOwnProperty("dayOfMonth"))
+                                        object.dayOfMonth = message.dayOfMonth;
+                                    if (message.timeOfDay != null && message.hasOwnProperty("timeOfDay"))
+                                        object.timeOfDay = $root.google.type.TimeOfDay.toObject(message.timeOfDay, options);
+                                    if (message.dayOfWeek != null && message.hasOwnProperty("dayOfWeek"))
+                                        object.dayOfWeek = options.enums === String ? $root.google.type.DayOfWeek[message.dayOfWeek] === undefined ? message.dayOfWeek : $root.google.type.DayOfWeek[message.dayOfWeek] : message.dayOfWeek;
+                                    if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                        object.timeZone = message.timeZone;
+                                    if (message.frequency != null && message.hasOwnProperty("frequency"))
+                                        object.frequency = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency[message.frequency] === undefined ? message.frequency : $root.google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency[message.frequency] : message.frequency;
+                                    if (message.fetchUri != null && message.hasOwnProperty("fetchUri"))
+                                        object.fetchUri = message.fetchUri;
+                                    if (message.username != null && message.hasOwnProperty("username"))
+                                        object.username = message.username;
+                                    if (message.password != null && message.hasOwnProperty("password"))
+                                        object.password = message.password;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FetchSettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FetchSettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for FetchSettings
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.datasources.v1.FileInput.FetchSettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                FetchSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.FileInput.FetchSettings";
+                                };
+    
+                                /**
+                                 * Frequency enum.
+                                 * @name google.shopping.merchant.datasources.v1.FileInput.FetchSettings.Frequency
+                                 * @enum {number}
+                                 * @property {number} FREQUENCY_UNSPECIFIED=0 FREQUENCY_UNSPECIFIED value
+                                 * @property {number} FREQUENCY_DAILY=1 FREQUENCY_DAILY value
+                                 * @property {number} FREQUENCY_WEEKLY=2 FREQUENCY_WEEKLY value
+                                 * @property {number} FREQUENCY_MONTHLY=3 FREQUENCY_MONTHLY value
+                                 */
+                                FetchSettings.Frequency = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "FREQUENCY_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "FREQUENCY_DAILY"] = 1;
+                                    values[valuesById[2] = "FREQUENCY_WEEKLY"] = 2;
+                                    values[valuesById[3] = "FREQUENCY_MONTHLY"] = 3;
+                                    return values;
+                                })();
+    
+                                return FetchSettings;
+                            })();
+    
+                            /**
+                             * FileInputType enum.
+                             * @name google.shopping.merchant.datasources.v1.FileInput.FileInputType
+                             * @enum {number}
+                             * @property {number} FILE_INPUT_TYPE_UNSPECIFIED=0 FILE_INPUT_TYPE_UNSPECIFIED value
+                             * @property {number} UPLOAD=1 UPLOAD value
+                             * @property {number} FETCH=2 FETCH value
+                             * @property {number} GOOGLE_SHEETS=3 GOOGLE_SHEETS value
+                             */
+                            FileInput.FileInputType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FILE_INPUT_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "UPLOAD"] = 1;
+                                values[valuesById[2] = "FETCH"] = 2;
+                                values[valuesById[3] = "GOOGLE_SHEETS"] = 3;
+                                return values;
+                            })();
+    
+                            return FileInput;
+                        })();
+    
+                        v1.FileUploadsService = (function() {
+    
+                            /**
+                             * Constructs a new FileUploadsService service.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a FileUploadsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function FileUploadsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (FileUploadsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = FileUploadsService;
+    
+                            /**
+                             * Creates new FileUploadsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.FileUploadsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {FileUploadsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            FileUploadsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.datasources.v1.FileUploadsService|getFileUpload}.
+                             * @memberof google.shopping.merchant.datasources.v1.FileUploadsService
+                             * @typedef GetFileUploadCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.datasources.v1.FileUpload} [response] FileUpload
+                             */
+    
+                            /**
+                             * Calls GetFileUpload.
+                             * @function getFileUpload
+                             * @memberof google.shopping.merchant.datasources.v1.FileUploadsService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IGetFileUploadRequest} request GetFileUploadRequest message or plain object
+                             * @param {google.shopping.merchant.datasources.v1.FileUploadsService.GetFileUploadCallback} callback Node-style callback called with the error, if any, and FileUpload
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(FileUploadsService.prototype.getFileUpload = function getFileUpload(request, callback) {
+                                return this.rpcCall(getFileUpload, $root.google.shopping.merchant.datasources.v1.GetFileUploadRequest, $root.google.shopping.merchant.datasources.v1.FileUpload, request, callback);
+                            }, "name", { value: "GetFileUpload" });
+    
+                            /**
+                             * Calls GetFileUpload.
+                             * @function getFileUpload
+                             * @memberof google.shopping.merchant.datasources.v1.FileUploadsService
+                             * @instance
+                             * @param {google.shopping.merchant.datasources.v1.IGetFileUploadRequest} request GetFileUploadRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.datasources.v1.FileUpload>} Promise
+                             * @variation 2
+                             */
+    
+                            return FileUploadsService;
+                        })();
+    
+                        v1.FileUpload = (function() {
+    
+                            /**
+                             * Properties of a FileUpload.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IFileUpload
+                             * @property {string|null} [name] FileUpload name
+                             * @property {number|Long|null} [dataSourceId] FileUpload dataSourceId
+                             * @property {google.shopping.merchant.datasources.v1.FileUpload.ProcessingState|null} [processingState] FileUpload processingState
+                             * @property {Array.<google.shopping.merchant.datasources.v1.FileUpload.IIssue>|null} [issues] FileUpload issues
+                             * @property {number|Long|null} [itemsTotal] FileUpload itemsTotal
+                             * @property {number|Long|null} [itemsCreated] FileUpload itemsCreated
+                             * @property {number|Long|null} [itemsUpdated] FileUpload itemsUpdated
+                             * @property {google.protobuf.ITimestamp|null} [uploadTime] FileUpload uploadTime
+                             */
+    
+                            /**
+                             * Constructs a new FileUpload.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a FileUpload.
+                             * @implements IFileUpload
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IFileUpload=} [properties] Properties to set
+                             */
+                            function FileUpload(properties) {
+                                this.issues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FileUpload name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.name = "";
+    
+                            /**
+                             * FileUpload dataSourceId.
+                             * @member {number|Long} dataSourceId
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.dataSourceId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * FileUpload processingState.
+                             * @member {google.shopping.merchant.datasources.v1.FileUpload.ProcessingState} processingState
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.processingState = 0;
+    
+                            /**
+                             * FileUpload issues.
+                             * @member {Array.<google.shopping.merchant.datasources.v1.FileUpload.IIssue>} issues
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.issues = $util.emptyArray;
+    
+                            /**
+                             * FileUpload itemsTotal.
+                             * @member {number|Long} itemsTotal
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.itemsTotal = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * FileUpload itemsCreated.
+                             * @member {number|Long} itemsCreated
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.itemsCreated = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * FileUpload itemsUpdated.
+                             * @member {number|Long} itemsUpdated
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.itemsUpdated = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * FileUpload uploadTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} uploadTime
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             */
+                            FileUpload.prototype.uploadTime = null;
+    
+                            /**
+                             * Creates a new FileUpload instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFileUpload=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.FileUpload} FileUpload instance
+                             */
+                            FileUpload.create = function create(properties) {
+                                return new FileUpload(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FileUpload message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFileUpload} message FileUpload message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileUpload.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.dataSourceId != null && Object.hasOwnProperty.call(message, "dataSourceId"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.dataSourceId);
+                                if (message.processingState != null && Object.hasOwnProperty.call(message, "processingState"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.processingState);
+                                if (message.issues != null && message.issues.length)
+                                    for (var i = 0; i < message.issues.length; ++i)
+                                        $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.encode(message.issues[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.itemsTotal != null && Object.hasOwnProperty.call(message, "itemsTotal"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.itemsTotal);
+                                if (message.itemsCreated != null && Object.hasOwnProperty.call(message, "itemsCreated"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).int64(message.itemsCreated);
+                                if (message.itemsUpdated != null && Object.hasOwnProperty.call(message, "itemsUpdated"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.itemsUpdated);
+                                if (message.uploadTime != null && Object.hasOwnProperty.call(message, "uploadTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.uploadTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FileUpload message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IFileUpload} message FileUpload message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FileUpload.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FileUpload message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.FileUpload} FileUpload
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileUpload.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.FileUpload();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dataSourceId = reader.int64();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.processingState = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.issues && message.issues.length))
+                                                message.issues = [];
+                                            message.issues.push($root.google.shopping.merchant.datasources.v1.FileUpload.Issue.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.itemsTotal = reader.int64();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.itemsCreated = reader.int64();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.itemsUpdated = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.uploadTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FileUpload message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.FileUpload} FileUpload
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FileUpload.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FileUpload message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FileUpload.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                    if (!$util.isInteger(message.dataSourceId) && !(message.dataSourceId && $util.isInteger(message.dataSourceId.low) && $util.isInteger(message.dataSourceId.high)))
+                                        return "dataSourceId: integer|Long expected";
+                                if (message.processingState != null && message.hasOwnProperty("processingState"))
+                                    switch (message.processingState) {
+                                    default:
+                                        return "processingState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.issues != null && message.hasOwnProperty("issues")) {
+                                    if (!Array.isArray(message.issues))
+                                        return "issues: array expected";
+                                    for (var i = 0; i < message.issues.length; ++i) {
+                                        var error = $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.verify(message.issues[i]);
+                                        if (error)
+                                            return "issues." + error;
+                                    }
+                                }
+                                if (message.itemsTotal != null && message.hasOwnProperty("itemsTotal"))
+                                    if (!$util.isInteger(message.itemsTotal) && !(message.itemsTotal && $util.isInteger(message.itemsTotal.low) && $util.isInteger(message.itemsTotal.high)))
+                                        return "itemsTotal: integer|Long expected";
+                                if (message.itemsCreated != null && message.hasOwnProperty("itemsCreated"))
+                                    if (!$util.isInteger(message.itemsCreated) && !(message.itemsCreated && $util.isInteger(message.itemsCreated.low) && $util.isInteger(message.itemsCreated.high)))
+                                        return "itemsCreated: integer|Long expected";
+                                if (message.itemsUpdated != null && message.hasOwnProperty("itemsUpdated"))
+                                    if (!$util.isInteger(message.itemsUpdated) && !(message.itemsUpdated && $util.isInteger(message.itemsUpdated.low) && $util.isInteger(message.itemsUpdated.high)))
+                                        return "itemsUpdated: integer|Long expected";
+                                if (message.uploadTime != null && message.hasOwnProperty("uploadTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.uploadTime);
+                                    if (error)
+                                        return "uploadTime." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FileUpload message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.FileUpload} FileUpload
+                             */
+                            FileUpload.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.FileUpload)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.FileUpload();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.dataSourceId != null)
+                                    if ($util.Long)
+                                        (message.dataSourceId = $util.Long.fromValue(object.dataSourceId)).unsigned = false;
+                                    else if (typeof object.dataSourceId === "string")
+                                        message.dataSourceId = parseInt(object.dataSourceId, 10);
+                                    else if (typeof object.dataSourceId === "number")
+                                        message.dataSourceId = object.dataSourceId;
+                                    else if (typeof object.dataSourceId === "object")
+                                        message.dataSourceId = new $util.LongBits(object.dataSourceId.low >>> 0, object.dataSourceId.high >>> 0).toNumber();
+                                switch (object.processingState) {
+                                default:
+                                    if (typeof object.processingState === "number") {
+                                        message.processingState = object.processingState;
+                                        break;
+                                    }
+                                    break;
+                                case "PROCESSING_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.processingState = 0;
+                                    break;
+                                case "FAILED":
+                                case 1:
+                                    message.processingState = 1;
+                                    break;
+                                case "IN_PROGRESS":
+                                case 2:
+                                    message.processingState = 2;
+                                    break;
+                                case "SUCCEEDED":
+                                case 3:
+                                    message.processingState = 3;
+                                    break;
+                                }
+                                if (object.issues) {
+                                    if (!Array.isArray(object.issues))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload.issues: array expected");
+                                    message.issues = [];
+                                    for (var i = 0; i < object.issues.length; ++i) {
+                                        if (typeof object.issues[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload.issues: object expected");
+                                        message.issues[i] = $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.fromObject(object.issues[i]);
+                                    }
+                                }
+                                if (object.itemsTotal != null)
+                                    if ($util.Long)
+                                        (message.itemsTotal = $util.Long.fromValue(object.itemsTotal)).unsigned = false;
+                                    else if (typeof object.itemsTotal === "string")
+                                        message.itemsTotal = parseInt(object.itemsTotal, 10);
+                                    else if (typeof object.itemsTotal === "number")
+                                        message.itemsTotal = object.itemsTotal;
+                                    else if (typeof object.itemsTotal === "object")
+                                        message.itemsTotal = new $util.LongBits(object.itemsTotal.low >>> 0, object.itemsTotal.high >>> 0).toNumber();
+                                if (object.itemsCreated != null)
+                                    if ($util.Long)
+                                        (message.itemsCreated = $util.Long.fromValue(object.itemsCreated)).unsigned = false;
+                                    else if (typeof object.itemsCreated === "string")
+                                        message.itemsCreated = parseInt(object.itemsCreated, 10);
+                                    else if (typeof object.itemsCreated === "number")
+                                        message.itemsCreated = object.itemsCreated;
+                                    else if (typeof object.itemsCreated === "object")
+                                        message.itemsCreated = new $util.LongBits(object.itemsCreated.low >>> 0, object.itemsCreated.high >>> 0).toNumber();
+                                if (object.itemsUpdated != null)
+                                    if ($util.Long)
+                                        (message.itemsUpdated = $util.Long.fromValue(object.itemsUpdated)).unsigned = false;
+                                    else if (typeof object.itemsUpdated === "string")
+                                        message.itemsUpdated = parseInt(object.itemsUpdated, 10);
+                                    else if (typeof object.itemsUpdated === "number")
+                                        message.itemsUpdated = object.itemsUpdated;
+                                    else if (typeof object.itemsUpdated === "object")
+                                        message.itemsUpdated = new $util.LongBits(object.itemsUpdated.low >>> 0, object.itemsUpdated.high >>> 0).toNumber();
+                                if (object.uploadTime != null) {
+                                    if (typeof object.uploadTime !== "object")
+                                        throw TypeError(".google.shopping.merchant.datasources.v1.FileUpload.uploadTime: object expected");
+                                    message.uploadTime = $root.google.protobuf.Timestamp.fromObject(object.uploadTime);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FileUpload message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.FileUpload} message FileUpload
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FileUpload.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.issues = [];
+                                if (options.defaults) {
+                                    object.name = "";
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.dataSourceId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.dataSourceId = options.longs === String ? "0" : 0;
+                                    object.processingState = options.enums === String ? "PROCESSING_STATE_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.itemsTotal = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.itemsTotal = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.itemsCreated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.itemsCreated = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.itemsUpdated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.itemsUpdated = options.longs === String ? "0" : 0;
+                                    object.uploadTime = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.dataSourceId != null && message.hasOwnProperty("dataSourceId"))
+                                    if (typeof message.dataSourceId === "number")
+                                        object.dataSourceId = options.longs === String ? String(message.dataSourceId) : message.dataSourceId;
+                                    else
+                                        object.dataSourceId = options.longs === String ? $util.Long.prototype.toString.call(message.dataSourceId) : options.longs === Number ? new $util.LongBits(message.dataSourceId.low >>> 0, message.dataSourceId.high >>> 0).toNumber() : message.dataSourceId;
+                                if (message.processingState != null && message.hasOwnProperty("processingState"))
+                                    object.processingState = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileUpload.ProcessingState[message.processingState] === undefined ? message.processingState : $root.google.shopping.merchant.datasources.v1.FileUpload.ProcessingState[message.processingState] : message.processingState;
+                                if (message.issues && message.issues.length) {
+                                    object.issues = [];
+                                    for (var j = 0; j < message.issues.length; ++j)
+                                        object.issues[j] = $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.toObject(message.issues[j], options);
+                                }
+                                if (message.itemsTotal != null && message.hasOwnProperty("itemsTotal"))
+                                    if (typeof message.itemsTotal === "number")
+                                        object.itemsTotal = options.longs === String ? String(message.itemsTotal) : message.itemsTotal;
+                                    else
+                                        object.itemsTotal = options.longs === String ? $util.Long.prototype.toString.call(message.itemsTotal) : options.longs === Number ? new $util.LongBits(message.itemsTotal.low >>> 0, message.itemsTotal.high >>> 0).toNumber() : message.itemsTotal;
+                                if (message.itemsCreated != null && message.hasOwnProperty("itemsCreated"))
+                                    if (typeof message.itemsCreated === "number")
+                                        object.itemsCreated = options.longs === String ? String(message.itemsCreated) : message.itemsCreated;
+                                    else
+                                        object.itemsCreated = options.longs === String ? $util.Long.prototype.toString.call(message.itemsCreated) : options.longs === Number ? new $util.LongBits(message.itemsCreated.low >>> 0, message.itemsCreated.high >>> 0).toNumber() : message.itemsCreated;
+                                if (message.itemsUpdated != null && message.hasOwnProperty("itemsUpdated"))
+                                    if (typeof message.itemsUpdated === "number")
+                                        object.itemsUpdated = options.longs === String ? String(message.itemsUpdated) : message.itemsUpdated;
+                                    else
+                                        object.itemsUpdated = options.longs === String ? $util.Long.prototype.toString.call(message.itemsUpdated) : options.longs === Number ? new $util.LongBits(message.itemsUpdated.low >>> 0, message.itemsUpdated.high >>> 0).toNumber() : message.itemsUpdated;
+                                if (message.uploadTime != null && message.hasOwnProperty("uploadTime"))
+                                    object.uploadTime = $root.google.protobuf.Timestamp.toObject(message.uploadTime, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FileUpload to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FileUpload.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for FileUpload
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            FileUpload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.FileUpload";
+                            };
+    
+                            FileUpload.Issue = (function() {
+    
+                                /**
+                                 * Properties of an Issue.
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                                 * @interface IIssue
+                                 * @property {string|null} [title] Issue title
+                                 * @property {string|null} [description] Issue description
+                                 * @property {string|null} [code] Issue code
+                                 * @property {number|Long|null} [count] Issue count
+                                 * @property {google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity|null} [severity] Issue severity
+                                 * @property {string|null} [documentationUri] Issue documentationUri
+                                 */
+    
+                                /**
+                                 * Constructs a new Issue.
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload
+                                 * @classdesc Represents an Issue.
+                                 * @implements IIssue
+                                 * @constructor
+                                 * @param {google.shopping.merchant.datasources.v1.FileUpload.IIssue=} [properties] Properties to set
+                                 */
+                                function Issue(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Issue title.
+                                 * @member {string} title
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @instance
+                                 */
+                                Issue.prototype.title = "";
+    
+                                /**
+                                 * Issue description.
+                                 * @member {string} description
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @instance
+                                 */
+                                Issue.prototype.description = "";
+    
+                                /**
+                                 * Issue code.
+                                 * @member {string} code
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @instance
+                                 */
+                                Issue.prototype.code = "";
+    
+                                /**
+                                 * Issue count.
+                                 * @member {number|Long} count
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @instance
+                                 */
+                                Issue.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Issue severity.
+                                 * @member {google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity} severity
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @instance
+                                 */
+                                Issue.prototype.severity = 0;
+    
+                                /**
+                                 * Issue documentationUri.
+                                 * @member {string} documentationUri
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @instance
+                                 */
+                                Issue.prototype.documentationUri = "";
+    
+                                /**
+                                 * Creates a new Issue instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileUpload.IIssue=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.datasources.v1.FileUpload.Issue} Issue instance
+                                 */
+                                Issue.create = function create(properties) {
+                                    return new Issue(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Issue message. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.Issue.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileUpload.IIssue} message Issue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Issue.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.code);
+                                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int64(message.count);
+                                    if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.severity);
+                                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.documentationUri);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Issue message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.FileUpload.Issue.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileUpload.IIssue} message Issue message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Issue.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Issue message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.datasources.v1.FileUpload.Issue} Issue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Issue.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.FileUpload.Issue();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.title = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.description = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.code = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.count = reader.int64();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.severity = reader.int32();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.documentationUri = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Issue message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.datasources.v1.FileUpload.Issue} Issue
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Issue.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Issue message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Issue.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        if (!$util.isString(message.title))
+                                            return "title: string expected";
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        if (!$util.isString(message.description))
+                                            return "description: string expected";
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        if (!$util.isString(message.code))
+                                            return "code: string expected";
+                                    if (message.count != null && message.hasOwnProperty("count"))
+                                        if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                            return "count: integer|Long expected";
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        switch (message.severity) {
+                                        default:
+                                            return "severity: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                        if (!$util.isString(message.documentationUri))
+                                            return "documentationUri: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Issue message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.datasources.v1.FileUpload.Issue} Issue
+                                 */
+                                Issue.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.datasources.v1.FileUpload.Issue)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.datasources.v1.FileUpload.Issue();
+                                    if (object.title != null)
+                                        message.title = String(object.title);
+                                    if (object.description != null)
+                                        message.description = String(object.description);
+                                    if (object.code != null)
+                                        message.code = String(object.code);
+                                    if (object.count != null)
+                                        if ($util.Long)
+                                            (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                        else if (typeof object.count === "string")
+                                            message.count = parseInt(object.count, 10);
+                                        else if (typeof object.count === "number")
+                                            message.count = object.count;
+                                        else if (typeof object.count === "object")
+                                            message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                    switch (object.severity) {
+                                    default:
+                                        if (typeof object.severity === "number") {
+                                            message.severity = object.severity;
+                                            break;
+                                        }
+                                        break;
+                                    case "SEVERITY_UNSPECIFIED":
+                                    case 0:
+                                        message.severity = 0;
+                                        break;
+                                    case "WARNING":
+                                    case 1:
+                                        message.severity = 1;
+                                        break;
+                                    case "ERROR":
+                                    case 2:
+                                        message.severity = 2;
+                                        break;
+                                    }
+                                    if (object.documentationUri != null)
+                                        message.documentationUri = String(object.documentationUri);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Issue message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1.FileUpload.Issue} message Issue
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Issue.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.title = "";
+                                        object.description = "";
+                                        object.code = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.count = options.longs === String ? "0" : 0;
+                                        object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
+                                        object.documentationUri = "";
+                                    }
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        object.title = message.title;
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        object.description = message.description;
+                                    if (message.code != null && message.hasOwnProperty("code"))
+                                        object.code = message.code;
+                                    if (message.count != null && message.hasOwnProperty("count"))
+                                        if (typeof message.count === "number")
+                                            object.count = options.longs === String ? String(message.count) : message.count;
+                                        else
+                                            object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                    if (message.severity != null && message.hasOwnProperty("severity"))
+                                        object.severity = options.enums === String ? $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity[message.severity] === undefined ? message.severity : $root.google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity[message.severity] : message.severity;
+                                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                                        object.documentationUri = message.documentationUri;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Issue to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Issue.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Issue
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.datasources.v1.FileUpload.Issue
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Issue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.FileUpload.Issue";
+                                };
+    
+                                /**
+                                 * Severity enum.
+                                 * @name google.shopping.merchant.datasources.v1.FileUpload.Issue.Severity
+                                 * @enum {number}
+                                 * @property {number} SEVERITY_UNSPECIFIED=0 SEVERITY_UNSPECIFIED value
+                                 * @property {number} WARNING=1 WARNING value
+                                 * @property {number} ERROR=2 ERROR value
+                                 */
+                                Issue.Severity = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "SEVERITY_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "WARNING"] = 1;
+                                    values[valuesById[2] = "ERROR"] = 2;
+                                    return values;
+                                })();
+    
+                                return Issue;
+                            })();
+    
+                            /**
+                             * ProcessingState enum.
+                             * @name google.shopping.merchant.datasources.v1.FileUpload.ProcessingState
+                             * @enum {number}
+                             * @property {number} PROCESSING_STATE_UNSPECIFIED=0 PROCESSING_STATE_UNSPECIFIED value
+                             * @property {number} FAILED=1 FAILED value
+                             * @property {number} IN_PROGRESS=2 IN_PROGRESS value
+                             * @property {number} SUCCEEDED=3 SUCCEEDED value
+                             */
+                            FileUpload.ProcessingState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PROCESSING_STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "FAILED"] = 1;
+                                values[valuesById[2] = "IN_PROGRESS"] = 2;
+                                values[valuesById[3] = "SUCCEEDED"] = 3;
+                                return values;
+                            })();
+    
+                            return FileUpload;
+                        })();
+    
+                        v1.GetFileUploadRequest = (function() {
+    
+                            /**
+                             * Properties of a GetFileUploadRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @interface IGetFileUploadRequest
+                             * @property {string|null} [name] GetFileUploadRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetFileUploadRequest.
+                             * @memberof google.shopping.merchant.datasources.v1
+                             * @classdesc Represents a GetFileUploadRequest.
+                             * @implements IGetFileUploadRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.datasources.v1.IGetFileUploadRequest=} [properties] Properties to set
+                             */
+                            function GetFileUploadRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetFileUploadRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @instance
+                             */
+                            GetFileUploadRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetFileUploadRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IGetFileUploadRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.datasources.v1.GetFileUploadRequest} GetFileUploadRequest instance
+                             */
+                            GetFileUploadRequest.create = function create(properties) {
+                                return new GetFileUploadRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetFileUploadRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetFileUploadRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IGetFileUploadRequest} message GetFileUploadRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetFileUploadRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetFileUploadRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1.GetFileUploadRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.IGetFileUploadRequest} message GetFileUploadRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetFileUploadRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetFileUploadRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.datasources.v1.GetFileUploadRequest} GetFileUploadRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetFileUploadRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1.GetFileUploadRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetFileUploadRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.datasources.v1.GetFileUploadRequest} GetFileUploadRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetFileUploadRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetFileUploadRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetFileUploadRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetFileUploadRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.datasources.v1.GetFileUploadRequest} GetFileUploadRequest
+                             */
+                            GetFileUploadRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.datasources.v1.GetFileUploadRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.datasources.v1.GetFileUploadRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetFileUploadRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {google.shopping.merchant.datasources.v1.GetFileUploadRequest} message GetFileUploadRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetFileUploadRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetFileUploadRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetFileUploadRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetFileUploadRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.datasources.v1.GetFileUploadRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetFileUploadRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.datasources.v1.GetFileUploadRequest";
+                            };
+    
+                            return GetFileUploadRequest;
+                        })();
+    
+                        return v1;
+                    })();
     
                     datasources.v1beta = (function() {
     
@@ -528,12 +7508,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DataSource.decode = function decode(reader, length) {
+                            DataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.DataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.primaryProductDataSource = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.decode(reader, reader.uint32());
@@ -1020,12 +8002,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetDataSourceRequest.decode = function decode(reader, length) {
+                            GetDataSourceRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -1245,12 +8229,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListDataSourcesRequest.decode = function decode(reader, length) {
+                            ListDataSourcesRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -1486,12 +8472,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ListDataSourcesResponse.decode = function decode(reader, length) {
+                            ListDataSourcesResponse.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.ListDataSourcesResponse();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.dataSources && message.dataSources.length))
@@ -1732,12 +8720,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CreateDataSourceRequest.decode = function decode(reader, length) {
+                            CreateDataSourceRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
@@ -1964,12 +8954,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UpdateDataSourceRequest.decode = function decode(reader, length) {
+                            UpdateDataSourceRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.dataSource = $root.google.shopping.merchant.datasources.v1beta.DataSource.decode(reader, reader.uint32());
@@ -2190,12 +9182,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FetchDataSourceRequest.decode = function decode(reader, length) {
+                            FetchDataSourceRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -2393,12 +9387,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeleteDataSourceRequest.decode = function decode(reader, length) {
+                            DeleteDataSourceRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -2593,23 +9589,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * PrimaryProductDataSource _feedLabel.
-                             * @member {"feedLabel"|undefined} _feedLabel
-                             * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PrimaryProductDataSource.prototype, "_feedLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * PrimaryProductDataSource _contentLanguage.
-                             * @member {"contentLanguage"|undefined} _contentLanguage
-                             * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(PrimaryProductDataSource.prototype, "_contentLanguage", {
                                 get: $util.oneOfGetter($oneOfFields = ["contentLanguage"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -2680,12 +9666,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PrimaryProductDataSource.decode = function decode(reader, length) {
+                            PrimaryProductDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 3: {
                                             message.channel = reader.int32();
@@ -3021,12 +10009,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DefaultRule.decode = function decode(reader, length) {
+                                DefaultRule.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.takeFromDataSources && message.takeFromDataSources.length))
@@ -3254,12 +10244,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Destination.decode = function decode(reader, length) {
+                                Destination.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.destination = reader.int32();
@@ -3315,6 +10307,12 @@
                                         case 4:
                                         case 5:
                                         case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
                                             break;
                                         }
                                     if (message.state != null && message.hasOwnProperty("state"))
@@ -3375,6 +10373,30 @@
                                     case "YOUTUBE_SHOPPING":
                                     case 6:
                                         message.destination = 6;
+                                        break;
+                                    case "YOUTUBE_SHOPPING_CHECKOUT":
+                                    case 7:
+                                        message.destination = 7;
+                                        break;
+                                    case "YOUTUBE_AFFILIATE":
+                                    case 8:
+                                        message.destination = 8;
+                                        break;
+                                    case "FREE_VEHICLE_LISTINGS":
+                                    case 9:
+                                        message.destination = 9;
+                                        break;
+                                    case "VEHICLE_ADS":
+                                    case 10:
+                                        message.destination = 10;
+                                        break;
+                                    case "CLOUD_RETAIL":
+                                    case 11:
+                                        message.destination = 11;
+                                        break;
+                                    case "LOCAL_CLOUD_RETAIL":
+                                    case 12:
+                                        message.destination = 12;
                                         break;
                                     }
                                     switch (object.state) {
@@ -3544,23 +10566,13 @@
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
-                            /**
-                             * SupplementalProductDataSource _feedLabel.
-                             * @member {"feedLabel"|undefined} _feedLabel
-                             * @memberof google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(SupplementalProductDataSource.prototype, "_feedLabel", {
                                 get: $util.oneOfGetter($oneOfFields = ["feedLabel"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
-                            /**
-                             * SupplementalProductDataSource _contentLanguage.
-                             * @member {"contentLanguage"|undefined} _contentLanguage
-                             * @memberof google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource
-                             * @instance
-                             */
+                            // Virtual OneOf for proto3 optional field
                             Object.defineProperty(SupplementalProductDataSource.prototype, "_contentLanguage", {
                                 get: $util.oneOfGetter($oneOfFields = ["contentLanguage"]),
                                 set: $util.oneOfSetter($oneOfFields)
@@ -3624,12 +10636,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SupplementalProductDataSource.decode = function decode(reader, length) {
+                            SupplementalProductDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.SupplementalProductDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.feedLabel = reader.string();
@@ -3890,12 +10904,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LocalInventoryDataSource.decode = function decode(reader, length) {
+                            LocalInventoryDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.LocalInventoryDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.feedLabel = reader.string();
@@ -4117,12 +11133,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RegionalInventoryDataSource.decode = function decode(reader, length) {
+                            RegionalInventoryDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.RegionalInventoryDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.feedLabel = reader.string();
@@ -4344,12 +11362,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PromotionDataSource.decode = function decode(reader, length) {
+                            PromotionDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.PromotionDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.targetCountry = reader.string();
@@ -4549,12 +11569,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ProductReviewDataSource.decode = function decode(reader, length) {
+                            ProductReviewDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.ProductReviewDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -4724,12 +11746,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MerchantReviewDataSource.decode = function decode(reader, length) {
+                            MerchantReviewDataSource.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.MerchantReviewDataSource();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -4946,12 +11970,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DataSourceReference.decode = function decode(reader, length) {
+                            DataSourceReference.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.DataSourceReference();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.self = reader.bool();
@@ -5211,12 +12237,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FileInput.decode = function decode(reader, length) {
+                            FileInput.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.FileInput();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.fetchSettings = $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings.decode(reader, reader.uint32());
@@ -5558,12 +12586,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                FetchSettings.decode = function decode(reader, length) {
+                                FetchSettings.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.FileInput.FetchSettings();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.enabled = reader.bool();
@@ -6127,12 +13157,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FileUpload.decode = function decode(reader, length) {
+                            FileUpload.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.FileUpload();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -6577,12 +13609,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Issue.decode = function decode(reader, length) {
+                                Issue.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.FileUpload.Issue();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.title = reader.string();
@@ -6916,12 +13950,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GetFileUploadRequest.decode = function decode(reader, length) {
+                            GetFileUploadRequest.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
@@ -7096,12 +14132,7 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Weight _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Weight
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Weight.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -7162,12 +14193,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Weight.decode = function decode(reader, length) {
+                    Weight.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Weight();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.amountMicros = reader.int64();
@@ -7391,23 +14424,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * Price _amountMicros.
-                     * @member {"amountMicros"|undefined} _amountMicros
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_amountMicros", {
                         get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * Price _currencyCode.
-                     * @member {"currencyCode"|undefined} _currencyCode
-                     * @memberof google.shopping.type.Price
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(Price.prototype, "_currencyCode", {
                         get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -7468,12 +14491,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Price.decode = function decode(reader, length) {
+                    Price.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Price();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.amountMicros = reader.int64();
@@ -7670,23 +14695,13 @@
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
-                    /**
-                     * CustomAttribute _name.
-                     * @member {"name"|undefined} _name
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_name", {
                         get: $util.oneOfGetter($oneOfFields = ["name"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
-                    /**
-                     * CustomAttribute _value.
-                     * @member {"value"|undefined} _value
-                     * @memberof google.shopping.type.CustomAttribute
-                     * @instance
-                     */
+                    // Virtual OneOf for proto3 optional field
                     Object.defineProperty(CustomAttribute.prototype, "_value", {
                         get: $util.oneOfGetter($oneOfFields = ["value"]),
                         set: $util.oneOfSetter($oneOfFields)
@@ -7750,12 +14765,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CustomAttribute.decode = function decode(reader, length) {
+                    CustomAttribute.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.CustomAttribute();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
@@ -7994,12 +15011,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Destination.decode = function decode(reader, length) {
+                    Destination.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Destination();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -8103,6 +15122,12 @@
                      * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
                      * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
                      * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     * @property {number} YOUTUBE_SHOPPING_CHECKOUT=7 YOUTUBE_SHOPPING_CHECKOUT value
+                     * @property {number} YOUTUBE_AFFILIATE=8 YOUTUBE_AFFILIATE value
+                     * @property {number} FREE_VEHICLE_LISTINGS=9 FREE_VEHICLE_LISTINGS value
+                     * @property {number} VEHICLE_ADS=10 VEHICLE_ADS value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
                      */
                     Destination.DestinationEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -8113,6 +15138,12 @@
                         values[valuesById[4] = "FREE_LISTINGS"] = 4;
                         values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
                         values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        values[valuesById[7] = "YOUTUBE_SHOPPING_CHECKOUT"] = 7;
+                        values[valuesById[8] = "YOUTUBE_AFFILIATE"] = 8;
+                        values[valuesById[9] = "FREE_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "VEHICLE_ADS"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
                         return values;
                     })();
     
@@ -8193,12 +15224,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReportingContext.decode = function decode(reader, length) {
+                    ReportingContext.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.ReportingContext();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -8305,11 +15338,16 @@
                      * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
                      * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
                      * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LISTINGS_UCP_CHECKOUT=19 FREE_LISTINGS_UCP_CHECKOUT value
                      * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
                      * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_AFFILIATE=18 YOUTUBE_AFFILIATE value
                      * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
                      * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
                      * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     * @property {number} PRODUCT_REVIEWS=15 PRODUCT_REVIEWS value
+                     * @property {number} MERCHANT_REVIEWS=16 MERCHANT_REVIEWS value
+                     * @property {number} YOUTUBE_CHECKOUT=17 YOUTUBE_CHECKOUT value
                      */
                     ReportingContext.ReportingContextEnum = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -8323,11 +15361,16 @@
                         values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
                         values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
                         values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[19] = "FREE_LISTINGS_UCP_CHECKOUT"] = 19;
                         values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
                         values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[18] = "YOUTUBE_AFFILIATE"] = 18;
                         values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
                         values[valuesById[11] = "CLOUD_RETAIL"] = 11;
                         values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        values[valuesById[15] = "PRODUCT_REVIEWS"] = 15;
+                        values[valuesById[16] = "MERCHANT_REVIEWS"] = 16;
+                        values[valuesById[17] = "YOUTUBE_CHECKOUT"] = 17;
                         return values;
                     })();
     
@@ -8408,12 +15451,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Channel.decode = function decode(reader, length) {
+                    Channel.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Channel();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             default:
                                 reader.skipType(tag & 7);
@@ -8638,12 +15683,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -8988,12 +16035,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -9372,12 +16421,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -9604,12 +16655,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -9973,12 +17026,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -10317,6 +17372,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -10418,6 +17474,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -10464,6 +17528,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -10491,12 +17557,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -10542,6 +17610,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -10636,6 +17708,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -10730,6 +17805,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -10759,6 +17836,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -10789,6 +17867,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -10930,12 +18010,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -11197,12 +18279,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -11405,12 +18489,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -11613,12 +18699,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -11821,12 +18909,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -12094,12 +19184,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -12473,12 +19565,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -12681,12 +19775,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -12913,12 +20009,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -13191,12 +20289,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -13618,12 +20718,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -14013,12 +21115,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -14243,12 +21347,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -14643,12 +21749,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -15310,12 +22418,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -15795,12 +22905,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -16039,12 +23151,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -16295,12 +23409,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -16640,12 +23756,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -17019,12 +24137,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -17544,12 +24664,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -17815,12 +24937,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -18134,12 +25258,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -18375,12 +25501,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -18632,12 +25760,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -18940,12 +26070,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -19444,12 +26576,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -20064,12 +27198,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -20512,12 +27648,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -20547,12 +27680,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -21278,12 +28413,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -21574,12 +28711,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -21860,12 +28999,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -22172,12 +29313,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -22363,6 +29506,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -22422,6 +29566,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -22456,6 +29608,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -22483,12 +29637,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -22510,6 +29666,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -22570,6 +29730,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -22606,6 +29769,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -22629,6 +29794,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -22643,6 +29809,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -22819,12 +29987,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -23236,12 +30406,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -23575,12 +30747,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -23851,12 +31025,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -24386,12 +31562,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -24770,12 +31948,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -25060,12 +32240,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -25335,12 +32517,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -25646,12 +32830,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -25914,12 +33100,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -26240,12 +33428,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -26459,12 +33649,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -26647,12 +33839,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -26875,12 +34069,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -27176,12 +34372,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                TimeOfDay.decode = function decode(reader, length) {
+                TimeOfDay.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.hours = reader.int32();

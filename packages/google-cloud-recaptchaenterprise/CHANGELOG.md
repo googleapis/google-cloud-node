@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.3.1...recaptcha-enterprise-v6.4.0) (2026-01-16)
+
+
+### Features
+
+* [recaptchaenterprise] Update NetApp v1 API with Host Groups, Block Volumes, Cache Volumes, and Backup Restore ([#6993](https://github.com/googleapis/google-cloud-node/issues/6993)) ([bc588be](https://github.com/googleapis/google-cloud-node/commit/bc588be78d9b27c0d2d1c3c992720ad332290a1a))
+
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.3.0...recaptcha-enterprise-v6.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.2.0...recaptcha-enterprise-v6.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6422](https://github.com/googleapis/google-cloud-node/issues/6422)) ([1e17ea2](https://github.com/googleapis/google-cloud-node/commit/1e17ea2496a502905259010a6702e7cc68f9d1ba))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.1.0...recaptcha-enterprise-v6.2.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6302](https://github.com/googleapis/google-cloud-node/issues/6302)) ([abc35be](https://github.com/googleapis/google-cloud-node/commit/abc35be4817709467e6c6b2a12ac4e749ffed72d))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v6.0.1...recaptcha-enterprise-v6.1.0) (2025-05-09)
 
 

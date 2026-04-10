@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,21 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  AutoscalingPolicyServiceClient,
-  BatchControllerClient,
-  ClusterControllerClient,
-  JobControllerClient,
-  NodeGroupControllerClient,
-  SessionControllerClient,
-  SessionTemplateControllerClient,
-  WorkflowTemplateServiceClient,
-} from '@google-cloud/dataproc';
+import {AutoscalingPolicyServiceClient, BatchControllerClient, ClusterControllerClient, JobControllerClient, NodeGroupControllerClient, SessionControllerClient, SessionTemplateControllerClient, WorkflowTemplateServiceClient} from '@google-cloud/dataproc';
 
 // check that the client class type name can be used
-function doStuffWithAutoscalingPolicyServiceClient(
-  client: AutoscalingPolicyServiceClient
-) {
+function doStuffWithAutoscalingPolicyServiceClient(client: AutoscalingPolicyServiceClient) {
   client.close();
 }
 function doStuffWithBatchControllerClient(client: BatchControllerClient) {
@@ -42,22 +31,16 @@ function doStuffWithClusterControllerClient(client: ClusterControllerClient) {
 function doStuffWithJobControllerClient(client: JobControllerClient) {
   client.close();
 }
-function doStuffWithNodeGroupControllerClient(
-  client: NodeGroupControllerClient
-) {
+function doStuffWithNodeGroupControllerClient(client: NodeGroupControllerClient) {
   client.close();
 }
 function doStuffWithSessionControllerClient(client: SessionControllerClient) {
   client.close();
 }
-function doStuffWithSessionTemplateControllerClient(
-  client: SessionTemplateControllerClient
-) {
+function doStuffWithSessionTemplateControllerClient(client: SessionTemplateControllerClient) {
   client.close();
 }
-function doStuffWithWorkflowTemplateServiceClient(
-  client: WorkflowTemplateServiceClient
-) {
+function doStuffWithWorkflowTemplateServiceClient(client: WorkflowTemplateServiceClient) {
   client.close();
 }
 

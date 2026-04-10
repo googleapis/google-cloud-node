@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -37,13 +37,12 @@ function main() {
    */
   // const project = 'my-project'
   /**
-   *  Set to true to invoke a replica failover to the designated DR
+   *  Set to true to invoke a replica failover to the DR
    *  replica. As part of replica failover, the promote operation attempts
    *  to add the original primary instance as a replica of the promoted
    *  DR replica when the original primary instance comes back online.
    *  If set to false or not specified, then the original primary
    *  instance becomes an independent Cloud SQL primary instance.
-   *  Only applicable to MySQL.
    */
   // const failover = true
 

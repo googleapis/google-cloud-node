@@ -882,6 +882,11 @@
                 "searchNearestEntities"
               ]
             },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
+              ]
+            },
             "StreamingFetchFeatureValues": {
               "methods": [
                 "streamingFetchFeatureValues"
@@ -905,6 +910,11 @@
             "SearchNearestEntities": {
               "methods": [
                 "searchNearestEntities"
+              ]
+            },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
               ]
             }
           }
@@ -1669,6 +1679,11 @@
                 "createIndex"
               ]
             },
+            "ImportIndex": {
+              "methods": [
+                "importIndex"
+              ]
+            },
             "UpdateIndex": {
               "methods": [
                 "updateIndex"
@@ -1709,6 +1724,11 @@
             "CreateIndex": {
               "methods": [
                 "createIndex"
+              ]
+            },
+            "ImportIndex": {
+              "methods": [
+                "importIndex"
               ]
             },
             "UpdateIndex": {
@@ -2180,6 +2200,94 @@
             "ReadIndexDatapoints": {
               "methods": [
                 "readIndexDatapoints"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MemoryBankService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MemoryBankServiceClient",
+          "rpcs": {
+            "GetMemory": {
+              "methods": [
+                "getMemory"
+              ]
+            },
+            "RetrieveMemories": {
+              "methods": [
+                "retrieveMemories"
+              ]
+            },
+            "CreateMemory": {
+              "methods": [
+                "createMemory"
+              ]
+            },
+            "UpdateMemory": {
+              "methods": [
+                "updateMemory"
+              ]
+            },
+            "DeleteMemory": {
+              "methods": [
+                "deleteMemory"
+              ]
+            },
+            "GenerateMemories": {
+              "methods": [
+                "generateMemories"
+              ]
+            },
+            "ListMemories": {
+              "methods": [
+                "listMemories",
+                "listMemoriesStream",
+                "listMemoriesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MemoryBankServiceClient",
+          "rpcs": {
+            "GetMemory": {
+              "methods": [
+                "getMemory"
+              ]
+            },
+            "RetrieveMemories": {
+              "methods": [
+                "retrieveMemories"
+              ]
+            },
+            "CreateMemory": {
+              "methods": [
+                "createMemory"
+              ]
+            },
+            "UpdateMemory": {
+              "methods": [
+                "updateMemory"
+              ]
+            },
+            "DeleteMemory": {
+              "methods": [
+                "deleteMemory"
+              ]
+            },
+            "GenerateMemories": {
+              "methods": [
+                "generateMemories"
+              ]
+            },
+            "ListMemories": {
+              "methods": [
+                "listMemories",
+                "listMemoriesStream",
+                "listMemoriesAsync"
               ]
             }
           }
@@ -2851,6 +2959,11 @@
                 "getModelEvaluationSlice"
               ]
             },
+            "RecommendSpec": {
+              "methods": [
+                "recommendSpec"
+              ]
+            },
             "UploadModel": {
               "methods": [
                 "uploadModel"
@@ -2959,6 +3072,11 @@
             "GetModelEvaluationSlice": {
               "methods": [
                 "getModelEvaluationSlice"
+              ]
+            },
+            "RecommendSpec": {
+              "methods": [
+                "recommendSpec"
               ]
             },
             "UploadModel": {
@@ -3476,6 +3594,11 @@
                 "generateContent"
               ]
             },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
+              ]
+            },
             "StreamRawPredict": {
               "methods": [
                 "streamRawPredict"
@@ -3554,6 +3677,11 @@
             "GenerateContent": {
               "methods": [
                 "generateContent"
+              ]
+            },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
               ]
             }
           }
@@ -4259,6 +4387,41 @@
                 "getRagEngineConfig"
               ]
             },
+            "CreateRagDataSchema": {
+              "methods": [
+                "createRagDataSchema"
+              ]
+            },
+            "GetRagDataSchema": {
+              "methods": [
+                "getRagDataSchema"
+              ]
+            },
+            "DeleteRagDataSchema": {
+              "methods": [
+                "deleteRagDataSchema"
+              ]
+            },
+            "CreateRagMetadata": {
+              "methods": [
+                "createRagMetadata"
+              ]
+            },
+            "UpdateRagMetadata": {
+              "methods": [
+                "updateRagMetadata"
+              ]
+            },
+            "GetRagMetadata": {
+              "methods": [
+                "getRagMetadata"
+              ]
+            },
+            "DeleteRagMetadata": {
+              "methods": [
+                "deleteRagMetadata"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -4289,6 +4452,26 @@
                 "updateRagEngineConfig"
               ]
             },
+            "BatchCreateRagDataSchemas": {
+              "methods": [
+                "batchCreateRagDataSchemas"
+              ]
+            },
+            "BatchDeleteRagDataSchemas": {
+              "methods": [
+                "batchDeleteRagDataSchemas"
+              ]
+            },
+            "BatchCreateRagMetadata": {
+              "methods": [
+                "batchCreateRagMetadata"
+              ]
+            },
+            "BatchDeleteRagMetadata": {
+              "methods": [
+                "batchDeleteRagMetadata"
+              ]
+            },
             "ListRagCorpora": {
               "methods": [
                 "listRagCorpora",
@@ -4301,6 +4484,20 @@
                 "listRagFiles",
                 "listRagFilesStream",
                 "listRagFilesAsync"
+              ]
+            },
+            "ListRagDataSchemas": {
+              "methods": [
+                "listRagDataSchemas",
+                "listRagDataSchemasStream",
+                "listRagDataSchemasAsync"
+              ]
+            },
+            "ListRagMetadata": {
+              "methods": [
+                "listRagMetadata",
+                "listRagMetadataStream",
+                "listRagMetadataAsync"
               ]
             }
           }
@@ -4328,6 +4525,41 @@
                 "getRagEngineConfig"
               ]
             },
+            "CreateRagDataSchema": {
+              "methods": [
+                "createRagDataSchema"
+              ]
+            },
+            "GetRagDataSchema": {
+              "methods": [
+                "getRagDataSchema"
+              ]
+            },
+            "DeleteRagDataSchema": {
+              "methods": [
+                "deleteRagDataSchema"
+              ]
+            },
+            "CreateRagMetadata": {
+              "methods": [
+                "createRagMetadata"
+              ]
+            },
+            "UpdateRagMetadata": {
+              "methods": [
+                "updateRagMetadata"
+              ]
+            },
+            "GetRagMetadata": {
+              "methods": [
+                "getRagMetadata"
+              ]
+            },
+            "DeleteRagMetadata": {
+              "methods": [
+                "deleteRagMetadata"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -4358,6 +4590,26 @@
                 "updateRagEngineConfig"
               ]
             },
+            "BatchCreateRagDataSchemas": {
+              "methods": [
+                "batchCreateRagDataSchemas"
+              ]
+            },
+            "BatchDeleteRagDataSchemas": {
+              "methods": [
+                "batchDeleteRagDataSchemas"
+              ]
+            },
+            "BatchCreateRagMetadata": {
+              "methods": [
+                "batchCreateRagMetadata"
+              ]
+            },
+            "BatchDeleteRagMetadata": {
+              "methods": [
+                "batchDeleteRagMetadata"
+              ]
+            },
             "ListRagCorpora": {
               "methods": [
                 "listRagCorpora",
@@ -4370,6 +4622,20 @@
                 "listRagFiles",
                 "listRagFilesStream",
                 "listRagFilesAsync"
+              ]
+            },
+            "ListRagDataSchemas": {
+              "methods": [
+                "listRagDataSchemas",
+                "listRagDataSchemasStream",
+                "listRagDataSchemasAsync"
+              ]
+            },
+            "ListRagMetadata": {
+              "methods": [
+                "listRagMetadata",
+                "listRagMetadataStream",
+                "listRagMetadataAsync"
               ]
             }
           }
@@ -4395,6 +4661,16 @@
               "methods": [
                 "corroborateContent"
               ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
+              ]
             }
           }
         },
@@ -4414,6 +4690,16 @@
             "CorroborateContent": {
               "methods": [
                 "corroborateContent"
+              ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
               ]
             }
           }

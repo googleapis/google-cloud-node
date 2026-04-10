@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -224,13 +221,19 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{autokey_config.name=folders/*/autokeyConfig}",
                             "(google.api.http).body": "autokey_config",
+                            "(google.api.http).additional_bindings.patch": "/v1/{autokey_config.name=projects/*/autokeyConfig}",
+                            "(google.api.http).additional_bindings.body": "autokey_config",
                             "(google.api.method_signature)": "autokey_config,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{autokey_config.name=folders/*/autokeyConfig}",
-                                "body": "autokey_config"
+                                "body": "autokey_config",
+                                "additional_bindings": {
+                                  "patch": "/v1/{autokey_config.name=projects/*/autokeyConfig}",
+                                  "body": "autokey_config"
+                                }
                               }
                             },
                             {
@@ -243,12 +246,16 @@
                           "responseType": "AutokeyConfig",
                           "options": {
                             "(google.api.http).get": "/v1/{name=folders/*/autokeyConfig}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/autokeyConfig}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=folders/*/autokeyConfig}"
+                                "get": "/v1/{name=folders/*/autokeyConfig}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/autokeyConfig}"
+                                }
                               }
                             },
                             {
@@ -309,7 +316,7 @@
                     "AutokeyConfig": {
                       "options": {
                         "(google.api.resource).type": "cloudkms.googleapis.com/AutokeyConfig",
-                        "(google.api.resource).pattern": "folders/{folder}/autokeyConfig",
+                        "(google.api.resource).pattern": "projects/{project}/autokeyConfig",
                         "(google.api.resource).plural": "autokeyConfigs",
                         "(google.api.resource).singular": "autokeyConfig"
                       },
@@ -341,6 +348,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "keyProjectResolutionMode": {
+                          "type": "KeyProjectResolutionMode",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -349,7 +363,16 @@
                             "STATE_UNSPECIFIED": 0,
                             "ACTIVE": 1,
                             "KEY_PROJECT_DELETED": 2,
-                            "UNINITIALIZED": 3
+                            "UNINITIALIZED": 3,
+                            "KEY_PROJECT_PERMISSION_DENIED": 4
+                          }
+                        },
+                        "KeyProjectResolutionMode": {
+                          "values": {
+                            "KEY_PROJECT_RESOLUTION_MODE_UNSPECIFIED": 0,
+                            "DEDICATED_KEY_PROJECT": 1,
+                            "RESOURCE_PROJECT": 2,
+                            "DISABLED": 3
                           }
                         }
                       }
@@ -857,6 +880,914 @@
                     "VerifyConnectivityResponse": {
                       "fields": {}
                     },
+                    "HsmManagement": {
+                      "options": {
+                        "(google.api.default_host)": "cloudkms.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloudkms"
+                      },
+                      "methods": {
+                        "ListSingleTenantHsmInstances": {
+                          "requestType": "ListSingleTenantHsmInstancesRequest",
+                          "responseType": "ListSingleTenantHsmInstancesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetSingleTenantHsmInstance": {
+                          "requestType": "GetSingleTenantHsmInstanceRequest",
+                          "responseType": "SingleTenantHsmInstance",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateSingleTenantHsmInstance": {
+                          "requestType": "CreateSingleTenantHsmInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances",
+                            "(google.api.http).body": "single_tenant_hsm_instance",
+                            "(google.api.method_signature)": "parent,single_tenant_hsm_instance,single_tenant_hsm_instance_id",
+                            "(google.longrunning.operation_info).response_type": "SingleTenantHsmInstance",
+                            "(google.longrunning.operation_info).metadata_type": "CreateSingleTenantHsmInstanceMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/singleTenantHsmInstances",
+                                "body": "single_tenant_hsm_instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,single_tenant_hsm_instance,single_tenant_hsm_instance_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "SingleTenantHsmInstance",
+                                "metadata_type": "CreateSingleTenantHsmInstanceMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateSingleTenantHsmInstanceProposal": {
+                          "requestType": "CreateSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals",
+                            "(google.api.http).body": "single_tenant_hsm_instance_proposal",
+                            "(google.api.method_signature)": "parent,single_tenant_hsm_instance_proposal,single_tenant_hsm_instance_proposal_id",
+                            "(google.longrunning.operation_info).response_type": "SingleTenantHsmInstanceProposal",
+                            "(google.longrunning.operation_info).metadata_type": "CreateSingleTenantHsmInstanceProposalMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals",
+                                "body": "single_tenant_hsm_instance_proposal"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,single_tenant_hsm_instance_proposal,single_tenant_hsm_instance_proposal_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "SingleTenantHsmInstanceProposal",
+                                "metadata_type": "CreateSingleTenantHsmInstanceProposalMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ApproveSingleTenantHsmInstanceProposal": {
+                          "requestType": "ApproveSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "ApproveSingleTenantHsmInstanceProposalResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:approve",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,quorum_reply"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:approve",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,quorum_reply"
+                            }
+                          ]
+                        },
+                        "ExecuteSingleTenantHsmInstanceProposal": {
+                          "requestType": "ExecuteSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:execute",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "ExecuteSingleTenantHsmInstanceProposalResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExecuteSingleTenantHsmInstanceProposalMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}:execute",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExecuteSingleTenantHsmInstanceProposalResponse",
+                                "metadata_type": "ExecuteSingleTenantHsmInstanceProposalMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetSingleTenantHsmInstanceProposal": {
+                          "requestType": "GetSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "SingleTenantHsmInstanceProposal",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListSingleTenantHsmInstanceProposals": {
+                          "requestType": "ListSingleTenantHsmInstanceProposalsRequest",
+                          "responseType": "ListSingleTenantHsmInstanceProposalsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/singleTenantHsmInstances/*}/proposals"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteSingleTenantHsmInstanceProposal": {
+                          "requestType": "DeleteSingleTenantHsmInstanceProposalRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/singleTenantHsmInstances/*/proposals/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "SingleTenantHsmInstance": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/SingleTenantHsmInstance",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}",
+                        "(google.api.resource).plural": "singleTenantHsmInstances",
+                        "(google.api.resource).singular": "singleTenantHsmInstance"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "quorumAuth": {
+                          "type": "QuorumAuth",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "unrefreshedDurationUntilDisable": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disableTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "PENDING_TWO_FACTOR_AUTH_REGISTRATION": 2,
+                            "ACTIVE": 3,
+                            "DISABLING": 4,
+                            "DISABLED": 5,
+                            "DELETING": 6,
+                            "DELETED": 7,
+                            "FAILED": 8
+                          }
+                        },
+                        "QuorumAuth": {
+                          "fields": {
+                            "totalApproverCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "twoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SingleTenantHsmInstanceProposal": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/singleTenantHsmInstances/{single_tenant_hsm_instance}/proposals/{proposal}",
+                        "(google.api.resource).plural": "singleTenantHsmInstanceProposals",
+                        "(google.api.resource).singular": "singleTenantHsmInstanceProposal"
+                      },
+                      "oneofs": {
+                        "approvalParameters": {
+                          "oneof": [
+                            "quorumParameters",
+                            "requiredActionQuorumParameters"
+                          ]
+                        },
+                        "expiration": {
+                          "oneof": [
+                            "expireTime",
+                            "ttl"
+                          ]
+                        },
+                        "operation": {
+                          "oneof": [
+                            "registerTwoFactorAuthKeys",
+                            "disableSingleTenantHsmInstance",
+                            "enableSingleTenantHsmInstance",
+                            "deleteSingleTenantHsmInstance",
+                            "addQuorumMember",
+                            "removeQuorumMember",
+                            "refreshSingleTenantHsmInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failureReason": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "quorumParameters": {
+                          "type": "QuorumParameters",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "requiredActionQuorumParameters": {
+                          "type": "RequiredActionQuorumParameters",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "ttl": {
+                          "type": "google.protobuf.Duration",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "purgeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "registerTwoFactorAuthKeys": {
+                          "type": "RegisterTwoFactorAuthKeys",
+                          "id": 8
+                        },
+                        "disableSingleTenantHsmInstance": {
+                          "type": "DisableSingleTenantHsmInstance",
+                          "id": 9
+                        },
+                        "enableSingleTenantHsmInstance": {
+                          "type": "EnableSingleTenantHsmInstance",
+                          "id": 10
+                        },
+                        "deleteSingleTenantHsmInstance": {
+                          "type": "DeleteSingleTenantHsmInstance",
+                          "id": 11
+                        },
+                        "addQuorumMember": {
+                          "type": "AddQuorumMember",
+                          "id": 12
+                        },
+                        "removeQuorumMember": {
+                          "type": "RemoveQuorumMember",
+                          "id": 13
+                        },
+                        "refreshSingleTenantHsmInstance": {
+                          "type": "RefreshSingleTenantHsmInstance",
+                          "id": 17
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "PENDING": 2,
+                            "APPROVED": 3,
+                            "RUNNING": 4,
+                            "SUCCEEDED": 5,
+                            "FAILED": 6,
+                            "DELETED": 7
+                          }
+                        },
+                        "QuorumParameters": {
+                          "fields": {
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "challenges": {
+                              "rule": "repeated",
+                              "type": "Challenge",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "approvedTwoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "RequiredActionQuorumParameters": {
+                          "fields": {
+                            "requiredChallenges": {
+                              "rule": "repeated",
+                              "type": "Challenge",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "quorumChallenges": {
+                              "rule": "repeated",
+                              "type": "Challenge",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "approvedTwoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "RegisterTwoFactorAuthKeys": {
+                          "fields": {
+                            "requiredApproverCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "twoFactorPublicKeyPems": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DisableSingleTenantHsmInstance": {
+                          "fields": {}
+                        },
+                        "EnableSingleTenantHsmInstance": {
+                          "fields": {}
+                        },
+                        "DeleteSingleTenantHsmInstance": {
+                          "fields": {}
+                        },
+                        "AddQuorumMember": {
+                          "fields": {
+                            "twoFactorPublicKeyPem": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RemoveQuorumMember": {
+                          "fields": {
+                            "twoFactorPublicKeyPem": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RefreshSingleTenantHsmInstance": {
+                          "fields": {}
+                        }
+                      }
+                    },
+                    "Challenge": {
+                      "fields": {
+                        "challenge": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "publicKeyPem": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ChallengeReply": {
+                      "fields": {
+                        "signedChallenge": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "publicKeyPem": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListSingleTenantHsmInstancesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSingleTenantHsmInstancesResponse": {
+                      "fields": {
+                        "singleTenantHsmInstances": {
+                          "rule": "repeated",
+                          "type": "SingleTenantHsmInstance",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetSingleTenantHsmInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstance"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSingleTenantHsmInstanceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "singleTenantHsmInstanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "singleTenantHsmInstance": {
+                          "type": "SingleTenantHsmInstance",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSingleTenantHsmInstanceMetadata": {
+                      "fields": {}
+                    },
+                    "CreateSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstance"
+                          }
+                        },
+                        "singleTenantHsmInstanceProposalId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "singleTenantHsmInstanceProposal": {
+                          "type": "SingleTenantHsmInstanceProposal",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSingleTenantHsmInstanceProposalMetadata": {
+                      "fields": {}
+                    },
+                    "GetSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        }
+                      }
+                    },
+                    "ApproveSingleTenantHsmInstanceProposalRequest": {
+                      "oneofs": {
+                        "approvalPayload": {
+                          "oneof": [
+                            "quorumReply",
+                            "requiredActionQuorumReply"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        },
+                        "quorumReply": {
+                          "type": "QuorumReply",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requiredActionQuorumReply": {
+                          "type": "RequiredActionQuorumReply",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "QuorumReply": {
+                          "fields": {
+                            "challengeReplies": {
+                              "rule": "repeated",
+                              "type": "ChallengeReply",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "RequiredActionQuorumReply": {
+                          "fields": {
+                            "requiredChallengeReplies": {
+                              "rule": "repeated",
+                              "type": "ChallengeReply",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "quorumChallengeReplies": {
+                              "rule": "repeated",
+                              "type": "ChallengeReply",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ApproveSingleTenantHsmInstanceProposalResponse": {
+                      "fields": {}
+                    },
+                    "ExecuteSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        }
+                      }
+                    },
+                    "ExecuteSingleTenantHsmInstanceProposalResponse": {
+                      "fields": {}
+                    },
+                    "ExecuteSingleTenantHsmInstanceProposalMetadata": {
+                      "fields": {}
+                    },
+                    "ListSingleTenantHsmInstanceProposalsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstance"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "showDeleted": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSingleTenantHsmInstanceProposalsResponse": {
+                      "fields": {
+                        "singleTenantHsmInstanceProposals": {
+                          "rule": "repeated",
+                          "type": "SingleTenantHsmInstanceProposal",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeleteSingleTenantHsmInstanceProposalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/SingleTenantHsmInstanceProposal"
+                          }
+                        }
+                      }
+                    },
                     "KeyRing": {
                       "options": {
                         "(google.api.resource).type": "cloudkms.googleapis.com/KeyRing",
@@ -975,7 +1906,8 @@
                             "ASYMMETRIC_SIGN": 5,
                             "ASYMMETRIC_DECRYPT": 6,
                             "RAW_ENCRYPT_DECRYPT": 7,
-                            "MAC": 9
+                            "MAC": 9,
+                            "KEY_ENCAPSULATION": 10
                           }
                         }
                       }
@@ -1200,8 +2132,17 @@
                             "HMAC_SHA512": 35,
                             "HMAC_SHA224": 36,
                             "EXTERNAL_SYMMETRIC_ENCRYPTION": 18,
+                            "ML_KEM_768": 47,
+                            "ML_KEM_1024": 48,
+                            "KEM_XWING": 63,
+                            "PQ_SIGN_ML_DSA_44": 68,
                             "PQ_SIGN_ML_DSA_65": 56,
-                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57
+                            "PQ_SIGN_ML_DSA_87": 69,
+                            "PQ_SIGN_SLH_DSA_SHA2_128S": 57,
+                            "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256": 60,
+                            "PQ_SIGN_ML_DSA_44_EXTERNAL_MU": 70,
+                            "PQ_SIGN_ML_DSA_65_EXTERNAL_MU": 67,
+                            "PQ_SIGN_ML_DSA_87_EXTERNAL_MU": 71
                           }
                         },
                         "CryptoKeyVersionState": {
@@ -1279,7 +2220,9 @@
                           "values": {
                             "PUBLIC_KEY_FORMAT_UNSPECIFIED": 0,
                             "PEM": 1,
-                            "NIST_PQC": 3
+                            "DER": 2,
+                            "NIST_PQC": 3,
+                            "XWING_RAW_BYTES": 4
                           }
                         }
                       }
@@ -1359,6 +2302,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "cryptoKeyBackend": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "*"
+                          }
                         }
                       },
                       "nested": {
@@ -1412,16 +2363,63 @@
                         }
                       }
                     },
+                    "RetiredResource": {
+                      "options": {
+                        "(google.api.resource).type": "cloudkms.googleapis.com/RetiredResource",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/retiredResources/{retired_resource}",
+                        "(google.api.resource).plural": "retiredResources",
+                        "(google.api.resource).singular": "retiredResource"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "originalResource": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deleteTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ProtectionLevel": {
                       "values": {
                         "PROTECTION_LEVEL_UNSPECIFIED": 0,
                         "SOFTWARE": 1,
                         "HSM": 2,
                         "EXTERNAL": 3,
-                        "EXTERNAL_VPC": 4
+                        "EXTERNAL_VPC": 4,
+                        "HSM_SINGLE_TENANT": 5
                       }
                     },
                     "AccessReason": {
+                      "valuesOptions": {
+                        "MODIFIED_CUSTOMER_INITIATED_ACCESS": {
+                          "deprecated": true
+                        },
+                        "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "REASON_UNSPECIFIED": 0,
                         "CUSTOMER_INITIATED_SUPPORT": 1,
@@ -1508,6 +2506,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=projects/*/locations/*/keyRings/*}/importJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListRetiredResources": {
+                          "requestType": "ListRetiredResourcesRequest",
+                          "responseType": "ListRetiredResourcesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/retiredResources",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/retiredResources"
                               }
                             },
                             {
@@ -1605,6 +2621,24 @@
                             }
                           ]
                         },
+                        "GetRetiredResource": {
+                          "requestType": "GetRetiredResourceRequest",
+                          "responseType": "RetiredResource",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/retiredResources/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/retiredResources/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "CreateKeyRing": {
                           "requestType": "CreateKeyRingRequest",
                           "responseType": "KeyRing",
@@ -1662,6 +2696,58 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,crypto_key_version"
+                            }
+                          ]
+                        },
+                        "DeleteCryptoKey": {
+                          "requestType": "DeleteCryptoKeyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteCryptoKeyMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteCryptoKeyMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteCryptoKeyVersion": {
+                          "requestType": "DeleteCryptoKeyVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteCryptoKeyVersionMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteCryptoKeyVersionMetadata"
+                              }
                             }
                           ]
                         },
@@ -1953,6 +3039,22 @@
                             }
                           ]
                         },
+                        "Decapsulate": {
+                          "requestType": "DecapsulateRequest",
+                          "responseType": "DecapsulateResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:decapsulate",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:decapsulate",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "GenerateRandomBytes": {
                           "requestType": "GenerateRandomBytesRequest",
                           "responseType": "GenerateRandomBytesResponse",
@@ -2143,6 +3245,32 @@
                         }
                       }
                     },
+                    "ListRetiredResourcesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudkms.googleapis.com/RetiredResource"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "ListKeyRingsResponse": {
                       "fields": {
                         "keyRings": {
@@ -2211,6 +3339,23 @@
                         }
                       }
                     },
+                    "ListRetiredResourcesResponse": {
+                      "fields": {
+                        "retiredResources": {
+                          "rule": "repeated",
+                          "type": "RetiredResource",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int64",
+                          "id": 3
+                        }
+                      }
+                    },
                     "GetKeyRingRequest": {
                       "fields": {
                         "name": {
@@ -2274,6 +3419,18 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/ImportJob"
+                          }
+                        }
+                      }
+                    },
+                    "GetRetiredResourceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/RetiredResource"
                           }
                         }
                       }
@@ -2349,6 +3506,30 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCryptoKeyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCryptoKeyVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
                           }
                         }
                       }
@@ -2835,6 +4016,32 @@
                         }
                       }
                     },
+                    "DecapsulateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "ciphertext": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "ciphertextCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "GenerateRandomBytesRequest": {
                       "fields": {
                         "location": {
@@ -3071,6 +4278,40 @@
                         }
                       }
                     },
+                    "DecapsulateResponse": {
+                      "oneofs": {
+                        "_sharedSecretCrc32c": {
+                          "oneof": [
+                            "sharedSecretCrc32c"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sharedSecret": {
+                          "type": "bytes",
+                          "id": 2
+                        },
+                        "sharedSecretCrc32c": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "verifiedCiphertextCrc32c": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "protectionLevel": {
+                          "type": "ProtectionLevel",
+                          "id": 5
+                        }
+                      }
+                    },
                     "GenerateRandomBytesResponse": {
                       "fields": {
                         "data": {
@@ -3117,8 +4358,27 @@
                         "ekmAvailable": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "hsmSingleTenantAvailable": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
+                    },
+                    "DeleteCryptoKeyMetadata": {
+                      "fields": {
+                        "retiredResource": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/RetiredResource"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCryptoKeyVersionMetadata": {
+                      "fields": {}
                     }
                   }
                 }
@@ -3239,6 +4499,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -3347,6 +4612,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -3522,7 +4791,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -3628,6 +4900,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -3637,6 +4910,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -3652,6 +4926,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3669,18 +4944,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -3721,6 +4990,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3803,6 +5073,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -3876,6 +5147,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3955,6 +5227,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -3967,6 +5240,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4008,6 +5282,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4024,6 +5299,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4041,6 +5317,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -4075,6 +5352,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -4216,6 +5494,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -4289,6 +5568,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -4350,10 +5630,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -4437,6 +5714,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -4456,6 +5734,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -4499,6 +5778,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -4532,6 +5812,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -4558,6 +5839,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -4600,6 +5882,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -4649,6 +5932,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -4721,8 +6005,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -4778,6 +6074,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -4809,6 +6106,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -4822,12 +6120,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -4847,6 +6151,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -4860,7 +6165,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

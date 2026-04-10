@@ -60,6 +60,18 @@ enum AcceleratorType {
   // Nvidia H100 Mega 80Gb GPU.
   NVIDIA_H100_MEGA_80GB = 14;
 
+  // Nvidia H200 141Gb GPU.
+  NVIDIA_H200_141GB = 15;
+
+  // Nvidia B200 GPU.
+  NVIDIA_B200 = 16;
+
+  // Nvidia GB200 GPU.
+  NVIDIA_GB200 = 17;
+
+  // Nvidia RTX Pro 6000 GPU.
+  NVIDIA_RTX_PRO_6000 = 18;
+
   // TPU v2.
   TPU_V2 = 6;
 

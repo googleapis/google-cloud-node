@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, IamClient, IamPr
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -264,6 +264,9 @@ export class PredictionServiceClient {
       indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
       ),
+      memoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/memories/{memory}'
+      ),
       metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
       ),
@@ -312,10 +315,10 @@ export class PredictionServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      projectLocationFeatureGroupFeaturePathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationFeatureGroupFeaturesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
       ),
-      projectLocationFeaturestoreEntityTypeFeaturePathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationFeaturestoreEntityTypeFeaturesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
       ),
       projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
@@ -327,11 +330,17 @@ export class PredictionServiceClient {
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
       ),
+      ragDataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragDataSchemas/{rag_data_schema}'
+      ),
       ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragEngineConfig'
       ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
+      ),
+      ragMetadataPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}/ragMetadata/{rag_metadata}'
       ),
       reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
@@ -433,7 +442,7 @@ export class PredictionServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const predictionServiceStubMethods =
-        ['predict', 'rawPredict', 'streamRawPredict', 'directPredict', 'directRawPredict', 'streamDirectPredict', 'streamDirectRawPredict', 'streamingPredict', 'serverStreamingPredict', 'streamingRawPredict', 'explain', 'countTokens', 'generateContent', 'streamGenerateContent', 'chatCompletions'];
+        ['predict', 'rawPredict', 'streamRawPredict', 'directPredict', 'directRawPredict', 'streamDirectPredict', 'streamDirectRawPredict', 'streamingPredict', 'serverStreamingPredict', 'streamingRawPredict', 'explain', 'countTokens', 'generateContent', 'streamGenerateContent', 'chatCompletions', 'embedContent'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -570,6 +579,9 @@ export class PredictionServiceClient {
  *   ][google.cloud.aiplatform.v1beta1.DeployedModel.model]
  *   {@link protos.google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
  *   {@link protos.google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+ * @param {number[]} [request.labels]
+ *   Optional. The user labels for Imagen billing usage only. Only Imagen
+ *   supports labels. For other use cases, it will be ignored.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -649,6 +661,12 @@ export class PredictionServiceClient {
       ]) => {
         this._log.info('predict response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -765,6 +783,12 @@ export class PredictionServiceClient {
       ]) => {
         this._log.info('rawPredict response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -860,6 +884,12 @@ export class PredictionServiceClient {
       ]) => {
         this._log.info('directPredict response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -961,6 +991,12 @@ export class PredictionServiceClient {
       ]) => {
         this._log.info('directRawPredict response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1099,6 +1135,12 @@ export class PredictionServiceClient {
       ]) => {
         this._log.info('explain response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1212,6 +1254,12 @@ export class PredictionServiceClient {
       ]) => {
         this._log.info('countTokens response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1265,6 +1313,9 @@ export class PredictionServiceClient {
  * @param {number[]} [request.safetySettings]
  *   Optional. Per request settings for blocking unsafe content.
  *   Enforced on GenerateContentResponse.candidates.
+ * @param {google.cloud.aiplatform.v1beta1.ModelArmorConfig} [request.modelArmorConfig]
+ *   Optional. Settings for prompt and response sanitization using the Model
+ *   Armor service. If supplied, safety_settings must not be supplied.
  * @param {google.cloud.aiplatform.v1beta1.GenerationConfig} [request.generationConfig]
  *   Optional. Generation config.
  * @param {object} [options]
@@ -1346,6 +1397,126 @@ export class PredictionServiceClient {
       ]) => {
         this._log.info('generateContent response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Embed content with multimodal inputs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the publisher model requested to serve the
+ *   prediction. Format:
+ *   `projects/{project}/locations/{location}/publishers/* /models/*`
+ * @param {google.cloud.aiplatform.v1beta1.Content} request.content
+ *   Required. Input content to be embedded.
+ * @param {string} [request.title]
+ *   Optional. Deprecated: Please use EmbedContentConfig.title instead.
+ *   The title for the text.
+ * @param {google.cloud.aiplatform.v1beta1.EmbedContentRequest.EmbeddingTaskType} [request.taskType]
+ *   Optional. Deprecated: Please use EmbedContentConfig.task_type instead.
+ *   The task type of the embedding.
+ * @param {number} [request.outputDimensionality]
+ *   Optional. Deprecated: Please use EmbedContentConfig.output_dimensionality
+ *   instead. Reduced dimension for the output embedding. If set, excessive
+ *   values in the output embedding are truncated from the end.
+ * @param {boolean} [request.autoTruncate]
+ *   Optional. Deprecated: Please use EmbedContentConfig.auto_truncate instead.
+ *   Whether to silently truncate the input content if it's longer
+ *   than the maximum sequence length.
+ * @param {google.cloud.aiplatform.v1beta1.EmbedContentRequest.EmbedContentConfig} [request.embedContentConfig]
+ *   Optional. Configuration for the EmbedContent request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.EmbedContentResponse|EmbedContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta1/prediction_service.embed_content.js</caption>
+ * region_tag:aiplatform_v1beta1_generated_PredictionService_EmbedContent_async
+ */
+  embedContent(
+      request?: protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|undefined, {}|undefined
+      ]>;
+  embedContent(
+      request: protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedContent(
+      request: protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  embedContent(
+      request?: protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+          protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('embedContent request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('embedContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.embedContent(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentResponse,
+        protos.google.cloud.aiplatform.v1beta1.IEmbedContentRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('embedContent response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -1570,6 +1741,9 @@ export class PredictionServiceClient {
  * @param {number[]} [request.safetySettings]
  *   Optional. Per request settings for blocking unsafe content.
  *   Enforced on GenerateContentResponse.candidates.
+ * @param {google.cloud.aiplatform.v1beta1.ModelArmorConfig} [request.modelArmorConfig]
+ *   Optional. Settings for prompt and response sanitization using the Model
+ *   Armor service. If supplied, safety_settings must not be supplied.
  * @param {google.cloud.aiplatform.v1beta1.GenerationConfig} [request.generationConfig]
  *   Optional. Generation config.
  * @param {object} [options]
@@ -3315,6 +3489,68 @@ export class PredictionServiceClient {
   }
 
   /**
+   * Return a fully-qualified memory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} memory
+   * @returns {string} Resource name string.
+   */
+  memoryPath(project:string,location:string,reasoningEngine:string,memory:string) {
+    return this.pathTemplates.memoryPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      memory: memory,
+    });
+  }
+
+  /**
+   * Parse the project from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).project;
+  }
+
+  /**
+   * Parse the location from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).reasoning_engine;
+  }
+
+  /**
+   * Parse the memory from Memory resource.
+   *
+   * @param {string} memoryName
+   *   A fully-qualified path representing Memory resource.
+   * @returns {string} A string representing the memory.
+   */
+  matchMemoryFromMemoryName(memoryName: string) {
+    return this.pathTemplates.memoryPathTemplate.match(memoryName).memory;
+  }
+
+  /**
    * Return a fully-qualified metadataSchema resource name string.
    *
    * @param {string} project
@@ -4177,7 +4413,7 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationFeatureGroupFeature resource name string.
+   * Return a fully-qualified projectLocationFeatureGroupFeatures resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -4185,8 +4421,8 @@ export class PredictionServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeatureGroupFeaturePath(project:string,location:string,featureGroup:string,feature:string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render({
+  projectLocationFeatureGroupFeaturesPath(project:string,location:string,featureGroup:string,feature:string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render({
       project: project,
       location: location,
       feature_group: featureGroup,
@@ -4195,51 +4431,51 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Parse the project from ProjectLocationFeatureGroupFeature resource.
+   * Parse the project from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).project;
+  matchProjectFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationFeatureGroupFeature resource.
+   * Parse the location from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).location;
+  matchLocationFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).location;
   }
 
   /**
-   * Parse the feature_group from ProjectLocationFeatureGroupFeature resource.
+   * Parse the feature_group from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the feature_group.
    */
-  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature_group;
+  matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).feature_group;
   }
 
   /**
-   * Parse the feature from ProjectLocationFeatureGroupFeature resource.
+   * Parse the feature from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature;
+  matchFeatureFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).feature;
   }
 
   /**
-   * Return a fully-qualified projectLocationFeaturestoreEntityTypeFeature resource name string.
+   * Return a fully-qualified projectLocationFeaturestoreEntityTypeFeatures resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -4248,8 +4484,8 @@ export class PredictionServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeaturestoreEntityTypeFeaturePath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render({
+  projectLocationFeaturestoreEntityTypeFeaturesPath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render({
       project: project,
       location: location,
       featurestore: featurestore,
@@ -4259,58 +4495,58 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Parse the project from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the project from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).project;
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the location from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).location;
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).location;
   }
 
   /**
-   * Parse the featurestore from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the featurestore from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the featurestore.
    */
-  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).featurestore;
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).featurestore;
   }
 
   /**
-   * Parse the entity_type from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the entity_type from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).entity_type;
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).entity_type;
   }
 
   /**
-   * Parse the feature from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the feature from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).feature;
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).feature;
   }
 
   /**
@@ -4461,6 +4697,68 @@ export class PredictionServiceClient {
   }
 
   /**
+   * Return a fully-qualified ragDataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_data_schema
+   * @returns {string} Resource name string.
+   */
+  ragDataSchemaPath(project:string,location:string,ragCorpus:string,ragDataSchema:string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_data_schema: ragDataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).project;
+  }
+
+  /**
+   * Parse the location from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_data_schema from RagDataSchema resource.
+   *
+   * @param {string} ragDataSchemaName
+   *   A fully-qualified path representing RagDataSchema resource.
+   * @returns {string} A string representing the rag_data_schema.
+   */
+  matchRagDataSchemaFromRagDataSchemaName(ragDataSchemaName: string) {
+    return this.pathTemplates.ragDataSchemaPathTemplate.match(ragDataSchemaName).rag_data_schema;
+  }
+
+  /**
    * Return a fully-qualified ragEngineConfig resource name string.
    *
    * @param {string} project
@@ -4556,6 +4854,81 @@ export class PredictionServiceClient {
    */
   matchRagFileFromRagFileName(ragFileName: string) {
     return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
+  }
+
+  /**
+   * Return a fully-qualified ragMetadata resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @param {string} rag_metadata
+   * @returns {string} Resource name string.
+   */
+  ragMetadataPath(project:string,location:string,ragCorpus:string,ragFile:string,ragMetadata:string) {
+    return this.pathTemplates.ragMetadataPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+      rag_metadata: ragMetadata,
+    });
+  }
+
+  /**
+   * Parse the project from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).project;
+  }
+
+  /**
+   * Parse the location from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_file;
+  }
+
+  /**
+   * Parse the rag_metadata from RagMetadata resource.
+   *
+   * @param {string} ragMetadataName
+   *   A fully-qualified path representing RagMetadata resource.
+   * @returns {string} A string representing the rag_metadata.
+   */
+  matchRagMetadataFromRagMetadataName(ragMetadataName: string) {
+    return this.pathTemplates.ragMetadataPathTemplate.match(ragMetadataName).rag_metadata;
   }
 
   /**

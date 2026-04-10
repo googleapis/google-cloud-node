@@ -33,6 +33,8 @@ option ruby_package = "Google::Ads::AdManager::V1";
 // Provides methods for handling `Role` objects.
 service RoleService {
   option (google.api.default_host) = "admanager.googleapis.com";
+  option (google.api.oauth_scopes) =
+      "https://www.googleapis.com/auth/admanager";
 
   // API to retrieve a `Role` object.
   rpc GetRole(GetRoleRequest) returns (Role) {
@@ -74,7 +76,8 @@ message ListRolesRequest {
 
   // Optional. The maximum number of `Roles` to return. The service may return
   // fewer than this value. If unspecified, at most 50 `Roles` will be returned.
-  // The maximum value is 1000; values above 1000 will be coerced to 1000.
+  // The maximum value is 1000; values greater than 1000 will be coerced to
+  // 1000.
   int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. A page token, received from a previous `ListRoles` call.
@@ -111,7 +114,7 @@ message ListRolesResponse {
   // If a filter was included in the request, this reflects the total number
   // after the filtering is applied.
   //
-  // `total_size` will not be calculated in the response unless it has been
+  // `total_size` won't be calculated in the response unless it has been
   // included in a response field mask. The response field mask can be provided
   // to the method by using the URL parameter `$fields` or `fields`, or by using
   // the HTTP/gRPC header `X-Goog-FieldMask`.

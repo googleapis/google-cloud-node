@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -974,6 +974,8 @@
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [mysqlRdbms] DiscoverConnectionProfileRequest mysqlRdbms
                          * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlRdbms] DiscoverConnectionProfileRequest postgresqlRdbms
                          * @property {google.cloud.datastream.v1.ISqlServerRdbms|null} [sqlServerRdbms] DiscoverConnectionProfileRequest sqlServerRdbms
+                         * @property {google.cloud.datastream.v1.ISalesforceOrg|null} [salesforceOrg] DiscoverConnectionProfileRequest salesforceOrg
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [mongodbCluster] DiscoverConnectionProfileRequest mongodbCluster
                          */
     
                         /**
@@ -1063,6 +1065,22 @@
                          */
                         DiscoverConnectionProfileRequest.prototype.sqlServerRdbms = null;
     
+                        /**
+                         * DiscoverConnectionProfileRequest salesforceOrg.
+                         * @member {google.cloud.datastream.v1.ISalesforceOrg|null|undefined} salesforceOrg
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
+                         * @instance
+                         */
+                        DiscoverConnectionProfileRequest.prototype.salesforceOrg = null;
+    
+                        /**
+                         * DiscoverConnectionProfileRequest mongodbCluster.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} mongodbCluster
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
+                         * @instance
+                         */
+                        DiscoverConnectionProfileRequest.prototype.mongodbCluster = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1090,12 +1108,12 @@
     
                         /**
                          * DiscoverConnectionProfileRequest dataObject.
-                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|undefined} dataObject
+                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|"salesforceOrg"|"mongodbCluster"|undefined} dataObject
                          * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileRequest
                          * @instance
                          */
                         Object.defineProperty(DiscoverConnectionProfileRequest.prototype, "dataObject", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms", "salesforceOrg", "mongodbCluster"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1137,6 +1155,10 @@
                                 $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.postgresqlRdbms, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             if (message.sqlServerRdbms != null && Object.hasOwnProperty.call(message, "sqlServerRdbms"))
                                 $root.google.cloud.datastream.v1.SqlServerRdbms.encode(message.sqlServerRdbms, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                            if (message.salesforceOrg != null && Object.hasOwnProperty.call(message, "salesforceOrg"))
+                                $root.google.cloud.datastream.v1.SalesforceOrg.encode(message.salesforceOrg, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.mongodbCluster != null && Object.hasOwnProperty.call(message, "mongodbCluster"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.mongodbCluster, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             if (message.connectionProfile != null && Object.hasOwnProperty.call(message, "connectionProfile"))
                                 $root.google.cloud.datastream.v1.ConnectionProfile.encode(message.connectionProfile, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
                             if (message.connectionProfileName != null && Object.hasOwnProperty.call(message, "connectionProfileName"))
@@ -1168,12 +1190,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoverConnectionProfileRequest.decode = function decode(reader, length) {
+                        DiscoverConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.DiscoverConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -1209,6 +1233,14 @@
                                     }
                                 case 103: {
                                         message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 104: {
+                                        message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1315,6 +1347,26 @@
                                         return "sqlServerRdbms." + error;
                                 }
                             }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SalesforceOrg.verify(message.salesforceOrg);
+                                    if (error)
+                                        return "salesforceOrg." + error;
+                                }
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.mongodbCluster);
+                                    if (error)
+                                        return "mongodbCluster." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1362,6 +1414,16 @@
                                 if (typeof object.sqlServerRdbms !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.sqlServerRdbms: object expected");
                                 message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.fromObject(object.sqlServerRdbms);
+                            }
+                            if (object.salesforceOrg != null) {
+                                if (typeof object.salesforceOrg !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.salesforceOrg: object expected");
+                                message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.fromObject(object.salesforceOrg);
+                            }
+                            if (object.mongodbCluster != null) {
+                                if (typeof object.mongodbCluster !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileRequest.mongodbCluster: object expected");
+                                message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.mongodbCluster);
                             }
                             return message;
                         };
@@ -1412,6 +1474,16 @@
                                 object.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.toObject(message.sqlServerRdbms, options);
                                 if (options.oneofs)
                                     object.dataObject = "sqlServerRdbms";
+                            }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                object.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.toObject(message.salesforceOrg, options);
+                                if (options.oneofs)
+                                    object.dataObject = "salesforceOrg";
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                object.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.mongodbCluster, options);
+                                if (options.oneofs)
+                                    object.dataObject = "mongodbCluster";
                             }
                             if (message.connectionProfile != null && message.hasOwnProperty("connectionProfile")) {
                                 object.connectionProfile = $root.google.cloud.datastream.v1.ConnectionProfile.toObject(message.connectionProfile, options);
@@ -1465,6 +1537,8 @@
                          * @property {google.cloud.datastream.v1.IMysqlRdbms|null} [mysqlRdbms] DiscoverConnectionProfileResponse mysqlRdbms
                          * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlRdbms] DiscoverConnectionProfileResponse postgresqlRdbms
                          * @property {google.cloud.datastream.v1.ISqlServerRdbms|null} [sqlServerRdbms] DiscoverConnectionProfileResponse sqlServerRdbms
+                         * @property {google.cloud.datastream.v1.ISalesforceOrg|null} [salesforceOrg] DiscoverConnectionProfileResponse salesforceOrg
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [mongodbCluster] DiscoverConnectionProfileResponse mongodbCluster
                          */
     
                         /**
@@ -1514,17 +1588,33 @@
                          */
                         DiscoverConnectionProfileResponse.prototype.sqlServerRdbms = null;
     
+                        /**
+                         * DiscoverConnectionProfileResponse salesforceOrg.
+                         * @member {google.cloud.datastream.v1.ISalesforceOrg|null|undefined} salesforceOrg
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
+                         * @instance
+                         */
+                        DiscoverConnectionProfileResponse.prototype.salesforceOrg = null;
+    
+                        /**
+                         * DiscoverConnectionProfileResponse mongodbCluster.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} mongodbCluster
+                         * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
+                         * @instance
+                         */
+                        DiscoverConnectionProfileResponse.prototype.mongodbCluster = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DiscoverConnectionProfileResponse dataObject.
-                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|undefined} dataObject
+                         * @member {"oracleRdbms"|"mysqlRdbms"|"postgresqlRdbms"|"sqlServerRdbms"|"salesforceOrg"|"mongodbCluster"|undefined} dataObject
                          * @memberof google.cloud.datastream.v1.DiscoverConnectionProfileResponse
                          * @instance
                          */
                         Object.defineProperty(DiscoverConnectionProfileResponse.prototype, "dataObject", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleRdbms", "mysqlRdbms", "postgresqlRdbms", "sqlServerRdbms", "salesforceOrg", "mongodbCluster"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1560,6 +1650,10 @@
                                 $root.google.cloud.datastream.v1.PostgresqlRdbms.encode(message.postgresqlRdbms, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             if (message.sqlServerRdbms != null && Object.hasOwnProperty.call(message, "sqlServerRdbms"))
                                 $root.google.cloud.datastream.v1.SqlServerRdbms.encode(message.sqlServerRdbms, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                            if (message.salesforceOrg != null && Object.hasOwnProperty.call(message, "salesforceOrg"))
+                                $root.google.cloud.datastream.v1.SalesforceOrg.encode(message.salesforceOrg, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.mongodbCluster != null && Object.hasOwnProperty.call(message, "mongodbCluster"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.mongodbCluster, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             return writer;
                         };
     
@@ -1587,12 +1681,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoverConnectionProfileResponse.decode = function decode(reader, length) {
+                        DiscoverConnectionProfileResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.DiscoverConnectionProfileResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 100: {
                                         message.oracleRdbms = $root.google.cloud.datastream.v1.OracleRdbms.decode(reader, reader.uint32());
@@ -1608,6 +1704,14 @@
                                     }
                                 case 103: {
                                         message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 104: {
+                                        message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -1684,6 +1788,26 @@
                                         return "sqlServerRdbms." + error;
                                 }
                             }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SalesforceOrg.verify(message.salesforceOrg);
+                                    if (error)
+                                        return "salesforceOrg." + error;
+                                }
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                if (properties.dataObject === 1)
+                                    return "dataObject: multiple values";
+                                properties.dataObject = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.mongodbCluster);
+                                    if (error)
+                                        return "mongodbCluster." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1718,6 +1842,16 @@
                                 if (typeof object.sqlServerRdbms !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.sqlServerRdbms: object expected");
                                 message.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.fromObject(object.sqlServerRdbms);
+                            }
+                            if (object.salesforceOrg != null) {
+                                if (typeof object.salesforceOrg !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.salesforceOrg: object expected");
+                                message.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.fromObject(object.salesforceOrg);
+                            }
+                            if (object.mongodbCluster != null) {
+                                if (typeof object.mongodbCluster !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.DiscoverConnectionProfileResponse.mongodbCluster: object expected");
+                                message.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.mongodbCluster);
                             }
                             return message;
                         };
@@ -1754,6 +1888,16 @@
                                 object.sqlServerRdbms = $root.google.cloud.datastream.v1.SqlServerRdbms.toObject(message.sqlServerRdbms, options);
                                 if (options.oneofs)
                                     object.dataObject = "sqlServerRdbms";
+                            }
+                            if (message.salesforceOrg != null && message.hasOwnProperty("salesforceOrg")) {
+                                object.salesforceOrg = $root.google.cloud.datastream.v1.SalesforceOrg.toObject(message.salesforceOrg, options);
+                                if (options.oneofs)
+                                    object.dataObject = "salesforceOrg";
+                            }
+                            if (message.mongodbCluster != null && message.hasOwnProperty("mongodbCluster")) {
+                                object.mongodbCluster = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.mongodbCluster, options);
+                                if (options.oneofs)
+                                    object.dataObject = "mongodbCluster";
                             }
                             return object;
                         };
@@ -1894,12 +2038,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchStaticIpsRequest.decode = function decode(reader, length) {
+                        FetchStaticIpsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.FetchStaticIpsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -2135,12 +2281,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchStaticIpsResponse.decode = function decode(reader, length) {
+                        FetchStaticIpsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.FetchStaticIpsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.staticIps && message.staticIps.length))
@@ -2409,12 +2557,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionProfilesRequest.decode = function decode(reader, length) {
+                        ListConnectionProfilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListConnectionProfilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -2687,12 +2837,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionProfilesResponse.decode = function decode(reader, length) {
+                        ListConnectionProfilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListConnectionProfilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.connectionProfiles && message.connectionProfiles.length))
@@ -2949,12 +3101,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetConnectionProfileRequest.decode = function decode(reader, length) {
+                        GetConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.GetConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -3207,12 +3361,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConnectionProfileRequest.decode = function decode(reader, length) {
+                        CreateConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CreateConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -3520,12 +3676,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateConnectionProfileRequest.decode = function decode(reader, length) {
+                        UpdateConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.UpdateConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -3793,12 +3951,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConnectionProfileRequest.decode = function decode(reader, length) {
+                        DeleteConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.DeleteConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4053,12 +4213,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStreamsRequest.decode = function decode(reader, length) {
+                        ListStreamsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListStreamsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -4331,12 +4493,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStreamsResponse.decode = function decode(reader, length) {
+                        ListStreamsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListStreamsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.streams && message.streams.length))
@@ -4593,12 +4757,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetStreamRequest.decode = function decode(reader, length) {
+                        GetStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.GetStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -4851,12 +5017,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateStreamRequest.decode = function decode(reader, length) {
+                        CreateStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CreateStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -5164,12 +5332,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateStreamRequest.decode = function decode(reader, length) {
+                        UpdateStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.UpdateStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -5437,12 +5607,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteStreamRequest.decode = function decode(reader, length) {
+                        DeleteStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.DeleteStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5675,12 +5847,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RunStreamRequest.decode = function decode(reader, length) {
+                        RunStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.RunStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -5908,12 +6082,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetStreamObjectRequest.decode = function decode(reader, length) {
+                        GetStreamObjectRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.GetStreamObjectRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -6122,12 +6298,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LookupStreamObjectRequest.decode = function decode(reader, length) {
+                        LookupStreamObjectRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.LookupStreamObjectRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -6343,12 +6521,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StartBackfillJobRequest.decode = function decode(reader, length) {
+                        StartBackfillJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StartBackfillJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.object = reader.string();
@@ -6546,12 +6726,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StartBackfillJobResponse.decode = function decode(reader, length) {
+                        StartBackfillJobResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StartBackfillJobResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.object = $root.google.cloud.datastream.v1.StreamObject.decode(reader, reader.uint32());
@@ -6754,12 +6936,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StopBackfillJobRequest.decode = function decode(reader, length) {
+                        StopBackfillJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StopBackfillJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.object = reader.string();
@@ -6957,12 +7141,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StopBackfillJobResponse.decode = function decode(reader, length) {
+                        StopBackfillJobResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StopBackfillJobResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.object = $root.google.cloud.datastream.v1.StreamObject.decode(reader, reader.uint32());
@@ -7187,12 +7373,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStreamObjectsRequest.decode = function decode(reader, length) {
+                        ListStreamObjectsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListStreamObjectsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -7428,12 +7616,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStreamObjectsResponse.decode = function decode(reader, length) {
+                        ListStreamObjectsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListStreamObjectsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.streamObjects && message.streamObjects.length))
@@ -7740,12 +7930,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -7969,6 +8161,7 @@
                          * @property {google.cloud.datastream.v1.IPrivateConnection|null} [privateConnection] CreatePrivateConnectionRequest privateConnection
                          * @property {string|null} [requestId] CreatePrivateConnectionRequest requestId
                          * @property {boolean|null} [force] CreatePrivateConnectionRequest force
+                         * @property {boolean|null} [validateOnly] CreatePrivateConnectionRequest validateOnly
                          */
     
                         /**
@@ -8027,6 +8220,14 @@
                         CreatePrivateConnectionRequest.prototype.force = false;
     
                         /**
+                         * CreatePrivateConnectionRequest validateOnly.
+                         * @member {boolean} validateOnly
+                         * @memberof google.cloud.datastream.v1.CreatePrivateConnectionRequest
+                         * @instance
+                         */
+                        CreatePrivateConnectionRequest.prototype.validateOnly = false;
+    
+                        /**
                          * Creates a new CreatePrivateConnectionRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.CreatePrivateConnectionRequest
@@ -8060,6 +8261,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             if (message.force != null && Object.hasOwnProperty.call(message, "force"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.force);
+                            if (message.validateOnly != null && Object.hasOwnProperty.call(message, "validateOnly"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.validateOnly);
                             return writer;
                         };
     
@@ -8087,12 +8290,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePrivateConnectionRequest.decode = function decode(reader, length) {
+                        CreatePrivateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CreatePrivateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -8112,6 +8317,10 @@
                                     }
                                 case 6: {
                                         message.force = reader.bool();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.validateOnly = reader.bool();
                                         break;
                                     }
                                 default:
@@ -8166,6 +8375,9 @@
                             if (message.force != null && message.hasOwnProperty("force"))
                                 if (typeof message.force !== "boolean")
                                     return "force: boolean expected";
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                if (typeof message.validateOnly !== "boolean")
+                                    return "validateOnly: boolean expected";
                             return null;
                         };
     
@@ -8194,6 +8406,8 @@
                                 message.requestId = String(object.requestId);
                             if (object.force != null)
                                 message.force = Boolean(object.force);
+                            if (object.validateOnly != null)
+                                message.validateOnly = Boolean(object.validateOnly);
                             return message;
                         };
     
@@ -8216,6 +8430,7 @@
                                 object.privateConnection = null;
                                 object.requestId = "";
                                 object.force = false;
+                                object.validateOnly = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -8227,6 +8442,8 @@
                                 object.requestId = message.requestId;
                             if (message.force != null && message.hasOwnProperty("force"))
                                 object.force = message.force;
+                            if (message.validateOnly != null && message.hasOwnProperty("validateOnly"))
+                                object.validateOnly = message.validateOnly;
                             return object;
                         };
     
@@ -8388,12 +8605,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPrivateConnectionsRequest.decode = function decode(reader, length) {
+                        ListPrivateConnectionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListPrivateConnectionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -8666,12 +8885,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPrivateConnectionsResponse.decode = function decode(reader, length) {
+                        ListPrivateConnectionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListPrivateConnectionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.privateConnections && message.privateConnections.length))
@@ -8950,12 +9171,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePrivateConnectionRequest.decode = function decode(reader, length) {
+                        DeletePrivateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.DeletePrivateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -9178,12 +9401,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPrivateConnectionRequest.decode = function decode(reader, length) {
+                        GetPrivateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.GetPrivateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -9414,12 +9639,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateRouteRequest.decode = function decode(reader, length) {
+                        CreateRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CreateRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -9703,12 +9930,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRoutesRequest.decode = function decode(reader, length) {
+                        ListRoutesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListRoutesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -9981,12 +10210,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRoutesResponse.decode = function decode(reader, length) {
+                        ListRoutesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ListRoutesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.routes && message.routes.length))
@@ -10254,12 +10485,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteRouteRequest.decode = function decode(reader, length) {
+                        DeleteRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.DeleteRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10470,12 +10703,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetRouteRequest.decode = function decode(reader, length) {
+                        GetRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.GetRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -10763,12 +10998,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleProfile.decode = function decode(reader, length) {
+                        OracleProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -11186,12 +11423,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleAsmConfig.decode = function decode(reader, length) {
+                        OracleAsmConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleAsmConfig(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -11568,12 +11807,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlProfile.decode = function decode(reader, length) {
+                        MysqlProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -11903,12 +12144,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostgresqlProfile.decode = function decode(reader, length) {
+                        PostgresqlProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -12239,12 +12482,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerProfile.decode = function decode(reader, length) {
+                        SqlServerProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -12539,12 +12784,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SalesforceProfile.decode = function decode(reader, length) {
+                        SalesforceProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SalesforceProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.domain = reader.string();
@@ -12830,12 +13077,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UserCredentials.decode = function decode(reader, length) {
+                            UserCredentials.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SalesforceProfile.UserCredentials();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.username = reader.string();
@@ -13104,12 +13353,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Oauth2ClientCredentials.decode = function decode(reader, length) {
+                            Oauth2ClientCredentials.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.clientId = reader.string();
@@ -13250,6 +13501,1048 @@
                         return SalesforceProfile;
                     })();
     
+                    v1.MongodbProfile = (function() {
+    
+                        /**
+                         * Properties of a MongodbProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbProfile
+                         * @property {Array.<google.cloud.datastream.v1.IHostAddress>|null} [hostAddresses] MongodbProfile hostAddresses
+                         * @property {string|null} [replicaSet] MongodbProfile replicaSet
+                         * @property {string|null} [username] MongodbProfile username
+                         * @property {string|null} [password] MongodbProfile password
+                         * @property {string|null} [secretManagerStoredPassword] MongodbProfile secretManagerStoredPassword
+                         * @property {google.cloud.datastream.v1.IMongodbSslConfig|null} [sslConfig] MongodbProfile sslConfig
+                         * @property {google.cloud.datastream.v1.ISrvConnectionFormat|null} [srvConnectionFormat] MongodbProfile srvConnectionFormat
+                         * @property {google.cloud.datastream.v1.IStandardConnectionFormat|null} [standardConnectionFormat] MongodbProfile standardConnectionFormat
+                         */
+    
+                        /**
+                         * Constructs a new MongodbProfile.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbProfile.
+                         * @implements IMongodbProfile
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbProfile=} [properties] Properties to set
+                         */
+                        function MongodbProfile(properties) {
+                            this.hostAddresses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbProfile hostAddresses.
+                         * @member {Array.<google.cloud.datastream.v1.IHostAddress>} hostAddresses
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.hostAddresses = $util.emptyArray;
+    
+                        /**
+                         * MongodbProfile replicaSet.
+                         * @member {string} replicaSet
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.replicaSet = "";
+    
+                        /**
+                         * MongodbProfile username.
+                         * @member {string} username
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.username = "";
+    
+                        /**
+                         * MongodbProfile password.
+                         * @member {string} password
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.password = "";
+    
+                        /**
+                         * MongodbProfile secretManagerStoredPassword.
+                         * @member {string} secretManagerStoredPassword
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.secretManagerStoredPassword = "";
+    
+                        /**
+                         * MongodbProfile sslConfig.
+                         * @member {google.cloud.datastream.v1.IMongodbSslConfig|null|undefined} sslConfig
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.sslConfig = null;
+    
+                        /**
+                         * MongodbProfile srvConnectionFormat.
+                         * @member {google.cloud.datastream.v1.ISrvConnectionFormat|null|undefined} srvConnectionFormat
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.srvConnectionFormat = null;
+    
+                        /**
+                         * MongodbProfile standardConnectionFormat.
+                         * @member {google.cloud.datastream.v1.IStandardConnectionFormat|null|undefined} standardConnectionFormat
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        MongodbProfile.prototype.standardConnectionFormat = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MongodbProfile mongodbConnectionFormat.
+                         * @member {"srvConnectionFormat"|"standardConnectionFormat"|undefined} mongodbConnectionFormat
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         */
+                        Object.defineProperty(MongodbProfile.prototype, "mongodbConnectionFormat", {
+                            get: $util.oneOfGetter($oneOfFields = ["srvConnectionFormat", "standardConnectionFormat"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MongodbProfile instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbProfile=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile instance
+                         */
+                        MongodbProfile.create = function create(properties) {
+                            return new MongodbProfile(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbProfile message. Does not implicitly {@link google.cloud.datastream.v1.MongodbProfile.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbProfile} message MongodbProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbProfile.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostAddresses != null && message.hostAddresses.length)
+                                for (var i = 0; i < message.hostAddresses.length; ++i)
+                                    $root.google.cloud.datastream.v1.HostAddress.encode(message.hostAddresses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.replicaSet != null && Object.hasOwnProperty.call(message, "replicaSet"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.replicaSet);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.username);
+                            if (message.password != null && Object.hasOwnProperty.call(message, "password"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.password);
+                            if (message.secretManagerStoredPassword != null && Object.hasOwnProperty.call(message, "secretManagerStoredPassword"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.secretManagerStoredPassword);
+                            if (message.sslConfig != null && Object.hasOwnProperty.call(message, "sslConfig"))
+                                $root.google.cloud.datastream.v1.MongodbSslConfig.encode(message.sslConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.srvConnectionFormat != null && Object.hasOwnProperty.call(message, "srvConnectionFormat"))
+                                $root.google.cloud.datastream.v1.SrvConnectionFormat.encode(message.srvConnectionFormat, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            if (message.standardConnectionFormat != null && Object.hasOwnProperty.call(message, "standardConnectionFormat"))
+                                $root.google.cloud.datastream.v1.StandardConnectionFormat.encode(message.standardConnectionFormat, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbProfile.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbProfile} message MongodbProfile message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbProfile.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbProfile message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbProfile.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbProfile();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.hostAddresses && message.hostAddresses.length))
+                                            message.hostAddresses = [];
+                                        message.hostAddresses.push($root.google.cloud.datastream.v1.HostAddress.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.replicaSet = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.username = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.password = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.secretManagerStoredPassword = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.sslConfig = $root.google.cloud.datastream.v1.MongodbSslConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 101: {
+                                        message.srvConnectionFormat = $root.google.cloud.datastream.v1.SrvConnectionFormat.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.standardConnectionFormat = $root.google.cloud.datastream.v1.StandardConnectionFormat.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbProfile message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbProfile.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbProfile message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbProfile.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.hostAddresses != null && message.hasOwnProperty("hostAddresses")) {
+                                if (!Array.isArray(message.hostAddresses))
+                                    return "hostAddresses: array expected";
+                                for (var i = 0; i < message.hostAddresses.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.HostAddress.verify(message.hostAddresses[i]);
+                                    if (error)
+                                        return "hostAddresses." + error;
+                                }
+                            }
+                            if (message.replicaSet != null && message.hasOwnProperty("replicaSet"))
+                                if (!$util.isString(message.replicaSet))
+                                    return "replicaSet: string expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                if (!$util.isString(message.password))
+                                    return "password: string expected";
+                            if (message.secretManagerStoredPassword != null && message.hasOwnProperty("secretManagerStoredPassword"))
+                                if (!$util.isString(message.secretManagerStoredPassword))
+                                    return "secretManagerStoredPassword: string expected";
+                            if (message.sslConfig != null && message.hasOwnProperty("sslConfig")) {
+                                var error = $root.google.cloud.datastream.v1.MongodbSslConfig.verify(message.sslConfig);
+                                if (error)
+                                    return "sslConfig." + error;
+                            }
+                            if (message.srvConnectionFormat != null && message.hasOwnProperty("srvConnectionFormat")) {
+                                properties.mongodbConnectionFormat = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SrvConnectionFormat.verify(message.srvConnectionFormat);
+                                    if (error)
+                                        return "srvConnectionFormat." + error;
+                                }
+                            }
+                            if (message.standardConnectionFormat != null && message.hasOwnProperty("standardConnectionFormat")) {
+                                if (properties.mongodbConnectionFormat === 1)
+                                    return "mongodbConnectionFormat: multiple values";
+                                properties.mongodbConnectionFormat = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.StandardConnectionFormat.verify(message.standardConnectionFormat);
+                                    if (error)
+                                        return "standardConnectionFormat." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbProfile message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbProfile} MongodbProfile
+                         */
+                        MongodbProfile.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbProfile)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbProfile();
+                            if (object.hostAddresses) {
+                                if (!Array.isArray(object.hostAddresses))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.hostAddresses: array expected");
+                                message.hostAddresses = [];
+                                for (var i = 0; i < object.hostAddresses.length; ++i) {
+                                    if (typeof object.hostAddresses[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbProfile.hostAddresses: object expected");
+                                    message.hostAddresses[i] = $root.google.cloud.datastream.v1.HostAddress.fromObject(object.hostAddresses[i]);
+                                }
+                            }
+                            if (object.replicaSet != null)
+                                message.replicaSet = String(object.replicaSet);
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            if (object.password != null)
+                                message.password = String(object.password);
+                            if (object.secretManagerStoredPassword != null)
+                                message.secretManagerStoredPassword = String(object.secretManagerStoredPassword);
+                            if (object.sslConfig != null) {
+                                if (typeof object.sslConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.sslConfig: object expected");
+                                message.sslConfig = $root.google.cloud.datastream.v1.MongodbSslConfig.fromObject(object.sslConfig);
+                            }
+                            if (object.srvConnectionFormat != null) {
+                                if (typeof object.srvConnectionFormat !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.srvConnectionFormat: object expected");
+                                message.srvConnectionFormat = $root.google.cloud.datastream.v1.SrvConnectionFormat.fromObject(object.srvConnectionFormat);
+                            }
+                            if (object.standardConnectionFormat != null) {
+                                if (typeof object.standardConnectionFormat !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbProfile.standardConnectionFormat: object expected");
+                                message.standardConnectionFormat = $root.google.cloud.datastream.v1.StandardConnectionFormat.fromObject(object.standardConnectionFormat);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbProfile message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbProfile} message MongodbProfile
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbProfile.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.hostAddresses = [];
+                            if (options.defaults) {
+                                object.replicaSet = "";
+                                object.username = "";
+                                object.password = "";
+                                object.secretManagerStoredPassword = "";
+                                object.sslConfig = null;
+                            }
+                            if (message.hostAddresses && message.hostAddresses.length) {
+                                object.hostAddresses = [];
+                                for (var j = 0; j < message.hostAddresses.length; ++j)
+                                    object.hostAddresses[j] = $root.google.cloud.datastream.v1.HostAddress.toObject(message.hostAddresses[j], options);
+                            }
+                            if (message.replicaSet != null && message.hasOwnProperty("replicaSet"))
+                                object.replicaSet = message.replicaSet;
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
+                            if (message.password != null && message.hasOwnProperty("password"))
+                                object.password = message.password;
+                            if (message.secretManagerStoredPassword != null && message.hasOwnProperty("secretManagerStoredPassword"))
+                                object.secretManagerStoredPassword = message.secretManagerStoredPassword;
+                            if (message.sslConfig != null && message.hasOwnProperty("sslConfig"))
+                                object.sslConfig = $root.google.cloud.datastream.v1.MongodbSslConfig.toObject(message.sslConfig, options);
+                            if (message.srvConnectionFormat != null && message.hasOwnProperty("srvConnectionFormat")) {
+                                object.srvConnectionFormat = $root.google.cloud.datastream.v1.SrvConnectionFormat.toObject(message.srvConnectionFormat, options);
+                                if (options.oneofs)
+                                    object.mongodbConnectionFormat = "srvConnectionFormat";
+                            }
+                            if (message.standardConnectionFormat != null && message.hasOwnProperty("standardConnectionFormat")) {
+                                object.standardConnectionFormat = $root.google.cloud.datastream.v1.StandardConnectionFormat.toObject(message.standardConnectionFormat, options);
+                                if (options.oneofs)
+                                    object.mongodbConnectionFormat = "standardConnectionFormat";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbProfile to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbProfile.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbProfile
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbProfile
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbProfile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbProfile";
+                        };
+    
+                        return MongodbProfile;
+                    })();
+    
+                    v1.HostAddress = (function() {
+    
+                        /**
+                         * Properties of a HostAddress.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IHostAddress
+                         * @property {string|null} [hostname] HostAddress hostname
+                         * @property {number|null} [port] HostAddress port
+                         */
+    
+                        /**
+                         * Constructs a new HostAddress.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a HostAddress.
+                         * @implements IHostAddress
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IHostAddress=} [properties] Properties to set
+                         */
+                        function HostAddress(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * HostAddress hostname.
+                         * @member {string} hostname
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @instance
+                         */
+                        HostAddress.prototype.hostname = "";
+    
+                        /**
+                         * HostAddress port.
+                         * @member {number} port
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @instance
+                         */
+                        HostAddress.prototype.port = 0;
+    
+                        /**
+                         * Creates a new HostAddress instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.IHostAddress=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress instance
+                         */
+                        HostAddress.create = function create(properties) {
+                            return new HostAddress(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified HostAddress message. Does not implicitly {@link google.cloud.datastream.v1.HostAddress.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.IHostAddress} message HostAddress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HostAddress.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.hostname != null && Object.hasOwnProperty.call(message, "hostname"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.hostname);
+                            if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified HostAddress message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.HostAddress.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.IHostAddress} message HostAddress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        HostAddress.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a HostAddress message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HostAddress.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.HostAddress();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.hostname = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.port = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a HostAddress message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        HostAddress.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a HostAddress message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        HostAddress.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                if (!$util.isString(message.hostname))
+                                    return "hostname: string expected";
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                if (!$util.isInteger(message.port))
+                                    return "port: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a HostAddress message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.HostAddress} HostAddress
+                         */
+                        HostAddress.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.HostAddress)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.HostAddress();
+                            if (object.hostname != null)
+                                message.hostname = String(object.hostname);
+                            if (object.port != null)
+                                message.port = object.port | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a HostAddress message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {google.cloud.datastream.v1.HostAddress} message HostAddress
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        HostAddress.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.hostname = "";
+                                object.port = 0;
+                            }
+                            if (message.hostname != null && message.hasOwnProperty("hostname"))
+                                object.hostname = message.hostname;
+                            if (message.port != null && message.hasOwnProperty("port"))
+                                object.port = message.port;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this HostAddress to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        HostAddress.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for HostAddress
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.HostAddress
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        HostAddress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.HostAddress";
+                        };
+    
+                        return HostAddress;
+                    })();
+    
+                    v1.SrvConnectionFormat = (function() {
+    
+                        /**
+                         * Properties of a SrvConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface ISrvConnectionFormat
+                         */
+    
+                        /**
+                         * Constructs a new SrvConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a SrvConnectionFormat.
+                         * @implements ISrvConnectionFormat
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat=} [properties] Properties to set
+                         */
+                        function SrvConnectionFormat(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new SrvConnectionFormat instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat instance
+                         */
+                        SrvConnectionFormat.create = function create(properties) {
+                            return new SrvConnectionFormat(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SrvConnectionFormat message. Does not implicitly {@link google.cloud.datastream.v1.SrvConnectionFormat.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat} message SrvConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SrvConnectionFormat.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SrvConnectionFormat message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SrvConnectionFormat.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.ISrvConnectionFormat} message SrvConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SrvConnectionFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SrvConnectionFormat message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SrvConnectionFormat.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SrvConnectionFormat();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SrvConnectionFormat message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SrvConnectionFormat.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SrvConnectionFormat message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SrvConnectionFormat.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SrvConnectionFormat message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.SrvConnectionFormat} SrvConnectionFormat
+                         */
+                        SrvConnectionFormat.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.SrvConnectionFormat)
+                                return object;
+                            return new $root.google.cloud.datastream.v1.SrvConnectionFormat();
+                        };
+    
+                        /**
+                         * Creates a plain object from a SrvConnectionFormat message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.SrvConnectionFormat} message SrvConnectionFormat
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SrvConnectionFormat.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this SrvConnectionFormat to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SrvConnectionFormat.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SrvConnectionFormat
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.SrvConnectionFormat
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SrvConnectionFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.SrvConnectionFormat";
+                        };
+    
+                        return SrvConnectionFormat;
+                    })();
+    
+                    v1.StandardConnectionFormat = (function() {
+    
+                        /**
+                         * Properties of a StandardConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IStandardConnectionFormat
+                         * @property {boolean|null} [directConnection] StandardConnectionFormat directConnection
+                         */
+    
+                        /**
+                         * Constructs a new StandardConnectionFormat.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a StandardConnectionFormat.
+                         * @implements IStandardConnectionFormat
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat=} [properties] Properties to set
+                         */
+                        function StandardConnectionFormat(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StandardConnectionFormat directConnection.
+                         * @member {boolean} directConnection
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @instance
+                         */
+                        StandardConnectionFormat.prototype.directConnection = false;
+    
+                        /**
+                         * Creates a new StandardConnectionFormat instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat instance
+                         */
+                        StandardConnectionFormat.create = function create(properties) {
+                            return new StandardConnectionFormat(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StandardConnectionFormat message. Does not implicitly {@link google.cloud.datastream.v1.StandardConnectionFormat.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat} message StandardConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StandardConnectionFormat.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.directConnection != null && Object.hasOwnProperty.call(message, "directConnection"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.directConnection);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StandardConnectionFormat message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.StandardConnectionFormat.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.IStandardConnectionFormat} message StandardConnectionFormat message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StandardConnectionFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StandardConnectionFormat message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StandardConnectionFormat.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StandardConnectionFormat();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.directConnection = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StandardConnectionFormat message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StandardConnectionFormat.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StandardConnectionFormat message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StandardConnectionFormat.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.directConnection != null && message.hasOwnProperty("directConnection"))
+                                if (typeof message.directConnection !== "boolean")
+                                    return "directConnection: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StandardConnectionFormat message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.StandardConnectionFormat} StandardConnectionFormat
+                         */
+                        StandardConnectionFormat.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.StandardConnectionFormat)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.StandardConnectionFormat();
+                            if (object.directConnection != null)
+                                message.directConnection = Boolean(object.directConnection);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StandardConnectionFormat message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {google.cloud.datastream.v1.StandardConnectionFormat} message StandardConnectionFormat
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StandardConnectionFormat.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.directConnection = false;
+                            if (message.directConnection != null && message.hasOwnProperty("directConnection"))
+                                object.directConnection = message.directConnection;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StandardConnectionFormat to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StandardConnectionFormat.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StandardConnectionFormat
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.StandardConnectionFormat
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StandardConnectionFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.StandardConnectionFormat";
+                        };
+    
+                        return StandardConnectionFormat;
+                    })();
+    
                     v1.GcsProfile = (function() {
     
                         /**
@@ -13346,12 +14639,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsProfile.decode = function decode(reader, length) {
+                        GcsProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.GcsProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bucket = reader.string();
@@ -13551,12 +14846,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryProfile.decode = function decode(reader, length) {
+                        BigQueryProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -13726,12 +15023,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StaticServiceIpConnectivity.decode = function decode(reader, length) {
+                        StaticServiceIpConnectivity.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StaticServiceIpConnectivity();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -13970,12 +15269,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ForwardSshTunnelConnectivity.decode = function decode(reader, length) {
+                        ForwardSshTunnelConnectivity.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ForwardSshTunnelConnectivity();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -14244,12 +15545,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VpcPeeringConfig.decode = function decode(reader, length) {
+                        VpcPeeringConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.VpcPeeringConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.vpc = reader.string();
@@ -14375,6 +15678,211 @@
                         return VpcPeeringConfig;
                     })();
     
+                    v1.PscInterfaceConfig = (function() {
+    
+                        /**
+                         * Properties of a PscInterfaceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IPscInterfaceConfig
+                         * @property {string|null} [networkAttachment] PscInterfaceConfig networkAttachment
+                         */
+    
+                        /**
+                         * Constructs a new PscInterfaceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a PscInterfaceConfig.
+                         * @implements IPscInterfaceConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig=} [properties] Properties to set
+                         */
+                        function PscInterfaceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PscInterfaceConfig networkAttachment.
+                         * @member {string} networkAttachment
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @instance
+                         */
+                        PscInterfaceConfig.prototype.networkAttachment = "";
+    
+                        /**
+                         * Creates a new PscInterfaceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig instance
+                         */
+                        PscInterfaceConfig.create = function create(properties) {
+                            return new PscInterfaceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PscInterfaceConfig message. Does not implicitly {@link google.cloud.datastream.v1.PscInterfaceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig} message PscInterfaceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PscInterfaceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.networkAttachment != null && Object.hasOwnProperty.call(message, "networkAttachment"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkAttachment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PscInterfaceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.PscInterfaceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IPscInterfaceConfig} message PscInterfaceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PscInterfaceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PscInterfaceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PscInterfaceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PscInterfaceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.networkAttachment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PscInterfaceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PscInterfaceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PscInterfaceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PscInterfaceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                if (!$util.isString(message.networkAttachment))
+                                    return "networkAttachment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PscInterfaceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.PscInterfaceConfig} PscInterfaceConfig
+                         */
+                        PscInterfaceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.PscInterfaceConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.PscInterfaceConfig();
+                            if (object.networkAttachment != null)
+                                message.networkAttachment = String(object.networkAttachment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PscInterfaceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.PscInterfaceConfig} message PscInterfaceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PscInterfaceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.networkAttachment = "";
+                            if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                object.networkAttachment = message.networkAttachment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PscInterfaceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PscInterfaceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PscInterfaceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.PscInterfaceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PscInterfaceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.PscInterfaceConfig";
+                        };
+    
+                        return PscInterfaceConfig;
+                    })();
+    
                     v1.PrivateConnection = (function() {
     
                         /**
@@ -14391,6 +15899,7 @@
                          * @property {boolean|null} [satisfiesPzs] PrivateConnection satisfiesPzs
                          * @property {boolean|null} [satisfiesPzi] PrivateConnection satisfiesPzi
                          * @property {google.cloud.datastream.v1.IVpcPeeringConfig|null} [vpcPeeringConfig] PrivateConnection vpcPeeringConfig
+                         * @property {google.cloud.datastream.v1.IPscInterfaceConfig|null} [pscInterfaceConfig] PrivateConnection pscInterfaceConfig
                          */
     
                         /**
@@ -14489,26 +15998,24 @@
                          */
                         PrivateConnection.prototype.vpcPeeringConfig = null;
     
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
                         /**
-                         * PrivateConnection _satisfiesPzs.
-                         * @member {"satisfiesPzs"|undefined} _satisfiesPzs
+                         * PrivateConnection pscInterfaceConfig.
+                         * @member {google.cloud.datastream.v1.IPscInterfaceConfig|null|undefined} pscInterfaceConfig
                          * @memberof google.cloud.datastream.v1.PrivateConnection
                          * @instance
                          */
+                        PrivateConnection.prototype.pscInterfaceConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PrivateConnection.prototype, "_satisfiesPzs", {
                             get: $util.oneOfGetter($oneOfFields = ["satisfiesPzs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * PrivateConnection _satisfiesPzi.
-                         * @member {"satisfiesPzi"|undefined} _satisfiesPzi
-                         * @memberof google.cloud.datastream.v1.PrivateConnection
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PrivateConnection.prototype, "_satisfiesPzi", {
                             get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -14559,6 +16066,8 @@
                                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.satisfiesPzi);
                             if (message.vpcPeeringConfig != null && Object.hasOwnProperty.call(message, "vpcPeeringConfig"))
                                 $root.google.cloud.datastream.v1.VpcPeeringConfig.encode(message.vpcPeeringConfig, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            if (message.pscInterfaceConfig != null && Object.hasOwnProperty.call(message, "pscInterfaceConfig"))
+                                $root.google.cloud.datastream.v1.PscInterfaceConfig.encode(message.pscInterfaceConfig, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             return writer;
                         };
     
@@ -14586,12 +16095,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrivateConnection.decode = function decode(reader, length) {
+                        PrivateConnection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PrivateConnection(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -14650,6 +16161,10 @@
                                     }
                                 case 100: {
                                         message.vpcPeeringConfig = $root.google.cloud.datastream.v1.VpcPeeringConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 101: {
+                                        message.pscInterfaceConfig = $root.google.cloud.datastream.v1.PscInterfaceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -14744,6 +16259,11 @@
                                 if (error)
                                     return "vpcPeeringConfig." + error;
                             }
+                            if (message.pscInterfaceConfig != null && message.hasOwnProperty("pscInterfaceConfig")) {
+                                var error = $root.google.cloud.datastream.v1.PscInterfaceConfig.verify(message.pscInterfaceConfig);
+                                if (error)
+                                    return "pscInterfaceConfig." + error;
+                            }
                             return null;
                         };
     
@@ -14826,6 +16346,11 @@
                                     throw TypeError(".google.cloud.datastream.v1.PrivateConnection.vpcPeeringConfig: object expected");
                                 message.vpcPeeringConfig = $root.google.cloud.datastream.v1.VpcPeeringConfig.fromObject(object.vpcPeeringConfig);
                             }
+                            if (object.pscInterfaceConfig != null) {
+                                if (typeof object.pscInterfaceConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.PrivateConnection.pscInterfaceConfig: object expected");
+                                message.pscInterfaceConfig = $root.google.cloud.datastream.v1.PscInterfaceConfig.fromObject(object.pscInterfaceConfig);
+                            }
                             return message;
                         };
     
@@ -14852,6 +16377,7 @@
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.error = null;
                                 object.vpcPeeringConfig = null;
+                                object.pscInterfaceConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -14883,6 +16409,8 @@
                             }
                             if (message.vpcPeeringConfig != null && message.hasOwnProperty("vpcPeeringConfig"))
                                 object.vpcPeeringConfig = $root.google.cloud.datastream.v1.VpcPeeringConfig.toObject(message.vpcPeeringConfig, options);
+                            if (message.pscInterfaceConfig != null && message.hasOwnProperty("pscInterfaceConfig"))
+                                object.pscInterfaceConfig = $root.google.cloud.datastream.v1.PscInterfaceConfig.toObject(message.pscInterfaceConfig, options);
                             return object;
                         };
     
@@ -15022,12 +16550,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrivateConnectivity.decode = function decode(reader, length) {
+                        PrivateConnectivity.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PrivateConnectivity();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.privateConnection = reader.string();
@@ -15293,12 +16823,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Route.decode = function decode(reader, length) {
+                        Route.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.Route(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15528,6 +17060,350 @@
                         return Route;
                     })();
     
+                    v1.MongodbSslConfig = (function() {
+    
+                        /**
+                         * Properties of a MongodbSslConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbSslConfig
+                         * @property {string|null} [clientKey] MongodbSslConfig clientKey
+                         * @property {boolean|null} [clientKeySet] MongodbSslConfig clientKeySet
+                         * @property {string|null} [clientCertificate] MongodbSslConfig clientCertificate
+                         * @property {boolean|null} [clientCertificateSet] MongodbSslConfig clientCertificateSet
+                         * @property {string|null} [caCertificate] MongodbSslConfig caCertificate
+                         * @property {boolean|null} [caCertificateSet] MongodbSslConfig caCertificateSet
+                         * @property {string|null} [secretManagerStoredClientKey] MongodbSslConfig secretManagerStoredClientKey
+                         */
+    
+                        /**
+                         * Constructs a new MongodbSslConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbSslConfig.
+                         * @implements IMongodbSslConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig=} [properties] Properties to set
+                         */
+                        function MongodbSslConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbSslConfig clientKey.
+                         * @member {string} clientKey
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientKey = "";
+    
+                        /**
+                         * MongodbSslConfig clientKeySet.
+                         * @member {boolean} clientKeySet
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientKeySet = false;
+    
+                        /**
+                         * MongodbSslConfig clientCertificate.
+                         * @member {string} clientCertificate
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientCertificate = "";
+    
+                        /**
+                         * MongodbSslConfig clientCertificateSet.
+                         * @member {boolean} clientCertificateSet
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.clientCertificateSet = false;
+    
+                        /**
+                         * MongodbSslConfig caCertificate.
+                         * @member {string} caCertificate
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.caCertificate = "";
+    
+                        /**
+                         * MongodbSslConfig caCertificateSet.
+                         * @member {boolean} caCertificateSet
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.caCertificateSet = false;
+    
+                        /**
+                         * MongodbSslConfig secretManagerStoredClientKey.
+                         * @member {string} secretManagerStoredClientKey
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         */
+                        MongodbSslConfig.prototype.secretManagerStoredClientKey = "";
+    
+                        /**
+                         * Creates a new MongodbSslConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig instance
+                         */
+                        MongodbSslConfig.create = function create(properties) {
+                            return new MongodbSslConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSslConfig message. Does not implicitly {@link google.cloud.datastream.v1.MongodbSslConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig} message MongodbSslConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSslConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.clientKey != null && Object.hasOwnProperty.call(message, "clientKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.clientKey);
+                            if (message.clientKeySet != null && Object.hasOwnProperty.call(message, "clientKeySet"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clientKeySet);
+                            if (message.clientCertificate != null && Object.hasOwnProperty.call(message, "clientCertificate"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.clientCertificate);
+                            if (message.clientCertificateSet != null && Object.hasOwnProperty.call(message, "clientCertificateSet"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.clientCertificateSet);
+                            if (message.caCertificate != null && Object.hasOwnProperty.call(message, "caCertificate"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.caCertificate);
+                            if (message.caCertificateSet != null && Object.hasOwnProperty.call(message, "caCertificateSet"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.caCertificateSet);
+                            if (message.secretManagerStoredClientKey != null && Object.hasOwnProperty.call(message, "secretManagerStoredClientKey"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.secretManagerStoredClientKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSslConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbSslConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSslConfig} message MongodbSslConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSslConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbSslConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSslConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbSslConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.clientKey = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clientKeySet = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.clientCertificate = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.clientCertificateSet = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.caCertificate = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.caCertificateSet = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.secretManagerStoredClientKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbSslConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSslConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbSslConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbSslConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.clientKey != null && message.hasOwnProperty("clientKey"))
+                                if (!$util.isString(message.clientKey))
+                                    return "clientKey: string expected";
+                            if (message.clientKeySet != null && message.hasOwnProperty("clientKeySet"))
+                                if (typeof message.clientKeySet !== "boolean")
+                                    return "clientKeySet: boolean expected";
+                            if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate"))
+                                if (!$util.isString(message.clientCertificate))
+                                    return "clientCertificate: string expected";
+                            if (message.clientCertificateSet != null && message.hasOwnProperty("clientCertificateSet"))
+                                if (typeof message.clientCertificateSet !== "boolean")
+                                    return "clientCertificateSet: boolean expected";
+                            if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
+                                if (!$util.isString(message.caCertificate))
+                                    return "caCertificate: string expected";
+                            if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
+                                if (typeof message.caCertificateSet !== "boolean")
+                                    return "caCertificateSet: boolean expected";
+                            if (message.secretManagerStoredClientKey != null && message.hasOwnProperty("secretManagerStoredClientKey"))
+                                if (!$util.isString(message.secretManagerStoredClientKey))
+                                    return "secretManagerStoredClientKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbSslConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbSslConfig} MongodbSslConfig
+                         */
+                        MongodbSslConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbSslConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbSslConfig();
+                            if (object.clientKey != null)
+                                message.clientKey = String(object.clientKey);
+                            if (object.clientKeySet != null)
+                                message.clientKeySet = Boolean(object.clientKeySet);
+                            if (object.clientCertificate != null)
+                                message.clientCertificate = String(object.clientCertificate);
+                            if (object.clientCertificateSet != null)
+                                message.clientCertificateSet = Boolean(object.clientCertificateSet);
+                            if (object.caCertificate != null)
+                                message.caCertificate = String(object.caCertificate);
+                            if (object.caCertificateSet != null)
+                                message.caCertificateSet = Boolean(object.caCertificateSet);
+                            if (object.secretManagerStoredClientKey != null)
+                                message.secretManagerStoredClientKey = String(object.secretManagerStoredClientKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbSslConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbSslConfig} message MongodbSslConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbSslConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.clientKey = "";
+                                object.clientKeySet = false;
+                                object.clientCertificate = "";
+                                object.clientCertificateSet = false;
+                                object.caCertificate = "";
+                                object.caCertificateSet = false;
+                                object.secretManagerStoredClientKey = "";
+                            }
+                            if (message.clientKey != null && message.hasOwnProperty("clientKey"))
+                                object.clientKey = message.clientKey;
+                            if (message.clientKeySet != null && message.hasOwnProperty("clientKeySet"))
+                                object.clientKeySet = message.clientKeySet;
+                            if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate"))
+                                object.clientCertificate = message.clientCertificate;
+                            if (message.clientCertificateSet != null && message.hasOwnProperty("clientCertificateSet"))
+                                object.clientCertificateSet = message.clientCertificateSet;
+                            if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
+                                object.caCertificate = message.caCertificate;
+                            if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
+                                object.caCertificateSet = message.caCertificateSet;
+                            if (message.secretManagerStoredClientKey != null && message.hasOwnProperty("secretManagerStoredClientKey"))
+                                object.secretManagerStoredClientKey = message.secretManagerStoredClientKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbSslConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbSslConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbSslConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbSslConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbSslConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbSslConfig";
+                        };
+    
+                        return MongodbSslConfig;
+                    })();
+    
                     v1.MysqlSslConfig = (function() {
     
                         /**
@@ -15668,12 +17544,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlSslConfig.decode = function decode(reader, length) {
+                        MysqlSslConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlSslConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.clientKey = reader.string();
@@ -15855,6 +17733,7 @@
                          * @interface IOracleSslConfig
                          * @property {string|null} [caCertificate] OracleSslConfig caCertificate
                          * @property {boolean|null} [caCertificateSet] OracleSslConfig caCertificateSet
+                         * @property {string|null} [serverCertificateDistinguishedName] OracleSslConfig serverCertificateDistinguishedName
                          */
     
                         /**
@@ -15889,6 +17768,14 @@
                         OracleSslConfig.prototype.caCertificateSet = false;
     
                         /**
+                         * OracleSslConfig serverCertificateDistinguishedName.
+                         * @member {string} serverCertificateDistinguishedName
+                         * @memberof google.cloud.datastream.v1.OracleSslConfig
+                         * @instance
+                         */
+                        OracleSslConfig.prototype.serverCertificateDistinguishedName = "";
+    
+                        /**
                          * Creates a new OracleSslConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.datastream.v1.OracleSslConfig
@@ -15916,6 +17803,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.caCertificate);
                             if (message.caCertificateSet != null && Object.hasOwnProperty.call(message, "caCertificateSet"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.caCertificateSet);
+                            if (message.serverCertificateDistinguishedName != null && Object.hasOwnProperty.call(message, "serverCertificateDistinguishedName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.serverCertificateDistinguishedName);
                             return writer;
                         };
     
@@ -15943,12 +17832,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleSslConfig.decode = function decode(reader, length) {
+                        OracleSslConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSslConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.caCertificate = reader.string();
@@ -15956,6 +17847,10 @@
                                     }
                                 case 2: {
                                         message.caCertificateSet = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.serverCertificateDistinguishedName = reader.string();
                                         break;
                                     }
                                 default:
@@ -15999,6 +17894,9 @@
                             if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
                                 if (typeof message.caCertificateSet !== "boolean")
                                     return "caCertificateSet: boolean expected";
+                            if (message.serverCertificateDistinguishedName != null && message.hasOwnProperty("serverCertificateDistinguishedName"))
+                                if (!$util.isString(message.serverCertificateDistinguishedName))
+                                    return "serverCertificateDistinguishedName: string expected";
                             return null;
                         };
     
@@ -16018,6 +17916,8 @@
                                 message.caCertificate = String(object.caCertificate);
                             if (object.caCertificateSet != null)
                                 message.caCertificateSet = Boolean(object.caCertificateSet);
+                            if (object.serverCertificateDistinguishedName != null)
+                                message.serverCertificateDistinguishedName = String(object.serverCertificateDistinguishedName);
                             return message;
                         };
     
@@ -16037,11 +17937,14 @@
                             if (options.defaults) {
                                 object.caCertificate = "";
                                 object.caCertificateSet = false;
+                                object.serverCertificateDistinguishedName = "";
                             }
                             if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                 object.caCertificate = message.caCertificate;
                             if (message.caCertificateSet != null && message.hasOwnProperty("caCertificateSet"))
                                 object.caCertificateSet = message.caCertificateSet;
+                            if (message.serverCertificateDistinguishedName != null && message.hasOwnProperty("serverCertificateDistinguishedName"))
+                                object.serverCertificateDistinguishedName = message.serverCertificateDistinguishedName;
                             return object;
                         };
     
@@ -16184,12 +18087,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostgresqlSslConfig.decode = function decode(reader, length) {
+                        PostgresqlSslConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlSslConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.serverVerification = $root.google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification.decode(reader, reader.uint32());
@@ -16340,6 +18245,7 @@
                              * @memberof google.cloud.datastream.v1.PostgresqlSslConfig
                              * @interface IServerVerification
                              * @property {string|null} [caCertificate] ServerVerification caCertificate
+                             * @property {string|null} [serverCertificateHostname] ServerVerification serverCertificateHostname
                              */
     
                             /**
@@ -16364,6 +18270,14 @@
                              * @instance
                              */
                             ServerVerification.prototype.caCertificate = "";
+    
+                            /**
+                             * ServerVerification serverCertificateHostname.
+                             * @member {string} serverCertificateHostname
+                             * @memberof google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification
+                             * @instance
+                             */
+                            ServerVerification.prototype.serverCertificateHostname = "";
     
                             /**
                              * Creates a new ServerVerification instance using the specified properties.
@@ -16391,6 +18305,8 @@
                                     writer = $Writer.create();
                                 if (message.caCertificate != null && Object.hasOwnProperty.call(message, "caCertificate"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.caCertificate);
+                                if (message.serverCertificateHostname != null && Object.hasOwnProperty.call(message, "serverCertificateHostname"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.serverCertificateHostname);
                                 return writer;
                             };
     
@@ -16418,15 +18334,21 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ServerVerification.decode = function decode(reader, length) {
+                            ServerVerification.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.caCertificate = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.serverCertificateHostname = reader.string();
                                             break;
                                         }
                                     default:
@@ -16467,6 +18389,9 @@
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     if (!$util.isString(message.caCertificate))
                                         return "caCertificate: string expected";
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    if (!$util.isString(message.serverCertificateHostname))
+                                        return "serverCertificateHostname: string expected";
                                 return null;
                             };
     
@@ -16484,6 +18409,8 @@
                                 var message = new $root.google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification();
                                 if (object.caCertificate != null)
                                     message.caCertificate = String(object.caCertificate);
+                                if (object.serverCertificateHostname != null)
+                                    message.serverCertificateHostname = String(object.serverCertificateHostname);
                                 return message;
                             };
     
@@ -16500,10 +18427,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.caCertificate = "";
+                                    object.serverCertificateHostname = "";
+                                }
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     object.caCertificate = message.caCertificate;
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    object.serverCertificateHostname = message.serverCertificateHostname;
                                 return object;
                             };
     
@@ -16545,6 +18476,7 @@
                              * @property {string|null} [clientCertificate] ServerAndClientVerification clientCertificate
                              * @property {string|null} [clientKey] ServerAndClientVerification clientKey
                              * @property {string|null} [caCertificate] ServerAndClientVerification caCertificate
+                             * @property {string|null} [serverCertificateHostname] ServerAndClientVerification serverCertificateHostname
                              */
     
                             /**
@@ -16587,6 +18519,14 @@
                             ServerAndClientVerification.prototype.caCertificate = "";
     
                             /**
+                             * ServerAndClientVerification serverCertificateHostname.
+                             * @member {string} serverCertificateHostname
+                             * @memberof google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification
+                             * @instance
+                             */
+                            ServerAndClientVerification.prototype.serverCertificateHostname = "";
+    
+                            /**
                              * Creates a new ServerAndClientVerification instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification
@@ -16616,6 +18556,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.clientKey);
                                 if (message.caCertificate != null && Object.hasOwnProperty.call(message, "caCertificate"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.caCertificate);
+                                if (message.serverCertificateHostname != null && Object.hasOwnProperty.call(message, "serverCertificateHostname"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.serverCertificateHostname);
                                 return writer;
                             };
     
@@ -16643,12 +18585,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ServerAndClientVerification.decode = function decode(reader, length) {
+                            ServerAndClientVerification.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.clientCertificate = reader.string();
@@ -16660,6 +18604,10 @@
                                         }
                                     case 3: {
                                             message.caCertificate = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.serverCertificateHostname = reader.string();
                                             break;
                                         }
                                     default:
@@ -16706,6 +18654,9 @@
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     if (!$util.isString(message.caCertificate))
                                         return "caCertificate: string expected";
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    if (!$util.isString(message.serverCertificateHostname))
+                                        return "serverCertificateHostname: string expected";
                                 return null;
                             };
     
@@ -16727,6 +18678,8 @@
                                     message.clientKey = String(object.clientKey);
                                 if (object.caCertificate != null)
                                     message.caCertificate = String(object.caCertificate);
+                                if (object.serverCertificateHostname != null)
+                                    message.serverCertificateHostname = String(object.serverCertificateHostname);
                                 return message;
                             };
     
@@ -16747,6 +18700,7 @@
                                     object.clientCertificate = "";
                                     object.clientKey = "";
                                     object.caCertificate = "";
+                                    object.serverCertificateHostname = "";
                                 }
                                 if (message.clientCertificate != null && message.hasOwnProperty("clientCertificate"))
                                     object.clientCertificate = message.clientCertificate;
@@ -16754,6 +18708,8 @@
                                     object.clientKey = message.clientKey;
                                 if (message.caCertificate != null && message.hasOwnProperty("caCertificate"))
                                     object.caCertificate = message.caCertificate;
+                                if (message.serverCertificateHostname != null && message.hasOwnProperty("serverCertificateHostname"))
+                                    object.serverCertificateHostname = message.serverCertificateHostname;
                                 return object;
                             };
     
@@ -16809,6 +18765,7 @@
                          * @property {google.cloud.datastream.v1.IPostgresqlProfile|null} [postgresqlProfile] ConnectionProfile postgresqlProfile
                          * @property {google.cloud.datastream.v1.ISqlServerProfile|null} [sqlServerProfile] ConnectionProfile sqlServerProfile
                          * @property {google.cloud.datastream.v1.ISalesforceProfile|null} [salesforceProfile] ConnectionProfile salesforceProfile
+                         * @property {google.cloud.datastream.v1.IMongodbProfile|null} [mongodbProfile] ConnectionProfile mongodbProfile
                          * @property {google.cloud.datastream.v1.IStaticServiceIpConnectivity|null} [staticServiceIpConnectivity] ConnectionProfile staticServiceIpConnectivity
                          * @property {google.cloud.datastream.v1.IForwardSshTunnelConnectivity|null} [forwardSshConnectivity] ConnectionProfile forwardSshConnectivity
                          * @property {google.cloud.datastream.v1.IPrivateConnectivity|null} [privateConnectivity] ConnectionProfile privateConnectivity
@@ -16943,6 +18900,14 @@
                         ConnectionProfile.prototype.salesforceProfile = null;
     
                         /**
+                         * ConnectionProfile mongodbProfile.
+                         * @member {google.cloud.datastream.v1.IMongodbProfile|null|undefined} mongodbProfile
+                         * @memberof google.cloud.datastream.v1.ConnectionProfile
+                         * @instance
+                         */
+                        ConnectionProfile.prototype.mongodbProfile = null;
+    
+                        /**
                          * ConnectionProfile staticServiceIpConnectivity.
                          * @member {google.cloud.datastream.v1.IStaticServiceIpConnectivity|null|undefined} staticServiceIpConnectivity
                          * @memberof google.cloud.datastream.v1.ConnectionProfile
@@ -16969,23 +18934,13 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * ConnectionProfile _satisfiesPzs.
-                         * @member {"satisfiesPzs"|undefined} _satisfiesPzs
-                         * @memberof google.cloud.datastream.v1.ConnectionProfile
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ConnectionProfile.prototype, "_satisfiesPzs", {
                             get: $util.oneOfGetter($oneOfFields = ["satisfiesPzs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * ConnectionProfile _satisfiesPzi.
-                         * @member {"satisfiesPzi"|undefined} _satisfiesPzi
-                         * @memberof google.cloud.datastream.v1.ConnectionProfile
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(ConnectionProfile.prototype, "_satisfiesPzi", {
                             get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -16993,12 +18948,12 @@
     
                         /**
                          * ConnectionProfile profile.
-                         * @member {"oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile"|undefined} profile
+                         * @member {"oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile"|"mongodbProfile"|undefined} profile
                          * @memberof google.cloud.datastream.v1.ConnectionProfile
                          * @instance
                          */
                         Object.defineProperty(ConnectionProfile.prototype, "profile", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleProfile", "gcsProfile", "mysqlProfile", "bigqueryProfile", "postgresqlProfile", "sqlServerProfile", "salesforceProfile"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleProfile", "gcsProfile", "mysqlProfile", "bigqueryProfile", "postgresqlProfile", "sqlServerProfile", "salesforceProfile", "mongodbProfile"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -17066,6 +19021,8 @@
                                 $root.google.cloud.datastream.v1.SqlServerProfile.encode(message.sqlServerProfile, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             if (message.salesforceProfile != null && Object.hasOwnProperty.call(message, "salesforceProfile"))
                                 $root.google.cloud.datastream.v1.SalesforceProfile.encode(message.salesforceProfile, writer.uint32(/* id 107, wireType 2 =*/858).fork()).ldelim();
+                            if (message.mongodbProfile != null && Object.hasOwnProperty.call(message, "mongodbProfile"))
+                                $root.google.cloud.datastream.v1.MongodbProfile.encode(message.mongodbProfile, writer.uint32(/* id 108, wireType 2 =*/866).fork()).ldelim();
                             if (message.staticServiceIpConnectivity != null && Object.hasOwnProperty.call(message, "staticServiceIpConnectivity"))
                                 $root.google.cloud.datastream.v1.StaticServiceIpConnectivity.encode(message.staticServiceIpConnectivity, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
                             if (message.forwardSshConnectivity != null && Object.hasOwnProperty.call(message, "forwardSshConnectivity"))
@@ -17099,12 +19056,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ConnectionProfile.decode = function decode(reader, length) {
+                        ConnectionProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ConnectionProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -17179,6 +19138,10 @@
                                     }
                                 case 107: {
                                         message.salesforceProfile = $root.google.cloud.datastream.v1.SalesforceProfile.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 108: {
+                                        message.mongodbProfile = $root.google.cloud.datastream.v1.MongodbProfile.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 200: {
@@ -17331,6 +19294,16 @@
                                         return "salesforceProfile." + error;
                                 }
                             }
+                            if (message.mongodbProfile != null && message.hasOwnProperty("mongodbProfile")) {
+                                if (properties.profile === 1)
+                                    return "profile: multiple values";
+                                properties.profile = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbProfile.verify(message.mongodbProfile);
+                                    if (error)
+                                        return "mongodbProfile." + error;
+                                }
+                            }
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 properties.connectivity = 1;
                                 {
@@ -17434,6 +19407,11 @@
                                     throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.salesforceProfile: object expected");
                                 message.salesforceProfile = $root.google.cloud.datastream.v1.SalesforceProfile.fromObject(object.salesforceProfile);
                             }
+                            if (object.mongodbProfile != null) {
+                                if (typeof object.mongodbProfile !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.mongodbProfile: object expected");
+                                message.mongodbProfile = $root.google.cloud.datastream.v1.MongodbProfile.fromObject(object.mongodbProfile);
+                            }
                             if (object.staticServiceIpConnectivity != null) {
                                 if (typeof object.staticServiceIpConnectivity !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.ConnectionProfile.staticServiceIpConnectivity: object expected");
@@ -17531,6 +19509,11 @@
                                 object.salesforceProfile = $root.google.cloud.datastream.v1.SalesforceProfile.toObject(message.salesforceProfile, options);
                                 if (options.oneofs)
                                     object.profile = "salesforceProfile";
+                            }
+                            if (message.mongodbProfile != null && message.hasOwnProperty("mongodbProfile")) {
+                                object.mongodbProfile = $root.google.cloud.datastream.v1.MongodbProfile.toObject(message.mongodbProfile, options);
+                                if (options.oneofs)
+                                    object.profile = "mongodbProfile";
                             }
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 object.staticServiceIpConnectivity = $root.google.cloud.datastream.v1.StaticServiceIpConnectivity.toObject(message.staticServiceIpConnectivity, options);
@@ -17752,12 +19735,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleColumn.decode = function decode(reader, length) {
+                        OracleColumn.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleColumn();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.column = reader.string();
@@ -18065,12 +20050,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleTable.decode = function decode(reader, length) {
+                        OracleTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = reader.string();
@@ -18313,12 +20300,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleSchema.decode = function decode(reader, length) {
+                        OracleSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schema = reader.string();
@@ -18550,12 +20539,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleRdbms.decode = function decode(reader, length) {
+                        OracleRdbms.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleRdbms();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.oracleSchemas && message.oracleSchemas.length))
@@ -18874,12 +20865,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleSourceConfig.decode = function decode(reader, length) {
+                        OracleSourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeObjects = $root.google.cloud.datastream.v1.OracleRdbms.decode(reader, reader.uint32());
@@ -19203,12 +21196,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DropLargeObjects.decode = function decode(reader, length) {
+                            DropLargeObjects.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -19378,12 +21373,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            StreamLargeObjects.decode = function decode(reader, length) {
+                            StreamLargeObjects.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -19553,12 +21550,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LogMiner.decode = function decode(reader, length) {
+                            LogMiner.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.LogMiner();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -19764,12 +21763,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BinaryLogParser.decode = function decode(reader, length) {
+                            BinaryLogParser.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.BinaryLogParser();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.oracleAsmLogFileAccess = $root.google.cloud.datastream.v1.OracleSourceConfig.BinaryLogParser.OracleAsmLogFileAccess.decode(reader, reader.uint32());
@@ -19987,12 +21988,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                OracleAsmLogFileAccess.decode = function decode(reader, length) {
+                                OracleAsmLogFileAccess.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.BinaryLogParser.OracleAsmLogFileAccess();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -20184,12 +22187,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LogFileDirectories.decode = function decode(reader, length) {
+                                LogFileDirectories.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleSourceConfig.BinaryLogParser.LogFileDirectories();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.onlineLogDirectory = reader.string();
@@ -20483,12 +22488,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostgresqlColumn.decode = function decode(reader, length) {
+                        PostgresqlColumn.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlColumn();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.column = reader.string();
@@ -20784,12 +22791,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostgresqlTable.decode = function decode(reader, length) {
+                        PostgresqlTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = reader.string();
@@ -21032,12 +23041,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostgresqlSchema.decode = function decode(reader, length) {
+                        PostgresqlSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schema = reader.string();
@@ -21269,12 +23280,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostgresqlRdbms.decode = function decode(reader, length) {
+                        PostgresqlRdbms.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlRdbms();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.postgresqlSchemas && message.postgresqlSchemas.length))
@@ -21535,12 +23548,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PostgresqlSourceConfig.decode = function decode(reader, length) {
+                        PostgresqlSourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.PostgresqlSourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeObjects = $root.google.cloud.datastream.v1.PostgresqlRdbms.decode(reader, reader.uint32());
@@ -21874,12 +23889,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerColumn.decode = function decode(reader, length) {
+                        SqlServerColumn.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerColumn();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.column = reader.string();
@@ -22175,12 +24192,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerTable.decode = function decode(reader, length) {
+                        SqlServerTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = reader.string();
@@ -22423,12 +24442,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerSchema.decode = function decode(reader, length) {
+                        SqlServerSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schema = reader.string();
@@ -22660,12 +24681,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerRdbms.decode = function decode(reader, length) {
+                        SqlServerRdbms.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerRdbms();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.schemas && message.schemas.length))
@@ -22951,12 +24974,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerSourceConfig.decode = function decode(reader, length) {
+                        SqlServerSourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerSourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeObjects = $root.google.cloud.datastream.v1.SqlServerRdbms.decode(reader, reader.uint32());
@@ -23237,12 +25262,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerTransactionLogs.decode = function decode(reader, length) {
+                        SqlServerTransactionLogs.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerTransactionLogs();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -23412,12 +25439,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerChangeTables.decode = function decode(reader, length) {
+                        SqlServerChangeTables.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerChangeTables();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -23686,12 +25715,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlColumn.decode = function decode(reader, length) {
+                        MysqlColumn.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlColumn();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.column = reader.string();
@@ -23999,12 +26030,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlTable.decode = function decode(reader, length) {
+                        MysqlTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = reader.string();
@@ -24247,12 +26280,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlDatabase.decode = function decode(reader, length) {
+                        MysqlDatabase.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlDatabase();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.database = reader.string();
@@ -24484,12 +26519,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlRdbms.decode = function decode(reader, length) {
+                        MysqlRdbms.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlRdbms();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.mysqlDatabases && message.mysqlDatabases.length))
@@ -24775,12 +26812,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlSourceConfig.decode = function decode(reader, length) {
+                        MysqlSourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlSourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeObjects = $root.google.cloud.datastream.v1.MysqlRdbms.decode(reader, reader.uint32());
@@ -25058,12 +27097,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BinaryLogPosition.decode = function decode(reader, length) {
+                            BinaryLogPosition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlSourceConfig.BinaryLogPosition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -25233,12 +27274,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Gtid.decode = function decode(reader, length) {
+                            Gtid.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlSourceConfig.Gtid();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -25444,12 +27487,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SalesforceSourceConfig.decode = function decode(reader, length) {
+                        SalesforceSourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SalesforceSourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeObjects = $root.google.cloud.datastream.v1.SalesforceOrg.decode(reader, reader.uint32());
@@ -25689,12 +27734,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SalesforceOrg.decode = function decode(reader, length) {
+                        SalesforceOrg.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SalesforceOrg();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.objects && message.objects.length))
@@ -25924,12 +27971,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SalesforceObject.decode = function decode(reader, length) {
+                        SalesforceObject.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SalesforceObject();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.objectName = reader.string();
@@ -26181,12 +28230,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SalesforceField.decode = function decode(reader, length) {
+                        SalesforceField.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SalesforceField();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -26324,6 +28375,1199 @@
                         return SalesforceField;
                     })();
     
+                    v1.MongodbSourceConfig = (function() {
+    
+                        /**
+                         * Properties of a MongodbSourceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbSourceConfig
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [includeObjects] MongodbSourceConfig includeObjects
+                         * @property {google.cloud.datastream.v1.IMongodbCluster|null} [excludeObjects] MongodbSourceConfig excludeObjects
+                         * @property {number|null} [maxConcurrentBackfillTasks] MongodbSourceConfig maxConcurrentBackfillTasks
+                         */
+    
+                        /**
+                         * Constructs a new MongodbSourceConfig.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbSourceConfig.
+                         * @implements IMongodbSourceConfig
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig=} [properties] Properties to set
+                         */
+                        function MongodbSourceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbSourceConfig includeObjects.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} includeObjects
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         */
+                        MongodbSourceConfig.prototype.includeObjects = null;
+    
+                        /**
+                         * MongodbSourceConfig excludeObjects.
+                         * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} excludeObjects
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         */
+                        MongodbSourceConfig.prototype.excludeObjects = null;
+    
+                        /**
+                         * MongodbSourceConfig maxConcurrentBackfillTasks.
+                         * @member {number} maxConcurrentBackfillTasks
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         */
+                        MongodbSourceConfig.prototype.maxConcurrentBackfillTasks = 0;
+    
+                        /**
+                         * Creates a new MongodbSourceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig instance
+                         */
+                        MongodbSourceConfig.create = function create(properties) {
+                            return new MongodbSourceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSourceConfig message. Does not implicitly {@link google.cloud.datastream.v1.MongodbSourceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig} message MongodbSourceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSourceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.includeObjects != null && Object.hasOwnProperty.call(message, "includeObjects"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.includeObjects, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.excludeObjects != null && Object.hasOwnProperty.call(message, "excludeObjects"))
+                                $root.google.cloud.datastream.v1.MongodbCluster.encode(message.excludeObjects, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.maxConcurrentBackfillTasks != null && Object.hasOwnProperty.call(message, "maxConcurrentBackfillTasks"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxConcurrentBackfillTasks);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbSourceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbSourceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbSourceConfig} message MongodbSourceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbSourceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbSourceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSourceConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbSourceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.includeObjects = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.excludeObjects = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maxConcurrentBackfillTasks = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbSourceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbSourceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbSourceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbSourceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.includeObjects != null && message.hasOwnProperty("includeObjects")) {
+                                var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.includeObjects);
+                                if (error)
+                                    return "includeObjects." + error;
+                            }
+                            if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects")) {
+                                var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.excludeObjects);
+                                if (error)
+                                    return "excludeObjects." + error;
+                            }
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                if (!$util.isInteger(message.maxConcurrentBackfillTasks))
+                                    return "maxConcurrentBackfillTasks: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbSourceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbSourceConfig} MongodbSourceConfig
+                         */
+                        MongodbSourceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbSourceConfig)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbSourceConfig();
+                            if (object.includeObjects != null) {
+                                if (typeof object.includeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbSourceConfig.includeObjects: object expected");
+                                message.includeObjects = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.includeObjects);
+                            }
+                            if (object.excludeObjects != null) {
+                                if (typeof object.excludeObjects !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbSourceConfig.excludeObjects: object expected");
+                                message.excludeObjects = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.excludeObjects);
+                            }
+                            if (object.maxConcurrentBackfillTasks != null)
+                                message.maxConcurrentBackfillTasks = object.maxConcurrentBackfillTasks | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbSourceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbSourceConfig} message MongodbSourceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbSourceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.includeObjects = null;
+                                object.excludeObjects = null;
+                                object.maxConcurrentBackfillTasks = 0;
+                            }
+                            if (message.includeObjects != null && message.hasOwnProperty("includeObjects"))
+                                object.includeObjects = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.includeObjects, options);
+                            if (message.excludeObjects != null && message.hasOwnProperty("excludeObjects"))
+                                object.excludeObjects = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.excludeObjects, options);
+                            if (message.maxConcurrentBackfillTasks != null && message.hasOwnProperty("maxConcurrentBackfillTasks"))
+                                object.maxConcurrentBackfillTasks = message.maxConcurrentBackfillTasks;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbSourceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbSourceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbSourceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbSourceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbSourceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbSourceConfig";
+                        };
+    
+                        return MongodbSourceConfig;
+                    })();
+    
+                    v1.MongodbCluster = (function() {
+    
+                        /**
+                         * Properties of a MongodbCluster.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbCluster
+                         * @property {Array.<google.cloud.datastream.v1.IMongodbDatabase>|null} [databases] MongodbCluster databases
+                         */
+    
+                        /**
+                         * Constructs a new MongodbCluster.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbCluster.
+                         * @implements IMongodbCluster
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbCluster=} [properties] Properties to set
+                         */
+                        function MongodbCluster(properties) {
+                            this.databases = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbCluster databases.
+                         * @member {Array.<google.cloud.datastream.v1.IMongodbDatabase>} databases
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @instance
+                         */
+                        MongodbCluster.prototype.databases = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MongodbCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCluster=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster instance
+                         */
+                        MongodbCluster.create = function create(properties) {
+                            return new MongodbCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCluster message. Does not implicitly {@link google.cloud.datastream.v1.MongodbCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCluster} message MongodbCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.databases != null && message.databases.length)
+                                for (var i = 0; i < message.databases.length; ++i)
+                                    $root.google.cloud.datastream.v1.MongodbDatabase.encode(message.databases[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCluster message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCluster} message MongodbCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCluster.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.databases && message.databases.length))
+                                            message.databases = [];
+                                        message.databases.push($root.google.cloud.datastream.v1.MongodbDatabase.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbCluster message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.databases != null && message.hasOwnProperty("databases")) {
+                                if (!Array.isArray(message.databases))
+                                    return "databases: array expected";
+                                for (var i = 0; i < message.databases.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.MongodbDatabase.verify(message.databases[i]);
+                                    if (error)
+                                        return "databases." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbCluster} MongodbCluster
+                         */
+                        MongodbCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbCluster)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbCluster();
+                            if (object.databases) {
+                                if (!Array.isArray(object.databases))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbCluster.databases: array expected");
+                                message.databases = [];
+                                for (var i = 0; i < object.databases.length; ++i) {
+                                    if (typeof object.databases[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbCluster.databases: object expected");
+                                    message.databases[i] = $root.google.cloud.datastream.v1.MongodbDatabase.fromObject(object.databases[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbCluster} message MongodbCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.databases = [];
+                            if (message.databases && message.databases.length) {
+                                object.databases = [];
+                                for (var j = 0; j < message.databases.length; ++j)
+                                    object.databases[j] = $root.google.cloud.datastream.v1.MongodbDatabase.toObject(message.databases[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbCluster
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbCluster
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbCluster";
+                        };
+    
+                        return MongodbCluster;
+                    })();
+    
+                    v1.MongodbDatabase = (function() {
+    
+                        /**
+                         * Properties of a MongodbDatabase.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbDatabase
+                         * @property {string|null} [database] MongodbDatabase database
+                         * @property {Array.<google.cloud.datastream.v1.IMongodbCollection>|null} [collections] MongodbDatabase collections
+                         */
+    
+                        /**
+                         * Constructs a new MongodbDatabase.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbDatabase.
+                         * @implements IMongodbDatabase
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase=} [properties] Properties to set
+                         */
+                        function MongodbDatabase(properties) {
+                            this.collections = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbDatabase database.
+                         * @member {string} database
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @instance
+                         */
+                        MongodbDatabase.prototype.database = "";
+    
+                        /**
+                         * MongodbDatabase collections.
+                         * @member {Array.<google.cloud.datastream.v1.IMongodbCollection>} collections
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @instance
+                         */
+                        MongodbDatabase.prototype.collections = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MongodbDatabase instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase instance
+                         */
+                        MongodbDatabase.create = function create(properties) {
+                            return new MongodbDatabase(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbDatabase message. Does not implicitly {@link google.cloud.datastream.v1.MongodbDatabase.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase} message MongodbDatabase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbDatabase.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
+                            if (message.collections != null && message.collections.length)
+                                for (var i = 0; i < message.collections.length; ++i)
+                                    $root.google.cloud.datastream.v1.MongodbCollection.encode(message.collections[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbDatabase message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbDatabase.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbDatabase} message MongodbDatabase message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbDatabase.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbDatabase message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbDatabase.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbDatabase();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.database = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.collections && message.collections.length))
+                                            message.collections = [];
+                                        message.collections.push($root.google.cloud.datastream.v1.MongodbCollection.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbDatabase message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbDatabase.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbDatabase message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbDatabase.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                if (!$util.isString(message.database))
+                                    return "database: string expected";
+                            if (message.collections != null && message.hasOwnProperty("collections")) {
+                                if (!Array.isArray(message.collections))
+                                    return "collections: array expected";
+                                for (var i = 0; i < message.collections.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.MongodbCollection.verify(message.collections[i]);
+                                    if (error)
+                                        return "collections." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbDatabase message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbDatabase} MongodbDatabase
+                         */
+                        MongodbDatabase.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbDatabase)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbDatabase();
+                            if (object.database != null)
+                                message.database = String(object.database);
+                            if (object.collections) {
+                                if (!Array.isArray(object.collections))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbDatabase.collections: array expected");
+                                message.collections = [];
+                                for (var i = 0; i < object.collections.length; ++i) {
+                                    if (typeof object.collections[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbDatabase.collections: object expected");
+                                    message.collections[i] = $root.google.cloud.datastream.v1.MongodbCollection.fromObject(object.collections[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbDatabase message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbDatabase} message MongodbDatabase
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbDatabase.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.collections = [];
+                            if (options.defaults)
+                                object.database = "";
+                            if (message.database != null && message.hasOwnProperty("database"))
+                                object.database = message.database;
+                            if (message.collections && message.collections.length) {
+                                object.collections = [];
+                                for (var j = 0; j < message.collections.length; ++j)
+                                    object.collections[j] = $root.google.cloud.datastream.v1.MongodbCollection.toObject(message.collections[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbDatabase to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbDatabase.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbDatabase
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbDatabase
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbDatabase.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbDatabase";
+                        };
+    
+                        return MongodbDatabase;
+                    })();
+    
+                    v1.MongodbCollection = (function() {
+    
+                        /**
+                         * Properties of a MongodbCollection.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbCollection
+                         * @property {string|null} [collection] MongodbCollection collection
+                         * @property {Array.<google.cloud.datastream.v1.IMongodbField>|null} [fields] MongodbCollection fields
+                         */
+    
+                        /**
+                         * Constructs a new MongodbCollection.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbCollection.
+                         * @implements IMongodbCollection
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbCollection=} [properties] Properties to set
+                         */
+                        function MongodbCollection(properties) {
+                            this.fields = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbCollection collection.
+                         * @member {string} collection
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @instance
+                         */
+                        MongodbCollection.prototype.collection = "";
+    
+                        /**
+                         * MongodbCollection fields.
+                         * @member {Array.<google.cloud.datastream.v1.IMongodbField>} fields
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @instance
+                         */
+                        MongodbCollection.prototype.fields = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MongodbCollection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCollection=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection instance
+                         */
+                        MongodbCollection.create = function create(properties) {
+                            return new MongodbCollection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCollection message. Does not implicitly {@link google.cloud.datastream.v1.MongodbCollection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCollection} message MongodbCollection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCollection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.collection != null && Object.hasOwnProperty.call(message, "collection"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.collection);
+                            if (message.fields != null && message.fields.length)
+                                for (var i = 0; i < message.fields.length; ++i)
+                                    $root.google.cloud.datastream.v1.MongodbField.encode(message.fields[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbCollection message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbCollection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbCollection} message MongodbCollection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbCollection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbCollection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCollection.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbCollection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.collection = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.fields && message.fields.length))
+                                            message.fields = [];
+                                        message.fields.push($root.google.cloud.datastream.v1.MongodbField.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbCollection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbCollection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbCollection message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbCollection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.collection != null && message.hasOwnProperty("collection"))
+                                if (!$util.isString(message.collection))
+                                    return "collection: string expected";
+                            if (message.fields != null && message.hasOwnProperty("fields")) {
+                                if (!Array.isArray(message.fields))
+                                    return "fields: array expected";
+                                for (var i = 0; i < message.fields.length; ++i) {
+                                    var error = $root.google.cloud.datastream.v1.MongodbField.verify(message.fields[i]);
+                                    if (error)
+                                        return "fields." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbCollection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbCollection} MongodbCollection
+                         */
+                        MongodbCollection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbCollection)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbCollection();
+                            if (object.collection != null)
+                                message.collection = String(object.collection);
+                            if (object.fields) {
+                                if (!Array.isArray(object.fields))
+                                    throw TypeError(".google.cloud.datastream.v1.MongodbCollection.fields: array expected");
+                                message.fields = [];
+                                for (var i = 0; i < object.fields.length; ++i) {
+                                    if (typeof object.fields[i] !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.MongodbCollection.fields: object expected");
+                                    message.fields[i] = $root.google.cloud.datastream.v1.MongodbField.fromObject(object.fields[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbCollection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbCollection} message MongodbCollection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbCollection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.fields = [];
+                            if (options.defaults)
+                                object.collection = "";
+                            if (message.collection != null && message.hasOwnProperty("collection"))
+                                object.collection = message.collection;
+                            if (message.fields && message.fields.length) {
+                                object.fields = [];
+                                for (var j = 0; j < message.fields.length; ++j)
+                                    object.fields[j] = $root.google.cloud.datastream.v1.MongodbField.toObject(message.fields[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbCollection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbCollection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbCollection
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbCollection
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbCollection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbCollection";
+                        };
+    
+                        return MongodbCollection;
+                    })();
+    
+                    v1.MongodbField = (function() {
+    
+                        /**
+                         * Properties of a MongodbField.
+                         * @memberof google.cloud.datastream.v1
+                         * @interface IMongodbField
+                         * @property {string|null} [field] MongodbField field
+                         */
+    
+                        /**
+                         * Constructs a new MongodbField.
+                         * @memberof google.cloud.datastream.v1
+                         * @classdesc Represents a MongodbField.
+                         * @implements IMongodbField
+                         * @constructor
+                         * @param {google.cloud.datastream.v1.IMongodbField=} [properties] Properties to set
+                         */
+                        function MongodbField(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MongodbField field.
+                         * @member {string} field
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @instance
+                         */
+                        MongodbField.prototype.field = "";
+    
+                        /**
+                         * Creates a new MongodbField instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbField=} [properties] Properties to set
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField instance
+                         */
+                        MongodbField.create = function create(properties) {
+                            return new MongodbField(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbField message. Does not implicitly {@link google.cloud.datastream.v1.MongodbField.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbField} message MongodbField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbField.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.field != null && Object.hasOwnProperty.call(message, "field"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.field);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MongodbField message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MongodbField.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.IMongodbField} message MongodbField message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MongodbField.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MongodbField message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbField.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MongodbField();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.field = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MongodbField message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MongodbField.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MongodbField message.
+                         * @function verify
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MongodbField.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.field != null && message.hasOwnProperty("field"))
+                                if (!$util.isString(message.field))
+                                    return "field: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MongodbField message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datastream.v1.MongodbField} MongodbField
+                         */
+                        MongodbField.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datastream.v1.MongodbField)
+                                return object;
+                            var message = new $root.google.cloud.datastream.v1.MongodbField();
+                            if (object.field != null)
+                                message.field = String(object.field);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MongodbField message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {google.cloud.datastream.v1.MongodbField} message MongodbField
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MongodbField.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.field = "";
+                            if (message.field != null && message.hasOwnProperty("field"))
+                                object.field = message.field;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MongodbField to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MongodbField.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MongodbField
+                         * @function getTypeUrl
+                         * @memberof google.cloud.datastream.v1.MongodbField
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MongodbField.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.datastream.v1.MongodbField";
+                        };
+    
+                        return MongodbField;
+                    })();
+    
                     v1.SourceConfig = (function() {
     
                         /**
@@ -26336,6 +29580,7 @@
                          * @property {google.cloud.datastream.v1.IPostgresqlSourceConfig|null} [postgresqlSourceConfig] SourceConfig postgresqlSourceConfig
                          * @property {google.cloud.datastream.v1.ISqlServerSourceConfig|null} [sqlServerSourceConfig] SourceConfig sqlServerSourceConfig
                          * @property {google.cloud.datastream.v1.ISalesforceSourceConfig|null} [salesforceSourceConfig] SourceConfig salesforceSourceConfig
+                         * @property {google.cloud.datastream.v1.IMongodbSourceConfig|null} [mongodbSourceConfig] SourceConfig mongodbSourceConfig
                          */
     
                         /**
@@ -26401,17 +29646,25 @@
                          */
                         SourceConfig.prototype.salesforceSourceConfig = null;
     
+                        /**
+                         * SourceConfig mongodbSourceConfig.
+                         * @member {google.cloud.datastream.v1.IMongodbSourceConfig|null|undefined} mongodbSourceConfig
+                         * @memberof google.cloud.datastream.v1.SourceConfig
+                         * @instance
+                         */
+                        SourceConfig.prototype.mongodbSourceConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SourceConfig sourceStreamConfig.
-                         * @member {"oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig"|"salesforceSourceConfig"|undefined} sourceStreamConfig
+                         * @member {"oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig"|"salesforceSourceConfig"|"mongodbSourceConfig"|undefined} sourceStreamConfig
                          * @memberof google.cloud.datastream.v1.SourceConfig
                          * @instance
                          */
                         Object.defineProperty(SourceConfig.prototype, "sourceStreamConfig", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleSourceConfig", "mysqlSourceConfig", "postgresqlSourceConfig", "sqlServerSourceConfig", "salesforceSourceConfig"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleSourceConfig", "mysqlSourceConfig", "postgresqlSourceConfig", "sqlServerSourceConfig", "salesforceSourceConfig", "mongodbSourceConfig"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -26451,6 +29704,8 @@
                                 $root.google.cloud.datastream.v1.SqlServerSourceConfig.encode(message.sqlServerSourceConfig, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
                             if (message.salesforceSourceConfig != null && Object.hasOwnProperty.call(message, "salesforceSourceConfig"))
                                 $root.google.cloud.datastream.v1.SalesforceSourceConfig.encode(message.salesforceSourceConfig, writer.uint32(/* id 104, wireType 2 =*/834).fork()).ldelim();
+                            if (message.mongodbSourceConfig != null && Object.hasOwnProperty.call(message, "mongodbSourceConfig"))
+                                $root.google.cloud.datastream.v1.MongodbSourceConfig.encode(message.mongodbSourceConfig, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
                             return writer;
                         };
     
@@ -26478,12 +29733,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceConfig.decode = function decode(reader, length) {
+                        SourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.sourceConnectionProfile = reader.string();
@@ -26507,6 +29764,10 @@
                                     }
                                 case 104: {
                                         message.salesforceSourceConfig = $root.google.cloud.datastream.v1.SalesforceSourceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.mongodbSourceConfig = $root.google.cloud.datastream.v1.MongodbSourceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -26596,6 +29857,16 @@
                                         return "salesforceSourceConfig." + error;
                                 }
                             }
+                            if (message.mongodbSourceConfig != null && message.hasOwnProperty("mongodbSourceConfig")) {
+                                if (properties.sourceStreamConfig === 1)
+                                    return "sourceStreamConfig: multiple values";
+                                properties.sourceStreamConfig = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.MongodbSourceConfig.verify(message.mongodbSourceConfig);
+                                    if (error)
+                                        return "mongodbSourceConfig." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -26637,6 +29908,11 @@
                                 if (typeof object.salesforceSourceConfig !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.SourceConfig.salesforceSourceConfig: object expected");
                                 message.salesforceSourceConfig = $root.google.cloud.datastream.v1.SalesforceSourceConfig.fromObject(object.salesforceSourceConfig);
+                            }
+                            if (object.mongodbSourceConfig != null) {
+                                if (typeof object.mongodbSourceConfig !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.SourceConfig.mongodbSourceConfig: object expected");
+                                message.mongodbSourceConfig = $root.google.cloud.datastream.v1.MongodbSourceConfig.fromObject(object.mongodbSourceConfig);
                             }
                             return message;
                         };
@@ -26682,6 +29958,11 @@
                                 object.salesforceSourceConfig = $root.google.cloud.datastream.v1.SalesforceSourceConfig.toObject(message.salesforceSourceConfig, options);
                                 if (options.oneofs)
                                     object.sourceStreamConfig = "salesforceSourceConfig";
+                            }
+                            if (message.mongodbSourceConfig != null && message.hasOwnProperty("mongodbSourceConfig")) {
+                                object.mongodbSourceConfig = $root.google.cloud.datastream.v1.MongodbSourceConfig.toObject(message.mongodbSourceConfig, options);
+                                if (options.oneofs)
+                                    object.sourceStreamConfig = "mongodbSourceConfig";
                             }
                             return object;
                         };
@@ -26789,12 +30070,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AvroFileFormat.decode = function decode(reader, length) {
+                        AvroFileFormat.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.AvroFileFormat();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -26986,12 +30269,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        JsonFileFormat.decode = function decode(reader, length) {
+                        JsonFileFormat.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.JsonFileFormat();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schemaFileFormat = reader.int32();
@@ -27340,12 +30625,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsDestinationConfig.decode = function decode(reader, length) {
+                        GcsDestinationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.GcsDestinationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -27700,12 +30987,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryDestinationConfig.decode = function decode(reader, length) {
+                        BigQueryDestinationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 201: {
                                         message.singleTargetDataset = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset.decode(reader, reader.uint32());
@@ -28016,12 +31305,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SingleTargetDataset.decode = function decode(reader, length) {
+                            SingleTargetDataset.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.datasetId = reader.string();
@@ -28141,6 +31432,7 @@
                              * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig
                              * @interface ISourceHierarchyDatasets
                              * @property {google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.IDatasetTemplate|null} [datasetTemplate] SourceHierarchyDatasets datasetTemplate
+                             * @property {string|null} [projectId] SourceHierarchyDatasets projectId
                              */
     
                             /**
@@ -28165,6 +31457,23 @@
                              * @instance
                              */
                             SourceHierarchyDatasets.prototype.datasetTemplate = null;
+    
+                            /**
+                             * SourceHierarchyDatasets projectId.
+                             * @member {string|null|undefined} projectId
+                             * @memberof google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets
+                             * @instance
+                             */
+                            SourceHierarchyDatasets.prototype.projectId = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(SourceHierarchyDatasets.prototype, "_projectId", {
+                                get: $util.oneOfGetter($oneOfFields = ["projectId"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new SourceHierarchyDatasets instance using the specified properties.
@@ -28192,6 +31501,8 @@
                                     writer = $Writer.create();
                                 if (message.datasetTemplate != null && Object.hasOwnProperty.call(message, "datasetTemplate"))
                                     $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.encode(message.datasetTemplate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
                                 return writer;
                             };
     
@@ -28219,15 +31530,21 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SourceHierarchyDatasets.decode = function decode(reader, length) {
+                            SourceHierarchyDatasets.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 2: {
                                             message.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.projectId = reader.string();
                                             break;
                                         }
                                     default:
@@ -28265,10 +31582,16 @@
                             SourceHierarchyDatasets.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.datasetTemplate != null && message.hasOwnProperty("datasetTemplate")) {
                                     var error = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.verify(message.datasetTemplate);
                                     if (error)
                                         return "datasetTemplate." + error;
+                                }
+                                if (message.projectId != null && message.hasOwnProperty("projectId")) {
+                                    properties._projectId = 1;
+                                    if (!$util.isString(message.projectId))
+                                        return "projectId: string expected";
                                 }
                                 return null;
                             };
@@ -28290,6 +31613,8 @@
                                         throw TypeError(".google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.datasetTemplate: object expected");
                                     message.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.fromObject(object.datasetTemplate);
                                 }
+                                if (object.projectId != null)
+                                    message.projectId = String(object.projectId);
                                 return message;
                             };
     
@@ -28310,6 +31635,11 @@
                                     object.datasetTemplate = null;
                                 if (message.datasetTemplate != null && message.hasOwnProperty("datasetTemplate"))
                                     object.datasetTemplate = $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate.toObject(message.datasetTemplate, options);
+                                if (message.projectId != null && message.hasOwnProperty("projectId")) {
+                                    object.projectId = message.projectId;
+                                    if (options.oneofs)
+                                        object._projectId = "projectId";
+                                }
                                 return object;
                             };
     
@@ -28446,12 +31776,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DatasetTemplate.decode = function decode(reader, length) {
+                                DatasetTemplate.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.location = reader.string();
@@ -28721,12 +32053,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BlmtConfig.decode = function decode(reader, length) {
+                            BlmtConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.bucket = reader.string();
@@ -29028,12 +32362,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AppendOnly.decode = function decode(reader, length) {
+                            AppendOnly.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.AppendOnly();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -29203,12 +32539,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Merge.decode = function decode(reader, length) {
+                            Merge.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BigQueryDestinationConfig.Merge();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -29428,12 +32766,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestinationConfig.decode = function decode(reader, length) {
+                        DestinationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.DestinationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.destinationConnectionProfile = reader.string();
@@ -29767,34 +33107,19 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Stream _customerManagedEncryptionKey.
-                         * @member {"customerManagedEncryptionKey"|undefined} _customerManagedEncryptionKey
-                         * @memberof google.cloud.datastream.v1.Stream
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Stream.prototype, "_customerManagedEncryptionKey", {
                             get: $util.oneOfGetter($oneOfFields = ["customerManagedEncryptionKey"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Stream _satisfiesPzs.
-                         * @member {"satisfiesPzs"|undefined} _satisfiesPzs
-                         * @memberof google.cloud.datastream.v1.Stream
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Stream.prototype, "_satisfiesPzs", {
                             get: $util.oneOfGetter($oneOfFields = ["satisfiesPzs"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        /**
-                         * Stream _satisfiesPzi.
-                         * @member {"satisfiesPzi"|undefined} _satisfiesPzi
-                         * @memberof google.cloud.datastream.v1.Stream
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(Stream.prototype, "_satisfiesPzi", {
                             get: $util.oneOfGetter($oneOfFields = ["satisfiesPzi"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -29883,12 +33208,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Stream.decode = function decode(reader, length) {
+                        Stream.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.Stream(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -30374,6 +33701,7 @@
                              * @property {google.cloud.datastream.v1.IPostgresqlRdbms|null} [postgresqlExcludedObjects] BackfillAllStrategy postgresqlExcludedObjects
                              * @property {google.cloud.datastream.v1.ISqlServerRdbms|null} [sqlServerExcludedObjects] BackfillAllStrategy sqlServerExcludedObjects
                              * @property {google.cloud.datastream.v1.ISalesforceOrg|null} [salesforceExcludedObjects] BackfillAllStrategy salesforceExcludedObjects
+                             * @property {google.cloud.datastream.v1.IMongodbCluster|null} [mongodbExcludedObjects] BackfillAllStrategy mongodbExcludedObjects
                              */
     
                             /**
@@ -30431,17 +33759,25 @@
                              */
                             BackfillAllStrategy.prototype.salesforceExcludedObjects = null;
     
+                            /**
+                             * BackfillAllStrategy mongodbExcludedObjects.
+                             * @member {google.cloud.datastream.v1.IMongodbCluster|null|undefined} mongodbExcludedObjects
+                             * @memberof google.cloud.datastream.v1.Stream.BackfillAllStrategy
+                             * @instance
+                             */
+                            BackfillAllStrategy.prototype.mongodbExcludedObjects = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * BackfillAllStrategy excludedObjects.
-                             * @member {"oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects"|"salesforceExcludedObjects"|undefined} excludedObjects
+                             * @member {"oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects"|"salesforceExcludedObjects"|"mongodbExcludedObjects"|undefined} excludedObjects
                              * @memberof google.cloud.datastream.v1.Stream.BackfillAllStrategy
                              * @instance
                              */
                             Object.defineProperty(BackfillAllStrategy.prototype, "excludedObjects", {
-                                get: $util.oneOfGetter($oneOfFields = ["oracleExcludedObjects", "mysqlExcludedObjects", "postgresqlExcludedObjects", "sqlServerExcludedObjects", "salesforceExcludedObjects"]),
+                                get: $util.oneOfGetter($oneOfFields = ["oracleExcludedObjects", "mysqlExcludedObjects", "postgresqlExcludedObjects", "sqlServerExcludedObjects", "salesforceExcludedObjects", "mongodbExcludedObjects"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -30479,6 +33815,8 @@
                                     $root.google.cloud.datastream.v1.SqlServerRdbms.encode(message.sqlServerExcludedObjects, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.salesforceExcludedObjects != null && Object.hasOwnProperty.call(message, "salesforceExcludedObjects"))
                                     $root.google.cloud.datastream.v1.SalesforceOrg.encode(message.salesforceExcludedObjects, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.mongodbExcludedObjects != null && Object.hasOwnProperty.call(message, "mongodbExcludedObjects"))
+                                    $root.google.cloud.datastream.v1.MongodbCluster.encode(message.mongodbExcludedObjects, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -30506,12 +33844,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BackfillAllStrategy.decode = function decode(reader, length) {
+                            BackfillAllStrategy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.Stream.BackfillAllStrategy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.oracleExcludedObjects = $root.google.cloud.datastream.v1.OracleRdbms.decode(reader, reader.uint32());
@@ -30531,6 +33871,10 @@
                                         }
                                     case 5: {
                                             message.salesforceExcludedObjects = $root.google.cloud.datastream.v1.SalesforceOrg.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.mongodbExcludedObjects = $root.google.cloud.datastream.v1.MongodbCluster.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -30617,6 +33961,16 @@
                                             return "salesforceExcludedObjects." + error;
                                     }
                                 }
+                                if (message.mongodbExcludedObjects != null && message.hasOwnProperty("mongodbExcludedObjects")) {
+                                    if (properties.excludedObjects === 1)
+                                        return "excludedObjects: multiple values";
+                                    properties.excludedObjects = 1;
+                                    {
+                                        var error = $root.google.cloud.datastream.v1.MongodbCluster.verify(message.mongodbExcludedObjects);
+                                        if (error)
+                                            return "mongodbExcludedObjects." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -30656,6 +34010,11 @@
                                     if (typeof object.salesforceExcludedObjects !== "object")
                                         throw TypeError(".google.cloud.datastream.v1.Stream.BackfillAllStrategy.salesforceExcludedObjects: object expected");
                                     message.salesforceExcludedObjects = $root.google.cloud.datastream.v1.SalesforceOrg.fromObject(object.salesforceExcludedObjects);
+                                }
+                                if (object.mongodbExcludedObjects != null) {
+                                    if (typeof object.mongodbExcludedObjects !== "object")
+                                        throw TypeError(".google.cloud.datastream.v1.Stream.BackfillAllStrategy.mongodbExcludedObjects: object expected");
+                                    message.mongodbExcludedObjects = $root.google.cloud.datastream.v1.MongodbCluster.fromObject(object.mongodbExcludedObjects);
                                 }
                                 return message;
                             };
@@ -30697,6 +34056,11 @@
                                     object.salesforceExcludedObjects = $root.google.cloud.datastream.v1.SalesforceOrg.toObject(message.salesforceExcludedObjects, options);
                                     if (options.oneofs)
                                         object.excludedObjects = "salesforceExcludedObjects";
+                                }
+                                if (message.mongodbExcludedObjects != null && message.hasOwnProperty("mongodbExcludedObjects")) {
+                                    object.mongodbExcludedObjects = $root.google.cloud.datastream.v1.MongodbCluster.toObject(message.mongodbExcludedObjects, options);
+                                    if (options.oneofs)
+                                        object.excludedObjects = "mongodbExcludedObjects";
                                 }
                                 return object;
                             };
@@ -30804,12 +34168,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BackfillNoneStrategy.decode = function decode(reader, length) {
+                            BackfillNoneStrategy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.Stream.BackfillNoneStrategy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -31061,12 +34427,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StreamObject.decode = function decode(reader, length) {
+                        StreamObject.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.StreamObject();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -31303,6 +34671,7 @@
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.IPostgresqlObjectIdentifier|null} [postgresqlIdentifier] SourceObjectIdentifier postgresqlIdentifier
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.ISqlServerObjectIdentifier|null} [sqlServerIdentifier] SourceObjectIdentifier sqlServerIdentifier
                          * @property {google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier|null} [salesforceIdentifier] SourceObjectIdentifier salesforceIdentifier
+                         * @property {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier|null} [mongodbIdentifier] SourceObjectIdentifier mongodbIdentifier
                          */
     
                         /**
@@ -31360,17 +34729,25 @@
                          */
                         SourceObjectIdentifier.prototype.salesforceIdentifier = null;
     
+                        /**
+                         * SourceObjectIdentifier mongodbIdentifier.
+                         * @member {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier|null|undefined} mongodbIdentifier
+                         * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                         * @instance
+                         */
+                        SourceObjectIdentifier.prototype.mongodbIdentifier = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * SourceObjectIdentifier sourceIdentifier.
-                         * @member {"oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier"|"salesforceIdentifier"|undefined} sourceIdentifier
+                         * @member {"oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier"|"salesforceIdentifier"|"mongodbIdentifier"|undefined} sourceIdentifier
                          * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
                          * @instance
                          */
                         Object.defineProperty(SourceObjectIdentifier.prototype, "sourceIdentifier", {
-                            get: $util.oneOfGetter($oneOfFields = ["oracleIdentifier", "mysqlIdentifier", "postgresqlIdentifier", "sqlServerIdentifier", "salesforceIdentifier"]),
+                            get: $util.oneOfGetter($oneOfFields = ["oracleIdentifier", "mysqlIdentifier", "postgresqlIdentifier", "sqlServerIdentifier", "salesforceIdentifier", "mongodbIdentifier"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -31408,6 +34785,8 @@
                                 $root.google.cloud.datastream.v1.SourceObjectIdentifier.SqlServerObjectIdentifier.encode(message.sqlServerIdentifier, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.salesforceIdentifier != null && Object.hasOwnProperty.call(message, "salesforceIdentifier"))
                                 $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.encode(message.salesforceIdentifier, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.mongodbIdentifier != null && Object.hasOwnProperty.call(message, "mongodbIdentifier"))
+                                $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.encode(message.mongodbIdentifier, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -31435,12 +34814,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceObjectIdentifier.decode = function decode(reader, length) {
+                        SourceObjectIdentifier.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.oracleIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.OracleObjectIdentifier.decode(reader, reader.uint32());
@@ -31460,6 +34841,10 @@
                                     }
                                 case 5: {
                                         message.salesforceIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.mongodbIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -31546,6 +34931,16 @@
                                         return "salesforceIdentifier." + error;
                                 }
                             }
+                            if (message.mongodbIdentifier != null && message.hasOwnProperty("mongodbIdentifier")) {
+                                if (properties.sourceIdentifier === 1)
+                                    return "sourceIdentifier: multiple values";
+                                properties.sourceIdentifier = 1;
+                                {
+                                    var error = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify(message.mongodbIdentifier);
+                                    if (error)
+                                        return "mongodbIdentifier." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -31585,6 +34980,11 @@
                                 if (typeof object.salesforceIdentifier !== "object")
                                     throw TypeError(".google.cloud.datastream.v1.SourceObjectIdentifier.salesforceIdentifier: object expected");
                                 message.salesforceIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.fromObject(object.salesforceIdentifier);
+                            }
+                            if (object.mongodbIdentifier != null) {
+                                if (typeof object.mongodbIdentifier !== "object")
+                                    throw TypeError(".google.cloud.datastream.v1.SourceObjectIdentifier.mongodbIdentifier: object expected");
+                                message.mongodbIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.fromObject(object.mongodbIdentifier);
                             }
                             return message;
                         };
@@ -31626,6 +35026,11 @@
                                 object.salesforceIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.toObject(message.salesforceIdentifier, options);
                                 if (options.oneofs)
                                     object.sourceIdentifier = "salesforceIdentifier";
+                            }
+                            if (message.mongodbIdentifier != null && message.hasOwnProperty("mongodbIdentifier")) {
+                                object.mongodbIdentifier = $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.toObject(message.mongodbIdentifier, options);
+                                if (options.oneofs)
+                                    object.sourceIdentifier = "mongodbIdentifier";
                             }
                             return object;
                         };
@@ -31752,12 +35157,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OracleObjectIdentifier.decode = function decode(reader, length) {
+                            OracleObjectIdentifier.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.OracleObjectIdentifier();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.schema = reader.string();
@@ -31979,12 +35386,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PostgresqlObjectIdentifier.decode = function decode(reader, length) {
+                            PostgresqlObjectIdentifier.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.schema = reader.string();
@@ -32206,12 +35615,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MysqlObjectIdentifier.decode = function decode(reader, length) {
+                            MysqlObjectIdentifier.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.database = reader.string();
@@ -32433,12 +35844,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SqlServerObjectIdentifier.decode = function decode(reader, length) {
+                            SqlServerObjectIdentifier.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.SqlServerObjectIdentifier();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.schema = reader.string();
@@ -32649,12 +36062,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SalesforceObjectIdentifier.decode = function decode(reader, length) {
+                            SalesforceObjectIdentifier.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.objectName = reader.string();
@@ -32765,6 +36180,235 @@
                             };
     
                             return SalesforceObjectIdentifier;
+                        })();
+    
+                        SourceObjectIdentifier.MongodbObjectIdentifier = (function() {
+    
+                            /**
+                             * Properties of a MongodbObjectIdentifier.
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                             * @interface IMongodbObjectIdentifier
+                             * @property {string|null} [database] MongodbObjectIdentifier database
+                             * @property {string|null} [collection] MongodbObjectIdentifier collection
+                             */
+    
+                            /**
+                             * Constructs a new MongodbObjectIdentifier.
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier
+                             * @classdesc Represents a MongodbObjectIdentifier.
+                             * @implements IMongodbObjectIdentifier
+                             * @constructor
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier=} [properties] Properties to set
+                             */
+                            function MongodbObjectIdentifier(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MongodbObjectIdentifier database.
+                             * @member {string} database
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @instance
+                             */
+                            MongodbObjectIdentifier.prototype.database = "";
+    
+                            /**
+                             * MongodbObjectIdentifier collection.
+                             * @member {string} collection
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @instance
+                             */
+                            MongodbObjectIdentifier.prototype.collection = "";
+    
+                            /**
+                             * Creates a new MongodbObjectIdentifier instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier=} [properties] Properties to set
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier instance
+                             */
+                            MongodbObjectIdentifier.create = function create(properties) {
+                                return new MongodbObjectIdentifier(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MongodbObjectIdentifier message. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier} message MongodbObjectIdentifier message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MongodbObjectIdentifier.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
+                                if (message.collection != null && Object.hasOwnProperty.call(message, "collection"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.collection);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MongodbObjectIdentifier message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.IMongodbObjectIdentifier} message MongodbObjectIdentifier message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MongodbObjectIdentifier.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MongodbObjectIdentifier message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MongodbObjectIdentifier.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.database = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.collection = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MongodbObjectIdentifier message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MongodbObjectIdentifier.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MongodbObjectIdentifier message.
+                             * @function verify
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MongodbObjectIdentifier.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    if (!$util.isString(message.database))
+                                        return "database: string expected";
+                                if (message.collection != null && message.hasOwnProperty("collection"))
+                                    if (!$util.isString(message.collection))
+                                        return "collection: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MongodbObjectIdentifier message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} MongodbObjectIdentifier
+                             */
+                            MongodbObjectIdentifier.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier)
+                                    return object;
+                                var message = new $root.google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier();
+                                if (object.database != null)
+                                    message.database = String(object.database);
+                                if (object.collection != null)
+                                    message.collection = String(object.collection);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MongodbObjectIdentifier message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier} message MongodbObjectIdentifier
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MongodbObjectIdentifier.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.database = "";
+                                    object.collection = "";
+                                }
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    object.database = message.database;
+                                if (message.collection != null && message.hasOwnProperty("collection"))
+                                    object.collection = message.collection;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MongodbObjectIdentifier to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MongodbObjectIdentifier.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MongodbObjectIdentifier
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MongodbObjectIdentifier.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier";
+                            };
+    
+                            return MongodbObjectIdentifier;
                         })();
     
                         return SourceObjectIdentifier;
@@ -32901,12 +36545,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BackfillJob.decode = function decode(reader, length) {
+                        BackfillJob.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.BackfillJob();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.state = reader.int32();
@@ -33344,12 +36990,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Error.decode = function decode(reader, length) {
+                        Error.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.Error(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.reason = reader.string();
@@ -33637,12 +37285,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ValidationResult.decode = function decode(reader, length) {
+                        ValidationResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ValidationResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.validations && message.validations.length))
@@ -33894,12 +37544,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Validation.decode = function decode(reader, length) {
+                        Validation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.Validation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.description = reader.string();
@@ -34243,12 +37895,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ValidationMessage.decode = function decode(reader, length) {
+                        ValidationMessage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.ValidationMessage(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.message = reader.string();
@@ -34593,12 +38247,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CdcStrategy.decode = function decode(reader, length) {
+                        CdcStrategy.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CdcStrategy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 101: {
                                         message.mostRecentStartPosition = $root.google.cloud.datastream.v1.CdcStrategy.MostRecentStartPosition.decode(reader, reader.uint32());
@@ -34840,12 +38496,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MostRecentStartPosition.decode = function decode(reader, length) {
+                            MostRecentStartPosition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CdcStrategy.MostRecentStartPosition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -35015,12 +38673,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NextAvailableStartPosition.decode = function decode(reader, length) {
+                            NextAvailableStartPosition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CdcStrategy.NextAvailableStartPosition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -35248,12 +38908,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SpecificStartPosition.decode = function decode(reader, length) {
+                            SpecificStartPosition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.CdcStrategy.SpecificStartPosition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 101: {
                                             message.mysqlLogPosition = $root.google.cloud.datastream.v1.MysqlLogPosition.decode(reader, reader.uint32());
@@ -35536,12 +39198,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SqlServerLsnPosition.decode = function decode(reader, length) {
+                        SqlServerLsnPosition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.SqlServerLsnPosition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.lsn = reader.string();
@@ -35739,12 +39403,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleScnPosition.decode = function decode(reader, length) {
+                        OracleScnPosition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.OracleScnPosition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.scn = reader.int64();
@@ -35915,12 +39581,7 @@
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
-                        /**
-                         * MysqlLogPosition _logPosition.
-                         * @member {"logPosition"|undefined} _logPosition
-                         * @memberof google.cloud.datastream.v1.MysqlLogPosition
-                         * @instance
-                         */
+                        // Virtual OneOf for proto3 optional field
                         Object.defineProperty(MysqlLogPosition.prototype, "_logPosition", {
                             get: $util.oneOfGetter($oneOfFields = ["logPosition"]),
                             set: $util.oneOfSetter($oneOfFields)
@@ -35981,12 +39642,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlLogPosition.decode = function decode(reader, length) {
+                        MysqlLogPosition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlLogPosition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.logFile = reader.string();
@@ -36201,12 +39864,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlGtidPosition.decode = function decode(reader, length) {
+                        MysqlGtidPosition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1.MysqlGtidPosition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.gtidSet = reader.string();
@@ -37246,12 +40911,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoverConnectionProfileRequest.decode = function decode(reader, length) {
+                        DiscoverConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -37595,12 +41262,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoverConnectionProfileResponse.decode = function decode(reader, length) {
+                        DiscoverConnectionProfileResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 100: {
                                         message.oracleRdbms = $root.google.cloud.datastream.v1alpha1.OracleRdbms.decode(reader, reader.uint32());
@@ -37854,12 +41523,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchStaticIpsRequest.decode = function decode(reader, length) {
+                        FetchStaticIpsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -38095,12 +41766,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchStaticIpsResponse.decode = function decode(reader, length) {
+                        FetchStaticIpsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.FetchStaticIpsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.staticIps && message.staticIps.length))
@@ -38325,12 +41998,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchErrorsRequest.decode = function decode(reader, length) {
+                        FetchErrorsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.FetchErrorsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.stream = reader.string();
@@ -38530,12 +42205,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FetchErrorsResponse.decode = function decode(reader, length) {
+                        FetchErrorsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.FetchErrorsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.errors && message.errors.length))
@@ -38796,12 +42473,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionProfilesRequest.decode = function decode(reader, length) {
+                        ListConnectionProfilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -39074,12 +42753,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionProfilesResponse.decode = function decode(reader, length) {
+                        ListConnectionProfilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListConnectionProfilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.connectionProfiles && message.connectionProfiles.length))
@@ -39336,12 +43017,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetConnectionProfileRequest.decode = function decode(reader, length) {
+                        GetConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.GetConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -39572,12 +43255,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConnectionProfileRequest.decode = function decode(reader, length) {
+                        CreateConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.CreateConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -39839,12 +43524,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateConnectionProfileRequest.decode = function decode(reader, length) {
+                        UpdateConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.UpdateConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -40088,12 +43775,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConnectionProfileRequest.decode = function decode(reader, length) {
+                        DeleteConnectionProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.DeleteConnectionProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -40348,12 +44037,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStreamsRequest.decode = function decode(reader, length) {
+                        ListStreamsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListStreamsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -40626,12 +44317,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStreamsResponse.decode = function decode(reader, length) {
+                        ListStreamsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListStreamsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.streams && message.streams.length))
@@ -40888,12 +44581,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetStreamRequest.decode = function decode(reader, length) {
+                        GetStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.GetStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -41146,12 +44841,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateStreamRequest.decode = function decode(reader, length) {
+                        CreateStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.CreateStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -41459,12 +45156,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateStreamRequest.decode = function decode(reader, length) {
+                        UpdateStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.UpdateStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
@@ -41732,12 +45431,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteStreamRequest.decode = function decode(reader, length) {
+                        DeleteStreamRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.DeleteStreamRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -42025,12 +45726,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OperationMetadata.decode = function decode(reader, length) {
+                        OperationMetadata.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.OperationMetadata();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -42361,12 +46064,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreatePrivateConnectionRequest.decode = function decode(reader, length) {
+                        CreatePrivateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.CreatePrivateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -42650,12 +46355,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPrivateConnectionsRequest.decode = function decode(reader, length) {
+                        ListPrivateConnectionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -42928,12 +46635,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListPrivateConnectionsResponse.decode = function decode(reader, length) {
+                        ListPrivateConnectionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListPrivateConnectionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.privateConnections && message.privateConnections.length))
@@ -43212,12 +46921,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeletePrivateConnectionRequest.decode = function decode(reader, length) {
+                        DeletePrivateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.DeletePrivateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -43440,12 +47151,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetPrivateConnectionRequest.decode = function decode(reader, length) {
+                        GetPrivateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.GetPrivateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -43676,12 +47389,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateRouteRequest.decode = function decode(reader, length) {
+                        CreateRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.CreateRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -43965,12 +47680,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRoutesRequest.decode = function decode(reader, length) {
+                        ListRoutesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListRoutesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -44243,12 +47960,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListRoutesResponse.decode = function decode(reader, length) {
+                        ListRoutesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ListRoutesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.routes && message.routes.length))
@@ -44516,12 +48235,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteRouteRequest.decode = function decode(reader, length) {
+                        DeleteRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.DeleteRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -44732,12 +48453,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetRouteRequest.decode = function decode(reader, length) {
+                        GetRouteRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.GetRouteRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -44992,12 +48715,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleProfile.decode = function decode(reader, length) {
+                        OracleProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.OracleProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -45334,12 +49059,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlProfile.decode = function decode(reader, length) {
+                        MysqlProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.MysqlProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -45602,12 +49329,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsProfile.decode = function decode(reader, length) {
+                        GcsProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.GcsProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bucketName = reader.string();
@@ -45807,12 +49536,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        NoConnectivitySettings.decode = function decode(reader, length) {
+                        NoConnectivitySettings.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.NoConnectivitySettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -45982,12 +49713,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StaticServiceIpConnectivity.decode = function decode(reader, length) {
+                        StaticServiceIpConnectivity.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.StaticServiceIpConnectivity();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -46226,12 +49959,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ForwardSshTunnelConnectivity.decode = function decode(reader, length) {
+                        ForwardSshTunnelConnectivity.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ForwardSshTunnelConnectivity();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hostname = reader.string();
@@ -46500,12 +50235,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VpcPeeringConfig.decode = function decode(reader, length) {
+                        VpcPeeringConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.VpcPeeringConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.vpcName = reader.string();
@@ -46795,12 +50532,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrivateConnection.decode = function decode(reader, length) {
+                        PrivateConnection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.PrivateConnection(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47184,12 +50923,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrivateConnectivity.decode = function decode(reader, length) {
+                        PrivateConnectivity.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.PrivateConnectivity();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.privateConnectionName = reader.string();
@@ -47455,12 +51196,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Route.decode = function decode(reader, length) {
+                        Route.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.Route(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47830,12 +51573,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlSslConfig.decode = function decode(reader, length) {
+                        MysqlSslConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.MysqlSslConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 11: {
                                         message.clientKey = reader.string();
@@ -48242,12 +51987,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ConnectionProfile.decode = function decode(reader, length) {
+                        ConnectionProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ConnectionProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -48791,12 +52538,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleColumn.decode = function decode(reader, length) {
+                        OracleColumn.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.OracleColumn();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.columnName = reader.string();
@@ -49104,12 +52853,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleTable.decode = function decode(reader, length) {
+                        OracleTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.OracleTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tableName = reader.string();
@@ -49352,12 +53103,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleSchema.decode = function decode(reader, length) {
+                        OracleSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.OracleSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schemaName = reader.string();
@@ -49589,12 +53342,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleRdbms.decode = function decode(reader, length) {
+                        OracleRdbms.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.OracleRdbms();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.oracleSchemas && message.oracleSchemas.length))
@@ -49822,12 +53577,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OracleSourceConfig.decode = function decode(reader, length) {
+                        OracleSourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.OracleSourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.allowlist = $root.google.cloud.datastream.v1alpha1.OracleRdbms.decode(reader, reader.uint32());
@@ -50114,12 +53871,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlColumn.decode = function decode(reader, length) {
+                        MysqlColumn.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.MysqlColumn();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.columnName = reader.string();
@@ -50403,12 +54162,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlTable.decode = function decode(reader, length) {
+                        MysqlTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.MysqlTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tableName = reader.string();
@@ -50651,12 +54412,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlDatabase.decode = function decode(reader, length) {
+                        MysqlDatabase.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.MysqlDatabase();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.databaseName = reader.string();
@@ -50888,12 +54651,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlRdbms.decode = function decode(reader, length) {
+                        MysqlRdbms.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.MysqlRdbms();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.mysqlDatabases && message.mysqlDatabases.length))
@@ -51121,12 +54886,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MysqlSourceConfig.decode = function decode(reader, length) {
+                        MysqlSourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.MysqlSourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.allowlist = $root.google.cloud.datastream.v1alpha1.MysqlRdbms.decode(reader, reader.uint32());
@@ -51383,12 +55150,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SourceConfig.decode = function decode(reader, length) {
+                        SourceConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.SourceConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.sourceConnectionProfileName = reader.string();
@@ -51622,12 +55391,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AvroFileFormat.decode = function decode(reader, length) {
+                        AvroFileFormat.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.AvroFileFormat();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -51849,12 +55620,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        JsonFileFormat.decode = function decode(reader, length) {
+                        JsonFileFormat.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.JsonFileFormat();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schemaFileFormat = reader.int32();
@@ -52198,12 +55971,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GcsDestinationConfig.decode = function decode(reader, length) {
+                        GcsDestinationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.GcsDestinationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -52534,12 +56309,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestinationConfig.decode = function decode(reader, length) {
+                        DestinationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.DestinationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.destinationConnectionProfileName = reader.string();
@@ -52888,12 +56665,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Stream.decode = function decode(reader, length) {
+                        Stream.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.Stream(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -53385,12 +57164,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BackfillAllStrategy.decode = function decode(reader, length) {
+                            BackfillAllStrategy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.Stream.BackfillAllStrategy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.oracleExcludedObjects = $root.google.cloud.datastream.v1alpha1.OracleRdbms.decode(reader, reader.uint32());
@@ -53611,12 +57392,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            BackfillNoneStrategy.decode = function decode(reader, length) {
+                            BackfillNoneStrategy.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.Stream.BackfillNoneStrategy();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -53874,12 +57657,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Error.decode = function decode(reader, length) {
+                        Error.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.Error(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.reason = reader.string();
@@ -54167,12 +57952,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ValidationResult.decode = function decode(reader, length) {
+                        ValidationResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ValidationResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.validations && message.validations.length))
@@ -54424,12 +58211,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Validation.decode = function decode(reader, length) {
+                        Validation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.Validation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.description = reader.string();
@@ -54766,12 +58555,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ValidationMessage.decode = function decode(reader, length) {
+                        ValidationMessage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datastream.v1alpha1.ValidationMessage(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.message = reader.string();
@@ -55111,12 +58902,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -55461,12 +59254,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -55845,12 +59640,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -56077,12 +59874,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -56446,12 +60245,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -56790,6 +60591,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -56891,6 +60693,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -56937,6 +60747,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -56964,12 +60776,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -57015,6 +60829,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -57109,6 +60927,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -57203,6 +61024,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -57232,6 +61055,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -57262,6 +61086,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -57403,12 +61229,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -57670,12 +61498,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -57878,12 +61708,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -58086,12 +61918,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -58294,12 +62128,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -58567,12 +62403,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -58946,12 +62784,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -59154,12 +62994,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -59386,12 +63228,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -59664,12 +63508,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -60091,12 +63937,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -60486,12 +64334,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -60716,12 +64566,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -61116,12 +64968,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -61783,12 +65637,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -62268,12 +66124,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -62512,12 +66370,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -62768,12 +66628,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -63113,12 +66975,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -63492,12 +67356,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -64017,12 +67883,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -64288,12 +68156,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -64607,12 +68477,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -64848,12 +68720,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -65105,12 +68979,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -65413,12 +69289,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -65917,12 +69795,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -66537,12 +70417,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -66985,12 +70867,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -67020,12 +70899,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -67751,12 +71632,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -68047,12 +71930,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -68333,12 +72218,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -68645,12 +72532,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -68836,6 +72725,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -68895,6 +72785,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -68929,6 +72827,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -68956,12 +72856,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -68983,6 +72885,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -69043,6 +72949,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -69079,6 +72988,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -69102,6 +73013,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -69116,6 +73028,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -69303,12 +73217,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -69737,12 +73653,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -70076,12 +73994,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -70352,12 +74272,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -70887,12 +74809,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -71271,12 +75195,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -71561,12 +75487,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -71836,12 +75764,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -72147,12 +76077,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -72415,12 +76347,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -72741,12 +76675,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -72982,12 +76918,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -73223,12 +77161,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -73437,12 +77377,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -73625,12 +77567,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -74112,12 +78056,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length) {
+                Operation.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -74392,12 +78338,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length) {
+                GetOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -74628,12 +78576,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length) {
+                ListOperationsRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 4: {
                                 message.name = reader.string();
@@ -74881,12 +78831,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length) {
+                ListOperationsResponse.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.operations && message.operations.length))
@@ -75116,12 +79068,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length) {
+                CancelOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -75319,12 +79273,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length) {
+                DeleteOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -75533,12 +79489,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length) {
+                WaitOperationRequest.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -75765,12 +79723,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length) {
+                OperationInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.responseType = reader.string();
@@ -76017,12 +79977,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();

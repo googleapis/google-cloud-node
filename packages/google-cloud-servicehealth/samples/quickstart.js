@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(parent, pageSize) {
   // [START servicehealth_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -81,13 +81,14 @@ function main(parent) {
     // Construct request
     const request = {
       parent,
+      pageSize,
     };
 
     // Run request
-    const iterable = servicehealthClient.listEventsAsync(request);
-    for await (const response of iterable) {
-      console.log(response);
-    }
+    const response = await servicehealthClient.listEvents(request, {
+      autopaginate: false,
+    });
+    console.log(response);
   }
 
   callListEvents();

@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -1478,6 +1475,19 @@
                         }
                       }
                     },
+                    "ExcludeByImageFindings": {
+                      "fields": {
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 1
+                        },
+                        "imageContainmentType": {
+                          "type": "ImageContainmentType",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ExclusionRule": {
                       "oneofs": {
                         "type": {
@@ -1485,7 +1495,8 @@
                             "dictionary",
                             "regex",
                             "excludeInfoTypes",
-                            "excludeByHotword"
+                            "excludeByHotword",
+                            "excludeByImageFindings"
                           ]
                         }
                       },
@@ -1506,9 +1517,71 @@
                           "type": "ExcludeByHotword",
                           "id": 5
                         },
+                        "excludeByImageFindings": {
+                          "type": "ExcludeByImageFindings",
+                          "id": 6
+                        },
                         "matchingType": {
                           "type": "MatchingType",
                           "id": 4
+                        }
+                      }
+                    },
+                    "AdjustByMatchingInfoTypes": {
+                      "fields": {
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 1
+                        },
+                        "minLikelihood": {
+                          "type": "Likelihood",
+                          "id": 2
+                        },
+                        "matchingType": {
+                          "type": "MatchingType",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AdjustByImageFindings": {
+                      "fields": {
+                        "infoTypes": {
+                          "rule": "repeated",
+                          "type": "InfoType",
+                          "id": 1
+                        },
+                        "minLikelihood": {
+                          "type": "Likelihood",
+                          "id": 2
+                        },
+                        "imageContainmentType": {
+                          "type": "ImageContainmentType",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AdjustmentRule": {
+                      "oneofs": {
+                        "conditions": {
+                          "oneof": [
+                            "adjustByMatchingInfoTypes",
+                            "adjustByImageFindings"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "adjustByMatchingInfoTypes": {
+                          "type": "AdjustByMatchingInfoTypes",
+                          "id": 1
+                        },
+                        "adjustByImageFindings": {
+                          "type": "AdjustByImageFindings",
+                          "id": 3
+                        },
+                        "likelihoodAdjustment": {
+                          "type": "CustomInfoType.DetectionRule.LikelihoodAdjustment",
+                          "id": 2
                         }
                       }
                     },
@@ -1517,7 +1590,8 @@
                         "type": {
                           "oneof": [
                             "hotwordRule",
-                            "exclusionRule"
+                            "exclusionRule",
+                            "adjustmentRule"
                           ]
                         }
                       },
@@ -1529,6 +1603,10 @@
                         "exclusionRule": {
                           "type": "ExclusionRule",
                           "id": 2
+                        },
+                        "adjustmentRule": {
+                          "type": "AdjustmentRule",
+                          "id": 3
                         }
                       }
                     },
@@ -1872,7 +1950,8 @@
                       "oneofs": {
                         "label": {
                           "oneof": [
-                            "storageLabel"
+                            "storageLabel",
+                            "keyValueMetadataLabel"
                           ]
                         }
                       },
@@ -1884,10 +1963,22 @@
                         "storageLabel": {
                           "type": "StorageMetadataLabel",
                           "id": 3
+                        },
+                        "keyValueMetadataLabel": {
+                          "type": "KeyValueMetadataLabel",
+                          "id": 4
                         }
                       }
                     },
                     "StorageMetadataLabel": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "KeyValueMetadataLabel": {
                       "fields": {
                         "key": {
                           "type": "string",
@@ -2029,6 +2120,14 @@
                         "byteItem": {
                           "type": "ByteContentItem",
                           "id": 7
+                        },
+                        "inspectTemplate": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "deidentifyTemplate": {
+                          "type": "string",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2224,7 +2323,8 @@
                       "oneofs": {
                         "type": {
                           "oneof": [
-                            "table"
+                            "table",
+                            "storagePath"
                           ]
                         }
                       },
@@ -2232,6 +2332,10 @@
                         "table": {
                           "type": "BigQueryTable",
                           "id": 1
+                        },
+                        "storagePath": {
+                          "type": "CloudStoragePath",
+                          "id": 5
                         },
                         "outputSchema": {
                           "type": "OutputSchema",
@@ -2416,6 +2520,28 @@
                         }
                       }
                     },
+                    "LocationSupport": {
+                      "fields": {
+                        "regionalizationScope": {
+                          "type": "RegionalizationScope",
+                          "id": 1
+                        },
+                        "locations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "RegionalizationScope": {
+                          "values": {
+                            "REGIONALIZATION_SCOPE_UNSPECIFIED": 0,
+                            "REGIONAL": 1,
+                            "ANY_LOCATION": 2
+                          }
+                        }
+                      }
+                    },
                     "InfoTypeDescription": {
                       "fields": {
                         "name": {
@@ -2434,6 +2560,10 @@
                         "description": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationSupport": {
+                          "type": "LocationSupport",
+                          "id": 6
                         },
                         "example": {
                           "type": "string",
@@ -2457,6 +2587,20 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 12
+                        },
+                        "launchStatus": {
+                          "type": "InfoTypeLaunchStatus",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "InfoTypeLaunchStatus": {
+                          "values": {
+                            "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED": 0,
+                            "GENERAL_AVAILABILITY": 1,
+                            "PUBLIC_PREVIEW": 2,
+                            "PRIVATE_PREVIEW": 3
+                          }
                         }
                       }
                     },
@@ -2492,6 +2636,7 @@
                             "ARGENTINA": 2,
                             "ARMENIA": 51,
                             "AUSTRALIA": 3,
+                            "AUSTRIA": 53,
                             "AZERBAIJAN": 48,
                             "BELARUS": 50,
                             "BELGIUM": 4,
@@ -4451,6 +4596,7 @@
                             "pubSub",
                             "publishSummaryToCscc",
                             "publishFindingsToCloudDataCatalog",
+                            "publishFindingsToDataplexCatalog",
                             "deidentify",
                             "jobNotificationEmails",
                             "publishToStackdriver"
@@ -4472,7 +4618,14 @@
                         },
                         "publishFindingsToCloudDataCatalog": {
                           "type": "PublishFindingsToCloudDataCatalog",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "publishFindingsToDataplexCatalog": {
+                          "type": "PublishFindingsToDataplexCatalog",
+                          "id": 10
                         },
                         "deidentify": {
                           "type": "Deidentify",
@@ -4508,6 +4661,9 @@
                           "fields": {}
                         },
                         "PublishFindingsToCloudDataCatalog": {
+                          "fields": {}
+                        },
+                        "PublishFindingsToDataplexCatalog": {
                           "fields": {}
                         },
                         "Deidentify": {
@@ -4988,7 +5144,8 @@
                             "pubSubNotification",
                             "publishToChronicle",
                             "publishToScc",
-                            "tagResources"
+                            "tagResources",
+                            "publishToDataplexCatalog"
                           ]
                         }
                       },
@@ -5012,6 +5169,10 @@
                         "tagResources": {
                           "type": "TagResources",
                           "id": 8
+                        },
+                        "publishToDataplexCatalog": {
+                          "type": "PublishToDataplexCatalog",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -5071,6 +5232,14 @@
                         },
                         "PublishToSecurityCommandCenter": {
                           "fields": {}
+                        },
+                        "PublishToDataplexCatalog": {
+                          "fields": {
+                            "lowerDataRiskToLow": {
+                              "type": "bool",
+                              "id": 1
+                            }
+                          }
                         },
                         "TagResources": {
                           "fields": {
@@ -5161,6 +5330,14 @@
                         "resourceVisibility": {
                           "type": "ResourceVisibility",
                           "id": 8
+                        },
+                        "fullResourceName": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 10
                         }
                       }
                     },
@@ -5923,6 +6100,13 @@
                         "includeRegexes": {
                           "type": "FileStoreRegexes",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeTags": {
+                          "type": "TagFilters",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7140,8 +7324,43 @@
                         "MATCHING_TYPE_UNSPECIFIED": 0,
                         "MATCHING_TYPE_FULL_MATCH": 1,
                         "MATCHING_TYPE_PARTIAL_MATCH": 2,
-                        "MATCHING_TYPE_INVERSE_MATCH": 3
+                        "MATCHING_TYPE_INVERSE_MATCH": 3,
+                        "MATCHING_TYPE_RULE_SPECIFIC": 4
                       }
+                    },
+                    "ImageContainmentType": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "encloses",
+                            "fullyInside",
+                            "overlaps"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "encloses": {
+                          "type": "Encloses",
+                          "id": 1
+                        },
+                        "fullyInside": {
+                          "type": "FullyInside",
+                          "id": 2
+                        },
+                        "overlaps": {
+                          "type": "Overlap",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Overlap": {
+                      "fields": {}
+                    },
+                    "Encloses": {
+                      "fields": {}
+                    },
+                    "FullyInside": {
+                      "fields": {}
                     },
                     "ContentOption": {
                       "values": {
@@ -7153,7 +7372,8 @@
                     "MetadataType": {
                       "values": {
                         "METADATATYPE_UNSPECIFIED": 0,
-                        "STORAGE_METADATA": 2
+                        "STORAGE_METADATA": 2,
+                        "CONTENT_METADATA": 3
                       }
                     },
                     "InfoTypeSupportedBy": {
@@ -7522,6 +7742,11 @@
                           "rule": "repeated",
                           "type": "RelatedResource",
                           "id": 41
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "Domain",
+                          "id": 47
                         }
                       },
                       "nested": {
@@ -7844,6 +8069,11 @@
                           "rule": "repeated",
                           "type": "RelatedResource",
                           "id": 26
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "Domain",
+                          "id": 27
                         }
                       },
                       "nested": {
@@ -7869,6 +8099,38 @@
                         "value": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "TagFilters": {
+                      "fields": {
+                        "tagFilters": {
+                          "rule": "repeated",
+                          "type": "TagFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TagFilter": {
+                      "oneofs": {
+                        "format": {
+                          "oneof": [
+                            "namespacedTagValue",
+                            "namespacedTagKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "namespacedTagValue": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "namespacedTagKey": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -8421,10 +8683,7 @@
                       "fields": {
                         "dataSource": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 1
                         }
                       }
                     },
@@ -8465,6 +8724,10 @@
                         "imageFallbackLocation": {
                           "type": "ImageFallbackLocation",
                           "id": 1
+                        },
+                        "documentFallbackLocation": {
+                          "type": "DocumentFallbackLocation",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -8484,6 +8747,61 @@
                               "type": "GlobalProcessing",
                               "id": 200
                             }
+                          }
+                        },
+                        "DocumentFallbackLocation": {
+                          "fields": {
+                            "multiRegionProcessing": {
+                              "type": "MultiRegionProcessing",
+                              "id": 100
+                            },
+                            "globalProcessing": {
+                              "type": "GlobalProcessing",
+                              "id": 200
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SaveToGcsFindingsOutput": {
+                      "fields": {
+                        "findings": {
+                          "rule": "repeated",
+                          "type": "Finding",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Domain": {
+                      "fields": {
+                        "category": {
+                          "type": "Category",
+                          "id": 1
+                        },
+                        "signals": {
+                          "rule": "repeated",
+                          "type": "Signal",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Category": {
+                          "values": {
+                            "CATEGORY_UNSPECIFIED": 0,
+                            "AI": 1,
+                            "CODE": 2
+                          }
+                        },
+                        "Signal": {
+                          "values": {
+                            "SIGNAL_UNSPECIFIED": 0,
+                            "MODEL": 1,
+                            "TEXT_EMBEDDING": 2,
+                            "EMBEDDING": 7,
+                            "VERTEX_PLUGIN": 3,
+                            "VECTOR_PLUGIN": 4,
+                            "SOURCE_CODE": 5,
+                            "SERVICE": 6
                           }
                         }
                       }
@@ -8552,7 +8870,8 @@
                             "dictionary",
                             "regex",
                             "surrogateType",
-                            "storedType"
+                            "storedType",
+                            "metadataKeyValueExpression"
                           ]
                         }
                       },
@@ -8580,6 +8899,10 @@
                         "storedType": {
                           "type": "StoredType",
                           "id": 5
+                        },
+                        "metadataKeyValueExpression": {
+                          "type": "MetadataKeyValueExpression",
+                          "id": 10
                         },
                         "detectionRules": {
                           "rule": "repeated",
@@ -8642,6 +8965,18 @@
                         },
                         "SurrogateType": {
                           "fields": {}
+                        },
+                        "MetadataKeyValueExpression": {
+                          "fields": {
+                            "keyRegex": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "valueRegex": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         },
                         "DetectionRule": {
                           "oneofs": {
@@ -9086,6 +9421,10 @@
                         "tableId": {
                           "type": "string",
                           "id": 2
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -9237,6 +9576,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -9345,6 +9689,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -9520,7 +9868,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -9626,6 +9977,7 @@
           },
           "nested": {
             "FileDescriptorSet": {
+              "edition": "proto2",
               "fields": {
                 "file": {
                   "rule": "repeated",
@@ -9635,6 +9987,7 @@
               }
             },
             "Edition": {
+              "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
                 "EDITION_PROTO2": 998,
@@ -9650,6 +10003,7 @@
               }
             },
             "FileDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -9667,18 +10021,12 @@
                 "publicDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 10,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 10
                 },
                 "weakDependency": {
                   "rule": "repeated",
                   "type": "int32",
-                  "id": 11,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 11
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -9719,6 +10067,7 @@
               }
             },
             "DescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -9801,6 +10150,7 @@
               }
             },
             "ExtensionRangeOptions": {
+              "edition": "proto2",
               "fields": {
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -9874,6 +10224,7 @@
               }
             },
             "FieldDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -9953,6 +10304,7 @@
               }
             },
             "OneofDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -9965,6 +10317,7 @@
               }
             },
             "EnumDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -10006,6 +10359,7 @@
               }
             },
             "EnumValueDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -10022,6 +10376,7 @@
               }
             },
             "ServiceDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -10039,6 +10394,7 @@
               }
             },
             "MethodDescriptorProto": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "type": "string",
@@ -10073,6 +10429,7 @@
               }
             },
             "FileOptions": {
+              "edition": "proto2",
               "fields": {
                 "javaPackage": {
                   "type": "string",
@@ -10214,6 +10571,7 @@
               }
             },
             "MessageOptions": {
+              "edition": "proto2",
               "fields": {
                 "messageSetWireFormat": {
                   "type": "bool",
@@ -10287,6 +10645,7 @@
               ]
             },
             "FieldOptions": {
+              "edition": "proto2",
               "fields": {
                 "ctype": {
                   "type": "CType",
@@ -10348,10 +10707,7 @@
                 "targets": {
                   "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 19,
-                  "options": {
-                    "packed": false
-                  }
+                  "id": 19
                 },
                 "editionDefaults": {
                   "rule": "repeated",
@@ -10435,6 +10791,7 @@
               }
             },
             "OneofOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -10454,6 +10811,7 @@
               ]
             },
             "EnumOptions": {
+              "edition": "proto2",
               "fields": {
                 "allowAlias": {
                   "type": "bool",
@@ -10497,6 +10855,7 @@
               ]
             },
             "EnumValueOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -10530,6 +10889,7 @@
               ]
             },
             "ServiceOptions": {
+              "edition": "proto2",
               "fields": {
                 "features": {
                   "type": "FeatureSet",
@@ -10556,6 +10916,7 @@
               ]
             },
             "MethodOptions": {
+              "edition": "proto2",
               "fields": {
                 "deprecated": {
                   "type": "bool",
@@ -10598,6 +10959,7 @@
               }
             },
             "UninterpretedOption": {
+              "edition": "proto2",
               "fields": {
                 "name": {
                   "rule": "repeated",
@@ -10647,6 +11009,7 @@
               }
             },
             "FeatureSet": {
+              "edition": "proto2",
               "fields": {
                 "fieldPresence": {
                   "type": "FieldPresence",
@@ -10719,8 +11082,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [
@@ -10776,6 +11151,7 @@
               }
             },
             "FeatureSetDefaults": {
+              "edition": "proto2",
               "fields": {
                 "defaults": {
                   "rule": "repeated",
@@ -10807,6 +11183,7 @@
               }
             },
             "SourceCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "location": {
                   "rule": "repeated",
@@ -10820,12 +11197,18 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "span": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "leadingComments": {
                       "type": "string",
@@ -10845,6 +11228,7 @@
               }
             },
             "GeneratedCodeInfo": {
+              "edition": "proto2",
               "fields": {
                 "annotation": {
                   "rule": "repeated",
@@ -10858,7 +11242,10 @@
                     "path": {
                       "rule": "repeated",
                       "type": "int32",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
                     },
                     "sourceFile": {
                       "type": "string",

@@ -185,6 +185,118 @@
         }
       }
     },
+    "HsmManagement": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HsmManagementClient",
+          "rpcs": {
+            "GetSingleTenantHsmInstance": {
+              "methods": [
+                "getSingleTenantHsmInstance"
+              ]
+            },
+            "ApproveSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "approveSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "GetSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "getSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "DeleteSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "deleteSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "CreateSingleTenantHsmInstance": {
+              "methods": [
+                "createSingleTenantHsmInstance"
+              ]
+            },
+            "CreateSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "createSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "ExecuteSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "executeSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "ListSingleTenantHsmInstances": {
+              "methods": [
+                "listSingleTenantHsmInstances",
+                "listSingleTenantHsmInstancesStream",
+                "listSingleTenantHsmInstancesAsync"
+              ]
+            },
+            "ListSingleTenantHsmInstanceProposals": {
+              "methods": [
+                "listSingleTenantHsmInstanceProposals",
+                "listSingleTenantHsmInstanceProposalsStream",
+                "listSingleTenantHsmInstanceProposalsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HsmManagementClient",
+          "rpcs": {
+            "GetSingleTenantHsmInstance": {
+              "methods": [
+                "getSingleTenantHsmInstance"
+              ]
+            },
+            "ApproveSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "approveSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "GetSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "getSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "DeleteSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "deleteSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "CreateSingleTenantHsmInstance": {
+              "methods": [
+                "createSingleTenantHsmInstance"
+              ]
+            },
+            "CreateSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "createSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "ExecuteSingleTenantHsmInstanceProposal": {
+              "methods": [
+                "executeSingleTenantHsmInstanceProposal"
+              ]
+            },
+            "ListSingleTenantHsmInstances": {
+              "methods": [
+                "listSingleTenantHsmInstances",
+                "listSingleTenantHsmInstancesStream",
+                "listSingleTenantHsmInstancesAsync"
+              ]
+            },
+            "ListSingleTenantHsmInstanceProposals": {
+              "methods": [
+                "listSingleTenantHsmInstanceProposals",
+                "listSingleTenantHsmInstanceProposalsStream",
+                "listSingleTenantHsmInstanceProposalsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "KeyManagementService": {
       "clients": {
         "grpc": {
@@ -213,6 +325,11 @@
             "GetImportJob": {
               "methods": [
                 "getImportJob"
+              ]
+            },
+            "GetRetiredResource": {
+              "methods": [
+                "getRetiredResource"
               ]
             },
             "CreateKeyRing": {
@@ -305,9 +422,24 @@
                 "macVerify"
               ]
             },
+            "Decapsulate": {
+              "methods": [
+                "decapsulate"
+              ]
+            },
             "GenerateRandomBytes": {
               "methods": [
                 "generateRandomBytes"
+              ]
+            },
+            "DeleteCryptoKey": {
+              "methods": [
+                "deleteCryptoKey"
+              ]
+            },
+            "DeleteCryptoKeyVersion": {
+              "methods": [
+                "deleteCryptoKeyVersion"
               ]
             },
             "ListKeyRings": {
@@ -336,6 +468,13 @@
                 "listImportJobs",
                 "listImportJobsStream",
                 "listImportJobsAsync"
+              ]
+            },
+            "ListRetiredResources": {
+              "methods": [
+                "listRetiredResources",
+                "listRetiredResourcesStream",
+                "listRetiredResourcesAsync"
               ]
             }
           }
@@ -368,6 +507,11 @@
                 "getImportJob"
               ]
             },
+            "GetRetiredResource": {
+              "methods": [
+                "getRetiredResource"
+              ]
+            },
             "CreateKeyRing": {
               "methods": [
                 "createKeyRing"
@@ -458,9 +602,24 @@
                 "macVerify"
               ]
             },
+            "Decapsulate": {
+              "methods": [
+                "decapsulate"
+              ]
+            },
             "GenerateRandomBytes": {
               "methods": [
                 "generateRandomBytes"
+              ]
+            },
+            "DeleteCryptoKey": {
+              "methods": [
+                "deleteCryptoKey"
+              ]
+            },
+            "DeleteCryptoKeyVersion": {
+              "methods": [
+                "deleteCryptoKeyVersion"
               ]
             },
             "ListKeyRings": {
@@ -489,6 +648,13 @@
                 "listImportJobs",
                 "listImportJobsStream",
                 "listImportJobsAsync"
+              ]
+            },
+            "ListRetiredResources": {
+              "methods": [
+                "listRetiredResources",
+                "listRetiredResourcesStream",
+                "listRetiredResourcesAsync"
               ]
             }
           }

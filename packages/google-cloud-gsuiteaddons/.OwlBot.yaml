@@ -13,5 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/gsuiteaddons/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-gsuiteaddons/$1
+    - source: /google/cloud/gsuiteaddons/google-cloud-gsuiteaddons-nodejs
+      dest: /owl-bot-staging/google-cloud-gsuiteaddons
+
+api-name: gsuiteaddons

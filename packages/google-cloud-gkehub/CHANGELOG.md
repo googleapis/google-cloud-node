@@ -1,5 +1,43 @@
 # Changelog
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.3.1...gke-hub-v6.4.0) (2026-03-19)
+
+
+### Features
+
+* [gkehub] A new field `kubernetes_api_server_version` is added to message `.google.cloud.gkehub.configmanagement.v1beta.MembershipState` ([#7534](https://github.com/googleapis/google-cloud-node/issues/7534)) ([9de1438](https://github.com/googleapis/google-cloud-node/commit/9de14388ef6e9919bb75de88d63cecb1c9a9a629))
+
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.3.0...gke-hub-v6.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+* Remove unmaintained modules ([#6789](https://github.com/googleapis/google-cloud-node/issues/6789)) ([5540190](https://github.com/googleapis/google-cloud-node/commit/5540190bfce6a97615191ecd36835376b919f487))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.2.0...gke-hub-v6.3.0) (2025-09-16)
+
+
+### Features
+
+* [gkehub] add `k8s_git_version` field ([#6721](https://github.com/googleapis/google-cloud-node/issues/6721)) ([c2976aa](https://github.com/googleapis/google-cloud-node/commit/c2976aaa1f6fc27af603f939e9d7dc48d716fcfd))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.1.0...gke-hub-v6.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6421](https://github.com/googleapis/google-cloud-node/issues/6421)) ([0cba45c](https://github.com/googleapis/google-cloud-node/commit/0cba45c3abc98d4f1ffdf75da3610e6e52267737))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.0.1...gke-hub-v6.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v6.0.0...gke-hub-v6.0.1) (2025-03-21)
 
 

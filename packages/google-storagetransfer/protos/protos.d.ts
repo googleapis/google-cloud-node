@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2681,6 +2681,9 @@ export namespace google {
 
                 /** AzureBlobStorageData credentialsSecret */
                 credentialsSecret?: (string|null);
+
+                /** AzureBlobStorageData federatedIdentityConfig */
+                federatedIdentityConfig?: (google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig|null);
             }
 
             /** Represents an AzureBlobStorageData. */
@@ -2706,6 +2709,9 @@ export namespace google {
 
                 /** AzureBlobStorageData credentialsSecret. */
                 public credentialsSecret: string;
+
+                /** AzureBlobStorageData federatedIdentityConfig. */
+                public federatedIdentityConfig?: (google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig|null);
 
                 /**
                  * Creates a new AzureBlobStorageData instance using the specified properties.
@@ -2783,6 +2789,112 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AzureBlobStorageData {
+
+                /** Properties of a FederatedIdentityConfig. */
+                interface IFederatedIdentityConfig {
+
+                    /** FederatedIdentityConfig clientId */
+                    clientId?: (string|null);
+
+                    /** FederatedIdentityConfig tenantId */
+                    tenantId?: (string|null);
+                }
+
+                /** Represents a FederatedIdentityConfig. */
+                class FederatedIdentityConfig implements IFederatedIdentityConfig {
+
+                    /**
+                     * Constructs a new FederatedIdentityConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig);
+
+                    /** FederatedIdentityConfig clientId. */
+                    public clientId: string;
+
+                    /** FederatedIdentityConfig tenantId. */
+                    public tenantId: string;
+
+                    /**
+                     * Creates a new FederatedIdentityConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FederatedIdentityConfig instance
+                     */
+                    public static create(properties?: google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig): google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig;
+
+                    /**
+                     * Encodes the specified FederatedIdentityConfig message. Does not implicitly {@link google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.verify|verify} messages.
+                     * @param message FederatedIdentityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FederatedIdentityConfig message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig.verify|verify} messages.
+                     * @param message FederatedIdentityConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.storagetransfer.v1.AzureBlobStorageData.IFederatedIdentityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FederatedIdentityConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FederatedIdentityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig;
+
+                    /**
+                     * Decodes a FederatedIdentityConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FederatedIdentityConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig;
+
+                    /**
+                     * Verifies a FederatedIdentityConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FederatedIdentityConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FederatedIdentityConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig;
+
+                    /**
+                     * Creates a plain object from a FederatedIdentityConfig message. Also converts values to other types if specified.
+                     * @param message FederatedIdentityConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.storagetransfer.v1.AzureBlobStorageData.FederatedIdentityConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FederatedIdentityConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FederatedIdentityConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
 
             /** Properties of a HttpData. */
@@ -4566,6 +4678,9 @@ export namespace google {
                 /** TransferJob projectId */
                 projectId?: (string|null);
 
+                /** TransferJob serviceAccount */
+                serviceAccount?: (string|null);
+
                 /** TransferJob transferSpec */
                 transferSpec?: (google.storagetransfer.v1.ITransferSpec|null);
 
@@ -4617,6 +4732,9 @@ export namespace google {
 
                 /** TransferJob projectId. */
                 public projectId: string;
+
+                /** TransferJob serviceAccount. */
+                public serviceAccount: string;
 
                 /** TransferJob transferSpec. */
                 public transferSpec?: (google.storagetransfer.v1.ITransferSpec|null);
@@ -5419,7 +5537,8 @@ export namespace google {
                 enum LoggableActionState {
                     LOGGABLE_ACTION_STATE_UNSPECIFIED = 0,
                     SUCCEEDED = 1,
-                    FAILED = 2
+                    FAILED = 2,
+                    SKIPPED = 3
                 }
             }
 
@@ -6252,6 +6371,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -6292,6 +6414,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -10510,6 +10635,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -10761,7 +10889,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -10792,7 +10920,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -11931,7 +12059,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -11947,7 +12075,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

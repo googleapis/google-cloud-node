@@ -430,16 +430,6 @@
                 "deleteChannelGroup"
               ]
             },
-            "SetAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "setAutomatedGa4ConfigurationOptOut"
-              ]
-            },
-            "FetchAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "fetchAutomatedGa4ConfigurationOptOut"
-              ]
-            },
             "CreateBigQueryLink": {
               "methods": [
                 "createBigQueryLink"
@@ -468,26 +458,6 @@
             "UpdateEnhancedMeasurementSettings": {
               "methods": [
                 "updateEnhancedMeasurementSettings"
-              ]
-            },
-            "CreateConnectedSiteTag": {
-              "methods": [
-                "createConnectedSiteTag"
-              ]
-            },
-            "DeleteConnectedSiteTag": {
-              "methods": [
-                "deleteConnectedSiteTag"
-              ]
-            },
-            "ListConnectedSiteTags": {
-              "methods": [
-                "listConnectedSiteTags"
-              ]
-            },
-            "FetchConnectedGa4Property": {
-              "methods": [
-                "fetchConnectedGa4Property"
               ]
             },
             "GetAdSenseLink": {
@@ -648,6 +618,21 @@
             "SubmitUserDeletion": {
               "methods": [
                 "submitUserDeletion"
+              ]
+            },
+            "UpdateSubpropertySyncConfig": {
+              "methods": [
+                "updateSubpropertySyncConfig"
+              ]
+            },
+            "GetSubpropertySyncConfig": {
+              "methods": [
+                "getSubpropertySyncConfig"
+              ]
+            },
+            "GetReportingIdentitySettings": {
+              "methods": [
+                "getReportingIdentitySettings"
               ]
             },
             "ListAccounts": {
@@ -844,6 +829,13 @@
                 "listReportingDataAnnotations",
                 "listReportingDataAnnotationsStream",
                 "listReportingDataAnnotationsAsync"
+              ]
+            },
+            "ListSubpropertySyncConfigs": {
+              "methods": [
+                "listSubpropertySyncConfigs",
+                "listSubpropertySyncConfigsStream",
+                "listSubpropertySyncConfigsAsync"
               ]
             }
           }
@@ -1271,16 +1263,6 @@
                 "deleteChannelGroup"
               ]
             },
-            "SetAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "setAutomatedGa4ConfigurationOptOut"
-              ]
-            },
-            "FetchAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "fetchAutomatedGa4ConfigurationOptOut"
-              ]
-            },
             "CreateBigQueryLink": {
               "methods": [
                 "createBigQueryLink"
@@ -1309,26 +1291,6 @@
             "UpdateEnhancedMeasurementSettings": {
               "methods": [
                 "updateEnhancedMeasurementSettings"
-              ]
-            },
-            "CreateConnectedSiteTag": {
-              "methods": [
-                "createConnectedSiteTag"
-              ]
-            },
-            "DeleteConnectedSiteTag": {
-              "methods": [
-                "deleteConnectedSiteTag"
-              ]
-            },
-            "ListConnectedSiteTags": {
-              "methods": [
-                "listConnectedSiteTags"
-              ]
-            },
-            "FetchConnectedGa4Property": {
-              "methods": [
-                "fetchConnectedGa4Property"
               ]
             },
             "GetAdSenseLink": {
@@ -1489,6 +1451,21 @@
             "SubmitUserDeletion": {
               "methods": [
                 "submitUserDeletion"
+              ]
+            },
+            "UpdateSubpropertySyncConfig": {
+              "methods": [
+                "updateSubpropertySyncConfig"
+              ]
+            },
+            "GetSubpropertySyncConfig": {
+              "methods": [
+                "getSubpropertySyncConfig"
+              ]
+            },
+            "GetReportingIdentitySettings": {
+              "methods": [
+                "getReportingIdentitySettings"
               ]
             },
             "ListAccounts": {
@@ -1685,6 +1662,13 @@
                 "listReportingDataAnnotations",
                 "listReportingDataAnnotationsStream",
                 "listReportingDataAnnotationsAsync"
+              ]
+            },
+            "ListSubpropertySyncConfigs": {
+              "methods": [
+                "listSubpropertySyncConfigs",
+                "listSubpropertySyncConfigsStream",
+                "listSubpropertySyncConfigsAsync"
               ]
             }
           }

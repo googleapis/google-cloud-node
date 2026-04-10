@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,6 +49,24 @@ function main(servingConfig) {
    */
   // const query = 'abc123'
   /**
+   *  Optional. The categories associated with a category page. Must be set for
+   *  category navigation queries to achieve good search quality. The format
+   *  should be the same as
+   *  PageInfo.page_category google.cloud.discoveryengine.v1.PageInfo.page_category.
+   *  This field is the equivalent of the query for browse (navigation) queries.
+   *  It's used by the browse model when the query is empty.
+   *  If the field is empty, it will not be used by the browse model.
+   *  If the field contains more than one element, only the first element will
+   *  be used.
+   *  To represent full path of a category, use '>' character to separate
+   *  different hierarchies. If '>' is part of the category name, replace it with
+   *  other character(s).
+   *  For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *  4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *  > Founders Edition`
+   */
+  // const pageCategories = ['abc','def']
+  /**
    *  Raw image query.
    */
   // const imageQuery = {}
@@ -80,6 +98,7 @@ function main(servingConfig) {
    *  page_token google.cloud.discoveryengine.v1.SearchRequest.page_token  is
    *  unset.
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *  A large offset may be capped to a reasonable threshold.
    */
   // const offset = 1234
   /**
@@ -192,10 +211,10 @@ function main(servingConfig) {
    */
   // const spellCorrectionSpec = {}
   /**
-   *  A unique identifier for tracking visitors. For example, this could be
-   *  implemented with an HTTP cookie, which should be able to uniquely identify
-   *  a visitor on a single device. This unique identifier should not change if
-   *  the visitor logs in or out of the website.
+   *  Optional. A unique identifier for tracking visitors. For example, this
+   *  could be implemented with an HTTP cookie, which should be able to uniquely
+   *  identify a visitor on a single device. This unique identifier should not
+   *  change if the visitor logs in or out of the website.
    *  This field should NOT have a fixed value such as `unknown_visitor`.
    *  This should be the same identifier as
    *  UserEvent.user_pseudo_id google.cloud.discoveryengine.v1.UserEvent.user_pseudo_id 
@@ -209,6 +228,89 @@ function main(servingConfig) {
    *  A specification for configuring the behavior of content search.
    */
   // const contentSearchSpec = {}
+  /**
+   *  Optional. The ranking expression controls the customized ranking on
+   *  retrieval documents. This overrides
+   *  ServingConfig.ranking_expression google.cloud.discoveryengine.v1.ServingConfig.ranking_expression.
+   *  The syntax and supported features depend on the
+   *  `ranking_expression_backend` value. If `ranking_expression_backend` is not
+   *  provided, it defaults to `RANK_BY_EMBEDDING`.
+   *  If
+   *  ranking_expression_backend google.cloud.discoveryengine.v1.SearchRequest.ranking_expression_backend 
+   *  is not provided or set to `RANK_BY_EMBEDDING`, it should be a single
+   *  function or multiple functions that are joined by "+".
+   *    * ranking_expression = function, { " + ", function };
+   *  Supported functions:
+   *    * double * relevance_score
+   *    * double * dotProduct(embedding_field_path)
+   *  Function variables:
+   *    * `relevance_score`: pre-defined keywords, used for measure relevance
+   *    between query and document.
+   *    * `embedding_field_path`: the document embedding field
+   *    used with query embedding vector.
+   *    * `dotProduct`: embedding function between `embedding_field_path` and
+   *    query embedding vector.
+   *   Example ranking expression:
+   *     If document has an embedding field doc_embedding, the ranking expression
+   *     could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+   *  If
+   *  ranking_expression_backend google.cloud.discoveryengine.v1.SearchRequest.ranking_expression_backend 
+   *  is set to `RANK_BY_FORMULA`, the following expression types (and
+   *  combinations of those chained using + or
+   *  * operators) are supported:
+   *    * `double`
+   *    * `signal`
+   *    * `log(signal)`
+   *    * `exp(signal)`
+   *    * `rr(signal, double > 0)`  -- reciprocal rank transformation with second
+   *    argument being a denominator constant.
+   *    * `is_nan(signal)` -- returns 0 if signal is NaN, 1 otherwise.
+   *    * `fill_nan(signal1, signal2 | double)` -- if signal1 is NaN, returns
+   *    signal2 | double, else returns signal1.
+   *    Here are a few examples of ranking formulas that use the supported
+   *    ranking expression types:
+   *    - `0.2 * semantic_similarity_score + 0.8 * log(keyword_similarity_score)`
+   *    -- mostly rank by the logarithm of `keyword_similarity_score` with slight
+   *    `semantic_smilarity_score` adjustment.
+   *    - `0.2 * exp(fill_nan(semantic_similarity_score, 0)) + 0.3 *
+   *    is_nan(keyword_similarity_score)` -- rank by the exponent of
+   *    `semantic_similarity_score` filling the value with 0 if it's NaN, also
+   *    add constant 0.3 adjustment to the final score if
+   *    `semantic_similarity_score` is NaN.
+   *    - `0.2 * rr(semantic_similarity_score, 16) + 0.8 *
+   *    rr(keyword_similarity_score, 16)` -- mostly rank by the reciprocal rank
+   *    of `keyword_similarity_score` with slight adjustment of reciprocal rank
+   *    of `semantic_smilarity_score`.
+   *  The following signals are supported:
+   *    * `semantic_similarity_score`: semantic similarity adjustment that is
+   *    calculated using the embeddings generated by a proprietary Google model.
+   *    This score determines how semantically similar a search query is to a
+   *    document.
+   *    * `keyword_similarity_score`: keyword match adjustment uses the Best
+   *    Match 25 (BM25) ranking function. This score is calculated using a
+   *    probabilistic model to estimate the probability that a document is
+   *    relevant to a given query.
+   *    * `relevance_score`: semantic relevance adjustment that uses a
+   *    proprietary Google model to determine the meaning and intent behind a
+   *    user's query in context with the content in the documents.
+   *    * `pctr_rank`: predicted conversion rate adjustment as a rank use
+   *    predicted Click-through rate (pCTR) to gauge the relevance and
+   *    attractiveness of a search result from a user's perspective. A higher
+   *    pCTR suggests that the result is more likely to satisfy the user's query
+   *    and intent, making it a valuable signal for ranking.
+   *    * `freshness_rank`: freshness adjustment as a rank
+   *    * `document_age`: The time in hours elapsed since the document was last
+   *    updated, a floating-point number (e.g., 0.25 means 15 minutes).
+   *    * `topicality_rank`: topicality adjustment as a rank. Uses proprietary
+   *    Google model to determine the keyword-based overlap between the query and
+   *    the document.
+   *    * `base_rank`: the default rank of the result
+   */
+  // const rankingExpression = 'abc123'
+  /**
+   *  Optional. The backend to use for the ranking expression evaluation.
+   */
+  // const rankingExpressionBackend = {}
   /**
    *  Whether to turn on safe search. This is only supported for
    *  website search.
@@ -233,6 +335,15 @@ function main(servingConfig) {
    */
   // const userLabels = [1,2,3,4]
   /**
+   *  Optional. Config for natural language query understanding capabilities,
+   *  such as extracting structured field filters from the query. Refer to this
+   *  documentation (https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *  for more information.
+   *  If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *  natural language query understanding will be done.
+   */
+  // const naturalLanguageQueryUnderstandingSpec = {}
+  /**
    *  Search as you type configuration. Only supported for the
    *  IndustryVertical.MEDIA google.cloud.discoveryengine.v1.IndustryVertical.MEDIA 
    *  vertical.
@@ -244,24 +355,31 @@ function main(servingConfig) {
    */
   // const displaySpec = {}
   /**
+   *  Optional. Crowding specifications for improving result diversity.
+   *  If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *  each unique combination of the `field` values, and max_count will be the
+   *  maximum value of `max_count` across all CrowdingSpecs.
+   *  For example, if the first CrowdingSpec has `field` = "color" and
+   *  `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *  `max_count` = 2, then after 3 documents that share the same color AND size
+   *  have been returned, subsequent ones should be
+   *  removed or demoted.
+   */
+  // const crowdingSpecs = [1,2,3,4]
+  /**
    *  The session resource name. Optional.
    *  Session allows users to do multi-turn /search API calls or coordination
    *  between /search API calls and /answer API calls.
    *  Example #1 (multi-turn /search API calls):
-   *    1. Call /search API with the auto-session mode (see below).
-   *    2. Call /search API with the session ID generated in the first call.
-   *       Here, the previous search query gets considered in query
-   *       standing. I.e., if the first query is "How did Alphabet do in 2022?"
-   *       and the current query is "How about 2023?", the current query will
-   *       be interpreted as "How did Alphabet do in 2023?".
+   *    Call /search API with the session ID generated in the first call.
+   *    Here, the previous search query gets considered in query
+   *    standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *    and the current query is "How about 2023?", the current query will
+   *    be interpreted as "How did Alphabet do in 2023?".
    *  Example #2 (coordination between /search API calls and /answer API calls):
-   *    1. Call /search API with the auto-session mode (see below).
-   *    2. Call /answer API with the session ID generated in the first call.
-   *       Here, the answer generation happens in the context of the search
-   *       results from the first search call.
-   *  Auto-session mode: when `projects/.../sessions/-` is used, a new session
-   *  gets automatically created. Otherwise, users can use the create-session API
-   *  to create a session manually.
+   *    Call /answer API with the session ID generated in the first call.
+   *    Here, the answer generation happens in the context of the search
+   *    results from the first search call.
    *  Multi-turn Search feature is currently at private GA stage. Please use
    *  v1alpha or v1beta version instead before we launch this feature to public
    *  GA. Or ask for allowlisting through Google Support team.
@@ -273,10 +391,12 @@ function main(servingConfig) {
    */
   // const sessionSpec = {}
   /**
-   *  The relevance threshold of the search results.
-   *  Default to Google defined threshold, leveraging a balance of
+   *  The global relevance threshold of the search results.
+   *  Defaults to Google defined threshold, leveraging a balance of
    *  precision and recall to deliver both highly accurate results and
    *  comprehensive coverage of relevant information.
+   *  If more granular relevance filtering is required, use the
+   *  `relevance_filter_spec` instead.
    *  This feature is not supported for healthcare search.
    */
   // const relevanceThreshold = {}

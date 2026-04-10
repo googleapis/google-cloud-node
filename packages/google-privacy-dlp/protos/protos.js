@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2003,12 +2003,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExcludeInfoTypes.decode = function decode(reader, length) {
+                        ExcludeInfoTypes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ExcludeInfoTypes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.infoTypes && message.infoTypes.length))
@@ -2236,12 +2238,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExcludeByHotword.decode = function decode(reader, length) {
+                        ExcludeByHotword.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ExcludeByHotword();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hotwordRegex = $root.google.privacy.dlp.v2.CustomInfoType.Regex.decode(reader, reader.uint32());
@@ -2377,6 +2381,261 @@
                         return ExcludeByHotword;
                     })();
     
+                    v2.ExcludeByImageFindings = (function() {
+    
+                        /**
+                         * Properties of an ExcludeByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IExcludeByImageFindings
+                         * @property {Array.<google.privacy.dlp.v2.IInfoType>|null} [infoTypes] ExcludeByImageFindings infoTypes
+                         * @property {google.privacy.dlp.v2.IImageContainmentType|null} [imageContainmentType] ExcludeByImageFindings imageContainmentType
+                         */
+    
+                        /**
+                         * Constructs a new ExcludeByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an ExcludeByImageFindings.
+                         * @implements IExcludeByImageFindings
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings=} [properties] Properties to set
+                         */
+                        function ExcludeByImageFindings(properties) {
+                            this.infoTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExcludeByImageFindings infoTypes.
+                         * @member {Array.<google.privacy.dlp.v2.IInfoType>} infoTypes
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @instance
+                         */
+                        ExcludeByImageFindings.prototype.infoTypes = $util.emptyArray;
+    
+                        /**
+                         * ExcludeByImageFindings imageContainmentType.
+                         * @member {google.privacy.dlp.v2.IImageContainmentType|null|undefined} imageContainmentType
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @instance
+                         */
+                        ExcludeByImageFindings.prototype.imageContainmentType = null;
+    
+                        /**
+                         * Creates a new ExcludeByImageFindings instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings instance
+                         */
+                        ExcludeByImageFindings.create = function create(properties) {
+                            return new ExcludeByImageFindings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExcludeByImageFindings message. Does not implicitly {@link google.privacy.dlp.v2.ExcludeByImageFindings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings} message ExcludeByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExcludeByImageFindings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    $root.google.privacy.dlp.v2.InfoType.encode(message.infoTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.imageContainmentType != null && Object.hasOwnProperty.call(message, "imageContainmentType"))
+                                $root.google.privacy.dlp.v2.ImageContainmentType.encode(message.imageContainmentType, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExcludeByImageFindings message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ExcludeByImageFindings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IExcludeByImageFindings} message ExcludeByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExcludeByImageFindings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExcludeByImageFindings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExcludeByImageFindings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ExcludeByImageFindings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push($root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExcludeByImageFindings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExcludeByImageFindings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExcludeByImageFindings message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExcludeByImageFindings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.InfoType.verify(message.infoTypes[i]);
+                                    if (error)
+                                        return "infoTypes." + error;
+                                }
+                            }
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType")) {
+                                var error = $root.google.privacy.dlp.v2.ImageContainmentType.verify(message.imageContainmentType);
+                                if (error)
+                                    return "imageContainmentType." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExcludeByImageFindings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.ExcludeByImageFindings} ExcludeByImageFindings
+                         */
+                        ExcludeByImageFindings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.ExcludeByImageFindings)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.ExcludeByImageFindings();
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.privacy.dlp.v2.ExcludeByImageFindings.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i) {
+                                    if (typeof object.infoTypes[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.ExcludeByImageFindings.infoTypes: object expected");
+                                    message.infoTypes[i] = $root.google.privacy.dlp.v2.InfoType.fromObject(object.infoTypes[i]);
+                                }
+                            }
+                            if (object.imageContainmentType != null) {
+                                if (typeof object.imageContainmentType !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ExcludeByImageFindings.imageContainmentType: object expected");
+                                message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.fromObject(object.imageContainmentType);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExcludeByImageFindings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.ExcludeByImageFindings} message ExcludeByImageFindings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExcludeByImageFindings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.infoTypes = [];
+                            if (options.defaults)
+                                object.imageContainmentType = null;
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = $root.google.privacy.dlp.v2.InfoType.toObject(message.infoTypes[j], options);
+                            }
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType"))
+                                object.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.toObject(message.imageContainmentType, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExcludeByImageFindings to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExcludeByImageFindings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExcludeByImageFindings
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.ExcludeByImageFindings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExcludeByImageFindings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.ExcludeByImageFindings";
+                        };
+    
+                        return ExcludeByImageFindings;
+                    })();
+    
                     v2.ExclusionRule = (function() {
     
                         /**
@@ -2387,6 +2646,7 @@
                          * @property {google.privacy.dlp.v2.CustomInfoType.IRegex|null} [regex] ExclusionRule regex
                          * @property {google.privacy.dlp.v2.IExcludeInfoTypes|null} [excludeInfoTypes] ExclusionRule excludeInfoTypes
                          * @property {google.privacy.dlp.v2.IExcludeByHotword|null} [excludeByHotword] ExclusionRule excludeByHotword
+                         * @property {google.privacy.dlp.v2.IExcludeByImageFindings|null} [excludeByImageFindings] ExclusionRule excludeByImageFindings
                          * @property {google.privacy.dlp.v2.MatchingType|null} [matchingType] ExclusionRule matchingType
                          */
     
@@ -2438,6 +2698,14 @@
                         ExclusionRule.prototype.excludeByHotword = null;
     
                         /**
+                         * ExclusionRule excludeByImageFindings.
+                         * @member {google.privacy.dlp.v2.IExcludeByImageFindings|null|undefined} excludeByImageFindings
+                         * @memberof google.privacy.dlp.v2.ExclusionRule
+                         * @instance
+                         */
+                        ExclusionRule.prototype.excludeByImageFindings = null;
+    
+                        /**
                          * ExclusionRule matchingType.
                          * @member {google.privacy.dlp.v2.MatchingType} matchingType
                          * @memberof google.privacy.dlp.v2.ExclusionRule
@@ -2450,12 +2718,12 @@
     
                         /**
                          * ExclusionRule type.
-                         * @member {"dictionary"|"regex"|"excludeInfoTypes"|"excludeByHotword"|undefined} type
+                         * @member {"dictionary"|"regex"|"excludeInfoTypes"|"excludeByHotword"|"excludeByImageFindings"|undefined} type
                          * @memberof google.privacy.dlp.v2.ExclusionRule
                          * @instance
                          */
                         Object.defineProperty(ExclusionRule.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "excludeInfoTypes", "excludeByHotword"]),
+                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "excludeInfoTypes", "excludeByHotword", "excludeByImageFindings"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2493,6 +2761,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.matchingType);
                             if (message.excludeByHotword != null && Object.hasOwnProperty.call(message, "excludeByHotword"))
                                 $root.google.privacy.dlp.v2.ExcludeByHotword.encode(message.excludeByHotword, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.excludeByImageFindings != null && Object.hasOwnProperty.call(message, "excludeByImageFindings"))
+                                $root.google.privacy.dlp.v2.ExcludeByImageFindings.encode(message.excludeByImageFindings, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
                         };
     
@@ -2520,12 +2790,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ExclusionRule.decode = function decode(reader, length) {
+                        ExclusionRule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ExclusionRule();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dictionary = $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.decode(reader, reader.uint32());
@@ -2541,6 +2813,10 @@
                                     }
                                 case 5: {
                                         message.excludeByHotword = $root.google.privacy.dlp.v2.ExcludeByHotword.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.excludeByImageFindings = $root.google.privacy.dlp.v2.ExcludeByImageFindings.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 4: {
@@ -2621,6 +2897,16 @@
                                         return "excludeByHotword." + error;
                                 }
                             }
+                            if (message.excludeByImageFindings != null && message.hasOwnProperty("excludeByImageFindings")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.ExcludeByImageFindings.verify(message.excludeByImageFindings);
+                                    if (error)
+                                        return "excludeByImageFindings." + error;
+                                }
+                            }
                             if (message.matchingType != null && message.hasOwnProperty("matchingType"))
                                 switch (message.matchingType) {
                                 default:
@@ -2629,6 +2915,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -2666,6 +2953,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.ExclusionRule.excludeByHotword: object expected");
                                 message.excludeByHotword = $root.google.privacy.dlp.v2.ExcludeByHotword.fromObject(object.excludeByHotword);
                             }
+                            if (object.excludeByImageFindings != null) {
+                                if (typeof object.excludeByImageFindings !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ExclusionRule.excludeByImageFindings: object expected");
+                                message.excludeByImageFindings = $root.google.privacy.dlp.v2.ExcludeByImageFindings.fromObject(object.excludeByImageFindings);
+                            }
                             switch (object.matchingType) {
                             default:
                                 if (typeof object.matchingType === "number") {
@@ -2688,6 +2980,10 @@
                             case "MATCHING_TYPE_INVERSE_MATCH":
                             case 3:
                                 message.matchingType = 3;
+                                break;
+                            case "MATCHING_TYPE_RULE_SPECIFIC":
+                            case 4:
+                                message.matchingType = 4;
                                 break;
                             }
                             return message;
@@ -2730,6 +3026,11 @@
                                 if (options.oneofs)
                                     object.type = "excludeByHotword";
                             }
+                            if (message.excludeByImageFindings != null && message.hasOwnProperty("excludeByImageFindings")) {
+                                object.excludeByImageFindings = $root.google.privacy.dlp.v2.ExcludeByImageFindings.toObject(message.excludeByImageFindings, options);
+                                if (options.oneofs)
+                                    object.type = "excludeByImageFindings";
+                            }
                             return object;
                         };
     
@@ -2762,6 +3063,964 @@
                         return ExclusionRule;
                     })();
     
+                    v2.AdjustByMatchingInfoTypes = (function() {
+    
+                        /**
+                         * Properties of an AdjustByMatchingInfoTypes.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IAdjustByMatchingInfoTypes
+                         * @property {Array.<google.privacy.dlp.v2.IInfoType>|null} [infoTypes] AdjustByMatchingInfoTypes infoTypes
+                         * @property {google.privacy.dlp.v2.Likelihood|null} [minLikelihood] AdjustByMatchingInfoTypes minLikelihood
+                         * @property {google.privacy.dlp.v2.MatchingType|null} [matchingType] AdjustByMatchingInfoTypes matchingType
+                         */
+    
+                        /**
+                         * Constructs a new AdjustByMatchingInfoTypes.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an AdjustByMatchingInfoTypes.
+                         * @implements IAdjustByMatchingInfoTypes
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes=} [properties] Properties to set
+                         */
+                        function AdjustByMatchingInfoTypes(properties) {
+                            this.infoTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdjustByMatchingInfoTypes infoTypes.
+                         * @member {Array.<google.privacy.dlp.v2.IInfoType>} infoTypes
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         */
+                        AdjustByMatchingInfoTypes.prototype.infoTypes = $util.emptyArray;
+    
+                        /**
+                         * AdjustByMatchingInfoTypes minLikelihood.
+                         * @member {google.privacy.dlp.v2.Likelihood} minLikelihood
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         */
+                        AdjustByMatchingInfoTypes.prototype.minLikelihood = 0;
+    
+                        /**
+                         * AdjustByMatchingInfoTypes matchingType.
+                         * @member {google.privacy.dlp.v2.MatchingType} matchingType
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         */
+                        AdjustByMatchingInfoTypes.prototype.matchingType = 0;
+    
+                        /**
+                         * Creates a new AdjustByMatchingInfoTypes instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes instance
+                         */
+                        AdjustByMatchingInfoTypes.create = function create(properties) {
+                            return new AdjustByMatchingInfoTypes(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByMatchingInfoTypes message. Does not implicitly {@link google.privacy.dlp.v2.AdjustByMatchingInfoTypes.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes} message AdjustByMatchingInfoTypes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByMatchingInfoTypes.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    $root.google.privacy.dlp.v2.InfoType.encode(message.infoTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.minLikelihood != null && Object.hasOwnProperty.call(message, "minLikelihood"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minLikelihood);
+                            if (message.matchingType != null && Object.hasOwnProperty.call(message, "matchingType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.matchingType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByMatchingInfoTypes message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AdjustByMatchingInfoTypes.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes} message AdjustByMatchingInfoTypes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByMatchingInfoTypes.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdjustByMatchingInfoTypes message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByMatchingInfoTypes.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push($root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.minLikelihood = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.matchingType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdjustByMatchingInfoTypes message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByMatchingInfoTypes.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdjustByMatchingInfoTypes message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdjustByMatchingInfoTypes.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.InfoType.verify(message.infoTypes[i]);
+                                    if (error)
+                                        return "infoTypes." + error;
+                                }
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                switch (message.minLikelihood) {
+                                default:
+                                    return "minLikelihood: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.matchingType != null && message.hasOwnProperty("matchingType"))
+                                switch (message.matchingType) {
+                                default:
+                                    return "matchingType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdjustByMatchingInfoTypes message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} AdjustByMatchingInfoTypes
+                         */
+                        AdjustByMatchingInfoTypes.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes();
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustByMatchingInfoTypes.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i) {
+                                    if (typeof object.infoTypes[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.AdjustByMatchingInfoTypes.infoTypes: object expected");
+                                    message.infoTypes[i] = $root.google.privacy.dlp.v2.InfoType.fromObject(object.infoTypes[i]);
+                                }
+                            }
+                            switch (object.minLikelihood) {
+                            default:
+                                if (typeof object.minLikelihood === "number") {
+                                    message.minLikelihood = object.minLikelihood;
+                                    break;
+                                }
+                                break;
+                            case "LIKELIHOOD_UNSPECIFIED":
+                            case 0:
+                                message.minLikelihood = 0;
+                                break;
+                            case "VERY_UNLIKELY":
+                            case 1:
+                                message.minLikelihood = 1;
+                                break;
+                            case "UNLIKELY":
+                            case 2:
+                                message.minLikelihood = 2;
+                                break;
+                            case "POSSIBLE":
+                            case 3:
+                                message.minLikelihood = 3;
+                                break;
+                            case "LIKELY":
+                            case 4:
+                                message.minLikelihood = 4;
+                                break;
+                            case "VERY_LIKELY":
+                            case 5:
+                                message.minLikelihood = 5;
+                                break;
+                            }
+                            switch (object.matchingType) {
+                            default:
+                                if (typeof object.matchingType === "number") {
+                                    message.matchingType = object.matchingType;
+                                    break;
+                                }
+                                break;
+                            case "MATCHING_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.matchingType = 0;
+                                break;
+                            case "MATCHING_TYPE_FULL_MATCH":
+                            case 1:
+                                message.matchingType = 1;
+                                break;
+                            case "MATCHING_TYPE_PARTIAL_MATCH":
+                            case 2:
+                                message.matchingType = 2;
+                                break;
+                            case "MATCHING_TYPE_INVERSE_MATCH":
+                            case 3:
+                                message.matchingType = 3;
+                                break;
+                            case "MATCHING_TYPE_RULE_SPECIFIC":
+                            case 4:
+                                message.matchingType = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdjustByMatchingInfoTypes message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {google.privacy.dlp.v2.AdjustByMatchingInfoTypes} message AdjustByMatchingInfoTypes
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdjustByMatchingInfoTypes.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.infoTypes = [];
+                            if (options.defaults) {
+                                object.minLikelihood = options.enums === String ? "LIKELIHOOD_UNSPECIFIED" : 0;
+                                object.matchingType = options.enums === String ? "MATCHING_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = $root.google.privacy.dlp.v2.InfoType.toObject(message.infoTypes[j], options);
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                object.minLikelihood = options.enums === String ? $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] === undefined ? message.minLikelihood : $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] : message.minLikelihood;
+                            if (message.matchingType != null && message.hasOwnProperty("matchingType"))
+                                object.matchingType = options.enums === String ? $root.google.privacy.dlp.v2.MatchingType[message.matchingType] === undefined ? message.matchingType : $root.google.privacy.dlp.v2.MatchingType[message.matchingType] : message.matchingType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdjustByMatchingInfoTypes to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdjustByMatchingInfoTypes.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdjustByMatchingInfoTypes
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.AdjustByMatchingInfoTypes
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdjustByMatchingInfoTypes.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.AdjustByMatchingInfoTypes";
+                        };
+    
+                        return AdjustByMatchingInfoTypes;
+                    })();
+    
+                    v2.AdjustByImageFindings = (function() {
+    
+                        /**
+                         * Properties of an AdjustByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IAdjustByImageFindings
+                         * @property {Array.<google.privacy.dlp.v2.IInfoType>|null} [infoTypes] AdjustByImageFindings infoTypes
+                         * @property {google.privacy.dlp.v2.Likelihood|null} [minLikelihood] AdjustByImageFindings minLikelihood
+                         * @property {google.privacy.dlp.v2.IImageContainmentType|null} [imageContainmentType] AdjustByImageFindings imageContainmentType
+                         */
+    
+                        /**
+                         * Constructs a new AdjustByImageFindings.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an AdjustByImageFindings.
+                         * @implements IAdjustByImageFindings
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings=} [properties] Properties to set
+                         */
+                        function AdjustByImageFindings(properties) {
+                            this.infoTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdjustByImageFindings infoTypes.
+                         * @member {Array.<google.privacy.dlp.v2.IInfoType>} infoTypes
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         */
+                        AdjustByImageFindings.prototype.infoTypes = $util.emptyArray;
+    
+                        /**
+                         * AdjustByImageFindings minLikelihood.
+                         * @member {google.privacy.dlp.v2.Likelihood} minLikelihood
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         */
+                        AdjustByImageFindings.prototype.minLikelihood = 0;
+    
+                        /**
+                         * AdjustByImageFindings imageContainmentType.
+                         * @member {google.privacy.dlp.v2.IImageContainmentType|null|undefined} imageContainmentType
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         */
+                        AdjustByImageFindings.prototype.imageContainmentType = null;
+    
+                        /**
+                         * Creates a new AdjustByImageFindings instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings instance
+                         */
+                        AdjustByImageFindings.create = function create(properties) {
+                            return new AdjustByImageFindings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByImageFindings message. Does not implicitly {@link google.privacy.dlp.v2.AdjustByImageFindings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings} message AdjustByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByImageFindings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.infoTypes != null && message.infoTypes.length)
+                                for (var i = 0; i < message.infoTypes.length; ++i)
+                                    $root.google.privacy.dlp.v2.InfoType.encode(message.infoTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.minLikelihood != null && Object.hasOwnProperty.call(message, "minLikelihood"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minLikelihood);
+                            if (message.imageContainmentType != null && Object.hasOwnProperty.call(message, "imageContainmentType"))
+                                $root.google.privacy.dlp.v2.ImageContainmentType.encode(message.imageContainmentType, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustByImageFindings message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AdjustByImageFindings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustByImageFindings} message AdjustByImageFindings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustByImageFindings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdjustByImageFindings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByImageFindings.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AdjustByImageFindings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.infoTypes && message.infoTypes.length))
+                                            message.infoTypes = [];
+                                        message.infoTypes.push($root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.minLikelihood = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdjustByImageFindings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustByImageFindings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdjustByImageFindings message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdjustByImageFindings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.infoTypes != null && message.hasOwnProperty("infoTypes")) {
+                                if (!Array.isArray(message.infoTypes))
+                                    return "infoTypes: array expected";
+                                for (var i = 0; i < message.infoTypes.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.InfoType.verify(message.infoTypes[i]);
+                                    if (error)
+                                        return "infoTypes." + error;
+                                }
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                switch (message.minLikelihood) {
+                                default:
+                                    return "minLikelihood: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType")) {
+                                var error = $root.google.privacy.dlp.v2.ImageContainmentType.verify(message.imageContainmentType);
+                                if (error)
+                                    return "imageContainmentType." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdjustByImageFindings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.AdjustByImageFindings} AdjustByImageFindings
+                         */
+                        AdjustByImageFindings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.AdjustByImageFindings)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.AdjustByImageFindings();
+                            if (object.infoTypes) {
+                                if (!Array.isArray(object.infoTypes))
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustByImageFindings.infoTypes: array expected");
+                                message.infoTypes = [];
+                                for (var i = 0; i < object.infoTypes.length; ++i) {
+                                    if (typeof object.infoTypes[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.AdjustByImageFindings.infoTypes: object expected");
+                                    message.infoTypes[i] = $root.google.privacy.dlp.v2.InfoType.fromObject(object.infoTypes[i]);
+                                }
+                            }
+                            switch (object.minLikelihood) {
+                            default:
+                                if (typeof object.minLikelihood === "number") {
+                                    message.minLikelihood = object.minLikelihood;
+                                    break;
+                                }
+                                break;
+                            case "LIKELIHOOD_UNSPECIFIED":
+                            case 0:
+                                message.minLikelihood = 0;
+                                break;
+                            case "VERY_UNLIKELY":
+                            case 1:
+                                message.minLikelihood = 1;
+                                break;
+                            case "UNLIKELY":
+                            case 2:
+                                message.minLikelihood = 2;
+                                break;
+                            case "POSSIBLE":
+                            case 3:
+                                message.minLikelihood = 3;
+                                break;
+                            case "LIKELY":
+                            case 4:
+                                message.minLikelihood = 4;
+                                break;
+                            case "VERY_LIKELY":
+                            case 5:
+                                message.minLikelihood = 5;
+                                break;
+                            }
+                            if (object.imageContainmentType != null) {
+                                if (typeof object.imageContainmentType !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustByImageFindings.imageContainmentType: object expected");
+                                message.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.fromObject(object.imageContainmentType);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdjustByImageFindings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {google.privacy.dlp.v2.AdjustByImageFindings} message AdjustByImageFindings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdjustByImageFindings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.infoTypes = [];
+                            if (options.defaults) {
+                                object.minLikelihood = options.enums === String ? "LIKELIHOOD_UNSPECIFIED" : 0;
+                                object.imageContainmentType = null;
+                            }
+                            if (message.infoTypes && message.infoTypes.length) {
+                                object.infoTypes = [];
+                                for (var j = 0; j < message.infoTypes.length; ++j)
+                                    object.infoTypes[j] = $root.google.privacy.dlp.v2.InfoType.toObject(message.infoTypes[j], options);
+                            }
+                            if (message.minLikelihood != null && message.hasOwnProperty("minLikelihood"))
+                                object.minLikelihood = options.enums === String ? $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] === undefined ? message.minLikelihood : $root.google.privacy.dlp.v2.Likelihood[message.minLikelihood] : message.minLikelihood;
+                            if (message.imageContainmentType != null && message.hasOwnProperty("imageContainmentType"))
+                                object.imageContainmentType = $root.google.privacy.dlp.v2.ImageContainmentType.toObject(message.imageContainmentType, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdjustByImageFindings to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdjustByImageFindings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdjustByImageFindings
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.AdjustByImageFindings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdjustByImageFindings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.AdjustByImageFindings";
+                        };
+    
+                        return AdjustByImageFindings;
+                    })();
+    
+                    v2.AdjustmentRule = (function() {
+    
+                        /**
+                         * Properties of an AdjustmentRule.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IAdjustmentRule
+                         * @property {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes|null} [adjustByMatchingInfoTypes] AdjustmentRule adjustByMatchingInfoTypes
+                         * @property {google.privacy.dlp.v2.IAdjustByImageFindings|null} [adjustByImageFindings] AdjustmentRule adjustByImageFindings
+                         * @property {google.privacy.dlp.v2.CustomInfoType.DetectionRule.ILikelihoodAdjustment|null} [likelihoodAdjustment] AdjustmentRule likelihoodAdjustment
+                         */
+    
+                        /**
+                         * Constructs a new AdjustmentRule.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an AdjustmentRule.
+                         * @implements IAdjustmentRule
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule=} [properties] Properties to set
+                         */
+                        function AdjustmentRule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdjustmentRule adjustByMatchingInfoTypes.
+                         * @member {google.privacy.dlp.v2.IAdjustByMatchingInfoTypes|null|undefined} adjustByMatchingInfoTypes
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        AdjustmentRule.prototype.adjustByMatchingInfoTypes = null;
+    
+                        /**
+                         * AdjustmentRule adjustByImageFindings.
+                         * @member {google.privacy.dlp.v2.IAdjustByImageFindings|null|undefined} adjustByImageFindings
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        AdjustmentRule.prototype.adjustByImageFindings = null;
+    
+                        /**
+                         * AdjustmentRule likelihoodAdjustment.
+                         * @member {google.privacy.dlp.v2.CustomInfoType.DetectionRule.ILikelihoodAdjustment|null|undefined} likelihoodAdjustment
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        AdjustmentRule.prototype.likelihoodAdjustment = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AdjustmentRule conditions.
+                         * @member {"adjustByMatchingInfoTypes"|"adjustByImageFindings"|undefined} conditions
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         */
+                        Object.defineProperty(AdjustmentRule.prototype, "conditions", {
+                            get: $util.oneOfGetter($oneOfFields = ["adjustByMatchingInfoTypes", "adjustByImageFindings"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AdjustmentRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule instance
+                         */
+                        AdjustmentRule.create = function create(properties) {
+                            return new AdjustmentRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustmentRule message. Does not implicitly {@link google.privacy.dlp.v2.AdjustmentRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule} message AdjustmentRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustmentRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.adjustByMatchingInfoTypes != null && Object.hasOwnProperty.call(message, "adjustByMatchingInfoTypes"))
+                                $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.encode(message.adjustByMatchingInfoTypes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.likelihoodAdjustment != null && Object.hasOwnProperty.call(message, "likelihoodAdjustment"))
+                                $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.encode(message.likelihoodAdjustment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.adjustByImageFindings != null && Object.hasOwnProperty.call(message, "adjustByImageFindings"))
+                                $root.google.privacy.dlp.v2.AdjustByImageFindings.encode(message.adjustByImageFindings, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdjustmentRule message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AdjustmentRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.IAdjustmentRule} message AdjustmentRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdjustmentRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdjustmentRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustmentRule.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AdjustmentRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.adjustByMatchingInfoTypes = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.adjustByImageFindings = $root.google.privacy.dlp.v2.AdjustByImageFindings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.likelihoodAdjustment = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdjustmentRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdjustmentRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdjustmentRule message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdjustmentRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.adjustByMatchingInfoTypes != null && message.hasOwnProperty("adjustByMatchingInfoTypes")) {
+                                properties.conditions = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.verify(message.adjustByMatchingInfoTypes);
+                                    if (error)
+                                        return "adjustByMatchingInfoTypes." + error;
+                                }
+                            }
+                            if (message.adjustByImageFindings != null && message.hasOwnProperty("adjustByImageFindings")) {
+                                if (properties.conditions === 1)
+                                    return "conditions: multiple values";
+                                properties.conditions = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.AdjustByImageFindings.verify(message.adjustByImageFindings);
+                                    if (error)
+                                        return "adjustByImageFindings." + error;
+                                }
+                            }
+                            if (message.likelihoodAdjustment != null && message.hasOwnProperty("likelihoodAdjustment")) {
+                                var error = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.verify(message.likelihoodAdjustment);
+                                if (error)
+                                    return "likelihoodAdjustment." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdjustmentRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.AdjustmentRule} AdjustmentRule
+                         */
+                        AdjustmentRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.AdjustmentRule)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.AdjustmentRule();
+                            if (object.adjustByMatchingInfoTypes != null) {
+                                if (typeof object.adjustByMatchingInfoTypes !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustmentRule.adjustByMatchingInfoTypes: object expected");
+                                message.adjustByMatchingInfoTypes = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.fromObject(object.adjustByMatchingInfoTypes);
+                            }
+                            if (object.adjustByImageFindings != null) {
+                                if (typeof object.adjustByImageFindings !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustmentRule.adjustByImageFindings: object expected");
+                                message.adjustByImageFindings = $root.google.privacy.dlp.v2.AdjustByImageFindings.fromObject(object.adjustByImageFindings);
+                            }
+                            if (object.likelihoodAdjustment != null) {
+                                if (typeof object.likelihoodAdjustment !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.AdjustmentRule.likelihoodAdjustment: object expected");
+                                message.likelihoodAdjustment = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.fromObject(object.likelihoodAdjustment);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdjustmentRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {google.privacy.dlp.v2.AdjustmentRule} message AdjustmentRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdjustmentRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.likelihoodAdjustment = null;
+                            if (message.adjustByMatchingInfoTypes != null && message.hasOwnProperty("adjustByMatchingInfoTypes")) {
+                                object.adjustByMatchingInfoTypes = $root.google.privacy.dlp.v2.AdjustByMatchingInfoTypes.toObject(message.adjustByMatchingInfoTypes, options);
+                                if (options.oneofs)
+                                    object.conditions = "adjustByMatchingInfoTypes";
+                            }
+                            if (message.likelihoodAdjustment != null && message.hasOwnProperty("likelihoodAdjustment"))
+                                object.likelihoodAdjustment = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment.toObject(message.likelihoodAdjustment, options);
+                            if (message.adjustByImageFindings != null && message.hasOwnProperty("adjustByImageFindings")) {
+                                object.adjustByImageFindings = $root.google.privacy.dlp.v2.AdjustByImageFindings.toObject(message.adjustByImageFindings, options);
+                                if (options.oneofs)
+                                    object.conditions = "adjustByImageFindings";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdjustmentRule to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdjustmentRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdjustmentRule
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.AdjustmentRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdjustmentRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.AdjustmentRule";
+                        };
+    
+                        return AdjustmentRule;
+                    })();
+    
                     v2.InspectionRule = (function() {
     
                         /**
@@ -2770,6 +4029,7 @@
                          * @interface IInspectionRule
                          * @property {google.privacy.dlp.v2.CustomInfoType.DetectionRule.IHotwordRule|null} [hotwordRule] InspectionRule hotwordRule
                          * @property {google.privacy.dlp.v2.IExclusionRule|null} [exclusionRule] InspectionRule exclusionRule
+                         * @property {google.privacy.dlp.v2.IAdjustmentRule|null} [adjustmentRule] InspectionRule adjustmentRule
                          */
     
                         /**
@@ -2803,17 +4063,25 @@
                          */
                         InspectionRule.prototype.exclusionRule = null;
     
+                        /**
+                         * InspectionRule adjustmentRule.
+                         * @member {google.privacy.dlp.v2.IAdjustmentRule|null|undefined} adjustmentRule
+                         * @memberof google.privacy.dlp.v2.InspectionRule
+                         * @instance
+                         */
+                        InspectionRule.prototype.adjustmentRule = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * InspectionRule type.
-                         * @member {"hotwordRule"|"exclusionRule"|undefined} type
+                         * @member {"hotwordRule"|"exclusionRule"|"adjustmentRule"|undefined} type
                          * @memberof google.privacy.dlp.v2.InspectionRule
                          * @instance
                          */
                         Object.defineProperty(InspectionRule.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["hotwordRule", "exclusionRule"]),
+                            get: $util.oneOfGetter($oneOfFields = ["hotwordRule", "exclusionRule", "adjustmentRule"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2845,6 +4113,8 @@
                                 $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule.encode(message.hotwordRule, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.exclusionRule != null && Object.hasOwnProperty.call(message, "exclusionRule"))
                                 $root.google.privacy.dlp.v2.ExclusionRule.encode(message.exclusionRule, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.adjustmentRule != null && Object.hasOwnProperty.call(message, "adjustmentRule"))
+                                $root.google.privacy.dlp.v2.AdjustmentRule.encode(message.adjustmentRule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -2872,12 +4142,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectionRule.decode = function decode(reader, length) {
+                        InspectionRule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectionRule();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.hotwordRule = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule.decode(reader, reader.uint32());
@@ -2885,6 +4157,10 @@
                                     }
                                 case 2: {
                                         message.exclusionRule = $root.google.privacy.dlp.v2.ExclusionRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.adjustmentRule = $root.google.privacy.dlp.v2.AdjustmentRule.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -2941,6 +4217,16 @@
                                         return "exclusionRule." + error;
                                 }
                             }
+                            if (message.adjustmentRule != null && message.hasOwnProperty("adjustmentRule")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.AdjustmentRule.verify(message.adjustmentRule);
+                                    if (error)
+                                        return "adjustmentRule." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2965,6 +4251,11 @@
                                 if (typeof object.exclusionRule !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.InspectionRule.exclusionRule: object expected");
                                 message.exclusionRule = $root.google.privacy.dlp.v2.ExclusionRule.fromObject(object.exclusionRule);
+                            }
+                            if (object.adjustmentRule != null) {
+                                if (typeof object.adjustmentRule !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.InspectionRule.adjustmentRule: object expected");
+                                message.adjustmentRule = $root.google.privacy.dlp.v2.AdjustmentRule.fromObject(object.adjustmentRule);
                             }
                             return message;
                         };
@@ -2991,6 +4282,11 @@
                                 object.exclusionRule = $root.google.privacy.dlp.v2.ExclusionRule.toObject(message.exclusionRule, options);
                                 if (options.oneofs)
                                     object.type = "exclusionRule";
+                            }
+                            if (message.adjustmentRule != null && message.hasOwnProperty("adjustmentRule")) {
+                                object.adjustmentRule = $root.google.privacy.dlp.v2.AdjustmentRule.toObject(message.adjustmentRule, options);
+                                if (options.oneofs)
+                                    object.type = "adjustmentRule";
                             }
                             return object;
                         };
@@ -3124,12 +4420,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectionRuleSet.decode = function decode(reader, length) {
+                        InspectionRuleSet.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectionRuleSet();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.infoTypes && message.infoTypes.length))
@@ -3479,12 +4777,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectConfig.decode = function decode(reader, length) {
+                        InspectConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.infoTypes && message.infoTypes.length))
@@ -3952,12 +5252,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            InfoTypeLikelihood.decode = function decode(reader, length) {
+                            InfoTypeLikelihood.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectConfig.InfoTypeLikelihood();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -4236,12 +5538,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FindingLimits.decode = function decode(reader, length) {
+                            FindingLimits.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectConfig.FindingLimits();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.maxFindingsPerItem = reader.int32();
@@ -4492,12 +5796,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                InfoTypeLimit.decode = function decode(reader, length) {
+                                InfoTypeLimit.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectConfig.FindingLimits.InfoTypeLimit();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -4730,12 +6036,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ByteContentItem.decode = function decode(reader, length) {
+                        ByteContentItem.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ByteContentItem();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -5136,12 +6444,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentItem.decode = function decode(reader, length) {
+                        ContentItem.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ContentItem();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.value = reader.string();
@@ -5406,12 +6716,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Table.decode = function decode(reader, length) {
+                        Table.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Table();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.headers && message.headers.length))
@@ -5659,12 +6971,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Row.decode = function decode(reader, length) {
+                            Row.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Table.Row();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.values && message.values.length))
@@ -5897,12 +7211,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectResult.decode = function decode(reader, length) {
+                        InspectResult.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectResult();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.findings && message.findings.length))
@@ -6266,12 +7582,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Finding.decode = function decode(reader, length) {
+                        Finding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Finding(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 14: {
                                         message.name = reader.string();
@@ -6747,12 +8065,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Location.decode = function decode(reader, length) {
+                        Location.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Location();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.byteRange = $root.google.privacy.dlp.v2.Range.decode(reader, reader.uint32());
@@ -7102,12 +8422,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ContentLocation.decode = function decode(reader, length) {
+                        ContentLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ContentLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.containerName = reader.string();
@@ -7353,6 +8675,7 @@
                          * @interface IMetadataLocation
                          * @property {google.privacy.dlp.v2.MetadataType|null} [type] MetadataLocation type
                          * @property {google.privacy.dlp.v2.IStorageMetadataLabel|null} [storageLabel] MetadataLocation storageLabel
+                         * @property {google.privacy.dlp.v2.IKeyValueMetadataLabel|null} [keyValueMetadataLabel] MetadataLocation keyValueMetadataLabel
                          */
     
                         /**
@@ -7386,17 +8709,25 @@
                          */
                         MetadataLocation.prototype.storageLabel = null;
     
+                        /**
+                         * MetadataLocation keyValueMetadataLabel.
+                         * @member {google.privacy.dlp.v2.IKeyValueMetadataLabel|null|undefined} keyValueMetadataLabel
+                         * @memberof google.privacy.dlp.v2.MetadataLocation
+                         * @instance
+                         */
+                        MetadataLocation.prototype.keyValueMetadataLabel = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * MetadataLocation label.
-                         * @member {"storageLabel"|undefined} label
+                         * @member {"storageLabel"|"keyValueMetadataLabel"|undefined} label
                          * @memberof google.privacy.dlp.v2.MetadataLocation
                          * @instance
                          */
                         Object.defineProperty(MetadataLocation.prototype, "label", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageLabel"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageLabel", "keyValueMetadataLabel"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -7428,6 +8759,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
                             if (message.storageLabel != null && Object.hasOwnProperty.call(message, "storageLabel"))
                                 $root.google.privacy.dlp.v2.StorageMetadataLabel.encode(message.storageLabel, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.keyValueMetadataLabel != null && Object.hasOwnProperty.call(message, "keyValueMetadataLabel"))
+                                $root.google.privacy.dlp.v2.KeyValueMetadataLabel.encode(message.keyValueMetadataLabel, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -7455,12 +8788,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        MetadataLocation.decode = function decode(reader, length) {
+                        MetadataLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.MetadataLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -7468,6 +8803,10 @@
                                     }
                                 case 3: {
                                         message.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.keyValueMetadataLabel = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -7512,6 +8851,7 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 2:
+                                case 3:
                                     break;
                                 }
                             if (message.storageLabel != null && message.hasOwnProperty("storageLabel")) {
@@ -7520,6 +8860,16 @@
                                     var error = $root.google.privacy.dlp.v2.StorageMetadataLabel.verify(message.storageLabel);
                                     if (error)
                                         return "storageLabel." + error;
+                                }
+                            }
+                            if (message.keyValueMetadataLabel != null && message.hasOwnProperty("keyValueMetadataLabel")) {
+                                if (properties.label === 1)
+                                    return "label: multiple values";
+                                properties.label = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.verify(message.keyValueMetadataLabel);
+                                    if (error)
+                                        return "keyValueMetadataLabel." + error;
                                 }
                             }
                             return null;
@@ -7552,11 +8902,20 @@
                             case 2:
                                 message.type = 2;
                                 break;
+                            case "CONTENT_METADATA":
+                            case 3:
+                                message.type = 3;
+                                break;
                             }
                             if (object.storageLabel != null) {
                                 if (typeof object.storageLabel !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.MetadataLocation.storageLabel: object expected");
                                 message.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.fromObject(object.storageLabel);
+                            }
+                            if (object.keyValueMetadataLabel != null) {
+                                if (typeof object.keyValueMetadataLabel !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.MetadataLocation.keyValueMetadataLabel: object expected");
+                                message.keyValueMetadataLabel = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.fromObject(object.keyValueMetadataLabel);
                             }
                             return message;
                         };
@@ -7582,6 +8941,11 @@
                                 object.storageLabel = $root.google.privacy.dlp.v2.StorageMetadataLabel.toObject(message.storageLabel, options);
                                 if (options.oneofs)
                                     object.label = "storageLabel";
+                            }
+                            if (message.keyValueMetadataLabel != null && message.hasOwnProperty("keyValueMetadataLabel")) {
+                                object.keyValueMetadataLabel = $root.google.privacy.dlp.v2.KeyValueMetadataLabel.toObject(message.keyValueMetadataLabel, options);
+                                if (options.oneofs)
+                                    object.label = "keyValueMetadataLabel";
                             }
                             return object;
                         };
@@ -7700,12 +9064,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StorageMetadataLabel.decode = function decode(reader, length) {
+                        StorageMetadataLabel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StorageMetadataLabel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.key = reader.string();
@@ -7818,6 +9184,211 @@
                         return StorageMetadataLabel;
                     })();
     
+                    v2.KeyValueMetadataLabel = (function() {
+    
+                        /**
+                         * Properties of a KeyValueMetadataLabel.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IKeyValueMetadataLabel
+                         * @property {string|null} [key] KeyValueMetadataLabel key
+                         */
+    
+                        /**
+                         * Constructs a new KeyValueMetadataLabel.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a KeyValueMetadataLabel.
+                         * @implements IKeyValueMetadataLabel
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel=} [properties] Properties to set
+                         */
+                        function KeyValueMetadataLabel(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KeyValueMetadataLabel key.
+                         * @member {string} key
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @instance
+                         */
+                        KeyValueMetadataLabel.prototype.key = "";
+    
+                        /**
+                         * Creates a new KeyValueMetadataLabel instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel instance
+                         */
+                        KeyValueMetadataLabel.create = function create(properties) {
+                            return new KeyValueMetadataLabel(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KeyValueMetadataLabel message. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataLabel.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel} message KeyValueMetadataLabel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyValueMetadataLabel.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KeyValueMetadataLabel message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.KeyValueMetadataLabel.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.IKeyValueMetadataLabel} message KeyValueMetadataLabel message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyValueMetadataLabel.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KeyValueMetadataLabel message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyValueMetadataLabel.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.KeyValueMetadataLabel();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.key = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KeyValueMetadataLabel message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyValueMetadataLabel.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KeyValueMetadataLabel message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KeyValueMetadataLabel.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KeyValueMetadataLabel message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.KeyValueMetadataLabel} KeyValueMetadataLabel
+                         */
+                        KeyValueMetadataLabel.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.KeyValueMetadataLabel)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.KeyValueMetadataLabel();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KeyValueMetadataLabel message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {google.privacy.dlp.v2.KeyValueMetadataLabel} message KeyValueMetadataLabel
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KeyValueMetadataLabel.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.key = "";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KeyValueMetadataLabel to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KeyValueMetadataLabel.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for KeyValueMetadataLabel
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.KeyValueMetadataLabel
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KeyValueMetadataLabel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.KeyValueMetadataLabel";
+                        };
+    
+                        return KeyValueMetadataLabel;
+                    })();
+    
                     v2.DocumentLocation = (function() {
     
                         /**
@@ -7903,12 +9474,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DocumentLocation.decode = function decode(reader, length) {
+                        DocumentLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DocumentLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fileOffset = reader.int64();
@@ -8142,12 +9715,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RecordLocation.decode = function decode(reader, length) {
+                        RecordLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.recordKey = $root.google.privacy.dlp.v2.RecordKey.decode(reader, reader.uint32());
@@ -8385,12 +9960,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TableLocation.decode = function decode(reader, length) {
+                        TableLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TableLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.rowIndex = reader.int64();
@@ -8668,12 +10245,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Container.decode = function decode(reader, length) {
+                        Container.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Container();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.string();
@@ -8960,12 +10539,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Range.decode = function decode(reader, length) {
+                        Range.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Range();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.start = reader.int64();
@@ -9206,12 +10787,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImageLocation.decode = function decode(reader, length) {
+                        ImageLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.boundingBoxes && message.boundingBoxes.length))
@@ -9461,12 +11044,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BoundingBox.decode = function decode(reader, length) {
+                        BoundingBox.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BoundingBox();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.top = reader.int32();
@@ -9628,6 +11213,8 @@
                          * @property {Array.<google.privacy.dlp.v2.RedactImageRequest.IImageRedactionConfig>|null} [imageRedactionConfigs] RedactImageRequest imageRedactionConfigs
                          * @property {boolean|null} [includeFindings] RedactImageRequest includeFindings
                          * @property {google.privacy.dlp.v2.IByteContentItem|null} [byteItem] RedactImageRequest byteItem
+                         * @property {string|null} [inspectTemplate] RedactImageRequest inspectTemplate
+                         * @property {string|null} [deidentifyTemplate] RedactImageRequest deidentifyTemplate
                          */
     
                         /**
@@ -9695,6 +11282,22 @@
                         RedactImageRequest.prototype.byteItem = null;
     
                         /**
+                         * RedactImageRequest inspectTemplate.
+                         * @member {string} inspectTemplate
+                         * @memberof google.privacy.dlp.v2.RedactImageRequest
+                         * @instance
+                         */
+                        RedactImageRequest.prototype.inspectTemplate = "";
+    
+                        /**
+                         * RedactImageRequest deidentifyTemplate.
+                         * @member {string} deidentifyTemplate
+                         * @memberof google.privacy.dlp.v2.RedactImageRequest
+                         * @instance
+                         */
+                        RedactImageRequest.prototype.deidentifyTemplate = "";
+    
+                        /**
                          * Creates a new RedactImageRequest instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.RedactImageRequest
@@ -9731,6 +11334,10 @@
                                 $root.google.privacy.dlp.v2.ByteContentItem.encode(message.byteItem, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.locationId != null && Object.hasOwnProperty.call(message, "locationId"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.locationId);
+                            if (message.inspectTemplate != null && Object.hasOwnProperty.call(message, "inspectTemplate"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.inspectTemplate);
+                            if (message.deidentifyTemplate != null && Object.hasOwnProperty.call(message, "deidentifyTemplate"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.deidentifyTemplate);
                             return writer;
                         };
     
@@ -9758,12 +11365,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RedactImageRequest.decode = function decode(reader, length) {
+                        RedactImageRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RedactImageRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -9789,6 +11398,14 @@
                                     }
                                 case 7: {
                                         message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.inspectTemplate = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.deidentifyTemplate = reader.string();
                                         break;
                                     }
                                 default:
@@ -9854,6 +11471,12 @@
                                 if (error)
                                     return "byteItem." + error;
                             }
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                if (!$util.isString(message.inspectTemplate))
+                                    return "inspectTemplate: string expected";
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                if (!$util.isString(message.deidentifyTemplate))
+                                    return "deidentifyTemplate: string expected";
                             return null;
                         };
     
@@ -9895,6 +11518,10 @@
                                     throw TypeError(".google.privacy.dlp.v2.RedactImageRequest.byteItem: object expected");
                                 message.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.fromObject(object.byteItem);
                             }
+                            if (object.inspectTemplate != null)
+                                message.inspectTemplate = String(object.inspectTemplate);
+                            if (object.deidentifyTemplate != null)
+                                message.deidentifyTemplate = String(object.deidentifyTemplate);
                             return message;
                         };
     
@@ -9919,6 +11546,8 @@
                                 object.includeFindings = false;
                                 object.byteItem = null;
                                 object.locationId = "";
+                                object.inspectTemplate = "";
+                                object.deidentifyTemplate = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -9935,6 +11564,10 @@
                                 object.byteItem = $root.google.privacy.dlp.v2.ByteContentItem.toObject(message.byteItem, options);
                             if (message.locationId != null && message.hasOwnProperty("locationId"))
                                 object.locationId = message.locationId;
+                            if (message.inspectTemplate != null && message.hasOwnProperty("inspectTemplate"))
+                                object.inspectTemplate = message.inspectTemplate;
+                            if (message.deidentifyTemplate != null && message.hasOwnProperty("deidentifyTemplate"))
+                                object.deidentifyTemplate = message.deidentifyTemplate;
                             return object;
                         };
     
@@ -10085,12 +11718,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ImageRedactionConfig.decode = function decode(reader, length) {
+                            ImageRedactionConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RedactImageRequest.ImageRedactionConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -10359,12 +11994,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Color.decode = function decode(reader, length) {
+                        Color.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Color();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.red = reader.float();
@@ -10609,12 +12246,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RedactImageResponse.decode = function decode(reader, length) {
+                        RedactImageResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RedactImageResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.redactedImage = reader.bytes();
@@ -10917,12 +12556,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeidentifyContentRequest.decode = function decode(reader, length) {
+                        DeidentifyContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeidentifyContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -11219,12 +12860,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeidentifyContentResponse.decode = function decode(reader, length) {
+                        DeidentifyContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeidentifyContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.item = $root.google.privacy.dlp.v2.ContentItem.decode(reader, reader.uint32());
@@ -11511,12 +13154,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReidentifyContentRequest.decode = function decode(reader, length) {
+                        ReidentifyContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ReidentifyContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -11813,12 +13458,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReidentifyContentResponse.decode = function decode(reader, length) {
+                        ReidentifyContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ReidentifyContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.item = $root.google.privacy.dlp.v2.ContentItem.decode(reader, reader.uint32());
@@ -12083,12 +13730,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectContentRequest.decode = function decode(reader, length) {
+                        InspectContentRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectContentRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -12345,12 +13994,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectContentResponse.decode = function decode(reader, length) {
+                        InspectContentResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectContentResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.result = $root.google.privacy.dlp.v2.InspectResult.decode(reader, reader.uint32());
@@ -12475,6 +14126,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IOutputStorageConfig
                          * @property {google.privacy.dlp.v2.IBigQueryTable|null} [table] OutputStorageConfig table
+                         * @property {google.privacy.dlp.v2.ICloudStoragePath|null} [storagePath] OutputStorageConfig storagePath
                          * @property {google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|null} [outputSchema] OutputStorageConfig outputSchema
                          */
     
@@ -12502,6 +14154,14 @@
                         OutputStorageConfig.prototype.table = null;
     
                         /**
+                         * OutputStorageConfig storagePath.
+                         * @member {google.privacy.dlp.v2.ICloudStoragePath|null|undefined} storagePath
+                         * @memberof google.privacy.dlp.v2.OutputStorageConfig
+                         * @instance
+                         */
+                        OutputStorageConfig.prototype.storagePath = null;
+    
+                        /**
                          * OutputStorageConfig outputSchema.
                          * @member {google.privacy.dlp.v2.OutputStorageConfig.OutputSchema} outputSchema
                          * @memberof google.privacy.dlp.v2.OutputStorageConfig
@@ -12514,12 +14174,12 @@
     
                         /**
                          * OutputStorageConfig type.
-                         * @member {"table"|undefined} type
+                         * @member {"table"|"storagePath"|undefined} type
                          * @memberof google.privacy.dlp.v2.OutputStorageConfig
                          * @instance
                          */
                         Object.defineProperty(OutputStorageConfig.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["table"]),
+                            get: $util.oneOfGetter($oneOfFields = ["table", "storagePath"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -12551,6 +14211,8 @@
                                 $root.google.privacy.dlp.v2.BigQueryTable.encode(message.table, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.outputSchema != null && Object.hasOwnProperty.call(message, "outputSchema"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.outputSchema);
+                            if (message.storagePath != null && Object.hasOwnProperty.call(message, "storagePath"))
+                                $root.google.privacy.dlp.v2.CloudStoragePath.encode(message.storagePath, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -12578,15 +14240,21 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutputStorageConfig.decode = function decode(reader, length) {
+                        OutputStorageConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OutputStorageConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -12637,6 +14305,16 @@
                                         return "table." + error;
                                 }
                             }
+                            if (message.storagePath != null && message.hasOwnProperty("storagePath")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.CloudStoragePath.verify(message.storagePath);
+                                    if (error)
+                                        return "storagePath." + error;
+                                }
+                            }
                             if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
                                 switch (message.outputSchema) {
                                 default:
@@ -12668,6 +14346,11 @@
                                 if (typeof object.table !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.OutputStorageConfig.table: object expected");
                                 message.table = $root.google.privacy.dlp.v2.BigQueryTable.fromObject(object.table);
+                            }
+                            if (object.storagePath != null) {
+                                if (typeof object.storagePath !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.OutputStorageConfig.storagePath: object expected");
+                                message.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.fromObject(object.storagePath);
                             }
                             switch (object.outputSchema) {
                             default:
@@ -12726,6 +14409,11 @@
                             }
                             if (message.outputSchema != null && message.hasOwnProperty("outputSchema"))
                                 object.outputSchema = options.enums === String ? $root.google.privacy.dlp.v2.OutputStorageConfig.OutputSchema[message.outputSchema] === undefined ? message.outputSchema : $root.google.privacy.dlp.v2.OutputStorageConfig.OutputSchema[message.outputSchema] : message.outputSchema;
+                            if (message.storagePath != null && message.hasOwnProperty("storagePath")) {
+                                object.storagePath = $root.google.privacy.dlp.v2.CloudStoragePath.toObject(message.storagePath, options);
+                                if (options.oneofs)
+                                    object.type = "storagePath";
+                            }
                             return object;
                         };
     
@@ -12876,12 +14564,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InfoTypeStats.decode = function decode(reader, length) {
+                        InfoTypeStats.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InfoTypeStats();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -13122,12 +14812,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectDataSourceDetails.decode = function decode(reader, length) {
+                        InspectDataSourceDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectDataSourceDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.requestedOptions = $root.google.privacy.dlp.v2.InspectDataSourceDetails.RequestedOptions.decode(reader, reader.uint32());
@@ -13356,12 +15048,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RequestedOptions.decode = function decode(reader, length) {
+                            RequestedOptions.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectDataSourceDetails.RequestedOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.snapshotInspectTemplate = $root.google.privacy.dlp.v2.InspectTemplate.decode(reader, reader.uint32());
@@ -13628,12 +15322,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Result.decode = function decode(reader, length) {
+                            Result.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectDataSourceDetails.Result();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.processedBytes = reader.int64();
@@ -13986,12 +15682,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileBigQueryRowSchema.decode = function decode(reader, length) {
+                        DataProfileBigQueryRowSchema.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileBigQueryRowSchema();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tableProfile = $root.google.privacy.dlp.v2.TableDataProfile.decode(reader, reader.uint32());
@@ -14269,12 +15967,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HybridInspectStatistics.decode = function decode(reader, length) {
+                        HybridInspectStatistics.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectStatistics();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.processedCount = reader.int64();
@@ -14553,12 +16253,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ActionDetails.decode = function decode(reader, length) {
+                        ActionDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ActionDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.deidentifyDetails = $root.google.privacy.dlp.v2.DeidentifyDataSourceDetails.decode(reader, reader.uint32());
@@ -14788,12 +16490,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeidentifyDataSourceStats.decode = function decode(reader, length) {
+                        DeidentifyDataSourceStats.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeidentifyDataSourceStats();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.transformedBytes = reader.int64();
@@ -15069,12 +16773,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeidentifyDataSourceDetails.decode = function decode(reader, length) {
+                        DeidentifyDataSourceDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeidentifyDataSourceDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.requestedOptions = $root.google.privacy.dlp.v2.DeidentifyDataSourceDetails.RequestedDeidentifyOptions.decode(reader, reader.uint32());
@@ -15314,12 +17020,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RequestedDeidentifyOptions.decode = function decode(reader, length) {
+                            RequestedDeidentifyOptions.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeidentifyDataSourceDetails.RequestedDeidentifyOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.snapshotDeidentifyTemplate = $root.google.privacy.dlp.v2.DeidentifyTemplate.decode(reader, reader.uint32());
@@ -15475,6 +17183,291 @@
                         return DeidentifyDataSourceDetails;
                     })();
     
+                    v2.LocationSupport = (function() {
+    
+                        /**
+                         * Properties of a LocationSupport.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ILocationSupport
+                         * @property {google.privacy.dlp.v2.LocationSupport.RegionalizationScope|null} [regionalizationScope] LocationSupport regionalizationScope
+                         * @property {Array.<string>|null} [locations] LocationSupport locations
+                         */
+    
+                        /**
+                         * Constructs a new LocationSupport.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a LocationSupport.
+                         * @implements ILocationSupport
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ILocationSupport=} [properties] Properties to set
+                         */
+                        function LocationSupport(properties) {
+                            this.locations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationSupport regionalizationScope.
+                         * @member {google.privacy.dlp.v2.LocationSupport.RegionalizationScope} regionalizationScope
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @instance
+                         */
+                        LocationSupport.prototype.regionalizationScope = 0;
+    
+                        /**
+                         * LocationSupport locations.
+                         * @member {Array.<string>} locations
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @instance
+                         */
+                        LocationSupport.prototype.locations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LocationSupport instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.ILocationSupport=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport instance
+                         */
+                        LocationSupport.create = function create(properties) {
+                            return new LocationSupport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationSupport message. Does not implicitly {@link google.privacy.dlp.v2.LocationSupport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.ILocationSupport} message LocationSupport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationSupport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.regionalizationScope != null && Object.hasOwnProperty.call(message, "regionalizationScope"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.regionalizationScope);
+                            if (message.locations != null && message.locations.length)
+                                for (var i = 0; i < message.locations.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.locations[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationSupport message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.LocationSupport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.ILocationSupport} message LocationSupport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationSupport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationSupport.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.LocationSupport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.regionalizationScope = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.locations && message.locations.length))
+                                            message.locations = [];
+                                        message.locations.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationSupport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationSupport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationSupport message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationSupport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.regionalizationScope != null && message.hasOwnProperty("regionalizationScope"))
+                                switch (message.regionalizationScope) {
+                                default:
+                                    return "regionalizationScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.locations != null && message.hasOwnProperty("locations")) {
+                                if (!Array.isArray(message.locations))
+                                    return "locations: array expected";
+                                for (var i = 0; i < message.locations.length; ++i)
+                                    if (!$util.isString(message.locations[i]))
+                                        return "locations: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationSupport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.LocationSupport} LocationSupport
+                         */
+                        LocationSupport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.LocationSupport)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.LocationSupport();
+                            switch (object.regionalizationScope) {
+                            default:
+                                if (typeof object.regionalizationScope === "number") {
+                                    message.regionalizationScope = object.regionalizationScope;
+                                    break;
+                                }
+                                break;
+                            case "REGIONALIZATION_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.regionalizationScope = 0;
+                                break;
+                            case "REGIONAL":
+                            case 1:
+                                message.regionalizationScope = 1;
+                                break;
+                            case "ANY_LOCATION":
+                            case 2:
+                                message.regionalizationScope = 2;
+                                break;
+                            }
+                            if (object.locations) {
+                                if (!Array.isArray(object.locations))
+                                    throw TypeError(".google.privacy.dlp.v2.LocationSupport.locations: array expected");
+                                message.locations = [];
+                                for (var i = 0; i < object.locations.length; ++i)
+                                    message.locations[i] = String(object.locations[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationSupport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {google.privacy.dlp.v2.LocationSupport} message LocationSupport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationSupport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.locations = [];
+                            if (options.defaults)
+                                object.regionalizationScope = options.enums === String ? "REGIONALIZATION_SCOPE_UNSPECIFIED" : 0;
+                            if (message.regionalizationScope != null && message.hasOwnProperty("regionalizationScope"))
+                                object.regionalizationScope = options.enums === String ? $root.google.privacy.dlp.v2.LocationSupport.RegionalizationScope[message.regionalizationScope] === undefined ? message.regionalizationScope : $root.google.privacy.dlp.v2.LocationSupport.RegionalizationScope[message.regionalizationScope] : message.regionalizationScope;
+                            if (message.locations && message.locations.length) {
+                                object.locations = [];
+                                for (var j = 0; j < message.locations.length; ++j)
+                                    object.locations[j] = message.locations[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationSupport to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationSupport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationSupport
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.LocationSupport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.LocationSupport";
+                        };
+    
+                        /**
+                         * RegionalizationScope enum.
+                         * @name google.privacy.dlp.v2.LocationSupport.RegionalizationScope
+                         * @enum {number}
+                         * @property {number} REGIONALIZATION_SCOPE_UNSPECIFIED=0 REGIONALIZATION_SCOPE_UNSPECIFIED value
+                         * @property {number} REGIONAL=1 REGIONAL value
+                         * @property {number} ANY_LOCATION=2 ANY_LOCATION value
+                         */
+                        LocationSupport.RegionalizationScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "REGIONALIZATION_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "REGIONAL"] = 1;
+                            values[valuesById[2] = "ANY_LOCATION"] = 2;
+                            return values;
+                        })();
+    
+                        return LocationSupport;
+                    })();
+    
                     v2.InfoTypeDescription = (function() {
     
                         /**
@@ -15485,11 +17478,13 @@
                          * @property {string|null} [displayName] InfoTypeDescription displayName
                          * @property {Array.<google.privacy.dlp.v2.InfoTypeSupportedBy>|null} [supportedBy] InfoTypeDescription supportedBy
                          * @property {string|null} [description] InfoTypeDescription description
+                         * @property {google.privacy.dlp.v2.ILocationSupport|null} [locationSupport] InfoTypeDescription locationSupport
                          * @property {string|null} [example] InfoTypeDescription example
                          * @property {Array.<google.privacy.dlp.v2.IVersionDescription>|null} [versions] InfoTypeDescription versions
                          * @property {Array.<google.privacy.dlp.v2.IInfoTypeCategory>|null} [categories] InfoTypeDescription categories
                          * @property {google.privacy.dlp.v2.ISensitivityScore|null} [sensitivityScore] InfoTypeDescription sensitivityScore
                          * @property {Array.<string>|null} [specificInfoTypes] InfoTypeDescription specificInfoTypes
+                         * @property {google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus|null} [launchStatus] InfoTypeDescription launchStatus
                          */
     
                         /**
@@ -15544,6 +17539,14 @@
                         InfoTypeDescription.prototype.description = "";
     
                         /**
+                         * InfoTypeDescription locationSupport.
+                         * @member {google.privacy.dlp.v2.ILocationSupport|null|undefined} locationSupport
+                         * @memberof google.privacy.dlp.v2.InfoTypeDescription
+                         * @instance
+                         */
+                        InfoTypeDescription.prototype.locationSupport = null;
+    
+                        /**
                          * InfoTypeDescription example.
                          * @member {string} example
                          * @memberof google.privacy.dlp.v2.InfoTypeDescription
@@ -15584,6 +17587,14 @@
                         InfoTypeDescription.prototype.specificInfoTypes = $util.emptyArray;
     
                         /**
+                         * InfoTypeDescription launchStatus.
+                         * @member {google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus} launchStatus
+                         * @memberof google.privacy.dlp.v2.InfoTypeDescription
+                         * @instance
+                         */
+                        InfoTypeDescription.prototype.launchStatus = 0;
+    
+                        /**
                          * Creates a new InfoTypeDescription instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.InfoTypeDescription
@@ -15619,6 +17630,8 @@
                             }
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.locationSupport != null && Object.hasOwnProperty.call(message, "locationSupport"))
+                                $root.google.privacy.dlp.v2.LocationSupport.encode(message.locationSupport, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.example != null && Object.hasOwnProperty.call(message, "example"))
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.example);
                             if (message.versions != null && message.versions.length)
@@ -15632,6 +17645,8 @@
                             if (message.specificInfoTypes != null && message.specificInfoTypes.length)
                                 for (var i = 0; i < message.specificInfoTypes.length; ++i)
                                     writer.uint32(/* id 12, wireType 2 =*/98).string(message.specificInfoTypes[i]);
+                            if (message.launchStatus != null && Object.hasOwnProperty.call(message, "launchStatus"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.launchStatus);
                             return writer;
                         };
     
@@ -15659,12 +17674,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InfoTypeDescription.decode = function decode(reader, length) {
+                        InfoTypeDescription.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InfoTypeDescription();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -15687,6 +17704,10 @@
                                     }
                                 case 4: {
                                         message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.locationSupport = $root.google.privacy.dlp.v2.LocationSupport.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -15713,6 +17734,10 @@
                                         if (!(message.specificInfoTypes && message.specificInfoTypes.length))
                                             message.specificInfoTypes = [];
                                         message.specificInfoTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.launchStatus = reader.int32();
                                         break;
                                     }
                                 default:
@@ -15772,6 +17797,11 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
+                            if (message.locationSupport != null && message.hasOwnProperty("locationSupport")) {
+                                var error = $root.google.privacy.dlp.v2.LocationSupport.verify(message.locationSupport);
+                                if (error)
+                                    return "locationSupport." + error;
+                            }
                             if (message.example != null && message.hasOwnProperty("example"))
                                 if (!$util.isString(message.example))
                                     return "example: string expected";
@@ -15805,6 +17835,16 @@
                                     if (!$util.isString(message.specificInfoTypes[i]))
                                         return "specificInfoTypes: string[] expected";
                             }
+                            if (message.launchStatus != null && message.hasOwnProperty("launchStatus"))
+                                switch (message.launchStatus) {
+                                default:
+                                    return "launchStatus: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -15851,6 +17891,11 @@
                             }
                             if (object.description != null)
                                 message.description = String(object.description);
+                            if (object.locationSupport != null) {
+                                if (typeof object.locationSupport !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.InfoTypeDescription.locationSupport: object expected");
+                                message.locationSupport = $root.google.privacy.dlp.v2.LocationSupport.fromObject(object.locationSupport);
+                            }
                             if (object.example != null)
                                 message.example = String(object.example);
                             if (object.versions) {
@@ -15885,6 +17930,30 @@
                                 for (var i = 0; i < object.specificInfoTypes.length; ++i)
                                     message.specificInfoTypes[i] = String(object.specificInfoTypes[i]);
                             }
+                            switch (object.launchStatus) {
+                            default:
+                                if (typeof object.launchStatus === "number") {
+                                    message.launchStatus = object.launchStatus;
+                                    break;
+                                }
+                                break;
+                            case "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED":
+                            case 0:
+                                message.launchStatus = 0;
+                                break;
+                            case "GENERAL_AVAILABILITY":
+                            case 1:
+                                message.launchStatus = 1;
+                                break;
+                            case "PUBLIC_PREVIEW":
+                            case 2:
+                                message.launchStatus = 2;
+                                break;
+                            case "PRIVATE_PREVIEW":
+                            case 3:
+                                message.launchStatus = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -15911,8 +17980,10 @@
                                 object.name = "";
                                 object.displayName = "";
                                 object.description = "";
+                                object.locationSupport = null;
                                 object.example = "";
                                 object.sensitivityScore = null;
+                                object.launchStatus = options.enums === String ? "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -15925,6 +17996,8 @@
                             }
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.locationSupport != null && message.hasOwnProperty("locationSupport"))
+                                object.locationSupport = $root.google.privacy.dlp.v2.LocationSupport.toObject(message.locationSupport, options);
                             if (message.example != null && message.hasOwnProperty("example"))
                                 object.example = message.example;
                             if (message.versions && message.versions.length) {
@@ -15944,6 +18017,8 @@
                                 for (var j = 0; j < message.specificInfoTypes.length; ++j)
                                     object.specificInfoTypes[j] = message.specificInfoTypes[j];
                             }
+                            if (message.launchStatus != null && message.hasOwnProperty("launchStatus"))
+                                object.launchStatus = options.enums === String ? $root.google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus[message.launchStatus] === undefined ? message.launchStatus : $root.google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus[message.launchStatus] : message.launchStatus;
                             return object;
                         };
     
@@ -15972,6 +18047,24 @@
                             }
                             return typeUrlPrefix + "/google.privacy.dlp.v2.InfoTypeDescription";
                         };
+    
+                        /**
+                         * InfoTypeLaunchStatus enum.
+                         * @name google.privacy.dlp.v2.InfoTypeDescription.InfoTypeLaunchStatus
+                         * @enum {number}
+                         * @property {number} INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED=0 INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED value
+                         * @property {number} GENERAL_AVAILABILITY=1 GENERAL_AVAILABILITY value
+                         * @property {number} PUBLIC_PREVIEW=2 PUBLIC_PREVIEW value
+                         * @property {number} PRIVATE_PREVIEW=3 PRIVATE_PREVIEW value
+                         */
+                        InfoTypeDescription.InfoTypeLaunchStatus = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INFO_TYPE_LAUNCH_STATUS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "GENERAL_AVAILABILITY"] = 1;
+                            values[valuesById[2] = "PUBLIC_PREVIEW"] = 2;
+                            values[valuesById[3] = "PRIVATE_PREVIEW"] = 3;
+                            return values;
+                        })();
     
                         return InfoTypeDescription;
                     })();
@@ -16097,12 +18190,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InfoTypeCategory.decode = function decode(reader, length) {
+                        InfoTypeCategory.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InfoTypeCategory();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.locationCategory = reader.int32();
@@ -16162,6 +18257,7 @@
                                 case 2:
                                 case 51:
                                 case 3:
+                                case 53:
                                 case 48:
                                 case 50:
                                 case 4:
@@ -16286,6 +18382,10 @@
                             case "AUSTRALIA":
                             case 3:
                                 message.locationCategory = 3;
+                                break;
+                            case "AUSTRIA":
+                            case 53:
+                                message.locationCategory = 53;
                                 break;
                             case "AZERBAIJAN":
                             case 48:
@@ -16613,6 +18713,7 @@
                          * @property {number} ARGENTINA=2 ARGENTINA value
                          * @property {number} ARMENIA=51 ARMENIA value
                          * @property {number} AUSTRALIA=3 AUSTRALIA value
+                         * @property {number} AUSTRIA=53 AUSTRIA value
                          * @property {number} AZERBAIJAN=48 AZERBAIJAN value
                          * @property {number} BELARUS=50 BELARUS value
                          * @property {number} BELGIUM=4 BELGIUM value
@@ -16668,6 +18769,7 @@
                             values[valuesById[2] = "ARGENTINA"] = 2;
                             values[valuesById[51] = "ARMENIA"] = 51;
                             values[valuesById[3] = "AUSTRALIA"] = 3;
+                            values[valuesById[53] = "AUSTRIA"] = 53;
                             values[valuesById[48] = "AZERBAIJAN"] = 48;
                             values[valuesById[50] = "BELARUS"] = 50;
                             values[valuesById[4] = "BELGIUM"] = 4;
@@ -16863,12 +18965,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VersionDescription.decode = function decode(reader, length) {
+                        VersionDescription.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.VersionDescription();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.version = reader.string();
@@ -17112,12 +19216,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInfoTypesRequest.decode = function decode(reader, length) {
+                        ListInfoTypesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListInfoTypesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.parent = reader.string();
@@ -17354,12 +19460,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInfoTypesResponse.decode = function decode(reader, length) {
+                        ListInfoTypesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListInfoTypesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.infoTypes && message.infoTypes.length))
@@ -17600,12 +19708,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RiskAnalysisJobConfig.decode = function decode(reader, length) {
+                        RiskAnalysisJobConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RiskAnalysisJobConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.privacyMetric = $root.google.privacy.dlp.v2.PrivacyMetric.decode(reader, reader.uint32());
@@ -17905,12 +20015,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QuasiId.decode = function decode(reader, length) {
+                        QuasiId.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.QuasiId();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -18202,12 +20314,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StatisticalTable.decode = function decode(reader, length) {
+                        StatisticalTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StatisticalTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.table = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
@@ -18468,12 +20582,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            QuasiIdentifierField.decode = function decode(reader, length) {
+                            QuasiIdentifierField.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StatisticalTable.QuasiIdentifierField();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -18761,12 +20877,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrivacyMetric.decode = function decode(reader, length) {
+                        PrivacyMetric.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.numericalStatsConfig = $root.google.privacy.dlp.v2.PrivacyMetric.NumericalStatsConfig.decode(reader, reader.uint32());
@@ -19091,12 +21209,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NumericalStatsConfig.decode = function decode(reader, length) {
+                            NumericalStatsConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.NumericalStatsConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -19299,12 +21419,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CategoricalStatsConfig.decode = function decode(reader, length) {
+                            CategoricalStatsConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.CategoricalStatsConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -19520,12 +21642,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            KAnonymityConfig.decode = function decode(reader, length) {
+                            KAnonymityConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.KAnonymityConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.quasiIds && message.quasiIds.length))
@@ -19773,12 +21897,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LDiversityConfig.decode = function decode(reader, length) {
+                            LDiversityConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.LDiversityConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.quasiIds && message.quasiIds.length))
@@ -20039,12 +22165,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            KMapEstimationConfig.decode = function decode(reader, length) {
+                            KMapEstimationConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.quasiIds && message.quasiIds.length))
@@ -20350,12 +22478,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                TaggedField.decode = function decode(reader, length) {
+                                TaggedField.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.TaggedField();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -20647,12 +22777,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                AuxiliaryTable.decode = function decode(reader, length) {
+                                AuxiliaryTable.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.AuxiliaryTable();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 3: {
                                                 message.table = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
@@ -20913,12 +23045,14 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    QuasiIdField.decode = function decode(reader, length) {
+                                    QuasiIdField.decode = function decode(reader, length, error) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.KMapEstimationConfig.AuxiliaryTable.QuasiIdField();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
                                             switch (tag >>> 3) {
                                             case 1: {
                                                     message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -21166,12 +23300,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeltaPresenceEstimationConfig.decode = function decode(reader, length) {
+                            DeltaPresenceEstimationConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrivacyMetric.DeltaPresenceEstimationConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.quasiIds && message.quasiIds.length))
@@ -21538,12 +23674,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AnalyzeDataSourceRiskDetails.decode = function decode(reader, length) {
+                        AnalyzeDataSourceRiskDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.requestedPrivacyMetric = $root.google.privacy.dlp.v2.PrivacyMetric.decode(reader, reader.uint32());
@@ -21945,12 +24083,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            NumericalStatsResult.decode = function decode(reader, length) {
+                            NumericalStatsResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.NumericalStatsResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.minValue = $root.google.privacy.dlp.v2.Value.decode(reader, reader.uint32());
@@ -22205,12 +24345,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            CategoricalStatsResult.decode = function decode(reader, length) {
+                            CategoricalStatsResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.CategoricalStatsResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 5: {
                                             if (!(message.valueFrequencyHistogramBuckets && message.valueFrequencyHistogramBuckets.length))
@@ -22470,12 +24612,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CategoricalStatsHistogramBucket.decode = function decode(reader, length) {
+                                CategoricalStatsHistogramBucket.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.CategoricalStatsResult.CategoricalStatsHistogramBucket();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.valueFrequencyLowerBound = reader.int64();
@@ -22803,12 +24947,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            KAnonymityResult.decode = function decode(reader, length) {
+                            KAnonymityResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 5: {
                                             if (!(message.equivalenceClassHistogramBuckets && message.equivalenceClassHistogramBuckets.length))
@@ -23035,12 +25181,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KAnonymityEquivalenceClass.decode = function decode(reader, length) {
+                                KAnonymityEquivalenceClass.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.KAnonymityEquivalenceClass();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.quasiIdsValues && message.quasiIdsValues.length))
@@ -23330,12 +25478,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KAnonymityHistogramBucket.decode = function decode(reader, length) {
+                                KAnonymityHistogramBucket.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KAnonymityResult.KAnonymityHistogramBucket();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.equivalenceClassSizeLowerBound = reader.int64();
@@ -23663,12 +25813,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LDiversityResult.decode = function decode(reader, length) {
+                            LDiversityResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 5: {
                                             if (!(message.sensitiveValueFrequencyHistogramBuckets && message.sensitiveValueFrequencyHistogramBuckets.length))
@@ -23919,12 +26071,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LDiversityEquivalenceClass.decode = function decode(reader, length) {
+                                LDiversityEquivalenceClass.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.LDiversityEquivalenceClass();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.quasiIdsValues && message.quasiIdsValues.length))
@@ -24273,12 +26427,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LDiversityHistogramBucket.decode = function decode(reader, length) {
+                                LDiversityHistogramBucket.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.LDiversityResult.LDiversityHistogramBucket();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.sensitiveValueFrequencyLowerBound = reader.int64();
@@ -24606,12 +26762,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            KMapEstimationResult.decode = function decode(reader, length) {
+                            KMapEstimationResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.kMapEstimationHistogram && message.kMapEstimationHistogram.length))
@@ -24838,12 +26996,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KMapEstimationQuasiIdValues.decode = function decode(reader, length) {
+                                KMapEstimationQuasiIdValues.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationQuasiIdValues();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.quasiIdsValues && message.quasiIdsValues.length))
@@ -25133,12 +27293,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                KMapEstimationHistogramBucket.decode = function decode(reader, length) {
+                                KMapEstimationHistogramBucket.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.KMapEstimationResult.KMapEstimationHistogramBucket();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.minAnonymity = reader.int64();
@@ -25466,12 +27628,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DeltaPresenceEstimationResult.decode = function decode(reader, length) {
+                            DeltaPresenceEstimationResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.deltaPresenceEstimationHistogram && message.deltaPresenceEstimationHistogram.length))
@@ -25698,12 +27862,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeltaPresenceEstimationQuasiIdValues.decode = function decode(reader, length) {
+                                DeltaPresenceEstimationQuasiIdValues.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationQuasiIdValues();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.quasiIdsValues && message.quasiIdsValues.length))
@@ -25979,12 +28145,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                DeltaPresenceEstimationHistogramBucket.decode = function decode(reader, length) {
+                                DeltaPresenceEstimationHistogramBucket.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.DeltaPresenceEstimationResult.DeltaPresenceEstimationHistogramBucket();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.minProbability = reader.double();
@@ -26282,12 +28450,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            RequestedRiskAnalysisOptions.decode = function decode(reader, length) {
+                            RequestedRiskAnalysisOptions.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AnalyzeDataSourceRiskDetails.RequestedRiskAnalysisOptions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.jobConfig = $root.google.privacy.dlp.v2.RiskAnalysisJobConfig.decode(reader, reader.uint32());
@@ -26504,12 +28674,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ValueFrequency.decode = function decode(reader, length) {
+                        ValueFrequency.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ValueFrequency();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.value = $root.google.privacy.dlp.v2.Value.decode(reader, reader.uint32());
@@ -26830,12 +29002,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Value.decode = function decode(reader, length) {
+                        Value.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Value();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.integerValue = reader.int64();
@@ -27254,12 +29428,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        QuoteInfo.decode = function decode(reader, length) {
+                        QuoteInfo.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.QuoteInfo();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.dateTime = $root.google.privacy.dlp.v2.DateTime.decode(reader, reader.uint32());
@@ -27500,12 +29676,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DateTime.decode = function decode(reader, length) {
+                        DateTime.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DateTime();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.date = $root.google.type.Date.decode(reader, reader.uint32());
@@ -27801,12 +29979,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            TimeZone.decode = function decode(reader, length) {
+                            TimeZone.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DateTime.TimeZone();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.offsetMinutes = reader.int32();
@@ -28054,12 +30234,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeidentifyConfig.decode = function decode(reader, length) {
+                        DeidentifyConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeidentifyConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.infoTypeTransformations = $root.google.privacy.dlp.v2.InfoTypeTransformations.decode(reader, reader.uint32());
@@ -28335,12 +30517,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ImageTransformations.decode = function decode(reader, length) {
+                        ImageTransformations.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageTransformations();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         if (!(message.transforms && message.transforms.length))
@@ -28601,12 +30785,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ImageTransformation.decode = function decode(reader, length) {
+                            ImageTransformation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageTransformations.ImageTransformation();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 4: {
                                             message.selectedInfoTypes = $root.google.privacy.dlp.v2.ImageTransformations.ImageTransformation.SelectedInfoTypes.decode(reader, reader.uint32());
@@ -28879,12 +31065,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                SelectedInfoTypes.decode = function decode(reader, length) {
+                                SelectedInfoTypes.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageTransformations.ImageTransformation.SelectedInfoTypes();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 5: {
                                                 if (!(message.infoTypes && message.infoTypes.length))
@@ -29090,12 +31278,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                AllInfoTypes.decode = function decode(reader, length) {
+                                AllInfoTypes.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageTransformations.ImageTransformation.AllInfoTypes();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -29265,12 +31455,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                AllText.decode = function decode(reader, length) {
+                                AllText.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageTransformations.ImageTransformation.AllText();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         default:
                                             reader.skipType(tag & 7);
@@ -29482,12 +31674,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationErrorHandling.decode = function decode(reader, length) {
+                        TransformationErrorHandling.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationErrorHandling();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.throwError = $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError.decode(reader, reader.uint32());
@@ -29705,12 +31899,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ThrowError.decode = function decode(reader, length) {
+                            ThrowError.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationErrorHandling.ThrowError();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -29880,12 +32076,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            LeaveUntransformed.decode = function decode(reader, length) {
+                            LeaveUntransformed.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -30204,12 +32402,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PrimitiveTransformation.decode = function decode(reader, length) {
+                        PrimitiveTransformation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PrimitiveTransformation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.replaceConfig = $root.google.privacy.dlp.v2.ReplaceValueConfig.decode(reader, reader.uint32());
@@ -30681,12 +32881,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TimePartConfig.decode = function decode(reader, length) {
+                        TimePartConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TimePartConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partToExtract = reader.int32();
@@ -30952,12 +33154,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoHashConfig.decode = function decode(reader, length) {
+                        CryptoHashConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CryptoHashConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cryptoKey = $root.google.privacy.dlp.v2.CryptoKey.decode(reader, reader.uint32());
@@ -31182,12 +33386,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoDeterministicConfig.decode = function decode(reader, length) {
+                        CryptoDeterministicConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CryptoDeterministicConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cryptoKey = $root.google.privacy.dlp.v2.CryptoKey.decode(reader, reader.uint32());
@@ -31425,12 +33631,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReplaceValueConfig.decode = function decode(reader, length) {
+                        ReplaceValueConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ReplaceValueConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.newValue = $root.google.privacy.dlp.v2.Value.decode(reader, reader.uint32());
@@ -31647,12 +33855,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReplaceDictionaryConfig.decode = function decode(reader, length) {
+                        ReplaceDictionaryConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ReplaceDictionaryConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.wordList = $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.WordList.decode(reader, reader.uint32());
@@ -31849,12 +34059,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ReplaceWithInfoTypeConfig.decode = function decode(reader, length) {
+                        ReplaceWithInfoTypeConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ReplaceWithInfoTypeConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -32024,12 +34236,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RedactConfig.decode = function decode(reader, length) {
+                        RedactConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RedactConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -32235,12 +34449,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CharsToIgnore.decode = function decode(reader, length) {
+                        CharsToIgnore.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CharsToIgnore();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.charactersToSkip = reader.string();
@@ -32556,12 +34772,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CharacterMaskConfig.decode = function decode(reader, length) {
+                        CharacterMaskConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CharacterMaskConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.maskingCharacter = reader.string();
@@ -32838,12 +35056,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FixedSizeBucketingConfig.decode = function decode(reader, length) {
+                        FixedSizeBucketingConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FixedSizeBucketingConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.lowerBound = $root.google.privacy.dlp.v2.Value.decode(reader, reader.uint32());
@@ -33078,12 +35298,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BucketingConfig.decode = function decode(reader, length) {
+                        BucketingConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BucketingConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.buckets && message.buckets.length))
@@ -33319,12 +35541,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Bucket.decode = function decode(reader, length) {
+                            Bucket.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BucketingConfig.Bucket();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.min = $root.google.privacy.dlp.v2.Value.decode(reader, reader.uint32());
@@ -33634,12 +35858,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoReplaceFfxFpeConfig.decode = function decode(reader, length) {
+                        CryptoReplaceFfxFpeConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CryptoReplaceFfxFpeConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cryptoKey = $root.google.privacy.dlp.v2.CryptoKey.decode(reader, reader.uint32());
@@ -34020,12 +36246,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CryptoKey.decode = function decode(reader, length) {
+                        CryptoKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CryptoKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.transient = $root.google.privacy.dlp.v2.TransientCryptoKey.decode(reader, reader.uint32());
@@ -34281,12 +36509,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransientCryptoKey.decode = function decode(reader, length) {
+                        TransientCryptoKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransientCryptoKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -34484,12 +36714,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UnwrappedCryptoKey.decode = function decode(reader, length) {
+                        UnwrappedCryptoKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.UnwrappedCryptoKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.key = reader.bytes();
@@ -34707,12 +36939,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KmsWrappedCryptoKey.decode = function decode(reader, length) {
+                        KmsWrappedCryptoKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.KmsWrappedCryptoKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.wrappedKey = reader.bytes();
@@ -34979,12 +37213,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DateShiftConfig.decode = function decode(reader, length) {
+                        DateShiftConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DateShiftConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.upperBoundDays = reader.int32();
@@ -35237,12 +37473,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InfoTypeTransformations.decode = function decode(reader, length) {
+                        InfoTypeTransformations.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InfoTypeTransformations();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.transformations && message.transformations.length))
@@ -35469,12 +37707,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            InfoTypeTransformation.decode = function decode(reader, length) {
+                            InfoTypeTransformation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InfoTypeTransformations.InfoTypeTransformation();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.infoTypes && message.infoTypes.length))
@@ -35761,12 +38001,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FieldTransformation.decode = function decode(reader, length) {
+                        FieldTransformation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FieldTransformation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.fields && message.fields.length))
@@ -36063,12 +38305,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RecordTransformations.decode = function decode(reader, length) {
+                        RecordTransformations.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordTransformations();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.fieldTransformations && message.fieldTransformations.length))
@@ -36317,12 +38561,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RecordSuppression.decode = function decode(reader, length) {
+                        RecordSuppression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordSuppression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.condition = $root.google.privacy.dlp.v2.RecordCondition.decode(reader, reader.uint32());
@@ -36525,12 +38771,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RecordCondition.decode = function decode(reader, length) {
+                        RecordCondition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordCondition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 3: {
                                         message.expressions = $root.google.privacy.dlp.v2.RecordCondition.Expressions.decode(reader, reader.uint32());
@@ -36752,12 +39000,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Condition.decode = function decode(reader, length) {
+                            Condition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordCondition.Condition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -37041,12 +39291,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Conditions.decode = function decode(reader, length) {
+                            Conditions.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordCondition.Conditions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.conditions && message.conditions.length))
@@ -37288,12 +39540,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Expressions.decode = function decode(reader, length) {
+                            Expressions.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordCondition.Expressions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.logicalOperator = reader.int32();
@@ -37563,12 +39817,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationOverview.decode = function decode(reader, length) {
+                        TransformationOverview.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationOverview();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.transformedBytes = reader.int64();
@@ -37882,12 +40138,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationSummary.decode = function decode(reader, length) {
+                        TransformationSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -38267,12 +40525,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SummaryResult.decode = function decode(reader, length) {
+                            SummaryResult.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationSummary.SummaryResult();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.count = reader.int64();
@@ -38569,12 +40829,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationDescription.decode = function decode(reader, length) {
+                        TransformationDescription.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationDescription();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.type = reader.int32();
@@ -38955,12 +41217,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationDetails.decode = function decode(reader, length) {
+                        TransformationDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationDetails();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resourceName = reader.string();
@@ -39299,12 +41563,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationLocation.decode = function decode(reader, length) {
+                        TransformationLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.findingId = reader.string();
@@ -39594,12 +41860,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RecordTransformation.decode = function decode(reader, length) {
+                        RecordTransformation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordTransformation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fieldId = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -39843,12 +42111,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationResultStatus.decode = function decode(reader, length) {
+                        TransformationResultStatus.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationResultStatus();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.resultStatusType = reader.int32();
@@ -40190,12 +42460,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationDetailsStorageConfig.decode = function decode(reader, length) {
+                        TransformationDetailsStorageConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationDetailsStorageConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
@@ -40417,12 +42689,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Schedule.decode = function decode(reader, length) {
+                        Schedule.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Schedule();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.recurrencePeriodDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -40619,12 +42893,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Manual.decode = function decode(reader, length) {
+                        Manual.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Manual();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -40860,12 +43136,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectTemplate.decode = function decode(reader, length) {
+                        InspectTemplate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectTemplate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -41194,12 +43472,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeidentifyTemplate.decode = function decode(reader, length) {
+                        DeidentifyTemplate.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeidentifyTemplate();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -41497,12 +43777,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Error.decode = function decode(reader, length) {
+                        Error.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Error();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.details = $root.google.rpc.Status.decode(reader, reader.uint32());
@@ -41907,12 +44189,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        JobTrigger.decode = function decode(reader, length) {
+                        JobTrigger.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.JobTrigger();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -42336,12 +44620,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Trigger.decode = function decode(reader, length) {
+                            Trigger.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.JobTrigger.Trigger();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.schedule = $root.google.privacy.dlp.v2.Schedule.decode(reader, reader.uint32());
@@ -42519,6 +44805,7 @@
                          * @property {google.privacy.dlp.v2.Action.IPublishToPubSub|null} [pubSub] Action pubSub
                          * @property {google.privacy.dlp.v2.Action.IPublishSummaryToCscc|null} [publishSummaryToCscc] Action publishSummaryToCscc
                          * @property {google.privacy.dlp.v2.Action.IPublishFindingsToCloudDataCatalog|null} [publishFindingsToCloudDataCatalog] Action publishFindingsToCloudDataCatalog
+                         * @property {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null} [publishFindingsToDataplexCatalog] Action publishFindingsToDataplexCatalog
                          * @property {google.privacy.dlp.v2.Action.IDeidentify|null} [deidentify] Action deidentify
                          * @property {google.privacy.dlp.v2.Action.IJobNotificationEmails|null} [jobNotificationEmails] Action jobNotificationEmails
                          * @property {google.privacy.dlp.v2.Action.IPublishToStackdriver|null} [publishToStackdriver] Action publishToStackdriver
@@ -42572,6 +44859,14 @@
                         Action.prototype.publishFindingsToCloudDataCatalog = null;
     
                         /**
+                         * Action publishFindingsToDataplexCatalog.
+                         * @member {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null|undefined} publishFindingsToDataplexCatalog
+                         * @memberof google.privacy.dlp.v2.Action
+                         * @instance
+                         */
+                        Action.prototype.publishFindingsToDataplexCatalog = null;
+    
+                        /**
                          * Action deidentify.
                          * @member {google.privacy.dlp.v2.Action.IDeidentify|null|undefined} deidentify
                          * @memberof google.privacy.dlp.v2.Action
@@ -42600,12 +44895,12 @@
     
                         /**
                          * Action action.
-                         * @member {"saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver"|undefined} action
+                         * @member {"saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"publishFindingsToDataplexCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver"|undefined} action
                          * @memberof google.privacy.dlp.v2.Action
                          * @instance
                          */
                         Object.defineProperty(Action.prototype, "action", {
-                            get: $util.oneOfGetter($oneOfFields = ["saveFindings", "pubSub", "publishSummaryToCscc", "publishFindingsToCloudDataCatalog", "deidentify", "jobNotificationEmails", "publishToStackdriver"]),
+                            get: $util.oneOfGetter($oneOfFields = ["saveFindings", "pubSub", "publishSummaryToCscc", "publishFindingsToCloudDataCatalog", "publishFindingsToDataplexCatalog", "deidentify", "jobNotificationEmails", "publishToStackdriver"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -42647,6 +44942,8 @@
                                 $root.google.privacy.dlp.v2.Action.JobNotificationEmails.encode(message.jobNotificationEmails, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.publishToStackdriver != null && Object.hasOwnProperty.call(message, "publishToStackdriver"))
                                 $root.google.privacy.dlp.v2.Action.PublishToStackdriver.encode(message.publishToStackdriver, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.publishFindingsToDataplexCatalog != null && Object.hasOwnProperty.call(message, "publishFindingsToDataplexCatalog"))
+                                $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.encode(message.publishFindingsToDataplexCatalog, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -42674,12 +44971,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Action.decode = function decode(reader, length) {
+                        Action.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.saveFindings = $root.google.privacy.dlp.v2.Action.SaveFindings.decode(reader, reader.uint32());
@@ -42695,6 +44994,10 @@
                                     }
                                 case 5: {
                                         message.publishFindingsToCloudDataCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -42783,6 +45086,16 @@
                                         return "publishFindingsToCloudDataCatalog." + error;
                                 }
                             }
+                            if (message.publishFindingsToDataplexCatalog != null && message.hasOwnProperty("publishFindingsToDataplexCatalog")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify(message.publishFindingsToDataplexCatalog);
+                                    if (error)
+                                        return "publishFindingsToDataplexCatalog." + error;
+                                }
+                            }
                             if (message.deidentify != null && message.hasOwnProperty("deidentify")) {
                                 if (properties.action === 1)
                                     return "action: multiple values";
@@ -42847,6 +45160,11 @@
                                 if (typeof object.publishFindingsToCloudDataCatalog !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.Action.publishFindingsToCloudDataCatalog: object expected");
                                 message.publishFindingsToCloudDataCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog.fromObject(object.publishFindingsToCloudDataCatalog);
+                            }
+                            if (object.publishFindingsToDataplexCatalog != null) {
+                                if (typeof object.publishFindingsToDataplexCatalog !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.Action.publishFindingsToDataplexCatalog: object expected");
+                                message.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.fromObject(object.publishFindingsToDataplexCatalog);
                             }
                             if (object.deidentify != null) {
                                 if (typeof object.deidentify !== "object")
@@ -42913,6 +45231,11 @@
                                 object.publishToStackdriver = $root.google.privacy.dlp.v2.Action.PublishToStackdriver.toObject(message.publishToStackdriver, options);
                                 if (options.oneofs)
                                     object.action = "publishToStackdriver";
+                            }
+                            if (message.publishFindingsToDataplexCatalog != null && message.hasOwnProperty("publishFindingsToDataplexCatalog")) {
+                                object.publishFindingsToDataplexCatalog = $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.toObject(message.publishFindingsToDataplexCatalog, options);
+                                if (options.oneofs)
+                                    object.action = "publishFindingsToDataplexCatalog";
                             }
                             return object;
                         };
@@ -43028,12 +45351,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SaveFindings.decode = function decode(reader, length) {
+                            SaveFindings.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.SaveFindings();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.outputConfig = $root.google.privacy.dlp.v2.OutputStorageConfig.decode(reader, reader.uint32());
@@ -43236,12 +45561,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublishToPubSub.decode = function decode(reader, length) {
+                            PublishToPubSub.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.PublishToPubSub();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.topic = reader.string();
@@ -43428,12 +45755,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublishSummaryToCscc.decode = function decode(reader, length) {
+                            PublishSummaryToCscc.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.PublishSummaryToCscc();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -43603,12 +45932,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublishFindingsToCloudDataCatalog.decode = function decode(reader, length) {
+                            PublishFindingsToCloudDataCatalog.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -43702,6 +46033,183 @@
                             };
     
                             return PublishFindingsToCloudDataCatalog;
+                        })();
+    
+                        Action.PublishFindingsToDataplexCatalog = (function() {
+    
+                            /**
+                             * Properties of a PublishFindingsToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.Action
+                             * @interface IPublishFindingsToDataplexCatalog
+                             */
+    
+                            /**
+                             * Constructs a new PublishFindingsToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.Action
+                             * @classdesc Represents a PublishFindingsToDataplexCatalog.
+                             * @implements IPublishFindingsToDataplexCatalog
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog=} [properties] Properties to set
+                             */
+                            function PublishFindingsToDataplexCatalog(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new PublishFindingsToDataplexCatalog instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog instance
+                             */
+                            PublishFindingsToDataplexCatalog.create = function create(properties) {
+                                return new PublishFindingsToDataplexCatalog(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PublishFindingsToDataplexCatalog message. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishFindingsToDataplexCatalog.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PublishFindingsToDataplexCatalog message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishFindingsToDataplexCatalog.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishFindingsToDataplexCatalog.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishFindingsToDataplexCatalog.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PublishFindingsToDataplexCatalog message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PublishFindingsToDataplexCatalog.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PublishFindingsToDataplexCatalog message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} PublishFindingsToDataplexCatalog
+                             */
+                            PublishFindingsToDataplexCatalog.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog)
+                                    return object;
+                                return new $root.google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog();
+                            };
+    
+                            /**
+                             * Creates a plain object from a PublishFindingsToDataplexCatalog message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog} message PublishFindingsToDataplexCatalog
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PublishFindingsToDataplexCatalog.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this PublishFindingsToDataplexCatalog to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PublishFindingsToDataplexCatalog.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PublishFindingsToDataplexCatalog
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PublishFindingsToDataplexCatalog.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog";
+                            };
+    
+                            return PublishFindingsToDataplexCatalog;
                         })();
     
                         Action.Deidentify = (function() {
@@ -43841,12 +46349,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Deidentify.decode = function decode(reader, length) {
+                            Deidentify.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.Deidentify();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 7: {
                                             message.transformationConfig = $root.google.privacy.dlp.v2.TransformationConfig.decode(reader, reader.uint32());
@@ -44169,12 +46679,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            JobNotificationEmails.decode = function decode(reader, length) {
+                            JobNotificationEmails.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.JobNotificationEmails();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -44344,12 +46856,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublishToStackdriver.decode = function decode(reader, length) {
+                            PublishToStackdriver.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Action.PublishToStackdriver();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -44555,12 +47069,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TransformationConfig.decode = function decode(reader, length) {
+                        TransformationConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TransformationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.deidentifyTemplate = reader.string();
@@ -44816,12 +47332,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateInspectTemplateRequest.decode = function decode(reader, length) {
+                        CreateInspectTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CreateInspectTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -45083,12 +47601,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateInspectTemplateRequest.decode = function decode(reader, length) {
+                        UpdateInspectTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.UpdateInspectTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -45321,12 +47841,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetInspectTemplateRequest.decode = function decode(reader, length) {
+                        GetInspectTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetInspectTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -45568,12 +48090,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInspectTemplatesRequest.decode = function decode(reader, length) {
+                        ListInspectTemplatesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListInspectTemplatesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -45833,12 +48357,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListInspectTemplatesResponse.decode = function decode(reader, length) {
+                        ListInspectTemplatesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListInspectTemplatesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.inspectTemplates && message.inspectTemplates.length))
@@ -46068,12 +48594,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteInspectTemplateRequest.decode = function decode(reader, length) {
+                        DeleteInspectTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteInspectTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -46304,12 +48832,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateJobTriggerRequest.decode = function decode(reader, length) {
+                        CreateJobTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CreateJobTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -46549,12 +49079,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ActivateJobTriggerRequest.decode = function decode(reader, length) {
+                        ActivateJobTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ActivateJobTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -46774,12 +49306,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateJobTriggerRequest.decode = function decode(reader, length) {
+                        UpdateJobTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.UpdateJobTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47012,12 +49546,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetJobTriggerRequest.decode = function decode(reader, length) {
+                        GetJobTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetJobTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47237,12 +49773,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDiscoveryConfigRequest.decode = function decode(reader, length) {
+                        CreateDiscoveryConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CreateDiscoveryConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -47492,12 +50030,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDiscoveryConfigRequest.decode = function decode(reader, length) {
+                        UpdateDiscoveryConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.UpdateDiscoveryConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47730,12 +50270,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDiscoveryConfigRequest.decode = function decode(reader, length) {
+                        GetDiscoveryConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetDiscoveryConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -47966,12 +50508,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDiscoveryConfigsRequest.decode = function decode(reader, length) {
+                        ListDiscoveryConfigsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListDiscoveryConfigsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -48219,12 +50763,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDiscoveryConfigsResponse.decode = function decode(reader, length) {
+                        ListDiscoveryConfigsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListDiscoveryConfigsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.discoveryConfigs && message.discoveryConfigs.length))
@@ -48454,12 +51000,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDiscoveryConfigRequest.decode = function decode(reader, length) {
+                        DeleteDiscoveryConfigRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteDiscoveryConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -48715,12 +51263,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDlpJobRequest.decode = function decode(reader, length) {
+                        CreateDlpJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CreateDlpJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -49056,12 +51606,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListJobTriggersRequest.decode = function decode(reader, length) {
+                        ListJobTriggersRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListJobTriggersRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -49369,12 +51921,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListJobTriggersResponse.decode = function decode(reader, length) {
+                        ListJobTriggersResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListJobTriggersResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.jobTriggers && message.jobTriggers.length))
@@ -49604,12 +52158,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteJobTriggerRequest.decode = function decode(reader, length) {
+                        DeleteJobTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteJobTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -49842,12 +52398,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InspectJobConfig.decode = function decode(reader, length) {
+                        InspectJobConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InspectJobConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.storageConfig = $root.google.privacy.dlp.v2.StorageConfig.decode(reader, reader.uint32());
@@ -50054,6 +52612,7 @@
                          * @property {google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle|null} [publishToChronicle] DataProfileAction publishToChronicle
                          * @property {google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter|null} [publishToScc] DataProfileAction publishToScc
                          * @property {google.privacy.dlp.v2.DataProfileAction.ITagResources|null} [tagResources] DataProfileAction tagResources
+                         * @property {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog|null} [publishToDataplexCatalog] DataProfileAction publishToDataplexCatalog
                          */
     
                         /**
@@ -50111,17 +52670,25 @@
                          */
                         DataProfileAction.prototype.tagResources = null;
     
+                        /**
+                         * DataProfileAction publishToDataplexCatalog.
+                         * @member {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog|null|undefined} publishToDataplexCatalog
+                         * @memberof google.privacy.dlp.v2.DataProfileAction
+                         * @instance
+                         */
+                        DataProfileAction.prototype.publishToDataplexCatalog = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DataProfileAction action.
-                         * @member {"exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources"|undefined} action
+                         * @member {"exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources"|"publishToDataplexCatalog"|undefined} action
                          * @memberof google.privacy.dlp.v2.DataProfileAction
                          * @instance
                          */
                         Object.defineProperty(DataProfileAction.prototype, "action", {
-                            get: $util.oneOfGetter($oneOfFields = ["exportData", "pubSubNotification", "publishToChronicle", "publishToScc", "tagResources"]),
+                            get: $util.oneOfGetter($oneOfFields = ["exportData", "pubSubNotification", "publishToChronicle", "publishToScc", "tagResources", "publishToDataplexCatalog"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -50159,6 +52726,8 @@
                                 $root.google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter.encode(message.publishToScc, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.tagResources != null && Object.hasOwnProperty.call(message, "tagResources"))
                                 $root.google.privacy.dlp.v2.DataProfileAction.TagResources.encode(message.tagResources, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.publishToDataplexCatalog != null && Object.hasOwnProperty.call(message, "publishToDataplexCatalog"))
+                                $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.encode(message.publishToDataplexCatalog, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -50186,12 +52755,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileAction.decode = function decode(reader, length) {
+                        DataProfileAction.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.exportData = $root.google.privacy.dlp.v2.DataProfileAction.Export.decode(reader, reader.uint32());
@@ -50211,6 +52782,10 @@
                                     }
                                 case 8: {
                                         message.tagResources = $root.google.privacy.dlp.v2.DataProfileAction.TagResources.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.publishToDataplexCatalog = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -50297,6 +52872,16 @@
                                         return "tagResources." + error;
                                 }
                             }
+                            if (message.publishToDataplexCatalog != null && message.hasOwnProperty("publishToDataplexCatalog")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify(message.publishToDataplexCatalog);
+                                    if (error)
+                                        return "publishToDataplexCatalog." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -50336,6 +52921,11 @@
                                 if (typeof object.tagResources !== "object")
                                     throw TypeError(".google.privacy.dlp.v2.DataProfileAction.tagResources: object expected");
                                 message.tagResources = $root.google.privacy.dlp.v2.DataProfileAction.TagResources.fromObject(object.tagResources);
+                            }
+                            if (object.publishToDataplexCatalog != null) {
+                                if (typeof object.publishToDataplexCatalog !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.DataProfileAction.publishToDataplexCatalog: object expected");
+                                message.publishToDataplexCatalog = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.fromObject(object.publishToDataplexCatalog);
                             }
                             return message;
                         };
@@ -50377,6 +52967,11 @@
                                 object.tagResources = $root.google.privacy.dlp.v2.DataProfileAction.TagResources.toObject(message.tagResources, options);
                                 if (options.oneofs)
                                     object.action = "tagResources";
+                            }
+                            if (message.publishToDataplexCatalog != null && message.hasOwnProperty("publishToDataplexCatalog")) {
+                                object.publishToDataplexCatalog = $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.toObject(message.publishToDataplexCatalog, options);
+                                if (options.oneofs)
+                                    object.action = "publishToDataplexCatalog";
                             }
                             return object;
                         };
@@ -50503,12 +53098,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Export.decode = function decode(reader, length) {
+                            Export.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.Export();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.profileTable = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
@@ -50762,12 +53359,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PubSubNotification.decode = function decode(reader, length) {
+                            PubSubNotification.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.PubSubNotification();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.topic = reader.string();
@@ -51097,12 +53696,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublishToChronicle.decode = function decode(reader, length) {
+                            PublishToChronicle.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.PublishToChronicle();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -51272,12 +53873,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PublishToSecurityCommandCenter.decode = function decode(reader, length) {
+                            PublishToSecurityCommandCenter.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -51371,6 +53974,211 @@
                             };
     
                             return PublishToSecurityCommandCenter;
+                        })();
+    
+                        DataProfileAction.PublishToDataplexCatalog = (function() {
+    
+                            /**
+                             * Properties of a PublishToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.DataProfileAction
+                             * @interface IPublishToDataplexCatalog
+                             * @property {boolean|null} [lowerDataRiskToLow] PublishToDataplexCatalog lowerDataRiskToLow
+                             */
+    
+                            /**
+                             * Constructs a new PublishToDataplexCatalog.
+                             * @memberof google.privacy.dlp.v2.DataProfileAction
+                             * @classdesc Represents a PublishToDataplexCatalog.
+                             * @implements IPublishToDataplexCatalog
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog=} [properties] Properties to set
+                             */
+                            function PublishToDataplexCatalog(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PublishToDataplexCatalog lowerDataRiskToLow.
+                             * @member {boolean} lowerDataRiskToLow
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @instance
+                             */
+                            PublishToDataplexCatalog.prototype.lowerDataRiskToLow = false;
+    
+                            /**
+                             * Creates a new PublishToDataplexCatalog instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog instance
+                             */
+                            PublishToDataplexCatalog.create = function create(properties) {
+                                return new PublishToDataplexCatalog(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PublishToDataplexCatalog message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog} message PublishToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishToDataplexCatalog.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.lowerDataRiskToLow != null && Object.hasOwnProperty.call(message, "lowerDataRiskToLow"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowerDataRiskToLow);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PublishToDataplexCatalog message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.IPublishToDataplexCatalog} message PublishToDataplexCatalog message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PublishToDataplexCatalog.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PublishToDataplexCatalog message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishToDataplexCatalog.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.lowerDataRiskToLow = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PublishToDataplexCatalog message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PublishToDataplexCatalog.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PublishToDataplexCatalog message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PublishToDataplexCatalog.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.lowerDataRiskToLow != null && message.hasOwnProperty("lowerDataRiskToLow"))
+                                    if (typeof message.lowerDataRiskToLow !== "boolean")
+                                        return "lowerDataRiskToLow: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PublishToDataplexCatalog message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} PublishToDataplexCatalog
+                             */
+                            PublishToDataplexCatalog.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog)
+                                    return object;
+                                var message = new $root.google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog();
+                                if (object.lowerDataRiskToLow != null)
+                                    message.lowerDataRiskToLow = Boolean(object.lowerDataRiskToLow);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PublishToDataplexCatalog message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog} message PublishToDataplexCatalog
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PublishToDataplexCatalog.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.lowerDataRiskToLow = false;
+                                if (message.lowerDataRiskToLow != null && message.hasOwnProperty("lowerDataRiskToLow"))
+                                    object.lowerDataRiskToLow = message.lowerDataRiskToLow;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PublishToDataplexCatalog to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PublishToDataplexCatalog.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PublishToDataplexCatalog
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PublishToDataplexCatalog.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog";
+                            };
+    
+                            return PublishToDataplexCatalog;
                         })();
     
                         DataProfileAction.TagResources = (function() {
@@ -51487,12 +54295,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            TagResources.decode = function decode(reader, length) {
+                            TagResources.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.TagResources();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.tagConditions && message.tagConditions.length))
@@ -51800,12 +54610,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                TagCondition.decode = function decode(reader, length) {
+                                TagCondition.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.tag = $root.google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue.decode(reader, reader.uint32());
@@ -52045,12 +54857,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                TagValue.decode = function decode(reader, length) {
+                                TagValue.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.namespacedValue = reader.string();
@@ -52187,6 +55001,8 @@
                          * @property {google.protobuf.ITimestamp|null} [timestamp] DataProfileFinding timestamp
                          * @property {google.privacy.dlp.v2.IDataProfileFindingLocation|null} [location] DataProfileFinding location
                          * @property {google.privacy.dlp.v2.ResourceVisibility|null} [resourceVisibility] DataProfileFinding resourceVisibility
+                         * @property {string|null} [fullResourceName] DataProfileFinding fullResourceName
+                         * @property {google.privacy.dlp.v2.IDataSourceType|null} [dataSourceType] DataProfileFinding dataSourceType
                          */
     
                         /**
@@ -52269,6 +55085,22 @@
                         DataProfileFinding.prototype.resourceVisibility = 0;
     
                         /**
+                         * DataProfileFinding fullResourceName.
+                         * @member {string} fullResourceName
+                         * @memberof google.privacy.dlp.v2.DataProfileFinding
+                         * @instance
+                         */
+                        DataProfileFinding.prototype.fullResourceName = "";
+    
+                        /**
+                         * DataProfileFinding dataSourceType.
+                         * @member {google.privacy.dlp.v2.IDataSourceType|null|undefined} dataSourceType
+                         * @memberof google.privacy.dlp.v2.DataProfileFinding
+                         * @instance
+                         */
+                        DataProfileFinding.prototype.dataSourceType = null;
+    
+                        /**
                          * Creates a new DataProfileFinding instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.DataProfileFinding
@@ -52308,6 +55140,10 @@
                                 $root.google.privacy.dlp.v2.DataProfileFindingLocation.encode(message.location, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.resourceVisibility != null && Object.hasOwnProperty.call(message, "resourceVisibility"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.resourceVisibility);
+                            if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.fullResourceName);
+                            if (message.dataSourceType != null && Object.hasOwnProperty.call(message, "dataSourceType"))
+                                $root.google.privacy.dlp.v2.DataSourceType.encode(message.dataSourceType, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -52335,12 +55171,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileFinding.decode = function decode(reader, length) {
+                        DataProfileFinding.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileFinding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.quote = reader.string();
@@ -52372,6 +55210,14 @@
                                     }
                                 case 8: {
                                         message.resourceVisibility = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.fullResourceName = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.dataSourceType = $root.google.privacy.dlp.v2.DataSourceType.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -52448,6 +55294,14 @@
                                 case 20:
                                     break;
                                 }
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                if (!$util.isString(message.fullResourceName))
+                                    return "fullResourceName: string expected";
+                            if (message.dataSourceType != null && message.hasOwnProperty("dataSourceType")) {
+                                var error = $root.google.privacy.dlp.v2.DataSourceType.verify(message.dataSourceType);
+                                if (error)
+                                    return "dataSourceType." + error;
+                            }
                             return null;
                         };
     
@@ -52513,6 +55367,13 @@
                                 message.resourceVisibility = 20;
                                 break;
                             }
+                            if (object.fullResourceName != null)
+                                message.fullResourceName = String(object.fullResourceName);
+                            if (object.dataSourceType != null) {
+                                if (typeof object.dataSourceType !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.DataProfileFinding.dataSourceType: object expected");
+                                message.dataSourceType = $root.google.privacy.dlp.v2.DataSourceType.fromObject(object.dataSourceType);
+                            }
                             return message;
                         };
     
@@ -52538,6 +55399,8 @@
                                 object.timestamp = null;
                                 object.location = null;
                                 object.resourceVisibility = options.enums === String ? "RESOURCE_VISIBILITY_UNSPECIFIED" : 0;
+                                object.fullResourceName = "";
+                                object.dataSourceType = null;
                             }
                             if (message.quote != null && message.hasOwnProperty("quote"))
                                 object.quote = message.quote;
@@ -52555,6 +55418,10 @@
                                 object.location = $root.google.privacy.dlp.v2.DataProfileFindingLocation.toObject(message.location, options);
                             if (message.resourceVisibility != null && message.hasOwnProperty("resourceVisibility"))
                                 object.resourceVisibility = options.enums === String ? $root.google.privacy.dlp.v2.ResourceVisibility[message.resourceVisibility] === undefined ? message.resourceVisibility : $root.google.privacy.dlp.v2.ResourceVisibility[message.resourceVisibility] : message.resourceVisibility;
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                object.fullResourceName = message.fullResourceName;
+                            if (message.dataSourceType != null && message.hasOwnProperty("dataSourceType"))
+                                object.dataSourceType = $root.google.privacy.dlp.v2.DataSourceType.toObject(message.dataSourceType, options);
                             return object;
                         };
     
@@ -52697,12 +55564,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileFindingLocation.decode = function decode(reader, length) {
+                        DataProfileFindingLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileFindingLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.containerName = reader.string();
@@ -52923,12 +55792,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileFindingRecordLocation.decode = function decode(reader, length) {
+                        DataProfileFindingRecordLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileFindingRecordLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -53179,12 +56050,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileJobConfig.decode = function decode(reader, length) {
+                        DataProfileJobConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileJobConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.location = $root.google.privacy.dlp.v2.DataProfileLocation.decode(reader, reader.uint32());
@@ -53498,12 +56371,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryRegex.decode = function decode(reader, length) {
+                        BigQueryRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectIdRegex = reader.string();
@@ -53728,12 +56603,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryRegexes.decode = function decode(reader, length) {
+                        BigQueryRegexes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryRegexes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.patterns && message.patterns.length))
@@ -53955,12 +56832,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryTableTypes.decode = function decode(reader, length) {
+                        BigQueryTableTypes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryTableTypes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.types && message.types.length))
@@ -54247,12 +57126,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Disabled.decode = function decode(reader, length) {
+                        Disabled.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Disabled();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -54458,12 +57339,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileLocation.decode = function decode(reader, length) {
+                        DataProfileLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.organizationId = reader.int64();
@@ -54843,12 +57726,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryConfig.decode = function decode(reader, length) {
+                        DiscoveryConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -55326,12 +58211,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OrgConfig.decode = function decode(reader, length) {
+                            OrgConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryConfig.OrgConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.location = $root.google.privacy.dlp.v2.DiscoveryStartingLocation.decode(reader, reader.uint32());
@@ -55635,12 +58522,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryTarget.decode = function decode(reader, length) {
+                        DiscoveryTarget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryTarget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bigQueryTarget = $root.google.privacy.dlp.v2.BigQueryDiscoveryTarget.decode(reader, reader.uint32());
@@ -56015,12 +58904,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryDiscoveryTarget.decode = function decode(reader, length) {
+                        BigQueryDiscoveryTarget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryDiscoveryTarget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.filter = $root.google.privacy.dlp.v2.DiscoveryBigQueryFilter.decode(reader, reader.uint32());
@@ -56324,12 +59215,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryBigQueryFilter.decode = function decode(reader, length) {
+                        DiscoveryBigQueryFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryBigQueryFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tables = $root.google.privacy.dlp.v2.BigQueryTableCollection.decode(reader, reader.uint32());
@@ -56571,12 +59464,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AllOtherBigQueryTables.decode = function decode(reader, length) {
+                            AllOtherBigQueryTables.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryBigQueryFilter.AllOtherBigQueryTables();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -56774,12 +59669,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryTableCollection.decode = function decode(reader, length) {
+                        BigQueryTableCollection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryTableCollection();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeRegexes = $root.google.privacy.dlp.v2.BigQueryRegexes.decode(reader, reader.uint32());
@@ -57034,12 +59931,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryBigQueryConditions.decode = function decode(reader, length) {
+                        DiscoveryBigQueryConditions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryBigQueryConditions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createdAfter = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -57333,12 +60232,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            OrConditions.decode = function decode(reader, length) {
+                            OrConditions.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryBigQueryConditions.OrConditions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.minRowCount = reader.int32();
@@ -57590,12 +60491,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryGenerationCadence.decode = function decode(reader, length) {
+                        DiscoveryGenerationCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryGenerationCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schemaModifiedCadence = $root.google.privacy.dlp.v2.DiscoverySchemaModifiedCadence.decode(reader, reader.uint32());
@@ -57890,12 +60793,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryTableModifiedCadence.decode = function decode(reader, length) {
+                        DiscoveryTableModifiedCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryTableModifiedCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.types && message.types.length))
@@ -58203,12 +61108,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoverySchemaModifiedCadence.decode = function decode(reader, length) {
+                        DiscoverySchemaModifiedCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoverySchemaModifiedCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.types && message.types.length))
@@ -58507,12 +61414,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryInspectTemplateModifiedCadence.decode = function decode(reader, length) {
+                        DiscoveryInspectTemplateModifiedCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryInspectTemplateModifiedCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.frequency = reader.int32();
@@ -58786,12 +61695,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudSqlDiscoveryTarget.decode = function decode(reader, length) {
+                        CloudSqlDiscoveryTarget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudSqlDiscoveryTarget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.filter = $root.google.privacy.dlp.v2.DiscoveryCloudSqlFilter.decode(reader, reader.uint32());
@@ -59095,12 +62006,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryCloudSqlFilter.decode = function decode(reader, length) {
+                        DiscoveryCloudSqlFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryCloudSqlFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.collection = $root.google.privacy.dlp.v2.DatabaseResourceCollection.decode(reader, reader.uint32());
@@ -59370,12 +62283,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DatabaseResourceCollection.decode = function decode(reader, length) {
+                        DatabaseResourceCollection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DatabaseResourceCollection();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeRegexes = $root.google.privacy.dlp.v2.DatabaseResourceRegexes.decode(reader, reader.uint32());
@@ -59585,12 +62500,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DatabaseResourceRegexes.decode = function decode(reader, length) {
+                        DatabaseResourceRegexes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DatabaseResourceRegexes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.patterns && message.patterns.length))
@@ -59840,12 +62757,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DatabaseResourceRegex.decode = function decode(reader, length) {
+                        DatabaseResourceRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DatabaseResourceRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectIdRegex = reader.string();
@@ -60069,12 +62988,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AllOtherDatabaseResources.decode = function decode(reader, length) {
+                        AllOtherDatabaseResources.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AllOtherDatabaseResources();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -60288,12 +63209,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DatabaseResourceReference.decode = function decode(reader, length) {
+                        DatabaseResourceReference.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DatabaseResourceReference();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectId = reader.string();
@@ -60549,12 +63472,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryCloudSqlConditions.decode = function decode(reader, length) {
+                        DiscoveryCloudSqlConditions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryCloudSqlConditions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.databaseEngines && message.databaseEngines.length))
@@ -60912,12 +63837,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryCloudSqlGenerationCadence.decode = function decode(reader, length) {
+                        DiscoveryCloudSqlGenerationCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.schemaModifiedCadence = $root.google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence.decode(reader, reader.uint32());
@@ -61192,12 +64119,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SchemaModifiedCadence.decode = function decode(reader, length) {
+                            SchemaModifiedCadence.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             if (!(message.types && message.types.length))
@@ -61488,12 +64417,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SecretsDiscoveryTarget.decode = function decode(reader, length) {
+                        SecretsDiscoveryTarget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.SecretsDiscoveryTarget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -61721,12 +64652,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudStorageDiscoveryTarget.decode = function decode(reader, length) {
+                        CloudStorageDiscoveryTarget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStorageDiscoveryTarget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.filter = $root.google.privacy.dlp.v2.DiscoveryCloudStorageFilter.decode(reader, reader.uint32());
@@ -62030,12 +64963,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryCloudStorageFilter.decode = function decode(reader, length) {
+                        DiscoveryCloudStorageFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryCloudStorageFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.collection = $root.google.privacy.dlp.v2.FileStoreCollection.decode(reader, reader.uint32());
@@ -62213,6 +65148,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IFileStoreCollection
                          * @property {google.privacy.dlp.v2.IFileStoreRegexes|null} [includeRegexes] FileStoreCollection includeRegexes
+                         * @property {google.privacy.dlp.v2.ITagFilters|null} [includeTags] FileStoreCollection includeTags
                          */
     
                         /**
@@ -62237,6 +65173,14 @@
                          * @instance
                          */
                         FileStoreCollection.prototype.includeRegexes = null;
+    
+                        /**
+                         * FileStoreCollection includeTags.
+                         * @member {google.privacy.dlp.v2.ITagFilters|null|undefined} includeTags
+                         * @memberof google.privacy.dlp.v2.FileStoreCollection
+                         * @instance
+                         */
+                        FileStoreCollection.prototype.includeTags = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -62278,6 +65222,8 @@
                                 writer = $Writer.create();
                             if (message.includeRegexes != null && Object.hasOwnProperty.call(message, "includeRegexes"))
                                 $root.google.privacy.dlp.v2.FileStoreRegexes.encode(message.includeRegexes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.includeTags != null && Object.hasOwnProperty.call(message, "includeTags"))
+                                $root.google.privacy.dlp.v2.TagFilters.encode(message.includeTags, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -62305,15 +65251,21 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileStoreCollection.decode = function decode(reader, length) {
+                        FileStoreCollection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileStoreCollection();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.includeTags = $root.google.privacy.dlp.v2.TagFilters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -62360,6 +65312,11 @@
                                         return "includeRegexes." + error;
                                 }
                             }
+                            if (message.includeTags != null && message.hasOwnProperty("includeTags")) {
+                                var error = $root.google.privacy.dlp.v2.TagFilters.verify(message.includeTags);
+                                if (error)
+                                    return "includeTags." + error;
+                            }
                             return null;
                         };
     
@@ -62380,6 +65337,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.FileStoreCollection.includeRegexes: object expected");
                                 message.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.fromObject(object.includeRegexes);
                             }
+                            if (object.includeTags != null) {
+                                if (typeof object.includeTags !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.FileStoreCollection.includeTags: object expected");
+                                message.includeTags = $root.google.privacy.dlp.v2.TagFilters.fromObject(object.includeTags);
+                            }
                             return message;
                         };
     
@@ -62396,11 +65358,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.includeTags = null;
                             if (message.includeRegexes != null && message.hasOwnProperty("includeRegexes")) {
                                 object.includeRegexes = $root.google.privacy.dlp.v2.FileStoreRegexes.toObject(message.includeRegexes, options);
                                 if (options.oneofs)
                                     object.pattern = "includeRegexes";
                             }
+                            if (message.includeTags != null && message.hasOwnProperty("includeTags"))
+                                object.includeTags = $root.google.privacy.dlp.v2.TagFilters.toObject(message.includeTags, options);
                             return object;
                         };
     
@@ -62520,12 +65486,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileStoreRegexes.decode = function decode(reader, length) {
+                        FileStoreRegexes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileStoreRegexes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.patterns && message.patterns.length))
@@ -62756,12 +65724,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileStoreRegex.decode = function decode(reader, length) {
+                        FileStoreRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileStoreRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cloudStorageRegex = $root.google.privacy.dlp.v2.CloudStorageRegex.decode(reader, reader.uint32());
@@ -62980,12 +65950,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudStorageRegex.decode = function decode(reader, length) {
+                        CloudStorageRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStorageRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectIdRegex = reader.string();
@@ -63207,12 +66179,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudStorageResourceReference.decode = function decode(reader, length) {
+                        CloudStorageResourceReference.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStorageResourceReference();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bucketName = reader.string();
@@ -63434,12 +66408,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryCloudStorageGenerationCadence.decode = function decode(reader, length) {
+                        DiscoveryCloudStorageGenerationCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryCloudStorageGenerationCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.refreshFrequency = reader.int32();
@@ -63705,12 +66681,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryCloudStorageConditions.decode = function decode(reader, length) {
+                        DiscoveryCloudStorageConditions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryCloudStorageConditions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.includedObjectAttributes && message.includedObjectAttributes.length))
@@ -64124,12 +67102,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryFileStoreConditions.decode = function decode(reader, length) {
+                        DiscoveryFileStoreConditions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryFileStoreConditions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createdAfter = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -64431,12 +67411,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OtherCloudDiscoveryTarget.decode = function decode(reader, length) {
+                        OtherCloudDiscoveryTarget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherCloudDiscoveryTarget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataSourceType = $root.google.privacy.dlp.v2.DataSourceType.decode(reader, reader.uint32());
@@ -64757,12 +67739,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryOtherCloudFilter.decode = function decode(reader, length) {
+                        DiscoveryOtherCloudFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryOtherCloudFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.collection = $root.google.privacy.dlp.v2.OtherCloudResourceCollection.decode(reader, reader.uint32());
@@ -65032,12 +68016,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OtherCloudResourceCollection.decode = function decode(reader, length) {
+                        OtherCloudResourceCollection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherCloudResourceCollection();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.includeRegexes = $root.google.privacy.dlp.v2.OtherCloudResourceRegexes.decode(reader, reader.uint32());
@@ -65247,12 +68233,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OtherCloudResourceRegexes.decode = function decode(reader, length) {
+                        OtherCloudResourceRegexes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherCloudResourceRegexes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.patterns && message.patterns.length))
@@ -65483,12 +68471,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OtherCloudResourceRegex.decode = function decode(reader, length) {
+                        OtherCloudResourceRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherCloudResourceRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.amazonS3BucketRegex = $root.google.privacy.dlp.v2.AmazonS3BucketRegex.decode(reader, reader.uint32());
@@ -65696,12 +68686,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AwsAccountRegex.decode = function decode(reader, length) {
+                        AwsAccountRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AwsAccountRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.accountIdRegex = reader.string();
@@ -65910,12 +68902,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AmazonS3BucketRegex.decode = function decode(reader, length) {
+                        AmazonS3BucketRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AmazonS3BucketRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.awsAccountRegex = $root.google.privacy.dlp.v2.AwsAccountRegex.decode(reader, reader.uint32());
@@ -66145,12 +69139,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OtherCloudSingleResourceReference.decode = function decode(reader, length) {
+                        OtherCloudSingleResourceReference.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherCloudSingleResourceReference();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.amazonS3Bucket = $root.google.privacy.dlp.v2.AmazonS3Bucket.decode(reader, reader.uint32());
@@ -66358,12 +69354,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AwsAccount.decode = function decode(reader, length) {
+                        AwsAccount.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AwsAccount();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.accountId = reader.string();
@@ -66572,12 +69570,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AmazonS3Bucket.decode = function decode(reader, length) {
+                        AmazonS3Bucket.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AmazonS3Bucket();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.awsAccount = $root.google.privacy.dlp.v2.AwsAccount.decode(reader, reader.uint32());
@@ -66818,12 +69818,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryOtherCloudConditions.decode = function decode(reader, length) {
+                        DiscoveryOtherCloudConditions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryOtherCloudConditions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.minAge = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -67070,12 +70072,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AmazonS3BucketConditions.decode = function decode(reader, length) {
+                        AmazonS3BucketConditions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AmazonS3BucketConditions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.bucketTypes && message.bucketTypes.length))
@@ -67436,12 +70440,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryOtherCloudGenerationCadence.decode = function decode(reader, length) {
+                        DiscoveryOtherCloudGenerationCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.refreshFrequency = reader.int32();
@@ -67711,12 +70717,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryStartingLocation.decode = function decode(reader, length) {
+                        DiscoveryStartingLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryStartingLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.organizationId = reader.int64();
@@ -67970,12 +70978,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OtherCloudDiscoveryStartingLocation.decode = function decode(reader, length) {
+                        OtherCloudDiscoveryStartingLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.awsLocation = $root.google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation.decode(reader, reader.uint32());
@@ -68205,12 +71215,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            AwsDiscoveryStartingLocation.decode = function decode(reader, length) {
+                            AwsDiscoveryStartingLocation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 2: {
                                             message.accountId = reader.string();
@@ -68422,12 +71434,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        AllOtherResources.decode = function decode(reader, length) {
+                        AllOtherResources.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.AllOtherResources();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -68655,12 +71669,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VertexDatasetDiscoveryTarget.decode = function decode(reader, length) {
+                        VertexDatasetDiscoveryTarget.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.VertexDatasetDiscoveryTarget();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.filter = $root.google.privacy.dlp.v2.DiscoveryVertexDatasetFilter.decode(reader, reader.uint32());
@@ -68964,12 +71980,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryVertexDatasetFilter.decode = function decode(reader, length) {
+                        DiscoveryVertexDatasetFilter.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryVertexDatasetFilter();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.collection = $root.google.privacy.dlp.v2.VertexDatasetCollection.decode(reader, reader.uint32());
@@ -69239,12 +72257,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VertexDatasetCollection.decode = function decode(reader, length) {
+                        VertexDatasetCollection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.VertexDatasetCollection();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.vertexDatasetRegexes = $root.google.privacy.dlp.v2.VertexDatasetRegexes.decode(reader, reader.uint32());
@@ -69454,12 +72474,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VertexDatasetRegexes.decode = function decode(reader, length) {
+                        VertexDatasetRegexes.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.VertexDatasetRegexes();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.patterns && message.patterns.length))
@@ -69676,12 +72698,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VertexDatasetRegex.decode = function decode(reader, length) {
+                        VertexDatasetRegex.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.VertexDatasetRegex();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectIdRegex = reader.string();
@@ -69879,12 +72903,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VertexDatasetResourceReference.decode = function decode(reader, length) {
+                        VertexDatasetResourceReference.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.VertexDatasetResourceReference();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.datasetResourceName = reader.string();
@@ -70093,12 +73119,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryVertexDatasetConditions.decode = function decode(reader, length) {
+                        DiscoveryVertexDatasetConditions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryVertexDatasetConditions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.createdAfter = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -70330,12 +73358,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DiscoveryVertexDatasetGenerationCadence.decode = function decode(reader, length) {
+                        DiscoveryVertexDatasetGenerationCadence.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DiscoveryVertexDatasetGenerationCadence();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.refreshFrequency = reader.int32();
@@ -70719,12 +73749,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DlpJob.decode = function decode(reader, length) {
+                        DlpJob.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DlpJob();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -71230,12 +74262,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDlpJobRequest.decode = function decode(reader, length) {
+                        GetDlpJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetDlpJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -71499,12 +74533,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDlpJobsRequest.decode = function decode(reader, length) {
+                        ListDlpJobsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListDlpJobsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 4: {
                                         message.parent = reader.string();
@@ -71812,12 +74848,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDlpJobsResponse.decode = function decode(reader, length) {
+                        ListDlpJobsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListDlpJobsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.jobs && message.jobs.length))
@@ -72047,12 +75085,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CancelDlpJobRequest.decode = function decode(reader, length) {
+                        CancelDlpJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CancelDlpJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -72250,12 +75290,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FinishDlpJobRequest.decode = function decode(reader, length) {
+                        FinishDlpJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FinishDlpJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -72453,12 +75495,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDlpJobRequest.decode = function decode(reader, length) {
+                        DeleteDlpJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteDlpJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -72689,12 +75733,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateDeidentifyTemplateRequest.decode = function decode(reader, length) {
+                        CreateDeidentifyTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -72956,12 +76002,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateDeidentifyTemplateRequest.decode = function decode(reader, length) {
+                        UpdateDeidentifyTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -73194,12 +76242,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetDeidentifyTemplateRequest.decode = function decode(reader, length) {
+                        GetDeidentifyTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetDeidentifyTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -73441,12 +76491,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDeidentifyTemplatesRequest.decode = function decode(reader, length) {
+                        ListDeidentifyTemplatesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -73706,12 +76758,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListDeidentifyTemplatesResponse.decode = function decode(reader, length) {
+                        ListDeidentifyTemplatesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListDeidentifyTemplatesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.deidentifyTemplates && message.deidentifyTemplates.length))
@@ -73941,12 +76995,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteDeidentifyTemplateRequest.decode = function decode(reader, length) {
+                        DeleteDeidentifyTemplateRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -74180,12 +77236,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LargeCustomDictionaryConfig.decode = function decode(reader, length) {
+                        LargeCustomDictionaryConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.LargeCustomDictionaryConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.outputPath = $root.google.privacy.dlp.v2.CloudStoragePath.decode(reader, reader.uint32());
@@ -74435,12 +77493,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        LargeCustomDictionaryStats.decode = function decode(reader, length) {
+                        LargeCustomDictionaryStats.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.LargeCustomDictionaryStats();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.approxNumPhrases = reader.int64();
@@ -74710,12 +77770,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StoredInfoTypeConfig.decode = function decode(reader, length) {
+                        StoredInfoTypeConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StoredInfoTypeConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.displayName = reader.string();
@@ -75011,12 +78073,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StoredInfoTypeStats.decode = function decode(reader, length) {
+                        StoredInfoTypeStats.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StoredInfoTypeStats();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.largeCustomDictionary = $root.google.privacy.dlp.v2.LargeCustomDictionaryStats.decode(reader, reader.uint32());
@@ -75270,12 +78334,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StoredInfoTypeVersion.decode = function decode(reader, length) {
+                        StoredInfoTypeVersion.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StoredInfoTypeVersion();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.config = $root.google.privacy.dlp.v2.StoredInfoTypeConfig.decode(reader, reader.uint32());
@@ -75615,12 +78681,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StoredInfoType.decode = function decode(reader, length) {
+                        StoredInfoType.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StoredInfoType();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -75901,12 +78969,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateStoredInfoTypeRequest.decode = function decode(reader, length) {
+                        CreateStoredInfoTypeRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CreateStoredInfoTypeRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -76168,12 +79238,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateStoredInfoTypeRequest.decode = function decode(reader, length) {
+                        UpdateStoredInfoTypeRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -76406,12 +79478,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetStoredInfoTypeRequest.decode = function decode(reader, length) {
+                        GetStoredInfoTypeRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetStoredInfoTypeRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -76653,12 +79727,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStoredInfoTypesRequest.decode = function decode(reader, length) {
+                        ListStoredInfoTypesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListStoredInfoTypesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -76918,12 +79994,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListStoredInfoTypesResponse.decode = function decode(reader, length) {
+                        ListStoredInfoTypesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListStoredInfoTypesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.storedInfoTypes && message.storedInfoTypes.length))
@@ -77153,12 +80231,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteStoredInfoTypeRequest.decode = function decode(reader, length) {
+                        DeleteStoredInfoTypeRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -77367,12 +80447,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HybridInspectJobTriggerRequest.decode = function decode(reader, length) {
+                        HybridInspectJobTriggerRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectJobTriggerRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -77599,12 +80681,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HybridInspectDlpJobRequest.decode = function decode(reader, length) {
+                        HybridInspectDlpJobRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectDlpJobRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -77831,12 +80915,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HybridContentItem.decode = function decode(reader, length) {
+                        HybridContentItem.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridContentItem();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.item = $root.google.privacy.dlp.v2.ContentItem.decode(reader, reader.uint32());
@@ -78103,12 +81189,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HybridFindingDetails.decode = function decode(reader, length) {
+                        HybridFindingDetails.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridFindingDetails(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.containerDetails = $root.google.privacy.dlp.v2.Container.decode(reader, reader.uint32());
@@ -78416,12 +81504,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HybridInspectResponse.decode = function decode(reader, length) {
+                        HybridInspectResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridInspectResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -78551,6 +81641,7 @@
                      * @property {number} MATCHING_TYPE_FULL_MATCH=1 MATCHING_TYPE_FULL_MATCH value
                      * @property {number} MATCHING_TYPE_PARTIAL_MATCH=2 MATCHING_TYPE_PARTIAL_MATCH value
                      * @property {number} MATCHING_TYPE_INVERSE_MATCH=3 MATCHING_TYPE_INVERSE_MATCH value
+                     * @property {number} MATCHING_TYPE_RULE_SPECIFIC=4 MATCHING_TYPE_RULE_SPECIFIC value
                      */
                     v2.MatchingType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -78558,7 +81649,838 @@
                         values[valuesById[1] = "MATCHING_TYPE_FULL_MATCH"] = 1;
                         values[valuesById[2] = "MATCHING_TYPE_PARTIAL_MATCH"] = 2;
                         values[valuesById[3] = "MATCHING_TYPE_INVERSE_MATCH"] = 3;
+                        values[valuesById[4] = "MATCHING_TYPE_RULE_SPECIFIC"] = 4;
                         return values;
+                    })();
+    
+                    v2.ImageContainmentType = (function() {
+    
+                        /**
+                         * Properties of an ImageContainmentType.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IImageContainmentType
+                         * @property {google.privacy.dlp.v2.IEncloses|null} [encloses] ImageContainmentType encloses
+                         * @property {google.privacy.dlp.v2.IFullyInside|null} [fullyInside] ImageContainmentType fullyInside
+                         * @property {google.privacy.dlp.v2.IOverlap|null} [overlaps] ImageContainmentType overlaps
+                         */
+    
+                        /**
+                         * Constructs a new ImageContainmentType.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an ImageContainmentType.
+                         * @implements IImageContainmentType
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IImageContainmentType=} [properties] Properties to set
+                         */
+                        function ImageContainmentType(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImageContainmentType encloses.
+                         * @member {google.privacy.dlp.v2.IEncloses|null|undefined} encloses
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        ImageContainmentType.prototype.encloses = null;
+    
+                        /**
+                         * ImageContainmentType fullyInside.
+                         * @member {google.privacy.dlp.v2.IFullyInside|null|undefined} fullyInside
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        ImageContainmentType.prototype.fullyInside = null;
+    
+                        /**
+                         * ImageContainmentType overlaps.
+                         * @member {google.privacy.dlp.v2.IOverlap|null|undefined} overlaps
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        ImageContainmentType.prototype.overlaps = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImageContainmentType type.
+                         * @member {"encloses"|"fullyInside"|"overlaps"|undefined} type
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         */
+                        Object.defineProperty(ImageContainmentType.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["encloses", "fullyInside", "overlaps"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImageContainmentType instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.IImageContainmentType=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType instance
+                         */
+                        ImageContainmentType.create = function create(properties) {
+                            return new ImageContainmentType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImageContainmentType message. Does not implicitly {@link google.privacy.dlp.v2.ImageContainmentType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.IImageContainmentType} message ImageContainmentType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageContainmentType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.encloses != null && Object.hasOwnProperty.call(message, "encloses"))
+                                $root.google.privacy.dlp.v2.Encloses.encode(message.encloses, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.fullyInside != null && Object.hasOwnProperty.call(message, "fullyInside"))
+                                $root.google.privacy.dlp.v2.FullyInside.encode(message.fullyInside, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.overlaps != null && Object.hasOwnProperty.call(message, "overlaps"))
+                                $root.google.privacy.dlp.v2.Overlap.encode(message.overlaps, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImageContainmentType message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ImageContainmentType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.IImageContainmentType} message ImageContainmentType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImageContainmentType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImageContainmentType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageContainmentType.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ImageContainmentType();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.encloses = $root.google.privacy.dlp.v2.Encloses.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.fullyInside = $root.google.privacy.dlp.v2.FullyInside.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.overlaps = $root.google.privacy.dlp.v2.Overlap.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImageContainmentType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImageContainmentType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImageContainmentType message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImageContainmentType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.encloses != null && message.hasOwnProperty("encloses")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Encloses.verify(message.encloses);
+                                    if (error)
+                                        return "encloses." + error;
+                                }
+                            }
+                            if (message.fullyInside != null && message.hasOwnProperty("fullyInside")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.FullyInside.verify(message.fullyInside);
+                                    if (error)
+                                        return "fullyInside." + error;
+                                }
+                            }
+                            if (message.overlaps != null && message.hasOwnProperty("overlaps")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.Overlap.verify(message.overlaps);
+                                    if (error)
+                                        return "overlaps." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImageContainmentType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.ImageContainmentType} ImageContainmentType
+                         */
+                        ImageContainmentType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.ImageContainmentType)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.ImageContainmentType();
+                            if (object.encloses != null) {
+                                if (typeof object.encloses !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ImageContainmentType.encloses: object expected");
+                                message.encloses = $root.google.privacy.dlp.v2.Encloses.fromObject(object.encloses);
+                            }
+                            if (object.fullyInside != null) {
+                                if (typeof object.fullyInside !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ImageContainmentType.fullyInside: object expected");
+                                message.fullyInside = $root.google.privacy.dlp.v2.FullyInside.fromObject(object.fullyInside);
+                            }
+                            if (object.overlaps != null) {
+                                if (typeof object.overlaps !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ImageContainmentType.overlaps: object expected");
+                                message.overlaps = $root.google.privacy.dlp.v2.Overlap.fromObject(object.overlaps);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImageContainmentType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {google.privacy.dlp.v2.ImageContainmentType} message ImageContainmentType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImageContainmentType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.encloses != null && message.hasOwnProperty("encloses")) {
+                                object.encloses = $root.google.privacy.dlp.v2.Encloses.toObject(message.encloses, options);
+                                if (options.oneofs)
+                                    object.type = "encloses";
+                            }
+                            if (message.fullyInside != null && message.hasOwnProperty("fullyInside")) {
+                                object.fullyInside = $root.google.privacy.dlp.v2.FullyInside.toObject(message.fullyInside, options);
+                                if (options.oneofs)
+                                    object.type = "fullyInside";
+                            }
+                            if (message.overlaps != null && message.hasOwnProperty("overlaps")) {
+                                object.overlaps = $root.google.privacy.dlp.v2.Overlap.toObject(message.overlaps, options);
+                                if (options.oneofs)
+                                    object.type = "overlaps";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImageContainmentType to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImageContainmentType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImageContainmentType
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.ImageContainmentType
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImageContainmentType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.ImageContainmentType";
+                        };
+    
+                        return ImageContainmentType;
+                    })();
+    
+                    v2.Overlap = (function() {
+    
+                        /**
+                         * Properties of an Overlap.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IOverlap
+                         */
+    
+                        /**
+                         * Constructs a new Overlap.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an Overlap.
+                         * @implements IOverlap
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IOverlap=} [properties] Properties to set
+                         */
+                        function Overlap(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new Overlap instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.IOverlap=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap instance
+                         */
+                        Overlap.create = function create(properties) {
+                            return new Overlap(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Overlap message. Does not implicitly {@link google.privacy.dlp.v2.Overlap.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.IOverlap} message Overlap message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Overlap.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Overlap message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Overlap.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.IOverlap} message Overlap message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Overlap.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Overlap message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Overlap.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Overlap();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Overlap message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Overlap.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Overlap message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Overlap.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Overlap message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Overlap} Overlap
+                         */
+                        Overlap.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Overlap)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.Overlap();
+                        };
+    
+                        /**
+                         * Creates a plain object from an Overlap message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {google.privacy.dlp.v2.Overlap} message Overlap
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Overlap.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this Overlap to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Overlap.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Overlap
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.Overlap
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Overlap.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.Overlap";
+                        };
+    
+                        return Overlap;
+                    })();
+    
+                    v2.Encloses = (function() {
+    
+                        /**
+                         * Properties of an Encloses.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IEncloses
+                         */
+    
+                        /**
+                         * Constructs a new Encloses.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents an Encloses.
+                         * @implements IEncloses
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IEncloses=} [properties] Properties to set
+                         */
+                        function Encloses(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new Encloses instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.IEncloses=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses instance
+                         */
+                        Encloses.create = function create(properties) {
+                            return new Encloses(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Encloses message. Does not implicitly {@link google.privacy.dlp.v2.Encloses.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.IEncloses} message Encloses message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Encloses.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Encloses message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Encloses.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.IEncloses} message Encloses message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Encloses.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Encloses message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Encloses.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Encloses();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Encloses message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Encloses.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Encloses message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Encloses.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Encloses message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Encloses} Encloses
+                         */
+                        Encloses.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Encloses)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.Encloses();
+                        };
+    
+                        /**
+                         * Creates a plain object from an Encloses message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {google.privacy.dlp.v2.Encloses} message Encloses
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Encloses.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this Encloses to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Encloses.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Encloses
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.Encloses
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Encloses.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.Encloses";
+                        };
+    
+                        return Encloses;
+                    })();
+    
+                    v2.FullyInside = (function() {
+    
+                        /**
+                         * Properties of a FullyInside.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IFullyInside
+                         */
+    
+                        /**
+                         * Constructs a new FullyInside.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a FullyInside.
+                         * @implements IFullyInside
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IFullyInside=} [properties] Properties to set
+                         */
+                        function FullyInside(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new FullyInside instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFullyInside=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside instance
+                         */
+                        FullyInside.create = function create(properties) {
+                            return new FullyInside(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FullyInside message. Does not implicitly {@link google.privacy.dlp.v2.FullyInside.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFullyInside} message FullyInside message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FullyInside.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FullyInside message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.FullyInside.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.IFullyInside} message FullyInside message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FullyInside.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FullyInside message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FullyInside.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FullyInside();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FullyInside message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FullyInside.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FullyInside message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FullyInside.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FullyInside message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.FullyInside} FullyInside
+                         */
+                        FullyInside.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.FullyInside)
+                                return object;
+                            return new $root.google.privacy.dlp.v2.FullyInside();
+                        };
+    
+                        /**
+                         * Creates a plain object from a FullyInside message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {google.privacy.dlp.v2.FullyInside} message FullyInside
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FullyInside.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this FullyInside to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FullyInside.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FullyInside
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.FullyInside
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FullyInside.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.FullyInside";
+                        };
+    
+                        return FullyInside;
                     })();
     
                     /**
@@ -78583,11 +82505,13 @@
                      * @enum {number}
                      * @property {number} METADATATYPE_UNSPECIFIED=0 METADATATYPE_UNSPECIFIED value
                      * @property {number} STORAGE_METADATA=2 STORAGE_METADATA value
+                     * @property {number} CONTENT_METADATA=3 CONTENT_METADATA value
                      */
                     v2.MetadataType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "METADATATYPE_UNSPECIFIED"] = 0;
                         values[valuesById[2] = "STORAGE_METADATA"] = 2;
+                        values[valuesById[3] = "CONTENT_METADATA"] = 3;
                         return values;
                     })();
     
@@ -78772,12 +82696,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListProjectDataProfilesRequest.decode = function decode(reader, length) {
+                        ListProjectDataProfilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListProjectDataProfilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -79037,12 +82963,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListProjectDataProfilesResponse.decode = function decode(reader, length) {
+                        ListProjectDataProfilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListProjectDataProfilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.projectDataProfiles && message.projectDataProfiles.length))
@@ -79316,12 +83244,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTableDataProfilesRequest.decode = function decode(reader, length) {
+                        ListTableDataProfilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListTableDataProfilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -79581,12 +83511,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListTableDataProfilesResponse.decode = function decode(reader, length) {
+                        ListTableDataProfilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListTableDataProfilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.tableDataProfiles && message.tableDataProfiles.length))
@@ -79860,12 +83792,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListColumnDataProfilesRequest.decode = function decode(reader, length) {
+                        ListColumnDataProfilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListColumnDataProfilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -80125,12 +84059,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListColumnDataProfilesResponse.decode = function decode(reader, length) {
+                        ListColumnDataProfilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListColumnDataProfilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.columnDataProfiles && message.columnDataProfiles.length))
@@ -80360,12 +84296,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataRiskLevel.decode = function decode(reader, length) {
+                        DataRiskLevel.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataRiskLevel();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.score = reader.int32();
@@ -80694,12 +84632,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProjectDataProfile.decode = function decode(reader, length) {
+                        ProjectDataProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProjectDataProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -81092,12 +85032,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfileConfigSnapshot.decode = function decode(reader, length) {
+                        DataProfileConfigSnapshot.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfileConfigSnapshot();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.inspectConfig = $root.google.privacy.dlp.v2.InspectConfig.decode(reader, reader.uint32());
@@ -81314,6 +85256,7 @@
                          * @property {google.privacy.dlp.v2.IBigQueryTable|null} [sampleFindingsTable] TableDataProfile sampleFindingsTable
                          * @property {Array.<google.privacy.dlp.v2.ITag>|null} [tags] TableDataProfile tags
                          * @property {Array.<google.privacy.dlp.v2.IRelatedResource>|null} [relatedResources] TableDataProfile relatedResources
+                         * @property {Array.<google.privacy.dlp.v2.IDomain>|null} [domains] TableDataProfile domains
                          */
     
                         /**
@@ -81330,6 +85273,7 @@
                             this.resourceLabels = {};
                             this.tags = [];
                             this.relatedResources = [];
+                            this.domains = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -81569,6 +85513,14 @@
                         TableDataProfile.prototype.relatedResources = $util.emptyArray;
     
                         /**
+                         * TableDataProfile domains.
+                         * @member {Array.<google.privacy.dlp.v2.IDomain>} domains
+                         * @memberof google.privacy.dlp.v2.TableDataProfile
+                         * @instance
+                         */
+                        TableDataProfile.prototype.domains = $util.emptyArray;
+    
+                        /**
                          * Creates a new TableDataProfile instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.TableDataProfile
@@ -81655,6 +85607,9 @@
                             if (message.relatedResources != null && message.relatedResources.length)
                                 for (var i = 0; i < message.relatedResources.length; ++i)
                                     $root.google.privacy.dlp.v2.RelatedResource.encode(message.relatedResources[i], writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.domains != null && message.domains.length)
+                                for (var i = 0; i < message.domains.length; ++i)
+                                    $root.google.privacy.dlp.v2.Domain.encode(message.domains[i], writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             return writer;
                         };
     
@@ -81682,12 +85637,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TableDataProfile.decode = function decode(reader, length) {
+                        TableDataProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TableDataProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -81830,6 +85787,12 @@
                                         if (!(message.relatedResources && message.relatedResources.length))
                                             message.relatedResources = [];
                                         message.relatedResources.push($root.google.privacy.dlp.v2.RelatedResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 47: {
+                                        if (!(message.domains && message.domains.length))
+                                            message.domains = [];
+                                        message.domains.push($root.google.privacy.dlp.v2.Domain.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -82020,6 +85983,15 @@
                                     var error = $root.google.privacy.dlp.v2.RelatedResource.verify(message.relatedResources[i]);
                                     if (error)
                                         return "relatedResources." + error;
+                                }
+                            }
+                            if (message.domains != null && message.hasOwnProperty("domains")) {
+                                if (!Array.isArray(message.domains))
+                                    return "domains: array expected";
+                                for (var i = 0; i < message.domains.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.Domain.verify(message.domains[i]);
+                                    if (error)
+                                        return "domains." + error;
                                 }
                             }
                             return null;
@@ -82248,6 +86220,16 @@
                                     message.relatedResources[i] = $root.google.privacy.dlp.v2.RelatedResource.fromObject(object.relatedResources[i]);
                                 }
                             }
+                            if (object.domains) {
+                                if (!Array.isArray(object.domains))
+                                    throw TypeError(".google.privacy.dlp.v2.TableDataProfile.domains: array expected");
+                                message.domains = [];
+                                for (var i = 0; i < object.domains.length; ++i) {
+                                    if (typeof object.domains[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.TableDataProfile.domains: object expected");
+                                    message.domains[i] = $root.google.privacy.dlp.v2.Domain.fromObject(object.domains[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -82269,6 +86251,7 @@
                                 object.otherInfoTypes = [];
                                 object.tags = [];
                                 object.relatedResources = [];
+                                object.domains = [];
                             }
                             if (options.objects || options.defaults)
                                 object.resourceLabels = {};
@@ -82399,6 +86382,11 @@
                                 object.relatedResources = [];
                                 for (var j = 0; j < message.relatedResources.length; ++j)
                                     object.relatedResources[j] = $root.google.privacy.dlp.v2.RelatedResource.toObject(message.relatedResources[j], options);
+                            }
+                            if (message.domains && message.domains.length) {
+                                object.domains = [];
+                                for (var j = 0; j < message.domains.length; ++j)
+                                    object.domains[j] = $root.google.privacy.dlp.v2.Domain.toObject(message.domains[j], options);
                             }
                             return object;
                         };
@@ -82544,12 +86532,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProfileStatus.decode = function decode(reader, length) {
+                        ProfileStatus.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProfileStatus();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
@@ -82797,12 +86787,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InfoTypeSummary.decode = function decode(reader, length) {
+                        InfoTypeSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InfoTypeSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -83040,12 +87032,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OtherInfoTypeSummary.decode = function decode(reader, length) {
+                        OtherInfoTypeSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.OtherInfoTypeSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -83522,12 +87516,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ColumnDataProfile.decode = function decode(reader, length) {
+                        ColumnDataProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ColumnDataProfile();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -84234,6 +88230,7 @@
                          * @property {boolean|null} [fileStoreIsEmpty] FileStoreDataProfile fileStoreIsEmpty
                          * @property {Array.<google.privacy.dlp.v2.ITag>|null} [tags] FileStoreDataProfile tags
                          * @property {Array.<google.privacy.dlp.v2.IRelatedResource>|null} [relatedResources] FileStoreDataProfile relatedResources
+                         * @property {Array.<google.privacy.dlp.v2.IDomain>|null} [domains] FileStoreDataProfile domains
                          */
     
                         /**
@@ -84252,6 +88249,7 @@
                             this.fileStoreInfoTypeSummaries = [];
                             this.tags = [];
                             this.relatedResources = [];
+                            this.domains = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -84467,6 +88465,14 @@
                         FileStoreDataProfile.prototype.relatedResources = $util.emptyArray;
     
                         /**
+                         * FileStoreDataProfile domains.
+                         * @member {Array.<google.privacy.dlp.v2.IDomain>} domains
+                         * @memberof google.privacy.dlp.v2.FileStoreDataProfile
+                         * @instance
+                         */
+                        FileStoreDataProfile.prototype.domains = $util.emptyArray;
+    
+                        /**
                          * Creates a new FileStoreDataProfile instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.FileStoreDataProfile
@@ -84551,6 +88557,9 @@
                             if (message.relatedResources != null && message.relatedResources.length)
                                 for (var i = 0; i < message.relatedResources.length; ++i)
                                     $root.google.privacy.dlp.v2.RelatedResource.encode(message.relatedResources[i], writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                            if (message.domains != null && message.domains.length)
+                                for (var i = 0; i < message.domains.length; ++i)
+                                    $root.google.privacy.dlp.v2.Domain.encode(message.domains[i], writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                             return writer;
                         };
     
@@ -84578,12 +88587,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileStoreDataProfile.decode = function decode(reader, length) {
+                        FileStoreDataProfile.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileStoreDataProfile(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -84735,6 +88746,12 @@
                                         if (!(message.relatedResources && message.relatedResources.length))
                                             message.relatedResources = [];
                                         message.relatedResources.push($root.google.privacy.dlp.v2.RelatedResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 27: {
+                                        if (!(message.domains && message.domains.length))
+                                            message.domains = [];
+                                        message.domains.push($root.google.privacy.dlp.v2.Domain.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -84921,6 +88938,15 @@
                                         return "relatedResources." + error;
                                 }
                             }
+                            if (message.domains != null && message.hasOwnProperty("domains")) {
+                                if (!Array.isArray(message.domains))
+                                    return "domains: array expected";
+                                for (var i = 0; i < message.domains.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.Domain.verify(message.domains[i]);
+                                    if (error)
+                                        return "domains." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -85105,6 +89131,16 @@
                                     message.relatedResources[i] = $root.google.privacy.dlp.v2.RelatedResource.fromObject(object.relatedResources[i]);
                                 }
                             }
+                            if (object.domains) {
+                                if (!Array.isArray(object.domains))
+                                    throw TypeError(".google.privacy.dlp.v2.FileStoreDataProfile.domains: array expected");
+                                message.domains = [];
+                                for (var i = 0; i < object.domains.length; ++i) {
+                                    if (typeof object.domains[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.FileStoreDataProfile.domains: object expected");
+                                    message.domains[i] = $root.google.privacy.dlp.v2.Domain.fromObject(object.domains[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -85127,6 +89163,7 @@
                                 object.fileStoreInfoTypeSummaries = [];
                                 object.tags = [];
                                 object.relatedResources = [];
+                                object.domains = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.resourceAttributes = {};
@@ -85226,6 +89263,11 @@
                                 object.relatedResources = [];
                                 for (var j = 0; j < message.relatedResources.length; ++j)
                                     object.relatedResources[j] = $root.google.privacy.dlp.v2.RelatedResource.toObject(message.relatedResources[j], options);
+                            }
+                            if (message.domains && message.domains.length) {
+                                object.domains = [];
+                                for (var j = 0; j < message.domains.length; ++j)
+                                    object.domains[j] = $root.google.privacy.dlp.v2.Domain.toObject(message.domains[j], options);
                             }
                             return object;
                         };
@@ -85382,12 +89424,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Tag.decode = function decode(reader, length) {
+                        Tag.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Tag();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.namespacedTagValue = reader.string();
@@ -85525,6 +89569,484 @@
                         return Tag;
                     })();
     
+                    v2.TagFilters = (function() {
+    
+                        /**
+                         * Properties of a TagFilters.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITagFilters
+                         * @property {Array.<google.privacy.dlp.v2.ITagFilter>|null} [tagFilters] TagFilters tagFilters
+                         */
+    
+                        /**
+                         * Constructs a new TagFilters.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TagFilters.
+                         * @implements ITagFilters
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITagFilters=} [properties] Properties to set
+                         */
+                        function TagFilters(properties) {
+                            this.tagFilters = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagFilters tagFilters.
+                         * @member {Array.<google.privacy.dlp.v2.ITagFilter>} tagFilters
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @instance
+                         */
+                        TagFilters.prototype.tagFilters = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TagFilters instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters instance
+                         */
+                        TagFilters.create = function create(properties) {
+                            return new TagFilters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilters message. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters} message TagFilters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.tagFilters != null && message.tagFilters.length)
+                                for (var i = 0; i < message.tagFilters.length; ++i)
+                                    $root.google.privacy.dlp.v2.TagFilter.encode(message.tagFilters[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilters message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilters} message TagFilters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagFilters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilters.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TagFilters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.tagFilters && message.tagFilters.length))
+                                            message.tagFilters = [];
+                                        message.tagFilters.push($root.google.privacy.dlp.v2.TagFilter.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagFilters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagFilters message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagFilters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.tagFilters != null && message.hasOwnProperty("tagFilters")) {
+                                if (!Array.isArray(message.tagFilters))
+                                    return "tagFilters: array expected";
+                                for (var i = 0; i < message.tagFilters.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.TagFilter.verify(message.tagFilters[i]);
+                                    if (error)
+                                        return "tagFilters." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagFilters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TagFilters} TagFilters
+                         */
+                        TagFilters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TagFilters)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TagFilters();
+                            if (object.tagFilters) {
+                                if (!Array.isArray(object.tagFilters))
+                                    throw TypeError(".google.privacy.dlp.v2.TagFilters.tagFilters: array expected");
+                                message.tagFilters = [];
+                                for (var i = 0; i < object.tagFilters.length; ++i) {
+                                    if (typeof object.tagFilters[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.TagFilters.tagFilters: object expected");
+                                    message.tagFilters[i] = $root.google.privacy.dlp.v2.TagFilter.fromObject(object.tagFilters[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagFilters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {google.privacy.dlp.v2.TagFilters} message TagFilters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagFilters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.tagFilters = [];
+                            if (message.tagFilters && message.tagFilters.length) {
+                                object.tagFilters = [];
+                                for (var j = 0; j < message.tagFilters.length; ++j)
+                                    object.tagFilters[j] = $root.google.privacy.dlp.v2.TagFilter.toObject(message.tagFilters[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagFilters to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagFilters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TagFilters
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.TagFilters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TagFilters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.TagFilters";
+                        };
+    
+                        return TagFilters;
+                    })();
+    
+                    v2.TagFilter = (function() {
+    
+                        /**
+                         * Properties of a TagFilter.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ITagFilter
+                         * @property {string|null} [namespacedTagValue] TagFilter namespacedTagValue
+                         * @property {string|null} [namespacedTagKey] TagFilter namespacedTagKey
+                         */
+    
+                        /**
+                         * Constructs a new TagFilter.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a TagFilter.
+                         * @implements ITagFilter
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ITagFilter=} [properties] Properties to set
+                         */
+                        function TagFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TagFilter namespacedTagValue.
+                         * @member {string|null|undefined} namespacedTagValue
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        TagFilter.prototype.namespacedTagValue = null;
+    
+                        /**
+                         * TagFilter namespacedTagKey.
+                         * @member {string|null|undefined} namespacedTagKey
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        TagFilter.prototype.namespacedTagKey = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * TagFilter format.
+                         * @member {"namespacedTagValue"|"namespacedTagKey"|undefined} format
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         */
+                        Object.defineProperty(TagFilter.prototype, "format", {
+                            get: $util.oneOfGetter($oneOfFields = ["namespacedTagValue", "namespacedTagKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new TagFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter instance
+                         */
+                        TagFilter.create = function create(properties) {
+                            return new TagFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilter message. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter} message TagFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.namespacedTagValue != null && Object.hasOwnProperty.call(message, "namespacedTagValue"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.namespacedTagValue);
+                            if (message.namespacedTagKey != null && Object.hasOwnProperty.call(message, "namespacedTagKey"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespacedTagKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TagFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.ITagFilter} message TagFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TagFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TagFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilter.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TagFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.namespacedTagValue = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.namespacedTagKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TagFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TagFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TagFilter message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TagFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue")) {
+                                properties.format = 1;
+                                if (!$util.isString(message.namespacedTagValue))
+                                    return "namespacedTagValue: string expected";
+                            }
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey")) {
+                                if (properties.format === 1)
+                                    return "format: multiple values";
+                                properties.format = 1;
+                                if (!$util.isString(message.namespacedTagKey))
+                                    return "namespacedTagKey: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TagFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.TagFilter} TagFilter
+                         */
+                        TagFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.TagFilter)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.TagFilter();
+                            if (object.namespacedTagValue != null)
+                                message.namespacedTagValue = String(object.namespacedTagValue);
+                            if (object.namespacedTagKey != null)
+                                message.namespacedTagKey = String(object.namespacedTagKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TagFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {google.privacy.dlp.v2.TagFilter} message TagFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TagFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue")) {
+                                object.namespacedTagValue = message.namespacedTagValue;
+                                if (options.oneofs)
+                                    object.format = "namespacedTagValue";
+                            }
+                            if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey")) {
+                                object.namespacedTagKey = message.namespacedTagKey;
+                                if (options.oneofs)
+                                    object.format = "namespacedTagKey";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TagFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TagFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TagFilter
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.TagFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TagFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.TagFilter";
+                        };
+    
+                        return TagFilter;
+                    })();
+    
                     v2.RelatedResource = (function() {
     
                         /**
@@ -85610,12 +90132,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RelatedResource.decode = function decode(reader, length) {
+                        RelatedResource.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RelatedResource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fullResource = reader.string();
@@ -85813,12 +90337,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileStoreInfoTypeSummary.decode = function decode(reader, length) {
+                        FileStoreInfoTypeSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileStoreInfoTypeSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -86021,12 +90547,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileExtensionInfo.decode = function decode(reader, length) {
+                        FileExtensionInfo.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileExtensionInfo();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fileExtension = reader.string();
@@ -86309,12 +90837,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileClusterSummary.decode = function decode(reader, length) {
+                        FileClusterSummary.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileClusterSummary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fileClusterType = $root.google.privacy.dlp.v2.FileClusterType.decode(reader, reader.uint32());
@@ -86690,12 +91220,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetProjectDataProfileRequest.decode = function decode(reader, length) {
+                        GetProjectDataProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetProjectDataProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -86893,12 +91425,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFileStoreDataProfileRequest.decode = function decode(reader, length) {
+                        GetFileStoreDataProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetFileStoreDataProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -87140,12 +91674,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFileStoreDataProfilesRequest.decode = function decode(reader, length) {
+                        ListFileStoreDataProfilesRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -87405,12 +91941,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFileStoreDataProfilesResponse.decode = function decode(reader, length) {
+                        ListFileStoreDataProfilesResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListFileStoreDataProfilesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.fileStoreDataProfiles && message.fileStoreDataProfiles.length))
@@ -87640,12 +92178,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteFileStoreDataProfileRequest.decode = function decode(reader, length) {
+                        DeleteFileStoreDataProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -87843,12 +92383,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetTableDataProfileRequest.decode = function decode(reader, length) {
+                        GetTableDataProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetTableDataProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -88046,12 +92588,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetColumnDataProfileRequest.decode = function decode(reader, length) {
+                        GetColumnDataProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetColumnDataProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -88249,12 +92793,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfilePubSubCondition.decode = function decode(reader, length) {
+                        DataProfilePubSubCondition.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfilePubSubCondition();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.expressions = $root.google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.decode(reader, reader.uint32());
@@ -88495,12 +93041,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PubSubCondition.decode = function decode(reader, length) {
+                            PubSubCondition.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.minimumRiskScore = reader.int32();
@@ -88781,12 +93329,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PubSubExpressions.decode = function decode(reader, length) {
+                            PubSubExpressions.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.logicalOperator = reader.int32();
@@ -89081,12 +93631,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataProfilePubSubMessage.decode = function decode(reader, length) {
+                        DataProfilePubSubMessage.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataProfilePubSubMessage();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.profile = $root.google.privacy.dlp.v2.TableDataProfile.decode(reader, reader.uint32());
@@ -89364,12 +93916,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateConnectionRequest.decode = function decode(reader, length) {
+                        CreateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CreateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -89585,12 +94139,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetConnectionRequest.decode = function decode(reader, length) {
+                        GetConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.GetConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -89821,12 +94377,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionsRequest.decode = function decode(reader, length) {
+                        ListConnectionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListConnectionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -90094,12 +94652,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchConnectionsRequest.decode = function decode(reader, length) {
+                        SearchConnectionsRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.SearchConnectionsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
@@ -90347,12 +94907,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListConnectionsResponse.decode = function decode(reader, length) {
+                        ListConnectionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ListConnectionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.connections && message.connections.length))
@@ -90595,12 +95157,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SearchConnectionsResponse.decode = function decode(reader, length) {
+                        SearchConnectionsResponse.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.SearchConnectionsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.connections && message.connections.length))
@@ -90852,12 +95416,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateConnectionRequest.decode = function decode(reader, length) {
+                        UpdateConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.UpdateConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -91090,12 +95656,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteConnectionRequest.decode = function decode(reader, length) {
+                        DeleteConnectionRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteConnectionRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -91342,12 +95910,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Connection.decode = function decode(reader, length) {
+                        Connection.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Connection();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -91671,12 +96241,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SecretManagerCredential.decode = function decode(reader, length) {
+                        SecretManagerCredential.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.SecretManagerCredential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.username = reader.string();
@@ -91876,12 +96448,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudSqlIamCredential.decode = function decode(reader, length) {
+                        CloudSqlIamCredential.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudSqlIamCredential();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 default:
                                     reader.skipType(tag & 7);
@@ -92120,12 +96694,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudSqlProperties.decode = function decode(reader, length) {
+                        CloudSqlProperties.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudSqlProperties();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.connectionName = reader.string();
@@ -92435,12 +97011,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteTableDataProfileRequest.decode = function decode(reader, length) {
+                        DeleteTableDataProfileRequest.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DeleteTableDataProfileRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -92638,12 +97216,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DataSourceType.decode = function decode(reader, length) {
+                        DataSourceType.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DataSourceType();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.dataSource = reader.string();
@@ -92855,12 +97435,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FileClusterType.decode = function decode(reader, length) {
+                        FileClusterType.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FileClusterType();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.cluster = reader.int32();
@@ -93080,6 +97662,7 @@
                          * @memberof google.privacy.dlp.v2
                          * @interface IProcessingLocation
                          * @property {google.privacy.dlp.v2.ProcessingLocation.IImageFallbackLocation|null} [imageFallbackLocation] ProcessingLocation imageFallbackLocation
+                         * @property {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation|null} [documentFallbackLocation] ProcessingLocation documentFallbackLocation
                          */
     
                         /**
@@ -93104,6 +97687,14 @@
                          * @instance
                          */
                         ProcessingLocation.prototype.imageFallbackLocation = null;
+    
+                        /**
+                         * ProcessingLocation documentFallbackLocation.
+                         * @member {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation|null|undefined} documentFallbackLocation
+                         * @memberof google.privacy.dlp.v2.ProcessingLocation
+                         * @instance
+                         */
+                        ProcessingLocation.prototype.documentFallbackLocation = null;
     
                         /**
                          * Creates a new ProcessingLocation instance using the specified properties.
@@ -93131,6 +97722,8 @@
                                 writer = $Writer.create();
                             if (message.imageFallbackLocation != null && Object.hasOwnProperty.call(message, "imageFallbackLocation"))
                                 $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.encode(message.imageFallbackLocation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.documentFallbackLocation != null && Object.hasOwnProperty.call(message, "documentFallbackLocation"))
+                                $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.encode(message.documentFallbackLocation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -93158,15 +97751,21 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ProcessingLocation.decode = function decode(reader, length) {
+                        ProcessingLocation.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProcessingLocation();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.imageFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.documentFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -93209,6 +97808,11 @@
                                 if (error)
                                     return "imageFallbackLocation." + error;
                             }
+                            if (message.documentFallbackLocation != null && message.hasOwnProperty("documentFallbackLocation")) {
+                                var error = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.verify(message.documentFallbackLocation);
+                                if (error)
+                                    return "documentFallbackLocation." + error;
+                            }
                             return null;
                         };
     
@@ -93229,6 +97833,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.imageFallbackLocation: object expected");
                                 message.imageFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.fromObject(object.imageFallbackLocation);
                             }
+                            if (object.documentFallbackLocation != null) {
+                                if (typeof object.documentFallbackLocation !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.documentFallbackLocation: object expected");
+                                message.documentFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.fromObject(object.documentFallbackLocation);
+                            }
                             return message;
                         };
     
@@ -93245,10 +97854,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.imageFallbackLocation = null;
+                                object.documentFallbackLocation = null;
+                            }
                             if (message.imageFallbackLocation != null && message.hasOwnProperty("imageFallbackLocation"))
                                 object.imageFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation.toObject(message.imageFallbackLocation, options);
+                            if (message.documentFallbackLocation != null && message.hasOwnProperty("documentFallbackLocation"))
+                                object.documentFallbackLocation = $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.toObject(message.documentFallbackLocation, options);
                             return object;
                         };
     
@@ -93352,12 +97965,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            MultiRegionProcessing.decode = function decode(reader, length) {
+                            MultiRegionProcessing.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -93527,12 +98142,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            GlobalProcessing.decode = function decode(reader, length) {
+                            GlobalProcessing.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -93724,12 +98341,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            ImageFallbackLocation.decode = function decode(reader, length) {
+                            ImageFallbackLocation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 100: {
                                             message.multiRegionProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.decode(reader, reader.uint32());
@@ -93865,7 +98484,840 @@
                             return ImageFallbackLocation;
                         })();
     
+                        ProcessingLocation.DocumentFallbackLocation = (function() {
+    
+                            /**
+                             * Properties of a DocumentFallbackLocation.
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation
+                             * @interface IDocumentFallbackLocation
+                             * @property {google.privacy.dlp.v2.ProcessingLocation.IMultiRegionProcessing|null} [multiRegionProcessing] DocumentFallbackLocation multiRegionProcessing
+                             * @property {google.privacy.dlp.v2.ProcessingLocation.IGlobalProcessing|null} [globalProcessing] DocumentFallbackLocation globalProcessing
+                             */
+    
+                            /**
+                             * Constructs a new DocumentFallbackLocation.
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation
+                             * @classdesc Represents a DocumentFallbackLocation.
+                             * @implements IDocumentFallbackLocation
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation=} [properties] Properties to set
+                             */
+                            function DocumentFallbackLocation(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DocumentFallbackLocation multiRegionProcessing.
+                             * @member {google.privacy.dlp.v2.ProcessingLocation.IMultiRegionProcessing|null|undefined} multiRegionProcessing
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @instance
+                             */
+                            DocumentFallbackLocation.prototype.multiRegionProcessing = null;
+    
+                            /**
+                             * DocumentFallbackLocation globalProcessing.
+                             * @member {google.privacy.dlp.v2.ProcessingLocation.IGlobalProcessing|null|undefined} globalProcessing
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @instance
+                             */
+                            DocumentFallbackLocation.prototype.globalProcessing = null;
+    
+                            /**
+                             * Creates a new DocumentFallbackLocation instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation instance
+                             */
+                            DocumentFallbackLocation.create = function create(properties) {
+                                return new DocumentFallbackLocation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DocumentFallbackLocation message. Does not implicitly {@link google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation} message DocumentFallbackLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DocumentFallbackLocation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.multiRegionProcessing != null && Object.hasOwnProperty.call(message, "multiRegionProcessing"))
+                                    $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.encode(message.multiRegionProcessing, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                                if (message.globalProcessing != null && Object.hasOwnProperty.call(message, "globalProcessing"))
+                                    $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.encode(message.globalProcessing, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DocumentFallbackLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.IDocumentFallbackLocation} message DocumentFallbackLocation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DocumentFallbackLocation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DocumentFallbackLocation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DocumentFallbackLocation.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 100: {
+                                            message.multiRegionProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 200: {
+                                            message.globalProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DocumentFallbackLocation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DocumentFallbackLocation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DocumentFallbackLocation message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DocumentFallbackLocation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.multiRegionProcessing != null && message.hasOwnProperty("multiRegionProcessing")) {
+                                    var error = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.verify(message.multiRegionProcessing);
+                                    if (error)
+                                        return "multiRegionProcessing." + error;
+                                }
+                                if (message.globalProcessing != null && message.hasOwnProperty("globalProcessing")) {
+                                    var error = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.verify(message.globalProcessing);
+                                    if (error)
+                                        return "globalProcessing." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DocumentFallbackLocation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} DocumentFallbackLocation
+                             */
+                            DocumentFallbackLocation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation)
+                                    return object;
+                                var message = new $root.google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation();
+                                if (object.multiRegionProcessing != null) {
+                                    if (typeof object.multiRegionProcessing !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.multiRegionProcessing: object expected");
+                                    message.multiRegionProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.fromObject(object.multiRegionProcessing);
+                                }
+                                if (object.globalProcessing != null) {
+                                    if (typeof object.globalProcessing !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation.globalProcessing: object expected");
+                                    message.globalProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.fromObject(object.globalProcessing);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DocumentFallbackLocation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation} message DocumentFallbackLocation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DocumentFallbackLocation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.multiRegionProcessing = null;
+                                    object.globalProcessing = null;
+                                }
+                                if (message.multiRegionProcessing != null && message.hasOwnProperty("multiRegionProcessing"))
+                                    object.multiRegionProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing.toObject(message.multiRegionProcessing, options);
+                                if (message.globalProcessing != null && message.hasOwnProperty("globalProcessing"))
+                                    object.globalProcessing = $root.google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing.toObject(message.globalProcessing, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DocumentFallbackLocation to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DocumentFallbackLocation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DocumentFallbackLocation
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DocumentFallbackLocation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation";
+                            };
+    
+                            return DocumentFallbackLocation;
+                        })();
+    
                         return ProcessingLocation;
+                    })();
+    
+                    v2.SaveToGcsFindingsOutput = (function() {
+    
+                        /**
+                         * Properties of a SaveToGcsFindingsOutput.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface ISaveToGcsFindingsOutput
+                         * @property {Array.<google.privacy.dlp.v2.IFinding>|null} [findings] SaveToGcsFindingsOutput findings
+                         */
+    
+                        /**
+                         * Constructs a new SaveToGcsFindingsOutput.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a SaveToGcsFindingsOutput.
+                         * @implements ISaveToGcsFindingsOutput
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput=} [properties] Properties to set
+                         */
+                        function SaveToGcsFindingsOutput(properties) {
+                            this.findings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SaveToGcsFindingsOutput findings.
+                         * @member {Array.<google.privacy.dlp.v2.IFinding>} findings
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @instance
+                         */
+                        SaveToGcsFindingsOutput.prototype.findings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SaveToGcsFindingsOutput instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput instance
+                         */
+                        SaveToGcsFindingsOutput.create = function create(properties) {
+                            return new SaveToGcsFindingsOutput(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SaveToGcsFindingsOutput message. Does not implicitly {@link google.privacy.dlp.v2.SaveToGcsFindingsOutput.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput} message SaveToGcsFindingsOutput message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SaveToGcsFindingsOutput.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.findings != null && message.findings.length)
+                                for (var i = 0; i < message.findings.length; ++i)
+                                    $root.google.privacy.dlp.v2.Finding.encode(message.findings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SaveToGcsFindingsOutput message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.SaveToGcsFindingsOutput.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.ISaveToGcsFindingsOutput} message SaveToGcsFindingsOutput message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SaveToGcsFindingsOutput.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SaveToGcsFindingsOutput message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SaveToGcsFindingsOutput.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.SaveToGcsFindingsOutput();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.findings && message.findings.length))
+                                            message.findings = [];
+                                        message.findings.push($root.google.privacy.dlp.v2.Finding.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SaveToGcsFindingsOutput message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SaveToGcsFindingsOutput.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SaveToGcsFindingsOutput message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SaveToGcsFindingsOutput.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.findings != null && message.hasOwnProperty("findings")) {
+                                if (!Array.isArray(message.findings))
+                                    return "findings: array expected";
+                                for (var i = 0; i < message.findings.length; ++i) {
+                                    var error = $root.google.privacy.dlp.v2.Finding.verify(message.findings[i]);
+                                    if (error)
+                                        return "findings." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SaveToGcsFindingsOutput message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.SaveToGcsFindingsOutput} SaveToGcsFindingsOutput
+                         */
+                        SaveToGcsFindingsOutput.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.SaveToGcsFindingsOutput)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.SaveToGcsFindingsOutput();
+                            if (object.findings) {
+                                if (!Array.isArray(object.findings))
+                                    throw TypeError(".google.privacy.dlp.v2.SaveToGcsFindingsOutput.findings: array expected");
+                                message.findings = [];
+                                for (var i = 0; i < object.findings.length; ++i) {
+                                    if (typeof object.findings[i] !== "object")
+                                        throw TypeError(".google.privacy.dlp.v2.SaveToGcsFindingsOutput.findings: object expected");
+                                    message.findings[i] = $root.google.privacy.dlp.v2.Finding.fromObject(object.findings[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SaveToGcsFindingsOutput message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {google.privacy.dlp.v2.SaveToGcsFindingsOutput} message SaveToGcsFindingsOutput
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SaveToGcsFindingsOutput.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.findings = [];
+                            if (message.findings && message.findings.length) {
+                                object.findings = [];
+                                for (var j = 0; j < message.findings.length; ++j)
+                                    object.findings[j] = $root.google.privacy.dlp.v2.Finding.toObject(message.findings[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SaveToGcsFindingsOutput to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SaveToGcsFindingsOutput.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SaveToGcsFindingsOutput
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.SaveToGcsFindingsOutput
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SaveToGcsFindingsOutput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.SaveToGcsFindingsOutput";
+                        };
+    
+                        return SaveToGcsFindingsOutput;
+                    })();
+    
+                    v2.Domain = (function() {
+    
+                        /**
+                         * Properties of a Domain.
+                         * @memberof google.privacy.dlp.v2
+                         * @interface IDomain
+                         * @property {google.privacy.dlp.v2.Domain.Category|null} [category] Domain category
+                         * @property {Array.<google.privacy.dlp.v2.Domain.Signal>|null} [signals] Domain signals
+                         */
+    
+                        /**
+                         * Constructs a new Domain.
+                         * @memberof google.privacy.dlp.v2
+                         * @classdesc Represents a Domain.
+                         * @implements IDomain
+                         * @constructor
+                         * @param {google.privacy.dlp.v2.IDomain=} [properties] Properties to set
+                         */
+                        function Domain(properties) {
+                            this.signals = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Domain category.
+                         * @member {google.privacy.dlp.v2.Domain.Category} category
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @instance
+                         */
+                        Domain.prototype.category = 0;
+    
+                        /**
+                         * Domain signals.
+                         * @member {Array.<google.privacy.dlp.v2.Domain.Signal>} signals
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @instance
+                         */
+                        Domain.prototype.signals = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Domain instance using the specified properties.
+                         * @function create
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.IDomain=} [properties] Properties to set
+                         * @returns {google.privacy.dlp.v2.Domain} Domain instance
+                         */
+                        Domain.create = function create(properties) {
+                            return new Domain(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Domain message. Does not implicitly {@link google.privacy.dlp.v2.Domain.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.IDomain} message Domain message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Domain.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.category);
+                            if (message.signals != null && message.signals.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.signals.length; ++i)
+                                    writer.int32(message.signals[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Domain message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Domain.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.IDomain} message Domain message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Domain.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Domain message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.privacy.dlp.v2.Domain} Domain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Domain.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Domain();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.category = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.signals && message.signals.length))
+                                            message.signals = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.signals.push(reader.int32());
+                                        } else
+                                            message.signals.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Domain message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.privacy.dlp.v2.Domain} Domain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Domain.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Domain message.
+                         * @function verify
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Domain.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                switch (message.category) {
+                                default:
+                                    return "category: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.signals != null && message.hasOwnProperty("signals")) {
+                                if (!Array.isArray(message.signals))
+                                    return "signals: array expected";
+                                for (var i = 0; i < message.signals.length; ++i)
+                                    switch (message.signals[i]) {
+                                    default:
+                                        return "signals: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 7:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Domain message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.privacy.dlp.v2.Domain} Domain
+                         */
+                        Domain.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.privacy.dlp.v2.Domain)
+                                return object;
+                            var message = new $root.google.privacy.dlp.v2.Domain();
+                            switch (object.category) {
+                            default:
+                                if (typeof object.category === "number") {
+                                    message.category = object.category;
+                                    break;
+                                }
+                                break;
+                            case "CATEGORY_UNSPECIFIED":
+                            case 0:
+                                message.category = 0;
+                                break;
+                            case "AI":
+                            case 1:
+                                message.category = 1;
+                                break;
+                            case "CODE":
+                            case 2:
+                                message.category = 2;
+                                break;
+                            }
+                            if (object.signals) {
+                                if (!Array.isArray(object.signals))
+                                    throw TypeError(".google.privacy.dlp.v2.Domain.signals: array expected");
+                                message.signals = [];
+                                for (var i = 0; i < object.signals.length; ++i)
+                                    switch (object.signals[i]) {
+                                    default:
+                                        if (typeof object.signals[i] === "number") {
+                                            message.signals[i] = object.signals[i];
+                                            break;
+                                        }
+                                    case "SIGNAL_UNSPECIFIED":
+                                    case 0:
+                                        message.signals[i] = 0;
+                                        break;
+                                    case "MODEL":
+                                    case 1:
+                                        message.signals[i] = 1;
+                                        break;
+                                    case "TEXT_EMBEDDING":
+                                    case 2:
+                                        message.signals[i] = 2;
+                                        break;
+                                    case "EMBEDDING":
+                                    case 7:
+                                        message.signals[i] = 7;
+                                        break;
+                                    case "VERTEX_PLUGIN":
+                                    case 3:
+                                        message.signals[i] = 3;
+                                        break;
+                                    case "VECTOR_PLUGIN":
+                                    case 4:
+                                        message.signals[i] = 4;
+                                        break;
+                                    case "SOURCE_CODE":
+                                    case 5:
+                                        message.signals[i] = 5;
+                                        break;
+                                    case "SERVICE":
+                                    case 6:
+                                        message.signals[i] = 6;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Domain message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {google.privacy.dlp.v2.Domain} message Domain
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Domain.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.signals = [];
+                            if (options.defaults)
+                                object.category = options.enums === String ? "CATEGORY_UNSPECIFIED" : 0;
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = options.enums === String ? $root.google.privacy.dlp.v2.Domain.Category[message.category] === undefined ? message.category : $root.google.privacy.dlp.v2.Domain.Category[message.category] : message.category;
+                            if (message.signals && message.signals.length) {
+                                object.signals = [];
+                                for (var j = 0; j < message.signals.length; ++j)
+                                    object.signals[j] = options.enums === String ? $root.google.privacy.dlp.v2.Domain.Signal[message.signals[j]] === undefined ? message.signals[j] : $root.google.privacy.dlp.v2.Domain.Signal[message.signals[j]] : message.signals[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Domain to JSON.
+                         * @function toJSON
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Domain.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Domain
+                         * @function getTypeUrl
+                         * @memberof google.privacy.dlp.v2.Domain
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Domain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.privacy.dlp.v2.Domain";
+                        };
+    
+                        /**
+                         * Category enum.
+                         * @name google.privacy.dlp.v2.Domain.Category
+                         * @enum {number}
+                         * @property {number} CATEGORY_UNSPECIFIED=0 CATEGORY_UNSPECIFIED value
+                         * @property {number} AI=1 AI value
+                         * @property {number} CODE=2 CODE value
+                         */
+                        Domain.Category = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CATEGORY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AI"] = 1;
+                            values[valuesById[2] = "CODE"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Signal enum.
+                         * @name google.privacy.dlp.v2.Domain.Signal
+                         * @enum {number}
+                         * @property {number} SIGNAL_UNSPECIFIED=0 SIGNAL_UNSPECIFIED value
+                         * @property {number} MODEL=1 MODEL value
+                         * @property {number} TEXT_EMBEDDING=2 TEXT_EMBEDDING value
+                         * @property {number} EMBEDDING=7 EMBEDDING value
+                         * @property {number} VERTEX_PLUGIN=3 VERTEX_PLUGIN value
+                         * @property {number} VECTOR_PLUGIN=4 VECTOR_PLUGIN value
+                         * @property {number} SOURCE_CODE=5 SOURCE_CODE value
+                         * @property {number} SERVICE=6 SERVICE value
+                         */
+                        Domain.Signal = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SIGNAL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MODEL"] = 1;
+                            values[valuesById[2] = "TEXT_EMBEDDING"] = 2;
+                            values[valuesById[7] = "EMBEDDING"] = 7;
+                            values[valuesById[3] = "VERTEX_PLUGIN"] = 3;
+                            values[valuesById[4] = "VECTOR_PLUGIN"] = 4;
+                            values[valuesById[5] = "SOURCE_CODE"] = 5;
+                            values[valuesById[6] = "SERVICE"] = 6;
+                            return values;
+                        })();
+    
+                        return Domain;
                     })();
     
                     v2.InfoType = (function() {
@@ -93975,12 +99427,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        InfoType.decode = function decode(reader, length) {
+                        InfoType.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.InfoType();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -94208,12 +99662,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        SensitivityScore.decode = function decode(reader, length) {
+                        SensitivityScore.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.SensitivityScore();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.score = reader.int32();
@@ -94498,12 +99954,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StoredType.decode = function decode(reader, length) {
+                        StoredType.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StoredType();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -94646,6 +100104,7 @@
                          * @property {google.privacy.dlp.v2.CustomInfoType.IRegex|null} [regex] CustomInfoType regex
                          * @property {google.privacy.dlp.v2.CustomInfoType.ISurrogateType|null} [surrogateType] CustomInfoType surrogateType
                          * @property {google.privacy.dlp.v2.IStoredType|null} [storedType] CustomInfoType storedType
+                         * @property {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression|null} [metadataKeyValueExpression] CustomInfoType metadataKeyValueExpression
                          * @property {Array.<google.privacy.dlp.v2.CustomInfoType.IDetectionRule>|null} [detectionRules] CustomInfoType detectionRules
                          * @property {google.privacy.dlp.v2.CustomInfoType.ExclusionType|null} [exclusionType] CustomInfoType exclusionType
                          * @property {google.privacy.dlp.v2.ISensitivityScore|null} [sensitivityScore] CustomInfoType sensitivityScore
@@ -94716,6 +100175,14 @@
                         CustomInfoType.prototype.storedType = null;
     
                         /**
+                         * CustomInfoType metadataKeyValueExpression.
+                         * @member {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression|null|undefined} metadataKeyValueExpression
+                         * @memberof google.privacy.dlp.v2.CustomInfoType
+                         * @instance
+                         */
+                        CustomInfoType.prototype.metadataKeyValueExpression = null;
+    
+                        /**
                          * CustomInfoType detectionRules.
                          * @member {Array.<google.privacy.dlp.v2.CustomInfoType.IDetectionRule>} detectionRules
                          * @memberof google.privacy.dlp.v2.CustomInfoType
@@ -94744,12 +100211,12 @@
     
                         /**
                          * CustomInfoType type.
-                         * @member {"dictionary"|"regex"|"surrogateType"|"storedType"|undefined} type
+                         * @member {"dictionary"|"regex"|"surrogateType"|"storedType"|"metadataKeyValueExpression"|undefined} type
                          * @memberof google.privacy.dlp.v2.CustomInfoType
                          * @instance
                          */
                         Object.defineProperty(CustomInfoType.prototype, "type", {
-                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "surrogateType", "storedType"]),
+                            get: $util.oneOfGetter($oneOfFields = ["dictionary", "regex", "surrogateType", "storedType", "metadataKeyValueExpression"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -94796,6 +100263,8 @@
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.exclusionType);
                             if (message.sensitivityScore != null && Object.hasOwnProperty.call(message, "sensitivityScore"))
                                 $root.google.privacy.dlp.v2.SensitivityScore.encode(message.sensitivityScore, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.metadataKeyValueExpression != null && Object.hasOwnProperty.call(message, "metadataKeyValueExpression"))
+                                $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.encode(message.metadataKeyValueExpression, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -94823,12 +100292,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CustomInfoType.decode = function decode(reader, length) {
+                        CustomInfoType.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.infoType = $root.google.privacy.dlp.v2.InfoType.decode(reader, reader.uint32());
@@ -94852,6 +100323,10 @@
                                     }
                                 case 5: {
                                         message.storedType = $root.google.privacy.dlp.v2.StoredType.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.metadataKeyValueExpression = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -94959,6 +100434,16 @@
                                         return "storedType." + error;
                                 }
                             }
+                            if (message.metadataKeyValueExpression != null && message.hasOwnProperty("metadataKeyValueExpression")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.verify(message.metadataKeyValueExpression);
+                                    if (error)
+                                        return "metadataKeyValueExpression." + error;
+                                }
+                            }
                             if (message.detectionRules != null && message.hasOwnProperty("detectionRules")) {
                                 if (!Array.isArray(message.detectionRules))
                                     return "detectionRules: array expected";
@@ -95053,6 +100538,11 @@
                                     throw TypeError(".google.privacy.dlp.v2.CustomInfoType.storedType: object expected");
                                 message.storedType = $root.google.privacy.dlp.v2.StoredType.fromObject(object.storedType);
                             }
+                            if (object.metadataKeyValueExpression != null) {
+                                if (typeof object.metadataKeyValueExpression !== "object")
+                                    throw TypeError(".google.privacy.dlp.v2.CustomInfoType.metadataKeyValueExpression: object expected");
+                                message.metadataKeyValueExpression = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.fromObject(object.metadataKeyValueExpression);
+                            }
                             if (object.detectionRules) {
                                 if (!Array.isArray(object.detectionRules))
                                     throw TypeError(".google.privacy.dlp.v2.CustomInfoType.detectionRules: array expected");
@@ -95141,6 +100631,11 @@
                                 object.exclusionType = options.enums === String ? $root.google.privacy.dlp.v2.CustomInfoType.ExclusionType[message.exclusionType] === undefined ? message.exclusionType : $root.google.privacy.dlp.v2.CustomInfoType.ExclusionType[message.exclusionType] : message.exclusionType;
                             if (message.sensitivityScore != null && message.hasOwnProperty("sensitivityScore"))
                                 object.sensitivityScore = $root.google.privacy.dlp.v2.SensitivityScore.toObject(message.sensitivityScore, options);
+                            if (message.metadataKeyValueExpression != null && message.hasOwnProperty("metadataKeyValueExpression")) {
+                                object.metadataKeyValueExpression = $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.toObject(message.metadataKeyValueExpression, options);
+                                if (options.oneofs)
+                                    object.type = "metadataKeyValueExpression";
+                            }
                             return object;
                         };
     
@@ -95280,12 +100775,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Dictionary.decode = function decode(reader, length) {
+                            Dictionary.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.Dictionary();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.wordList = $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.WordList.decode(reader, reader.uint32());
@@ -95516,12 +101013,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                WordList.decode = function decode(reader, length) {
+                                WordList.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.Dictionary.WordList();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 if (!(message.words && message.words.length))
@@ -95752,12 +101251,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Regex.decode = function decode(reader, length) {
+                            Regex.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.Regex();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.pattern = reader.string();
@@ -95976,12 +101477,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            SurrogateType.decode = function decode(reader, length) {
+                            SurrogateType.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.SurrogateType();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     default:
                                         reader.skipType(tag & 7);
@@ -96075,6 +101578,235 @@
                             };
     
                             return SurrogateType;
+                        })();
+    
+                        CustomInfoType.MetadataKeyValueExpression = (function() {
+    
+                            /**
+                             * Properties of a MetadataKeyValueExpression.
+                             * @memberof google.privacy.dlp.v2.CustomInfoType
+                             * @interface IMetadataKeyValueExpression
+                             * @property {string|null} [keyRegex] MetadataKeyValueExpression keyRegex
+                             * @property {string|null} [valueRegex] MetadataKeyValueExpression valueRegex
+                             */
+    
+                            /**
+                             * Constructs a new MetadataKeyValueExpression.
+                             * @memberof google.privacy.dlp.v2.CustomInfoType
+                             * @classdesc Represents a MetadataKeyValueExpression.
+                             * @implements IMetadataKeyValueExpression
+                             * @constructor
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression=} [properties] Properties to set
+                             */
+                            function MetadataKeyValueExpression(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MetadataKeyValueExpression keyRegex.
+                             * @member {string} keyRegex
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @instance
+                             */
+                            MetadataKeyValueExpression.prototype.keyRegex = "";
+    
+                            /**
+                             * MetadataKeyValueExpression valueRegex.
+                             * @member {string} valueRegex
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @instance
+                             */
+                            MetadataKeyValueExpression.prototype.valueRegex = "";
+    
+                            /**
+                             * Creates a new MetadataKeyValueExpression instance using the specified properties.
+                             * @function create
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression=} [properties] Properties to set
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression instance
+                             */
+                            MetadataKeyValueExpression.create = function create(properties) {
+                                return new MetadataKeyValueExpression(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MetadataKeyValueExpression message. Does not implicitly {@link google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression} message MetadataKeyValueExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetadataKeyValueExpression.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.keyRegex != null && Object.hasOwnProperty.call(message, "keyRegex"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.keyRegex);
+                                if (message.valueRegex != null && Object.hasOwnProperty.call(message, "valueRegex"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.valueRegex);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MetadataKeyValueExpression message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.IMetadataKeyValueExpression} message MetadataKeyValueExpression message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MetadataKeyValueExpression.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MetadataKeyValueExpression message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetadataKeyValueExpression.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.keyRegex = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.valueRegex = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MetadataKeyValueExpression message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MetadataKeyValueExpression.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MetadataKeyValueExpression message.
+                             * @function verify
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MetadataKeyValueExpression.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.keyRegex != null && message.hasOwnProperty("keyRegex"))
+                                    if (!$util.isString(message.keyRegex))
+                                        return "keyRegex: string expected";
+                                if (message.valueRegex != null && message.hasOwnProperty("valueRegex"))
+                                    if (!$util.isString(message.valueRegex))
+                                        return "valueRegex: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MetadataKeyValueExpression message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} MetadataKeyValueExpression
+                             */
+                            MetadataKeyValueExpression.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression)
+                                    return object;
+                                var message = new $root.google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression();
+                                if (object.keyRegex != null)
+                                    message.keyRegex = String(object.keyRegex);
+                                if (object.valueRegex != null)
+                                    message.valueRegex = String(object.valueRegex);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MetadataKeyValueExpression message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression} message MetadataKeyValueExpression
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MetadataKeyValueExpression.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.keyRegex = "";
+                                    object.valueRegex = "";
+                                }
+                                if (message.keyRegex != null && message.hasOwnProperty("keyRegex"))
+                                    object.keyRegex = message.keyRegex;
+                                if (message.valueRegex != null && message.hasOwnProperty("valueRegex"))
+                                    object.valueRegex = message.valueRegex;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MetadataKeyValueExpression to JSON.
+                             * @function toJSON
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MetadataKeyValueExpression.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MetadataKeyValueExpression
+                             * @function getTypeUrl
+                             * @memberof google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MetadataKeyValueExpression.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression";
+                            };
+    
+                            return MetadataKeyValueExpression;
                         })();
     
                         CustomInfoType.DetectionRule = (function() {
@@ -96176,12 +101908,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            DetectionRule.decode = function decode(reader, length) {
+                            DetectionRule.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.hotwordRule = $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule.decode(reader, reader.uint32());
@@ -96397,12 +102131,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                Proximity.decode = function decode(reader, length) {
+                                Proximity.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.Proximity();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.windowBefore = reader.int32();
@@ -96638,12 +102374,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                LikelihoodAdjustment.decode = function decode(reader, length) {
+                                LikelihoodAdjustment.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.fixedLikelihood = reader.int32();
@@ -96924,12 +102662,14 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                HotwordRule.decode = function decode(reader, length) {
+                                HotwordRule.decode = function decode(reader, length, error) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.hotwordRegex = $root.google.privacy.dlp.v2.CustomInfoType.Regex.decode(reader, reader.uint32());
@@ -97187,12 +102927,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FieldId.decode = function decode(reader, length) {
+                        FieldId.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.FieldId();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -97401,12 +103143,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        PartitionId.decode = function decode(reader, length) {
+                        PartitionId.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.PartitionId();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.projectId = reader.string();
@@ -97617,12 +103361,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        KindExpression.decode = function decode(reader, length) {
+                        KindExpression.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.KindExpression();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
@@ -97831,12 +103577,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DatastoreOptions.decode = function decode(reader, length) {
+                        DatastoreOptions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DatastoreOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partitionId = $root.google.privacy.dlp.v2.PartitionId.decode(reader, reader.uint32());
@@ -98115,12 +103863,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudStorageRegexFileSet.decode = function decode(reader, length) {
+                        CloudStorageRegexFileSet.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStorageRegexFileSet();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.bucketName = reader.string();
@@ -98432,12 +104182,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudStorageOptions.decode = function decode(reader, length) {
+                        CloudStorageOptions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStorageOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.fileSet = $root.google.privacy.dlp.v2.CloudStorageOptions.FileSet.decode(reader, reader.uint32());
@@ -98831,12 +104583,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            FileSet.decode = function decode(reader, length) {
+                            FileSet.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStorageOptions.FileSet();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.url = reader.string();
@@ -99071,12 +104825,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudStorageFileSet.decode = function decode(reader, length) {
+                        CloudStorageFileSet.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStorageFileSet();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.url = reader.string();
@@ -99274,12 +105030,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CloudStoragePath.decode = function decode(reader, length) {
+                        CloudStoragePath.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.CloudStoragePath();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.path = reader.string();
@@ -99549,12 +105307,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryOptions.decode = function decode(reader, length) {
+                        BigQueryOptions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tableReference = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
@@ -100001,12 +105761,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StorageConfig.decode = function decode(reader, length) {
+                        StorageConfig.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StorageConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.datastoreOptions = $root.google.privacy.dlp.v2.DatastoreOptions.decode(reader, reader.uint32());
@@ -100334,12 +106096,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            TimespanConfig.decode = function decode(reader, length) {
+                            TimespanConfig.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.StorageConfig.TimespanConfig();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -100629,12 +106393,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        HybridOptions.decode = function decode(reader, length) {
+                        HybridOptions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.HybridOptions(), key, value;
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.description = reader.string();
@@ -100934,12 +106700,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryKey.decode = function decode(reader, length) {
+                        BigQueryKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.tableReference = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
@@ -101169,12 +106937,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DatastoreKey.decode = function decode(reader, length) {
+                        DatastoreKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.DatastoreKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.entityKey = $root.google.privacy.dlp.v2.Key.decode(reader, reader.uint32());
@@ -101390,12 +107160,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Key.decode = function decode(reader, length) {
+                        Key.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Key();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.partitionId = $root.google.privacy.dlp.v2.PartitionId.decode(reader, reader.uint32());
@@ -101663,12 +107435,14 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            PathElement.decode = function decode(reader, length) {
+                            PathElement.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.Key.PathElement();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.kind = reader.string();
@@ -101952,12 +107726,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RecordKey.decode = function decode(reader, length) {
+                        RecordKey.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.RecordKey();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.datastoreKey = $root.google.privacy.dlp.v2.DatastoreKey.decode(reader, reader.uint32());
@@ -102238,12 +108014,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryTable.decode = function decode(reader, length) {
+                        BigQueryTable.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryTable();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.projectId = reader.string();
@@ -102389,6 +108167,7 @@
                          * @interface ITableReference
                          * @property {string|null} [datasetId] TableReference datasetId
                          * @property {string|null} [tableId] TableReference tableId
+                         * @property {string|null} [projectId] TableReference projectId
                          */
     
                         /**
@@ -102423,6 +108202,14 @@
                         TableReference.prototype.tableId = "";
     
                         /**
+                         * TableReference projectId.
+                         * @member {string} projectId
+                         * @memberof google.privacy.dlp.v2.TableReference
+                         * @instance
+                         */
+                        TableReference.prototype.projectId = "";
+    
+                        /**
                          * Creates a new TableReference instance using the specified properties.
                          * @function create
                          * @memberof google.privacy.dlp.v2.TableReference
@@ -102450,6 +108237,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.datasetId);
                             if (message.tableId != null && Object.hasOwnProperty.call(message, "tableId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.tableId);
+                            if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
                             return writer;
                         };
     
@@ -102477,12 +108266,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TableReference.decode = function decode(reader, length) {
+                        TableReference.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TableReference();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.datasetId = reader.string();
@@ -102490,6 +108281,10 @@
                                     }
                                 case 2: {
                                         message.tableId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.projectId = reader.string();
                                         break;
                                     }
                                 default:
@@ -102533,6 +108328,9 @@
                             if (message.tableId != null && message.hasOwnProperty("tableId"))
                                 if (!$util.isString(message.tableId))
                                     return "tableId: string expected";
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                if (!$util.isString(message.projectId))
+                                    return "projectId: string expected";
                             return null;
                         };
     
@@ -102552,6 +108350,8 @@
                                 message.datasetId = String(object.datasetId);
                             if (object.tableId != null)
                                 message.tableId = String(object.tableId);
+                            if (object.projectId != null)
+                                message.projectId = String(object.projectId);
                             return message;
                         };
     
@@ -102571,11 +108371,14 @@
                             if (options.defaults) {
                                 object.datasetId = "";
                                 object.tableId = "";
+                                object.projectId = "";
                             }
                             if (message.datasetId != null && message.hasOwnProperty("datasetId"))
                                 object.datasetId = message.datasetId;
                             if (message.tableId != null && message.hasOwnProperty("tableId"))
                                 object.tableId = message.tableId;
+                            if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                object.projectId = message.projectId;
                             return object;
                         };
     
@@ -102704,12 +108507,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        BigQueryField.decode = function decode(reader, length) {
+                        BigQueryField.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.BigQueryField();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.table = $root.google.privacy.dlp.v2.BigQueryTable.decode(reader, reader.uint32());
@@ -102930,12 +108735,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        EntityId.decode = function decode(reader, length) {
+                        EntityId.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.EntityId();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.field = $root.google.privacy.dlp.v2.FieldId.decode(reader, reader.uint32());
@@ -103140,12 +108947,14 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TableOptions.decode = function decode(reader, length) {
+                        TableOptions.decode = function decode(reader, length, error) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.privacy.dlp.v2.TableOptions();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
                                 switch (tag >>> 3) {
                                 case 1: {
                                         if (!(message.identifyingFields && message.identifyingFields.length))
@@ -103393,12 +109202,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length) {
+                Http.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.rules && message.rules.length))
@@ -103743,12 +109554,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length) {
+                HttpRule.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -104127,12 +109940,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length) {
+                CustomHttpPattern.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.kind = reader.string();
@@ -104359,12 +110174,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length) {
+                CommonLanguageSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.referenceDocsUri = reader.string();
@@ -104728,12 +110545,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length) {
+                ClientLibrarySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.version = reader.string();
@@ -105072,6 +110891,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -105173,6 +110993,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -105219,6 +111047,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -105246,12 +111076,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length) {
+                Publishing.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
@@ -105297,6 +111129,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -105391,6 +111227,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -105485,6 +111324,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -105514,6 +111355,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -105544,6 +111386,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -105685,12 +111529,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length) {
+                JavaSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.libraryPackage = reader.string();
@@ -105952,12 +111798,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length) {
+                CppSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -106160,12 +112008,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length) {
+                PhpSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -106368,12 +112218,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length) {
+                PythonSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -106576,12 +112428,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length) {
+                NodeSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -106849,12 +112703,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length) {
+                DotnetSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -107228,12 +113084,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length) {
+                RubySettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -107436,12 +113294,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length) {
+                GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
@@ -107668,12 +113528,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length) {
+                MethodSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.selector = reader.string();
@@ -107946,12 +113808,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length) {
+                    LongRunning.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
@@ -108373,12 +114237,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length) {
+                ResourceDescriptor.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -108768,12 +114634,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length) {
+                ResourceReference.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type = reader.string();
@@ -108998,12 +114866,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length) {
+                FileDescriptorSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.file && message.file.length))
@@ -109398,12 +115268,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length) {
+                FileDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -110065,12 +115937,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length) {
+                DescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -110550,12 +116424,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length) {
+                    ExtensionRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -110794,12 +116670,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length) {
+                    ReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -111050,12 +116928,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
@@ -111395,12 +117275,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length) {
+                    Declaration.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.number = reader.int32();
@@ -111774,12 +117656,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length) {
+                FieldDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -112299,12 +118183,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length) {
+                OneofDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -112570,12 +118456,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length) {
+                EnumDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -112889,12 +118777,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length) {
+                    EnumReservedRange.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.start = reader.int32();
@@ -113130,12 +119020,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -113387,12 +119279,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -113695,12 +119589,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length) {
+                MethodDescriptorProto.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.name = reader.string();
@@ -114199,12 +120095,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length) {
+                FileOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.javaPackage = reader.string();
@@ -114819,12 +120717,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length) {
+                MessageOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.messageSetWireFormat = reader.bool();
@@ -115267,12 +121167,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -115302,12 +121199,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length) {
+                FieldOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.ctype = reader.int32();
@@ -116033,12 +121932,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length) {
+                    EditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -116329,12 +122230,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length) {
+                OneofOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -116615,12 +122518,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length) {
+                EnumOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 message.allowAlias = reader.bool();
@@ -116927,12 +122832,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length) {
+                EnumValueOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
@@ -117118,6 +123025,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -117177,6 +123085,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -117211,6 +123127,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -117238,12 +123156,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length) {
+                ServiceOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 34: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
@@ -117265,6 +123185,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -117325,6 +123249,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -117361,6 +123288,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -117384,6 +123313,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -117398,6 +123328,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     
@@ -117574,12 +123506,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length) {
+                MethodOptions.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 33: {
                                 message.deprecated = reader.bool();
@@ -117991,12 +123925,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length) {
+                UninterpretedOption.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 2: {
                                 if (!(message.name && message.name.length))
@@ -118330,12 +124266,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length) {
+                    NamePart.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     message.namePart = reader.string();
@@ -118606,12 +124544,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length) {
+                FeatureSet.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.fieldPresence = reader.int32();
@@ -119141,12 +125081,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length) {
+                FeatureSetDefaults.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
@@ -119525,12 +125467,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 3: {
                                     message.edition = reader.int32();
@@ -119815,12 +125759,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length) {
+                SourceCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.location && message.location.length))
@@ -120090,12 +126036,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length) {
+                    Location.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -120401,12 +126349,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
@@ -120669,12 +126619,14 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length) {
+                    Annotation.decode = function decode(reader, length, error) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
+                            if (tag === error)
+                                break;
                             switch (tag >>> 3) {
                             case 1: {
                                     if (!(message.path && message.path.length))
@@ -120995,12 +126947,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length) {
+                Duration.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -121236,12 +127190,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length) {
+                Timestamp.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.seconds = reader.int64();
@@ -121455,12 +127411,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length) {
+                Empty.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         default:
                             reader.skipType(tag & 7);
@@ -121643,12 +127601,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length) {
+                FieldMask.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 if (!(message.paths && message.paths.length))
@@ -121871,12 +127831,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length) {
+                Any.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.type_url = reader.string();
@@ -122132,12 +128094,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length) {
+                Status.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.code = reader.int32();
@@ -122414,12 +128378,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Date.decode = function decode(reader, length) {
+                Date.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.year = reader.int32();
@@ -122701,12 +128667,14 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                TimeOfDay.decode = function decode(reader, length) {
+                TimeOfDay.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
+                        if (tag === error)
+                            break;
                         switch (tag >>> 3) {
                         case 1: {
                                 message.hours = reader.int32();

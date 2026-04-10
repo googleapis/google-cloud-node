@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,6 +36,23 @@ function main() {
    *  Project ID of the project that contains the instance to be deleted.
    */
   // const project = 'my-project'
+  /**
+   *  Flag to opt-in for final backup. By default, it is turned off.
+   */
+  // const enableFinalBackup = true
+  /**
+   *  Optional. Retention period of the final backup.
+   */
+  // const finalBackupTtlDays = 1234
+  /**
+   *  Optional. Final Backup expiration time.
+   *  Timestamp in UTC of when this resource is considered expired.
+   */
+  // const finalBackupExpiryTime = {}
+  /**
+   *  Optional. The description of the final backup.
+   */
+  // const finalBackupDescription = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

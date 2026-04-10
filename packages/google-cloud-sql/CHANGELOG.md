@@ -1,5 +1,42 @@
 # Changelog
 
+## [0.24.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.23.0...sql-v0.24.0) (2026-01-16)
+
+
+### Features
+
+* [sql] introduces auto_upgrade_enabled option for MySQL in DatabaseInstance.Settings ([#6969](https://github.com/googleapis/google-cloud-node/issues/6969)) ([4880248](https://github.com/googleapis/google-cloud-node/commit/48802487892bf059142b4b4064a4c2dec31d3838))
+
+## [0.23.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.22.0...sql-v0.23.0) (2025-11-21)
+
+
+### Features
+
+* [sql] introduces auto_upgrade_enabled option for MySQL in DatabaseInstance.Settings ([#6904](https://github.com/googleapis/google-cloud-node/issues/6904)) ([f3c5811](https://github.com/googleapis/google-cloud-node/commit/f3c58114c24765dfb3d3969ba5e411fb9fb9b3f8))
+
+## [0.22.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.21.1...sql-v0.22.0) (2025-10-31)
+
+
+### Features
+
+* [sql] introduces POSTGRES_17 and POSTGRES_18 database versions in the SqlDatabaseVersion enum type ([#6854](https://github.com/googleapis/google-cloud-node/issues/6854)) ([90ffcd9](https://github.com/googleapis/google-cloud-node/commit/90ffcd969537de0668c80caf611eaafd6beb1273))
+
+## [0.21.1](https://github.com/googleapis/google-cloud-node/compare/sql-v0.21.0...sql-v0.21.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.21.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.20.1...sql-v0.21.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6423](https://github.com/googleapis/google-cloud-node/issues/6423)) ([df9184f](https://github.com/googleapis/google-cloud-node/commit/df9184fe9fb00013ef519f093c4de5fd54ec2ce9))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [0.20.1](https://github.com/googleapis/google-cloud-node/compare/sql-v0.20.0...sql-v0.20.1) (2025-03-19)
 
 

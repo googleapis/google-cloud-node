@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,8 +35,8 @@ function main(projectId, zone, clusterId, maintenancePolicy) {
   // const projectId = 'abc123'
   /**
    *  Required. The name of the Google Compute Engine
-   *  zone (https://cloud.google.com/compute/docs/zones#available) in which the
-   *  cluster resides.
+   *  zone (https://cloud.google.com/compute/docs/zones#available)
+   *  in which the cluster resides.
    */
   // const zone = 'abc123'
   /**

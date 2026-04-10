@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.2.1...confidentialcomputing-v2.2.2) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.2.0...confidentialcomputing-v2.2.1) (2025-09-09)
+
+
+### Bug Fixes
+
+* [gapic-node-processing] remove hardlinks ([#6699](https://github.com/googleapis/google-cloud-node/issues/6699)) ([3478080](https://github.com/googleapis/google-cloud-node/commit/3478080d2c37b236c90feb1ad4a7643b4cb04aa4))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.1.0...confidentialcomputing-v2.2.0) (2025-09-04)
+
+
+### Features
+
+* Add new `VerifyConfidentialSpace` and `VerifyConfidentialGke` rpcs and relevant fields ([7fd10b4](https://github.com/googleapis/google-cloud-node/commit/7fd10b45202d5031f6b283d9af2c15d72d76823d))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.0.1...confidentialcomputing-v2.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.0.0...confidentialcomputing-v2.0.1) (2025-03-19)
 
 

@@ -34,6 +34,8 @@ option ruby_package = "Google::Ads::AdManager::V1";
 // Provides methods for handling `EntitySignalsMapping` objects.
 service EntitySignalsMappingService {
   option (google.api.default_host) = "admanager.googleapis.com";
+  option (google.api.oauth_scopes) =
+      "https://www.googleapis.com/auth/admanager";
 
   // API to retrieve a `EntitySignalsMapping` object.
   rpc GetEntitySignalsMapping(GetEntitySignalsMappingRequest)
@@ -154,7 +156,7 @@ message CreateEntitySignalsMappingRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "admanager.googleapis.com/EntitySignalsMapping"
+      type: "admanager.googleapis.com/Network"
     }
   ];
 
@@ -193,7 +195,7 @@ message ListEntitySignalsMappingsResponse {
   // If a filter was included in the request, this reflects the total number
   // after the filtering is applied.
   //
-  // `total_size` will not be calculated in the response unless it has been
+  // `total_size` won't be calculated in the response unless it has been
   // included in a response field mask. The response field mask can be provided
   // to the method by using the URL parameter `$fields` or `fields`, or by using
   // the HTTP/gRPC header `X-Goog-FieldMask`.
@@ -211,7 +213,7 @@ message BatchCreateEntitySignalsMappingsRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "admanager.googleapis.com/EntitySignalsMapping"
+      type: "admanager.googleapis.com/Network"
     }
   ];
 
@@ -235,7 +237,7 @@ message BatchUpdateEntitySignalsMappingsRequest {
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "admanager.googleapis.com/EntitySignalsMapping"
+      type: "admanager.googleapis.com/Network"
     }
   ];
 

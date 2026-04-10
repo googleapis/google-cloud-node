@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ function main(resource, destinationParent) {
   /**
    *  Required. Name of the Google Cloud folder or organization to reparent the
    *  target resource. The analysis will be performed against hypothetically
-   *  moving the resource to this specified desitination parent. This can only be
+   *  moving the resource to this specified destination parent. This can only be
    *  a folder number (such as "folders/123") or an organization number (such as
    *  "organizations/123").
    */

@@ -1,4 +1,4 @@
-// Copyright 5798 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ function main(name) {
   // const operatingSystem = {}
 
   // Imports the Gateway library
-  const {GatewayControlClient} = require('@google-cloud/gateway').v1;
+  const {GatewayControlClient} = require('@google-cloud/gke-connect-gateway').v1;
 
   // Instantiates a client
   const gatewayClient = new GatewayControlClient();

@@ -5,6 +5,30 @@
   "protoPackage": "google.cloud.aiplatform.v1",
   "libraryPackage": "@google-cloud/aiplatform",
   "services": {
+    "DataFoundryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataFoundryServiceClient",
+          "rpcs": {
+            "GenerateSyntheticData": {
+              "methods": [
+                "generateSyntheticData"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataFoundryServiceClient",
+          "rpcs": {
+            "GenerateSyntheticData": {
+              "methods": [
+                "generateSyntheticData"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DatasetService": {
       "clients": {
         "grpc": {
@@ -617,6 +641,16 @@
               "methods": [
                 "searchNearestEntities"
               ]
+            },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
+              ]
+            },
+            "FeatureViewDirectWrite": {
+              "methods": [
+                "featureViewDirectWrite"
+              ]
             }
           }
         },
@@ -631,6 +665,11 @@
             "SearchNearestEntities": {
               "methods": [
                 "searchNearestEntities"
+              ]
+            },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
               ]
             }
           }
@@ -2235,6 +2274,11 @@
               "methods": [
                 "getPublisherModel"
               ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
+              ]
             }
           }
         },
@@ -2244,6 +2288,11 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
               ]
             }
           }
@@ -2915,6 +2964,11 @@
                 "generateContent"
               ]
             },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
+              ]
+            },
             "StreamRawPredict": {
               "methods": [
                 "streamRawPredict"
@@ -2983,6 +3037,11 @@
             "GenerateContent": {
               "methods": [
                 "generateContent"
+              ]
+            },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
               ]
             }
           }
@@ -3168,6 +3227,98 @@
                 "listSchedules",
                 "listSchedulesStream",
                 "listSchedulesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SessionServiceClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "AppendEvent": {
+              "methods": [
+                "appendEvent"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SessionServiceClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "UpdateSession": {
+              "methods": [
+                "updateSession"
+              ]
+            },
+            "AppendEvent": {
+              "methods": [
+                "appendEvent"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
               ]
             }
           }
@@ -3591,6 +3742,11 @@
                 "getRagFile"
               ]
             },
+            "GetRagEngineConfig": {
+              "methods": [
+                "getRagEngineConfig"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -3614,6 +3770,11 @@
             "DeleteRagFile": {
               "methods": [
                 "deleteRagFile"
+              ]
+            },
+            "UpdateRagEngineConfig": {
+              "methods": [
+                "updateRagEngineConfig"
               ]
             },
             "ListRagCorpora": {
@@ -3650,6 +3811,11 @@
                 "getRagFile"
               ]
             },
+            "GetRagEngineConfig": {
+              "methods": [
+                "getRagEngineConfig"
+              ]
+            },
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
@@ -3673,6 +3839,11 @@
             "DeleteRagFile": {
               "methods": [
                 "deleteRagFile"
+              ]
+            },
+            "UpdateRagEngineConfig": {
+              "methods": [
+                "updateRagEngineConfig"
               ]
             },
             "ListRagCorpora": {
@@ -3712,6 +3883,16 @@
               "methods": [
                 "corroborateContent"
               ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
+              ]
             }
           }
         },
@@ -3731,6 +3912,16 @@
             "CorroborateContent": {
               "methods": [
                 "corroborateContent"
+              ]
+            },
+            "AskContexts": {
+              "methods": [
+                "askContexts"
+              ]
+            },
+            "AsyncRetrieveContexts": {
+              "methods": [
+                "asyncRetrieveContexts"
               ]
             }
           }

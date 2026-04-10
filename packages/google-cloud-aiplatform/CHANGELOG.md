@@ -1,5 +1,201 @@
 # Changelog
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.4.0...aiplatform-v6.5.0) (2026-03-02)
+
+
+### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#7266](https://github.com/googleapis/google-cloud-node/issues/7266)) ([9f91e05](https://github.com/googleapis/google-cloud-node/commit/9f91e0513bf7a60239aef5e4222993184c63fbb2))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.3.0...aiplatform-v6.4.0) (2026-02-03)
+
+
+### Features
+
+* Force-delete for RagCorpora, ignoring any external errors and ensuring deletion of the RagCorpus ([#7085](https://github.com/googleapis/google-cloud-node/issues/7085)) ([b69b8ae](https://github.com/googleapis/google-cloud-node/commit/b69b8aea0fd9e9066f78e86c346a0ab7d8be609a))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.2.0...aiplatform-v6.3.0) (2026-02-02)
+
+
+### Features
+
+* Add `fps` to message `VideoMetadata` ([#7074](https://github.com/googleapis/google-cloud-node/issues/7074)) ([779b172](https://github.com/googleapis/google-cloud-node/commit/779b17294b50e3c5ae2403d0a03f5c2704ce93cb))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.1.0...aiplatform-v6.2.0) (2026-01-22)
+
+
+### Features
+
+* [Many APIs] Added OUTPUT_ONLY annotations to create_time and update_time in InternalRange to reflect existing service behavior ([#7013](https://github.com/googleapis/google-cloud-node/issues/7013)) ([0dbd123](https://github.com/googleapis/google-cloud-node/commit/0dbd123f45ccc049dbc6697655cd861d1200bf07))
+* RAG - add mode config to RagEngineConfig with Spanner and Serverless ([#7016](https://github.com/googleapis/google-cloud-node/issues/7016)) ([2273e3c](https://github.com/googleapis/google-cloud-node/commit/2273e3c0a7dc15bcdccd295851272ae75c14180e))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.0.0...aiplatform-v6.1.0) (2026-01-12)
+
+
+### Features
+
+* Add Lustre support to the Vertex Training Custom Job API ([#6952](https://github.com/googleapis/google-cloud-node/issues/6952)) ([8e2862c](https://github.com/googleapis/google-cloud-node/commit/8e2862c632772bb21380731c23b85ef96f477350))
+* Add Lustre support to the Vertex Training Custom Job API ([#6959](https://github.com/googleapis/google-cloud-node/issues/6959)) ([168fe86](https://github.com/googleapis/google-cloud-node/commit/168fe8615035b62ef60d0283895e6c517c1f281d))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.14.0...aiplatform-v6.0.0) (2025-12-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911))
+
+### Bug Fixes
+
+* Fix issue when using UrlContext tool ([#6911](https://github.com/googleapis/google-cloud-node/issues/6911)) ([6fb8d09](https://github.com/googleapis/google-cloud-node/commit/6fb8d09786816740eb2c5128ce833d5bc649a915))
+
+## [5.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.13.0...aiplatform-v5.14.0) (2025-11-21)
+
+
+### Features
+
+* Add `ReplicatedVoiceConfig` to `VoiceConfig` to enable Gemini TTS voice replication ([#6899](https://github.com/googleapis/google-cloud-node/issues/6899)) ([beb5cac](https://github.com/googleapis/google-cloud-node/commit/beb5cac2dbd8cad292d67e3641306824c3ecab85))
+* Add support for developer connect based deployment ([#6900](https://github.com/googleapis/google-cloud-node/issues/6900)) ([7b6c79b](https://github.com/googleapis/google-cloud-node/commit/7b6c79b20551dde858cd932174c1fb558408172f))
+
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.12.0...aiplatform-v5.13.0) (2025-11-11)
+
+
+### Features
+
+* Add order_by to list_events ([#6864](https://github.com/googleapis/google-cloud-node/issues/6864)) ([8d71bbf](https://github.com/googleapis/google-cloud-node/commit/8d71bbf30bc7ae1a54a3e37b8740d46dfbe418dd))
+
+## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.11.0...aiplatform-v5.12.0) (2025-10-25)
+
+
+### Features
+
+* Add EmbedContent method v1 ([#6844](https://github.com/googleapis/google-cloud-node/issues/6844)) ([da2c718](https://github.com/googleapis/google-cloud-node/commit/da2c71816dc16c6ec4d64d74b7913ae5e399a0bc))
+
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.10.0...aiplatform-v5.11.0) (2025-10-23)
+
+
+### Features
+
+* Add EmbedContent method v1beta1 ([#6833](https://github.com/googleapis/google-cloud-node/issues/6833)) ([8a7ce8e](https://github.com/googleapis/google-cloud-node/commit/8a7ce8e898273557543277bcdb664d5aee9183ce))
+
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.9.0...aiplatform-v5.10.0) (2025-10-21)
+
+
+### Features
+
+* Add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#6825](https://github.com/googleapis/google-cloud-node/issues/6825)) ([0d3274e](https://github.com/googleapis/google-cloud-node/commit/0d3274e0fa00cf2cf9cc15488b2f33672a97fe00))
+* Add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#6829](https://github.com/googleapis/google-cloud-node/issues/6829)) ([6001de8](https://github.com/googleapis/google-cloud-node/commit/6001de8c9b62274d067b58b346e835c97dc249ea))
+
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.8.0...aiplatform-v5.9.0) (2025-10-16)
+
+
+### Features
+
+* Add aspect_ratio and image_config for v1 version ([#6817](https://github.com/googleapis/google-cloud-node/issues/6817)) ([9f40bf1](https://github.com/googleapis/google-cloud-node/commit/9f40bf125a2e32fee4da4cd391265e9d4b380bcd))
+* Add aspect_ratio and image_config for v1beta1 version ([#6814](https://github.com/googleapis/google-cloud-node/issues/6814)) ([8d38a09](https://github.com/googleapis/google-cloud-node/commit/8d38a0919218be1c4ba6de4e283786facf2eb0b4))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.7.0...aiplatform-v5.8.0) (2025-10-13)
+
+
+### Features
+
+* Add JAILBREAK category to SafetySettings for prediction service ([#6801](https://github.com/googleapis/google-cloud-node/issues/6801)) ([fcf84bf](https://github.com/googleapis/google-cloud-node/commit/fcf84bf1ece803b25b8719e80afb852ea515a4c0))
+* Add labels field for Predict API for Imagen use case (v1beta and v1) ([#6788](https://github.com/googleapis/google-cloud-node/issues/6788)) ([6a0eeb4](https://github.com/googleapis/google-cloud-node/commit/6a0eeb493f3f2eef6bbec8baa2f27aa9b9841bda))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.6.0...aiplatform-v5.7.0) (2025-09-09)
+
+
+### Features
+
+* PSC support for custom weights deploy ([#6695](https://github.com/googleapis/google-cloud-node/issues/6695)) ([961ac1a](https://github.com/googleapis/google-cloud-node/commit/961ac1ae3d0144b2cc5e5ba95378e2c02d12b5c5))
+* Tuning PreTunedModel API field ([#6612](https://github.com/googleapis/google-cloud-node/issues/6612)) ([f48ce9b](https://github.com/googleapis/google-cloud-node/commit/f48ce9b66bbc17b0615fc22f08e07694f0e83135))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.5.0...aiplatform-v5.6.0) (2025-08-21)
+
+
+### Features
+
+* Add `gpu_partition_size` to `MachineSpec` ([#6595](https://github.com/googleapis/google-cloud-node/issues/6595)) ([de966d3](https://github.com/googleapis/google-cloud-node/commit/de966d3992725acf05932096ff09d0b6741a6c1f))
+* Add option EndpointUserId and ModelUserId fields ([#6600](https://github.com/googleapis/google-cloud-node/issues/6600)) ([11f87fa](https://github.com/googleapis/google-cloud-node/commit/11f87fa265c5b83214838c6179e007ad9e6bf590))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.4.0...aiplatform-v5.5.0) (2025-08-12)
+
+
+### Features
+
+* Added document_name for vertex ai search as part of retrieved context from grounding chunk ([#6586](https://github.com/googleapis/google-cloud-node/issues/6586)) ([dd3f406](https://github.com/googleapis/google-cloud-node/commit/dd3f406707562e375d0978a57a5cc1537032421b))
+* Expose RecommendSpecs api to vertex python SDK for Custom Weights Model deployment ([#6593](https://github.com/googleapis/google-cloud-node/issues/6593)) ([ace3695](https://github.com/googleapis/google-cloud-node/commit/ace3695ff8200040fd4dfe93c7950a08d13a5ee2))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.3.0...aiplatform-v5.4.0) (2025-08-07)
+
+
+### Features
+
+* Add FeatureViewDirectWrite API in v1 ([#6566](https://github.com/googleapis/google-cloud-node/issues/6566)) ([e80e35d](https://github.com/googleapis/google-cloud-node/commit/e80e35de2f33266dbec28487ab496e6b8e1d1699))
+* Add Grounding with Google Maps tool ([#6578](https://github.com/googleapis/google-cloud-node/issues/6578)) ([c0e8526](https://github.com/googleapis/google-cloud-node/commit/c0e8526a55692c48430190aa3f02db319e1f8d05))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.2.0...aiplatform-v5.3.0) (2025-08-04)
+
+
+### Features
+
+* A new value `NVIDIA_GB200` is added to enum `AcceleratorType` ([#6557](https://github.com/googleapis/google-cloud-node/issues/6557)) ([f814e74](https://github.com/googleapis/google-cloud-node/commit/f814e743ac3da1734af1ae44b091139e12747475))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.1.0...aiplatform-v5.2.0) (2025-08-04)
+
+
+### Features
+
+* Add a FooBar API ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+* Add enable_datapoint_upsert_logging to google.cloud.aiplatform.v1.DeployedIndex ([#6542](https://github.com/googleapis/google-cloud-node/issues/6542)) ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+* Add field ReasoningEngineSpec.service_account ([#6547](https://github.com/googleapis/google-cloud-node/issues/6547)) ([9643347](https://github.com/googleapis/google-cloud-node/commit/9643347354333438637958811c1029d501720563))
+* Add the VeoTuningSpec ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+* Remove private preview label from Model Armor protos ([1783b41](https://github.com/googleapis/google-cloud-node/commit/1783b417e71850cf29137544d613ef204f882d25))
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.0.0...aiplatform-v5.1.0) (2025-07-28)
+
+
+### Features
+
+* Add service_account to Reasoning Engine public protos ([#6523](https://github.com/googleapis/google-cloud-node/issues/6523)) ([4afa04e](https://github.com/googleapis/google-cloud-node/commit/4afa04ea37f9a1d3df1082b481891ce4b844d7bf))
+* Adds DWS and spot VM feature support to custom batch predictions 2.0 ([#6536](https://github.com/googleapis/google-cloud-node/issues/6536)) ([4ef705b](https://github.com/googleapis/google-cloud-node/commit/4ef705b409954f45fae7638064aafa61ade1bcc8))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.4.0...aiplatform-v5.0.0) (2025-07-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove gemini_template_config and request_column_name fields from DatasetService.AssessData and DatasetService.AssembleData ([#6508](https://github.com/googleapis/google-cloud-node/issues/6508))
+
+### Bug Fixes
+
+* Remove gemini_template_config and request_column_name fields from DatasetService.AssessData and DatasetService.AssembleData ([#6508](https://github.com/googleapis/google-cloud-node/issues/6508)) ([7e751ac](https://github.com/googleapis/google-cloud-node/commit/7e751ac51e5e5f66e1fda8419cae4a36cd7e22c5))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.3.0...aiplatform-v4.4.0) (2025-07-17)
+
+
+### Features
+
+* Add Aggregation Output in EvaluateDataset Get Operation Response ([#6474](https://github.com/googleapis/google-cloud-node/issues/6474)) ([d5d5573](https://github.com/googleapis/google-cloud-node/commit/d5d55738b1e2a07f0942041654588cf012cde3e7))
+* Add API for Managed OSS Fine Tuning ([#6494](https://github.com/googleapis/google-cloud-node/issues/6494)) ([a71d814](https://github.com/googleapis/google-cloud-node/commit/a71d814de86954fa3fae816cd6e63be842d84dca))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.2.0...aiplatform-v4.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add invoke_route_prefix to ModelContainerSpec in aiplatform v1 models.proto ([#6433](https://github.com/googleapis/google-cloud-node/issues/6433)) ([32a196b](https://github.com/googleapis/google-cloud-node/commit/32a196bf8be28a29be7671fa73491e8346044dd7))
+* Add json schema support to structured output and function declaration ([#6314](https://github.com/googleapis/google-cloud-node/issues/6314)) ([901c552](https://github.com/googleapis/google-cloud-node/commit/901c552faa7d83682fa4ac6a90398e2a55c529ee))
+* Add message ColabImage, add field colab_image to NotebookSoftwareConfig ([#6452](https://github.com/googleapis/google-cloud-node/issues/6452)) ([d6cf158](https://github.com/googleapis/google-cloud-node/commit/d6cf1586c2b4b5866e1b459e71278169137f03e3))
+* Add Model Garden deploy OSS model API ([#6412](https://github.com/googleapis/google-cloud-node/issues/6412)) ([73f3477](https://github.com/googleapis/google-cloud-node/commit/73f3477eb5c07f7356cd426e8105419e0e2bd60e))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+* Expose UrlContextMetadata API to v1 ([#6399](https://github.com/googleapis/google-cloud-node/issues/6399)) ([46839ea](https://github.com/googleapis/google-cloud-node/commit/46839ea7a92b2d69acf2838caa0f2aefa13c7dd1))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v4.1.0...aiplatform-v4.2.0) (2025-05-09)
 
 

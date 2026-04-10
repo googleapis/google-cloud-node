@@ -4,6 +4,65 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.6.0...container-v6.7.0) (2026-01-31)
+
+
+### Features
+
+* [container] Add GPUDirectConfig to configure GPU Direct for node pools ([#7035](https://github.com/googleapis/google-cloud-node/issues/7035)) ([eda043c](https://github.com/googleapis/google-cloud-node/commit/eda043cff45893b011a9c5f7ee157f265dad098b))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.5.0...container-v6.6.0) (2025-10-23)
+
+
+### Features
+
+* [container] add node_kernel_module_loading field to LinuxNodeConfig ([#6832](https://github.com/googleapis/google-cloud-node/issues/6832)) ([7f614ac](https://github.com/googleapis/google-cloud-node/commit/7f614ac2228003354479fd3b5959f631c67e7cc6))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.4.1...container-v6.5.0) (2025-10-16)
+
+
+### Features
+
+* [container] Add SwapConfig to enable and configure swap memory for node pools ([#6818](https://github.com/googleapis/google-cloud-node/issues/6818)) ([ee1aabf](https://github.com/googleapis/google-cloud-node/commit/ee1aabfb23f3e6c6c6b26298188ab3411f4073ae))
+
+## [6.4.1](https://github.com/googleapis/google-cloud-node/compare/container-v6.4.0...container-v6.4.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.3.0...container-v6.4.0) (2025-07-28)
+
+
+### Features
+
+* [container] A new enum `TransparentHugepageEnabled` is added ([#6522](https://github.com/googleapis/google-cloud-node/issues/6522)) ([c73b860](https://github.com/googleapis/google-cloud-node/commit/c73b860e2473725fe7443a89b8b6410047825888))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.2.0...container-v6.3.0) (2025-07-17)
+
+
+### Features
+
+* [container] A new enum `TransparentHugepageEnabled` is added ([#6496](https://github.com/googleapis/google-cloud-node/issues/6496)) ([c46a08f](https://github.com/googleapis/google-cloud-node/commit/c46a08f885753f84cdc0bb9b609820f9be0114ad))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.1.0...container-v6.2.0) (2025-07-09)
+
+
+### Features
+
+* [container] add topology_manager in NodeKubeletConfig ([#6374](https://github.com/googleapis/google-cloud-node/issues/6374)) ([ccd2416](https://github.com/googleapis/google-cloud-node/commit/ccd2416a98fc9fe42b475802975000d5b149719f))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6424](https://github.com/googleapis/google-cloud-node/issues/6424)) ([9a595a6](https://github.com/googleapis/google-cloud-node/commit/9a595a658b5fc2a02a18ffbca618190eb64d8013))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.0.1...container-v6.1.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([#6304](https://github.com/googleapis/google-cloud-node/issues/6304)) ([132240f](https://github.com/googleapis/google-cloud-node/commit/132240fbf6cb29b309b76c1d60f0611720590847))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/container-v6.0.0...container-v6.0.1) (2025-03-19)
 
 

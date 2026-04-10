@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,27 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  CloudChannelReportsServiceClient,
-  CloudChannelServiceClient,
-} from '@google-cloud/channel';
+import {CloudChannelReportsServiceClient, CloudChannelServiceClient} from '@google-cloud/channel';
 
 // check that the client class type name can be used
-function doStuffWithCloudChannelReportsServiceClient(
-  client: CloudChannelReportsServiceClient
-) {
+function doStuffWithCloudChannelReportsServiceClient(client: CloudChannelReportsServiceClient) {
   client.close();
 }
-function doStuffWithCloudChannelServiceClient(
-  client: CloudChannelServiceClient
-) {
+function doStuffWithCloudChannelServiceClient(client: CloudChannelServiceClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const cloudChannelReportsServiceClient =
-    new CloudChannelReportsServiceClient();
+  const cloudChannelReportsServiceClient = new CloudChannelReportsServiceClient();
   doStuffWithCloudChannelReportsServiceClient(cloudChannelReportsServiceClient);
   // check that the client instance can be created
   const cloudChannelServiceClient = new CloudChannelServiceClient();

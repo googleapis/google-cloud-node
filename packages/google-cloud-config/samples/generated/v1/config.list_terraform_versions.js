@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,15 +35,15 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. When requesting a page of resources, 'page_size' specifies number
-   *  of resources to return. If unspecified, at most 500 will be returned. The
-   *  maximum value is 1000.
+   *  Optional. When requesting a page of terraform versions, 'page_size'
+   *  specifies number of terraform versions to return. If unspecified, at most
+   *  500 will be returned. The maximum value is 1000.
    */
   // const pageSize = 1234
   /**
    *  Optional. Token returned by previous call to 'ListTerraformVersions' which
    *  specifies the position in the list from where to continue listing the
-   *  resources.
+   *  terraform versions.
    */
   // const pageToken = 'abc123'
   /**

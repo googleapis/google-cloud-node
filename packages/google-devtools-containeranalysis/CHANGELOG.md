@@ -4,6 +4,50 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.6.0...containeranalysis-v6.7.0) (2026-03-18)
+
+
+### Features
+
+* [containeranalysis] Added line_number to FileLocation ([#7608](https://github.com/googleapis/google-cloud-node/issues/7608)) ([7286747](https://github.com/googleapis/google-cloud-node/commit/72867475f8475a961db73e910d5c2d20cd894f06))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.5.0...containeranalysis-v6.6.0) (2026-02-19)
+
+
+### Features
+
+* [containeranalysis] A new field `registry` is added to message `.grafeas.v1.BaseImage` ([#7258](https://github.com/googleapis/google-cloud-node/issues/7258)) ([53e98e9](https://github.com/googleapis/google-cloud-node/commit/53e98e9da1468dab3b86a08b6704d9f384f64fc1))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.4.0...containeranalysis-v6.5.0) (2026-01-31)
+
+
+### Features
+
+* [containeranalysis] A new field `last_vulnerability_update_time` is added to message `.grafeas.v1.DiscoveryOccurrence` ([#7039](https://github.com/googleapis/google-cloud-node/issues/7039)) ([c56f26b](https://github.com/googleapis/google-cloud-node/commit/c56f26b50db6cfce1183931d19314764423ff0db))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.1...containeranalysis-v6.4.0) (2026-01-16)
+
+
+### Features
+
+* [containeranalysis] A new message `File` is added ([#6987](https://github.com/googleapis/google-cloud-node/issues/6987)) ([0413036](https://github.com/googleapis/google-cloud-node/commit/04130369a1e730a90e456ea2d33b1320de67f03b))
+
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.3.0...containeranalysis-v6.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.2.0...containeranalysis-v6.3.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6425](https://github.com/googleapis/google-cloud-node/issues/6425)) ([c920e8d](https://github.com/googleapis/google-cloud-node/commit/c920e8d0d43be81fc171bc5f7d59800b66b830b8))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.1.0...containeranalysis-v6.2.0) (2025-05-09)
 
 

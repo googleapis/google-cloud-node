@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,12 @@ function main(updateMask, vpcFlowLogsConfig) {
   /**
    *  Required. Mask of fields to update. At least one path must be supplied in
    *  this field.
+   *  For example, to change the state of the configuration to ENABLED, specify
+   *    `update_mask` = `"state"`, and the `vpc_flow_logs_config` would be:
+   *    `vpc_flow_logs_config = {
+   *      name =
+   *      "projects/my-project/locations/global/vpcFlowLogsConfigs/my-config"
+   *      state = "ENABLED" }`
    */
   // const updateMask = {}
   /**

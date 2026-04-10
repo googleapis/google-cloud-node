@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -448,14 +448,15 @@ message AccessSettings {
       [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Allows customers to configure tenant_id for GCIP instance per-app.
+// Allows customers to configure tenant IDs for a Cloud Identity Platform (GCIP)
+// instance for each application.
 message GcipSettings {
-  // Optional. GCIP tenant ids that are linked to the IAP resource.
-  // tenant_ids could be a string beginning with a number character to indicate
-  // authenticating with GCIP tenant flow, or in the format of _<ProjectNumber>
-  // to indicate authenticating with GCIP agent flow.
-  // If agent flow is used, tenant_ids should only contain one single element,
-  // while for tenant flow, tenant_ids can contain multiple elements.
+  // Optional. GCIP tenant IDs that are linked to the IAP resource. `tenant_ids`
+  // could be a string beginning with a number character to indicate
+  // authenticating with GCIP tenant flow, or in the format of
+  // `_<ProjectNumber>` to indicate authenticating with GCIP agent flow. If
+  // agent flow is used, `tenant_ids` should only contain one single element,
+  // while for tenant flow, `tenant_ids` can contain multiple elements.
   repeated string tenant_ids = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Login page URI associated with the GCIP tenants.
@@ -464,11 +465,12 @@ message GcipSettings {
   google.protobuf.StringValue login_page_uri = 2;
 }
 
-// Allows customers to configure HTTP request paths that'll allow HTTP OPTIONS
-// call to bypass authentication and authorization.
+// Allows customers to configure HTTP request paths that'll allow HTTP
+// `OPTIONS` call to bypass authentication and authorization.
 message CorsSettings {
-  // Configuration to allow HTTP OPTIONS calls to skip authorization. If
-  // undefined, IAP will not apply any special logic to OPTIONS requests.
+  // Configuration to allow HTTP `OPTIONS` calls to skip
+  // authentication and authorization. If undefined, IAP will not apply any
+  // special logic to `OPTIONS` requests.
   google.protobuf.BoolValue allow_http_options = 1;
 }
 
@@ -481,6 +483,23 @@ message OAuthSettings {
   // Note: IAP does not verify that the id token's hd claim matches this value
   // since access behavior is managed by IAM policies.
   google.protobuf.StringValue login_hint = 2;
+
+  // Optional. OAuth 2.0 client ID used in the OAuth flow.
+  // This allows for client sharing. The risks of client sharing
+  // are outlined here:
+  // https://cloud.google.com/iap/docs/sharing-oauth-clients#risks.
+  google.protobuf.StringValue client_id = 3
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Input only. OAuth secret paired with client ID.
+  google.protobuf.StringValue client_secret = 4 [
+    (google.api.field_behavior) = INPUT_ONLY,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
+  // Output only. OAuth secret SHA256 paired with client ID.
+  google.protobuf.StringValue client_secret_sha256 = 6
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Optional. List of client ids allowed to use IAP programmatically.
   repeated string programmatic_clients = 5

@@ -524,6 +524,12 @@ message AutotuningConfig {
 
     // Memory management for workloads.
     MEMORY = 4;
+
+    // No autotuning.
+    NONE = 5;
+
+    // Automatic selection of scenarios.
+    AUTO = 6;
   }
 
   // Optional. Scenarios for which tunings are applied.
@@ -555,6 +561,9 @@ enum Component {
   // Compute Engine image versions.
   ANACONDA = 5;
 
+  // Delta Lake.
+  DELTA = 20;
+
   // Docker
   DOCKER = 13;
 
@@ -573,8 +582,17 @@ enum Component {
   // Hudi.
   HUDI = 18;
 
+  // Iceberg.
+  ICEBERG = 19;
+
   // The Jupyter Notebook.
   JUPYTER = 1;
+
+  // The Jupyter Kernel Gateway.
+  JUPYTER_KERNEL_GATEWAY = 22;
+
+  // The Pig component.
+  PIG = 21;
 
   // The Presto query engine.
   PRESTO = 6;

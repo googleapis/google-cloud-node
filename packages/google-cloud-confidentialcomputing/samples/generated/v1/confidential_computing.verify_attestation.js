@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,6 +36,10 @@ function main(challenge, tpmAttestation) {
    *  Optional. An SEV-SNP Attestation Report.
    */
   // const sevSnpAttestation = {}
+  /**
+   *  Optional. An Nvidia attestation report for GPU and NVSwitch devices.
+   */
+  // const nvidiaAttestation = {}
   /**
    *  Required. The name of the Challenge whose nonce was used to generate the
    *  attestation, in the format `projects/* /locations/* /challenges/*`. The

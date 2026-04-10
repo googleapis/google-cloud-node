@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -70,6 +70,12 @@ function main(name, offer) {
    *  left empty for single currency accounts.
    */
   // const billingAccount = 'abc123'
+  /**
+   *  Optional. Price reference ID for the offer. Only for offers that require
+   *  additional price information. Used to guarantee that the pricing is
+   *  consistent between quoting the offer and placing the order.
+   */
+  // const priceReferenceId = 'abc123'
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;

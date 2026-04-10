@@ -1,0 +1,16 @@
+{
+  "name": "storage",
+  "name_pretty": "Google Cloud Storage",
+  "product_documentation": "https://cloud.google.com/storage",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage/latest",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559782",
+  "release_level": "stable",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/storage",
+  "api_id": "storage-api.googleapis.com",
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/gcs-team",
+  "api_shortname": "storage",
+  "library_type": "GAPIC_MANUAL"
+}

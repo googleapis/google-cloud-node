@@ -1,5 +1,42 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.9.1...gdchardwaremanagement-v0.10.0) (2026-03-18)
+
+
+### Features
+
+* [gdchardwaremanagement] Add `OFFLINE` state to Zone resources ([#7513](https://github.com/googleapis/google-cloud-node/issues/7513)) ([fdecca6](https://github.com/googleapis/google-cloud-node/commit/fdecca62c8a8138bea15df300063a9bdda83880f))
+
+## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.9.0...gdchardwaremanagement-v0.9.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.8.0...gdchardwaremanagement-v0.9.0) (2025-08-28)
+
+
+### Features
+
+* [gdchardwaremanagement] Added RequestOrderDateChange RPC - allows Customers to request date changes ([#6627](https://github.com/googleapis/google-cloud-node/issues/6627)) ([b92b2c7](https://github.com/googleapis/google-cloud-node/commit/b92b2c7d56645f28aabd7771cba76d8fd506ec0a))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.7.0...gdchardwaremanagement-v0.8.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6420](https://github.com/googleapis/google-cloud-node/issues/6420)) ([fe8d6cc](https://github.com/googleapis/google-cloud-node/commit/fe8d6cc157bea696790f2844fa7d410a481c79ed))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.6.0...gdchardwaremanagement-v0.7.0) (2025-06-03)
+
+
+### Features
+
+* Add protobufjs 2023 edition support ([b3bd921](https://github.com/googleapis/google-cloud-node/commit/b3bd921a30b15a632d8e8495b91723d314c23c71))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.5.1...gdchardwaremanagement-v0.6.0) (2025-05-09)
 
 

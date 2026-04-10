@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/config/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-config/$1
+    - source: /google/cloud/config/google-cloud-config-nodejs
+      dest: /owl-bot-staging/google-cloud-config
 
-api-name: infra-manager
+api-name: config

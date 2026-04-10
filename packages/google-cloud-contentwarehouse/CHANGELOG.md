@@ -1,5 +1,39 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.3.0...contentwarehouse-v2.4.0) (2026-03-04)
+
+
+### Features
+
+* [contentwarehouse] Added a field for enabling image and table annotation for layout parser processor ([#7319](https://github.com/googleapis/google-cloud-node/issues/7319)) ([7eb5628](https://github.com/googleapis/google-cloud-node/commit/7eb5628e05f7592c7c3857035f82e9f44d8d4ef4))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.2.0...contentwarehouse-v2.3.0) (2025-10-13)
+
+
+### Features
+
+* [contentwarehouse] Added new messages `EntityValidationOutput` and `EntitiesRevision` ([#6797](https://github.com/googleapis/google-cloud-node/issues/6797)) ([4816238](https://github.com/googleapis/google-cloud-node/commit/4816238881c50b1174907d1b17b8ece52a689bd0))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.1.0...contentwarehouse-v2.2.0) (2025-08-21)
+
+
+### Features
+
+* [contentwarehouse] Added config options for derived fields and signature detection. Some annotation changes changes to mark fields explicitly output only (no changes in semantics just readability) ([#6608](https://github.com/googleapis/google-cloud-node/issues/6608)) ([dab8cb9](https://github.com/googleapis/google-cloud-node/commit/dab8cb9a0b0b9629a899c95c2699c276c23a2c93))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.0.1...contentwarehouse-v2.1.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.0.0...contentwarehouse-v2.0.1) (2025-03-19)
 
 

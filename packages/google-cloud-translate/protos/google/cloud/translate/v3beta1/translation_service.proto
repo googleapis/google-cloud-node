@@ -23,7 +23,6 @@ import "google/api/resource.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/timestamp.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Translate.V3Beta1";
 option go_package = "cloud.google.com/go/translation/apiv3beta1/translationpb;translationpb";
 option java_multiple_files = true;
@@ -174,6 +173,14 @@ service TranslationService {
       metadata_type: "DeleteGlossaryMetadata"
     };
   }
+
+  // Refines the input translated text to improve the quality.
+  rpc RefineText(RefineTextRequest) returns (RefineTextResponse) {
+    option (google.api.http) = {
+      post: "/v3beta1/{parent=projects/*/locations/*}:refineText"
+      body: "*"
+    };
+  }
 }
 
 // Configures which glossary should be used for a specific target language,
@@ -186,6 +193,11 @@ message TranslateTextGlossaryConfig {
   // Optional. Indicates match is case-insensitive.
   // Default value is false if missing.
   bool ignore_case = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If set to true, the glossary will be used for contextual
+  // translation.
+  bool contextual_translation_enabled = 4
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The request message for synchronous translation.
@@ -202,13 +214,15 @@ message TranslateTextRequest {
 
   // Optional. The BCP-47 language code of the input text if
   // known, for example, "en-US" or "sr-Latn". Supported language codes are
-  // listed in Language Support. If the source language isn't specified, the API
-  // attempts to identify the source language automatically and returns the
-  // source language within the response.
+  // listed in [Language
+  // Support](https://cloud.google.com/translate/docs/languages). If the source
+  // language isn't specified, the API attempts to identify the source language
+  // automatically and returns the source language within the response.
   string source_language_code = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. The BCP-47 language code to use for translation of the input
-  // text, set to one of the language codes listed in Language Support.
+  // text, set to one of the language codes listed in [Language
+  // Support](https://cloud.google.com/translate/docs/languages).
   string target_language_code = 5 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Project or location to make a call. Must refer to a caller's
@@ -683,18 +697,25 @@ message TranslateDocumentRequest {
   //
   // Models and glossaries must be within the same region (have the same
   // location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
-  string parent = 1 [(google.api.field_behavior) = REQUIRED];
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "locations.googleapis.com/Location"
+    }
+  ];
 
   // Optional. The BCP-47 language code of the input document if known, for
   // example, "en-US" or "sr-Latn". Supported language codes are listed in
-  // Language Support. If the source language isn't specified, the API attempts
-  // to identify the source language automatically and returns the source
-  // language within the response. Source language must be specified if the
-  // request contains a glossary or a custom model.
+  // [Language Support](https://cloud.google.com/translate/docs/languages). If
+  // the source language isn't specified, the API attempts to identify the
+  // source language automatically and returns the source language within the
+  // response. Source language must be specified if the request contains a
+  // glossary or a custom model.
   string source_language_code = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. The BCP-47 language code to use for translation of the input
-  // document, set to one of the language codes listed in Language Support.
+  // document, set to one of the language codes listed in [Language
+  // Support](https://cloud.google.com/translate/docs/languages).
   string target_language_code = 3 [(google.api.field_behavior) = REQUIRED];
 
   // Required. Input configurations.
@@ -824,10 +845,14 @@ message BatchTranslateTextRequest {
     }
   ];
 
-  // Required. Source language code.
+  // Required. Source language code. Supported language codes are listed in
+  // [Language
+  // Support](https://cloud.google.com/translate/docs/languages).
   string source_language_code = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // Required. Specify up to 10 language codes here.
+  // Required. Specify up to 10 language codes here. Supported language codes
+  // are listed in [Language
+  // Support](https://cloud.google.com/translate/docs/languages).
   repeated string target_language_codes = 3
       [(google.api.field_behavior) = REQUIRED];
 
@@ -1227,7 +1252,9 @@ message BatchTranslateDocumentRequest {
   string source_language_code = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. The BCP-47 language code to use for translation of the input
-  // document. Specify up to 10 language codes here.
+  // document. Specify up to 10 language codes here. Supported language codes
+  // are listed in [Language
+  // Support](https://cloud.google.com/translate/docs/languages).
   repeated string target_language_codes = 3
       [(google.api.field_behavior) = REQUIRED];
 
@@ -1293,6 +1320,9 @@ message BatchTranslateDocumentRequest {
 
   // Optional. If true, enable auto rotation correction in DVS.
   bool enable_rotation_correction = 12 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If true, only native pdf pages will be translated.
+  bool pdf_native_only = 13 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Input configuration for BatchTranslateDocument request.
@@ -1483,4 +1513,49 @@ message BatchTranslateDocumentMetadata {
 
   // Time when the operation was submitted.
   google.protobuf.Timestamp submit_time = 10;
+}
+
+// A single refinement entry for RefineTextRequest.
+message RefinementEntry {
+  // Required. The source text to be refined.
+  string source_text = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The original translation of the source text.
+  string original_translation = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Request message for RefineText.
+message RefineTextRequest {
+  // Required. Project or location to make a call. Must refer to a caller's
+  // project.
+  //
+  // Format: `projects/{project-number-or-id}/locations/{location-id}`.
+  //
+  // For global calls, use `projects/{project-number-or-id}/locations/global` or
+  // `projects/{project-number-or-id}`.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "locations.googleapis.com/Location"
+    }
+  ];
+
+  // Required. The source texts and original translations in the source and
+  // target languages.
+  repeated RefinementEntry refinement_entries = 2
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The BCP-47 language code of the source text in the request, for
+  // example, "en-US".
+  string source_language_code = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The BCP-47 language code for translation output, for example,
+  // "zh-CN".
+  string target_language_code = 5 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response message for RefineText.
+message RefineTextResponse {
+  // The refined translations obtained from the original translations.
+  repeated string refined_translations = 1;
 }

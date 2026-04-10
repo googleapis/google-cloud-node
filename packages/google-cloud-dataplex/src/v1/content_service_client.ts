@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,21 +18,11 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  GrpcClientOptions,
-  PaginationCallback,
-  GaxCall,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
-import {Transform} from 'stream';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LocationsClient, LocationProtos} from 'google-gax';
+
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -43,7 +33,8 @@ import * as gapicConfig from './content_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  ContentService manages Notebook and SQL Scripts for Dataplex.
+ *  ContentService manages Notebook and SQL Scripts for Dataplex Universal
+ *  Catalog.
  * @class
  * @memberof v1
  */
@@ -112,41 +103,20 @@ export class ContentServiceClient {
    *     const client = new ContentServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ContentServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'dataplex.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -172,7 +142,7 @@ export class ContentServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -188,9 +158,13 @@ export class ContentServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -220,11 +194,17 @@ export class ContentServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataAssetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}'
+      ),
       dataAttributePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
       ),
       dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+      ),
+      dataProductPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataProducts/{data_product}'
       ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}'
@@ -247,17 +227,32 @@ export class ContentServiceClient {
       entryGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}'
       ),
+      entryLinkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}'
+      ),
       entryTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryTypes/{entry_type}'
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
       ),
+      glossaryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}'
+      ),
+      glossaryCategoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}'
+      ),
+      glossaryTermPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}'
+      ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
       ),
       lakePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}'
+      ),
+      metadataFeedPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}'
       ),
       metadataJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
@@ -268,14 +263,12 @@ export class ContentServiceClient {
       projectLocationLakeActionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}'
       ),
-      projectLocationLakeZoneActionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
-        ),
-      projectLocationLakeZoneAssetActionPathTemplate:
-        new this._gaxModule.PathTemplate(
-          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
-        ),
+      projectLocationLakeZoneActionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
+      ),
+      projectLocationLakeZoneAssetActionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
+      ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}'
       ),
@@ -287,290 +280,34 @@ export class ContentServiceClient {
       ),
     };
 
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      listContent: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'content'
-      ),
-    };
-
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1/{name=projects/*/locations/*}',
-        },
-        {
-          selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1/{name=projects/*}/locations',
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
-          get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',
-          additional_bindings: [
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
-            },
-            {
-              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
-          post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
-          post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-          body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
-              body: '*',
-            },
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/locations/*/operations/*}',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-        {
-          selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*/locations/*}/operations',
-          additional_bindings: [
-            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
-          ],
-        },
-      ];
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',body: '*',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
+      }];
     }
-    this.operationsClient = this._gaxModule
-      .lro(lroOptions)
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
 
-    this.descriptors.longrunning = {};
+    this.descriptors.longrunning = {
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.dataplex.v1.ContentService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.dataplex.v1.ContentService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -601,53 +338,11 @@ export class ContentServiceClient {
     // Put together the "service stub" for
     // google.cloud.dataplex.v1.ContentService.
     this.contentServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.dataplex.v1.ContentService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.dataplex.v1.ContentService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataplex.v1.ContentService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
-
-    // Iterate over each of the methods that the service provides
-    // and create an API call method for each.
-    const contentServiceStubMethods = [
-      'createContent',
-      'updateContent',
-      'deleteContent',
-      'getContent',
-      'getIamPolicy',
-      'setIamPolicy',
-      'testIamPermissions',
-      'listContent',
-    ];
-    for (const methodName of contentServiceStubMethods) {
-      const callPromise = this.contentServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
-          throw err;
-        }
-      );
-
-      const descriptor = this.descriptors.page[methodName] || undefined;
-      const apiCall = this._gaxModule.createApiCall(
-        callPromise,
-        this._defaults[methodName],
-        descriptor,
-        this._opts.fallback
-      );
-
-      this.innerApiCalls[methodName] = apiCall;
-    }
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     return this.contentServiceStub;
   }
@@ -658,14 +353,8 @@ export class ContentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataplex.googleapis.com';
   }
@@ -676,14 +365,8 @@ export class ContentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'dataplex.googleapis.com';
   }
@@ -714,7 +397,7 @@ export class ContentServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [];
   }
 
   getProjectId(): Promise<string>;
@@ -723,9 +406,8 @@ export class ContentServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -736,1094 +418,8 @@ export class ContentServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Create a content.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
-   * @param {google.cloud.dataplex.v1.Content} request.content
-   *   Required. Content resource.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Content|Content}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.create_content.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_CreateContent_async
-   */
-  createContent(
-    request?: protos.google.cloud.dataplex.v1.ICreateContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  createContent(
-    request: protos.google.cloud.dataplex.v1.ICreateContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.ICreateContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createContent(
-    request: protos.google.cloud.dataplex.v1.ICreateContentRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.ICreateContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createContent(
-    request?: protos.google.cloud.dataplex.v1.ICreateContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dataplex.v1.IContent,
-          | protos.google.cloud.dataplex.v1.ICreateContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.ICreateContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('createContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IContent,
-          | protos.google.cloud.dataplex.v1.ICreateContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('createContent response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .createContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IContent,
-          protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createContent response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Update a content. Only supports full resource update.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.
-   * @param {google.cloud.dataplex.v1.Content} request.content
-   *   Required. Update description.
-   *   Only fields specified in `update_mask` are updated.
-   * @param {boolean} [request.validateOnly]
-   *   Optional. Only validate the request, but do not perform mutations.
-   *   The default is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Content|Content}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.update_content.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_UpdateContent_async
-   */
-  updateContent(
-    request?: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateContent(
-    request: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IUpdateContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateContent(
-    request: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IUpdateContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateContent(
-    request?: protos.google.cloud.dataplex.v1.IUpdateContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dataplex.v1.IContent,
-          | protos.google.cloud.dataplex.v1.IUpdateContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IUpdateContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'content.name': request.content!.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('updateContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IContent,
-          | protos.google.cloud.dataplex.v1.IUpdateContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('updateContent response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .updateContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IContent,
-          protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateContent response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Delete a content.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the content:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/content/{content_id}
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.delete_content.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_DeleteContent_async
-   */
-  deleteContent(
-    request?: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  deleteContent(
-    request: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteContent(
-    request: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteContent(
-    request?: protos.google.cloud.dataplex.v1.IDeleteContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeleteContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('deleteContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.dataplex.v1.IDeleteContentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('deleteContent response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .deleteContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteContent response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Get a content resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the content:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/content/{content_id}
-   * @param {google.cloud.dataplex.v1.GetContentRequest.ContentView} [request.view]
-   *   Optional. Specify content view to make a partial request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Content|Content}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.get_content.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_GetContent_async
-   */
-  getContent(
-    request?: protos.google.cloud.dataplex.v1.IGetContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getContent(
-    request: protos.google.cloud.dataplex.v1.IGetContentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getContent(
-    request: protos.google.cloud.dataplex.v1.IGetContentRequest,
-    callback: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getContent(
-    request?: protos.google.cloud.dataplex.v1.IGetContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.dataplex.v1.IContent,
-          protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent,
-      protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('getContent request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.dataplex.v1.IContent,
-          protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('getContent response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .getContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.dataplex.v1.IContent,
-          protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getContent response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Gets the access control policy for a contentitem resource. A `NOT_FOUND`
-   * error is returned if the resource does not exist. An empty policy is
-   * returned if the resource exists but does not have a policy set on it.
-   *
-   * Caller must have Google IAM `dataplex.content.getIamPolicy` permission
-   * on the resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.GetPolicyOptions} request.options
-   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
-   *   `GetIamPolicy`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.get_iam_policy.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_GetIamPolicy_async
-   */
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request?: protos.google.iam.v1.IGetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('getIamPolicy response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .getIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Sets the access control policy on the specified contentitem resource.
-   * Replaces any existing policy.
-   *
-   * Caller must have Google IAM `dataplex.content.setIamPolicy` permission
-   * on the resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy is being specified.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {google.iam.v1.Policy} request.policy
-   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
-   *   the policy is limited to a few 10s of KB. An empty policy is a
-   *   valid policy but certain Cloud Platform services (such as Projects)
-   *   might reject them.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-   *   the fields in the mask will be modified. If no mask is provided, the
-   *   following default mask is used:
-   *
-   *   `paths: "bindings, etag"`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.set_iam_policy.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_SetIamPolicy_async
-   */
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
-    callback: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request?: protos.google.iam.v1.ISetIamPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.IPolicy,
-      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('setIamPolicy response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .setIamPolicy(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('setIamPolicy response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Returns the caller's permissions on a resource.
-   * If the resource does not exist, an empty set of
-   * permissions is returned (a `NOT_FOUND` error is not returned).
-   *
-   * A caller is not required to have Google IAM permission to make this
-   * request.
-   *
-   * Note: This operation is designed to be used for building permission-aware
-   * UIs and command-line tools, not for authorization checking. This operation
-   * may "fail open" without warning.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.resource
-   *   REQUIRED: The resource for which the policy detail is being requested.
-   *   See the operation documentation for the appropriate value for this field.
-   * @param {string[]} request.permissions
-   *   The set of permissions to check for the `resource`. Permissions with
-   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.test_iam_permissions.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_TestIamPermissions_async
-   */
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
-    callback: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.iam.v1.ITestIamPermissionsResponse,
-      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        resource: request.resource ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('testIamPermissions response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .testIamPermissions(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('testIamPermissions response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
 
-  /**
-   * List content.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of content to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 content will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListContent` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListContent` must match the call that provided the page
-   *   token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
-   *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   type = "NOTEBOOK"
-   *   type = "SQL_SCRIPT"
-   *
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Content|Content}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listContentAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listContent(
-    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent[],
-      protos.google.cloud.dataplex.v1.IListContentRequest | null,
-      protos.google.cloud.dataplex.v1.IListContentResponse,
-    ]
-  >;
-  listContent(
-    request: protos.google.cloud.dataplex.v1.IListContentRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListContentRequest,
-      protos.google.cloud.dataplex.v1.IListContentResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IContent
-    >
-  ): void;
-  listContent(
-    request: protos.google.cloud.dataplex.v1.IListContentRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListContentRequest,
-      protos.google.cloud.dataplex.v1.IListContentResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IContent
-    >
-  ): void;
-  listContent(
-    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListContentRequest,
-          | protos.google.cloud.dataplex.v1.IListContentResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IContent
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListContentRequest,
-      protos.google.cloud.dataplex.v1.IListContentResponse | null | undefined,
-      protos.google.cloud.dataplex.v1.IContent
-    >
-  ): Promise<
-    [
-      protos.google.cloud.dataplex.v1.IContent[],
-      protos.google.cloud.dataplex.v1.IListContentRequest | null,
-      protos.google.cloud.dataplex.v1.IListContentResponse,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
-    });
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListContentRequest,
-          | protos.google.cloud.dataplex.v1.IListContentResponse
-          | null
-          | undefined,
-          protos.google.cloud.dataplex.v1.IContent
-        >
-      | undefined = callback
-      ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listContent values %j', values);
-          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('listContent request %j', request);
-    return this.innerApiCalls
-      .listContent(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.dataplex.v1.IContent[],
-          protos.google.cloud.dataplex.v1.IListContentRequest | null,
-          protos.google.cloud.dataplex.v1.IListContentResponse,
-        ]) => {
-          this._log.info('listContent values %j', response);
-          return [response, input, output];
-        }
-      );
-  }
-
-  /**
-   * Equivalent to `listContent`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of content to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 content will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListContent` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListContent` must match the call that provided the page
-   *   token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
-   *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   type = "NOTEBOOK"
-   *   type = "SQL_SCRIPT"
-   *
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Content|Content} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listContentAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listContentStream(
-    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listContent'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('listContent stream %j', request);
-    return this.descriptors.page.listContent.createStream(
-      this.innerApiCalls.listContent as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listContent`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
-   * @param {number} [request.pageSize]
-   *   Optional. Maximum number of content to return. The service may return fewer
-   *   than this value. If unspecified, at most 10 content will be returned. The
-   *   maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} [request.pageToken]
-   *   Optional. Page token received from a previous `ListContent` call. Provide
-   *   this to retrieve the subsequent page. When paginating, all other parameters
-   *   provided to `ListContent` must match the call that provided the page
-   *   token.
-   * @param {string} [request.filter]
-   *   Optional. Filter request. Filters are case-sensitive.
-   *   The following formats are supported:
-   *
-   *   labels.key1 = "value1"
-   *   labels:key1
-   *   type = "NOTEBOOK"
-   *   type = "SQL_SCRIPT"
-   *
-   *   These restrictions can be coinjoined with AND, OR and NOT conjunctions.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.dataplex.v1.Content|Content}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/content_service.list_content.js</caption>
-   * region_tag:dataplex_v1_generated_ContentService_ListContent_async
-   */
-  listContentAsync(
-    request?: protos.google.cloud.dataplex.v1.IListContentRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.dataplex.v1.IContent> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listContent'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
-      throw err;
-    });
-    this._log.info('listContent iterate %j', request);
-    return this.descriptors.page.listContent.asyncIterate(
-      this.innerApiCalls['listContent'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.dataplex.v1.IContent>;
-  }
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1863,7 +459,7 @@ export class ContentServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1901,7 +497,7 @@ export class ContentServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-  /**
+/**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1946,20 +542,20 @@ export class ContentServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1996,13 +592,13 @@ export class ContentServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2036,7 +632,7 @@ export class ContentServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-  cancelOperation(
+   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2051,20 +647,20 @@ export class ContentServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2108,20 +704,20 @@ export class ContentServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
-    let options: gax.CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2137,7 +733,7 @@ export class ContentServiceClient {
    * @param {string} aspect_type
    * @returns {string} Resource name string.
    */
-  aspectTypePath(project: string, location: string, aspectType: string) {
+  aspectTypePath(project:string,location:string,aspectType:string) {
     return this.pathTemplates.aspectTypePathTemplate.render({
       project: project,
       location: location,
@@ -2153,8 +749,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .project;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).project;
   }
 
   /**
@@ -2165,8 +760,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .location;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).location;
   }
 
   /**
@@ -2177,8 +771,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the aspect_type.
    */
   matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
-      .aspect_type;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).aspect_type;
   }
 
   /**
@@ -2191,13 +784,7 @@ export class ContentServiceClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    asset: string
-  ) {
+  assetPath(project:string,location:string,lake:string,zone:string,asset:string) {
     return this.pathTemplates.assetPathTemplate.render({
       project: project,
       location: location,
@@ -2271,12 +858,7 @@ export class ContentServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(
-    project: string,
-    location: string,
-    lake: string,
-    content: string
-  ) {
+  contentPath(project:string,location:string,lake:string,content:string) {
     return this.pathTemplates.contentPathTemplate.render({
       project: project,
       location: location,
@@ -2330,6 +912,68 @@ export class ContentServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataAsset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @param {string} data_asset
+   * @returns {string} Resource name string.
+   */
+  dataAssetPath(project:string,location:string,dataProduct:string,dataAsset:string) {
+    return this.pathTemplates.dataAssetPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+      data_asset: dataAsset,
+    });
+  }
+
+  /**
+   * Parse the project from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).project;
+  }
+
+  /**
+   * Parse the location from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).location;
+  }
+
+  /**
+   * Parse the data_product from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_product;
+  }
+
+  /**
+   * Parse the data_asset from DataAsset resource.
+   *
+   * @param {string} dataAssetName
+   *   A fully-qualified path representing DataAsset resource.
+   * @returns {string} A string representing the data_asset.
+   */
+  matchDataAssetFromDataAssetName(dataAssetName: string) {
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_asset;
+  }
+
+  /**
    * Return a fully-qualified dataAttribute resource name string.
    *
    * @param {string} project
@@ -2338,12 +982,7 @@ export class ContentServiceClient {
    * @param {string} data_attribute_id
    * @returns {string} Resource name string.
    */
-  dataAttributePath(
-    project: string,
-    location: string,
-    dataTaxonomy: string,
-    dataAttributeId: string
-  ) {
+  dataAttributePath(project:string,location:string,dataTaxonomy:string,dataAttributeId:string) {
     return this.pathTemplates.dataAttributePathTemplate.render({
       project: project,
       location: location,
@@ -2360,8 +999,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .project;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).project;
   }
 
   /**
@@ -2372,8 +1010,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .location;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).location;
   }
 
   /**
@@ -2384,8 +1021,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the dataTaxonomy.
    */
   matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .dataTaxonomy;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).dataTaxonomy;
   }
 
   /**
@@ -2396,8 +1032,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the data_attribute_id.
    */
   matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
-      .data_attribute_id;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).data_attribute_id;
   }
 
   /**
@@ -2408,11 +1043,7 @@ export class ContentServiceClient {
    * @param {string} data_attribute_binding_id
    * @returns {string} Resource name string.
    */
-  dataAttributeBindingPath(
-    project: string,
-    location: string,
-    dataAttributeBindingId: string
-  ) {
+  dataAttributeBindingPath(project:string,location:string,dataAttributeBindingId:string) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.render({
       project: project,
       location: location,
@@ -2428,9 +1059,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).project;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).project;
   }
 
   /**
@@ -2441,9 +1070,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).location;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).location;
   }
 
   /**
@@ -2453,12 +1080,57 @@ export class ContentServiceClient {
    *   A fully-qualified path representing DataAttributeBinding resource.
    * @returns {string} A string representing the data_attribute_binding_id.
    */
-  matchDataAttributeBindingIdFromDataAttributeBindingName(
-    dataAttributeBindingName: string
-  ) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
-      dataAttributeBindingName
-    ).data_attribute_binding_id;
+  matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
+  }
+
+  /**
+   * Return a fully-qualified dataProduct resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_product
+   * @returns {string} Resource name string.
+   */
+  dataProductPath(project:string,location:string,dataProduct:string) {
+    return this.pathTemplates.dataProductPathTemplate.render({
+      project: project,
+      location: location,
+      data_product: dataProduct,
+    });
+  }
+
+  /**
+   * Parse the project from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).project;
+  }
+
+  /**
+   * Parse the location from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).location;
+  }
+
+  /**
+   * Parse the data_product from DataProduct resource.
+   *
+   * @param {string} dataProductName
+   *   A fully-qualified path representing DataProduct resource.
+   * @returns {string} A string representing the data_product.
+   */
+  matchDataProductFromDataProductName(dataProductName: string) {
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).data_product;
   }
 
   /**
@@ -2469,7 +1141,7 @@ export class ContentServiceClient {
    * @param {string} dataScan
    * @returns {string} Resource name string.
    */
-  dataScanPath(project: string, location: string, dataScan: string) {
+  dataScanPath(project:string,location:string,dataScan:string) {
     return this.pathTemplates.dataScanPathTemplate.render({
       project: project,
       location: location,
@@ -2519,12 +1191,7 @@ export class ContentServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  dataScanJobPath(
-    project: string,
-    location: string,
-    dataScan: string,
-    job: string
-  ) {
+  dataScanJobPath(project:string,location:string,dataScan:string,job:string) {
     return this.pathTemplates.dataScanJobPathTemplate.render({
       project: project,
       location: location,
@@ -2541,8 +1208,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .project;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).project;
   }
 
   /**
@@ -2553,8 +1219,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .location;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).location;
   }
 
   /**
@@ -2565,8 +1230,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the dataScan.
    */
   matchDataScanFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .dataScan;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).dataScan;
   }
 
   /**
@@ -2577,8 +1241,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
-      .job;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).job;
   }
 
   /**
@@ -2589,7 +1252,7 @@ export class ContentServiceClient {
    * @param {string} data_taxonomy_id
    * @returns {string} Resource name string.
    */
-  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
+  dataTaxonomyPath(project:string,location:string,dataTaxonomyId:string) {
     return this.pathTemplates.dataTaxonomyPathTemplate.render({
       project: project,
       location: location,
@@ -2605,8 +1268,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .project;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).project;
   }
 
   /**
@@ -2617,8 +1279,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .location;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).location;
   }
 
   /**
@@ -2629,8 +1290,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the data_taxonomy_id.
    */
   matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
-      .data_taxonomy_id;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).data_taxonomy_id;
   }
 
   /**
@@ -2641,11 +1301,7 @@ export class ContentServiceClient {
    * @param {string} encryption_config
    * @returns {string} Resource name string.
    */
-  encryptionConfigPath(
-    organization: string,
-    location: string,
-    encryptionConfig: string
-  ) {
+  encryptionConfigPath(organization:string,location:string,encryptionConfig:string) {
     return this.pathTemplates.encryptionConfigPathTemplate.render({
       organization: organization,
       location: location,
@@ -2661,9 +1317,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).organization;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).organization;
   }
 
   /**
@@ -2674,9 +1328,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).location;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).location;
   }
 
   /**
@@ -2687,9 +1339,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the encryption_config.
    */
   matchEncryptionConfigFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(
-      encryptionConfigName
-    ).encryption_config;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).encryption_config;
   }
 
   /**
@@ -2702,13 +1352,7 @@ export class ContentServiceClient {
    * @param {string} entity
    * @returns {string} Resource name string.
    */
-  entityPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    entity: string
-  ) {
+  entityPath(project:string,location:string,lake:string,zone:string,entity:string) {
     return this.pathTemplates.entityPathTemplate.render({
       project: project,
       location: location,
@@ -2782,12 +1426,7 @@ export class ContentServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  entryPath(
-    project: string,
-    location: string,
-    entryGroup: string,
-    entry: string
-  ) {
+  entryPath(project:string,location:string,entryGroup:string,entry:string) {
     return this.pathTemplates.entryPathTemplate.render({
       project: project,
       location: location,
@@ -2848,7 +1487,7 @@ export class ContentServiceClient {
    * @param {string} entry_group
    * @returns {string} Resource name string.
    */
-  entryGroupPath(project: string, location: string, entryGroup: string) {
+  entryGroupPath(project:string,location:string,entryGroup:string) {
     return this.pathTemplates.entryGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2864,8 +1503,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .project;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).project;
   }
 
   /**
@@ -2876,8 +1514,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .location;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).location;
   }
 
   /**
@@ -2888,8 +1525,69 @@ export class ContentServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
-      .entry_group;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).entry_group;
+  }
+
+  /**
+   * Return a fully-qualified entryLink resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entry_group
+   * @param {string} entry_link
+   * @returns {string} Resource name string.
+   */
+  entryLinkPath(project:string,location:string,entryGroup:string,entryLink:string) {
+    return this.pathTemplates.entryLinkPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
+      entry_link: entryLink,
+    });
+  }
+
+  /**
+   * Parse the project from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).project;
+  }
+
+  /**
+   * Parse the location from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).location;
+  }
+
+  /**
+   * Parse the entry_group from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_group;
+  }
+
+  /**
+   * Parse the entry_link from EntryLink resource.
+   *
+   * @param {string} entryLinkName
+   *   A fully-qualified path representing EntryLink resource.
+   * @returns {string} A string representing the entry_link.
+   */
+  matchEntryLinkFromEntryLinkName(entryLinkName: string) {
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_link;
   }
 
   /**
@@ -2900,7 +1598,7 @@ export class ContentServiceClient {
    * @param {string} entry_type
    * @returns {string} Resource name string.
    */
-  entryTypePath(project: string, location: string, entryType: string) {
+  entryTypePath(project:string,location:string,entryType:string) {
     return this.pathTemplates.entryTypePathTemplate.render({
       project: project,
       location: location,
@@ -2916,8 +1614,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .project;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).project;
   }
 
   /**
@@ -2928,8 +1625,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .location;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).location;
   }
 
   /**
@@ -2940,8 +1636,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the entry_type.
    */
   matchEntryTypeFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
-      .entry_type;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).entry_type;
   }
 
   /**
@@ -2953,12 +1648,7 @@ export class ContentServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(
-    project: string,
-    location: string,
-    lake: string,
-    environment: string
-  ) {
+  environmentPath(project:string,location:string,lake:string,environment:string) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -2975,8 +1665,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
   }
 
   /**
@@ -2987,8 +1676,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
   }
 
   /**
@@ -2999,8 +1687,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the lake.
    */
   matchLakeFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .lake;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).lake;
   }
 
   /**
@@ -3011,8 +1698,180 @@ export class ContentServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+  }
+
+  /**
+   * Return a fully-qualified glossary resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @returns {string} Resource name string.
+   */
+  glossaryPath(project:string,location:string,glossary:string) {
+    return this.pathTemplates.glossaryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+    });
+  }
+
+  /**
+   * Parse the project from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).project;
+  }
+
+  /**
+   * Parse the location from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).location;
+  }
+
+  /**
+   * Parse the glossary from Glossary resource.
+   *
+   * @param {string} glossaryName
+   *   A fully-qualified path representing Glossary resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryName(glossaryName: string) {
+    return this.pathTemplates.glossaryPathTemplate.match(glossaryName).glossary;
+  }
+
+  /**
+   * Return a fully-qualified glossaryCategory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_category
+   * @returns {string} Resource name string.
+   */
+  glossaryCategoryPath(project:string,location:string,glossary:string,glossaryCategory:string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_category: glossaryCategory,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary;
+  }
+
+  /**
+   * Parse the glossary_category from GlossaryCategory resource.
+   *
+   * @param {string} glossaryCategoryName
+   *   A fully-qualified path representing GlossaryCategory resource.
+   * @returns {string} A string representing the glossary_category.
+   */
+  matchGlossaryCategoryFromGlossaryCategoryName(glossaryCategoryName: string) {
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary_category;
+  }
+
+  /**
+   * Return a fully-qualified glossaryTerm resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_term
+   * @returns {string} Resource name string.
+   */
+  glossaryTermPath(project:string,location:string,glossary:string,glossaryTerm:string) {
+    return this.pathTemplates.glossaryTermPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_term: glossaryTerm,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).project;
+  }
+
+  /**
+   * Parse the location from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary;
+  }
+
+  /**
+   * Parse the glossary_term from GlossaryTerm resource.
+   *
+   * @param {string} glossaryTermName
+   *   A fully-qualified path representing GlossaryTerm resource.
+   * @returns {string} A string representing the glossary_term.
+   */
+  matchGlossaryTermFromGlossaryTermName(glossaryTermName: string) {
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary_term;
   }
 
   /**
@@ -3025,13 +1884,7 @@ export class ContentServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(
-    project: string,
-    location: string,
-    lake: string,
-    task: string,
-    job: string
-  ) {
+  jobPath(project:string,location:string,lake:string,task:string,job:string) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -3104,7 +1957,7 @@ export class ContentServiceClient {
    * @param {string} lake
    * @returns {string} Resource name string.
    */
-  lakePath(project: string, location: string, lake: string) {
+  lakePath(project:string,location:string,lake:string) {
     return this.pathTemplates.lakePathTemplate.render({
       project: project,
       location: location,
@@ -3146,6 +1999,55 @@ export class ContentServiceClient {
   }
 
   /**
+   * Return a fully-qualified metadataFeed resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_feed
+   * @returns {string} Resource name string.
+   */
+  metadataFeedPath(project:string,location:string,metadataFeed:string) {
+    return this.pathTemplates.metadataFeedPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_feed: metadataFeed,
+    });
+  }
+
+  /**
+   * Parse the project from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).project;
+  }
+
+  /**
+   * Parse the location from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).location;
+  }
+
+  /**
+   * Parse the metadata_feed from MetadataFeed resource.
+   *
+   * @param {string} metadataFeedName
+   *   A fully-qualified path representing MetadataFeed resource.
+   * @returns {string} A string representing the metadata_feed.
+   */
+  matchMetadataFeedFromMetadataFeedName(metadataFeedName: string) {
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).metadata_feed;
+  }
+
+  /**
    * Return a fully-qualified metadataJob resource name string.
    *
    * @param {string} project
@@ -3153,7 +2055,7 @@ export class ContentServiceClient {
    * @param {string} metadataJob
    * @returns {string} Resource name string.
    */
-  metadataJobPath(project: string, location: string, metadataJob: string) {
+  metadataJobPath(project:string,location:string,metadataJob:string) {
     return this.pathTemplates.metadataJobPathTemplate.render({
       project: project,
       location: location,
@@ -3169,8 +2071,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .project;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).project;
   }
 
   /**
@@ -3181,8 +2082,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .location;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).location;
   }
 
   /**
@@ -3193,8 +2093,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the metadataJob.
    */
   matchMetadataJobFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
-      .metadataJob;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).metadataJob;
   }
 
   /**
@@ -3208,14 +2107,7 @@ export class ContentServiceClient {
    * @param {string} partition
    * @returns {string} Resource name string.
    */
-  partitionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    entity: string,
-    partition: string
-  ) {
+  partitionPath(project:string,location:string,lake:string,zone:string,entity:string,partition:string) {
     return this.pathTemplates.partitionPathTemplate.render({
       project: project,
       location: location,
@@ -3234,8 +2126,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .project;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).project;
   }
 
   /**
@@ -3246,8 +2137,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .location;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).location;
   }
 
   /**
@@ -3291,8 +2181,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the partition.
    */
   matchPartitionFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName)
-      .partition;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName).partition;
   }
 
   /**
@@ -3304,12 +2193,7 @@ export class ContentServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    action: string
-  ) {
+  projectLocationLakeActionPath(project:string,location:string,lake:string,action:string) {
     return this.pathTemplates.projectLocationLakeActionPathTemplate.render({
       project: project,
       location: location,
@@ -3325,12 +2209,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).project;
+  matchProjectFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).project;
   }
 
   /**
@@ -3340,12 +2220,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).location;
+  matchLocationFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).location;
   }
 
   /**
@@ -3355,12 +2231,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).lake;
   }
 
   /**
@@ -3370,12 +2242,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeActionName(
-    projectLocationLakeActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
-      projectLocationLakeActionName
-    ).action;
+  matchActionFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).action;
   }
 
   /**
@@ -3388,13 +2256,7 @@ export class ContentServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    action: string
-  ) {
+  projectLocationLakeZoneActionPath(project:string,location:string,lake:string,zone:string,action:string) {
     return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.render({
       project: project,
       location: location,
@@ -3411,12 +2273,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).project;
+  matchProjectFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).project;
   }
 
   /**
@@ -3426,12 +2284,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).location;
+  matchLocationFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).location;
   }
 
   /**
@@ -3441,12 +2295,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).lake;
   }
 
   /**
@@ -3456,12 +2306,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).zone;
+  matchZoneFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).zone;
   }
 
   /**
@@ -3471,12 +2317,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneActionName(
-    projectLocationLakeZoneActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
-      projectLocationLakeZoneActionName
-    ).action;
+  matchActionFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).action;
   }
 
   /**
@@ -3490,24 +2332,15 @@ export class ContentServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneAssetActionPath(
-    project: string,
-    location: string,
-    lake: string,
-    zone: string,
-    asset: string,
-    action: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render(
-      {
-        project: project,
-        location: location,
-        lake: lake,
-        zone: zone,
-        asset: asset,
-        action: action,
-      }
-    );
+  projectLocationLakeZoneAssetActionPath(project:string,location:string,lake:string,zone:string,asset:string,action:string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render({
+      project: project,
+      location: location,
+      lake: lake,
+      zone: zone,
+      asset: asset,
+      action: action,
+    });
   }
 
   /**
@@ -3517,12 +2350,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).project;
+  matchProjectFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).project;
   }
 
   /**
@@ -3532,12 +2361,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).location;
+  matchLocationFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).location;
   }
 
   /**
@@ -3547,12 +2372,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).lake;
+  matchLakeFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).lake;
   }
 
   /**
@@ -3562,12 +2383,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).zone;
+  matchZoneFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).zone;
   }
 
   /**
@@ -3577,12 +2394,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).asset;
+  matchAssetFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).asset;
   }
 
   /**
@@ -3592,12 +2405,8 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneAssetActionName(
-    projectLocationLakeZoneAssetActionName: string
-  ) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
-      projectLocationLakeZoneAssetActionName
-    ).action;
+  matchActionFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).action;
   }
 
   /**
@@ -3610,13 +2419,7 @@ export class ContentServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(
-    project: string,
-    location: string,
-    lake: string,
-    environment: string,
-    session: string
-  ) {
+  sessionPath(project:string,location:string,lake:string,environment:string,session:string) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -3667,8 +2470,7 @@ export class ContentServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromSessionName(sessionName: string) {
-    return this.pathTemplates.sessionPathTemplate.match(sessionName)
-      .environment;
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).environment;
   }
 
   /**
@@ -3691,7 +2493,7 @@ export class ContentServiceClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(project: string, location: string, lake: string, task: string) {
+  taskPath(project:string,location:string,lake:string,task:string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -3753,7 +2555,7 @@ export class ContentServiceClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project: string, location: string, lake: string, zone: string) {
+  zonePath(project:string,location:string,lake:string,zone:string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -3818,9 +2620,7 @@ export class ContentServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
         void this.operationsClient.close();
       });
     }

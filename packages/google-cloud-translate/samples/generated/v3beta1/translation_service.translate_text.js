@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -43,14 +43,16 @@ function main(contents, targetLanguageCode, parent) {
   /**
    *  Optional. The BCP-47 language code of the input text if
    *  known, for example, "en-US" or "sr-Latn". Supported language codes are
-   *  listed in Language Support. If the source language isn't specified, the API
-   *  attempts to identify the source language automatically and returns the
-   *  source language within the response.
+   *  listed in Language
+   *  Support (https://cloud.google.com/translate/docs/languages). If the source
+   *  language isn't specified, the API attempts to identify the source language
+   *  automatically and returns the source language within the response.
    */
   // const sourceLanguageCode = 'abc123'
   /**
    *  Required. The BCP-47 language code to use for translation of the input
-   *  text, set to one of the language codes listed in Language Support.
+   *  text, set to one of the language codes listed in Language
+   *  Support (https://cloud.google.com/translate/docs/languages).
    */
   // const targetLanguageCode = 'abc123'
   /**

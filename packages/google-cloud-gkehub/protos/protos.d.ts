@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2917,6 +2917,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -3168,7 +3171,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -3199,7 +3202,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -4338,7 +4341,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -4354,7 +4357,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.
@@ -5286,9 +5289,6 @@ export namespace google {
                         /** ConfigSync metricsGcpServiceAccountEmail. */
                         public metricsGcpServiceAccountEmail: string;
 
-                        /** ConfigSync _enabled. */
-                        public _enabled?: "enabled";
-
                         /**
                          * Creates a new ConfigSync instance using the specified properties.
                          * @param [properties] Properties to set
@@ -5675,12 +5675,6 @@ export namespace google {
 
                         /** PolicyController logDeniesEnabled. */
                         public logDeniesEnabled: boolean;
-
-                        /** PolicyController _templateLibraryInstalled. */
-                        public _templateLibraryInstalled?: "templateLibraryInstalled";
-
-                        /** PolicyController _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
 
                         /**
                          * Creates a new PolicyController instance using the specified properties.
@@ -8248,12 +8242,6 @@ export namespace google {
                         /** PolicyController mutationEnabled. */
                         public mutationEnabled: boolean;
 
-                        /** PolicyController _templateLibraryInstalled. */
-                        public _templateLibraryInstalled?: "templateLibraryInstalled";
-
-                        /** PolicyController _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
-
                         /**
                          * Creates a new PolicyController instance using the specified properties.
                          * @param [properties] Properties to set
@@ -10442,6 +10430,9 @@ export namespace google {
 
                         /** MembershipState hierarchyControllerState */
                         hierarchyControllerState?: (google.cloud.gkehub.configmanagement.v1beta.IHierarchyControllerState|null);
+
+                        /** MembershipState kubernetesApiServerVersion */
+                        kubernetesApiServerVersion?: (string|null);
                     }
 
                     /** Represents a MembershipState. */
@@ -10473,6 +10464,9 @@ export namespace google {
 
                         /** MembershipState hierarchyControllerState. */
                         public hierarchyControllerState?: (google.cloud.gkehub.configmanagement.v1beta.IHierarchyControllerState|null);
+
+                        /** MembershipState kubernetesApiServerVersion. */
+                        public kubernetesApiServerVersion: string;
 
                         /**
                          * Creates a new MembershipState instance using the specified properties.
@@ -10715,6 +10709,9 @@ export namespace google {
 
                         /** ConfigSync stopSyncing */
                         stopSyncing?: (boolean|null);
+
+                        /** ConfigSync deploymentOverrides */
+                        deploymentOverrides?: (google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride[]|null);
                     }
 
                     /** Represents a ConfigSync. */
@@ -10744,8 +10741,8 @@ export namespace google {
                         /** ConfigSync stopSyncing. */
                         public stopSyncing: boolean;
 
-                        /** ConfigSync _enabled. */
-                        public _enabled?: "enabled";
+                        /** ConfigSync deploymentOverrides. */
+                        public deploymentOverrides: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride[];
 
                         /**
                          * Creates a new ConfigSync instance using the specified properties.
@@ -10819,6 +10816,236 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ConfigSync
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeploymentOverride. */
+                    interface IDeploymentOverride {
+
+                        /** DeploymentOverride deploymentName */
+                        deploymentName?: (string|null);
+
+                        /** DeploymentOverride deploymentNamespace */
+                        deploymentNamespace?: (string|null);
+
+                        /** DeploymentOverride containers */
+                        containers?: (google.cloud.gkehub.configmanagement.v1beta.IContainerOverride[]|null);
+                    }
+
+                    /** Represents a DeploymentOverride. */
+                    class DeploymentOverride implements IDeploymentOverride {
+
+                        /**
+                         * Constructs a new DeploymentOverride.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride);
+
+                        /** DeploymentOverride deploymentName. */
+                        public deploymentName: string;
+
+                        /** DeploymentOverride deploymentNamespace. */
+                        public deploymentNamespace: string;
+
+                        /** DeploymentOverride containers. */
+                        public containers: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride[];
+
+                        /**
+                         * Creates a new DeploymentOverride instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeploymentOverride instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Encodes the specified DeploymentOverride message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.verify|verify} messages.
+                         * @param message DeploymentOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeploymentOverride message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride.verify|verify} messages.
+                         * @param message DeploymentOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.configmanagement.v1beta.IDeploymentOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeploymentOverride message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeploymentOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Decodes a DeploymentOverride message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeploymentOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Verifies a DeploymentOverride message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeploymentOverride message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeploymentOverride
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride;
+
+                        /**
+                         * Creates a plain object from a DeploymentOverride message. Also converts values to other types if specified.
+                         * @param message DeploymentOverride
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.configmanagement.v1beta.DeploymentOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeploymentOverride to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeploymentOverride
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ContainerOverride. */
+                    interface IContainerOverride {
+
+                        /** ContainerOverride containerName */
+                        containerName?: (string|null);
+
+                        /** ContainerOverride cpuRequest */
+                        cpuRequest?: (string|null);
+
+                        /** ContainerOverride cpuLimit */
+                        cpuLimit?: (string|null);
+
+                        /** ContainerOverride memoryRequest */
+                        memoryRequest?: (string|null);
+
+                        /** ContainerOverride memoryLimit */
+                        memoryLimit?: (string|null);
+                    }
+
+                    /** Represents a ContainerOverride. */
+                    class ContainerOverride implements IContainerOverride {
+
+                        /**
+                         * Constructs a new ContainerOverride.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride);
+
+                        /** ContainerOverride containerName. */
+                        public containerName: string;
+
+                        /** ContainerOverride cpuRequest. */
+                        public cpuRequest: string;
+
+                        /** ContainerOverride cpuLimit. */
+                        public cpuLimit: string;
+
+                        /** ContainerOverride memoryRequest. */
+                        public memoryRequest: string;
+
+                        /** ContainerOverride memoryLimit. */
+                        public memoryLimit: string;
+
+                        /**
+                         * Creates a new ContainerOverride instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ContainerOverride instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Encodes the specified ContainerOverride message. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.verify|verify} messages.
+                         * @param message ContainerOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ContainerOverride message, length delimited. Does not implicitly {@link google.cloud.gkehub.configmanagement.v1beta.ContainerOverride.verify|verify} messages.
+                         * @param message ContainerOverride message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.configmanagement.v1beta.IContainerOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ContainerOverride message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ContainerOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Decodes a ContainerOverride message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ContainerOverride
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Verifies a ContainerOverride message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ContainerOverride message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ContainerOverride
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.configmanagement.v1beta.ContainerOverride;
+
+                        /**
+                         * Creates a plain object from a ContainerOverride message. Also converts values to other types if specified.
+                         * @param message ContainerOverride
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.configmanagement.v1beta.ContainerOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ContainerOverride to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ContainerOverride
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -11151,12 +11378,6 @@ export namespace google {
 
                         /** PolicyController updateTime. */
                         public updateTime?: (google.protobuf.ITimestamp|null);
-
-                        /** PolicyController _templateLibraryInstalled. */
-                        public _templateLibraryInstalled?: "templateLibraryInstalled";
-
-                        /** PolicyController _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
 
                         /**
                          * Creates a new PolicyController instance using the specified properties.
@@ -13771,6 +13992,15 @@ export namespace google {
 
                     /** Feature deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Feature scopeSpecs */
+                    scopeSpecs?: ({ [k: string]: google.cloud.gkehub.v1.IScopeFeatureSpec }|null);
+
+                    /** Feature scopeStates */
+                    scopeStates?: ({ [k: string]: google.cloud.gkehub.v1.IScopeFeatureState }|null);
+
+                    /** Feature unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a Feature. */
@@ -13811,6 +14041,15 @@ export namespace google {
 
                     /** Feature deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Feature scopeSpecs. */
+                    public scopeSpecs: { [k: string]: google.cloud.gkehub.v1.IScopeFeatureSpec };
+
+                    /** Feature scopeStates. */
+                    public scopeStates: { [k: string]: google.cloud.gkehub.v1.IScopeFeatureState };
+
+                    /** Feature unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new Feature instance using the specified properties.
@@ -14223,6 +14462,9 @@ export namespace google {
                 /** Properties of a CommonFeatureState. */
                 interface ICommonFeatureState {
 
+                    /** CommonFeatureState rbacrolebindingactuation */
+                    rbacrolebindingactuation?: (google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureState|null);
+
                     /** CommonFeatureState state */
                     state?: (google.cloud.gkehub.v1.IFeatureState|null);
                 }
@@ -14236,8 +14478,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.gkehub.v1.ICommonFeatureState);
 
+                    /** CommonFeatureState rbacrolebindingactuation. */
+                    public rbacrolebindingactuation?: (google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureState|null);
+
                     /** CommonFeatureState state. */
                     public state?: (google.cloud.gkehub.v1.IFeatureState|null);
+
+                    /** CommonFeatureState featureState. */
+                    public featureState?: "rbacrolebindingactuation";
 
                     /**
                      * Creates a new CommonFeatureState instance using the specified properties.
@@ -14311,6 +14559,194 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CommonFeatureState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ScopeFeatureSpec. */
+                interface IScopeFeatureSpec {
+                }
+
+                /** Represents a ScopeFeatureSpec. */
+                class ScopeFeatureSpec implements IScopeFeatureSpec {
+
+                    /**
+                     * Constructs a new ScopeFeatureSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IScopeFeatureSpec);
+
+                    /**
+                     * Creates a new ScopeFeatureSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ScopeFeatureSpec instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IScopeFeatureSpec): google.cloud.gkehub.v1.ScopeFeatureSpec;
+
+                    /**
+                     * Encodes the specified ScopeFeatureSpec message. Does not implicitly {@link google.cloud.gkehub.v1.ScopeFeatureSpec.verify|verify} messages.
+                     * @param message ScopeFeatureSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IScopeFeatureSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ScopeFeatureSpec message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ScopeFeatureSpec.verify|verify} messages.
+                     * @param message ScopeFeatureSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IScopeFeatureSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ScopeFeatureSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ScopeFeatureSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ScopeFeatureSpec;
+
+                    /**
+                     * Decodes a ScopeFeatureSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ScopeFeatureSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ScopeFeatureSpec;
+
+                    /**
+                     * Verifies a ScopeFeatureSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ScopeFeatureSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ScopeFeatureSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ScopeFeatureSpec;
+
+                    /**
+                     * Creates a plain object from a ScopeFeatureSpec message. Also converts values to other types if specified.
+                     * @param message ScopeFeatureSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ScopeFeatureSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ScopeFeatureSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScopeFeatureSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ScopeFeatureState. */
+                interface IScopeFeatureState {
+
+                    /** ScopeFeatureState state */
+                    state?: (google.cloud.gkehub.v1.IFeatureState|null);
+                }
+
+                /** Represents a ScopeFeatureState. */
+                class ScopeFeatureState implements IScopeFeatureState {
+
+                    /**
+                     * Constructs a new ScopeFeatureState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IScopeFeatureState);
+
+                    /** ScopeFeatureState state. */
+                    public state?: (google.cloud.gkehub.v1.IFeatureState|null);
+
+                    /**
+                     * Creates a new ScopeFeatureState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ScopeFeatureState instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IScopeFeatureState): google.cloud.gkehub.v1.ScopeFeatureState;
+
+                    /**
+                     * Encodes the specified ScopeFeatureState message. Does not implicitly {@link google.cloud.gkehub.v1.ScopeFeatureState.verify|verify} messages.
+                     * @param message ScopeFeatureState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IScopeFeatureState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ScopeFeatureState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ScopeFeatureState.verify|verify} messages.
+                     * @param message ScopeFeatureState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IScopeFeatureState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ScopeFeatureState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ScopeFeatureState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ScopeFeatureState;
+
+                    /**
+                     * Decodes a ScopeFeatureState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ScopeFeatureState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ScopeFeatureState;
+
+                    /**
+                     * Verifies a ScopeFeatureState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ScopeFeatureState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ScopeFeatureState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ScopeFeatureState;
+
+                    /**
+                     * Creates a plain object from a ScopeFeatureState message. Also converts values to other types if specified.
+                     * @param message ScopeFeatureState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ScopeFeatureState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ScopeFeatureState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScopeFeatureState
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14521,6 +14957,2045 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Fleet. */
+                interface IFleet {
+
+                    /** Fleet name */
+                    name?: (string|null);
+
+                    /** Fleet displayName */
+                    displayName?: (string|null);
+
+                    /** Fleet createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Fleet updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Fleet deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Fleet uid */
+                    uid?: (string|null);
+
+                    /** Fleet state */
+                    state?: (google.cloud.gkehub.v1.IFleetLifecycleState|null);
+
+                    /** Fleet defaultClusterConfig */
+                    defaultClusterConfig?: (google.cloud.gkehub.v1.IDefaultClusterConfig|null);
+
+                    /** Fleet labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a Fleet. */
+                class Fleet implements IFleet {
+
+                    /**
+                     * Constructs a new Fleet.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IFleet);
+
+                    /** Fleet name. */
+                    public name: string;
+
+                    /** Fleet displayName. */
+                    public displayName: string;
+
+                    /** Fleet createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Fleet updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Fleet deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Fleet uid. */
+                    public uid: string;
+
+                    /** Fleet state. */
+                    public state?: (google.cloud.gkehub.v1.IFleetLifecycleState|null);
+
+                    /** Fleet defaultClusterConfig. */
+                    public defaultClusterConfig?: (google.cloud.gkehub.v1.IDefaultClusterConfig|null);
+
+                    /** Fleet labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new Fleet instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Fleet instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IFleet): google.cloud.gkehub.v1.Fleet;
+
+                    /**
+                     * Encodes the specified Fleet message. Does not implicitly {@link google.cloud.gkehub.v1.Fleet.verify|verify} messages.
+                     * @param message Fleet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Fleet message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.Fleet.verify|verify} messages.
+                     * @param message Fleet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IFleet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Fleet message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Fleet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.Fleet;
+
+                    /**
+                     * Decodes a Fleet message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Fleet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.Fleet;
+
+                    /**
+                     * Verifies a Fleet message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Fleet message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Fleet
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.Fleet;
+
+                    /**
+                     * Creates a plain object from a Fleet message. Also converts values to other types if specified.
+                     * @param message Fleet
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.Fleet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Fleet to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Fleet
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DefaultClusterConfig. */
+                interface IDefaultClusterConfig {
+
+                    /** DefaultClusterConfig securityPostureConfig */
+                    securityPostureConfig?: (google.cloud.gkehub.v1.ISecurityPostureConfig|null);
+
+                    /** DefaultClusterConfig binaryAuthorizationConfig */
+                    binaryAuthorizationConfig?: (google.cloud.gkehub.v1.IBinaryAuthorizationConfig|null);
+
+                    /** DefaultClusterConfig compliancePostureConfig */
+                    compliancePostureConfig?: (google.cloud.gkehub.v1.ICompliancePostureConfig|null);
+                }
+
+                /** Represents a DefaultClusterConfig. */
+                class DefaultClusterConfig implements IDefaultClusterConfig {
+
+                    /**
+                     * Constructs a new DefaultClusterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IDefaultClusterConfig);
+
+                    /** DefaultClusterConfig securityPostureConfig. */
+                    public securityPostureConfig?: (google.cloud.gkehub.v1.ISecurityPostureConfig|null);
+
+                    /** DefaultClusterConfig binaryAuthorizationConfig. */
+                    public binaryAuthorizationConfig?: (google.cloud.gkehub.v1.IBinaryAuthorizationConfig|null);
+
+                    /** DefaultClusterConfig compliancePostureConfig. */
+                    public compliancePostureConfig?: (google.cloud.gkehub.v1.ICompliancePostureConfig|null);
+
+                    /**
+                     * Creates a new DefaultClusterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DefaultClusterConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IDefaultClusterConfig): google.cloud.gkehub.v1.DefaultClusterConfig;
+
+                    /**
+                     * Encodes the specified DefaultClusterConfig message. Does not implicitly {@link google.cloud.gkehub.v1.DefaultClusterConfig.verify|verify} messages.
+                     * @param message DefaultClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IDefaultClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DefaultClusterConfig message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.DefaultClusterConfig.verify|verify} messages.
+                     * @param message DefaultClusterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IDefaultClusterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DefaultClusterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DefaultClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.DefaultClusterConfig;
+
+                    /**
+                     * Decodes a DefaultClusterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DefaultClusterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.DefaultClusterConfig;
+
+                    /**
+                     * Verifies a DefaultClusterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DefaultClusterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DefaultClusterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.DefaultClusterConfig;
+
+                    /**
+                     * Creates a plain object from a DefaultClusterConfig message. Also converts values to other types if specified.
+                     * @param message DefaultClusterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.DefaultClusterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DefaultClusterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DefaultClusterConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecurityPostureConfig. */
+                interface ISecurityPostureConfig {
+
+                    /** SecurityPostureConfig mode */
+                    mode?: (google.cloud.gkehub.v1.SecurityPostureConfig.Mode|keyof typeof google.cloud.gkehub.v1.SecurityPostureConfig.Mode|null);
+
+                    /** SecurityPostureConfig vulnerabilityMode */
+                    vulnerabilityMode?: (google.cloud.gkehub.v1.SecurityPostureConfig.VulnerabilityMode|keyof typeof google.cloud.gkehub.v1.SecurityPostureConfig.VulnerabilityMode|null);
+                }
+
+                /** Represents a SecurityPostureConfig. */
+                class SecurityPostureConfig implements ISecurityPostureConfig {
+
+                    /**
+                     * Constructs a new SecurityPostureConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ISecurityPostureConfig);
+
+                    /** SecurityPostureConfig mode. */
+                    public mode: (google.cloud.gkehub.v1.SecurityPostureConfig.Mode|keyof typeof google.cloud.gkehub.v1.SecurityPostureConfig.Mode);
+
+                    /** SecurityPostureConfig vulnerabilityMode. */
+                    public vulnerabilityMode: (google.cloud.gkehub.v1.SecurityPostureConfig.VulnerabilityMode|keyof typeof google.cloud.gkehub.v1.SecurityPostureConfig.VulnerabilityMode);
+
+                    /**
+                     * Creates a new SecurityPostureConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecurityPostureConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ISecurityPostureConfig): google.cloud.gkehub.v1.SecurityPostureConfig;
+
+                    /**
+                     * Encodes the specified SecurityPostureConfig message. Does not implicitly {@link google.cloud.gkehub.v1.SecurityPostureConfig.verify|verify} messages.
+                     * @param message SecurityPostureConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ISecurityPostureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecurityPostureConfig message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.SecurityPostureConfig.verify|verify} messages.
+                     * @param message SecurityPostureConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ISecurityPostureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecurityPostureConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecurityPostureConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.SecurityPostureConfig;
+
+                    /**
+                     * Decodes a SecurityPostureConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecurityPostureConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.SecurityPostureConfig;
+
+                    /**
+                     * Verifies a SecurityPostureConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecurityPostureConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecurityPostureConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.SecurityPostureConfig;
+
+                    /**
+                     * Creates a plain object from a SecurityPostureConfig message. Also converts values to other types if specified.
+                     * @param message SecurityPostureConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.SecurityPostureConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecurityPostureConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecurityPostureConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SecurityPostureConfig {
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        BASIC = 2,
+                        ENTERPRISE = 3
+                    }
+
+                    /** VulnerabilityMode enum. */
+                    enum VulnerabilityMode {
+                        VULNERABILITY_MODE_UNSPECIFIED = 0,
+                        VULNERABILITY_DISABLED = 1,
+                        VULNERABILITY_BASIC = 2,
+                        VULNERABILITY_ENTERPRISE = 3
+                    }
+                }
+
+                /** Properties of a BinaryAuthorizationConfig. */
+                interface IBinaryAuthorizationConfig {
+
+                    /** BinaryAuthorizationConfig evaluationMode */
+                    evaluationMode?: (google.cloud.gkehub.v1.BinaryAuthorizationConfig.EvaluationMode|keyof typeof google.cloud.gkehub.v1.BinaryAuthorizationConfig.EvaluationMode|null);
+
+                    /** BinaryAuthorizationConfig policyBindings */
+                    policyBindings?: (google.cloud.gkehub.v1.BinaryAuthorizationConfig.IPolicyBinding[]|null);
+                }
+
+                /** Represents a BinaryAuthorizationConfig. */
+                class BinaryAuthorizationConfig implements IBinaryAuthorizationConfig {
+
+                    /**
+                     * Constructs a new BinaryAuthorizationConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IBinaryAuthorizationConfig);
+
+                    /** BinaryAuthorizationConfig evaluationMode. */
+                    public evaluationMode: (google.cloud.gkehub.v1.BinaryAuthorizationConfig.EvaluationMode|keyof typeof google.cloud.gkehub.v1.BinaryAuthorizationConfig.EvaluationMode);
+
+                    /** BinaryAuthorizationConfig policyBindings. */
+                    public policyBindings: google.cloud.gkehub.v1.BinaryAuthorizationConfig.IPolicyBinding[];
+
+                    /**
+                     * Creates a new BinaryAuthorizationConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BinaryAuthorizationConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IBinaryAuthorizationConfig): google.cloud.gkehub.v1.BinaryAuthorizationConfig;
+
+                    /**
+                     * Encodes the specified BinaryAuthorizationConfig message. Does not implicitly {@link google.cloud.gkehub.v1.BinaryAuthorizationConfig.verify|verify} messages.
+                     * @param message BinaryAuthorizationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IBinaryAuthorizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BinaryAuthorizationConfig message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.BinaryAuthorizationConfig.verify|verify} messages.
+                     * @param message BinaryAuthorizationConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IBinaryAuthorizationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BinaryAuthorizationConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BinaryAuthorizationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.BinaryAuthorizationConfig;
+
+                    /**
+                     * Decodes a BinaryAuthorizationConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BinaryAuthorizationConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.BinaryAuthorizationConfig;
+
+                    /**
+                     * Verifies a BinaryAuthorizationConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BinaryAuthorizationConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BinaryAuthorizationConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.BinaryAuthorizationConfig;
+
+                    /**
+                     * Creates a plain object from a BinaryAuthorizationConfig message. Also converts values to other types if specified.
+                     * @param message BinaryAuthorizationConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.BinaryAuthorizationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BinaryAuthorizationConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BinaryAuthorizationConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BinaryAuthorizationConfig {
+
+                    /** Properties of a PolicyBinding. */
+                    interface IPolicyBinding {
+
+                        /** PolicyBinding name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a PolicyBinding. */
+                    class PolicyBinding implements IPolicyBinding {
+
+                        /**
+                         * Constructs a new PolicyBinding.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.v1.BinaryAuthorizationConfig.IPolicyBinding);
+
+                        /** PolicyBinding name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new PolicyBinding instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PolicyBinding instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.v1.BinaryAuthorizationConfig.IPolicyBinding): google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding;
+
+                        /**
+                         * Encodes the specified PolicyBinding message. Does not implicitly {@link google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding.verify|verify} messages.
+                         * @param message PolicyBinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.v1.BinaryAuthorizationConfig.IPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PolicyBinding message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding.verify|verify} messages.
+                         * @param message PolicyBinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.v1.BinaryAuthorizationConfig.IPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PolicyBinding message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PolicyBinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding;
+
+                        /**
+                         * Decodes a PolicyBinding message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PolicyBinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding;
+
+                        /**
+                         * Verifies a PolicyBinding message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PolicyBinding message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PolicyBinding
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding;
+
+                        /**
+                         * Creates a plain object from a PolicyBinding message. Also converts values to other types if specified.
+                         * @param message PolicyBinding
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.v1.BinaryAuthorizationConfig.PolicyBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PolicyBinding to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PolicyBinding
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** EvaluationMode enum. */
+                    enum EvaluationMode {
+                        EVALUATION_MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        POLICY_BINDINGS = 2
+                    }
+                }
+
+                /** Properties of a CompliancePostureConfig. */
+                interface ICompliancePostureConfig {
+
+                    /** CompliancePostureConfig mode */
+                    mode?: (google.cloud.gkehub.v1.CompliancePostureConfig.Mode|keyof typeof google.cloud.gkehub.v1.CompliancePostureConfig.Mode|null);
+
+                    /** CompliancePostureConfig complianceStandards */
+                    complianceStandards?: (google.cloud.gkehub.v1.CompliancePostureConfig.IComplianceStandard[]|null);
+                }
+
+                /** Represents a CompliancePostureConfig. */
+                class CompliancePostureConfig implements ICompliancePostureConfig {
+
+                    /**
+                     * Constructs a new CompliancePostureConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ICompliancePostureConfig);
+
+                    /** CompliancePostureConfig mode. */
+                    public mode: (google.cloud.gkehub.v1.CompliancePostureConfig.Mode|keyof typeof google.cloud.gkehub.v1.CompliancePostureConfig.Mode);
+
+                    /** CompliancePostureConfig complianceStandards. */
+                    public complianceStandards: google.cloud.gkehub.v1.CompliancePostureConfig.IComplianceStandard[];
+
+                    /**
+                     * Creates a new CompliancePostureConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CompliancePostureConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ICompliancePostureConfig): google.cloud.gkehub.v1.CompliancePostureConfig;
+
+                    /**
+                     * Encodes the specified CompliancePostureConfig message. Does not implicitly {@link google.cloud.gkehub.v1.CompliancePostureConfig.verify|verify} messages.
+                     * @param message CompliancePostureConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ICompliancePostureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CompliancePostureConfig message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CompliancePostureConfig.verify|verify} messages.
+                     * @param message CompliancePostureConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ICompliancePostureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CompliancePostureConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CompliancePostureConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CompliancePostureConfig;
+
+                    /**
+                     * Decodes a CompliancePostureConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CompliancePostureConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CompliancePostureConfig;
+
+                    /**
+                     * Verifies a CompliancePostureConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CompliancePostureConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CompliancePostureConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CompliancePostureConfig;
+
+                    /**
+                     * Creates a plain object from a CompliancePostureConfig message. Also converts values to other types if specified.
+                     * @param message CompliancePostureConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.CompliancePostureConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CompliancePostureConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CompliancePostureConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CompliancePostureConfig {
+
+                    /** Properties of a ComplianceStandard. */
+                    interface IComplianceStandard {
+
+                        /** ComplianceStandard standard */
+                        standard?: (string|null);
+                    }
+
+                    /** Represents a ComplianceStandard. */
+                    class ComplianceStandard implements IComplianceStandard {
+
+                        /**
+                         * Constructs a new ComplianceStandard.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.v1.CompliancePostureConfig.IComplianceStandard);
+
+                        /** ComplianceStandard standard. */
+                        public standard: string;
+
+                        /**
+                         * Creates a new ComplianceStandard instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ComplianceStandard instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.v1.CompliancePostureConfig.IComplianceStandard): google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard;
+
+                        /**
+                         * Encodes the specified ComplianceStandard message. Does not implicitly {@link google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard.verify|verify} messages.
+                         * @param message ComplianceStandard message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.v1.CompliancePostureConfig.IComplianceStandard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ComplianceStandard message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard.verify|verify} messages.
+                         * @param message ComplianceStandard message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.v1.CompliancePostureConfig.IComplianceStandard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ComplianceStandard message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ComplianceStandard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard;
+
+                        /**
+                         * Decodes a ComplianceStandard message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ComplianceStandard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard;
+
+                        /**
+                         * Verifies a ComplianceStandard message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ComplianceStandard message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ComplianceStandard
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard;
+
+                        /**
+                         * Creates a plain object from a ComplianceStandard message. Also converts values to other types if specified.
+                         * @param message ComplianceStandard
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.v1.CompliancePostureConfig.ComplianceStandard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ComplianceStandard to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ComplianceStandard
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        ENABLED = 2
+                    }
+                }
+
+                /** Properties of a FleetLifecycleState. */
+                interface IFleetLifecycleState {
+
+                    /** FleetLifecycleState code */
+                    code?: (google.cloud.gkehub.v1.FleetLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.FleetLifecycleState.Code|null);
+                }
+
+                /** Represents a FleetLifecycleState. */
+                class FleetLifecycleState implements IFleetLifecycleState {
+
+                    /**
+                     * Constructs a new FleetLifecycleState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IFleetLifecycleState);
+
+                    /** FleetLifecycleState code. */
+                    public code: (google.cloud.gkehub.v1.FleetLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.FleetLifecycleState.Code);
+
+                    /**
+                     * Creates a new FleetLifecycleState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FleetLifecycleState instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IFleetLifecycleState): google.cloud.gkehub.v1.FleetLifecycleState;
+
+                    /**
+                     * Encodes the specified FleetLifecycleState message. Does not implicitly {@link google.cloud.gkehub.v1.FleetLifecycleState.verify|verify} messages.
+                     * @param message FleetLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IFleetLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FleetLifecycleState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.FleetLifecycleState.verify|verify} messages.
+                     * @param message FleetLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IFleetLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FleetLifecycleState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FleetLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.FleetLifecycleState;
+
+                    /**
+                     * Decodes a FleetLifecycleState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FleetLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.FleetLifecycleState;
+
+                    /**
+                     * Verifies a FleetLifecycleState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FleetLifecycleState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FleetLifecycleState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.FleetLifecycleState;
+
+                    /**
+                     * Creates a plain object from a FleetLifecycleState message. Also converts values to other types if specified.
+                     * @param message FleetLifecycleState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.FleetLifecycleState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FleetLifecycleState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FleetLifecycleState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FleetLifecycleState {
+
+                    /** Code enum. */
+                    enum Code {
+                        CODE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        DELETING = 3,
+                        UPDATING = 4
+                    }
+                }
+
+                /** Properties of a Namespace. */
+                interface INamespace {
+
+                    /** Namespace name */
+                    name?: (string|null);
+
+                    /** Namespace uid */
+                    uid?: (string|null);
+
+                    /** Namespace createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace state */
+                    state?: (google.cloud.gkehub.v1.INamespaceLifecycleState|null);
+
+                    /** Namespace scope */
+                    scope?: (string|null);
+
+                    /** Namespace namespaceLabels */
+                    namespaceLabels?: ({ [k: string]: string }|null);
+
+                    /** Namespace labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a Namespace. */
+                class Namespace implements INamespace {
+
+                    /**
+                     * Constructs a new Namespace.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.INamespace);
+
+                    /** Namespace name. */
+                    public name: string;
+
+                    /** Namespace uid. */
+                    public uid: string;
+
+                    /** Namespace createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Namespace state. */
+                    public state?: (google.cloud.gkehub.v1.INamespaceLifecycleState|null);
+
+                    /** Namespace scope. */
+                    public scope: string;
+
+                    /** Namespace namespaceLabels. */
+                    public namespaceLabels: { [k: string]: string };
+
+                    /** Namespace labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new Namespace instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Namespace instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.INamespace): google.cloud.gkehub.v1.Namespace;
+
+                    /**
+                     * Encodes the specified Namespace message. Does not implicitly {@link google.cloud.gkehub.v1.Namespace.verify|verify} messages.
+                     * @param message Namespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.INamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Namespace message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.Namespace.verify|verify} messages.
+                     * @param message Namespace message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.INamespace, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Namespace message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Namespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.Namespace;
+
+                    /**
+                     * Decodes a Namespace message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Namespace
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.Namespace;
+
+                    /**
+                     * Verifies a Namespace message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Namespace message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Namespace
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.Namespace;
+
+                    /**
+                     * Creates a plain object from a Namespace message. Also converts values to other types if specified.
+                     * @param message Namespace
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.Namespace, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Namespace to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Namespace
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NamespaceLifecycleState. */
+                interface INamespaceLifecycleState {
+
+                    /** NamespaceLifecycleState code */
+                    code?: (google.cloud.gkehub.v1.NamespaceLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.NamespaceLifecycleState.Code|null);
+                }
+
+                /** Represents a NamespaceLifecycleState. */
+                class NamespaceLifecycleState implements INamespaceLifecycleState {
+
+                    /**
+                     * Constructs a new NamespaceLifecycleState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.INamespaceLifecycleState);
+
+                    /** NamespaceLifecycleState code. */
+                    public code: (google.cloud.gkehub.v1.NamespaceLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.NamespaceLifecycleState.Code);
+
+                    /**
+                     * Creates a new NamespaceLifecycleState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NamespaceLifecycleState instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.INamespaceLifecycleState): google.cloud.gkehub.v1.NamespaceLifecycleState;
+
+                    /**
+                     * Encodes the specified NamespaceLifecycleState message. Does not implicitly {@link google.cloud.gkehub.v1.NamespaceLifecycleState.verify|verify} messages.
+                     * @param message NamespaceLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.INamespaceLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NamespaceLifecycleState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.NamespaceLifecycleState.verify|verify} messages.
+                     * @param message NamespaceLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.INamespaceLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NamespaceLifecycleState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NamespaceLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.NamespaceLifecycleState;
+
+                    /**
+                     * Decodes a NamespaceLifecycleState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NamespaceLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.NamespaceLifecycleState;
+
+                    /**
+                     * Verifies a NamespaceLifecycleState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NamespaceLifecycleState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NamespaceLifecycleState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.NamespaceLifecycleState;
+
+                    /**
+                     * Creates a plain object from a NamespaceLifecycleState message. Also converts values to other types if specified.
+                     * @param message NamespaceLifecycleState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.NamespaceLifecycleState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NamespaceLifecycleState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NamespaceLifecycleState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NamespaceLifecycleState {
+
+                    /** Code enum. */
+                    enum Code {
+                        CODE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        DELETING = 3,
+                        UPDATING = 4
+                    }
+                }
+
+                /** Properties of a RBACRoleBinding. */
+                interface IRBACRoleBinding {
+
+                    /** RBACRoleBinding user */
+                    user?: (string|null);
+
+                    /** RBACRoleBinding group */
+                    group?: (string|null);
+
+                    /** RBACRoleBinding name */
+                    name?: (string|null);
+
+                    /** RBACRoleBinding uid */
+                    uid?: (string|null);
+
+                    /** RBACRoleBinding createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RBACRoleBinding updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RBACRoleBinding deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RBACRoleBinding state */
+                    state?: (google.cloud.gkehub.v1.IRBACRoleBindingLifecycleState|null);
+
+                    /** RBACRoleBinding role */
+                    role?: (google.cloud.gkehub.v1.RBACRoleBinding.IRole|null);
+
+                    /** RBACRoleBinding labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a RBACRoleBinding. */
+                class RBACRoleBinding implements IRBACRoleBinding {
+
+                    /**
+                     * Constructs a new RBACRoleBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IRBACRoleBinding);
+
+                    /** RBACRoleBinding user. */
+                    public user?: (string|null);
+
+                    /** RBACRoleBinding group. */
+                    public group?: (string|null);
+
+                    /** RBACRoleBinding name. */
+                    public name: string;
+
+                    /** RBACRoleBinding uid. */
+                    public uid: string;
+
+                    /** RBACRoleBinding createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RBACRoleBinding updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RBACRoleBinding deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RBACRoleBinding state. */
+                    public state?: (google.cloud.gkehub.v1.IRBACRoleBindingLifecycleState|null);
+
+                    /** RBACRoleBinding role. */
+                    public role?: (google.cloud.gkehub.v1.RBACRoleBinding.IRole|null);
+
+                    /** RBACRoleBinding labels. */
+                    public labels: { [k: string]: string };
+
+                    /** RBACRoleBinding principal. */
+                    public principal?: ("user"|"group");
+
+                    /**
+                     * Creates a new RBACRoleBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RBACRoleBinding instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IRBACRoleBinding): google.cloud.gkehub.v1.RBACRoleBinding;
+
+                    /**
+                     * Encodes the specified RBACRoleBinding message. Does not implicitly {@link google.cloud.gkehub.v1.RBACRoleBinding.verify|verify} messages.
+                     * @param message RBACRoleBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IRBACRoleBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RBACRoleBinding message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.RBACRoleBinding.verify|verify} messages.
+                     * @param message RBACRoleBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IRBACRoleBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RBACRoleBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RBACRoleBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.RBACRoleBinding;
+
+                    /**
+                     * Decodes a RBACRoleBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RBACRoleBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.RBACRoleBinding;
+
+                    /**
+                     * Verifies a RBACRoleBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RBACRoleBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RBACRoleBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.RBACRoleBinding;
+
+                    /**
+                     * Creates a plain object from a RBACRoleBinding message. Also converts values to other types if specified.
+                     * @param message RBACRoleBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.RBACRoleBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RBACRoleBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RBACRoleBinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RBACRoleBinding {
+
+                    /** Properties of a Role. */
+                    interface IRole {
+
+                        /** Role predefinedRole */
+                        predefinedRole?: (google.cloud.gkehub.v1.RBACRoleBinding.Role.PredefinedRoles|keyof typeof google.cloud.gkehub.v1.RBACRoleBinding.Role.PredefinedRoles|null);
+
+                        /** Role customRole */
+                        customRole?: (string|null);
+                    }
+
+                    /** Represents a Role. */
+                    class Role implements IRole {
+
+                        /**
+                         * Constructs a new Role.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.v1.RBACRoleBinding.IRole);
+
+                        /** Role predefinedRole. */
+                        public predefinedRole: (google.cloud.gkehub.v1.RBACRoleBinding.Role.PredefinedRoles|keyof typeof google.cloud.gkehub.v1.RBACRoleBinding.Role.PredefinedRoles);
+
+                        /** Role customRole. */
+                        public customRole: string;
+
+                        /**
+                         * Creates a new Role instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Role instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.v1.RBACRoleBinding.IRole): google.cloud.gkehub.v1.RBACRoleBinding.Role;
+
+                        /**
+                         * Encodes the specified Role message. Does not implicitly {@link google.cloud.gkehub.v1.RBACRoleBinding.Role.verify|verify} messages.
+                         * @param message Role message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.v1.RBACRoleBinding.IRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Role message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.RBACRoleBinding.Role.verify|verify} messages.
+                         * @param message Role message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.v1.RBACRoleBinding.IRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Role message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Role
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.RBACRoleBinding.Role;
+
+                        /**
+                         * Decodes a Role message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Role
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.RBACRoleBinding.Role;
+
+                        /**
+                         * Verifies a Role message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Role message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Role
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.RBACRoleBinding.Role;
+
+                        /**
+                         * Creates a plain object from a Role message. Also converts values to other types if specified.
+                         * @param message Role
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.v1.RBACRoleBinding.Role, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Role to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Role
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Role {
+
+                        /** PredefinedRoles enum. */
+                        enum PredefinedRoles {
+                            UNKNOWN = 0,
+                            ADMIN = 1,
+                            EDIT = 2,
+                            VIEW = 3,
+                            ANTHOS_SUPPORT = 4
+                        }
+                    }
+                }
+
+                /** Properties of a RBACRoleBindingLifecycleState. */
+                interface IRBACRoleBindingLifecycleState {
+
+                    /** RBACRoleBindingLifecycleState code */
+                    code?: (google.cloud.gkehub.v1.RBACRoleBindingLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.RBACRoleBindingLifecycleState.Code|null);
+                }
+
+                /** Represents a RBACRoleBindingLifecycleState. */
+                class RBACRoleBindingLifecycleState implements IRBACRoleBindingLifecycleState {
+
+                    /**
+                     * Constructs a new RBACRoleBindingLifecycleState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IRBACRoleBindingLifecycleState);
+
+                    /** RBACRoleBindingLifecycleState code. */
+                    public code: (google.cloud.gkehub.v1.RBACRoleBindingLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.RBACRoleBindingLifecycleState.Code);
+
+                    /**
+                     * Creates a new RBACRoleBindingLifecycleState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RBACRoleBindingLifecycleState instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IRBACRoleBindingLifecycleState): google.cloud.gkehub.v1.RBACRoleBindingLifecycleState;
+
+                    /**
+                     * Encodes the specified RBACRoleBindingLifecycleState message. Does not implicitly {@link google.cloud.gkehub.v1.RBACRoleBindingLifecycleState.verify|verify} messages.
+                     * @param message RBACRoleBindingLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IRBACRoleBindingLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RBACRoleBindingLifecycleState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.RBACRoleBindingLifecycleState.verify|verify} messages.
+                     * @param message RBACRoleBindingLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IRBACRoleBindingLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RBACRoleBindingLifecycleState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RBACRoleBindingLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.RBACRoleBindingLifecycleState;
+
+                    /**
+                     * Decodes a RBACRoleBindingLifecycleState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RBACRoleBindingLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.RBACRoleBindingLifecycleState;
+
+                    /**
+                     * Verifies a RBACRoleBindingLifecycleState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RBACRoleBindingLifecycleState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RBACRoleBindingLifecycleState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.RBACRoleBindingLifecycleState;
+
+                    /**
+                     * Creates a plain object from a RBACRoleBindingLifecycleState message. Also converts values to other types if specified.
+                     * @param message RBACRoleBindingLifecycleState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.RBACRoleBindingLifecycleState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RBACRoleBindingLifecycleState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RBACRoleBindingLifecycleState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RBACRoleBindingLifecycleState {
+
+                    /** Code enum. */
+                    enum Code {
+                        CODE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        DELETING = 3,
+                        UPDATING = 4
+                    }
+                }
+
+                /** Properties of a Scope. */
+                interface IScope {
+
+                    /** Scope name */
+                    name?: (string|null);
+
+                    /** Scope uid */
+                    uid?: (string|null);
+
+                    /** Scope createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Scope updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Scope deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Scope state */
+                    state?: (google.cloud.gkehub.v1.IScopeLifecycleState|null);
+
+                    /** Scope namespaceLabels */
+                    namespaceLabels?: ({ [k: string]: string }|null);
+
+                    /** Scope labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a Scope. */
+                class Scope implements IScope {
+
+                    /**
+                     * Constructs a new Scope.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IScope);
+
+                    /** Scope name. */
+                    public name: string;
+
+                    /** Scope uid. */
+                    public uid: string;
+
+                    /** Scope createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Scope updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Scope deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Scope state. */
+                    public state?: (google.cloud.gkehub.v1.IScopeLifecycleState|null);
+
+                    /** Scope namespaceLabels. */
+                    public namespaceLabels: { [k: string]: string };
+
+                    /** Scope labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new Scope instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Scope instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IScope): google.cloud.gkehub.v1.Scope;
+
+                    /**
+                     * Encodes the specified Scope message. Does not implicitly {@link google.cloud.gkehub.v1.Scope.verify|verify} messages.
+                     * @param message Scope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Scope message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.Scope.verify|verify} messages.
+                     * @param message Scope message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Scope message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Scope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.Scope;
+
+                    /**
+                     * Decodes a Scope message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Scope
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.Scope;
+
+                    /**
+                     * Verifies a Scope message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Scope message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Scope
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.Scope;
+
+                    /**
+                     * Creates a plain object from a Scope message. Also converts values to other types if specified.
+                     * @param message Scope
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.Scope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Scope to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Scope
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ScopeLifecycleState. */
+                interface IScopeLifecycleState {
+
+                    /** ScopeLifecycleState code */
+                    code?: (google.cloud.gkehub.v1.ScopeLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.ScopeLifecycleState.Code|null);
+                }
+
+                /** Represents a ScopeLifecycleState. */
+                class ScopeLifecycleState implements IScopeLifecycleState {
+
+                    /**
+                     * Constructs a new ScopeLifecycleState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IScopeLifecycleState);
+
+                    /** ScopeLifecycleState code. */
+                    public code: (google.cloud.gkehub.v1.ScopeLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.ScopeLifecycleState.Code);
+
+                    /**
+                     * Creates a new ScopeLifecycleState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ScopeLifecycleState instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IScopeLifecycleState): google.cloud.gkehub.v1.ScopeLifecycleState;
+
+                    /**
+                     * Encodes the specified ScopeLifecycleState message. Does not implicitly {@link google.cloud.gkehub.v1.ScopeLifecycleState.verify|verify} messages.
+                     * @param message ScopeLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IScopeLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ScopeLifecycleState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ScopeLifecycleState.verify|verify} messages.
+                     * @param message ScopeLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IScopeLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ScopeLifecycleState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ScopeLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ScopeLifecycleState;
+
+                    /**
+                     * Decodes a ScopeLifecycleState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ScopeLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ScopeLifecycleState;
+
+                    /**
+                     * Verifies a ScopeLifecycleState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ScopeLifecycleState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ScopeLifecycleState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ScopeLifecycleState;
+
+                    /**
+                     * Creates a plain object from a ScopeLifecycleState message. Also converts values to other types if specified.
+                     * @param message ScopeLifecycleState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ScopeLifecycleState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ScopeLifecycleState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ScopeLifecycleState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ScopeLifecycleState {
+
+                    /** Code enum. */
+                    enum Code {
+                        CODE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        DELETING = 3,
+                        UPDATING = 4
+                    }
+                }
+
+                /** Properties of a MembershipBinding. */
+                interface IMembershipBinding {
+
+                    /** MembershipBinding scope */
+                    scope?: (string|null);
+
+                    /** MembershipBinding name */
+                    name?: (string|null);
+
+                    /** MembershipBinding uid */
+                    uid?: (string|null);
+
+                    /** MembershipBinding createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MembershipBinding updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MembershipBinding deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MembershipBinding state */
+                    state?: (google.cloud.gkehub.v1.IMembershipBindingLifecycleState|null);
+
+                    /** MembershipBinding labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a MembershipBinding. */
+                class MembershipBinding implements IMembershipBinding {
+
+                    /**
+                     * Constructs a new MembershipBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IMembershipBinding);
+
+                    /** MembershipBinding scope. */
+                    public scope?: (string|null);
+
+                    /** MembershipBinding name. */
+                    public name: string;
+
+                    /** MembershipBinding uid. */
+                    public uid: string;
+
+                    /** MembershipBinding createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MembershipBinding updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MembershipBinding deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MembershipBinding state. */
+                    public state?: (google.cloud.gkehub.v1.IMembershipBindingLifecycleState|null);
+
+                    /** MembershipBinding labels. */
+                    public labels: { [k: string]: string };
+
+                    /** MembershipBinding target. */
+                    public target?: "scope";
+
+                    /**
+                     * Creates a new MembershipBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MembershipBinding instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IMembershipBinding): google.cloud.gkehub.v1.MembershipBinding;
+
+                    /**
+                     * Encodes the specified MembershipBinding message. Does not implicitly {@link google.cloud.gkehub.v1.MembershipBinding.verify|verify} messages.
+                     * @param message MembershipBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IMembershipBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MembershipBinding message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.MembershipBinding.verify|verify} messages.
+                     * @param message MembershipBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IMembershipBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MembershipBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MembershipBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.MembershipBinding;
+
+                    /**
+                     * Decodes a MembershipBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MembershipBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.MembershipBinding;
+
+                    /**
+                     * Verifies a MembershipBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MembershipBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MembershipBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.MembershipBinding;
+
+                    /**
+                     * Creates a plain object from a MembershipBinding message. Also converts values to other types if specified.
+                     * @param message MembershipBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.MembershipBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MembershipBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MembershipBinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MembershipBindingLifecycleState. */
+                interface IMembershipBindingLifecycleState {
+
+                    /** MembershipBindingLifecycleState code */
+                    code?: (google.cloud.gkehub.v1.MembershipBindingLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.MembershipBindingLifecycleState.Code|null);
+                }
+
+                /** Represents a MembershipBindingLifecycleState. */
+                class MembershipBindingLifecycleState implements IMembershipBindingLifecycleState {
+
+                    /**
+                     * Constructs a new MembershipBindingLifecycleState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IMembershipBindingLifecycleState);
+
+                    /** MembershipBindingLifecycleState code. */
+                    public code: (google.cloud.gkehub.v1.MembershipBindingLifecycleState.Code|keyof typeof google.cloud.gkehub.v1.MembershipBindingLifecycleState.Code);
+
+                    /**
+                     * Creates a new MembershipBindingLifecycleState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MembershipBindingLifecycleState instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IMembershipBindingLifecycleState): google.cloud.gkehub.v1.MembershipBindingLifecycleState;
+
+                    /**
+                     * Encodes the specified MembershipBindingLifecycleState message. Does not implicitly {@link google.cloud.gkehub.v1.MembershipBindingLifecycleState.verify|verify} messages.
+                     * @param message MembershipBindingLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IMembershipBindingLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MembershipBindingLifecycleState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.MembershipBindingLifecycleState.verify|verify} messages.
+                     * @param message MembershipBindingLifecycleState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IMembershipBindingLifecycleState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MembershipBindingLifecycleState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MembershipBindingLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.MembershipBindingLifecycleState;
+
+                    /**
+                     * Decodes a MembershipBindingLifecycleState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MembershipBindingLifecycleState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.MembershipBindingLifecycleState;
+
+                    /**
+                     * Verifies a MembershipBindingLifecycleState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MembershipBindingLifecycleState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MembershipBindingLifecycleState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.MembershipBindingLifecycleState;
+
+                    /**
+                     * Creates a plain object from a MembershipBindingLifecycleState message. Also converts values to other types if specified.
+                     * @param message MembershipBindingLifecycleState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.MembershipBindingLifecycleState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MembershipBindingLifecycleState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MembershipBindingLifecycleState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MembershipBindingLifecycleState {
+
+                    /** Code enum. */
+                    enum Code {
+                        CODE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 2,
+                        DELETING = 3,
+                        UPDATING = 4
+                    }
                 }
 
                 /** Properties of a Membership. */
@@ -14936,6 +17411,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion */
                     k8sVersion?: (string|null);
+
+                    /** ResourceOptions k8sGitVersion */
+                    k8sGitVersion?: (string|null);
                 }
 
                 /** Represents a ResourceOptions. */
@@ -14955,6 +17433,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion. */
                     public k8sVersion: string;
+
+                    /** ResourceOptions k8sGitVersion. */
+                    public k8sGitVersion: string;
 
                     /**
                      * Creates a new ResourceOptions instance using the specified properties.
@@ -15611,7 +18092,7 @@ export namespace google {
                     identityProvider?: (string|null);
 
                     /** Authority oidcJwks */
-                    oidcJwks?: (Uint8Array|string|null);
+                    oidcJwks?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an Authority. */
@@ -15633,7 +18114,7 @@ export namespace google {
                     public identityProvider: string;
 
                     /** Authority oidcJwks. */
-                    public oidcJwks: (Uint8Array|string);
+                    public oidcJwks: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Authority instance using the specified properties.
@@ -15746,6 +18227,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listMemberships(request: google.cloud.gkehub.v1.IListMembershipsRequest): Promise<google.cloud.gkehub.v1.ListMembershipsResponse>;
+
+                    /**
+                     * Calls ListBoundMemberships.
+                     * @param request ListBoundMembershipsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBoundMembershipsResponse
+                     */
+                    public listBoundMemberships(request: google.cloud.gkehub.v1.IListBoundMembershipsRequest, callback: google.cloud.gkehub.v1.GkeHub.ListBoundMembershipsCallback): void;
+
+                    /**
+                     * Calls ListBoundMemberships.
+                     * @param request ListBoundMembershipsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBoundMemberships(request: google.cloud.gkehub.v1.IListBoundMembershipsRequest): Promise<google.cloud.gkehub.v1.ListBoundMembershipsResponse>;
 
                     /**
                      * Calls ListFeatures.
@@ -15886,6 +18381,454 @@ export namespace google {
                      * @returns Promise
                      */
                     public generateConnectManifest(request: google.cloud.gkehub.v1.IGenerateConnectManifestRequest): Promise<google.cloud.gkehub.v1.GenerateConnectManifestResponse>;
+
+                    /**
+                     * Calls CreateFleet.
+                     * @param request CreateFleetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createFleet(request: google.cloud.gkehub.v1.ICreateFleetRequest, callback: google.cloud.gkehub.v1.GkeHub.CreateFleetCallback): void;
+
+                    /**
+                     * Calls CreateFleet.
+                     * @param request CreateFleetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFleet(request: google.cloud.gkehub.v1.ICreateFleetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetFleet.
+                     * @param request GetFleetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Fleet
+                     */
+                    public getFleet(request: google.cloud.gkehub.v1.IGetFleetRequest, callback: google.cloud.gkehub.v1.GkeHub.GetFleetCallback): void;
+
+                    /**
+                     * Calls GetFleet.
+                     * @param request GetFleetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFleet(request: google.cloud.gkehub.v1.IGetFleetRequest): Promise<google.cloud.gkehub.v1.Fleet>;
+
+                    /**
+                     * Calls UpdateFleet.
+                     * @param request UpdateFleetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateFleet(request: google.cloud.gkehub.v1.IUpdateFleetRequest, callback: google.cloud.gkehub.v1.GkeHub.UpdateFleetCallback): void;
+
+                    /**
+                     * Calls UpdateFleet.
+                     * @param request UpdateFleetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFleet(request: google.cloud.gkehub.v1.IUpdateFleetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteFleet.
+                     * @param request DeleteFleetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteFleet(request: google.cloud.gkehub.v1.IDeleteFleetRequest, callback: google.cloud.gkehub.v1.GkeHub.DeleteFleetCallback): void;
+
+                    /**
+                     * Calls DeleteFleet.
+                     * @param request DeleteFleetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFleet(request: google.cloud.gkehub.v1.IDeleteFleetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListFleets.
+                     * @param request ListFleetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFleetsResponse
+                     */
+                    public listFleets(request: google.cloud.gkehub.v1.IListFleetsRequest, callback: google.cloud.gkehub.v1.GkeHub.ListFleetsCallback): void;
+
+                    /**
+                     * Calls ListFleets.
+                     * @param request ListFleetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFleets(request: google.cloud.gkehub.v1.IListFleetsRequest): Promise<google.cloud.gkehub.v1.ListFleetsResponse>;
+
+                    /**
+                     * Calls GetScopeNamespace.
+                     * @param request GetScopeNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Namespace
+                     */
+                    public getScopeNamespace(request: google.cloud.gkehub.v1.IGetScopeNamespaceRequest, callback: google.cloud.gkehub.v1.GkeHub.GetScopeNamespaceCallback): void;
+
+                    /**
+                     * Calls GetScopeNamespace.
+                     * @param request GetScopeNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getScopeNamespace(request: google.cloud.gkehub.v1.IGetScopeNamespaceRequest): Promise<google.cloud.gkehub.v1.Namespace>;
+
+                    /**
+                     * Calls CreateScopeNamespace.
+                     * @param request CreateScopeNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createScopeNamespace(request: google.cloud.gkehub.v1.ICreateScopeNamespaceRequest, callback: google.cloud.gkehub.v1.GkeHub.CreateScopeNamespaceCallback): void;
+
+                    /**
+                     * Calls CreateScopeNamespace.
+                     * @param request CreateScopeNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createScopeNamespace(request: google.cloud.gkehub.v1.ICreateScopeNamespaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateScopeNamespace.
+                     * @param request UpdateScopeNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateScopeNamespace(request: google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest, callback: google.cloud.gkehub.v1.GkeHub.UpdateScopeNamespaceCallback): void;
+
+                    /**
+                     * Calls UpdateScopeNamespace.
+                     * @param request UpdateScopeNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateScopeNamespace(request: google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteScopeNamespace.
+                     * @param request DeleteScopeNamespaceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteScopeNamespace(request: google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest, callback: google.cloud.gkehub.v1.GkeHub.DeleteScopeNamespaceCallback): void;
+
+                    /**
+                     * Calls DeleteScopeNamespace.
+                     * @param request DeleteScopeNamespaceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteScopeNamespace(request: google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListScopeNamespaces.
+                     * @param request ListScopeNamespacesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListScopeNamespacesResponse
+                     */
+                    public listScopeNamespaces(request: google.cloud.gkehub.v1.IListScopeNamespacesRequest, callback: google.cloud.gkehub.v1.GkeHub.ListScopeNamespacesCallback): void;
+
+                    /**
+                     * Calls ListScopeNamespaces.
+                     * @param request ListScopeNamespacesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listScopeNamespaces(request: google.cloud.gkehub.v1.IListScopeNamespacesRequest): Promise<google.cloud.gkehub.v1.ListScopeNamespacesResponse>;
+
+                    /**
+                     * Calls GetScopeRBACRoleBinding.
+                     * @param request GetScopeRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RBACRoleBinding
+                     */
+                    public getScopeRBACRoleBinding(request: google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.GetScopeRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls GetScopeRBACRoleBinding.
+                     * @param request GetScopeRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getScopeRBACRoleBinding(request: google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest): Promise<google.cloud.gkehub.v1.RBACRoleBinding>;
+
+                    /**
+                     * Calls CreateScopeRBACRoleBinding.
+                     * @param request CreateScopeRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createScopeRBACRoleBinding(request: google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.CreateScopeRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls CreateScopeRBACRoleBinding.
+                     * @param request CreateScopeRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createScopeRBACRoleBinding(request: google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateScopeRBACRoleBinding.
+                     * @param request UpdateScopeRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateScopeRBACRoleBinding(request: google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.UpdateScopeRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls UpdateScopeRBACRoleBinding.
+                     * @param request UpdateScopeRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateScopeRBACRoleBinding(request: google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteScopeRBACRoleBinding.
+                     * @param request DeleteScopeRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteScopeRBACRoleBinding(request: google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.DeleteScopeRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls DeleteScopeRBACRoleBinding.
+                     * @param request DeleteScopeRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteScopeRBACRoleBinding(request: google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListScopeRBACRoleBindings.
+                     * @param request ListScopeRBACRoleBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListScopeRBACRoleBindingsResponse
+                     */
+                    public listScopeRBACRoleBindings(request: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest, callback: google.cloud.gkehub.v1.GkeHub.ListScopeRBACRoleBindingsCallback): void;
+
+                    /**
+                     * Calls ListScopeRBACRoleBindings.
+                     * @param request ListScopeRBACRoleBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listScopeRBACRoleBindings(request: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest): Promise<google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse>;
+
+                    /**
+                     * Calls GetScope.
+                     * @param request GetScopeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Scope
+                     */
+                    public getScope(request: google.cloud.gkehub.v1.IGetScopeRequest, callback: google.cloud.gkehub.v1.GkeHub.GetScopeCallback): void;
+
+                    /**
+                     * Calls GetScope.
+                     * @param request GetScopeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getScope(request: google.cloud.gkehub.v1.IGetScopeRequest): Promise<google.cloud.gkehub.v1.Scope>;
+
+                    /**
+                     * Calls CreateScope.
+                     * @param request CreateScopeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createScope(request: google.cloud.gkehub.v1.ICreateScopeRequest, callback: google.cloud.gkehub.v1.GkeHub.CreateScopeCallback): void;
+
+                    /**
+                     * Calls CreateScope.
+                     * @param request CreateScopeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createScope(request: google.cloud.gkehub.v1.ICreateScopeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateScope.
+                     * @param request UpdateScopeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateScope(request: google.cloud.gkehub.v1.IUpdateScopeRequest, callback: google.cloud.gkehub.v1.GkeHub.UpdateScopeCallback): void;
+
+                    /**
+                     * Calls UpdateScope.
+                     * @param request UpdateScopeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateScope(request: google.cloud.gkehub.v1.IUpdateScopeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteScope.
+                     * @param request DeleteScopeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteScope(request: google.cloud.gkehub.v1.IDeleteScopeRequest, callback: google.cloud.gkehub.v1.GkeHub.DeleteScopeCallback): void;
+
+                    /**
+                     * Calls DeleteScope.
+                     * @param request DeleteScopeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteScope(request: google.cloud.gkehub.v1.IDeleteScopeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListScopes.
+                     * @param request ListScopesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListScopesResponse
+                     */
+                    public listScopes(request: google.cloud.gkehub.v1.IListScopesRequest, callback: google.cloud.gkehub.v1.GkeHub.ListScopesCallback): void;
+
+                    /**
+                     * Calls ListScopes.
+                     * @param request ListScopesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listScopes(request: google.cloud.gkehub.v1.IListScopesRequest): Promise<google.cloud.gkehub.v1.ListScopesResponse>;
+
+                    /**
+                     * Calls ListPermittedScopes.
+                     * @param request ListPermittedScopesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPermittedScopesResponse
+                     */
+                    public listPermittedScopes(request: google.cloud.gkehub.v1.IListPermittedScopesRequest, callback: google.cloud.gkehub.v1.GkeHub.ListPermittedScopesCallback): void;
+
+                    /**
+                     * Calls ListPermittedScopes.
+                     * @param request ListPermittedScopesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPermittedScopes(request: google.cloud.gkehub.v1.IListPermittedScopesRequest): Promise<google.cloud.gkehub.v1.ListPermittedScopesResponse>;
+
+                    /**
+                     * Calls GetMembershipBinding.
+                     * @param request GetMembershipBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and MembershipBinding
+                     */
+                    public getMembershipBinding(request: google.cloud.gkehub.v1.IGetMembershipBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.GetMembershipBindingCallback): void;
+
+                    /**
+                     * Calls GetMembershipBinding.
+                     * @param request GetMembershipBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMembershipBinding(request: google.cloud.gkehub.v1.IGetMembershipBindingRequest): Promise<google.cloud.gkehub.v1.MembershipBinding>;
+
+                    /**
+                     * Calls CreateMembershipBinding.
+                     * @param request CreateMembershipBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMembershipBinding(request: google.cloud.gkehub.v1.ICreateMembershipBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.CreateMembershipBindingCallback): void;
+
+                    /**
+                     * Calls CreateMembershipBinding.
+                     * @param request CreateMembershipBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMembershipBinding(request: google.cloud.gkehub.v1.ICreateMembershipBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateMembershipBinding.
+                     * @param request UpdateMembershipBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateMembershipBinding(request: google.cloud.gkehub.v1.IUpdateMembershipBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.UpdateMembershipBindingCallback): void;
+
+                    /**
+                     * Calls UpdateMembershipBinding.
+                     * @param request UpdateMembershipBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMembershipBinding(request: google.cloud.gkehub.v1.IUpdateMembershipBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteMembershipBinding.
+                     * @param request DeleteMembershipBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteMembershipBinding(request: google.cloud.gkehub.v1.IDeleteMembershipBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.DeleteMembershipBindingCallback): void;
+
+                    /**
+                     * Calls DeleteMembershipBinding.
+                     * @param request DeleteMembershipBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMembershipBinding(request: google.cloud.gkehub.v1.IDeleteMembershipBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListMembershipBindings.
+                     * @param request ListMembershipBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMembershipBindingsResponse
+                     */
+                    public listMembershipBindings(request: google.cloud.gkehub.v1.IListMembershipBindingsRequest, callback: google.cloud.gkehub.v1.GkeHub.ListMembershipBindingsCallback): void;
+
+                    /**
+                     * Calls ListMembershipBindings.
+                     * @param request ListMembershipBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMembershipBindings(request: google.cloud.gkehub.v1.IListMembershipBindingsRequest): Promise<google.cloud.gkehub.v1.ListMembershipBindingsResponse>;
+
+                    /**
+                     * Calls GetMembershipRBACRoleBinding.
+                     * @param request GetMembershipRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RBACRoleBinding
+                     */
+                    public getMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.GetMembershipRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls GetMembershipRBACRoleBinding.
+                     * @param request GetMembershipRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest): Promise<google.cloud.gkehub.v1.RBACRoleBinding>;
+
+                    /**
+                     * Calls CreateMembershipRBACRoleBinding.
+                     * @param request CreateMembershipRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.CreateMembershipRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls CreateMembershipRBACRoleBinding.
+                     * @param request CreateMembershipRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateMembershipRBACRoleBinding.
+                     * @param request UpdateMembershipRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.UpdateMembershipRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls UpdateMembershipRBACRoleBinding.
+                     * @param request UpdateMembershipRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteMembershipRBACRoleBinding.
+                     * @param request DeleteMembershipRBACRoleBindingRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest, callback: google.cloud.gkehub.v1.GkeHub.DeleteMembershipRBACRoleBindingCallback): void;
+
+                    /**
+                     * Calls DeleteMembershipRBACRoleBinding.
+                     * @param request DeleteMembershipRBACRoleBindingRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMembershipRBACRoleBinding(request: google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListMembershipRBACRoleBindings.
+                     * @param request ListMembershipRBACRoleBindingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMembershipRBACRoleBindingsResponse
+                     */
+                    public listMembershipRBACRoleBindings(request: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest, callback: google.cloud.gkehub.v1.GkeHub.ListMembershipRBACRoleBindingsCallback): void;
+
+                    /**
+                     * Calls ListMembershipRBACRoleBindings.
+                     * @param request ListMembershipRBACRoleBindingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMembershipRBACRoleBindings(request: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest): Promise<google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse>;
+
+                    /**
+                     * Calls GenerateMembershipRBACRoleBindingYAML.
+                     * @param request GenerateMembershipRBACRoleBindingYAMLRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateMembershipRBACRoleBindingYAMLResponse
+                     */
+                    public generateMembershipRBACRoleBindingYAML(request: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest, callback: google.cloud.gkehub.v1.GkeHub.GenerateMembershipRBACRoleBindingYAMLCallback): void;
+
+                    /**
+                     * Calls GenerateMembershipRBACRoleBindingYAML.
+                     * @param request GenerateMembershipRBACRoleBindingYAMLRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateMembershipRBACRoleBindingYAML(request: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest): Promise<google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse>;
                 }
 
                 namespace GkeHub {
@@ -15896,6 +18839,13 @@ export namespace google {
                      * @param [response] ListMembershipsResponse
                      */
                     type ListMembershipsCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListMembershipsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listBoundMemberships}.
+                     * @param error Error, if any
+                     * @param [response] ListBoundMembershipsResponse
+                     */
+                    type ListBoundMembershipsCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListBoundMembershipsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listFeatures}.
@@ -15966,6 +18916,2926 @@ export namespace google {
                      * @param [response] GenerateConnectManifestResponse
                      */
                     type GenerateConnectManifestCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.GenerateConnectManifestResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|createFleet}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateFleetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|getFleet}.
+                     * @param error Error, if any
+                     * @param [response] Fleet
+                     */
+                    type GetFleetCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.Fleet) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|updateFleet}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateFleetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|deleteFleet}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteFleetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listFleets}.
+                     * @param error Error, if any
+                     * @param [response] ListFleetsResponse
+                     */
+                    type ListFleetsCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListFleetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|getScopeNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Namespace
+                     */
+                    type GetScopeNamespaceCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.Namespace) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|createScopeNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateScopeNamespaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|updateScopeNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateScopeNamespaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|deleteScopeNamespace}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteScopeNamespaceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listScopeNamespaces}.
+                     * @param error Error, if any
+                     * @param [response] ListScopeNamespacesResponse
+                     */
+                    type ListScopeNamespacesCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListScopeNamespacesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|getScopeRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] RBACRoleBinding
+                     */
+                    type GetScopeRBACRoleBindingCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.RBACRoleBinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|createScopeRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateScopeRBACRoleBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|updateScopeRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateScopeRBACRoleBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|deleteScopeRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteScopeRBACRoleBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listScopeRBACRoleBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListScopeRBACRoleBindingsResponse
+                     */
+                    type ListScopeRBACRoleBindingsCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|getScope}.
+                     * @param error Error, if any
+                     * @param [response] Scope
+                     */
+                    type GetScopeCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.Scope) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|createScope}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateScopeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|updateScope}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateScopeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|deleteScope}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteScopeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listScopes}.
+                     * @param error Error, if any
+                     * @param [response] ListScopesResponse
+                     */
+                    type ListScopesCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListScopesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listPermittedScopes}.
+                     * @param error Error, if any
+                     * @param [response] ListPermittedScopesResponse
+                     */
+                    type ListPermittedScopesCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListPermittedScopesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|getMembershipBinding}.
+                     * @param error Error, if any
+                     * @param [response] MembershipBinding
+                     */
+                    type GetMembershipBindingCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.MembershipBinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|createMembershipBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMembershipBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|updateMembershipBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateMembershipBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|deleteMembershipBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteMembershipBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listMembershipBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListMembershipBindingsResponse
+                     */
+                    type ListMembershipBindingsCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListMembershipBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|getMembershipRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] RBACRoleBinding
+                     */
+                    type GetMembershipRBACRoleBindingCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.RBACRoleBinding) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|createMembershipRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMembershipRBACRoleBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|updateMembershipRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateMembershipRBACRoleBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|deleteMembershipRBACRoleBinding}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteMembershipRBACRoleBindingCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|listMembershipRBACRoleBindings}.
+                     * @param error Error, if any
+                     * @param [response] ListMembershipRBACRoleBindingsResponse
+                     */
+                    type ListMembershipRBACRoleBindingsCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gkehub.v1.GkeHub|generateMembershipRBACRoleBindingYAML}.
+                     * @param error Error, if any
+                     * @param [response] GenerateMembershipRBACRoleBindingYAMLResponse
+                     */
+                    type GenerateMembershipRBACRoleBindingYAMLCallback = (error: (Error|null), response?: google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse) => void;
+                }
+
+                /** Properties of a GetScopeNamespaceRequest. */
+                interface IGetScopeNamespaceRequest {
+
+                    /** GetScopeNamespaceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetScopeNamespaceRequest. */
+                class GetScopeNamespaceRequest implements IGetScopeNamespaceRequest {
+
+                    /**
+                     * Constructs a new GetScopeNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGetScopeNamespaceRequest);
+
+                    /** GetScopeNamespaceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetScopeNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetScopeNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGetScopeNamespaceRequest): google.cloud.gkehub.v1.GetScopeNamespaceRequest;
+
+                    /**
+                     * Encodes the specified GetScopeNamespaceRequest message. Does not implicitly {@link google.cloud.gkehub.v1.GetScopeNamespaceRequest.verify|verify} messages.
+                     * @param message GetScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGetScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetScopeNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GetScopeNamespaceRequest.verify|verify} messages.
+                     * @param message GetScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGetScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetScopeNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GetScopeNamespaceRequest;
+
+                    /**
+                     * Decodes a GetScopeNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GetScopeNamespaceRequest;
+
+                    /**
+                     * Verifies a GetScopeNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetScopeNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetScopeNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GetScopeNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from a GetScopeNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message GetScopeNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GetScopeNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetScopeNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScopeNamespaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateScopeNamespaceRequest. */
+                interface ICreateScopeNamespaceRequest {
+
+                    /** CreateScopeNamespaceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateScopeNamespaceRequest scopeNamespaceId */
+                    scopeNamespaceId?: (string|null);
+
+                    /** CreateScopeNamespaceRequest scopeNamespace */
+                    scopeNamespace?: (google.cloud.gkehub.v1.INamespace|null);
+                }
+
+                /** Represents a CreateScopeNamespaceRequest. */
+                class CreateScopeNamespaceRequest implements ICreateScopeNamespaceRequest {
+
+                    /**
+                     * Constructs a new CreateScopeNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ICreateScopeNamespaceRequest);
+
+                    /** CreateScopeNamespaceRequest parent. */
+                    public parent: string;
+
+                    /** CreateScopeNamespaceRequest scopeNamespaceId. */
+                    public scopeNamespaceId: string;
+
+                    /** CreateScopeNamespaceRequest scopeNamespace. */
+                    public scopeNamespace?: (google.cloud.gkehub.v1.INamespace|null);
+
+                    /**
+                     * Creates a new CreateScopeNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateScopeNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ICreateScopeNamespaceRequest): google.cloud.gkehub.v1.CreateScopeNamespaceRequest;
+
+                    /**
+                     * Encodes the specified CreateScopeNamespaceRequest message. Does not implicitly {@link google.cloud.gkehub.v1.CreateScopeNamespaceRequest.verify|verify} messages.
+                     * @param message CreateScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ICreateScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateScopeNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CreateScopeNamespaceRequest.verify|verify} messages.
+                     * @param message CreateScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ICreateScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateScopeNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CreateScopeNamespaceRequest;
+
+                    /**
+                     * Decodes a CreateScopeNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CreateScopeNamespaceRequest;
+
+                    /**
+                     * Verifies a CreateScopeNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateScopeNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateScopeNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CreateScopeNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateScopeNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message CreateScopeNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.CreateScopeNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateScopeNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateScopeNamespaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateScopeNamespaceRequest. */
+                interface IUpdateScopeNamespaceRequest {
+
+                    /** UpdateScopeNamespaceRequest scopeNamespace */
+                    scopeNamespace?: (google.cloud.gkehub.v1.INamespace|null);
+
+                    /** UpdateScopeNamespaceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateScopeNamespaceRequest. */
+                class UpdateScopeNamespaceRequest implements IUpdateScopeNamespaceRequest {
+
+                    /**
+                     * Constructs a new UpdateScopeNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest);
+
+                    /** UpdateScopeNamespaceRequest scopeNamespace. */
+                    public scopeNamespace?: (google.cloud.gkehub.v1.INamespace|null);
+
+                    /** UpdateScopeNamespaceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateScopeNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateScopeNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest): google.cloud.gkehub.v1.UpdateScopeNamespaceRequest;
+
+                    /**
+                     * Encodes the specified UpdateScopeNamespaceRequest message. Does not implicitly {@link google.cloud.gkehub.v1.UpdateScopeNamespaceRequest.verify|verify} messages.
+                     * @param message UpdateScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateScopeNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.UpdateScopeNamespaceRequest.verify|verify} messages.
+                     * @param message UpdateScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateScopeNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.UpdateScopeNamespaceRequest;
+
+                    /**
+                     * Decodes an UpdateScopeNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.UpdateScopeNamespaceRequest;
+
+                    /**
+                     * Verifies an UpdateScopeNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateScopeNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateScopeNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.UpdateScopeNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateScopeNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateScopeNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.UpdateScopeNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateScopeNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateScopeNamespaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteScopeNamespaceRequest. */
+                interface IDeleteScopeNamespaceRequest {
+
+                    /** DeleteScopeNamespaceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteScopeNamespaceRequest. */
+                class DeleteScopeNamespaceRequest implements IDeleteScopeNamespaceRequest {
+
+                    /**
+                     * Constructs a new DeleteScopeNamespaceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest);
+
+                    /** DeleteScopeNamespaceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteScopeNamespaceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteScopeNamespaceRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest): google.cloud.gkehub.v1.DeleteScopeNamespaceRequest;
+
+                    /**
+                     * Encodes the specified DeleteScopeNamespaceRequest message. Does not implicitly {@link google.cloud.gkehub.v1.DeleteScopeNamespaceRequest.verify|verify} messages.
+                     * @param message DeleteScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteScopeNamespaceRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.DeleteScopeNamespaceRequest.verify|verify} messages.
+                     * @param message DeleteScopeNamespaceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteScopeNamespaceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.DeleteScopeNamespaceRequest;
+
+                    /**
+                     * Decodes a DeleteScopeNamespaceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteScopeNamespaceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.DeleteScopeNamespaceRequest;
+
+                    /**
+                     * Verifies a DeleteScopeNamespaceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteScopeNamespaceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteScopeNamespaceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.DeleteScopeNamespaceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteScopeNamespaceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteScopeNamespaceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.DeleteScopeNamespaceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteScopeNamespaceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteScopeNamespaceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListScopeNamespacesRequest. */
+                interface IListScopeNamespacesRequest {
+
+                    /** ListScopeNamespacesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListScopeNamespacesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListScopeNamespacesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListScopeNamespacesRequest. */
+                class ListScopeNamespacesRequest implements IListScopeNamespacesRequest {
+
+                    /**
+                     * Constructs a new ListScopeNamespacesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListScopeNamespacesRequest);
+
+                    /** ListScopeNamespacesRequest parent. */
+                    public parent: string;
+
+                    /** ListScopeNamespacesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListScopeNamespacesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListScopeNamespacesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListScopeNamespacesRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListScopeNamespacesRequest): google.cloud.gkehub.v1.ListScopeNamespacesRequest;
+
+                    /**
+                     * Encodes the specified ListScopeNamespacesRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeNamespacesRequest.verify|verify} messages.
+                     * @param message ListScopeNamespacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListScopeNamespacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListScopeNamespacesRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeNamespacesRequest.verify|verify} messages.
+                     * @param message ListScopeNamespacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListScopeNamespacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListScopeNamespacesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListScopeNamespacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListScopeNamespacesRequest;
+
+                    /**
+                     * Decodes a ListScopeNamespacesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListScopeNamespacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListScopeNamespacesRequest;
+
+                    /**
+                     * Verifies a ListScopeNamespacesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListScopeNamespacesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListScopeNamespacesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListScopeNamespacesRequest;
+
+                    /**
+                     * Creates a plain object from a ListScopeNamespacesRequest message. Also converts values to other types if specified.
+                     * @param message ListScopeNamespacesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListScopeNamespacesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListScopeNamespacesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScopeNamespacesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListScopeNamespacesResponse. */
+                interface IListScopeNamespacesResponse {
+
+                    /** ListScopeNamespacesResponse scopeNamespaces */
+                    scopeNamespaces?: (google.cloud.gkehub.v1.INamespace[]|null);
+
+                    /** ListScopeNamespacesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListScopeNamespacesResponse. */
+                class ListScopeNamespacesResponse implements IListScopeNamespacesResponse {
+
+                    /**
+                     * Constructs a new ListScopeNamespacesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListScopeNamespacesResponse);
+
+                    /** ListScopeNamespacesResponse scopeNamespaces. */
+                    public scopeNamespaces: google.cloud.gkehub.v1.INamespace[];
+
+                    /** ListScopeNamespacesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListScopeNamespacesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListScopeNamespacesResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListScopeNamespacesResponse): google.cloud.gkehub.v1.ListScopeNamespacesResponse;
+
+                    /**
+                     * Encodes the specified ListScopeNamespacesResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeNamespacesResponse.verify|verify} messages.
+                     * @param message ListScopeNamespacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListScopeNamespacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListScopeNamespacesResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeNamespacesResponse.verify|verify} messages.
+                     * @param message ListScopeNamespacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListScopeNamespacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListScopeNamespacesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListScopeNamespacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListScopeNamespacesResponse;
+
+                    /**
+                     * Decodes a ListScopeNamespacesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListScopeNamespacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListScopeNamespacesResponse;
+
+                    /**
+                     * Verifies a ListScopeNamespacesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListScopeNamespacesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListScopeNamespacesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListScopeNamespacesResponse;
+
+                    /**
+                     * Creates a plain object from a ListScopeNamespacesResponse message. Also converts values to other types if specified.
+                     * @param message ListScopeNamespacesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListScopeNamespacesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListScopeNamespacesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScopeNamespacesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetScopeRBACRoleBindingRequest. */
+                interface IGetScopeRBACRoleBindingRequest {
+
+                    /** GetScopeRBACRoleBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetScopeRBACRoleBindingRequest. */
+                class GetScopeRBACRoleBindingRequest implements IGetScopeRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new GetScopeRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest);
+
+                    /** GetScopeRBACRoleBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetScopeRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetScopeRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest): google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified GetScopeRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message GetScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetScopeRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message GetScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetScopeRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes a GetScopeRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies a GetScopeRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetScopeRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetScopeRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetScopeRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetScopeRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GetScopeRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetScopeRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScopeRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateScopeRBACRoleBindingRequest. */
+                interface ICreateScopeRBACRoleBindingRequest {
+
+                    /** CreateScopeRBACRoleBindingRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateScopeRBACRoleBindingRequest rbacrolebindingId */
+                    rbacrolebindingId?: (string|null);
+
+                    /** CreateScopeRBACRoleBindingRequest rbacrolebinding */
+                    rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+                }
+
+                /** Represents a CreateScopeRBACRoleBindingRequest. */
+                class CreateScopeRBACRoleBindingRequest implements ICreateScopeRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new CreateScopeRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest);
+
+                    /** CreateScopeRBACRoleBindingRequest parent. */
+                    public parent: string;
+
+                    /** CreateScopeRBACRoleBindingRequest rbacrolebindingId. */
+                    public rbacrolebindingId: string;
+
+                    /** CreateScopeRBACRoleBindingRequest rbacrolebinding. */
+                    public rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+
+                    /**
+                     * Creates a new CreateScopeRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateScopeRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest): google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified CreateScopeRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message CreateScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateScopeRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message CreateScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateScopeRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes a CreateScopeRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies a CreateScopeRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateScopeRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateScopeRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from a CreateScopeRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message CreateScopeRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.CreateScopeRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateScopeRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateScopeRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateScopeRBACRoleBindingRequest. */
+                interface IUpdateScopeRBACRoleBindingRequest {
+
+                    /** UpdateScopeRBACRoleBindingRequest rbacrolebinding */
+                    rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+
+                    /** UpdateScopeRBACRoleBindingRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateScopeRBACRoleBindingRequest. */
+                class UpdateScopeRBACRoleBindingRequest implements IUpdateScopeRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new UpdateScopeRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest);
+
+                    /** UpdateScopeRBACRoleBindingRequest rbacrolebinding. */
+                    public rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+
+                    /** UpdateScopeRBACRoleBindingRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateScopeRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateScopeRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest): google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified UpdateScopeRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message UpdateScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateScopeRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message UpdateScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateScopeRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes an UpdateScopeRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies an UpdateScopeRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateScopeRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateScopeRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateScopeRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message UpdateScopeRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.UpdateScopeRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateScopeRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateScopeRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteScopeRBACRoleBindingRequest. */
+                interface IDeleteScopeRBACRoleBindingRequest {
+
+                    /** DeleteScopeRBACRoleBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteScopeRBACRoleBindingRequest. */
+                class DeleteScopeRBACRoleBindingRequest implements IDeleteScopeRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new DeleteScopeRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest);
+
+                    /** DeleteScopeRBACRoleBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteScopeRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteScopeRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest): google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified DeleteScopeRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message DeleteScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteScopeRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message DeleteScopeRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteScopeRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes a DeleteScopeRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteScopeRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies a DeleteScopeRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteScopeRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteScopeRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteScopeRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message DeleteScopeRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.DeleteScopeRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteScopeRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteScopeRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListScopeRBACRoleBindingsRequest. */
+                interface IListScopeRBACRoleBindingsRequest {
+
+                    /** ListScopeRBACRoleBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListScopeRBACRoleBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListScopeRBACRoleBindingsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListScopeRBACRoleBindingsRequest. */
+                class ListScopeRBACRoleBindingsRequest implements IListScopeRBACRoleBindingsRequest {
+
+                    /**
+                     * Constructs a new ListScopeRBACRoleBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest);
+
+                    /** ListScopeRBACRoleBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListScopeRBACRoleBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListScopeRBACRoleBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListScopeRBACRoleBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListScopeRBACRoleBindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListScopeRBACRoleBindingsRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest.verify|verify} messages.
+                     * @param message ListScopeRBACRoleBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListScopeRBACRoleBindingsRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest.verify|verify} messages.
+                     * @param message ListScopeRBACRoleBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListScopeRBACRoleBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListScopeRBACRoleBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest;
+
+                    /**
+                     * Decodes a ListScopeRBACRoleBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListScopeRBACRoleBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest;
+
+                    /**
+                     * Verifies a ListScopeRBACRoleBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListScopeRBACRoleBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListScopeRBACRoleBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListScopeRBACRoleBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListScopeRBACRoleBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListScopeRBACRoleBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListScopeRBACRoleBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScopeRBACRoleBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListScopeRBACRoleBindingsResponse. */
+                interface IListScopeRBACRoleBindingsResponse {
+
+                    /** ListScopeRBACRoleBindingsResponse rbacrolebindings */
+                    rbacrolebindings?: (google.cloud.gkehub.v1.IRBACRoleBinding[]|null);
+
+                    /** ListScopeRBACRoleBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListScopeRBACRoleBindingsResponse. */
+                class ListScopeRBACRoleBindingsResponse implements IListScopeRBACRoleBindingsResponse {
+
+                    /**
+                     * Constructs a new ListScopeRBACRoleBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse);
+
+                    /** ListScopeRBACRoleBindingsResponse rbacrolebindings. */
+                    public rbacrolebindings: google.cloud.gkehub.v1.IRBACRoleBinding[];
+
+                    /** ListScopeRBACRoleBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListScopeRBACRoleBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListScopeRBACRoleBindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListScopeRBACRoleBindingsResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse.verify|verify} messages.
+                     * @param message ListScopeRBACRoleBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListScopeRBACRoleBindingsResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse.verify|verify} messages.
+                     * @param message ListScopeRBACRoleBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListScopeRBACRoleBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListScopeRBACRoleBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse;
+
+                    /**
+                     * Decodes a ListScopeRBACRoleBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListScopeRBACRoleBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse;
+
+                    /**
+                     * Verifies a ListScopeRBACRoleBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListScopeRBACRoleBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListScopeRBACRoleBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListScopeRBACRoleBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListScopeRBACRoleBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListScopeRBACRoleBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListScopeRBACRoleBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScopeRBACRoleBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetScopeRequest. */
+                interface IGetScopeRequest {
+
+                    /** GetScopeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetScopeRequest. */
+                class GetScopeRequest implements IGetScopeRequest {
+
+                    /**
+                     * Constructs a new GetScopeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGetScopeRequest);
+
+                    /** GetScopeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetScopeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetScopeRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGetScopeRequest): google.cloud.gkehub.v1.GetScopeRequest;
+
+                    /**
+                     * Encodes the specified GetScopeRequest message. Does not implicitly {@link google.cloud.gkehub.v1.GetScopeRequest.verify|verify} messages.
+                     * @param message GetScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGetScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetScopeRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GetScopeRequest.verify|verify} messages.
+                     * @param message GetScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGetScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetScopeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GetScopeRequest;
+
+                    /**
+                     * Decodes a GetScopeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GetScopeRequest;
+
+                    /**
+                     * Verifies a GetScopeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetScopeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetScopeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GetScopeRequest;
+
+                    /**
+                     * Creates a plain object from a GetScopeRequest message. Also converts values to other types if specified.
+                     * @param message GetScopeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GetScopeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetScopeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetScopeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateScopeRequest. */
+                interface ICreateScopeRequest {
+
+                    /** CreateScopeRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateScopeRequest scopeId */
+                    scopeId?: (string|null);
+
+                    /** CreateScopeRequest scope */
+                    scope?: (google.cloud.gkehub.v1.IScope|null);
+                }
+
+                /** Represents a CreateScopeRequest. */
+                class CreateScopeRequest implements ICreateScopeRequest {
+
+                    /**
+                     * Constructs a new CreateScopeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ICreateScopeRequest);
+
+                    /** CreateScopeRequest parent. */
+                    public parent: string;
+
+                    /** CreateScopeRequest scopeId. */
+                    public scopeId: string;
+
+                    /** CreateScopeRequest scope. */
+                    public scope?: (google.cloud.gkehub.v1.IScope|null);
+
+                    /**
+                     * Creates a new CreateScopeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateScopeRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ICreateScopeRequest): google.cloud.gkehub.v1.CreateScopeRequest;
+
+                    /**
+                     * Encodes the specified CreateScopeRequest message. Does not implicitly {@link google.cloud.gkehub.v1.CreateScopeRequest.verify|verify} messages.
+                     * @param message CreateScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ICreateScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateScopeRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CreateScopeRequest.verify|verify} messages.
+                     * @param message CreateScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ICreateScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateScopeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CreateScopeRequest;
+
+                    /**
+                     * Decodes a CreateScopeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CreateScopeRequest;
+
+                    /**
+                     * Verifies a CreateScopeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateScopeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateScopeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CreateScopeRequest;
+
+                    /**
+                     * Creates a plain object from a CreateScopeRequest message. Also converts values to other types if specified.
+                     * @param message CreateScopeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.CreateScopeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateScopeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateScopeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateScopeRequest. */
+                interface IUpdateScopeRequest {
+
+                    /** UpdateScopeRequest scope */
+                    scope?: (google.cloud.gkehub.v1.IScope|null);
+
+                    /** UpdateScopeRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateScopeRequest. */
+                class UpdateScopeRequest implements IUpdateScopeRequest {
+
+                    /**
+                     * Constructs a new UpdateScopeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IUpdateScopeRequest);
+
+                    /** UpdateScopeRequest scope. */
+                    public scope?: (google.cloud.gkehub.v1.IScope|null);
+
+                    /** UpdateScopeRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateScopeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateScopeRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IUpdateScopeRequest): google.cloud.gkehub.v1.UpdateScopeRequest;
+
+                    /**
+                     * Encodes the specified UpdateScopeRequest message. Does not implicitly {@link google.cloud.gkehub.v1.UpdateScopeRequest.verify|verify} messages.
+                     * @param message UpdateScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IUpdateScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateScopeRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.UpdateScopeRequest.verify|verify} messages.
+                     * @param message UpdateScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IUpdateScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateScopeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.UpdateScopeRequest;
+
+                    /**
+                     * Decodes an UpdateScopeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.UpdateScopeRequest;
+
+                    /**
+                     * Verifies an UpdateScopeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateScopeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateScopeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.UpdateScopeRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateScopeRequest message. Also converts values to other types if specified.
+                     * @param message UpdateScopeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.UpdateScopeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateScopeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateScopeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteScopeRequest. */
+                interface IDeleteScopeRequest {
+
+                    /** DeleteScopeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteScopeRequest. */
+                class DeleteScopeRequest implements IDeleteScopeRequest {
+
+                    /**
+                     * Constructs a new DeleteScopeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IDeleteScopeRequest);
+
+                    /** DeleteScopeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteScopeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteScopeRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IDeleteScopeRequest): google.cloud.gkehub.v1.DeleteScopeRequest;
+
+                    /**
+                     * Encodes the specified DeleteScopeRequest message. Does not implicitly {@link google.cloud.gkehub.v1.DeleteScopeRequest.verify|verify} messages.
+                     * @param message DeleteScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IDeleteScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteScopeRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.DeleteScopeRequest.verify|verify} messages.
+                     * @param message DeleteScopeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IDeleteScopeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteScopeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.DeleteScopeRequest;
+
+                    /**
+                     * Decodes a DeleteScopeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteScopeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.DeleteScopeRequest;
+
+                    /**
+                     * Verifies a DeleteScopeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteScopeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteScopeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.DeleteScopeRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteScopeRequest message. Also converts values to other types if specified.
+                     * @param message DeleteScopeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.DeleteScopeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteScopeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteScopeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListScopesRequest. */
+                interface IListScopesRequest {
+
+                    /** ListScopesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListScopesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListScopesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListScopesRequest. */
+                class ListScopesRequest implements IListScopesRequest {
+
+                    /**
+                     * Constructs a new ListScopesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListScopesRequest);
+
+                    /** ListScopesRequest parent. */
+                    public parent: string;
+
+                    /** ListScopesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListScopesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListScopesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListScopesRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListScopesRequest): google.cloud.gkehub.v1.ListScopesRequest;
+
+                    /**
+                     * Encodes the specified ListScopesRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListScopesRequest.verify|verify} messages.
+                     * @param message ListScopesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListScopesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListScopesRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListScopesRequest.verify|verify} messages.
+                     * @param message ListScopesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListScopesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListScopesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListScopesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListScopesRequest;
+
+                    /**
+                     * Decodes a ListScopesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListScopesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListScopesRequest;
+
+                    /**
+                     * Verifies a ListScopesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListScopesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListScopesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListScopesRequest;
+
+                    /**
+                     * Creates a plain object from a ListScopesRequest message. Also converts values to other types if specified.
+                     * @param message ListScopesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListScopesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListScopesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScopesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListScopesResponse. */
+                interface IListScopesResponse {
+
+                    /** ListScopesResponse scopes */
+                    scopes?: (google.cloud.gkehub.v1.IScope[]|null);
+
+                    /** ListScopesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListScopesResponse. */
+                class ListScopesResponse implements IListScopesResponse {
+
+                    /**
+                     * Constructs a new ListScopesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListScopesResponse);
+
+                    /** ListScopesResponse scopes. */
+                    public scopes: google.cloud.gkehub.v1.IScope[];
+
+                    /** ListScopesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListScopesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListScopesResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListScopesResponse): google.cloud.gkehub.v1.ListScopesResponse;
+
+                    /**
+                     * Encodes the specified ListScopesResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListScopesResponse.verify|verify} messages.
+                     * @param message ListScopesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListScopesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListScopesResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListScopesResponse.verify|verify} messages.
+                     * @param message ListScopesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListScopesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListScopesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListScopesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListScopesResponse;
+
+                    /**
+                     * Decodes a ListScopesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListScopesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListScopesResponse;
+
+                    /**
+                     * Verifies a ListScopesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListScopesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListScopesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListScopesResponse;
+
+                    /**
+                     * Creates a plain object from a ListScopesResponse message. Also converts values to other types if specified.
+                     * @param message ListScopesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListScopesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListScopesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListScopesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPermittedScopesRequest. */
+                interface IListPermittedScopesRequest {
+
+                    /** ListPermittedScopesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPermittedScopesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPermittedScopesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPermittedScopesRequest. */
+                class ListPermittedScopesRequest implements IListPermittedScopesRequest {
+
+                    /**
+                     * Constructs a new ListPermittedScopesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListPermittedScopesRequest);
+
+                    /** ListPermittedScopesRequest parent. */
+                    public parent: string;
+
+                    /** ListPermittedScopesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPermittedScopesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPermittedScopesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPermittedScopesRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListPermittedScopesRequest): google.cloud.gkehub.v1.ListPermittedScopesRequest;
+
+                    /**
+                     * Encodes the specified ListPermittedScopesRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListPermittedScopesRequest.verify|verify} messages.
+                     * @param message ListPermittedScopesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListPermittedScopesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPermittedScopesRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListPermittedScopesRequest.verify|verify} messages.
+                     * @param message ListPermittedScopesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListPermittedScopesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPermittedScopesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPermittedScopesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListPermittedScopesRequest;
+
+                    /**
+                     * Decodes a ListPermittedScopesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPermittedScopesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListPermittedScopesRequest;
+
+                    /**
+                     * Verifies a ListPermittedScopesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPermittedScopesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPermittedScopesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListPermittedScopesRequest;
+
+                    /**
+                     * Creates a plain object from a ListPermittedScopesRequest message. Also converts values to other types if specified.
+                     * @param message ListPermittedScopesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListPermittedScopesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPermittedScopesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPermittedScopesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPermittedScopesResponse. */
+                interface IListPermittedScopesResponse {
+
+                    /** ListPermittedScopesResponse scopes */
+                    scopes?: (google.cloud.gkehub.v1.IScope[]|null);
+
+                    /** ListPermittedScopesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPermittedScopesResponse. */
+                class ListPermittedScopesResponse implements IListPermittedScopesResponse {
+
+                    /**
+                     * Constructs a new ListPermittedScopesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListPermittedScopesResponse);
+
+                    /** ListPermittedScopesResponse scopes. */
+                    public scopes: google.cloud.gkehub.v1.IScope[];
+
+                    /** ListPermittedScopesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPermittedScopesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPermittedScopesResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListPermittedScopesResponse): google.cloud.gkehub.v1.ListPermittedScopesResponse;
+
+                    /**
+                     * Encodes the specified ListPermittedScopesResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListPermittedScopesResponse.verify|verify} messages.
+                     * @param message ListPermittedScopesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListPermittedScopesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPermittedScopesResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListPermittedScopesResponse.verify|verify} messages.
+                     * @param message ListPermittedScopesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListPermittedScopesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPermittedScopesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPermittedScopesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListPermittedScopesResponse;
+
+                    /**
+                     * Decodes a ListPermittedScopesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPermittedScopesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListPermittedScopesResponse;
+
+                    /**
+                     * Verifies a ListPermittedScopesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPermittedScopesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPermittedScopesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListPermittedScopesResponse;
+
+                    /**
+                     * Creates a plain object from a ListPermittedScopesResponse message. Also converts values to other types if specified.
+                     * @param message ListPermittedScopesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListPermittedScopesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPermittedScopesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPermittedScopesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMembershipBindingRequest. */
+                interface IGetMembershipBindingRequest {
+
+                    /** GetMembershipBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMembershipBindingRequest. */
+                class GetMembershipBindingRequest implements IGetMembershipBindingRequest {
+
+                    /**
+                     * Constructs a new GetMembershipBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGetMembershipBindingRequest);
+
+                    /** GetMembershipBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMembershipBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMembershipBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGetMembershipBindingRequest): google.cloud.gkehub.v1.GetMembershipBindingRequest;
+
+                    /**
+                     * Encodes the specified GetMembershipBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.GetMembershipBindingRequest.verify|verify} messages.
+                     * @param message GetMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGetMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMembershipBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GetMembershipBindingRequest.verify|verify} messages.
+                     * @param message GetMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGetMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMembershipBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GetMembershipBindingRequest;
+
+                    /**
+                     * Decodes a GetMembershipBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GetMembershipBindingRequest;
+
+                    /**
+                     * Verifies a GetMembershipBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMembershipBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMembershipBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GetMembershipBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetMembershipBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetMembershipBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GetMembershipBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMembershipBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMembershipBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateMembershipBindingRequest. */
+                interface ICreateMembershipBindingRequest {
+
+                    /** CreateMembershipBindingRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMembershipBindingRequest membershipBinding */
+                    membershipBinding?: (google.cloud.gkehub.v1.IMembershipBinding|null);
+
+                    /** CreateMembershipBindingRequest membershipBindingId */
+                    membershipBindingId?: (string|null);
+                }
+
+                /** Represents a CreateMembershipBindingRequest. */
+                class CreateMembershipBindingRequest implements ICreateMembershipBindingRequest {
+
+                    /**
+                     * Constructs a new CreateMembershipBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ICreateMembershipBindingRequest);
+
+                    /** CreateMembershipBindingRequest parent. */
+                    public parent: string;
+
+                    /** CreateMembershipBindingRequest membershipBinding. */
+                    public membershipBinding?: (google.cloud.gkehub.v1.IMembershipBinding|null);
+
+                    /** CreateMembershipBindingRequest membershipBindingId. */
+                    public membershipBindingId: string;
+
+                    /**
+                     * Creates a new CreateMembershipBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMembershipBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ICreateMembershipBindingRequest): google.cloud.gkehub.v1.CreateMembershipBindingRequest;
+
+                    /**
+                     * Encodes the specified CreateMembershipBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.CreateMembershipBindingRequest.verify|verify} messages.
+                     * @param message CreateMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ICreateMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMembershipBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CreateMembershipBindingRequest.verify|verify} messages.
+                     * @param message CreateMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ICreateMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMembershipBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CreateMembershipBindingRequest;
+
+                    /**
+                     * Decodes a CreateMembershipBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CreateMembershipBindingRequest;
+
+                    /**
+                     * Verifies a CreateMembershipBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMembershipBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMembershipBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CreateMembershipBindingRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMembershipBindingRequest message. Also converts values to other types if specified.
+                     * @param message CreateMembershipBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.CreateMembershipBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMembershipBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMembershipBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMembershipBindingRequest. */
+                interface IUpdateMembershipBindingRequest {
+
+                    /** UpdateMembershipBindingRequest membershipBinding */
+                    membershipBinding?: (google.cloud.gkehub.v1.IMembershipBinding|null);
+
+                    /** UpdateMembershipBindingRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMembershipBindingRequest. */
+                class UpdateMembershipBindingRequest implements IUpdateMembershipBindingRequest {
+
+                    /**
+                     * Constructs a new UpdateMembershipBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IUpdateMembershipBindingRequest);
+
+                    /** UpdateMembershipBindingRequest membershipBinding. */
+                    public membershipBinding?: (google.cloud.gkehub.v1.IMembershipBinding|null);
+
+                    /** UpdateMembershipBindingRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMembershipBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMembershipBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IUpdateMembershipBindingRequest): google.cloud.gkehub.v1.UpdateMembershipBindingRequest;
+
+                    /**
+                     * Encodes the specified UpdateMembershipBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.UpdateMembershipBindingRequest.verify|verify} messages.
+                     * @param message UpdateMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IUpdateMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMembershipBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.UpdateMembershipBindingRequest.verify|verify} messages.
+                     * @param message UpdateMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IUpdateMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMembershipBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.UpdateMembershipBindingRequest;
+
+                    /**
+                     * Decodes an UpdateMembershipBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.UpdateMembershipBindingRequest;
+
+                    /**
+                     * Verifies an UpdateMembershipBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMembershipBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMembershipBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.UpdateMembershipBindingRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMembershipBindingRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMembershipBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.UpdateMembershipBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMembershipBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMembershipBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMembershipBindingRequest. */
+                interface IDeleteMembershipBindingRequest {
+
+                    /** DeleteMembershipBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMembershipBindingRequest. */
+                class DeleteMembershipBindingRequest implements IDeleteMembershipBindingRequest {
+
+                    /**
+                     * Constructs a new DeleteMembershipBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IDeleteMembershipBindingRequest);
+
+                    /** DeleteMembershipBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMembershipBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMembershipBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IDeleteMembershipBindingRequest): google.cloud.gkehub.v1.DeleteMembershipBindingRequest;
+
+                    /**
+                     * Encodes the specified DeleteMembershipBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.DeleteMembershipBindingRequest.verify|verify} messages.
+                     * @param message DeleteMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IDeleteMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMembershipBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.DeleteMembershipBindingRequest.verify|verify} messages.
+                     * @param message DeleteMembershipBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IDeleteMembershipBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMembershipBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.DeleteMembershipBindingRequest;
+
+                    /**
+                     * Decodes a DeleteMembershipBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMembershipBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.DeleteMembershipBindingRequest;
+
+                    /**
+                     * Verifies a DeleteMembershipBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMembershipBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMembershipBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.DeleteMembershipBindingRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMembershipBindingRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMembershipBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.DeleteMembershipBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMembershipBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMembershipBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMembershipBindingsRequest. */
+                interface IListMembershipBindingsRequest {
+
+                    /** ListMembershipBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMembershipBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMembershipBindingsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMembershipBindingsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListMembershipBindingsRequest. */
+                class ListMembershipBindingsRequest implements IListMembershipBindingsRequest {
+
+                    /**
+                     * Constructs a new ListMembershipBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListMembershipBindingsRequest);
+
+                    /** ListMembershipBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListMembershipBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMembershipBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMembershipBindingsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListMembershipBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMembershipBindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListMembershipBindingsRequest): google.cloud.gkehub.v1.ListMembershipBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListMembershipBindingsRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipBindingsRequest.verify|verify} messages.
+                     * @param message ListMembershipBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListMembershipBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMembershipBindingsRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipBindingsRequest.verify|verify} messages.
+                     * @param message ListMembershipBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListMembershipBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMembershipBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMembershipBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListMembershipBindingsRequest;
+
+                    /**
+                     * Decodes a ListMembershipBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMembershipBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListMembershipBindingsRequest;
+
+                    /**
+                     * Verifies a ListMembershipBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMembershipBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMembershipBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListMembershipBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMembershipBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListMembershipBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListMembershipBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMembershipBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMembershipBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMembershipBindingsResponse. */
+                interface IListMembershipBindingsResponse {
+
+                    /** ListMembershipBindingsResponse membershipBindings */
+                    membershipBindings?: (google.cloud.gkehub.v1.IMembershipBinding[]|null);
+
+                    /** ListMembershipBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMembershipBindingsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMembershipBindingsResponse. */
+                class ListMembershipBindingsResponse implements IListMembershipBindingsResponse {
+
+                    /**
+                     * Constructs a new ListMembershipBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListMembershipBindingsResponse);
+
+                    /** ListMembershipBindingsResponse membershipBindings. */
+                    public membershipBindings: google.cloud.gkehub.v1.IMembershipBinding[];
+
+                    /** ListMembershipBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMembershipBindingsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMembershipBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMembershipBindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListMembershipBindingsResponse): google.cloud.gkehub.v1.ListMembershipBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListMembershipBindingsResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipBindingsResponse.verify|verify} messages.
+                     * @param message ListMembershipBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListMembershipBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMembershipBindingsResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipBindingsResponse.verify|verify} messages.
+                     * @param message ListMembershipBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListMembershipBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMembershipBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMembershipBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListMembershipBindingsResponse;
+
+                    /**
+                     * Decodes a ListMembershipBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMembershipBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListMembershipBindingsResponse;
+
+                    /**
+                     * Verifies a ListMembershipBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMembershipBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMembershipBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListMembershipBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMembershipBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListMembershipBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListMembershipBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMembershipBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMembershipBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ListMembershipsRequest. */
@@ -16083,6 +21953,836 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListMembershipsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMembershipRBACRoleBindingRequest. */
+                interface IGetMembershipRBACRoleBindingRequest {
+
+                    /** GetMembershipRBACRoleBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMembershipRBACRoleBindingRequest. */
+                class GetMembershipRBACRoleBindingRequest implements IGetMembershipRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new GetMembershipRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest);
+
+                    /** GetMembershipRBACRoleBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMembershipRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMembershipRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest): google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified GetMembershipRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message GetMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMembershipRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message GetMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMembershipRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes a GetMembershipRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies a GetMembershipRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMembershipRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMembershipRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from a GetMembershipRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message GetMembershipRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GetMembershipRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMembershipRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMembershipRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateMembershipRBACRoleBindingRequest. */
+                interface ICreateMembershipRBACRoleBindingRequest {
+
+                    /** CreateMembershipRBACRoleBindingRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMembershipRBACRoleBindingRequest rbacrolebindingId */
+                    rbacrolebindingId?: (string|null);
+
+                    /** CreateMembershipRBACRoleBindingRequest rbacrolebinding */
+                    rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+                }
+
+                /** Represents a CreateMembershipRBACRoleBindingRequest. */
+                class CreateMembershipRBACRoleBindingRequest implements ICreateMembershipRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new CreateMembershipRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest);
+
+                    /** CreateMembershipRBACRoleBindingRequest parent. */
+                    public parent: string;
+
+                    /** CreateMembershipRBACRoleBindingRequest rbacrolebindingId. */
+                    public rbacrolebindingId: string;
+
+                    /** CreateMembershipRBACRoleBindingRequest rbacrolebinding. */
+                    public rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+
+                    /**
+                     * Creates a new CreateMembershipRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMembershipRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest): google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified CreateMembershipRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message CreateMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMembershipRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message CreateMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMembershipRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes a CreateMembershipRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies a CreateMembershipRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMembershipRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMembershipRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMembershipRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message CreateMembershipRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.CreateMembershipRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMembershipRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMembershipRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMembershipRBACRoleBindingRequest. */
+                interface IUpdateMembershipRBACRoleBindingRequest {
+
+                    /** UpdateMembershipRBACRoleBindingRequest rbacrolebinding */
+                    rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+
+                    /** UpdateMembershipRBACRoleBindingRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateMembershipRBACRoleBindingRequest. */
+                class UpdateMembershipRBACRoleBindingRequest implements IUpdateMembershipRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new UpdateMembershipRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest);
+
+                    /** UpdateMembershipRBACRoleBindingRequest rbacrolebinding. */
+                    public rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+
+                    /** UpdateMembershipRBACRoleBindingRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateMembershipRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMembershipRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest): google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified UpdateMembershipRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message UpdateMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMembershipRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message UpdateMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMembershipRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes an UpdateMembershipRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies an UpdateMembershipRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMembershipRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMembershipRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMembershipRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMembershipRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.UpdateMembershipRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMembershipRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMembershipRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMembershipRBACRoleBindingRequest. */
+                interface IDeleteMembershipRBACRoleBindingRequest {
+
+                    /** DeleteMembershipRBACRoleBindingRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteMembershipRBACRoleBindingRequest. */
+                class DeleteMembershipRBACRoleBindingRequest implements IDeleteMembershipRBACRoleBindingRequest {
+
+                    /**
+                     * Constructs a new DeleteMembershipRBACRoleBindingRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest);
+
+                    /** DeleteMembershipRBACRoleBindingRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteMembershipRBACRoleBindingRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMembershipRBACRoleBindingRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest): google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Encodes the specified DeleteMembershipRBACRoleBindingRequest message. Does not implicitly {@link google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message DeleteMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMembershipRBACRoleBindingRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest.verify|verify} messages.
+                     * @param message DeleteMembershipRBACRoleBindingRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMembershipRBACRoleBindingRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Decodes a DeleteMembershipRBACRoleBindingRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMembershipRBACRoleBindingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Verifies a DeleteMembershipRBACRoleBindingRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMembershipRBACRoleBindingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMembershipRBACRoleBindingRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMembershipRBACRoleBindingRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMembershipRBACRoleBindingRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.DeleteMembershipRBACRoleBindingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMembershipRBACRoleBindingRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMembershipRBACRoleBindingRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMembershipRBACRoleBindingsRequest. */
+                interface IListMembershipRBACRoleBindingsRequest {
+
+                    /** ListMembershipRBACRoleBindingsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMembershipRBACRoleBindingsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMembershipRBACRoleBindingsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListMembershipRBACRoleBindingsRequest. */
+                class ListMembershipRBACRoleBindingsRequest implements IListMembershipRBACRoleBindingsRequest {
+
+                    /**
+                     * Constructs a new ListMembershipRBACRoleBindingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest);
+
+                    /** ListMembershipRBACRoleBindingsRequest parent. */
+                    public parent: string;
+
+                    /** ListMembershipRBACRoleBindingsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMembershipRBACRoleBindingsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListMembershipRBACRoleBindingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMembershipRBACRoleBindingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest;
+
+                    /**
+                     * Encodes the specified ListMembershipRBACRoleBindingsRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest.verify|verify} messages.
+                     * @param message ListMembershipRBACRoleBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMembershipRBACRoleBindingsRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest.verify|verify} messages.
+                     * @param message ListMembershipRBACRoleBindingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMembershipRBACRoleBindingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMembershipRBACRoleBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest;
+
+                    /**
+                     * Decodes a ListMembershipRBACRoleBindingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMembershipRBACRoleBindingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest;
+
+                    /**
+                     * Verifies a ListMembershipRBACRoleBindingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMembershipRBACRoleBindingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMembershipRBACRoleBindingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMembershipRBACRoleBindingsRequest message. Also converts values to other types if specified.
+                     * @param message ListMembershipRBACRoleBindingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMembershipRBACRoleBindingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMembershipRBACRoleBindingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMembershipRBACRoleBindingsResponse. */
+                interface IListMembershipRBACRoleBindingsResponse {
+
+                    /** ListMembershipRBACRoleBindingsResponse rbacrolebindings */
+                    rbacrolebindings?: (google.cloud.gkehub.v1.IRBACRoleBinding[]|null);
+
+                    /** ListMembershipRBACRoleBindingsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMembershipRBACRoleBindingsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMembershipRBACRoleBindingsResponse. */
+                class ListMembershipRBACRoleBindingsResponse implements IListMembershipRBACRoleBindingsResponse {
+
+                    /**
+                     * Constructs a new ListMembershipRBACRoleBindingsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse);
+
+                    /** ListMembershipRBACRoleBindingsResponse rbacrolebindings. */
+                    public rbacrolebindings: google.cloud.gkehub.v1.IRBACRoleBinding[];
+
+                    /** ListMembershipRBACRoleBindingsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMembershipRBACRoleBindingsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMembershipRBACRoleBindingsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMembershipRBACRoleBindingsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse;
+
+                    /**
+                     * Encodes the specified ListMembershipRBACRoleBindingsResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse.verify|verify} messages.
+                     * @param message ListMembershipRBACRoleBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMembershipRBACRoleBindingsResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse.verify|verify} messages.
+                     * @param message ListMembershipRBACRoleBindingsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMembershipRBACRoleBindingsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMembershipRBACRoleBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse;
+
+                    /**
+                     * Decodes a ListMembershipRBACRoleBindingsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMembershipRBACRoleBindingsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse;
+
+                    /**
+                     * Verifies a ListMembershipRBACRoleBindingsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMembershipRBACRoleBindingsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMembershipRBACRoleBindingsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMembershipRBACRoleBindingsResponse message. Also converts values to other types if specified.
+                     * @param message ListMembershipRBACRoleBindingsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListMembershipRBACRoleBindingsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMembershipRBACRoleBindingsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMembershipRBACRoleBindingsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateMembershipRBACRoleBindingYAMLRequest. */
+                interface IGenerateMembershipRBACRoleBindingYAMLRequest {
+
+                    /** GenerateMembershipRBACRoleBindingYAMLRequest parent */
+                    parent?: (string|null);
+
+                    /** GenerateMembershipRBACRoleBindingYAMLRequest rbacrolebindingId */
+                    rbacrolebindingId?: (string|null);
+
+                    /** GenerateMembershipRBACRoleBindingYAMLRequest rbacrolebinding */
+                    rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+                }
+
+                /** Represents a GenerateMembershipRBACRoleBindingYAMLRequest. */
+                class GenerateMembershipRBACRoleBindingYAMLRequest implements IGenerateMembershipRBACRoleBindingYAMLRequest {
+
+                    /**
+                     * Constructs a new GenerateMembershipRBACRoleBindingYAMLRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest);
+
+                    /** GenerateMembershipRBACRoleBindingYAMLRequest parent. */
+                    public parent: string;
+
+                    /** GenerateMembershipRBACRoleBindingYAMLRequest rbacrolebindingId. */
+                    public rbacrolebindingId: string;
+
+                    /** GenerateMembershipRBACRoleBindingYAMLRequest rbacrolebinding. */
+                    public rbacrolebinding?: (google.cloud.gkehub.v1.IRBACRoleBinding|null);
+
+                    /**
+                     * Creates a new GenerateMembershipRBACRoleBindingYAMLRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateMembershipRBACRoleBindingYAMLRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest;
+
+                    /**
+                     * Encodes the specified GenerateMembershipRBACRoleBindingYAMLRequest message. Does not implicitly {@link google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest.verify|verify} messages.
+                     * @param message GenerateMembershipRBACRoleBindingYAMLRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateMembershipRBACRoleBindingYAMLRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest.verify|verify} messages.
+                     * @param message GenerateMembershipRBACRoleBindingYAMLRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateMembershipRBACRoleBindingYAMLRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateMembershipRBACRoleBindingYAMLRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest;
+
+                    /**
+                     * Decodes a GenerateMembershipRBACRoleBindingYAMLRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateMembershipRBACRoleBindingYAMLRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest;
+
+                    /**
+                     * Verifies a GenerateMembershipRBACRoleBindingYAMLRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateMembershipRBACRoleBindingYAMLRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateMembershipRBACRoleBindingYAMLRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateMembershipRBACRoleBindingYAMLRequest message. Also converts values to other types if specified.
+                     * @param message GenerateMembershipRBACRoleBindingYAMLRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateMembershipRBACRoleBindingYAMLRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateMembershipRBACRoleBindingYAMLRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateMembershipRBACRoleBindingYAMLResponse. */
+                interface IGenerateMembershipRBACRoleBindingYAMLResponse {
+
+                    /** GenerateMembershipRBACRoleBindingYAMLResponse roleBindingsYaml */
+                    roleBindingsYaml?: (string|null);
+                }
+
+                /** Represents a GenerateMembershipRBACRoleBindingYAMLResponse. */
+                class GenerateMembershipRBACRoleBindingYAMLResponse implements IGenerateMembershipRBACRoleBindingYAMLResponse {
+
+                    /**
+                     * Constructs a new GenerateMembershipRBACRoleBindingYAMLResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse);
+
+                    /** GenerateMembershipRBACRoleBindingYAMLResponse roleBindingsYaml. */
+                    public roleBindingsYaml: string;
+
+                    /**
+                     * Creates a new GenerateMembershipRBACRoleBindingYAMLResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateMembershipRBACRoleBindingYAMLResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse;
+
+                    /**
+                     * Encodes the specified GenerateMembershipRBACRoleBindingYAMLResponse message. Does not implicitly {@link google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse.verify|verify} messages.
+                     * @param message GenerateMembershipRBACRoleBindingYAMLResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateMembershipRBACRoleBindingYAMLResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse.verify|verify} messages.
+                     * @param message GenerateMembershipRBACRoleBindingYAMLResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateMembershipRBACRoleBindingYAMLResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateMembershipRBACRoleBindingYAMLResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse;
+
+                    /**
+                     * Decodes a GenerateMembershipRBACRoleBindingYAMLResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateMembershipRBACRoleBindingYAMLResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse;
+
+                    /**
+                     * Verifies a GenerateMembershipRBACRoleBindingYAMLResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateMembershipRBACRoleBindingYAMLResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateMembershipRBACRoleBindingYAMLResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateMembershipRBACRoleBindingYAMLResponse message. Also converts values to other types if specified.
+                     * @param message GenerateMembershipRBACRoleBindingYAMLResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateMembershipRBACRoleBindingYAMLResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateMembershipRBACRoleBindingYAMLResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -16289,6 +22989,230 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetMembershipRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBoundMembershipsRequest. */
+                interface IListBoundMembershipsRequest {
+
+                    /** ListBoundMembershipsRequest scopeName */
+                    scopeName?: (string|null);
+
+                    /** ListBoundMembershipsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListBoundMembershipsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBoundMembershipsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListBoundMembershipsRequest. */
+                class ListBoundMembershipsRequest implements IListBoundMembershipsRequest {
+
+                    /**
+                     * Constructs a new ListBoundMembershipsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListBoundMembershipsRequest);
+
+                    /** ListBoundMembershipsRequest scopeName. */
+                    public scopeName: string;
+
+                    /** ListBoundMembershipsRequest filter. */
+                    public filter: string;
+
+                    /** ListBoundMembershipsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBoundMembershipsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListBoundMembershipsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBoundMembershipsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListBoundMembershipsRequest): google.cloud.gkehub.v1.ListBoundMembershipsRequest;
+
+                    /**
+                     * Encodes the specified ListBoundMembershipsRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListBoundMembershipsRequest.verify|verify} messages.
+                     * @param message ListBoundMembershipsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListBoundMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBoundMembershipsRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListBoundMembershipsRequest.verify|verify} messages.
+                     * @param message ListBoundMembershipsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListBoundMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBoundMembershipsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBoundMembershipsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListBoundMembershipsRequest;
+
+                    /**
+                     * Decodes a ListBoundMembershipsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBoundMembershipsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListBoundMembershipsRequest;
+
+                    /**
+                     * Verifies a ListBoundMembershipsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBoundMembershipsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBoundMembershipsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListBoundMembershipsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBoundMembershipsRequest message. Also converts values to other types if specified.
+                     * @param message ListBoundMembershipsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListBoundMembershipsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBoundMembershipsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBoundMembershipsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBoundMembershipsResponse. */
+                interface IListBoundMembershipsResponse {
+
+                    /** ListBoundMembershipsResponse memberships */
+                    memberships?: (google.cloud.gkehub.v1.IMembership[]|null);
+
+                    /** ListBoundMembershipsResponse unreachable */
+                    unreachable?: (string[]|null);
+
+                    /** ListBoundMembershipsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListBoundMembershipsResponse. */
+                class ListBoundMembershipsResponse implements IListBoundMembershipsResponse {
+
+                    /**
+                     * Constructs a new ListBoundMembershipsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListBoundMembershipsResponse);
+
+                    /** ListBoundMembershipsResponse memberships. */
+                    public memberships: google.cloud.gkehub.v1.IMembership[];
+
+                    /** ListBoundMembershipsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /** ListBoundMembershipsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListBoundMembershipsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBoundMembershipsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListBoundMembershipsResponse): google.cloud.gkehub.v1.ListBoundMembershipsResponse;
+
+                    /**
+                     * Encodes the specified ListBoundMembershipsResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListBoundMembershipsResponse.verify|verify} messages.
+                     * @param message ListBoundMembershipsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListBoundMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBoundMembershipsResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListBoundMembershipsResponse.verify|verify} messages.
+                     * @param message ListBoundMembershipsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListBoundMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBoundMembershipsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBoundMembershipsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListBoundMembershipsResponse;
+
+                    /**
+                     * Decodes a ListBoundMembershipsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBoundMembershipsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListBoundMembershipsResponse;
+
+                    /**
+                     * Verifies a ListBoundMembershipsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBoundMembershipsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBoundMembershipsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListBoundMembershipsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBoundMembershipsResponse message. Also converts values to other types if specified.
+                     * @param message ListBoundMembershipsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListBoundMembershipsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBoundMembershipsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBoundMembershipsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -16644,7 +23568,7 @@ export namespace google {
                     namespace?: (string|null);
 
                     /** GenerateConnectManifestRequest proxy */
-                    proxy?: (Uint8Array|string|null);
+                    proxy?: (Uint8Array|Buffer|string|null);
 
                     /** GenerateConnectManifestRequest version */
                     version?: (string|null);
@@ -16656,7 +23580,7 @@ export namespace google {
                     registry?: (string|null);
 
                     /** GenerateConnectManifestRequest imagePullSecretContent */
-                    imagePullSecretContent?: (Uint8Array|string|null);
+                    imagePullSecretContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a GenerateConnectManifestRequest. */
@@ -16675,7 +23599,7 @@ export namespace google {
                     public namespace: string;
 
                     /** GenerateConnectManifestRequest proxy. */
-                    public proxy: (Uint8Array|string);
+                    public proxy: (Uint8Array|Buffer|string);
 
                     /** GenerateConnectManifestRequest version. */
                     public version: string;
@@ -16687,7 +23611,7 @@ export namespace google {
                     public registry: string;
 
                     /** GenerateConnectManifestRequest imagePullSecretContent. */
-                    public imagePullSecretContent: (Uint8Array|string);
+                    public imagePullSecretContent: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new GenerateConnectManifestRequest instance using the specified properties.
@@ -17087,6 +24011,9 @@ export namespace google {
 
                     /** ListFeaturesRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListFeaturesRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListFeaturesRequest. */
@@ -17112,6 +24039,9 @@ export namespace google {
 
                     /** ListFeaturesRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListFeaturesRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListFeaturesRequest instance using the specified properties.
@@ -17299,6 +24229,9 @@ export namespace google {
 
                     /** GetFeatureRequest name */
                     name?: (string|null);
+
+                    /** GetFeatureRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a GetFeatureRequest. */
@@ -17312,6 +24245,9 @@ export namespace google {
 
                     /** GetFeatureRequest name. */
                     public name: string;
+
+                    /** GetFeatureRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new GetFeatureRequest instance using the specified properties.
@@ -17724,6 +24660,618 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateFeatureRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateFleetRequest. */
+                interface ICreateFleetRequest {
+
+                    /** CreateFleetRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFleetRequest fleet */
+                    fleet?: (google.cloud.gkehub.v1.IFleet|null);
+                }
+
+                /** Represents a CreateFleetRequest. */
+                class CreateFleetRequest implements ICreateFleetRequest {
+
+                    /**
+                     * Constructs a new CreateFleetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.ICreateFleetRequest);
+
+                    /** CreateFleetRequest parent. */
+                    public parent: string;
+
+                    /** CreateFleetRequest fleet. */
+                    public fleet?: (google.cloud.gkehub.v1.IFleet|null);
+
+                    /**
+                     * Creates a new CreateFleetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFleetRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.ICreateFleetRequest): google.cloud.gkehub.v1.CreateFleetRequest;
+
+                    /**
+                     * Encodes the specified CreateFleetRequest message. Does not implicitly {@link google.cloud.gkehub.v1.CreateFleetRequest.verify|verify} messages.
+                     * @param message CreateFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.ICreateFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFleetRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.CreateFleetRequest.verify|verify} messages.
+                     * @param message CreateFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.ICreateFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFleetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.CreateFleetRequest;
+
+                    /**
+                     * Decodes a CreateFleetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.CreateFleetRequest;
+
+                    /**
+                     * Verifies a CreateFleetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFleetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFleetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.CreateFleetRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFleetRequest message. Also converts values to other types if specified.
+                     * @param message CreateFleetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.CreateFleetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFleetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFleetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFleetRequest. */
+                interface IGetFleetRequest {
+
+                    /** GetFleetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFleetRequest. */
+                class GetFleetRequest implements IGetFleetRequest {
+
+                    /**
+                     * Constructs a new GetFleetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IGetFleetRequest);
+
+                    /** GetFleetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFleetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFleetRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IGetFleetRequest): google.cloud.gkehub.v1.GetFleetRequest;
+
+                    /**
+                     * Encodes the specified GetFleetRequest message. Does not implicitly {@link google.cloud.gkehub.v1.GetFleetRequest.verify|verify} messages.
+                     * @param message GetFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IGetFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFleetRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.GetFleetRequest.verify|verify} messages.
+                     * @param message GetFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IGetFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFleetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.GetFleetRequest;
+
+                    /**
+                     * Decodes a GetFleetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.GetFleetRequest;
+
+                    /**
+                     * Verifies a GetFleetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFleetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFleetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.GetFleetRequest;
+
+                    /**
+                     * Creates a plain object from a GetFleetRequest message. Also converts values to other types if specified.
+                     * @param message GetFleetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.GetFleetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFleetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFleetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFleetRequest. */
+                interface IUpdateFleetRequest {
+
+                    /** UpdateFleetRequest fleet */
+                    fleet?: (google.cloud.gkehub.v1.IFleet|null);
+
+                    /** UpdateFleetRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFleetRequest. */
+                class UpdateFleetRequest implements IUpdateFleetRequest {
+
+                    /**
+                     * Constructs a new UpdateFleetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IUpdateFleetRequest);
+
+                    /** UpdateFleetRequest fleet. */
+                    public fleet?: (google.cloud.gkehub.v1.IFleet|null);
+
+                    /** UpdateFleetRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFleetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFleetRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IUpdateFleetRequest): google.cloud.gkehub.v1.UpdateFleetRequest;
+
+                    /**
+                     * Encodes the specified UpdateFleetRequest message. Does not implicitly {@link google.cloud.gkehub.v1.UpdateFleetRequest.verify|verify} messages.
+                     * @param message UpdateFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IUpdateFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFleetRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.UpdateFleetRequest.verify|verify} messages.
+                     * @param message UpdateFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IUpdateFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFleetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.UpdateFleetRequest;
+
+                    /**
+                     * Decodes an UpdateFleetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.UpdateFleetRequest;
+
+                    /**
+                     * Verifies an UpdateFleetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFleetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFleetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.UpdateFleetRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFleetRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFleetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.UpdateFleetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFleetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFleetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteFleetRequest. */
+                interface IDeleteFleetRequest {
+
+                    /** DeleteFleetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFleetRequest. */
+                class DeleteFleetRequest implements IDeleteFleetRequest {
+
+                    /**
+                     * Constructs a new DeleteFleetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IDeleteFleetRequest);
+
+                    /** DeleteFleetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFleetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFleetRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IDeleteFleetRequest): google.cloud.gkehub.v1.DeleteFleetRequest;
+
+                    /**
+                     * Encodes the specified DeleteFleetRequest message. Does not implicitly {@link google.cloud.gkehub.v1.DeleteFleetRequest.verify|verify} messages.
+                     * @param message DeleteFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IDeleteFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFleetRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.DeleteFleetRequest.verify|verify} messages.
+                     * @param message DeleteFleetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IDeleteFleetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFleetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.DeleteFleetRequest;
+
+                    /**
+                     * Decodes a DeleteFleetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFleetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.DeleteFleetRequest;
+
+                    /**
+                     * Verifies a DeleteFleetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFleetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFleetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.DeleteFleetRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFleetRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFleetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.DeleteFleetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFleetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFleetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFleetsRequest. */
+                interface IListFleetsRequest {
+
+                    /** ListFleetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFleetsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFleetsRequest pageSize */
+                    pageSize?: (number|null);
+                }
+
+                /** Represents a ListFleetsRequest. */
+                class ListFleetsRequest implements IListFleetsRequest {
+
+                    /**
+                     * Constructs a new ListFleetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListFleetsRequest);
+
+                    /** ListFleetsRequest parent. */
+                    public parent: string;
+
+                    /** ListFleetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFleetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /**
+                     * Creates a new ListFleetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFleetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListFleetsRequest): google.cloud.gkehub.v1.ListFleetsRequest;
+
+                    /**
+                     * Encodes the specified ListFleetsRequest message. Does not implicitly {@link google.cloud.gkehub.v1.ListFleetsRequest.verify|verify} messages.
+                     * @param message ListFleetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListFleetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFleetsRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListFleetsRequest.verify|verify} messages.
+                     * @param message ListFleetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListFleetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFleetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFleetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListFleetsRequest;
+
+                    /**
+                     * Decodes a ListFleetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFleetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListFleetsRequest;
+
+                    /**
+                     * Verifies a ListFleetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFleetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFleetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListFleetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFleetsRequest message. Also converts values to other types if specified.
+                     * @param message ListFleetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListFleetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFleetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFleetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFleetsResponse. */
+                interface IListFleetsResponse {
+
+                    /** ListFleetsResponse fleets */
+                    fleets?: (google.cloud.gkehub.v1.IFleet[]|null);
+
+                    /** ListFleetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFleetsResponse. */
+                class ListFleetsResponse implements IListFleetsResponse {
+
+                    /**
+                     * Constructs a new ListFleetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1.IListFleetsResponse);
+
+                    /** ListFleetsResponse fleets. */
+                    public fleets: google.cloud.gkehub.v1.IFleet[];
+
+                    /** ListFleetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFleetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFleetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1.IListFleetsResponse): google.cloud.gkehub.v1.ListFleetsResponse;
+
+                    /**
+                     * Encodes the specified ListFleetsResponse message. Does not implicitly {@link google.cloud.gkehub.v1.ListFleetsResponse.verify|verify} messages.
+                     * @param message ListFleetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1.IListFleetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFleetsResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1.ListFleetsResponse.verify|verify} messages.
+                     * @param message ListFleetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1.IListFleetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFleetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFleetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1.ListFleetsResponse;
+
+                    /**
+                     * Decodes a ListFleetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFleetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1.ListFleetsResponse;
+
+                    /**
+                     * Verifies a ListFleetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFleetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFleetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1.ListFleetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFleetsResponse message. Also converts values to other types if specified.
+                     * @param message ListFleetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1.ListFleetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFleetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFleetsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -18189,6 +25737,202 @@ export namespace google {
 
                         /**
                          * Gets the default type url for FeatureSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+            }
+
+            /** Namespace rbacrolebindingactuation. */
+            namespace rbacrolebindingactuation {
+
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Properties of a FeatureSpec. */
+                    interface IFeatureSpec {
+
+                        /** FeatureSpec allowedCustomRoles */
+                        allowedCustomRoles?: (string[]|null);
+                    }
+
+                    /** Represents a FeatureSpec. */
+                    class FeatureSpec implements IFeatureSpec {
+
+                        /**
+                         * Constructs a new FeatureSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureSpec);
+
+                        /** FeatureSpec allowedCustomRoles. */
+                        public allowedCustomRoles: string[];
+
+                        /**
+                         * Creates a new FeatureSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FeatureSpec instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureSpec): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureSpec;
+
+                        /**
+                         * Encodes the specified FeatureSpec message. Does not implicitly {@link google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureSpec.verify|verify} messages.
+                         * @param message FeatureSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FeatureSpec message, length delimited. Does not implicitly {@link google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureSpec.verify|verify} messages.
+                         * @param message FeatureSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FeatureSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FeatureSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureSpec;
+
+                        /**
+                         * Decodes a FeatureSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FeatureSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureSpec;
+
+                        /**
+                         * Verifies a FeatureSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FeatureSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FeatureSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureSpec;
+
+                        /**
+                         * Creates a plain object from a FeatureSpec message. Also converts values to other types if specified.
+                         * @param message FeatureSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FeatureSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FeatureSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FeatureState. */
+                    interface IFeatureState {
+                    }
+
+                    /** Represents a FeatureState. */
+                    class FeatureState implements IFeatureState {
+
+                        /**
+                         * Constructs a new FeatureState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureState);
+
+                        /**
+                         * Creates a new FeatureState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FeatureState instance
+                         */
+                        public static create(properties?: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureState): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState;
+
+                        /**
+                         * Encodes the specified FeatureState message. Does not implicitly {@link google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState.verify|verify} messages.
+                         * @param message FeatureState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FeatureState message, length delimited. Does not implicitly {@link google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState.verify|verify} messages.
+                         * @param message FeatureState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkehub.rbacrolebindingactuation.v1.IFeatureState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FeatureState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FeatureState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState;
+
+                        /**
+                         * Decodes a FeatureState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FeatureState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState;
+
+                        /**
+                         * Verifies a FeatureState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FeatureState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FeatureState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState;
+
+                        /**
+                         * Creates a plain object from a FeatureState message. Also converts values to other types if specified.
+                         * @param message FeatureState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkehub.rbacrolebindingactuation.v1.FeatureState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FeatureState to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FeatureState
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -21528,2892 +29272,6 @@ export namespace google {
                 }
             }
 
-            /** Namespace v1alpha2. */
-            namespace v1alpha2 {
-
-                /** Represents a GkeHub */
-                class GkeHub extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new GkeHub service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new GkeHub service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GkeHub;
-
-                    /**
-                     * Calls ListMemberships.
-                     * @param request ListMembershipsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListMembershipsResponse
-                     */
-                    public listMemberships(request: google.cloud.gkehub.v1alpha2.IListMembershipsRequest, callback: google.cloud.gkehub.v1alpha2.GkeHub.ListMembershipsCallback): void;
-
-                    /**
-                     * Calls ListMemberships.
-                     * @param request ListMembershipsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listMemberships(request: google.cloud.gkehub.v1alpha2.IListMembershipsRequest): Promise<google.cloud.gkehub.v1alpha2.ListMembershipsResponse>;
-
-                    /**
-                     * Calls GetMembership.
-                     * @param request GetMembershipRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Membership
-                     */
-                    public getMembership(request: google.cloud.gkehub.v1alpha2.IGetMembershipRequest, callback: google.cloud.gkehub.v1alpha2.GkeHub.GetMembershipCallback): void;
-
-                    /**
-                     * Calls GetMembership.
-                     * @param request GetMembershipRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getMembership(request: google.cloud.gkehub.v1alpha2.IGetMembershipRequest): Promise<google.cloud.gkehub.v1alpha2.Membership>;
-
-                    /**
-                     * Calls CreateMembership.
-                     * @param request CreateMembershipRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public createMembership(request: google.cloud.gkehub.v1alpha2.ICreateMembershipRequest, callback: google.cloud.gkehub.v1alpha2.GkeHub.CreateMembershipCallback): void;
-
-                    /**
-                     * Calls CreateMembership.
-                     * @param request CreateMembershipRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createMembership(request: google.cloud.gkehub.v1alpha2.ICreateMembershipRequest): Promise<google.longrunning.Operation>;
-
-                    /**
-                     * Calls DeleteMembership.
-                     * @param request DeleteMembershipRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public deleteMembership(request: google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest, callback: google.cloud.gkehub.v1alpha2.GkeHub.DeleteMembershipCallback): void;
-
-                    /**
-                     * Calls DeleteMembership.
-                     * @param request DeleteMembershipRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteMembership(request: google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest): Promise<google.longrunning.Operation>;
-
-                    /**
-                     * Calls UpdateMembership.
-                     * @param request UpdateMembershipRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public updateMembership(request: google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest, callback: google.cloud.gkehub.v1alpha2.GkeHub.UpdateMembershipCallback): void;
-
-                    /**
-                     * Calls UpdateMembership.
-                     * @param request UpdateMembershipRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateMembership(request: google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest): Promise<google.longrunning.Operation>;
-
-                    /**
-                     * Calls GenerateConnectManifest.
-                     * @param request GenerateConnectManifestRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and GenerateConnectManifestResponse
-                     */
-                    public generateConnectManifest(request: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest, callback: google.cloud.gkehub.v1alpha2.GkeHub.GenerateConnectManifestCallback): void;
-
-                    /**
-                     * Calls GenerateConnectManifest.
-                     * @param request GenerateConnectManifestRequest message or plain object
-                     * @returns Promise
-                     */
-                    public generateConnectManifest(request: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest): Promise<google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse>;
-
-                    /**
-                     * Calls InitializeHub.
-                     * @param request InitializeHubRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and InitializeHubResponse
-                     */
-                    public initializeHub(request: google.cloud.gkehub.v1alpha2.IInitializeHubRequest, callback: google.cloud.gkehub.v1alpha2.GkeHub.InitializeHubCallback): void;
-
-                    /**
-                     * Calls InitializeHub.
-                     * @param request InitializeHubRequest message or plain object
-                     * @returns Promise
-                     */
-                    public initializeHub(request: google.cloud.gkehub.v1alpha2.IInitializeHubRequest): Promise<google.cloud.gkehub.v1alpha2.InitializeHubResponse>;
-                }
-
-                namespace GkeHub {
-
-                    /**
-                     * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|listMemberships}.
-                     * @param error Error, if any
-                     * @param [response] ListMembershipsResponse
-                     */
-                    type ListMembershipsCallback = (error: (Error|null), response?: google.cloud.gkehub.v1alpha2.ListMembershipsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|getMembership}.
-                     * @param error Error, if any
-                     * @param [response] Membership
-                     */
-                    type GetMembershipCallback = (error: (Error|null), response?: google.cloud.gkehub.v1alpha2.Membership) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|createMembership}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type CreateMembershipCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|deleteMembership}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type DeleteMembershipCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|updateMembership}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type UpdateMembershipCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|generateConnectManifest}.
-                     * @param error Error, if any
-                     * @param [response] GenerateConnectManifestResponse
-                     */
-                    type GenerateConnectManifestCallback = (error: (Error|null), response?: google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|initializeHub}.
-                     * @param error Error, if any
-                     * @param [response] InitializeHubResponse
-                     */
-                    type InitializeHubCallback = (error: (Error|null), response?: google.cloud.gkehub.v1alpha2.InitializeHubResponse) => void;
-                }
-
-                /** Properties of a Membership. */
-                interface IMembership {
-
-                    /** Membership name */
-                    name?: (string|null);
-
-                    /** Membership labels */
-                    labels?: ({ [k: string]: string }|null);
-
-                    /** Membership description */
-                    description?: (string|null);
-
-                    /** Membership endpoint */
-                    endpoint?: (google.cloud.gkehub.v1alpha2.IMembershipEndpoint|null);
-
-                    /** Membership state */
-                    state?: (google.cloud.gkehub.v1alpha2.IMembershipState|null);
-
-                    /** Membership createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership deleteTime */
-                    deleteTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership externalId */
-                    externalId?: (string|null);
-
-                    /** Membership authority */
-                    authority?: (google.cloud.gkehub.v1alpha2.IAuthority|null);
-
-                    /** Membership lastConnectionTime */
-                    lastConnectionTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership uniqueId */
-                    uniqueId?: (string|null);
-
-                    /** Membership infrastructureType */
-                    infrastructureType?: (google.cloud.gkehub.v1alpha2.Membership.InfrastructureType|keyof typeof google.cloud.gkehub.v1alpha2.Membership.InfrastructureType|null);
-                }
-
-                /** Represents a Membership. */
-                class Membership implements IMembership {
-
-                    /**
-                     * Constructs a new Membership.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IMembership);
-
-                    /** Membership name. */
-                    public name: string;
-
-                    /** Membership labels. */
-                    public labels: { [k: string]: string };
-
-                    /** Membership description. */
-                    public description: string;
-
-                    /** Membership endpoint. */
-                    public endpoint?: (google.cloud.gkehub.v1alpha2.IMembershipEndpoint|null);
-
-                    /** Membership state. */
-                    public state?: (google.cloud.gkehub.v1alpha2.IMembershipState|null);
-
-                    /** Membership createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership deleteTime. */
-                    public deleteTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership externalId. */
-                    public externalId: string;
-
-                    /** Membership authority. */
-                    public authority?: (google.cloud.gkehub.v1alpha2.IAuthority|null);
-
-                    /** Membership lastConnectionTime. */
-                    public lastConnectionTime?: (google.protobuf.ITimestamp|null);
-
-                    /** Membership uniqueId. */
-                    public uniqueId: string;
-
-                    /** Membership infrastructureType. */
-                    public infrastructureType: (google.cloud.gkehub.v1alpha2.Membership.InfrastructureType|keyof typeof google.cloud.gkehub.v1alpha2.Membership.InfrastructureType);
-
-                    /** Membership type. */
-                    public type?: "endpoint";
-
-                    /**
-                     * Creates a new Membership instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Membership instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IMembership): google.cloud.gkehub.v1alpha2.Membership;
-
-                    /**
-                     * Encodes the specified Membership message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Membership.verify|verify} messages.
-                     * @param message Membership message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Membership message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Membership.verify|verify} messages.
-                     * @param message Membership message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IMembership, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Membership message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Membership
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.Membership;
-
-                    /**
-                     * Decodes a Membership message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Membership
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.Membership;
-
-                    /**
-                     * Verifies a Membership message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Membership message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Membership
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.Membership;
-
-                    /**
-                     * Creates a plain object from a Membership message. Also converts values to other types if specified.
-                     * @param message Membership
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.Membership, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Membership to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Membership
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Membership {
-
-                    /** InfrastructureType enum. */
-                    enum InfrastructureType {
-                        INFRASTRUCTURE_TYPE_UNSPECIFIED = 0,
-                        ON_PREM = 1,
-                        MULTI_CLOUD = 2
-                    }
-                }
-
-                /** Properties of a MembershipEndpoint. */
-                interface IMembershipEndpoint {
-
-                    /** MembershipEndpoint gkeCluster */
-                    gkeCluster?: (google.cloud.gkehub.v1alpha2.IGkeCluster|null);
-
-                    /** MembershipEndpoint onPremCluster */
-                    onPremCluster?: (google.cloud.gkehub.v1alpha2.IOnPremCluster|null);
-
-                    /** MembershipEndpoint multiCloudCluster */
-                    multiCloudCluster?: (google.cloud.gkehub.v1alpha2.IMultiCloudCluster|null);
-
-                    /** MembershipEndpoint kubernetesMetadata */
-                    kubernetesMetadata?: (google.cloud.gkehub.v1alpha2.IKubernetesMetadata|null);
-
-                    /** MembershipEndpoint kubernetesResource */
-                    kubernetesResource?: (google.cloud.gkehub.v1alpha2.IKubernetesResource|null);
-                }
-
-                /** Represents a MembershipEndpoint. */
-                class MembershipEndpoint implements IMembershipEndpoint {
-
-                    /**
-                     * Constructs a new MembershipEndpoint.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IMembershipEndpoint);
-
-                    /** MembershipEndpoint gkeCluster. */
-                    public gkeCluster?: (google.cloud.gkehub.v1alpha2.IGkeCluster|null);
-
-                    /** MembershipEndpoint onPremCluster. */
-                    public onPremCluster?: (google.cloud.gkehub.v1alpha2.IOnPremCluster|null);
-
-                    /** MembershipEndpoint multiCloudCluster. */
-                    public multiCloudCluster?: (google.cloud.gkehub.v1alpha2.IMultiCloudCluster|null);
-
-                    /** MembershipEndpoint kubernetesMetadata. */
-                    public kubernetesMetadata?: (google.cloud.gkehub.v1alpha2.IKubernetesMetadata|null);
-
-                    /** MembershipEndpoint kubernetesResource. */
-                    public kubernetesResource?: (google.cloud.gkehub.v1alpha2.IKubernetesResource|null);
-
-                    /** MembershipEndpoint type. */
-                    public type?: ("gkeCluster"|"onPremCluster"|"multiCloudCluster");
-
-                    /**
-                     * Creates a new MembershipEndpoint instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns MembershipEndpoint instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IMembershipEndpoint): google.cloud.gkehub.v1alpha2.MembershipEndpoint;
-
-                    /**
-                     * Encodes the specified MembershipEndpoint message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipEndpoint.verify|verify} messages.
-                     * @param message MembershipEndpoint message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IMembershipEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified MembershipEndpoint message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipEndpoint.verify|verify} messages.
-                     * @param message MembershipEndpoint message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IMembershipEndpoint, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a MembershipEndpoint message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns MembershipEndpoint
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.MembershipEndpoint;
-
-                    /**
-                     * Decodes a MembershipEndpoint message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns MembershipEndpoint
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.MembershipEndpoint;
-
-                    /**
-                     * Verifies a MembershipEndpoint message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a MembershipEndpoint message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns MembershipEndpoint
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.MembershipEndpoint;
-
-                    /**
-                     * Creates a plain object from a MembershipEndpoint message. Also converts values to other types if specified.
-                     * @param message MembershipEndpoint
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.MembershipEndpoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this MembershipEndpoint to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for MembershipEndpoint
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a KubernetesResource. */
-                interface IKubernetesResource {
-
-                    /** KubernetesResource membershipCrManifest */
-                    membershipCrManifest?: (string|null);
-
-                    /** KubernetesResource membershipResources */
-                    membershipResources?: (google.cloud.gkehub.v1alpha2.IResourceManifest[]|null);
-
-                    /** KubernetesResource connectResources */
-                    connectResources?: (google.cloud.gkehub.v1alpha2.IResourceManifest[]|null);
-
-                    /** KubernetesResource resourceOptions */
-                    resourceOptions?: (google.cloud.gkehub.v1alpha2.IResourceOptions|null);
-                }
-
-                /** Represents a KubernetesResource. */
-                class KubernetesResource implements IKubernetesResource {
-
-                    /**
-                     * Constructs a new KubernetesResource.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IKubernetesResource);
-
-                    /** KubernetesResource membershipCrManifest. */
-                    public membershipCrManifest: string;
-
-                    /** KubernetesResource membershipResources. */
-                    public membershipResources: google.cloud.gkehub.v1alpha2.IResourceManifest[];
-
-                    /** KubernetesResource connectResources. */
-                    public connectResources: google.cloud.gkehub.v1alpha2.IResourceManifest[];
-
-                    /** KubernetesResource resourceOptions. */
-                    public resourceOptions?: (google.cloud.gkehub.v1alpha2.IResourceOptions|null);
-
-                    /**
-                     * Creates a new KubernetesResource instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns KubernetesResource instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IKubernetesResource): google.cloud.gkehub.v1alpha2.KubernetesResource;
-
-                    /**
-                     * Encodes the specified KubernetesResource message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesResource.verify|verify} messages.
-                     * @param message KubernetesResource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IKubernetesResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified KubernetesResource message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesResource.verify|verify} messages.
-                     * @param message KubernetesResource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IKubernetesResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a KubernetesResource message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns KubernetesResource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.KubernetesResource;
-
-                    /**
-                     * Decodes a KubernetesResource message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns KubernetesResource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.KubernetesResource;
-
-                    /**
-                     * Verifies a KubernetesResource message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a KubernetesResource message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns KubernetesResource
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.KubernetesResource;
-
-                    /**
-                     * Creates a plain object from a KubernetesResource message. Also converts values to other types if specified.
-                     * @param message KubernetesResource
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.KubernetesResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this KubernetesResource to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for KubernetesResource
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ResourceOptions. */
-                interface IResourceOptions {
-
-                    /** ResourceOptions connectVersion */
-                    connectVersion?: (string|null);
-
-                    /** ResourceOptions v1beta1Crd */
-                    v1beta1Crd?: (boolean|null);
-
-                    /** ResourceOptions k8sVersion */
-                    k8sVersion?: (string|null);
-                }
-
-                /** Represents a ResourceOptions. */
-                class ResourceOptions implements IResourceOptions {
-
-                    /**
-                     * Constructs a new ResourceOptions.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IResourceOptions);
-
-                    /** ResourceOptions connectVersion. */
-                    public connectVersion: string;
-
-                    /** ResourceOptions v1beta1Crd. */
-                    public v1beta1Crd: boolean;
-
-                    /** ResourceOptions k8sVersion. */
-                    public k8sVersion: string;
-
-                    /**
-                     * Creates a new ResourceOptions instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ResourceOptions instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IResourceOptions): google.cloud.gkehub.v1alpha2.ResourceOptions;
-
-                    /**
-                     * Encodes the specified ResourceOptions message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceOptions.verify|verify} messages.
-                     * @param message ResourceOptions message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IResourceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ResourceOptions message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceOptions.verify|verify} messages.
-                     * @param message ResourceOptions message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IResourceOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ResourceOptions message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ResourceOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.ResourceOptions;
-
-                    /**
-                     * Decodes a ResourceOptions message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ResourceOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.ResourceOptions;
-
-                    /**
-                     * Verifies a ResourceOptions message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ResourceOptions message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ResourceOptions
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.ResourceOptions;
-
-                    /**
-                     * Creates a plain object from a ResourceOptions message. Also converts values to other types if specified.
-                     * @param message ResourceOptions
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.ResourceOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ResourceOptions to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ResourceOptions
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a GkeCluster. */
-                interface IGkeCluster {
-
-                    /** GkeCluster resourceLink */
-                    resourceLink?: (string|null);
-
-                    /** GkeCluster clusterMissing */
-                    clusterMissing?: (boolean|null);
-                }
-
-                /** Represents a GkeCluster. */
-                class GkeCluster implements IGkeCluster {
-
-                    /**
-                     * Constructs a new GkeCluster.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IGkeCluster);
-
-                    /** GkeCluster resourceLink. */
-                    public resourceLink: string;
-
-                    /** GkeCluster clusterMissing. */
-                    public clusterMissing: boolean;
-
-                    /**
-                     * Creates a new GkeCluster instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GkeCluster instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IGkeCluster): google.cloud.gkehub.v1alpha2.GkeCluster;
-
-                    /**
-                     * Encodes the specified GkeCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GkeCluster.verify|verify} messages.
-                     * @param message GkeCluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IGkeCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GkeCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GkeCluster.verify|verify} messages.
-                     * @param message GkeCluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IGkeCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GkeCluster message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GkeCluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.GkeCluster;
-
-                    /**
-                     * Decodes a GkeCluster message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GkeCluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.GkeCluster;
-
-                    /**
-                     * Verifies a GkeCluster message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GkeCluster message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GkeCluster
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.GkeCluster;
-
-                    /**
-                     * Creates a plain object from a GkeCluster message. Also converts values to other types if specified.
-                     * @param message GkeCluster
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.GkeCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GkeCluster to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GkeCluster
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an OnPremCluster. */
-                interface IOnPremCluster {
-
-                    /** OnPremCluster resourceLink */
-                    resourceLink?: (string|null);
-
-                    /** OnPremCluster clusterMissing */
-                    clusterMissing?: (boolean|null);
-
-                    /** OnPremCluster adminCluster */
-                    adminCluster?: (boolean|null);
-                }
-
-                /** Represents an OnPremCluster. */
-                class OnPremCluster implements IOnPremCluster {
-
-                    /**
-                     * Constructs a new OnPremCluster.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IOnPremCluster);
-
-                    /** OnPremCluster resourceLink. */
-                    public resourceLink: string;
-
-                    /** OnPremCluster clusterMissing. */
-                    public clusterMissing: boolean;
-
-                    /** OnPremCluster adminCluster. */
-                    public adminCluster: boolean;
-
-                    /**
-                     * Creates a new OnPremCluster instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns OnPremCluster instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IOnPremCluster): google.cloud.gkehub.v1alpha2.OnPremCluster;
-
-                    /**
-                     * Encodes the specified OnPremCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OnPremCluster.verify|verify} messages.
-                     * @param message OnPremCluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IOnPremCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified OnPremCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OnPremCluster.verify|verify} messages.
-                     * @param message OnPremCluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IOnPremCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an OnPremCluster message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns OnPremCluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.OnPremCluster;
-
-                    /**
-                     * Decodes an OnPremCluster message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns OnPremCluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.OnPremCluster;
-
-                    /**
-                     * Verifies an OnPremCluster message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an OnPremCluster message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns OnPremCluster
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.OnPremCluster;
-
-                    /**
-                     * Creates a plain object from an OnPremCluster message. Also converts values to other types if specified.
-                     * @param message OnPremCluster
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.OnPremCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this OnPremCluster to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for OnPremCluster
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a MultiCloudCluster. */
-                interface IMultiCloudCluster {
-
-                    /** MultiCloudCluster resourceLink */
-                    resourceLink?: (string|null);
-
-                    /** MultiCloudCluster clusterMissing */
-                    clusterMissing?: (boolean|null);
-                }
-
-                /** Represents a MultiCloudCluster. */
-                class MultiCloudCluster implements IMultiCloudCluster {
-
-                    /**
-                     * Constructs a new MultiCloudCluster.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IMultiCloudCluster);
-
-                    /** MultiCloudCluster resourceLink. */
-                    public resourceLink: string;
-
-                    /** MultiCloudCluster clusterMissing. */
-                    public clusterMissing: boolean;
-
-                    /**
-                     * Creates a new MultiCloudCluster instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns MultiCloudCluster instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IMultiCloudCluster): google.cloud.gkehub.v1alpha2.MultiCloudCluster;
-
-                    /**
-                     * Encodes the specified MultiCloudCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify|verify} messages.
-                     * @param message MultiCloudCluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IMultiCloudCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified MultiCloudCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify|verify} messages.
-                     * @param message MultiCloudCluster message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IMultiCloudCluster, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a MultiCloudCluster message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns MultiCloudCluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.MultiCloudCluster;
-
-                    /**
-                     * Decodes a MultiCloudCluster message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns MultiCloudCluster
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.MultiCloudCluster;
-
-                    /**
-                     * Verifies a MultiCloudCluster message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a MultiCloudCluster message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns MultiCloudCluster
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.MultiCloudCluster;
-
-                    /**
-                     * Creates a plain object from a MultiCloudCluster message. Also converts values to other types if specified.
-                     * @param message MultiCloudCluster
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.MultiCloudCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this MultiCloudCluster to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for MultiCloudCluster
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a KubernetesMetadata. */
-                interface IKubernetesMetadata {
-
-                    /** KubernetesMetadata kubernetesApiServerVersion */
-                    kubernetesApiServerVersion?: (string|null);
-
-                    /** KubernetesMetadata nodeProviderId */
-                    nodeProviderId?: (string|null);
-
-                    /** KubernetesMetadata nodeCount */
-                    nodeCount?: (number|null);
-
-                    /** KubernetesMetadata vcpuCount */
-                    vcpuCount?: (number|null);
-
-                    /** KubernetesMetadata memoryMb */
-                    memoryMb?: (number|null);
-
-                    /** KubernetesMetadata updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a KubernetesMetadata. */
-                class KubernetesMetadata implements IKubernetesMetadata {
-
-                    /**
-                     * Constructs a new KubernetesMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IKubernetesMetadata);
-
-                    /** KubernetesMetadata kubernetesApiServerVersion. */
-                    public kubernetesApiServerVersion: string;
-
-                    /** KubernetesMetadata nodeProviderId. */
-                    public nodeProviderId: string;
-
-                    /** KubernetesMetadata nodeCount. */
-                    public nodeCount: number;
-
-                    /** KubernetesMetadata vcpuCount. */
-                    public vcpuCount: number;
-
-                    /** KubernetesMetadata memoryMb. */
-                    public memoryMb: number;
-
-                    /** KubernetesMetadata updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new KubernetesMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns KubernetesMetadata instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IKubernetesMetadata): google.cloud.gkehub.v1alpha2.KubernetesMetadata;
-
-                    /**
-                     * Encodes the specified KubernetesMetadata message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesMetadata.verify|verify} messages.
-                     * @param message KubernetesMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IKubernetesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified KubernetesMetadata message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesMetadata.verify|verify} messages.
-                     * @param message KubernetesMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IKubernetesMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a KubernetesMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns KubernetesMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.KubernetesMetadata;
-
-                    /**
-                     * Decodes a KubernetesMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns KubernetesMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.KubernetesMetadata;
-
-                    /**
-                     * Verifies a KubernetesMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a KubernetesMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns KubernetesMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.KubernetesMetadata;
-
-                    /**
-                     * Creates a plain object from a KubernetesMetadata message. Also converts values to other types if specified.
-                     * @param message KubernetesMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.KubernetesMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this KubernetesMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for KubernetesMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an Authority. */
-                interface IAuthority {
-
-                    /** Authority issuer */
-                    issuer?: (string|null);
-
-                    /** Authority oidcJwks */
-                    oidcJwks?: (Uint8Array|string|null);
-
-                    /** Authority identityProvider */
-                    identityProvider?: (string|null);
-
-                    /** Authority workloadIdentityPool */
-                    workloadIdentityPool?: (string|null);
-                }
-
-                /** Represents an Authority. */
-                class Authority implements IAuthority {
-
-                    /**
-                     * Constructs a new Authority.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IAuthority);
-
-                    /** Authority issuer. */
-                    public issuer: string;
-
-                    /** Authority oidcJwks. */
-                    public oidcJwks: (Uint8Array|string);
-
-                    /** Authority identityProvider. */
-                    public identityProvider: string;
-
-                    /** Authority workloadIdentityPool. */
-                    public workloadIdentityPool: string;
-
-                    /**
-                     * Creates a new Authority instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Authority instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IAuthority): google.cloud.gkehub.v1alpha2.Authority;
-
-                    /**
-                     * Encodes the specified Authority message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Authority.verify|verify} messages.
-                     * @param message Authority message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Authority message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Authority.verify|verify} messages.
-                     * @param message Authority message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IAuthority, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an Authority message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Authority
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.Authority;
-
-                    /**
-                     * Decodes an Authority message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Authority
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.Authority;
-
-                    /**
-                     * Verifies an Authority message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an Authority message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Authority
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.Authority;
-
-                    /**
-                     * Creates a plain object from an Authority message. Also converts values to other types if specified.
-                     * @param message Authority
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.Authority, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Authority to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Authority
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a MembershipState. */
-                interface IMembershipState {
-
-                    /** MembershipState code */
-                    code?: (google.cloud.gkehub.v1alpha2.MembershipState.Code|keyof typeof google.cloud.gkehub.v1alpha2.MembershipState.Code|null);
-                }
-
-                /** Represents a MembershipState. */
-                class MembershipState implements IMembershipState {
-
-                    /**
-                     * Constructs a new MembershipState.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IMembershipState);
-
-                    /** MembershipState code. */
-                    public code: (google.cloud.gkehub.v1alpha2.MembershipState.Code|keyof typeof google.cloud.gkehub.v1alpha2.MembershipState.Code);
-
-                    /**
-                     * Creates a new MembershipState instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns MembershipState instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IMembershipState): google.cloud.gkehub.v1alpha2.MembershipState;
-
-                    /**
-                     * Encodes the specified MembershipState message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipState.verify|verify} messages.
-                     * @param message MembershipState message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IMembershipState, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified MembershipState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipState.verify|verify} messages.
-                     * @param message MembershipState message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IMembershipState, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a MembershipState message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns MembershipState
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.MembershipState;
-
-                    /**
-                     * Decodes a MembershipState message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns MembershipState
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.MembershipState;
-
-                    /**
-                     * Verifies a MembershipState message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a MembershipState message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns MembershipState
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.MembershipState;
-
-                    /**
-                     * Creates a plain object from a MembershipState message. Also converts values to other types if specified.
-                     * @param message MembershipState
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.MembershipState, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this MembershipState to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for MembershipState
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace MembershipState {
-
-                    /** Code enum. */
-                    enum Code {
-                        CODE_UNSPECIFIED = 0,
-                        CREATING = 1,
-                        READY = 2,
-                        DELETING = 3,
-                        UPDATING = 4,
-                        SERVICE_UPDATING = 5
-                    }
-                }
-
-                /** Properties of a ListMembershipsRequest. */
-                interface IListMembershipsRequest {
-
-                    /** ListMembershipsRequest parent */
-                    parent?: (string|null);
-
-                    /** ListMembershipsRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListMembershipsRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** ListMembershipsRequest filter */
-                    filter?: (string|null);
-
-                    /** ListMembershipsRequest orderBy */
-                    orderBy?: (string|null);
-                }
-
-                /** Represents a ListMembershipsRequest. */
-                class ListMembershipsRequest implements IListMembershipsRequest {
-
-                    /**
-                     * Constructs a new ListMembershipsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IListMembershipsRequest);
-
-                    /** ListMembershipsRequest parent. */
-                    public parent: string;
-
-                    /** ListMembershipsRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListMembershipsRequest pageToken. */
-                    public pageToken: string;
-
-                    /** ListMembershipsRequest filter. */
-                    public filter: string;
-
-                    /** ListMembershipsRequest orderBy. */
-                    public orderBy: string;
-
-                    /**
-                     * Creates a new ListMembershipsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListMembershipsRequest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IListMembershipsRequest): google.cloud.gkehub.v1alpha2.ListMembershipsRequest;
-
-                    /**
-                     * Encodes the specified ListMembershipsRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsRequest.verify|verify} messages.
-                     * @param message ListMembershipsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IListMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListMembershipsRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsRequest.verify|verify} messages.
-                     * @param message ListMembershipsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IListMembershipsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListMembershipsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListMembershipsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.ListMembershipsRequest;
-
-                    /**
-                     * Decodes a ListMembershipsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListMembershipsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.ListMembershipsRequest;
-
-                    /**
-                     * Verifies a ListMembershipsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListMembershipsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListMembershipsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.ListMembershipsRequest;
-
-                    /**
-                     * Creates a plain object from a ListMembershipsRequest message. Also converts values to other types if specified.
-                     * @param message ListMembershipsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.ListMembershipsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListMembershipsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ListMembershipsRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ListMembershipsResponse. */
-                interface IListMembershipsResponse {
-
-                    /** ListMembershipsResponse resources */
-                    resources?: (google.cloud.gkehub.v1alpha2.IMembership[]|null);
-
-                    /** ListMembershipsResponse nextPageToken */
-                    nextPageToken?: (string|null);
-
-                    /** ListMembershipsResponse unreachable */
-                    unreachable?: (string[]|null);
-                }
-
-                /** Represents a ListMembershipsResponse. */
-                class ListMembershipsResponse implements IListMembershipsResponse {
-
-                    /**
-                     * Constructs a new ListMembershipsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IListMembershipsResponse);
-
-                    /** ListMembershipsResponse resources. */
-                    public resources: google.cloud.gkehub.v1alpha2.IMembership[];
-
-                    /** ListMembershipsResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /** ListMembershipsResponse unreachable. */
-                    public unreachable: string[];
-
-                    /**
-                     * Creates a new ListMembershipsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListMembershipsResponse instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IListMembershipsResponse): google.cloud.gkehub.v1alpha2.ListMembershipsResponse;
-
-                    /**
-                     * Encodes the specified ListMembershipsResponse message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsResponse.verify|verify} messages.
-                     * @param message ListMembershipsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IListMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListMembershipsResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsResponse.verify|verify} messages.
-                     * @param message ListMembershipsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IListMembershipsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListMembershipsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListMembershipsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.ListMembershipsResponse;
-
-                    /**
-                     * Decodes a ListMembershipsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListMembershipsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.ListMembershipsResponse;
-
-                    /**
-                     * Verifies a ListMembershipsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListMembershipsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListMembershipsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.ListMembershipsResponse;
-
-                    /**
-                     * Creates a plain object from a ListMembershipsResponse message. Also converts values to other types if specified.
-                     * @param message ListMembershipsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.ListMembershipsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListMembershipsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ListMembershipsResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a GetMembershipRequest. */
-                interface IGetMembershipRequest {
-
-                    /** GetMembershipRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetMembershipRequest. */
-                class GetMembershipRequest implements IGetMembershipRequest {
-
-                    /**
-                     * Constructs a new GetMembershipRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IGetMembershipRequest);
-
-                    /** GetMembershipRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetMembershipRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetMembershipRequest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IGetMembershipRequest): google.cloud.gkehub.v1alpha2.GetMembershipRequest;
-
-                    /**
-                     * Encodes the specified GetMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GetMembershipRequest.verify|verify} messages.
-                     * @param message GetMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IGetMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GetMembershipRequest.verify|verify} messages.
-                     * @param message GetMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IGetMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetMembershipRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.GetMembershipRequest;
-
-                    /**
-                     * Decodes a GetMembershipRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.GetMembershipRequest;
-
-                    /**
-                     * Verifies a GetMembershipRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetMembershipRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetMembershipRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.GetMembershipRequest;
-
-                    /**
-                     * Creates a plain object from a GetMembershipRequest message. Also converts values to other types if specified.
-                     * @param message GetMembershipRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.GetMembershipRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetMembershipRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GetMembershipRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CreateMembershipRequest. */
-                interface ICreateMembershipRequest {
-
-                    /** CreateMembershipRequest parent */
-                    parent?: (string|null);
-
-                    /** CreateMembershipRequest membershipId */
-                    membershipId?: (string|null);
-
-                    /** CreateMembershipRequest resource */
-                    resource?: (google.cloud.gkehub.v1alpha2.IMembership|null);
-                }
-
-                /** Represents a CreateMembershipRequest. */
-                class CreateMembershipRequest implements ICreateMembershipRequest {
-
-                    /**
-                     * Constructs a new CreateMembershipRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.ICreateMembershipRequest);
-
-                    /** CreateMembershipRequest parent. */
-                    public parent: string;
-
-                    /** CreateMembershipRequest membershipId. */
-                    public membershipId: string;
-
-                    /** CreateMembershipRequest resource. */
-                    public resource?: (google.cloud.gkehub.v1alpha2.IMembership|null);
-
-                    /**
-                     * Creates a new CreateMembershipRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateMembershipRequest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.ICreateMembershipRequest): google.cloud.gkehub.v1alpha2.CreateMembershipRequest;
-
-                    /**
-                     * Encodes the specified CreateMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.CreateMembershipRequest.verify|verify} messages.
-                     * @param message CreateMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.ICreateMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.CreateMembershipRequest.verify|verify} messages.
-                     * @param message CreateMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.ICreateMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateMembershipRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.CreateMembershipRequest;
-
-                    /**
-                     * Decodes a CreateMembershipRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.CreateMembershipRequest;
-
-                    /**
-                     * Verifies a CreateMembershipRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateMembershipRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateMembershipRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.CreateMembershipRequest;
-
-                    /**
-                     * Creates a plain object from a CreateMembershipRequest message. Also converts values to other types if specified.
-                     * @param message CreateMembershipRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.CreateMembershipRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateMembershipRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CreateMembershipRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DeleteMembershipRequest. */
-                interface IDeleteMembershipRequest {
-
-                    /** DeleteMembershipRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a DeleteMembershipRequest. */
-                class DeleteMembershipRequest implements IDeleteMembershipRequest {
-
-                    /**
-                     * Constructs a new DeleteMembershipRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest);
-
-                    /** DeleteMembershipRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new DeleteMembershipRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteMembershipRequest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest): google.cloud.gkehub.v1alpha2.DeleteMembershipRequest;
-
-                    /**
-                     * Encodes the specified DeleteMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.DeleteMembershipRequest.verify|verify} messages.
-                     * @param message DeleteMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.DeleteMembershipRequest.verify|verify} messages.
-                     * @param message DeleteMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteMembershipRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.DeleteMembershipRequest;
-
-                    /**
-                     * Decodes a DeleteMembershipRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.DeleteMembershipRequest;
-
-                    /**
-                     * Verifies a DeleteMembershipRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteMembershipRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteMembershipRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.DeleteMembershipRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteMembershipRequest message. Also converts values to other types if specified.
-                     * @param message DeleteMembershipRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.DeleteMembershipRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteMembershipRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DeleteMembershipRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an UpdateMembershipRequest. */
-                interface IUpdateMembershipRequest {
-
-                    /** UpdateMembershipRequest name */
-                    name?: (string|null);
-
-                    /** UpdateMembershipRequest updateMask */
-                    updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /** UpdateMembershipRequest resource */
-                    resource?: (google.cloud.gkehub.v1alpha2.IMembership|null);
-                }
-
-                /** Represents an UpdateMembershipRequest. */
-                class UpdateMembershipRequest implements IUpdateMembershipRequest {
-
-                    /**
-                     * Constructs a new UpdateMembershipRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest);
-
-                    /** UpdateMembershipRequest name. */
-                    public name: string;
-
-                    /** UpdateMembershipRequest updateMask. */
-                    public updateMask?: (google.protobuf.IFieldMask|null);
-
-                    /** UpdateMembershipRequest resource. */
-                    public resource?: (google.cloud.gkehub.v1alpha2.IMembership|null);
-
-                    /**
-                     * Creates a new UpdateMembershipRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateMembershipRequest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest): google.cloud.gkehub.v1alpha2.UpdateMembershipRequest;
-
-                    /**
-                     * Encodes the specified UpdateMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.UpdateMembershipRequest.verify|verify} messages.
-                     * @param message UpdateMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.UpdateMembershipRequest.verify|verify} messages.
-                     * @param message UpdateMembershipRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateMembershipRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.UpdateMembershipRequest;
-
-                    /**
-                     * Decodes an UpdateMembershipRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateMembershipRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.UpdateMembershipRequest;
-
-                    /**
-                     * Verifies an UpdateMembershipRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateMembershipRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateMembershipRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.UpdateMembershipRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateMembershipRequest message. Also converts values to other types if specified.
-                     * @param message UpdateMembershipRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.UpdateMembershipRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateMembershipRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for UpdateMembershipRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a GenerateConnectManifestRequest. */
-                interface IGenerateConnectManifestRequest {
-
-                    /** GenerateConnectManifestRequest name */
-                    name?: (string|null);
-
-                    /** GenerateConnectManifestRequest namespace */
-                    namespace?: (string|null);
-
-                    /** GenerateConnectManifestRequest proxy */
-                    proxy?: (Uint8Array|string|null);
-
-                    /** GenerateConnectManifestRequest version */
-                    version?: (string|null);
-
-                    /** GenerateConnectManifestRequest isUpgrade */
-                    isUpgrade?: (boolean|null);
-
-                    /** GenerateConnectManifestRequest registry */
-                    registry?: (string|null);
-
-                    /** GenerateConnectManifestRequest imagePullSecretContent */
-                    imagePullSecretContent?: (Uint8Array|string|null);
-                }
-
-                /** Represents a GenerateConnectManifestRequest. */
-                class GenerateConnectManifestRequest implements IGenerateConnectManifestRequest {
-
-                    /**
-                     * Constructs a new GenerateConnectManifestRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest);
-
-                    /** GenerateConnectManifestRequest name. */
-                    public name: string;
-
-                    /** GenerateConnectManifestRequest namespace. */
-                    public namespace: string;
-
-                    /** GenerateConnectManifestRequest proxy. */
-                    public proxy: (Uint8Array|string);
-
-                    /** GenerateConnectManifestRequest version. */
-                    public version: string;
-
-                    /** GenerateConnectManifestRequest isUpgrade. */
-                    public isUpgrade: boolean;
-
-                    /** GenerateConnectManifestRequest registry. */
-                    public registry: string;
-
-                    /** GenerateConnectManifestRequest imagePullSecretContent. */
-                    public imagePullSecretContent: (Uint8Array|string);
-
-                    /**
-                     * Creates a new GenerateConnectManifestRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GenerateConnectManifestRequest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest): google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest;
-
-                    /**
-                     * Encodes the specified GenerateConnectManifestRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest.verify|verify} messages.
-                     * @param message GenerateConnectManifestRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GenerateConnectManifestRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest.verify|verify} messages.
-                     * @param message GenerateConnectManifestRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GenerateConnectManifestRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GenerateConnectManifestRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest;
-
-                    /**
-                     * Decodes a GenerateConnectManifestRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GenerateConnectManifestRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest;
-
-                    /**
-                     * Verifies a GenerateConnectManifestRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GenerateConnectManifestRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GenerateConnectManifestRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest;
-
-                    /**
-                     * Creates a plain object from a GenerateConnectManifestRequest message. Also converts values to other types if specified.
-                     * @param message GenerateConnectManifestRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GenerateConnectManifestRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GenerateConnectManifestRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a GenerateConnectManifestResponse. */
-                interface IGenerateConnectManifestResponse {
-
-                    /** GenerateConnectManifestResponse manifest */
-                    manifest?: (google.cloud.gkehub.v1alpha2.IConnectAgentResource[]|null);
-                }
-
-                /** Represents a GenerateConnectManifestResponse. */
-                class GenerateConnectManifestResponse implements IGenerateConnectManifestResponse {
-
-                    /**
-                     * Constructs a new GenerateConnectManifestResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse);
-
-                    /** GenerateConnectManifestResponse manifest. */
-                    public manifest: google.cloud.gkehub.v1alpha2.IConnectAgentResource[];
-
-                    /**
-                     * Creates a new GenerateConnectManifestResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GenerateConnectManifestResponse instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse): google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse;
-
-                    /**
-                     * Encodes the specified GenerateConnectManifestResponse message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse.verify|verify} messages.
-                     * @param message GenerateConnectManifestResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GenerateConnectManifestResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse.verify|verify} messages.
-                     * @param message GenerateConnectManifestResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GenerateConnectManifestResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GenerateConnectManifestResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse;
-
-                    /**
-                     * Decodes a GenerateConnectManifestResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GenerateConnectManifestResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse;
-
-                    /**
-                     * Verifies a GenerateConnectManifestResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GenerateConnectManifestResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GenerateConnectManifestResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse;
-
-                    /**
-                     * Creates a plain object from a GenerateConnectManifestResponse message. Also converts values to other types if specified.
-                     * @param message GenerateConnectManifestResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GenerateConnectManifestResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GenerateConnectManifestResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ConnectAgentResource. */
-                interface IConnectAgentResource {
-
-                    /** ConnectAgentResource type */
-                    type?: (google.cloud.gkehub.v1alpha2.ITypeMeta|null);
-
-                    /** ConnectAgentResource manifest */
-                    manifest?: (string|null);
-                }
-
-                /** Represents a ConnectAgentResource. */
-                class ConnectAgentResource implements IConnectAgentResource {
-
-                    /**
-                     * Constructs a new ConnectAgentResource.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IConnectAgentResource);
-
-                    /** ConnectAgentResource type. */
-                    public type?: (google.cloud.gkehub.v1alpha2.ITypeMeta|null);
-
-                    /** ConnectAgentResource manifest. */
-                    public manifest: string;
-
-                    /**
-                     * Creates a new ConnectAgentResource instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ConnectAgentResource instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IConnectAgentResource): google.cloud.gkehub.v1alpha2.ConnectAgentResource;
-
-                    /**
-                     * Encodes the specified ConnectAgentResource message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ConnectAgentResource.verify|verify} messages.
-                     * @param message ConnectAgentResource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IConnectAgentResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ConnectAgentResource message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ConnectAgentResource.verify|verify} messages.
-                     * @param message ConnectAgentResource message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IConnectAgentResource, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ConnectAgentResource message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ConnectAgentResource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.ConnectAgentResource;
-
-                    /**
-                     * Decodes a ConnectAgentResource message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ConnectAgentResource
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.ConnectAgentResource;
-
-                    /**
-                     * Verifies a ConnectAgentResource message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ConnectAgentResource message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ConnectAgentResource
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.ConnectAgentResource;
-
-                    /**
-                     * Creates a plain object from a ConnectAgentResource message. Also converts values to other types if specified.
-                     * @param message ConnectAgentResource
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.ConnectAgentResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ConnectAgentResource to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ConnectAgentResource
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ResourceManifest. */
-                interface IResourceManifest {
-
-                    /** ResourceManifest manifest */
-                    manifest?: (string|null);
-
-                    /** ResourceManifest clusterScoped */
-                    clusterScoped?: (boolean|null);
-                }
-
-                /** Represents a ResourceManifest. */
-                class ResourceManifest implements IResourceManifest {
-
-                    /**
-                     * Constructs a new ResourceManifest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IResourceManifest);
-
-                    /** ResourceManifest manifest. */
-                    public manifest: string;
-
-                    /** ResourceManifest clusterScoped. */
-                    public clusterScoped: boolean;
-
-                    /**
-                     * Creates a new ResourceManifest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ResourceManifest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IResourceManifest): google.cloud.gkehub.v1alpha2.ResourceManifest;
-
-                    /**
-                     * Encodes the specified ResourceManifest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceManifest.verify|verify} messages.
-                     * @param message ResourceManifest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IResourceManifest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ResourceManifest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceManifest.verify|verify} messages.
-                     * @param message ResourceManifest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IResourceManifest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ResourceManifest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ResourceManifest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.ResourceManifest;
-
-                    /**
-                     * Decodes a ResourceManifest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ResourceManifest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.ResourceManifest;
-
-                    /**
-                     * Verifies a ResourceManifest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ResourceManifest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ResourceManifest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.ResourceManifest;
-
-                    /**
-                     * Creates a plain object from a ResourceManifest message. Also converts values to other types if specified.
-                     * @param message ResourceManifest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.ResourceManifest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ResourceManifest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ResourceManifest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a TypeMeta. */
-                interface ITypeMeta {
-
-                    /** TypeMeta kind */
-                    kind?: (string|null);
-
-                    /** TypeMeta apiVersion */
-                    apiVersion?: (string|null);
-                }
-
-                /** Represents a TypeMeta. */
-                class TypeMeta implements ITypeMeta {
-
-                    /**
-                     * Constructs a new TypeMeta.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.ITypeMeta);
-
-                    /** TypeMeta kind. */
-                    public kind: string;
-
-                    /** TypeMeta apiVersion. */
-                    public apiVersion: string;
-
-                    /**
-                     * Creates a new TypeMeta instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TypeMeta instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.ITypeMeta): google.cloud.gkehub.v1alpha2.TypeMeta;
-
-                    /**
-                     * Encodes the specified TypeMeta message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.TypeMeta.verify|verify} messages.
-                     * @param message TypeMeta message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.ITypeMeta, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TypeMeta message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.TypeMeta.verify|verify} messages.
-                     * @param message TypeMeta message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.ITypeMeta, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TypeMeta message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TypeMeta
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.TypeMeta;
-
-                    /**
-                     * Decodes a TypeMeta message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TypeMeta
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.TypeMeta;
-
-                    /**
-                     * Verifies a TypeMeta message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TypeMeta message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TypeMeta
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.TypeMeta;
-
-                    /**
-                     * Creates a plain object from a TypeMeta message. Also converts values to other types if specified.
-                     * @param message TypeMeta
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.TypeMeta, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TypeMeta to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for TypeMeta
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an InitializeHubRequest. */
-                interface IInitializeHubRequest {
-
-                    /** InitializeHubRequest project */
-                    project?: (string|null);
-                }
-
-                /** Represents an InitializeHubRequest. */
-                class InitializeHubRequest implements IInitializeHubRequest {
-
-                    /**
-                     * Constructs a new InitializeHubRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IInitializeHubRequest);
-
-                    /** InitializeHubRequest project. */
-                    public project: string;
-
-                    /**
-                     * Creates a new InitializeHubRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns InitializeHubRequest instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IInitializeHubRequest): google.cloud.gkehub.v1alpha2.InitializeHubRequest;
-
-                    /**
-                     * Encodes the specified InitializeHubRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubRequest.verify|verify} messages.
-                     * @param message InitializeHubRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IInitializeHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified InitializeHubRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubRequest.verify|verify} messages.
-                     * @param message InitializeHubRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IInitializeHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an InitializeHubRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns InitializeHubRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.InitializeHubRequest;
-
-                    /**
-                     * Decodes an InitializeHubRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns InitializeHubRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.InitializeHubRequest;
-
-                    /**
-                     * Verifies an InitializeHubRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an InitializeHubRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns InitializeHubRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.InitializeHubRequest;
-
-                    /**
-                     * Creates a plain object from an InitializeHubRequest message. Also converts values to other types if specified.
-                     * @param message InitializeHubRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.InitializeHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this InitializeHubRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for InitializeHubRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an InitializeHubResponse. */
-                interface IInitializeHubResponse {
-
-                    /** InitializeHubResponse serviceIdentity */
-                    serviceIdentity?: (string|null);
-
-                    /** InitializeHubResponse workloadIdentityPool */
-                    workloadIdentityPool?: (string|null);
-                }
-
-                /** Represents an InitializeHubResponse. */
-                class InitializeHubResponse implements IInitializeHubResponse {
-
-                    /**
-                     * Constructs a new InitializeHubResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IInitializeHubResponse);
-
-                    /** InitializeHubResponse serviceIdentity. */
-                    public serviceIdentity: string;
-
-                    /** InitializeHubResponse workloadIdentityPool. */
-                    public workloadIdentityPool: string;
-
-                    /**
-                     * Creates a new InitializeHubResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns InitializeHubResponse instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IInitializeHubResponse): google.cloud.gkehub.v1alpha2.InitializeHubResponse;
-
-                    /**
-                     * Encodes the specified InitializeHubResponse message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubResponse.verify|verify} messages.
-                     * @param message InitializeHubResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IInitializeHubResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified InitializeHubResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubResponse.verify|verify} messages.
-                     * @param message InitializeHubResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IInitializeHubResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an InitializeHubResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns InitializeHubResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.InitializeHubResponse;
-
-                    /**
-                     * Decodes an InitializeHubResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns InitializeHubResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.InitializeHubResponse;
-
-                    /**
-                     * Verifies an InitializeHubResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an InitializeHubResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns InitializeHubResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.InitializeHubResponse;
-
-                    /**
-                     * Creates a plain object from an InitializeHubResponse message. Also converts values to other types if specified.
-                     * @param message InitializeHubResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.InitializeHubResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this InitializeHubResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for InitializeHubResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an OperationMetadata. */
-                interface IOperationMetadata {
-
-                    /** OperationMetadata createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata endTime */
-                    endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata target */
-                    target?: (string|null);
-
-                    /** OperationMetadata verb */
-                    verb?: (string|null);
-
-                    /** OperationMetadata statusDetail */
-                    statusDetail?: (string|null);
-
-                    /** OperationMetadata cancelRequested */
-                    cancelRequested?: (boolean|null);
-
-                    /** OperationMetadata apiVersion */
-                    apiVersion?: (string|null);
-                }
-
-                /** Represents an OperationMetadata. */
-                class OperationMetadata implements IOperationMetadata {
-
-                    /**
-                     * Constructs a new OperationMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.gkehub.v1alpha2.IOperationMetadata);
-
-                    /** OperationMetadata createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata endTime. */
-                    public endTime?: (google.protobuf.ITimestamp|null);
-
-                    /** OperationMetadata target. */
-                    public target: string;
-
-                    /** OperationMetadata verb. */
-                    public verb: string;
-
-                    /** OperationMetadata statusDetail. */
-                    public statusDetail: string;
-
-                    /** OperationMetadata cancelRequested. */
-                    public cancelRequested: boolean;
-
-                    /** OperationMetadata apiVersion. */
-                    public apiVersion: string;
-
-                    /**
-                     * Creates a new OperationMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns OperationMetadata instance
-                     */
-                    public static create(properties?: google.cloud.gkehub.v1alpha2.IOperationMetadata): google.cloud.gkehub.v1alpha2.OperationMetadata;
-
-                    /**
-                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OperationMetadata.verify|verify} messages.
-                     * @param message OperationMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.gkehub.v1alpha2.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OperationMetadata.verify|verify} messages.
-                     * @param message OperationMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.gkehub.v1alpha2.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns OperationMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1alpha2.OperationMetadata;
-
-                    /**
-                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns OperationMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1alpha2.OperationMetadata;
-
-                    /**
-                     * Verifies an OperationMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns OperationMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1alpha2.OperationMetadata;
-
-                    /**
-                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
-                     * @param message OperationMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.gkehub.v1alpha2.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this OperationMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for OperationMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-            }
-
             /** Namespace policycontroller. */
             namespace policycontroller {
 
@@ -24831,18 +29689,6 @@ export namespace google {
                         /** HubConfig deploymentConfigs. */
                         public deploymentConfigs: { [k: string]: google.cloud.gkehub.policycontroller.v1beta.IPolicyControllerDeploymentConfig };
 
-                        /** HubConfig _auditIntervalSeconds. */
-                        public _auditIntervalSeconds?: "auditIntervalSeconds";
-
-                        /** HubConfig _monitoring. */
-                        public _monitoring?: "monitoring";
-
-                        /** HubConfig _policyContent. */
-                        public _policyContent?: "policyContent";
-
-                        /** HubConfig _constraintViolationLimit. */
-                        public _constraintViolationLimit?: "constraintViolationLimit";
-
                         /**
                          * Creates a new HubConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -24976,15 +29822,6 @@ export namespace google {
                         /** PolicyControllerDeploymentConfig podAffinity. */
                         public podAffinity: (google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Affinity|keyof typeof google.cloud.gkehub.policycontroller.v1beta.PolicyControllerDeploymentConfig.Affinity);
 
-                        /** PolicyControllerDeploymentConfig _replicaCount. */
-                        public _replicaCount?: "replicaCount";
-
-                        /** PolicyControllerDeploymentConfig _containerResources. */
-                        public _containerResources?: "containerResources";
-
-                        /** PolicyControllerDeploymentConfig _podAntiAffinity. */
-                        public _podAntiAffinity?: "podAntiAffinity";
-
                         /**
                          * Creates a new PolicyControllerDeploymentConfig instance using the specified properties.
                          * @param [properties] Properties to set
@@ -25102,18 +29939,6 @@ export namespace google {
                             /** Toleration effect. */
                             public effect?: (string|null);
 
-                            /** Toleration _key. */
-                            public _key?: "key";
-
-                            /** Toleration _operator. */
-                            public _operator?: "operator";
-
-                            /** Toleration _value. */
-                            public _value?: "value";
-
-                            /** Toleration _effect. */
-                            public _effect?: "effect";
-
                             /**
                              * Creates a new Toleration instance using the specified properties.
                              * @param [properties] Properties to set
@@ -25225,12 +30050,6 @@ export namespace google {
                         /** ResourceRequirements requests. */
                         public requests?: (google.cloud.gkehub.policycontroller.v1beta.IResourceList|null);
 
-                        /** ResourceRequirements _limits. */
-                        public _limits?: "limits";
-
-                        /** ResourceRequirements _requests. */
-                        public _requests?: "requests";
-
                         /**
                          * Creates a new ResourceRequirements instance using the specified properties.
                          * @param [properties] Properties to set
@@ -25333,12 +30152,6 @@ export namespace google {
 
                         /** ResourceList cpu. */
                         public cpu?: (string|null);
-
-                        /** ResourceList _memory. */
-                        public _memory?: "memory";
-
-                        /** ResourceList _cpu. */
-                        public _cpu?: "cpu";
 
                         /**
                          * Creates a new ResourceList instance using the specified properties.
@@ -28322,6 +33135,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion */
                     k8sVersion?: (string|null);
+
+                    /** ResourceOptions k8sGitVersion */
+                    k8sGitVersion?: (string|null);
                 }
 
                 /** Represents a ResourceOptions. */
@@ -28341,6 +33157,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion. */
                     public k8sVersion: string;
+
+                    /** ResourceOptions k8sGitVersion. */
+                    public k8sGitVersion: string;
 
                     /**
                      * Creates a new ResourceOptions instance using the specified properties.
@@ -29190,7 +34009,7 @@ export namespace google {
                     identityProvider?: (string|null);
 
                     /** Authority oidcJwks */
-                    oidcJwks?: (Uint8Array|string|null);
+                    oidcJwks?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents an Authority. */
@@ -29212,7 +34031,7 @@ export namespace google {
                     public identityProvider: string;
 
                     /** Authority oidcJwks. */
-                    public oidcJwks: (Uint8Array|string);
+                    public oidcJwks: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new Authority instance using the specified properties.
@@ -30220,7 +35039,7 @@ export namespace google {
                     registry?: (string|null);
 
                     /** GenerateConnectManifestRequest imagePullSecretContent */
-                    imagePullSecretContent?: (Uint8Array|string|null);
+                    imagePullSecretContent?: (Uint8Array|Buffer|string|null);
                 }
 
                 /** Represents a GenerateConnectManifestRequest. */
@@ -30248,7 +35067,7 @@ export namespace google {
                     public registry: string;
 
                     /** GenerateConnectManifestRequest imagePullSecretContent. */
-                    public imagePullSecretContent: (Uint8Array|string);
+                    public imagePullSecretContent: (Uint8Array|Buffer|string);
 
                     /**
                      * Creates a new GenerateConnectManifestRequest instance using the specified properties.
@@ -30638,7 +35457,7 @@ export namespace google {
                     name?: (string|null);
 
                     /** ConnectAgent proxy */
-                    proxy?: (Uint8Array|string|null);
+                    proxy?: (Uint8Array|Buffer|string|null);
 
                     /** ConnectAgent namespace */
                     namespace?: (string|null);
@@ -30657,7 +35476,7 @@ export namespace google {
                     public name: string;
 
                     /** ConnectAgent proxy. */
-                    public proxy: (Uint8Array|string);
+                    public proxy: (Uint8Array|Buffer|string);
 
                     /** ConnectAgent namespace. */
                     public namespace: string;
@@ -32214,6 +37033,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -32254,6 +37076,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.

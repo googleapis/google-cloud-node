@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -100,6 +100,7 @@ message Backup {
   Type backup_type = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Volume full name of this backup belongs to.
+  // Either source_volume or ontap_source should be provided.
   // Format:
   // `projects/{projects_id}/locations/{location}/volumes/{volume_id}`
   string source_volume = 6 [
@@ -130,6 +131,28 @@ message Backup {
 
   // Output only. Reserved for future use
   bool satisfies_pzi = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Region of the volume from which the backup was created.
+  // Format: `projects/{project_id}/locations/{location}`
+  string volume_region = 13 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "locations.googleapis.com/Location"
+    }
+  ];
+
+  // Output only. Region in which backup is stored.
+  // Format: `projects/{project_id}/locations/{location}`
+  string backup_region = 14 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "locations.googleapis.com/Location"
+    }
+  ];
+
+  // Output only. The time until which the backup is not deletable.
+  google.protobuf.Timestamp enforced_retention_end_time = 15
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // ListBackupsRequest lists backups.

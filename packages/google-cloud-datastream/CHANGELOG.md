@@ -1,5 +1,28 @@
 # Changelog
 
+## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.3.0...datastream-v4.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.2.0...datastream-v4.3.0) (2025-08-12)
+
+
+### Features
+
+* [datastream] Add new field `salesforce_org` to message `DiscoverConnectionProfileRequest` ([#6580](https://github.com/googleapis/google-cloud-node/issues/6580)) ([57f8500](https://github.com/googleapis/google-cloud-node/commit/57f85000900bd7b7bf4f4d8470ef599202f8c541))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.1.0...datastream-v4.2.0) (2025-07-09)
+
+
+### Features
+
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6419](https://github.com/googleapis/google-cloud-node/issues/6419)) ([f8a324c](https://github.com/googleapis/google-cloud-node/commit/f8a324ca5c3bc0f730e4ed67d9407c44f2414936))
+* [Many APIs] add methods from gax to cache proto root and process custom error details ([#6420](https://github.com/googleapis/google-cloud-node/issues/6420)) ([fe8d6cc](https://github.com/googleapis/google-cloud-node/commit/fe8d6cc157bea696790f2844fa7d410a481c79ed))
+* Add protobufjs 2023 edition support ([#6303](https://github.com/googleapis/google-cloud-node/issues/6303)) ([4a0cba1](https://github.com/googleapis/google-cloud-node/commit/4a0cba1e41a9aeb9c15ad31487ef013c8277cfef))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/datastream-v4.0.1...datastream-v4.1.0) (2025-05-09)
 
 

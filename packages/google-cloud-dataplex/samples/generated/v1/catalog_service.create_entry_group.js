@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ function main(parent, entryGroupId, entryGroup) {
   /**
    *  Required. The resource name of the entryGroup, of the form:
    *  projects/{project_number}/locations/{location_id}
-   *  where `location_id` refers to a GCP region.
+   *  where `location_id` refers to a Google Cloud region.
    */
   // const parent = 'abc123'
   /**

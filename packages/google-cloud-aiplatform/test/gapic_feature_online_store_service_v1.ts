@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as featureonlinestoreserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
@@ -50,6 +52,15 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
 
 function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubBidiStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
@@ -445,6 +456,178 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
             const expectedError = new Error('The client has already been closed.');
             client.close().catch(err => {throw err});
             await assert.rejects(client.searchNearestEntities(request), expectedError);
+        });
+    });
+
+    describe('generateFetchAccessToken', () => {
+        it('invokes generateFetchAccessToken without error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse()
+            );
+            client.innerApiCalls.generateFetchAccessToken = stubSimpleCall(expectedResponse);
+            const [response] = await client.generateFetchAccessToken(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateFetchAccessToken without error using callback', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse()
+            );
+            client.innerApiCalls.generateFetchAccessToken = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.generateFetchAccessToken(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.aiplatform.v1.IGenerateFetchAccessTokenResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateFetchAccessToken with error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedHeaderRequestParams = `feature_view=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.generateFetchAccessToken = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.generateFetchAccessToken(request), expectedError);
+            const actualRequest = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.generateFetchAccessToken as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes generateFetchAccessToken with closed client', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest', ['featureView']);
+            request.featureView = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.generateFetchAccessToken(request), expectedError);
+        });
+    });
+
+    describe('featureViewDirectWrite', () => {
+        it('invokes featureViewDirectWrite without error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest()
+            );
+            
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse()
+            );
+            client.innerApiCalls.featureViewDirectWrite = stubBidiStreamingCall(expectedResponse);
+            const stream = client.featureViewDirectWrite();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.featureViewDirectWrite as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
+
+        it('invokes featureViewDirectWrite with error', async () => {
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.featureViewDirectWrite = stubBidiStreamingCall(undefined, expectedError);
+            const stream = client.featureViewDirectWrite();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.innerApiCalls.featureViewDirectWrite as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
         });
     });
     describe('getIamPolicy', () => {
@@ -2676,8 +2859,8 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
             });
         });
 
-        describe('projectLocationFeatureGroupFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeatureGroupFeature";
+        describe('projectLocationFeatureGroupFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeatureGroupFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -2689,49 +2872,49 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeatureGroupFeaturePath', () => {
-                const result = client.projectLocationFeatureGroupFeaturePath("projectValue", "locationValue", "featureGroupValue", "featureValue");
+            it('projectLocationFeatureGroupFeaturesPath', () => {
+                const result = client.projectLocationFeatureGroupFeaturesPath("projectValue", "locationValue", "featureGroupValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureGroupFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureGroupValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeatureGroupFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeatureGroupFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeatureGroupFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeatureGroupFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
 
-        describe('projectLocationFeaturestoreEntityTypeFeature', async () => {
-            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeature";
+        describe('projectLocationFeaturestoreEntityTypeFeatures', async () => {
+            const fakePath = "/rendered/path/projectLocationFeaturestoreEntityTypeFeatures";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -2744,50 +2927,50 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match =
+            client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('projectLocationFeaturestoreEntityTypeFeaturePath', () => {
-                const result = client.projectLocationFeaturestoreEntityTypeFeaturePath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
+            it('projectLocationFeaturestoreEntityTypeFeaturesPath', () => {
+                const result = client.projectLocationFeaturestoreEntityTypeFeaturesPath("projectValue", "locationValue", "featurestoreValue", "entityTypeValue", "featureValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featurestoreValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "entityTypeValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName', () => {
-                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(fakePath);
+            it('matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName', () => {
+                const result = client.matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName(fakePath);
                 assert.strictEqual(result, "featureValue");
-                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -2926,6 +3109,44 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
                 const result = client.matchRagCorpusFromRagCorpusName(fakePath);
                 assert.strictEqual(result, "ragCorpusValue");
                 assert((client.pathTemplates.ragCorpusPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('ragEngineConfig', async () => {
+            const fakePath = "/rendered/path/ragEngineConfig";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.ragEngineConfigPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.ragEngineConfigPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('ragEngineConfigPath', () => {
+                const result = client.ragEngineConfigPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromRagEngineConfigName', () => {
+                const result = client.matchProjectFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromRagEngineConfigName', () => {
+                const result = client.matchLocationFromRagEngineConfigName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.ragEngineConfigPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -3126,6 +3347,122 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
                 const result = client.matchScheduleFromScheduleName(fakePath);
                 assert.strictEqual(result, "scheduleValue");
                 assert((client.pathTemplates.schedulePathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('session', async () => {
+            const fakePath = "/rendered/path/session";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                session: "sessionValue",
+            };
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sessionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sessionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sessionPath', () => {
+                const result = client.sessionPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sessionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSessionName', () => {
+                const result = client.matchProjectFromSessionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSessionName', () => {
+                const result = client.matchLocationFromSessionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromSessionName', () => {
+                const result = client.matchReasoningEngineFromSessionName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromSessionName', () => {
+                const result = client.matchSessionFromSessionName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.sessionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sessionEvent', async () => {
+            const fakePath = "/rendered/path/sessionEvent";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                session: "sessionValue",
+                event: "eventValue",
+            };
+            const client = new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sessionEventPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sessionEventPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sessionEventPath', () => {
+                const result = client.sessionEventPath("projectValue", "locationValue", "reasoningEngineValue", "sessionValue", "eventValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sessionEventPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSessionEventName', () => {
+                const result = client.matchProjectFromSessionEventName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSessionEventName', () => {
+                const result = client.matchLocationFromSessionEventName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromSessionEventName', () => {
+                const result = client.matchReasoningEngineFromSessionEventName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchSessionFromSessionEventName', () => {
+                const result = client.matchSessionFromSessionEventName(fakePath);
+                assert.strictEqual(result, "sessionValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEventFromSessionEventName', () => {
+                const result = client.matchEventFromSessionEventName(fakePath);
+                assert.strictEqual(result, "eventValue");
+                assert((client.pathTemplates.sessionEventPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,9 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DataFoundryServiceClient, DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiCacheServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ReasoningEngineExecutionServiceClient, ReasoningEngineServiceClient, ScheduleServiceClient, SessionServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VertexRagDataServiceClient, VertexRagServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
+function doStuffWithDataFoundryServiceClient(client: DataFoundryServiceClient) {
+  client.close();
+}
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
   client.close();
 }
@@ -100,6 +103,9 @@ function doStuffWithReasoningEngineServiceClient(client: ReasoningEngineServiceC
 function doStuffWithScheduleServiceClient(client: ScheduleServiceClient) {
   client.close();
 }
+function doStuffWithSessionServiceClient(client: SessionServiceClient) {
+  client.close();
+}
 function doStuffWithSpecialistPoolServiceClient(client: SpecialistPoolServiceClient) {
   client.close();
 }
@@ -117,6 +123,9 @@ function doStuffWithVizierServiceClient(client: VizierServiceClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const dataFoundryServiceClient = new DataFoundryServiceClient();
+  doStuffWithDataFoundryServiceClient(dataFoundryServiceClient);
   // check that the client instance can be created
   const datasetServiceClient = new DatasetServiceClient();
   doStuffWithDatasetServiceClient(datasetServiceClient);
@@ -198,6 +207,9 @@ function main() {
   // check that the client instance can be created
   const scheduleServiceClient = new ScheduleServiceClient();
   doStuffWithScheduleServiceClient(scheduleServiceClient);
+  // check that the client instance can be created
+  const sessionServiceClient = new SessionServiceClient();
+  doStuffWithSessionServiceClient(sessionServiceClient);
   // check that the client instance can be created
   const specialistPoolServiceClient = new SpecialistPoolServiceClient();
   doStuffWithSpecialistPoolServiceClient(specialistPoolServiceClient);

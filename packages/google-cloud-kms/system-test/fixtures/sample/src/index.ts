@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,12 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  AutokeyClient,
-  AutokeyAdminClient,
-  EkmServiceClient,
-  KeyManagementServiceClient,
-} from '@google-cloud/kms';
+import {AutokeyClient, AutokeyAdminClient, EkmServiceClient, HsmManagementClient, KeyManagementServiceClient} from '@google-cloud/kms';
 
 // check that the client class type name can be used
 function doStuffWithAutokeyClient(client: AutokeyClient) {
@@ -33,9 +28,10 @@ function doStuffWithAutokeyAdminClient(client: AutokeyAdminClient) {
 function doStuffWithEkmServiceClient(client: EkmServiceClient) {
   client.close();
 }
-function doStuffWithKeyManagementServiceClient(
-  client: KeyManagementServiceClient
-) {
+function doStuffWithHsmManagementClient(client: HsmManagementClient) {
+  client.close();
+}
+function doStuffWithKeyManagementServiceClient(client: KeyManagementServiceClient) {
   client.close();
 }
 
@@ -49,6 +45,9 @@ function main() {
   // check that the client instance can be created
   const ekmServiceClient = new EkmServiceClient();
   doStuffWithEkmServiceClient(ekmServiceClient);
+  // check that the client instance can be created
+  const hsmManagementClient = new HsmManagementClient();
+  doStuffWithHsmManagementClient(hsmManagementClient);
   // check that the client instance can be created
   const keyManagementServiceClient = new KeyManagementServiceClient();
   doStuffWithKeyManagementServiceClient(keyManagementServiceClient);

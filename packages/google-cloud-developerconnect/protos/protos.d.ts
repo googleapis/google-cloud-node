@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -241,6 +241,174 @@ export namespace google {
                      * @returns Promise
                      */
                     public fetchGitRefs(request: google.cloud.developerconnect.v1.IFetchGitRefsRequest): Promise<google.cloud.developerconnect.v1.FetchGitRefsResponse>;
+
+                    /**
+                     * Calls ListAccountConnectors.
+                     * @param request ListAccountConnectorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAccountConnectorsResponse
+                     */
+                    public listAccountConnectors(request: google.cloud.developerconnect.v1.IListAccountConnectorsRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.ListAccountConnectorsCallback): void;
+
+                    /**
+                     * Calls ListAccountConnectors.
+                     * @param request ListAccountConnectorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAccountConnectors(request: google.cloud.developerconnect.v1.IListAccountConnectorsRequest): Promise<google.cloud.developerconnect.v1.ListAccountConnectorsResponse>;
+
+                    /**
+                     * Calls GetAccountConnector.
+                     * @param request GetAccountConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AccountConnector
+                     */
+                    public getAccountConnector(request: google.cloud.developerconnect.v1.IGetAccountConnectorRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.GetAccountConnectorCallback): void;
+
+                    /**
+                     * Calls GetAccountConnector.
+                     * @param request GetAccountConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAccountConnector(request: google.cloud.developerconnect.v1.IGetAccountConnectorRequest): Promise<google.cloud.developerconnect.v1.AccountConnector>;
+
+                    /**
+                     * Calls CreateAccountConnector.
+                     * @param request CreateAccountConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAccountConnector(request: google.cloud.developerconnect.v1.ICreateAccountConnectorRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.CreateAccountConnectorCallback): void;
+
+                    /**
+                     * Calls CreateAccountConnector.
+                     * @param request CreateAccountConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAccountConnector(request: google.cloud.developerconnect.v1.ICreateAccountConnectorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAccountConnector.
+                     * @param request UpdateAccountConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAccountConnector(request: google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.UpdateAccountConnectorCallback): void;
+
+                    /**
+                     * Calls UpdateAccountConnector.
+                     * @param request UpdateAccountConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAccountConnector(request: google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAccountConnector.
+                     * @param request DeleteAccountConnectorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAccountConnector(request: google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.DeleteAccountConnectorCallback): void;
+
+                    /**
+                     * Calls DeleteAccountConnector.
+                     * @param request DeleteAccountConnectorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAccountConnector(request: google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls FetchAccessToken.
+                     * @param request FetchAccessTokenRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchAccessTokenResponse
+                     */
+                    public fetchAccessToken(request: google.cloud.developerconnect.v1.IFetchAccessTokenRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FetchAccessTokenCallback): void;
+
+                    /**
+                     * Calls FetchAccessToken.
+                     * @param request FetchAccessTokenRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchAccessToken(request: google.cloud.developerconnect.v1.IFetchAccessTokenRequest): Promise<google.cloud.developerconnect.v1.FetchAccessTokenResponse>;
+
+                    /**
+                     * Calls ListUsers.
+                     * @param request ListUsersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListUsersResponse
+                     */
+                    public listUsers(request: google.cloud.developerconnect.v1.IListUsersRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.ListUsersCallback): void;
+
+                    /**
+                     * Calls ListUsers.
+                     * @param request ListUsersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listUsers(request: google.cloud.developerconnect.v1.IListUsersRequest): Promise<google.cloud.developerconnect.v1.ListUsersResponse>;
+
+                    /**
+                     * Calls DeleteUser.
+                     * @param request DeleteUserRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteUser(request: google.cloud.developerconnect.v1.IDeleteUserRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.DeleteUserCallback): void;
+
+                    /**
+                     * Calls DeleteUser.
+                     * @param request DeleteUserRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteUser(request: google.cloud.developerconnect.v1.IDeleteUserRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls FetchSelf.
+                     * @param request FetchSelfRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and User
+                     */
+                    public fetchSelf(request: google.cloud.developerconnect.v1.IFetchSelfRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FetchSelfCallback): void;
+
+                    /**
+                     * Calls FetchSelf.
+                     * @param request FetchSelfRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchSelf(request: google.cloud.developerconnect.v1.IFetchSelfRequest): Promise<google.cloud.developerconnect.v1.User>;
+
+                    /**
+                     * Calls DeleteSelf.
+                     * @param request DeleteSelfRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSelf(request: google.cloud.developerconnect.v1.IDeleteSelfRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.DeleteSelfCallback): void;
+
+                    /**
+                     * Calls DeleteSelf.
+                     * @param request DeleteSelfRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSelf(request: google.cloud.developerconnect.v1.IDeleteSelfRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StartOAuth.
+                     * @param request StartOAuthRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and StartOAuthResponse
+                     */
+                    public startOAuth(request: google.cloud.developerconnect.v1.IStartOAuthRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.StartOAuthCallback): void;
+
+                    /**
+                     * Calls StartOAuth.
+                     * @param request StartOAuthRequest message or plain object
+                     * @returns Promise
+                     */
+                    public startOAuth(request: google.cloud.developerconnect.v1.IStartOAuthRequest): Promise<google.cloud.developerconnect.v1.StartOAuthResponse>;
+
+                    /**
+                     * Calls FinishOAuth.
+                     * @param request FinishOAuthRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FinishOAuthResponse
+                     */
+                    public finishOAuth(request: google.cloud.developerconnect.v1.IFinishOAuthRequest, callback: google.cloud.developerconnect.v1.DeveloperConnect.FinishOAuthCallback): void;
+
+                    /**
+                     * Calls FinishOAuth.
+                     * @param request FinishOAuthRequest message or plain object
+                     * @returns Promise
+                     */
+                    public finishOAuth(request: google.cloud.developerconnect.v1.IFinishOAuthRequest): Promise<google.cloud.developerconnect.v1.FinishOAuthResponse>;
                 }
 
                 namespace DeveloperConnect {
@@ -342,6 +510,333 @@ export namespace google {
                      * @param [response] FetchGitRefsResponse
                      */
                     type FetchGitRefsCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchGitRefsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|listAccountConnectors}.
+                     * @param error Error, if any
+                     * @param [response] ListAccountConnectorsResponse
+                     */
+                    type ListAccountConnectorsCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.ListAccountConnectorsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|getAccountConnector}.
+                     * @param error Error, if any
+                     * @param [response] AccountConnector
+                     */
+                    type GetAccountConnectorCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.AccountConnector) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|createAccountConnector}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAccountConnectorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|updateAccountConnector}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAccountConnectorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|deleteAccountConnector}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAccountConnectorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchAccessToken}.
+                     * @param error Error, if any
+                     * @param [response] FetchAccessTokenResponse
+                     */
+                    type FetchAccessTokenCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FetchAccessTokenResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|listUsers}.
+                     * @param error Error, if any
+                     * @param [response] ListUsersResponse
+                     */
+                    type ListUsersCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.ListUsersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|deleteUser}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteUserCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|fetchSelf}.
+                     * @param error Error, if any
+                     * @param [response] User
+                     */
+                    type FetchSelfCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.User) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|deleteSelf}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSelfCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|startOAuth}.
+                     * @param error Error, if any
+                     * @param [response] StartOAuthResponse
+                     */
+                    type StartOAuthCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.StartOAuthResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.DeveloperConnect|finishOAuth}.
+                     * @param error Error, if any
+                     * @param [response] FinishOAuthResponse
+                     */
+                    type FinishOAuthCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.FinishOAuthResponse) => void;
+                }
+
+                /** SystemProvider enum. */
+                enum SystemProvider {
+                    SYSTEM_PROVIDER_UNSPECIFIED = 0,
+                    GITHUB = 1,
+                    GITLAB = 2,
+                    GOOGLE = 3,
+                    SENTRY = 4,
+                    ROVO = 5,
+                    NEW_RELIC = 6,
+                    DATASTAX = 7,
+                    DYNATRACE = 8
+                }
+
+                /** Properties of a ListUsersRequest. */
+                interface IListUsersRequest {
+
+                    /** ListUsersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListUsersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListUsersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListUsersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListUsersRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListUsersRequest. */
+                class ListUsersRequest implements IListUsersRequest {
+
+                    /**
+                     * Constructs a new ListUsersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListUsersRequest);
+
+                    /** ListUsersRequest parent. */
+                    public parent: string;
+
+                    /** ListUsersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListUsersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListUsersRequest filter. */
+                    public filter: string;
+
+                    /** ListUsersRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListUsersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsersRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListUsersRequest): google.cloud.developerconnect.v1.ListUsersRequest;
+
+                    /**
+                     * Encodes the specified ListUsersRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersRequest.verify|verify} messages.
+                     * @param message ListUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsersRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersRequest.verify|verify} messages.
+                     * @param message ListUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListUsersRequest;
+
+                    /**
+                     * Decodes a ListUsersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListUsersRequest;
+
+                    /**
+                     * Verifies a ListUsersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListUsersRequest;
+
+                    /**
+                     * Creates a plain object from a ListUsersRequest message. Also converts values to other types if specified.
+                     * @param message ListUsersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListUsersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListUsersResponse. */
+                interface IListUsersResponse {
+
+                    /** ListUsersResponse users */
+                    users?: (google.cloud.developerconnect.v1.IUser[]|null);
+
+                    /** ListUsersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListUsersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListUsersResponse. */
+                class ListUsersResponse implements IListUsersResponse {
+
+                    /**
+                     * Constructs a new ListUsersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListUsersResponse);
+
+                    /** ListUsersResponse users. */
+                    public users: google.cloud.developerconnect.v1.IUser[];
+
+                    /** ListUsersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListUsersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListUsersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListUsersResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListUsersResponse): google.cloud.developerconnect.v1.ListUsersResponse;
+
+                    /**
+                     * Encodes the specified ListUsersResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersResponse.verify|verify} messages.
+                     * @param message ListUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListUsersResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListUsersResponse.verify|verify} messages.
+                     * @param message ListUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListUsersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListUsersResponse;
+
+                    /**
+                     * Decodes a ListUsersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListUsersResponse;
+
+                    /**
+                     * Verifies a ListUsersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListUsersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListUsersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListUsersResponse;
+
+                    /**
+                     * Creates a plain object from a ListUsersResponse message. Also converts values to other types if specified.
+                     * @param message ListUsersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListUsersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListUsersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Connection. */
@@ -358,6 +853,18 @@ export namespace google {
 
                     /** Connection gitlabEnterpriseConfig */
                     gitlabEnterpriseConfig?: (google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null);
+
+                    /** Connection bitbucketDataCenterConfig */
+                    bitbucketDataCenterConfig?: (google.cloud.developerconnect.v1.IBitbucketDataCenterConfig|null);
+
+                    /** Connection bitbucketCloudConfig */
+                    bitbucketCloudConfig?: (google.cloud.developerconnect.v1.IBitbucketCloudConfig|null);
+
+                    /** Connection secureSourceManagerInstanceConfig */
+                    secureSourceManagerInstanceConfig?: (google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig|null);
+
+                    /** Connection httpConfig */
+                    httpConfig?: (google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig|null);
 
                     /** Connection name */
                     name?: (string|null);
@@ -394,6 +901,9 @@ export namespace google {
 
                     /** Connection cryptoKeyConfig */
                     cryptoKeyConfig?: (google.cloud.developerconnect.v1.ICryptoKeyConfig|null);
+
+                    /** Connection gitProxyConfig */
+                    gitProxyConfig?: (google.cloud.developerconnect.v1.IGitProxyConfig|null);
                 }
 
                 /** Represents a Connection. */
@@ -416,6 +926,18 @@ export namespace google {
 
                     /** Connection gitlabEnterpriseConfig. */
                     public gitlabEnterpriseConfig?: (google.cloud.developerconnect.v1.IGitLabEnterpriseConfig|null);
+
+                    /** Connection bitbucketDataCenterConfig. */
+                    public bitbucketDataCenterConfig?: (google.cloud.developerconnect.v1.IBitbucketDataCenterConfig|null);
+
+                    /** Connection bitbucketCloudConfig. */
+                    public bitbucketCloudConfig?: (google.cloud.developerconnect.v1.IBitbucketCloudConfig|null);
+
+                    /** Connection secureSourceManagerInstanceConfig. */
+                    public secureSourceManagerInstanceConfig?: (google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig|null);
+
+                    /** Connection httpConfig. */
+                    public httpConfig?: (google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig|null);
 
                     /** Connection name. */
                     public name: string;
@@ -453,8 +975,11 @@ export namespace google {
                     /** Connection cryptoKeyConfig. */
                     public cryptoKeyConfig?: (google.cloud.developerconnect.v1.ICryptoKeyConfig|null);
 
+                    /** Connection gitProxyConfig. */
+                    public gitProxyConfig?: (google.cloud.developerconnect.v1.IGitProxyConfig|null);
+
                     /** Connection connectionConfig. */
-                    public connectionConfig?: ("githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig");
+                    public connectionConfig?: ("githubConfig"|"githubEnterpriseConfig"|"gitlabConfig"|"gitlabEnterpriseConfig"|"bitbucketDataCenterConfig"|"bitbucketCloudConfig"|"secureSourceManagerInstanceConfig"|"httpConfig");
 
                     /**
                      * Creates a new Connection instance using the specified properties.
@@ -631,6 +1156,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GitProxyConfig. */
+                interface IGitProxyConfig {
+
+                    /** GitProxyConfig enabled */
+                    enabled?: (boolean|null);
+
+                    /** GitProxyConfig httpProxyBaseUri */
+                    httpProxyBaseUri?: (string|null);
+                }
+
+                /** Represents a GitProxyConfig. */
+                class GitProxyConfig implements IGitProxyConfig {
+
+                    /**
+                     * Constructs a new GitProxyConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGitProxyConfig);
+
+                    /** GitProxyConfig enabled. */
+                    public enabled: boolean;
+
+                    /** GitProxyConfig httpProxyBaseUri. */
+                    public httpProxyBaseUri: string;
+
+                    /**
+                     * Creates a new GitProxyConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GitProxyConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGitProxyConfig): google.cloud.developerconnect.v1.GitProxyConfig;
+
+                    /**
+                     * Encodes the specified GitProxyConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GitProxyConfig.verify|verify} messages.
+                     * @param message GitProxyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGitProxyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GitProxyConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GitProxyConfig.verify|verify} messages.
+                     * @param message GitProxyConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGitProxyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GitProxyConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GitProxyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GitProxyConfig;
+
+                    /**
+                     * Decodes a GitProxyConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GitProxyConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GitProxyConfig;
+
+                    /**
+                     * Verifies a GitProxyConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GitProxyConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GitProxyConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GitProxyConfig;
+
+                    /**
+                     * Creates a plain object from a GitProxyConfig message. Also converts values to other types if specified.
+                     * @param message GitProxyConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GitProxyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GitProxyConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GitProxyConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an InstallationState. */
                 interface IInstallationState {
 
@@ -749,6 +1377,339 @@ export namespace google {
                         PENDING_USER_OAUTH = 2,
                         PENDING_INSTALL_APP = 3,
                         COMPLETE = 10
+                    }
+                }
+
+                /** Properties of a GenericHTTPEndpointConfig. */
+                interface IGenericHTTPEndpointConfig {
+
+                    /** GenericHTTPEndpointConfig basicAuthentication */
+                    basicAuthentication?: (google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication|null);
+
+                    /** GenericHTTPEndpointConfig bearerTokenAuthentication */
+                    bearerTokenAuthentication?: (google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication|null);
+
+                    /** GenericHTTPEndpointConfig hostUri */
+                    hostUri?: (string|null);
+
+                    /** GenericHTTPEndpointConfig serviceDirectoryConfig */
+                    serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** GenericHTTPEndpointConfig sslCaCertificate */
+                    sslCaCertificate?: (string|null);
+                }
+
+                /** Represents a GenericHTTPEndpointConfig. */
+                class GenericHTTPEndpointConfig implements IGenericHTTPEndpointConfig {
+
+                    /**
+                     * Constructs a new GenericHTTPEndpointConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig);
+
+                    /** GenericHTTPEndpointConfig basicAuthentication. */
+                    public basicAuthentication?: (google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication|null);
+
+                    /** GenericHTTPEndpointConfig bearerTokenAuthentication. */
+                    public bearerTokenAuthentication?: (google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication|null);
+
+                    /** GenericHTTPEndpointConfig hostUri. */
+                    public hostUri: string;
+
+                    /** GenericHTTPEndpointConfig serviceDirectoryConfig. */
+                    public serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** GenericHTTPEndpointConfig sslCaCertificate. */
+                    public sslCaCertificate: string;
+
+                    /** GenericHTTPEndpointConfig authentication. */
+                    public authentication?: ("basicAuthentication"|"bearerTokenAuthentication");
+
+                    /**
+                     * Creates a new GenericHTTPEndpointConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenericHTTPEndpointConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig;
+
+                    /**
+                     * Encodes the specified GenericHTTPEndpointConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.verify|verify} messages.
+                     * @param message GenericHTTPEndpointConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenericHTTPEndpointConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.verify|verify} messages.
+                     * @param message GenericHTTPEndpointConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGenericHTTPEndpointConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenericHTTPEndpointConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenericHTTPEndpointConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig;
+
+                    /**
+                     * Decodes a GenericHTTPEndpointConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenericHTTPEndpointConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig;
+
+                    /**
+                     * Verifies a GenericHTTPEndpointConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenericHTTPEndpointConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenericHTTPEndpointConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig;
+
+                    /**
+                     * Creates a plain object from a GenericHTTPEndpointConfig message. Also converts values to other types if specified.
+                     * @param message GenericHTTPEndpointConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenericHTTPEndpointConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenericHTTPEndpointConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenericHTTPEndpointConfig {
+
+                    /** Properties of a BasicAuthentication. */
+                    interface IBasicAuthentication {
+
+                        /** BasicAuthentication passwordSecretVersion */
+                        passwordSecretVersion?: (string|null);
+
+                        /** BasicAuthentication username */
+                        username?: (string|null);
+                    }
+
+                    /** Represents a BasicAuthentication. */
+                    class BasicAuthentication implements IBasicAuthentication {
+
+                        /**
+                         * Constructs a new BasicAuthentication.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication);
+
+                        /** BasicAuthentication passwordSecretVersion. */
+                        public passwordSecretVersion?: (string|null);
+
+                        /** BasicAuthentication username. */
+                        public username: string;
+
+                        /** BasicAuthentication password. */
+                        public password?: "passwordSecretVersion";
+
+                        /**
+                         * Creates a new BasicAuthentication instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BasicAuthentication instance
+                         */
+                        public static create(properties?: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication;
+
+                        /**
+                         * Encodes the specified BasicAuthentication message. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.verify|verify} messages.
+                         * @param message BasicAuthentication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BasicAuthentication message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication.verify|verify} messages.
+                         * @param message BasicAuthentication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBasicAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BasicAuthentication message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BasicAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication;
+
+                        /**
+                         * Decodes a BasicAuthentication message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BasicAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication;
+
+                        /**
+                         * Verifies a BasicAuthentication message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BasicAuthentication message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BasicAuthentication
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication;
+
+                        /**
+                         * Creates a plain object from a BasicAuthentication message. Also converts values to other types if specified.
+                         * @param message BasicAuthentication
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BasicAuthentication to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BasicAuthentication
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BearerTokenAuthentication. */
+                    interface IBearerTokenAuthentication {
+
+                        /** BearerTokenAuthentication tokenSecretVersion */
+                        tokenSecretVersion?: (string|null);
+                    }
+
+                    /** Represents a BearerTokenAuthentication. */
+                    class BearerTokenAuthentication implements IBearerTokenAuthentication {
+
+                        /**
+                         * Constructs a new BearerTokenAuthentication.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication);
+
+                        /** BearerTokenAuthentication tokenSecretVersion. */
+                        public tokenSecretVersion?: (string|null);
+
+                        /** BearerTokenAuthentication token. */
+                        public token?: "tokenSecretVersion";
+
+                        /**
+                         * Creates a new BearerTokenAuthentication instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BearerTokenAuthentication instance
+                         */
+                        public static create(properties?: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication;
+
+                        /**
+                         * Encodes the specified BearerTokenAuthentication message. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.verify|verify} messages.
+                         * @param message BearerTokenAuthentication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BearerTokenAuthentication message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication.verify|verify} messages.
+                         * @param message BearerTokenAuthentication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.IBearerTokenAuthentication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BearerTokenAuthentication message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BearerTokenAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication;
+
+                        /**
+                         * Decodes a BearerTokenAuthentication message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BearerTokenAuthentication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication;
+
+                        /**
+                         * Verifies a BearerTokenAuthentication message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BearerTokenAuthentication message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BearerTokenAuthentication
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication;
+
+                        /**
+                         * Creates a plain object from a BearerTokenAuthentication message. Also converts values to other types if specified.
+                         * @param message BearerTokenAuthentication
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BearerTokenAuthentication to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BearerTokenAuthentication
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -873,7 +1834,8 @@ export namespace google {
                     enum GitHubApp {
                         GIT_HUB_APP_UNSPECIFIED = 0,
                         DEVELOPER_CONNECT = 1,
-                        FIREBASE = 2
+                        FIREBASE = 2,
+                        GEMINI_CODE_ASSIST = 3
                     }
                 }
 
@@ -909,6 +1871,9 @@ export namespace google {
 
                     /** GitHubEnterpriseConfig sslCaCertificate */
                     sslCaCertificate?: (string|null);
+
+                    /** GitHubEnterpriseConfig organization */
+                    organization?: (string|null);
                 }
 
                 /** Represents a GitHubEnterpriseConfig. */
@@ -949,6 +1914,9 @@ export namespace google {
 
                     /** GitHubEnterpriseConfig sslCaCertificate. */
                     public sslCaCertificate: string;
+
+                    /** GitHubEnterpriseConfig organization. */
+                    public organization: string;
 
                     /**
                      * Creates a new GitHubEnterpriseConfig instance using the specified properties.
@@ -1567,6 +2535,351 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GitLabEnterpriseConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BitbucketDataCenterConfig. */
+                interface IBitbucketDataCenterConfig {
+
+                    /** BitbucketDataCenterConfig hostUri */
+                    hostUri?: (string|null);
+
+                    /** BitbucketDataCenterConfig webhookSecretSecretVersion */
+                    webhookSecretSecretVersion?: (string|null);
+
+                    /** BitbucketDataCenterConfig readAuthorizerCredential */
+                    readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** BitbucketDataCenterConfig authorizerCredential */
+                    authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** BitbucketDataCenterConfig serviceDirectoryConfig */
+                    serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** BitbucketDataCenterConfig sslCaCertificate */
+                    sslCaCertificate?: (string|null);
+
+                    /** BitbucketDataCenterConfig serverVersion */
+                    serverVersion?: (string|null);
+                }
+
+                /** Represents a BitbucketDataCenterConfig. */
+                class BitbucketDataCenterConfig implements IBitbucketDataCenterConfig {
+
+                    /**
+                     * Constructs a new BitbucketDataCenterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IBitbucketDataCenterConfig);
+
+                    /** BitbucketDataCenterConfig hostUri. */
+                    public hostUri: string;
+
+                    /** BitbucketDataCenterConfig webhookSecretSecretVersion. */
+                    public webhookSecretSecretVersion: string;
+
+                    /** BitbucketDataCenterConfig readAuthorizerCredential. */
+                    public readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** BitbucketDataCenterConfig authorizerCredential. */
+                    public authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** BitbucketDataCenterConfig serviceDirectoryConfig. */
+                    public serviceDirectoryConfig?: (google.cloud.developerconnect.v1.IServiceDirectoryConfig|null);
+
+                    /** BitbucketDataCenterConfig sslCaCertificate. */
+                    public sslCaCertificate: string;
+
+                    /** BitbucketDataCenterConfig serverVersion. */
+                    public serverVersion: string;
+
+                    /**
+                     * Creates a new BitbucketDataCenterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BitbucketDataCenterConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IBitbucketDataCenterConfig): google.cloud.developerconnect.v1.BitbucketDataCenterConfig;
+
+                    /**
+                     * Encodes the specified BitbucketDataCenterConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketDataCenterConfig.verify|verify} messages.
+                     * @param message BitbucketDataCenterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IBitbucketDataCenterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BitbucketDataCenterConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketDataCenterConfig.verify|verify} messages.
+                     * @param message BitbucketDataCenterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IBitbucketDataCenterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BitbucketDataCenterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BitbucketDataCenterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.BitbucketDataCenterConfig;
+
+                    /**
+                     * Decodes a BitbucketDataCenterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BitbucketDataCenterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.BitbucketDataCenterConfig;
+
+                    /**
+                     * Verifies a BitbucketDataCenterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BitbucketDataCenterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BitbucketDataCenterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.BitbucketDataCenterConfig;
+
+                    /**
+                     * Creates a plain object from a BitbucketDataCenterConfig message. Also converts values to other types if specified.
+                     * @param message BitbucketDataCenterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.BitbucketDataCenterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BitbucketDataCenterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BitbucketDataCenterConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BitbucketCloudConfig. */
+                interface IBitbucketCloudConfig {
+
+                    /** BitbucketCloudConfig workspace */
+                    workspace?: (string|null);
+
+                    /** BitbucketCloudConfig webhookSecretSecretVersion */
+                    webhookSecretSecretVersion?: (string|null);
+
+                    /** BitbucketCloudConfig readAuthorizerCredential */
+                    readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** BitbucketCloudConfig authorizerCredential */
+                    authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+                }
+
+                /** Represents a BitbucketCloudConfig. */
+                class BitbucketCloudConfig implements IBitbucketCloudConfig {
+
+                    /**
+                     * Constructs a new BitbucketCloudConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IBitbucketCloudConfig);
+
+                    /** BitbucketCloudConfig workspace. */
+                    public workspace: string;
+
+                    /** BitbucketCloudConfig webhookSecretSecretVersion. */
+                    public webhookSecretSecretVersion: string;
+
+                    /** BitbucketCloudConfig readAuthorizerCredential. */
+                    public readAuthorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /** BitbucketCloudConfig authorizerCredential. */
+                    public authorizerCredential?: (google.cloud.developerconnect.v1.IUserCredential|null);
+
+                    /**
+                     * Creates a new BitbucketCloudConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BitbucketCloudConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IBitbucketCloudConfig): google.cloud.developerconnect.v1.BitbucketCloudConfig;
+
+                    /**
+                     * Encodes the specified BitbucketCloudConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketCloudConfig.verify|verify} messages.
+                     * @param message BitbucketCloudConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IBitbucketCloudConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BitbucketCloudConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.BitbucketCloudConfig.verify|verify} messages.
+                     * @param message BitbucketCloudConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IBitbucketCloudConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BitbucketCloudConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BitbucketCloudConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.BitbucketCloudConfig;
+
+                    /**
+                     * Decodes a BitbucketCloudConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BitbucketCloudConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.BitbucketCloudConfig;
+
+                    /**
+                     * Verifies a BitbucketCloudConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BitbucketCloudConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BitbucketCloudConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.BitbucketCloudConfig;
+
+                    /**
+                     * Creates a plain object from a BitbucketCloudConfig message. Also converts values to other types if specified.
+                     * @param message BitbucketCloudConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.BitbucketCloudConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BitbucketCloudConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BitbucketCloudConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecureSourceManagerInstanceConfig. */
+                interface ISecureSourceManagerInstanceConfig {
+
+                    /** SecureSourceManagerInstanceConfig instance */
+                    instance?: (string|null);
+                }
+
+                /** Represents a SecureSourceManagerInstanceConfig. */
+                class SecureSourceManagerInstanceConfig implements ISecureSourceManagerInstanceConfig {
+
+                    /**
+                     * Constructs a new SecureSourceManagerInstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig);
+
+                    /** SecureSourceManagerInstanceConfig instance. */
+                    public instance: string;
+
+                    /**
+                     * Creates a new SecureSourceManagerInstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecureSourceManagerInstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig): google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig;
+
+                    /**
+                     * Encodes the specified SecureSourceManagerInstanceConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.verify|verify} messages.
+                     * @param message SecureSourceManagerInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecureSourceManagerInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig.verify|verify} messages.
+                     * @param message SecureSourceManagerInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.ISecureSourceManagerInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecureSourceManagerInstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecureSourceManagerInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig;
+
+                    /**
+                     * Decodes a SecureSourceManagerInstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecureSourceManagerInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig;
+
+                    /**
+                     * Verifies a SecureSourceManagerInstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecureSourceManagerInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecureSourceManagerInstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig;
+
+                    /**
+                     * Creates a plain object from a SecureSourceManagerInstanceConfig message. Also converts values to other types if specified.
+                     * @param message SecureSourceManagerInstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.SecureSourceManagerInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecureSourceManagerInstanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecureSourceManagerInstanceConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2257,6 +3570,811 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ListAccountConnectorsRequest. */
+                interface IListAccountConnectorsRequest {
+
+                    /** ListAccountConnectorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAccountConnectorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAccountConnectorsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAccountConnectorsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAccountConnectorsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAccountConnectorsRequest. */
+                class ListAccountConnectorsRequest implements IListAccountConnectorsRequest {
+
+                    /**
+                     * Constructs a new ListAccountConnectorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListAccountConnectorsRequest);
+
+                    /** ListAccountConnectorsRequest parent. */
+                    public parent: string;
+
+                    /** ListAccountConnectorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAccountConnectorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAccountConnectorsRequest filter. */
+                    public filter: string;
+
+                    /** ListAccountConnectorsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAccountConnectorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccountConnectorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListAccountConnectorsRequest): google.cloud.developerconnect.v1.ListAccountConnectorsRequest;
+
+                    /**
+                     * Encodes the specified ListAccountConnectorsRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsRequest.verify|verify} messages.
+                     * @param message ListAccountConnectorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListAccountConnectorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccountConnectorsRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsRequest.verify|verify} messages.
+                     * @param message ListAccountConnectorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListAccountConnectorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccountConnectorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccountConnectorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListAccountConnectorsRequest;
+
+                    /**
+                     * Decodes a ListAccountConnectorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccountConnectorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListAccountConnectorsRequest;
+
+                    /**
+                     * Verifies a ListAccountConnectorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccountConnectorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccountConnectorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListAccountConnectorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAccountConnectorsRequest message. Also converts values to other types if specified.
+                     * @param message ListAccountConnectorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListAccountConnectorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccountConnectorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAccountConnectorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAccountConnectorsResponse. */
+                interface IListAccountConnectorsResponse {
+
+                    /** ListAccountConnectorsResponse accountConnectors */
+                    accountConnectors?: (google.cloud.developerconnect.v1.IAccountConnector[]|null);
+
+                    /** ListAccountConnectorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAccountConnectorsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAccountConnectorsResponse. */
+                class ListAccountConnectorsResponse implements IListAccountConnectorsResponse {
+
+                    /**
+                     * Constructs a new ListAccountConnectorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListAccountConnectorsResponse);
+
+                    /** ListAccountConnectorsResponse accountConnectors. */
+                    public accountConnectors: google.cloud.developerconnect.v1.IAccountConnector[];
+
+                    /** ListAccountConnectorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAccountConnectorsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAccountConnectorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccountConnectorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListAccountConnectorsResponse): google.cloud.developerconnect.v1.ListAccountConnectorsResponse;
+
+                    /**
+                     * Encodes the specified ListAccountConnectorsResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsResponse.verify|verify} messages.
+                     * @param message ListAccountConnectorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListAccountConnectorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccountConnectorsResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListAccountConnectorsResponse.verify|verify} messages.
+                     * @param message ListAccountConnectorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListAccountConnectorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccountConnectorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccountConnectorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListAccountConnectorsResponse;
+
+                    /**
+                     * Decodes a ListAccountConnectorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccountConnectorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListAccountConnectorsResponse;
+
+                    /**
+                     * Verifies a ListAccountConnectorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccountConnectorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccountConnectorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListAccountConnectorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAccountConnectorsResponse message. Also converts values to other types if specified.
+                     * @param message ListAccountConnectorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListAccountConnectorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccountConnectorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAccountConnectorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAccountConnectorRequest. */
+                interface IGetAccountConnectorRequest {
+
+                    /** GetAccountConnectorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAccountConnectorRequest. */
+                class GetAccountConnectorRequest implements IGetAccountConnectorRequest {
+
+                    /**
+                     * Constructs a new GetAccountConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGetAccountConnectorRequest);
+
+                    /** GetAccountConnectorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAccountConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAccountConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGetAccountConnectorRequest): google.cloud.developerconnect.v1.GetAccountConnectorRequest;
+
+                    /**
+                     * Encodes the specified GetAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.GetAccountConnectorRequest.verify|verify} messages.
+                     * @param message GetAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGetAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GetAccountConnectorRequest.verify|verify} messages.
+                     * @param message GetAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGetAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAccountConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GetAccountConnectorRequest;
+
+                    /**
+                     * Decodes a GetAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GetAccountConnectorRequest;
+
+                    /**
+                     * Verifies a GetAccountConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAccountConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GetAccountConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a GetAccountConnectorRequest message. Also converts values to other types if specified.
+                     * @param message GetAccountConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GetAccountConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAccountConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAccountConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAccountConnectorRequest. */
+                interface ICreateAccountConnectorRequest {
+
+                    /** CreateAccountConnectorRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAccountConnectorRequest accountConnectorId */
+                    accountConnectorId?: (string|null);
+
+                    /** CreateAccountConnectorRequest accountConnector */
+                    accountConnector?: (google.cloud.developerconnect.v1.IAccountConnector|null);
+
+                    /** CreateAccountConnectorRequest requestId */
+                    requestId?: (string|null);
+
+                    /** CreateAccountConnectorRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateAccountConnectorRequest. */
+                class CreateAccountConnectorRequest implements ICreateAccountConnectorRequest {
+
+                    /**
+                     * Constructs a new CreateAccountConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.ICreateAccountConnectorRequest);
+
+                    /** CreateAccountConnectorRequest parent. */
+                    public parent: string;
+
+                    /** CreateAccountConnectorRequest accountConnectorId. */
+                    public accountConnectorId: string;
+
+                    /** CreateAccountConnectorRequest accountConnector. */
+                    public accountConnector?: (google.cloud.developerconnect.v1.IAccountConnector|null);
+
+                    /** CreateAccountConnectorRequest requestId. */
+                    public requestId: string;
+
+                    /** CreateAccountConnectorRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateAccountConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAccountConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.ICreateAccountConnectorRequest): google.cloud.developerconnect.v1.CreateAccountConnectorRequest;
+
+                    /**
+                     * Encodes the specified CreateAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.CreateAccountConnectorRequest.verify|verify} messages.
+                     * @param message CreateAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.ICreateAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.CreateAccountConnectorRequest.verify|verify} messages.
+                     * @param message CreateAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.ICreateAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAccountConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.CreateAccountConnectorRequest;
+
+                    /**
+                     * Decodes a CreateAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.CreateAccountConnectorRequest;
+
+                    /**
+                     * Verifies a CreateAccountConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAccountConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.CreateAccountConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAccountConnectorRequest message. Also converts values to other types if specified.
+                     * @param message CreateAccountConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.CreateAccountConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAccountConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAccountConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAccountConnectorRequest. */
+                interface IUpdateAccountConnectorRequest {
+
+                    /** UpdateAccountConnectorRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAccountConnectorRequest accountConnector */
+                    accountConnector?: (google.cloud.developerconnect.v1.IAccountConnector|null);
+
+                    /** UpdateAccountConnectorRequest requestId */
+                    requestId?: (string|null);
+
+                    /** UpdateAccountConnectorRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** UpdateAccountConnectorRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateAccountConnectorRequest. */
+                class UpdateAccountConnectorRequest implements IUpdateAccountConnectorRequest {
+
+                    /**
+                     * Constructs a new UpdateAccountConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest);
+
+                    /** UpdateAccountConnectorRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAccountConnectorRequest accountConnector. */
+                    public accountConnector?: (google.cloud.developerconnect.v1.IAccountConnector|null);
+
+                    /** UpdateAccountConnectorRequest requestId. */
+                    public requestId: string;
+
+                    /** UpdateAccountConnectorRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** UpdateAccountConnectorRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateAccountConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAccountConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest): google.cloud.developerconnect.v1.UpdateAccountConnectorRequest;
+
+                    /**
+                     * Encodes the specified UpdateAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateAccountConnectorRequest.verify|verify} messages.
+                     * @param message UpdateAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateAccountConnectorRequest.verify|verify} messages.
+                     * @param message UpdateAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IUpdateAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAccountConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.UpdateAccountConnectorRequest;
+
+                    /**
+                     * Decodes an UpdateAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.UpdateAccountConnectorRequest;
+
+                    /**
+                     * Verifies an UpdateAccountConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAccountConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.UpdateAccountConnectorRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAccountConnectorRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAccountConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.UpdateAccountConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAccountConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAccountConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAccountConnectorRequest. */
+                interface IDeleteAccountConnectorRequest {
+
+                    /** DeleteAccountConnectorRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAccountConnectorRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteAccountConnectorRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteAccountConnectorRequest etag */
+                    etag?: (string|null);
+
+                    /** DeleteAccountConnectorRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteAccountConnectorRequest. */
+                class DeleteAccountConnectorRequest implements IDeleteAccountConnectorRequest {
+
+                    /**
+                     * Constructs a new DeleteAccountConnectorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest);
+
+                    /** DeleteAccountConnectorRequest name. */
+                    public name: string;
+
+                    /** DeleteAccountConnectorRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteAccountConnectorRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteAccountConnectorRequest etag. */
+                    public etag: string;
+
+                    /** DeleteAccountConnectorRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteAccountConnectorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAccountConnectorRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest): google.cloud.developerconnect.v1.DeleteAccountConnectorRequest;
+
+                    /**
+                     * Encodes the specified DeleteAccountConnectorRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteAccountConnectorRequest.verify|verify} messages.
+                     * @param message DeleteAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAccountConnectorRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteAccountConnectorRequest.verify|verify} messages.
+                     * @param message DeleteAccountConnectorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IDeleteAccountConnectorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAccountConnectorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.DeleteAccountConnectorRequest;
+
+                    /**
+                     * Decodes a DeleteAccountConnectorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAccountConnectorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.DeleteAccountConnectorRequest;
+
+                    /**
+                     * Verifies a DeleteAccountConnectorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAccountConnectorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAccountConnectorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.DeleteAccountConnectorRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAccountConnectorRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAccountConnectorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.DeleteAccountConnectorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAccountConnectorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAccountConnectorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteUserRequest. */
+                interface IDeleteUserRequest {
+
+                    /** DeleteUserRequest name */
+                    name?: (string|null);
+
+                    /** DeleteUserRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteUserRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteUserRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteUserRequest. */
+                class DeleteUserRequest implements IDeleteUserRequest {
+
+                    /**
+                     * Constructs a new DeleteUserRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IDeleteUserRequest);
+
+                    /** DeleteUserRequest name. */
+                    public name: string;
+
+                    /** DeleteUserRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteUserRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteUserRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteUserRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteUserRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IDeleteUserRequest): google.cloud.developerconnect.v1.DeleteUserRequest;
+
+                    /**
+                     * Encodes the specified DeleteUserRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteUserRequest.verify|verify} messages.
+                     * @param message DeleteUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IDeleteUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteUserRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteUserRequest.verify|verify} messages.
+                     * @param message DeleteUserRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IDeleteUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteUserRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.DeleteUserRequest;
+
+                    /**
+                     * Decodes a DeleteUserRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteUserRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.DeleteUserRequest;
+
+                    /**
+                     * Verifies a DeleteUserRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteUserRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteUserRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.DeleteUserRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteUserRequest message. Also converts values to other types if specified.
+                     * @param message DeleteUserRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.DeleteUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteUserRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteUserRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an OperationMetadata. */
                 interface IOperationMetadata {
 
@@ -2390,6 +4508,1172 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FetchSelfRequest. */
+                interface IFetchSelfRequest {
+
+                    /** FetchSelfRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a FetchSelfRequest. */
+                class FetchSelfRequest implements IFetchSelfRequest {
+
+                    /**
+                     * Constructs a new FetchSelfRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchSelfRequest);
+
+                    /** FetchSelfRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new FetchSelfRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchSelfRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchSelfRequest): google.cloud.developerconnect.v1.FetchSelfRequest;
+
+                    /**
+                     * Encodes the specified FetchSelfRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchSelfRequest.verify|verify} messages.
+                     * @param message FetchSelfRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchSelfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchSelfRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchSelfRequest.verify|verify} messages.
+                     * @param message FetchSelfRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchSelfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchSelfRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchSelfRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchSelfRequest;
+
+                    /**
+                     * Decodes a FetchSelfRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchSelfRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchSelfRequest;
+
+                    /**
+                     * Verifies a FetchSelfRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchSelfRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchSelfRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchSelfRequest;
+
+                    /**
+                     * Creates a plain object from a FetchSelfRequest message. Also converts values to other types if specified.
+                     * @param message FetchSelfRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchSelfRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchSelfRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchSelfRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSelfRequest. */
+                interface IDeleteSelfRequest {
+
+                    /** DeleteSelfRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSelfRequest. */
+                class DeleteSelfRequest implements IDeleteSelfRequest {
+
+                    /**
+                     * Constructs a new DeleteSelfRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IDeleteSelfRequest);
+
+                    /** DeleteSelfRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSelfRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSelfRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IDeleteSelfRequest): google.cloud.developerconnect.v1.DeleteSelfRequest;
+
+                    /**
+                     * Encodes the specified DeleteSelfRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteSelfRequest.verify|verify} messages.
+                     * @param message DeleteSelfRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IDeleteSelfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSelfRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteSelfRequest.verify|verify} messages.
+                     * @param message DeleteSelfRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IDeleteSelfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSelfRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSelfRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.DeleteSelfRequest;
+
+                    /**
+                     * Decodes a DeleteSelfRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSelfRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.DeleteSelfRequest;
+
+                    /**
+                     * Verifies a DeleteSelfRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSelfRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSelfRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.DeleteSelfRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSelfRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSelfRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.DeleteSelfRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSelfRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSelfRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchAccessTokenRequest. */
+                interface IFetchAccessTokenRequest {
+
+                    /** FetchAccessTokenRequest accountConnector */
+                    accountConnector?: (string|null);
+                }
+
+                /** Represents a FetchAccessTokenRequest. */
+                class FetchAccessTokenRequest implements IFetchAccessTokenRequest {
+
+                    /**
+                     * Constructs a new FetchAccessTokenRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchAccessTokenRequest);
+
+                    /** FetchAccessTokenRequest accountConnector. */
+                    public accountConnector: string;
+
+                    /**
+                     * Creates a new FetchAccessTokenRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchAccessTokenRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchAccessTokenRequest): google.cloud.developerconnect.v1.FetchAccessTokenRequest;
+
+                    /**
+                     * Encodes the specified FetchAccessTokenRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenRequest.verify|verify} messages.
+                     * @param message FetchAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchAccessTokenRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenRequest.verify|verify} messages.
+                     * @param message FetchAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchAccessTokenRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchAccessTokenRequest;
+
+                    /**
+                     * Decodes a FetchAccessTokenRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchAccessTokenRequest;
+
+                    /**
+                     * Verifies a FetchAccessTokenRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchAccessTokenRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchAccessTokenRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchAccessTokenRequest;
+
+                    /**
+                     * Creates a plain object from a FetchAccessTokenRequest message. Also converts values to other types if specified.
+                     * @param message FetchAccessTokenRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchAccessTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchAccessTokenRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchAccessTokenRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchAccessTokenResponse. */
+                interface IFetchAccessTokenResponse {
+
+                    /** FetchAccessTokenResponse token */
+                    token?: (string|null);
+
+                    /** FetchAccessTokenResponse expirationTime */
+                    expirationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FetchAccessTokenResponse scopes */
+                    scopes?: (string[]|null);
+
+                    /** FetchAccessTokenResponse exchangeError */
+                    exchangeError?: (google.cloud.developerconnect.v1.IExchangeError|null);
+                }
+
+                /** Represents a FetchAccessTokenResponse. */
+                class FetchAccessTokenResponse implements IFetchAccessTokenResponse {
+
+                    /**
+                     * Constructs a new FetchAccessTokenResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFetchAccessTokenResponse);
+
+                    /** FetchAccessTokenResponse token. */
+                    public token: string;
+
+                    /** FetchAccessTokenResponse expirationTime. */
+                    public expirationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FetchAccessTokenResponse scopes. */
+                    public scopes: string[];
+
+                    /** FetchAccessTokenResponse exchangeError. */
+                    public exchangeError?: (google.cloud.developerconnect.v1.IExchangeError|null);
+
+                    /**
+                     * Creates a new FetchAccessTokenResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchAccessTokenResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFetchAccessTokenResponse): google.cloud.developerconnect.v1.FetchAccessTokenResponse;
+
+                    /**
+                     * Encodes the specified FetchAccessTokenResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenResponse.verify|verify} messages.
+                     * @param message FetchAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFetchAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchAccessTokenResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FetchAccessTokenResponse.verify|verify} messages.
+                     * @param message FetchAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFetchAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchAccessTokenResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FetchAccessTokenResponse;
+
+                    /**
+                     * Decodes a FetchAccessTokenResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FetchAccessTokenResponse;
+
+                    /**
+                     * Verifies a FetchAccessTokenResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchAccessTokenResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchAccessTokenResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FetchAccessTokenResponse;
+
+                    /**
+                     * Creates a plain object from a FetchAccessTokenResponse message. Also converts values to other types if specified.
+                     * @param message FetchAccessTokenResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FetchAccessTokenResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchAccessTokenResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchAccessTokenResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StartOAuthRequest. */
+                interface IStartOAuthRequest {
+
+                    /** StartOAuthRequest accountConnector */
+                    accountConnector?: (string|null);
+                }
+
+                /** Represents a StartOAuthRequest. */
+                class StartOAuthRequest implements IStartOAuthRequest {
+
+                    /**
+                     * Constructs a new StartOAuthRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IStartOAuthRequest);
+
+                    /** StartOAuthRequest accountConnector. */
+                    public accountConnector: string;
+
+                    /**
+                     * Creates a new StartOAuthRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartOAuthRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IStartOAuthRequest): google.cloud.developerconnect.v1.StartOAuthRequest;
+
+                    /**
+                     * Encodes the specified StartOAuthRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthRequest.verify|verify} messages.
+                     * @param message StartOAuthRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IStartOAuthRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartOAuthRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthRequest.verify|verify} messages.
+                     * @param message StartOAuthRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IStartOAuthRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartOAuthRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartOAuthRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.StartOAuthRequest;
+
+                    /**
+                     * Decodes a StartOAuthRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartOAuthRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.StartOAuthRequest;
+
+                    /**
+                     * Verifies a StartOAuthRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartOAuthRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartOAuthRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.StartOAuthRequest;
+
+                    /**
+                     * Creates a plain object from a StartOAuthRequest message. Also converts values to other types if specified.
+                     * @param message StartOAuthRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.StartOAuthRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartOAuthRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartOAuthRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StartOAuthResponse. */
+                interface IStartOAuthResponse {
+
+                    /** StartOAuthResponse systemProviderId */
+                    systemProviderId?: (google.cloud.developerconnect.v1.SystemProvider|keyof typeof google.cloud.developerconnect.v1.SystemProvider|null);
+
+                    /** StartOAuthResponse ticket */
+                    ticket?: (string|null);
+
+                    /** StartOAuthResponse codeChallenge */
+                    codeChallenge?: (string|null);
+
+                    /** StartOAuthResponse codeChallengeMethod */
+                    codeChallengeMethod?: (string|null);
+
+                    /** StartOAuthResponse clientId */
+                    clientId?: (string|null);
+
+                    /** StartOAuthResponse scopes */
+                    scopes?: (string[]|null);
+
+                    /** StartOAuthResponse authUri */
+                    authUri?: (string|null);
+                }
+
+                /** Represents a StartOAuthResponse. */
+                class StartOAuthResponse implements IStartOAuthResponse {
+
+                    /**
+                     * Constructs a new StartOAuthResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IStartOAuthResponse);
+
+                    /** StartOAuthResponse systemProviderId. */
+                    public systemProviderId?: (google.cloud.developerconnect.v1.SystemProvider|keyof typeof google.cloud.developerconnect.v1.SystemProvider|null);
+
+                    /** StartOAuthResponse ticket. */
+                    public ticket: string;
+
+                    /** StartOAuthResponse codeChallenge. */
+                    public codeChallenge: string;
+
+                    /** StartOAuthResponse codeChallengeMethod. */
+                    public codeChallengeMethod: string;
+
+                    /** StartOAuthResponse clientId. */
+                    public clientId: string;
+
+                    /** StartOAuthResponse scopes. */
+                    public scopes: string[];
+
+                    /** StartOAuthResponse authUri. */
+                    public authUri: string;
+
+                    /** StartOAuthResponse id. */
+                    public id?: "systemProviderId";
+
+                    /**
+                     * Creates a new StartOAuthResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartOAuthResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IStartOAuthResponse): google.cloud.developerconnect.v1.StartOAuthResponse;
+
+                    /**
+                     * Encodes the specified StartOAuthResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthResponse.verify|verify} messages.
+                     * @param message StartOAuthResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IStartOAuthResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartOAuthResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.StartOAuthResponse.verify|verify} messages.
+                     * @param message StartOAuthResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IStartOAuthResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartOAuthResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartOAuthResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.StartOAuthResponse;
+
+                    /**
+                     * Decodes a StartOAuthResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartOAuthResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.StartOAuthResponse;
+
+                    /**
+                     * Verifies a StartOAuthResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartOAuthResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartOAuthResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.StartOAuthResponse;
+
+                    /**
+                     * Creates a plain object from a StartOAuthResponse message. Also converts values to other types if specified.
+                     * @param message StartOAuthResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.StartOAuthResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartOAuthResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartOAuthResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FinishOAuthRequest. */
+                interface IFinishOAuthRequest {
+
+                    /** FinishOAuthRequest oauthParams */
+                    oauthParams?: (google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams|null);
+
+                    /** FinishOAuthRequest googleOauthParams */
+                    googleOauthParams?: (google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams|null);
+
+                    /** FinishOAuthRequest accountConnector */
+                    accountConnector?: (string|null);
+                }
+
+                /** Represents a FinishOAuthRequest. */
+                class FinishOAuthRequest implements IFinishOAuthRequest {
+
+                    /**
+                     * Constructs a new FinishOAuthRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFinishOAuthRequest);
+
+                    /** FinishOAuthRequest oauthParams. */
+                    public oauthParams?: (google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams|null);
+
+                    /** FinishOAuthRequest googleOauthParams. */
+                    public googleOauthParams?: (google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams|null);
+
+                    /** FinishOAuthRequest accountConnector. */
+                    public accountConnector: string;
+
+                    /** FinishOAuthRequest params. */
+                    public params?: ("oauthParams"|"googleOauthParams");
+
+                    /**
+                     * Creates a new FinishOAuthRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FinishOAuthRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFinishOAuthRequest): google.cloud.developerconnect.v1.FinishOAuthRequest;
+
+                    /**
+                     * Encodes the specified FinishOAuthRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.verify|verify} messages.
+                     * @param message FinishOAuthRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFinishOAuthRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FinishOAuthRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.verify|verify} messages.
+                     * @param message FinishOAuthRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFinishOAuthRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FinishOAuthRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FinishOAuthRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FinishOAuthRequest;
+
+                    /**
+                     * Decodes a FinishOAuthRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FinishOAuthRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FinishOAuthRequest;
+
+                    /**
+                     * Verifies a FinishOAuthRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FinishOAuthRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FinishOAuthRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FinishOAuthRequest;
+
+                    /**
+                     * Creates a plain object from a FinishOAuthRequest message. Also converts values to other types if specified.
+                     * @param message FinishOAuthRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FinishOAuthRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FinishOAuthRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FinishOAuthRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FinishOAuthRequest {
+
+                    /** Properties of a OAuthParams. */
+                    interface IOAuthParams {
+
+                        /** OAuthParams code */
+                        code?: (string|null);
+
+                        /** OAuthParams ticket */
+                        ticket?: (string|null);
+                    }
+
+                    /** Represents a OAuthParams. */
+                    class OAuthParams implements IOAuthParams {
+
+                        /**
+                         * Constructs a new OAuthParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams);
+
+                        /** OAuthParams code. */
+                        public code: string;
+
+                        /** OAuthParams ticket. */
+                        public ticket: string;
+
+                        /**
+                         * Creates a new OAuthParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OAuthParams instance
+                         */
+                        public static create(properties?: google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams): google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams;
+
+                        /**
+                         * Encodes the specified OAuthParams message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.verify|verify} messages.
+                         * @param message OAuthParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OAuthParams message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams.verify|verify} messages.
+                         * @param message OAuthParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.developerconnect.v1.FinishOAuthRequest.IOAuthParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a OAuthParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OAuthParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams;
+
+                        /**
+                         * Decodes a OAuthParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OAuthParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams;
+
+                        /**
+                         * Verifies a OAuthParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a OAuthParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OAuthParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams;
+
+                        /**
+                         * Creates a plain object from a OAuthParams message. Also converts values to other types if specified.
+                         * @param message OAuthParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.developerconnect.v1.FinishOAuthRequest.OAuthParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OAuthParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OAuthParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GoogleOAuthParams. */
+                    interface IGoogleOAuthParams {
+
+                        /** GoogleOAuthParams scopes */
+                        scopes?: (string[]|null);
+
+                        /** GoogleOAuthParams versionInfo */
+                        versionInfo?: (string|null);
+
+                        /** GoogleOAuthParams ticket */
+                        ticket?: (string|null);
+                    }
+
+                    /** Represents a GoogleOAuthParams. */
+                    class GoogleOAuthParams implements IGoogleOAuthParams {
+
+                        /**
+                         * Constructs a new GoogleOAuthParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams);
+
+                        /** GoogleOAuthParams scopes. */
+                        public scopes: string[];
+
+                        /** GoogleOAuthParams versionInfo. */
+                        public versionInfo: string;
+
+                        /** GoogleOAuthParams ticket. */
+                        public ticket: string;
+
+                        /**
+                         * Creates a new GoogleOAuthParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoogleOAuthParams instance
+                         */
+                        public static create(properties?: google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams): google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams;
+
+                        /**
+                         * Encodes the specified GoogleOAuthParams message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.verify|verify} messages.
+                         * @param message GoogleOAuthParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoogleOAuthParams message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams.verify|verify} messages.
+                         * @param message GoogleOAuthParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.developerconnect.v1.FinishOAuthRequest.IGoogleOAuthParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoogleOAuthParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoogleOAuthParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams;
+
+                        /**
+                         * Decodes a GoogleOAuthParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoogleOAuthParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams;
+
+                        /**
+                         * Verifies a GoogleOAuthParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoogleOAuthParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoogleOAuthParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams;
+
+                        /**
+                         * Creates a plain object from a GoogleOAuthParams message. Also converts values to other types if specified.
+                         * @param message GoogleOAuthParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.developerconnect.v1.FinishOAuthRequest.GoogleOAuthParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoogleOAuthParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleOAuthParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a FinishOAuthResponse. */
+                interface IFinishOAuthResponse {
+
+                    /** FinishOAuthResponse exchangeError */
+                    exchangeError?: (google.cloud.developerconnect.v1.IExchangeError|null);
+                }
+
+                /** Represents a FinishOAuthResponse. */
+                class FinishOAuthResponse implements IFinishOAuthResponse {
+
+                    /**
+                     * Constructs a new FinishOAuthResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IFinishOAuthResponse);
+
+                    /** FinishOAuthResponse exchangeError. */
+                    public exchangeError?: (google.cloud.developerconnect.v1.IExchangeError|null);
+
+                    /**
+                     * Creates a new FinishOAuthResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FinishOAuthResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IFinishOAuthResponse): google.cloud.developerconnect.v1.FinishOAuthResponse;
+
+                    /**
+                     * Encodes the specified FinishOAuthResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthResponse.verify|verify} messages.
+                     * @param message FinishOAuthResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IFinishOAuthResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FinishOAuthResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.FinishOAuthResponse.verify|verify} messages.
+                     * @param message FinishOAuthResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IFinishOAuthResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FinishOAuthResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FinishOAuthResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.FinishOAuthResponse;
+
+                    /**
+                     * Decodes a FinishOAuthResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FinishOAuthResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.FinishOAuthResponse;
+
+                    /**
+                     * Verifies a FinishOAuthResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FinishOAuthResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FinishOAuthResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.FinishOAuthResponse;
+
+                    /**
+                     * Creates a plain object from a FinishOAuthResponse message. Also converts values to other types if specified.
+                     * @param message FinishOAuthResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.FinishOAuthResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FinishOAuthResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FinishOAuthResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExchangeError. */
+                interface IExchangeError {
+
+                    /** ExchangeError code */
+                    code?: (string|null);
+
+                    /** ExchangeError description */
+                    description?: (string|null);
+                }
+
+                /** Represents an ExchangeError. */
+                class ExchangeError implements IExchangeError {
+
+                    /**
+                     * Constructs a new ExchangeError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IExchangeError);
+
+                    /** ExchangeError code. */
+                    public code: string;
+
+                    /** ExchangeError description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new ExchangeError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExchangeError instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IExchangeError): google.cloud.developerconnect.v1.ExchangeError;
+
+                    /**
+                     * Encodes the specified ExchangeError message. Does not implicitly {@link google.cloud.developerconnect.v1.ExchangeError.verify|verify} messages.
+                     * @param message ExchangeError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IExchangeError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExchangeError message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ExchangeError.verify|verify} messages.
+                     * @param message ExchangeError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IExchangeError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExchangeError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExchangeError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ExchangeError;
+
+                    /**
+                     * Decodes an ExchangeError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExchangeError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ExchangeError;
+
+                    /**
+                     * Verifies an ExchangeError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExchangeError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExchangeError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ExchangeError;
+
+                    /**
+                     * Creates a plain object from an ExchangeError message. Also converts values to other types if specified.
+                     * @param message ExchangeError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ExchangeError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExchangeError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExchangeError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GitRepositoryLink. */
                 interface IGitRepositoryLink {
 
@@ -2425,6 +5709,9 @@ export namespace google {
 
                     /** GitRepositoryLink webhookId */
                     webhookId?: (string|null);
+
+                    /** GitRepositoryLink gitProxyUri */
+                    gitProxyUri?: (string|null);
                 }
 
                 /** Represents a GitRepositoryLink. */
@@ -2468,6 +5755,9 @@ export namespace google {
 
                     /** GitRepositoryLink webhookId. */
                     public webhookId: string;
+
+                    /** GitRepositoryLink gitProxyUri. */
+                    public gitProxyUri: string;
 
                     /**
                      * Creates a new GitRepositoryLink instance using the specified properties.
@@ -4364,6 +7654,2965 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of an AccountConnector. */
+                interface IAccountConnector {
+
+                    /** AccountConnector providerOauthConfig */
+                    providerOauthConfig?: (google.cloud.developerconnect.v1.IProviderOAuthConfig|null);
+
+                    /** AccountConnector name */
+                    name?: (string|null);
+
+                    /** AccountConnector createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccountConnector updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccountConnector annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** AccountConnector etag */
+                    etag?: (string|null);
+
+                    /** AccountConnector labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AccountConnector oauthStartUri */
+                    oauthStartUri?: (string|null);
+                }
+
+                /** Represents an AccountConnector. */
+                class AccountConnector implements IAccountConnector {
+
+                    /**
+                     * Constructs a new AccountConnector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IAccountConnector);
+
+                    /** AccountConnector providerOauthConfig. */
+                    public providerOauthConfig?: (google.cloud.developerconnect.v1.IProviderOAuthConfig|null);
+
+                    /** AccountConnector name. */
+                    public name: string;
+
+                    /** AccountConnector createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccountConnector updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccountConnector annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** AccountConnector etag. */
+                    public etag: string;
+
+                    /** AccountConnector labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AccountConnector oauthStartUri. */
+                    public oauthStartUri: string;
+
+                    /** AccountConnector accountConnectorConfig. */
+                    public accountConnectorConfig?: "providerOauthConfig";
+
+                    /**
+                     * Creates a new AccountConnector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccountConnector instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IAccountConnector): google.cloud.developerconnect.v1.AccountConnector;
+
+                    /**
+                     * Encodes the specified AccountConnector message. Does not implicitly {@link google.cloud.developerconnect.v1.AccountConnector.verify|verify} messages.
+                     * @param message AccountConnector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IAccountConnector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccountConnector message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AccountConnector.verify|verify} messages.
+                     * @param message AccountConnector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IAccountConnector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccountConnector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccountConnector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.AccountConnector;
+
+                    /**
+                     * Decodes an AccountConnector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccountConnector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.AccountConnector;
+
+                    /**
+                     * Verifies an AccountConnector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccountConnector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccountConnector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.AccountConnector;
+
+                    /**
+                     * Creates a plain object from an AccountConnector message. Also converts values to other types if specified.
+                     * @param message AccountConnector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.AccountConnector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccountConnector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccountConnector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a User. */
+                interface IUser {
+
+                    /** User name */
+                    name?: (string|null);
+
+                    /** User displayName */
+                    displayName?: (string|null);
+
+                    /** User createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** User lastTokenRequestTime */
+                    lastTokenRequestTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a User. */
+                class User implements IUser {
+
+                    /**
+                     * Constructs a new User.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IUser);
+
+                    /** User name. */
+                    public name: string;
+
+                    /** User displayName. */
+                    public displayName: string;
+
+                    /** User createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** User lastTokenRequestTime. */
+                    public lastTokenRequestTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new User instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns User instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IUser): google.cloud.developerconnect.v1.User;
+
+                    /**
+                     * Encodes the specified User message. Does not implicitly {@link google.cloud.developerconnect.v1.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified User message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.User;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.User;
+
+                    /**
+                     * Verifies a User message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a User message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns User
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.User;
+
+                    /**
+                     * Creates a plain object from a User message. Also converts values to other types if specified.
+                     * @param message User
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this User to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for User
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProviderOAuthConfig. */
+                interface IProviderOAuthConfig {
+
+                    /** ProviderOAuthConfig systemProviderId */
+                    systemProviderId?: (google.cloud.developerconnect.v1.SystemProvider|keyof typeof google.cloud.developerconnect.v1.SystemProvider|null);
+
+                    /** ProviderOAuthConfig scopes */
+                    scopes?: (string[]|null);
+                }
+
+                /** Represents a ProviderOAuthConfig. */
+                class ProviderOAuthConfig implements IProviderOAuthConfig {
+
+                    /**
+                     * Constructs a new ProviderOAuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IProviderOAuthConfig);
+
+                    /** ProviderOAuthConfig systemProviderId. */
+                    public systemProviderId?: (google.cloud.developerconnect.v1.SystemProvider|keyof typeof google.cloud.developerconnect.v1.SystemProvider|null);
+
+                    /** ProviderOAuthConfig scopes. */
+                    public scopes: string[];
+
+                    /** ProviderOAuthConfig oauthProviderId. */
+                    public oauthProviderId?: "systemProviderId";
+
+                    /**
+                     * Creates a new ProviderOAuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProviderOAuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IProviderOAuthConfig): google.cloud.developerconnect.v1.ProviderOAuthConfig;
+
+                    /**
+                     * Encodes the specified ProviderOAuthConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.ProviderOAuthConfig.verify|verify} messages.
+                     * @param message ProviderOAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IProviderOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProviderOAuthConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ProviderOAuthConfig.verify|verify} messages.
+                     * @param message ProviderOAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IProviderOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProviderOAuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProviderOAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ProviderOAuthConfig;
+
+                    /**
+                     * Decodes a ProviderOAuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProviderOAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ProviderOAuthConfig;
+
+                    /**
+                     * Verifies a ProviderOAuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProviderOAuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProviderOAuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ProviderOAuthConfig;
+
+                    /**
+                     * Creates a plain object from a ProviderOAuthConfig message. Also converts values to other types if specified.
+                     * @param message ProviderOAuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ProviderOAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProviderOAuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProviderOAuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents an InsightsConfigService */
+                class InsightsConfigService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new InsightsConfigService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new InsightsConfigService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): InsightsConfigService;
+
+                    /**
+                     * Calls ListInsightsConfigs.
+                     * @param request ListInsightsConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListInsightsConfigsResponse
+                     */
+                    public listInsightsConfigs(request: google.cloud.developerconnect.v1.IListInsightsConfigsRequest, callback: google.cloud.developerconnect.v1.InsightsConfigService.ListInsightsConfigsCallback): void;
+
+                    /**
+                     * Calls ListInsightsConfigs.
+                     * @param request ListInsightsConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listInsightsConfigs(request: google.cloud.developerconnect.v1.IListInsightsConfigsRequest): Promise<google.cloud.developerconnect.v1.ListInsightsConfigsResponse>;
+
+                    /**
+                     * Calls CreateInsightsConfig.
+                     * @param request CreateInsightsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createInsightsConfig(request: google.cloud.developerconnect.v1.ICreateInsightsConfigRequest, callback: google.cloud.developerconnect.v1.InsightsConfigService.CreateInsightsConfigCallback): void;
+
+                    /**
+                     * Calls CreateInsightsConfig.
+                     * @param request CreateInsightsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createInsightsConfig(request: google.cloud.developerconnect.v1.ICreateInsightsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetInsightsConfig.
+                     * @param request GetInsightsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and InsightsConfig
+                     */
+                    public getInsightsConfig(request: google.cloud.developerconnect.v1.IGetInsightsConfigRequest, callback: google.cloud.developerconnect.v1.InsightsConfigService.GetInsightsConfigCallback): void;
+
+                    /**
+                     * Calls GetInsightsConfig.
+                     * @param request GetInsightsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getInsightsConfig(request: google.cloud.developerconnect.v1.IGetInsightsConfigRequest): Promise<google.cloud.developerconnect.v1.InsightsConfig>;
+
+                    /**
+                     * Calls UpdateInsightsConfig.
+                     * @param request UpdateInsightsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateInsightsConfig(request: google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest, callback: google.cloud.developerconnect.v1.InsightsConfigService.UpdateInsightsConfigCallback): void;
+
+                    /**
+                     * Calls UpdateInsightsConfig.
+                     * @param request UpdateInsightsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateInsightsConfig(request: google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteInsightsConfig.
+                     * @param request DeleteInsightsConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteInsightsConfig(request: google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest, callback: google.cloud.developerconnect.v1.InsightsConfigService.DeleteInsightsConfigCallback): void;
+
+                    /**
+                     * Calls DeleteInsightsConfig.
+                     * @param request DeleteInsightsConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteInsightsConfig(request: google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetDeploymentEvent.
+                     * @param request GetDeploymentEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DeploymentEvent
+                     */
+                    public getDeploymentEvent(request: google.cloud.developerconnect.v1.IGetDeploymentEventRequest, callback: google.cloud.developerconnect.v1.InsightsConfigService.GetDeploymentEventCallback): void;
+
+                    /**
+                     * Calls GetDeploymentEvent.
+                     * @param request GetDeploymentEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDeploymentEvent(request: google.cloud.developerconnect.v1.IGetDeploymentEventRequest): Promise<google.cloud.developerconnect.v1.DeploymentEvent>;
+
+                    /**
+                     * Calls ListDeploymentEvents.
+                     * @param request ListDeploymentEventsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDeploymentEventsResponse
+                     */
+                    public listDeploymentEvents(request: google.cloud.developerconnect.v1.IListDeploymentEventsRequest, callback: google.cloud.developerconnect.v1.InsightsConfigService.ListDeploymentEventsCallback): void;
+
+                    /**
+                     * Calls ListDeploymentEvents.
+                     * @param request ListDeploymentEventsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDeploymentEvents(request: google.cloud.developerconnect.v1.IListDeploymentEventsRequest): Promise<google.cloud.developerconnect.v1.ListDeploymentEventsResponse>;
+                }
+
+                namespace InsightsConfigService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|listInsightsConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListInsightsConfigsResponse
+                     */
+                    type ListInsightsConfigsCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.ListInsightsConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|createInsightsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateInsightsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|getInsightsConfig}.
+                     * @param error Error, if any
+                     * @param [response] InsightsConfig
+                     */
+                    type GetInsightsConfigCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.InsightsConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|updateInsightsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateInsightsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|deleteInsightsConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteInsightsConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|getDeploymentEvent}.
+                     * @param error Error, if any
+                     * @param [response] DeploymentEvent
+                     */
+                    type GetDeploymentEventCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.DeploymentEvent) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.developerconnect.v1.InsightsConfigService|listDeploymentEvents}.
+                     * @param error Error, if any
+                     * @param [response] ListDeploymentEventsResponse
+                     */
+                    type ListDeploymentEventsCallback = (error: (Error|null), response?: google.cloud.developerconnect.v1.ListDeploymentEventsResponse) => void;
+                }
+
+                /** Properties of an InsightsConfig. */
+                interface IInsightsConfig {
+
+                    /** InsightsConfig appHubApplication */
+                    appHubApplication?: (string|null);
+
+                    /** InsightsConfig projects */
+                    projects?: (google.cloud.developerconnect.v1.IProjects|null);
+
+                    /** InsightsConfig name */
+                    name?: (string|null);
+
+                    /** InsightsConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InsightsConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InsightsConfig runtimeConfigs */
+                    runtimeConfigs?: (google.cloud.developerconnect.v1.IRuntimeConfig[]|null);
+
+                    /** InsightsConfig artifactConfigs */
+                    artifactConfigs?: (google.cloud.developerconnect.v1.IArtifactConfig[]|null);
+
+                    /** InsightsConfig state */
+                    state?: (google.cloud.developerconnect.v1.InsightsConfig.State|keyof typeof google.cloud.developerconnect.v1.InsightsConfig.State|null);
+
+                    /** InsightsConfig annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** InsightsConfig labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** InsightsConfig reconciling */
+                    reconciling?: (boolean|null);
+
+                    /** InsightsConfig errors */
+                    errors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents an InsightsConfig. */
+                class InsightsConfig implements IInsightsConfig {
+
+                    /**
+                     * Constructs a new InsightsConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IInsightsConfig);
+
+                    /** InsightsConfig appHubApplication. */
+                    public appHubApplication?: (string|null);
+
+                    /** InsightsConfig projects. */
+                    public projects?: (google.cloud.developerconnect.v1.IProjects|null);
+
+                    /** InsightsConfig name. */
+                    public name: string;
+
+                    /** InsightsConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InsightsConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InsightsConfig runtimeConfigs. */
+                    public runtimeConfigs: google.cloud.developerconnect.v1.IRuntimeConfig[];
+
+                    /** InsightsConfig artifactConfigs. */
+                    public artifactConfigs: google.cloud.developerconnect.v1.IArtifactConfig[];
+
+                    /** InsightsConfig state. */
+                    public state: (google.cloud.developerconnect.v1.InsightsConfig.State|keyof typeof google.cloud.developerconnect.v1.InsightsConfig.State);
+
+                    /** InsightsConfig annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** InsightsConfig labels. */
+                    public labels: { [k: string]: string };
+
+                    /** InsightsConfig reconciling. */
+                    public reconciling: boolean;
+
+                    /** InsightsConfig errors. */
+                    public errors: google.rpc.IStatus[];
+
+                    /** InsightsConfig insightsConfigContext. */
+                    public insightsConfigContext?: ("appHubApplication"|"projects");
+
+                    /**
+                     * Creates a new InsightsConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InsightsConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IInsightsConfig): google.cloud.developerconnect.v1.InsightsConfig;
+
+                    /**
+                     * Encodes the specified InsightsConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.InsightsConfig.verify|verify} messages.
+                     * @param message InsightsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IInsightsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InsightsConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.InsightsConfig.verify|verify} messages.
+                     * @param message InsightsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IInsightsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InsightsConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InsightsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.InsightsConfig;
+
+                    /**
+                     * Decodes an InsightsConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InsightsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.InsightsConfig;
+
+                    /**
+                     * Verifies an InsightsConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InsightsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InsightsConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.InsightsConfig;
+
+                    /**
+                     * Creates a plain object from an InsightsConfig message. Also converts values to other types if specified.
+                     * @param message InsightsConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.InsightsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InsightsConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InsightsConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InsightsConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 5,
+                        COMPLETE = 3,
+                        ERROR = 4
+                    }
+                }
+
+                /** Properties of a Projects. */
+                interface IProjects {
+
+                    /** Projects projectIds */
+                    projectIds?: (string[]|null);
+                }
+
+                /** Represents a Projects. */
+                class Projects implements IProjects {
+
+                    /**
+                     * Constructs a new Projects.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IProjects);
+
+                    /** Projects projectIds. */
+                    public projectIds: string[];
+
+                    /**
+                     * Creates a new Projects instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Projects instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IProjects): google.cloud.developerconnect.v1.Projects;
+
+                    /**
+                     * Encodes the specified Projects message. Does not implicitly {@link google.cloud.developerconnect.v1.Projects.verify|verify} messages.
+                     * @param message Projects message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IProjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Projects message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.Projects.verify|verify} messages.
+                     * @param message Projects message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IProjects, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Projects message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Projects
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.Projects;
+
+                    /**
+                     * Decodes a Projects message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Projects
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.Projects;
+
+                    /**
+                     * Verifies a Projects message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Projects message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Projects
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.Projects;
+
+                    /**
+                     * Creates a plain object from a Projects message. Also converts values to other types if specified.
+                     * @param message Projects
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.Projects, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Projects to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Projects
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RuntimeConfig. */
+                interface IRuntimeConfig {
+
+                    /** RuntimeConfig gkeWorkload */
+                    gkeWorkload?: (google.cloud.developerconnect.v1.IGKEWorkload|null);
+
+                    /** RuntimeConfig googleCloudRun */
+                    googleCloudRun?: (google.cloud.developerconnect.v1.IGoogleCloudRun|null);
+
+                    /** RuntimeConfig appHubWorkload */
+                    appHubWorkload?: (google.cloud.developerconnect.v1.IAppHubWorkload|null);
+
+                    /** RuntimeConfig appHubService */
+                    appHubService?: (google.cloud.developerconnect.v1.IAppHubService|null);
+
+                    /** RuntimeConfig uri */
+                    uri?: (string|null);
+
+                    /** RuntimeConfig state */
+                    state?: (google.cloud.developerconnect.v1.RuntimeConfig.State|keyof typeof google.cloud.developerconnect.v1.RuntimeConfig.State|null);
+                }
+
+                /** Represents a RuntimeConfig. */
+                class RuntimeConfig implements IRuntimeConfig {
+
+                    /**
+                     * Constructs a new RuntimeConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IRuntimeConfig);
+
+                    /** RuntimeConfig gkeWorkload. */
+                    public gkeWorkload?: (google.cloud.developerconnect.v1.IGKEWorkload|null);
+
+                    /** RuntimeConfig googleCloudRun. */
+                    public googleCloudRun?: (google.cloud.developerconnect.v1.IGoogleCloudRun|null);
+
+                    /** RuntimeConfig appHubWorkload. */
+                    public appHubWorkload?: (google.cloud.developerconnect.v1.IAppHubWorkload|null);
+
+                    /** RuntimeConfig appHubService. */
+                    public appHubService?: (google.cloud.developerconnect.v1.IAppHubService|null);
+
+                    /** RuntimeConfig uri. */
+                    public uri: string;
+
+                    /** RuntimeConfig state. */
+                    public state: (google.cloud.developerconnect.v1.RuntimeConfig.State|keyof typeof google.cloud.developerconnect.v1.RuntimeConfig.State);
+
+                    /** RuntimeConfig runtime. */
+                    public runtime?: ("gkeWorkload"|"googleCloudRun");
+
+                    /** RuntimeConfig derivedFrom. */
+                    public derivedFrom?: ("appHubWorkload"|"appHubService");
+
+                    /**
+                     * Creates a new RuntimeConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RuntimeConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IRuntimeConfig): google.cloud.developerconnect.v1.RuntimeConfig;
+
+                    /**
+                     * Encodes the specified RuntimeConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.RuntimeConfig.verify|verify} messages.
+                     * @param message RuntimeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IRuntimeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RuntimeConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.RuntimeConfig.verify|verify} messages.
+                     * @param message RuntimeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IRuntimeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RuntimeConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RuntimeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.RuntimeConfig;
+
+                    /**
+                     * Decodes a RuntimeConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RuntimeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.RuntimeConfig;
+
+                    /**
+                     * Verifies a RuntimeConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RuntimeConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RuntimeConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.RuntimeConfig;
+
+                    /**
+                     * Creates a plain object from a RuntimeConfig message. Also converts values to other types if specified.
+                     * @param message RuntimeConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.RuntimeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RuntimeConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RuntimeConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RuntimeConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        LINKED = 1,
+                        UNLINKED = 2
+                    }
+                }
+
+                /** Properties of a GKEWorkload. */
+                interface IGKEWorkload {
+
+                    /** GKEWorkload cluster */
+                    cluster?: (string|null);
+
+                    /** GKEWorkload deployment */
+                    deployment?: (string|null);
+                }
+
+                /** Represents a GKEWorkload. */
+                class GKEWorkload implements IGKEWorkload {
+
+                    /**
+                     * Constructs a new GKEWorkload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGKEWorkload);
+
+                    /** GKEWorkload cluster. */
+                    public cluster: string;
+
+                    /** GKEWorkload deployment. */
+                    public deployment: string;
+
+                    /**
+                     * Creates a new GKEWorkload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GKEWorkload instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGKEWorkload): google.cloud.developerconnect.v1.GKEWorkload;
+
+                    /**
+                     * Encodes the specified GKEWorkload message. Does not implicitly {@link google.cloud.developerconnect.v1.GKEWorkload.verify|verify} messages.
+                     * @param message GKEWorkload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGKEWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GKEWorkload message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GKEWorkload.verify|verify} messages.
+                     * @param message GKEWorkload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGKEWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GKEWorkload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GKEWorkload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GKEWorkload;
+
+                    /**
+                     * Decodes a GKEWorkload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GKEWorkload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GKEWorkload;
+
+                    /**
+                     * Verifies a GKEWorkload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GKEWorkload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GKEWorkload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GKEWorkload;
+
+                    /**
+                     * Creates a plain object from a GKEWorkload message. Also converts values to other types if specified.
+                     * @param message GKEWorkload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GKEWorkload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GKEWorkload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GKEWorkload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoogleCloudRun. */
+                interface IGoogleCloudRun {
+
+                    /** GoogleCloudRun serviceUri */
+                    serviceUri?: (string|null);
+                }
+
+                /** Represents a GoogleCloudRun. */
+                class GoogleCloudRun implements IGoogleCloudRun {
+
+                    /**
+                     * Constructs a new GoogleCloudRun.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGoogleCloudRun);
+
+                    /** GoogleCloudRun serviceUri. */
+                    public serviceUri: string;
+
+                    /**
+                     * Creates a new GoogleCloudRun instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleCloudRun instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGoogleCloudRun): google.cloud.developerconnect.v1.GoogleCloudRun;
+
+                    /**
+                     * Encodes the specified GoogleCloudRun message. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleCloudRun.verify|verify} messages.
+                     * @param message GoogleCloudRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGoogleCloudRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleCloudRun message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleCloudRun.verify|verify} messages.
+                     * @param message GoogleCloudRun message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGoogleCloudRun, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleCloudRun message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleCloudRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GoogleCloudRun;
+
+                    /**
+                     * Decodes a GoogleCloudRun message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleCloudRun
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GoogleCloudRun;
+
+                    /**
+                     * Verifies a GoogleCloudRun message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleCloudRun message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleCloudRun
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GoogleCloudRun;
+
+                    /**
+                     * Creates a plain object from a GoogleCloudRun message. Also converts values to other types if specified.
+                     * @param message GoogleCloudRun
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GoogleCloudRun, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleCloudRun to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleCloudRun
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AppHubWorkload. */
+                interface IAppHubWorkload {
+
+                    /** AppHubWorkload workload */
+                    workload?: (string|null);
+
+                    /** AppHubWorkload criticality */
+                    criticality?: (string|null);
+
+                    /** AppHubWorkload environment */
+                    environment?: (string|null);
+                }
+
+                /** Represents an AppHubWorkload. */
+                class AppHubWorkload implements IAppHubWorkload {
+
+                    /**
+                     * Constructs a new AppHubWorkload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IAppHubWorkload);
+
+                    /** AppHubWorkload workload. */
+                    public workload: string;
+
+                    /** AppHubWorkload criticality. */
+                    public criticality: string;
+
+                    /** AppHubWorkload environment. */
+                    public environment: string;
+
+                    /**
+                     * Creates a new AppHubWorkload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AppHubWorkload instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IAppHubWorkload): google.cloud.developerconnect.v1.AppHubWorkload;
+
+                    /**
+                     * Encodes the specified AppHubWorkload message. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubWorkload.verify|verify} messages.
+                     * @param message AppHubWorkload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IAppHubWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AppHubWorkload message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubWorkload.verify|verify} messages.
+                     * @param message AppHubWorkload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IAppHubWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AppHubWorkload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AppHubWorkload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.AppHubWorkload;
+
+                    /**
+                     * Decodes an AppHubWorkload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AppHubWorkload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.AppHubWorkload;
+
+                    /**
+                     * Verifies an AppHubWorkload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AppHubWorkload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AppHubWorkload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.AppHubWorkload;
+
+                    /**
+                     * Creates a plain object from an AppHubWorkload message. Also converts values to other types if specified.
+                     * @param message AppHubWorkload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.AppHubWorkload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AppHubWorkload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AppHubWorkload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AppHubService. */
+                interface IAppHubService {
+
+                    /** AppHubService apphubService */
+                    apphubService?: (string|null);
+
+                    /** AppHubService criticality */
+                    criticality?: (string|null);
+
+                    /** AppHubService environment */
+                    environment?: (string|null);
+                }
+
+                /** Represents an AppHubService. */
+                class AppHubService implements IAppHubService {
+
+                    /**
+                     * Constructs a new AppHubService.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IAppHubService);
+
+                    /** AppHubService apphubService. */
+                    public apphubService: string;
+
+                    /** AppHubService criticality. */
+                    public criticality: string;
+
+                    /** AppHubService environment. */
+                    public environment: string;
+
+                    /**
+                     * Creates a new AppHubService instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AppHubService instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IAppHubService): google.cloud.developerconnect.v1.AppHubService;
+
+                    /**
+                     * Encodes the specified AppHubService message. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubService.verify|verify} messages.
+                     * @param message AppHubService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IAppHubService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AppHubService message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.AppHubService.verify|verify} messages.
+                     * @param message AppHubService message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IAppHubService, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AppHubService message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AppHubService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.AppHubService;
+
+                    /**
+                     * Decodes an AppHubService message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AppHubService
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.AppHubService;
+
+                    /**
+                     * Verifies an AppHubService message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AppHubService message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AppHubService
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.AppHubService;
+
+                    /**
+                     * Creates a plain object from an AppHubService message. Also converts values to other types if specified.
+                     * @param message AppHubService
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.AppHubService, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AppHubService to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AppHubService
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ArtifactConfig. */
+                interface IArtifactConfig {
+
+                    /** ArtifactConfig googleArtifactRegistry */
+                    googleArtifactRegistry?: (google.cloud.developerconnect.v1.IGoogleArtifactRegistry|null);
+
+                    /** ArtifactConfig googleArtifactAnalysis */
+                    googleArtifactAnalysis?: (google.cloud.developerconnect.v1.IGoogleArtifactAnalysis|null);
+
+                    /** ArtifactConfig uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents an ArtifactConfig. */
+                class ArtifactConfig implements IArtifactConfig {
+
+                    /**
+                     * Constructs a new ArtifactConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IArtifactConfig);
+
+                    /** ArtifactConfig googleArtifactRegistry. */
+                    public googleArtifactRegistry?: (google.cloud.developerconnect.v1.IGoogleArtifactRegistry|null);
+
+                    /** ArtifactConfig googleArtifactAnalysis. */
+                    public googleArtifactAnalysis?: (google.cloud.developerconnect.v1.IGoogleArtifactAnalysis|null);
+
+                    /** ArtifactConfig uri. */
+                    public uri: string;
+
+                    /** ArtifactConfig artifactStorage. */
+                    public artifactStorage?: "googleArtifactRegistry";
+
+                    /** ArtifactConfig artifactMetadataStorage. */
+                    public artifactMetadataStorage?: "googleArtifactAnalysis";
+
+                    /**
+                     * Creates a new ArtifactConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ArtifactConfig instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IArtifactConfig): google.cloud.developerconnect.v1.ArtifactConfig;
+
+                    /**
+                     * Encodes the specified ArtifactConfig message. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactConfig.verify|verify} messages.
+                     * @param message ArtifactConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IArtifactConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ArtifactConfig message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactConfig.verify|verify} messages.
+                     * @param message ArtifactConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IArtifactConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ArtifactConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ArtifactConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ArtifactConfig;
+
+                    /**
+                     * Decodes an ArtifactConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ArtifactConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ArtifactConfig;
+
+                    /**
+                     * Verifies an ArtifactConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ArtifactConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ArtifactConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ArtifactConfig;
+
+                    /**
+                     * Creates a plain object from an ArtifactConfig message. Also converts values to other types if specified.
+                     * @param message ArtifactConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ArtifactConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ArtifactConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ArtifactConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoogleArtifactAnalysis. */
+                interface IGoogleArtifactAnalysis {
+
+                    /** GoogleArtifactAnalysis projectId */
+                    projectId?: (string|null);
+                }
+
+                /** Represents a GoogleArtifactAnalysis. */
+                class GoogleArtifactAnalysis implements IGoogleArtifactAnalysis {
+
+                    /**
+                     * Constructs a new GoogleArtifactAnalysis.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGoogleArtifactAnalysis);
+
+                    /** GoogleArtifactAnalysis projectId. */
+                    public projectId: string;
+
+                    /**
+                     * Creates a new GoogleArtifactAnalysis instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleArtifactAnalysis instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGoogleArtifactAnalysis): google.cloud.developerconnect.v1.GoogleArtifactAnalysis;
+
+                    /**
+                     * Encodes the specified GoogleArtifactAnalysis message. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactAnalysis.verify|verify} messages.
+                     * @param message GoogleArtifactAnalysis message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGoogleArtifactAnalysis, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleArtifactAnalysis message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactAnalysis.verify|verify} messages.
+                     * @param message GoogleArtifactAnalysis message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGoogleArtifactAnalysis, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleArtifactAnalysis message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleArtifactAnalysis
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GoogleArtifactAnalysis;
+
+                    /**
+                     * Decodes a GoogleArtifactAnalysis message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleArtifactAnalysis
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GoogleArtifactAnalysis;
+
+                    /**
+                     * Verifies a GoogleArtifactAnalysis message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleArtifactAnalysis message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleArtifactAnalysis
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GoogleArtifactAnalysis;
+
+                    /**
+                     * Creates a plain object from a GoogleArtifactAnalysis message. Also converts values to other types if specified.
+                     * @param message GoogleArtifactAnalysis
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GoogleArtifactAnalysis, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleArtifactAnalysis to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleArtifactAnalysis
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoogleArtifactRegistry. */
+                interface IGoogleArtifactRegistry {
+
+                    /** GoogleArtifactRegistry projectId */
+                    projectId?: (string|null);
+
+                    /** GoogleArtifactRegistry artifactRegistryPackage */
+                    artifactRegistryPackage?: (string|null);
+                }
+
+                /** Represents a GoogleArtifactRegistry. */
+                class GoogleArtifactRegistry implements IGoogleArtifactRegistry {
+
+                    /**
+                     * Constructs a new GoogleArtifactRegistry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGoogleArtifactRegistry);
+
+                    /** GoogleArtifactRegistry projectId. */
+                    public projectId: string;
+
+                    /** GoogleArtifactRegistry artifactRegistryPackage. */
+                    public artifactRegistryPackage: string;
+
+                    /**
+                     * Creates a new GoogleArtifactRegistry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleArtifactRegistry instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGoogleArtifactRegistry): google.cloud.developerconnect.v1.GoogleArtifactRegistry;
+
+                    /**
+                     * Encodes the specified GoogleArtifactRegistry message. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactRegistry.verify|verify} messages.
+                     * @param message GoogleArtifactRegistry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGoogleArtifactRegistry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleArtifactRegistry message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GoogleArtifactRegistry.verify|verify} messages.
+                     * @param message GoogleArtifactRegistry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGoogleArtifactRegistry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleArtifactRegistry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleArtifactRegistry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GoogleArtifactRegistry;
+
+                    /**
+                     * Decodes a GoogleArtifactRegistry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleArtifactRegistry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GoogleArtifactRegistry;
+
+                    /**
+                     * Verifies a GoogleArtifactRegistry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleArtifactRegistry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleArtifactRegistry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GoogleArtifactRegistry;
+
+                    /**
+                     * Creates a plain object from a GoogleArtifactRegistry message. Also converts values to other types if specified.
+                     * @param message GoogleArtifactRegistry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GoogleArtifactRegistry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleArtifactRegistry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleArtifactRegistry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentEvent. */
+                interface IDeploymentEvent {
+
+                    /** DeploymentEvent name */
+                    name?: (string|null);
+
+                    /** DeploymentEvent createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentEvent updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentEvent runtimeConfig */
+                    runtimeConfig?: (google.cloud.developerconnect.v1.IRuntimeConfig|null);
+
+                    /** DeploymentEvent runtimeDeploymentUri */
+                    runtimeDeploymentUri?: (string|null);
+
+                    /** DeploymentEvent state */
+                    state?: (google.cloud.developerconnect.v1.DeploymentEvent.State|keyof typeof google.cloud.developerconnect.v1.DeploymentEvent.State|null);
+
+                    /** DeploymentEvent artifactDeployments */
+                    artifactDeployments?: (google.cloud.developerconnect.v1.IArtifactDeployment[]|null);
+
+                    /** DeploymentEvent deployTime */
+                    deployTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentEvent undeployTime */
+                    undeployTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeploymentEvent. */
+                class DeploymentEvent implements IDeploymentEvent {
+
+                    /**
+                     * Constructs a new DeploymentEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IDeploymentEvent);
+
+                    /** DeploymentEvent name. */
+                    public name: string;
+
+                    /** DeploymentEvent createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentEvent updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentEvent runtimeConfig. */
+                    public runtimeConfig?: (google.cloud.developerconnect.v1.IRuntimeConfig|null);
+
+                    /** DeploymentEvent runtimeDeploymentUri. */
+                    public runtimeDeploymentUri: string;
+
+                    /** DeploymentEvent state. */
+                    public state: (google.cloud.developerconnect.v1.DeploymentEvent.State|keyof typeof google.cloud.developerconnect.v1.DeploymentEvent.State);
+
+                    /** DeploymentEvent artifactDeployments. */
+                    public artifactDeployments: google.cloud.developerconnect.v1.IArtifactDeployment[];
+
+                    /** DeploymentEvent deployTime. */
+                    public deployTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentEvent undeployTime. */
+                    public undeployTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DeploymentEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentEvent instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IDeploymentEvent): google.cloud.developerconnect.v1.DeploymentEvent;
+
+                    /**
+                     * Encodes the specified DeploymentEvent message. Does not implicitly {@link google.cloud.developerconnect.v1.DeploymentEvent.verify|verify} messages.
+                     * @param message DeploymentEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IDeploymentEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentEvent message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeploymentEvent.verify|verify} messages.
+                     * @param message DeploymentEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IDeploymentEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.DeploymentEvent;
+
+                    /**
+                     * Decodes a DeploymentEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.DeploymentEvent;
+
+                    /**
+                     * Verifies a DeploymentEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.DeploymentEvent;
+
+                    /**
+                     * Creates a plain object from a DeploymentEvent message. Also converts values to other types if specified.
+                     * @param message DeploymentEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.DeploymentEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeploymentEvent {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STATE_ACTIVE = 1,
+                        STATE_INACTIVE = 2
+                    }
+                }
+
+                /** Properties of a GetDeploymentEventRequest. */
+                interface IGetDeploymentEventRequest {
+
+                    /** GetDeploymentEventRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDeploymentEventRequest. */
+                class GetDeploymentEventRequest implements IGetDeploymentEventRequest {
+
+                    /**
+                     * Constructs a new GetDeploymentEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGetDeploymentEventRequest);
+
+                    /** GetDeploymentEventRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDeploymentEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDeploymentEventRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGetDeploymentEventRequest): google.cloud.developerconnect.v1.GetDeploymentEventRequest;
+
+                    /**
+                     * Encodes the specified GetDeploymentEventRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.GetDeploymentEventRequest.verify|verify} messages.
+                     * @param message GetDeploymentEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGetDeploymentEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDeploymentEventRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GetDeploymentEventRequest.verify|verify} messages.
+                     * @param message GetDeploymentEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGetDeploymentEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDeploymentEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDeploymentEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GetDeploymentEventRequest;
+
+                    /**
+                     * Decodes a GetDeploymentEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDeploymentEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GetDeploymentEventRequest;
+
+                    /**
+                     * Verifies a GetDeploymentEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDeploymentEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDeploymentEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GetDeploymentEventRequest;
+
+                    /**
+                     * Creates a plain object from a GetDeploymentEventRequest message. Also converts values to other types if specified.
+                     * @param message GetDeploymentEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GetDeploymentEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDeploymentEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDeploymentEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeploymentEventsRequest. */
+                interface IListDeploymentEventsRequest {
+
+                    /** ListDeploymentEventsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDeploymentEventsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDeploymentEventsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDeploymentEventsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListDeploymentEventsRequest. */
+                class ListDeploymentEventsRequest implements IListDeploymentEventsRequest {
+
+                    /**
+                     * Constructs a new ListDeploymentEventsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListDeploymentEventsRequest);
+
+                    /** ListDeploymentEventsRequest parent. */
+                    public parent: string;
+
+                    /** ListDeploymentEventsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDeploymentEventsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDeploymentEventsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListDeploymentEventsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeploymentEventsRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListDeploymentEventsRequest): google.cloud.developerconnect.v1.ListDeploymentEventsRequest;
+
+                    /**
+                     * Encodes the specified ListDeploymentEventsRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsRequest.verify|verify} messages.
+                     * @param message ListDeploymentEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListDeploymentEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeploymentEventsRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsRequest.verify|verify} messages.
+                     * @param message ListDeploymentEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListDeploymentEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeploymentEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListDeploymentEventsRequest;
+
+                    /**
+                     * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeploymentEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListDeploymentEventsRequest;
+
+                    /**
+                     * Verifies a ListDeploymentEventsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeploymentEventsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeploymentEventsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListDeploymentEventsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDeploymentEventsRequest message. Also converts values to other types if specified.
+                     * @param message ListDeploymentEventsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListDeploymentEventsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeploymentEventsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeploymentEventsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeploymentEventsResponse. */
+                interface IListDeploymentEventsResponse {
+
+                    /** ListDeploymentEventsResponse deploymentEvents */
+                    deploymentEvents?: (google.cloud.developerconnect.v1.IDeploymentEvent[]|null);
+
+                    /** ListDeploymentEventsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDeploymentEventsResponse. */
+                class ListDeploymentEventsResponse implements IListDeploymentEventsResponse {
+
+                    /**
+                     * Constructs a new ListDeploymentEventsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListDeploymentEventsResponse);
+
+                    /** ListDeploymentEventsResponse deploymentEvents. */
+                    public deploymentEvents: google.cloud.developerconnect.v1.IDeploymentEvent[];
+
+                    /** ListDeploymentEventsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDeploymentEventsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeploymentEventsResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListDeploymentEventsResponse): google.cloud.developerconnect.v1.ListDeploymentEventsResponse;
+
+                    /**
+                     * Encodes the specified ListDeploymentEventsResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsResponse.verify|verify} messages.
+                     * @param message ListDeploymentEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListDeploymentEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeploymentEventsResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListDeploymentEventsResponse.verify|verify} messages.
+                     * @param message ListDeploymentEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListDeploymentEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeploymentEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListDeploymentEventsResponse;
+
+                    /**
+                     * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeploymentEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListDeploymentEventsResponse;
+
+                    /**
+                     * Verifies a ListDeploymentEventsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeploymentEventsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeploymentEventsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListDeploymentEventsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDeploymentEventsResponse message. Also converts values to other types if specified.
+                     * @param message ListDeploymentEventsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListDeploymentEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeploymentEventsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeploymentEventsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ArtifactDeployment. */
+                interface IArtifactDeployment {
+
+                    /** ArtifactDeployment id */
+                    id?: (string|null);
+
+                    /** ArtifactDeployment artifactReference */
+                    artifactReference?: (string|null);
+
+                    /** ArtifactDeployment artifactAlias */
+                    artifactAlias?: (string|null);
+
+                    /** ArtifactDeployment sourceCommitUris */
+                    sourceCommitUris?: (string[]|null);
+
+                    /** ArtifactDeployment deployTime */
+                    deployTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ArtifactDeployment undeployTime */
+                    undeployTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ArtifactDeployment containerStatusSummary */
+                    containerStatusSummary?: (string|null);
+                }
+
+                /** Represents an ArtifactDeployment. */
+                class ArtifactDeployment implements IArtifactDeployment {
+
+                    /**
+                     * Constructs a new ArtifactDeployment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IArtifactDeployment);
+
+                    /** ArtifactDeployment id. */
+                    public id: string;
+
+                    /** ArtifactDeployment artifactReference. */
+                    public artifactReference: string;
+
+                    /** ArtifactDeployment artifactAlias. */
+                    public artifactAlias: string;
+
+                    /** ArtifactDeployment sourceCommitUris. */
+                    public sourceCommitUris: string[];
+
+                    /** ArtifactDeployment deployTime. */
+                    public deployTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ArtifactDeployment undeployTime. */
+                    public undeployTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ArtifactDeployment containerStatusSummary. */
+                    public containerStatusSummary: string;
+
+                    /**
+                     * Creates a new ArtifactDeployment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ArtifactDeployment instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IArtifactDeployment): google.cloud.developerconnect.v1.ArtifactDeployment;
+
+                    /**
+                     * Encodes the specified ArtifactDeployment message. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactDeployment.verify|verify} messages.
+                     * @param message ArtifactDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IArtifactDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ArtifactDeployment message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ArtifactDeployment.verify|verify} messages.
+                     * @param message ArtifactDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IArtifactDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ArtifactDeployment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ArtifactDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ArtifactDeployment;
+
+                    /**
+                     * Decodes an ArtifactDeployment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ArtifactDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ArtifactDeployment;
+
+                    /**
+                     * Verifies an ArtifactDeployment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ArtifactDeployment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ArtifactDeployment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ArtifactDeployment;
+
+                    /**
+                     * Creates a plain object from an ArtifactDeployment message. Also converts values to other types if specified.
+                     * @param message ArtifactDeployment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ArtifactDeployment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ArtifactDeployment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ArtifactDeployment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateInsightsConfigRequest. */
+                interface ICreateInsightsConfigRequest {
+
+                    /** CreateInsightsConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateInsightsConfigRequest insightsConfigId */
+                    insightsConfigId?: (string|null);
+
+                    /** CreateInsightsConfigRequest insightsConfig */
+                    insightsConfig?: (google.cloud.developerconnect.v1.IInsightsConfig|null);
+
+                    /** CreateInsightsConfigRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateInsightsConfigRequest. */
+                class CreateInsightsConfigRequest implements ICreateInsightsConfigRequest {
+
+                    /**
+                     * Constructs a new CreateInsightsConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.ICreateInsightsConfigRequest);
+
+                    /** CreateInsightsConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateInsightsConfigRequest insightsConfigId. */
+                    public insightsConfigId: string;
+
+                    /** CreateInsightsConfigRequest insightsConfig. */
+                    public insightsConfig?: (google.cloud.developerconnect.v1.IInsightsConfig|null);
+
+                    /** CreateInsightsConfigRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateInsightsConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateInsightsConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.ICreateInsightsConfigRequest): google.cloud.developerconnect.v1.CreateInsightsConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.CreateInsightsConfigRequest.verify|verify} messages.
+                     * @param message CreateInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.ICreateInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.CreateInsightsConfigRequest.verify|verify} messages.
+                     * @param message CreateInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.ICreateInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateInsightsConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.CreateInsightsConfigRequest;
+
+                    /**
+                     * Decodes a CreateInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.CreateInsightsConfigRequest;
+
+                    /**
+                     * Verifies a CreateInsightsConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateInsightsConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.CreateInsightsConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateInsightsConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateInsightsConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.CreateInsightsConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateInsightsConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateInsightsConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetInsightsConfigRequest. */
+                interface IGetInsightsConfigRequest {
+
+                    /** GetInsightsConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetInsightsConfigRequest. */
+                class GetInsightsConfigRequest implements IGetInsightsConfigRequest {
+
+                    /**
+                     * Constructs a new GetInsightsConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IGetInsightsConfigRequest);
+
+                    /** GetInsightsConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetInsightsConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetInsightsConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IGetInsightsConfigRequest): google.cloud.developerconnect.v1.GetInsightsConfigRequest;
+
+                    /**
+                     * Encodes the specified GetInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.GetInsightsConfigRequest.verify|verify} messages.
+                     * @param message GetInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IGetInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.GetInsightsConfigRequest.verify|verify} messages.
+                     * @param message GetInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IGetInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetInsightsConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.GetInsightsConfigRequest;
+
+                    /**
+                     * Decodes a GetInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.GetInsightsConfigRequest;
+
+                    /**
+                     * Verifies a GetInsightsConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetInsightsConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.GetInsightsConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetInsightsConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetInsightsConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.GetInsightsConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetInsightsConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetInsightsConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListInsightsConfigsRequest. */
+                interface IListInsightsConfigsRequest {
+
+                    /** ListInsightsConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListInsightsConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListInsightsConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListInsightsConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListInsightsConfigsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListInsightsConfigsRequest. */
+                class ListInsightsConfigsRequest implements IListInsightsConfigsRequest {
+
+                    /**
+                     * Constructs a new ListInsightsConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListInsightsConfigsRequest);
+
+                    /** ListInsightsConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListInsightsConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListInsightsConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListInsightsConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListInsightsConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListInsightsConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInsightsConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListInsightsConfigsRequest): google.cloud.developerconnect.v1.ListInsightsConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListInsightsConfigsRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsRequest.verify|verify} messages.
+                     * @param message ListInsightsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListInsightsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInsightsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsRequest.verify|verify} messages.
+                     * @param message ListInsightsConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListInsightsConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInsightsConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInsightsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListInsightsConfigsRequest;
+
+                    /**
+                     * Decodes a ListInsightsConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInsightsConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListInsightsConfigsRequest;
+
+                    /**
+                     * Verifies a ListInsightsConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInsightsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInsightsConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListInsightsConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListInsightsConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListInsightsConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListInsightsConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInsightsConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInsightsConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListInsightsConfigsResponse. */
+                interface IListInsightsConfigsResponse {
+
+                    /** ListInsightsConfigsResponse insightsConfigs */
+                    insightsConfigs?: (google.cloud.developerconnect.v1.IInsightsConfig[]|null);
+
+                    /** ListInsightsConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListInsightsConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListInsightsConfigsResponse. */
+                class ListInsightsConfigsResponse implements IListInsightsConfigsResponse {
+
+                    /**
+                     * Constructs a new ListInsightsConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IListInsightsConfigsResponse);
+
+                    /** ListInsightsConfigsResponse insightsConfigs. */
+                    public insightsConfigs: google.cloud.developerconnect.v1.IInsightsConfig[];
+
+                    /** ListInsightsConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListInsightsConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListInsightsConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInsightsConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IListInsightsConfigsResponse): google.cloud.developerconnect.v1.ListInsightsConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListInsightsConfigsResponse message. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsResponse.verify|verify} messages.
+                     * @param message ListInsightsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IListInsightsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInsightsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.ListInsightsConfigsResponse.verify|verify} messages.
+                     * @param message ListInsightsConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IListInsightsConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInsightsConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInsightsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.ListInsightsConfigsResponse;
+
+                    /**
+                     * Decodes a ListInsightsConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInsightsConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.ListInsightsConfigsResponse;
+
+                    /**
+                     * Verifies a ListInsightsConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInsightsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInsightsConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.ListInsightsConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListInsightsConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListInsightsConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.ListInsightsConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInsightsConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInsightsConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteInsightsConfigRequest. */
+                interface IDeleteInsightsConfigRequest {
+
+                    /** DeleteInsightsConfigRequest name */
+                    name?: (string|null);
+
+                    /** DeleteInsightsConfigRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteInsightsConfigRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteInsightsConfigRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteInsightsConfigRequest. */
+                class DeleteInsightsConfigRequest implements IDeleteInsightsConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteInsightsConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest);
+
+                    /** DeleteInsightsConfigRequest name. */
+                    public name: string;
+
+                    /** DeleteInsightsConfigRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteInsightsConfigRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteInsightsConfigRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteInsightsConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteInsightsConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest): google.cloud.developerconnect.v1.DeleteInsightsConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteInsightsConfigRequest.verify|verify} messages.
+                     * @param message DeleteInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.DeleteInsightsConfigRequest.verify|verify} messages.
+                     * @param message DeleteInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteInsightsConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.DeleteInsightsConfigRequest;
+
+                    /**
+                     * Decodes a DeleteInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.DeleteInsightsConfigRequest;
+
+                    /**
+                     * Verifies a DeleteInsightsConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteInsightsConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.DeleteInsightsConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteInsightsConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteInsightsConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.DeleteInsightsConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteInsightsConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteInsightsConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateInsightsConfigRequest. */
+                interface IUpdateInsightsConfigRequest {
+
+                    /** UpdateInsightsConfigRequest insightsConfig */
+                    insightsConfig?: (google.cloud.developerconnect.v1.IInsightsConfig|null);
+
+                    /** UpdateInsightsConfigRequest requestId */
+                    requestId?: (string|null);
+
+                    /** UpdateInsightsConfigRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** UpdateInsightsConfigRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateInsightsConfigRequest. */
+                class UpdateInsightsConfigRequest implements IUpdateInsightsConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateInsightsConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest);
+
+                    /** UpdateInsightsConfigRequest insightsConfig. */
+                    public insightsConfig?: (google.cloud.developerconnect.v1.IInsightsConfig|null);
+
+                    /** UpdateInsightsConfigRequest requestId. */
+                    public requestId: string;
+
+                    /** UpdateInsightsConfigRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** UpdateInsightsConfigRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateInsightsConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInsightsConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest): google.cloud.developerconnect.v1.UpdateInsightsConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateInsightsConfigRequest message. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateInsightsConfigRequest.verify|verify} messages.
+                     * @param message UpdateInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInsightsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.developerconnect.v1.UpdateInsightsConfigRequest.verify|verify} messages.
+                     * @param message UpdateInsightsConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInsightsConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.developerconnect.v1.UpdateInsightsConfigRequest;
+
+                    /**
+                     * Decodes an UpdateInsightsConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInsightsConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.developerconnect.v1.UpdateInsightsConfigRequest;
+
+                    /**
+                     * Verifies an UpdateInsightsConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInsightsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInsightsConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.developerconnect.v1.UpdateInsightsConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateInsightsConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateInsightsConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.developerconnect.v1.UpdateInsightsConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInsightsConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateInsightsConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
@@ -5023,6 +11272,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri */
             protoReferenceDocumentationUri?: (string|null);
+
+            /** Publishing restReferenceDocumentationUri */
+            restReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -5063,6 +11315,9 @@ export namespace google {
 
             /** Publishing protoReferenceDocumentationUri. */
             public protoReferenceDocumentationUri: string;
+
+            /** Publishing restReferenceDocumentationUri. */
+            public restReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -9393,6 +15648,9 @@ export namespace google {
 
             /** ServiceOptions .google.api.oauthScopes */
             ".google.api.oauthScopes"?: (string|null);
+
+            /** ServiceOptions .google.api.apiVersion */
+            ".google.api.apiVersion"?: (string|null);
         }
 
         /** Represents a ServiceOptions. */
@@ -9644,7 +15902,7 @@ export namespace google {
             doubleValue?: (number|null);
 
             /** UninterpretedOption stringValue */
-            stringValue?: (Uint8Array|string|null);
+            stringValue?: (Uint8Array|Buffer|string|null);
 
             /** UninterpretedOption aggregateValue */
             aggregateValue?: (string|null);
@@ -9675,7 +15933,7 @@ export namespace google {
             public doubleValue: number;
 
             /** UninterpretedOption stringValue. */
-            public stringValue: (Uint8Array|string);
+            public stringValue: (Uint8Array|Buffer|string);
 
             /** UninterpretedOption aggregateValue. */
             public aggregateValue: string;
@@ -10814,7 +17072,7 @@ export namespace google {
             type_url?: (string|null);
 
             /** Any value */
-            value?: (Uint8Array|string|null);
+            value?: (Uint8Array|Buffer|string|null);
         }
 
         /** Represents an Any. */
@@ -10830,7 +17088,7 @@ export namespace google {
             public type_url: string;
 
             /** Any value. */
-            public value: (Uint8Array|string);
+            public value: (Uint8Array|Buffer|string);
 
             /**
              * Creates a new Any instance using the specified properties.

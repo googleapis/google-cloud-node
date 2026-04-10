@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,7 +45,9 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
   // const sourceLanguageCode = 'abc123'
   /**
    *  Required. The ISO-639 language code to use for translation of the input
-   *  document. Specify up to 10 language codes here.
+   *  document. Specify up to 10 language codes here. Supported language codes
+   *  are listed in Language
+   *  Support (https://cloud.google.com/translate/docs/languages).
    */
   // const targetLanguageCodes = ['abc','def']
   /**

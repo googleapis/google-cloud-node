@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,11 +38,15 @@ function main(parent, sourceLanguageCode, targetLanguageCodes, inputConfigs, out
    */
   // const parent = 'abc123'
   /**
-   *  Required. Source language code.
+   *  Required. Source language code. Supported language codes are listed in
+   *  Language
+   *  Support (https://cloud.google.com/translate/docs/languages).
    */
   // const sourceLanguageCode = 'abc123'
   /**
-   *  Required. Specify up to 10 language codes here.
+   *  Required. Specify up to 10 language codes here. Supported language codes
+   *  are listed in Language
+   *  Support (https://cloud.google.com/translate/docs/languages).
    */
   // const targetLanguageCodes = ['abc','def']
   /**

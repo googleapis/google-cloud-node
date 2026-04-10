@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,19 @@ option java_outer_classname = "StoragePoolProto";
 option java_package = "com.google.cloud.netapp.v1";
 option php_namespace = "Google\\Cloud\\NetApp\\V1";
 option ruby_package = "Google::Cloud::NetApp::V1";
+
+// `Mode` of the storage pool or volume. This field is used to control whether
+// the resource is managed by the GCNV APIs or the GCNV ONTAP Mode APIs.
+enum Mode {
+  // The `Mode` is not specified.
+  MODE_UNSPECIFIED = 0;
+
+  // The resource is managed by the GCNV APIs.
+  DEFAULT = 1;
+
+  // The resource is managed by the GCNV ONTAP Mode APIs.
+  ONTAP = 2;
+}
 
 // GetStoragePoolRequest gets a Storage Pool.
 message GetStoragePoolRequest {
@@ -259,6 +272,57 @@ message StoragePool {
 
   // Output only. Reserved for future use
   bool satisfies_pzi = 24 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. True if using Independent Scaling of capacity and performance
+  // (Hyperdisk) By default set to false
+  bool custom_performance_enabled = 25 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Custom Performance Total Throughput of the pool (in MiBps)
+  int64 total_throughput_mibps = 26 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Custom Performance Total IOPS of the pool
+  // if not provided, it will be calculated based on the total_throughput_mibps
+  int64 total_iops = 27 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Total hot tier capacity for the Storage Pool. It is applicable
+  // only to Flex service level. It should be less than the minimum storage pool
+  // size and cannot be more than the current storage pool size. It cannot be
+  // decreased once set.
+  int64 hot_tier_size_gib = 28 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Flag indicating that the hot-tier threshold will be
+  // auto-increased by 10% of the hot-tier when it hits 100%. Default is true.
+  // The increment will kick in only if the new size after increment is
+  // still less than or equal to storage pool size.
+  optional bool enable_hot_tier_auto_resize = 29
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. QoS (Quality of Service) Type of the storage pool
+  QosType qos_type = 30 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Available throughput of the storage pool (in MiB/s).
+  double available_throughput_mibps = 31
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Total cold tier data rounded down to the nearest GiB used by
+  // the storage pool.
+  int64 cold_tier_size_used_gib = 33
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Total hot tier data rounded down to the nearest GiB used by
+  // the storage pool.
+  int64 hot_tier_size_used_gib = 34 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. Type of the storage pool. This field is used to control whether
+  // the pool supports `FILE` based volumes only or `UNIFIED` (both `FILE` and
+  // `BLOCK`) volumes. If not specified during creation, it defaults to `FILE`.
+  optional StoragePoolType type = 35 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Mode of the storage pool. This field is used to control whether
+  // the user can perform the ONTAP operations on the storage pool using the
+  // GCNV ONTAP Mode APIs. If not specified during creation, it defaults to
+  // `DEFAULT`.
+  optional Mode mode = 36 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // ValidateDirectoryServiceRequest validates the directory service policy

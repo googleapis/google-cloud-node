@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOption
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging} from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -301,10 +301,10 @@ export class MetadataServiceClient {
       projectLocationEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      projectLocationFeatureGroupFeaturePathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationFeatureGroupFeaturesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}'
       ),
-      projectLocationFeaturestoreEntityTypeFeaturePathTemplate: new this._gaxModule.PathTemplate(
+      projectLocationFeaturestoreEntityTypeFeaturesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
       ),
       projectLocationPublisherModelPathTemplate: new this._gaxModule.PathTemplate(
@@ -315,6 +315,9 @@ export class MetadataServiceClient {
       ),
       ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
+      ),
+      ragEngineConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragEngineConfig'
       ),
       ragFilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
@@ -327,6 +330,12 @@ export class MetadataServiceClient {
       ),
       schedulePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/schedules/{schedule}'
+      ),
+      sessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}'
+      ),
+      sessionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/sessions/{session}/events/{event}'
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
@@ -373,7 +382,7 @@ export class MetadataServiceClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'metadataSchemas')
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -388,11 +397,11 @@ export class MetadataServiceClient {
       },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',}],
       },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',body: '*',}],
       },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/v1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/ui/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*}/operations',},{get: '/ui/{name=projects/*/locations/*/apps/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',},{get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/v1/{name=projects/*/locations/*/models/*}/operations',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/studies/*}/operations',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',},{get: '/v1/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',}],
-      },{selector: 'google.longrunning.Operations.WaitOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:wait',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',}],
+      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/ragEngineConfig/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/ragEngineConfig/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',},{get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/ragEngineConfig/operations/*}',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',},{get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/ui/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/agents/*}/operations',},{get: '/ui/{name=projects/*/locations/*/apps/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',},{get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',},{get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*}/operations',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*}/operations',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',},{get: '/ui/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',},{get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',},{get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/indexes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',},{get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',},{get: '/v1/{name=projects/*/locations/*/models/*}/operations',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',},{get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}/operations',},{get: '/v1/{name=projects/*/locations/*/studies/*}/operations',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*}/operations',},{get: '/v1/{name=projects/*/locations/*/persistentResources/*}/operations',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/ragEngineConfig}/operations',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations',},{get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',},{get: '/v1/{name=projects/*/locations/*/schedules/*}/operations',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{get: '/v1/{name=reasoningEngines/*/sessions/*}/operations',}],
+      },{selector: 'google.longrunning.Operations.WaitOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:wait',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/ragEngineConfig/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',},{post: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',},{post: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}:wait',}],
       }];
     }
     this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
@@ -699,6 +708,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('getMetadataStore response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -800,6 +815,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('createArtifact response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -890,6 +911,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('getArtifact response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -987,6 +1014,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('updateArtifact response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1087,6 +1120,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('createContext response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1177,6 +1216,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('getContext response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1273,6 +1318,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('updateContext response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1376,6 +1427,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('addContextArtifactsAndExecutions response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1473,6 +1530,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('addContextChildren response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1568,6 +1631,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('removeContextChildren response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1664,6 +1733,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('queryContextLineageSubgraph response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1766,6 +1841,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('createExecution response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1856,6 +1937,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('getExecution response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -1953,6 +2040,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('updateExecution response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -2049,6 +2142,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('addExecutionEvents response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -2141,6 +2240,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('queryExecutionInputsAndOutputs response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -2242,6 +2347,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('createMetadataSchema response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -2332,6 +2443,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('getMetadataSchema response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 /**
@@ -2459,6 +2576,12 @@ export class MetadataServiceClient {
       ]) => {
         this._log.info('queryArtifactLineageSubgraph response %j', response);
         return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
       });
   }
 
@@ -7325,7 +7448,7 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Return a fully-qualified projectLocationFeatureGroupFeature resource name string.
+   * Return a fully-qualified projectLocationFeatureGroupFeatures resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -7333,8 +7456,8 @@ export class MetadataServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeatureGroupFeaturePath(project:string,location:string,featureGroup:string,feature:string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.render({
+  projectLocationFeatureGroupFeaturesPath(project:string,location:string,featureGroup:string,feature:string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.render({
       project: project,
       location: location,
       feature_group: featureGroup,
@@ -7343,51 +7466,51 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Parse the project from ProjectLocationFeatureGroupFeature resource.
+   * Parse the project from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).project;
+  matchProjectFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationFeatureGroupFeature resource.
+   * Parse the location from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).location;
+  matchLocationFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).location;
   }
 
   /**
-   * Parse the feature_group from ProjectLocationFeatureGroupFeature resource.
+   * Parse the feature_group from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the feature_group.
    */
-  matchFeatureGroupFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature_group;
+  matchFeatureGroupFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).feature_group;
   }
 
   /**
-   * Parse the feature from ProjectLocationFeatureGroupFeature resource.
+   * Parse the feature from ProjectLocationFeatureGroupFeatures resource.
    *
-   * @param {string} projectLocationFeatureGroupFeatureName
-   *   A fully-qualified path representing project_location_feature_group_feature resource.
+   * @param {string} projectLocationFeatureGroupFeaturesName
+   *   A fully-qualified path representing project_location_feature_group_features resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeatureGroupFeatureName(projectLocationFeatureGroupFeatureName: string) {
-    return this.pathTemplates.projectLocationFeatureGroupFeaturePathTemplate.match(projectLocationFeatureGroupFeatureName).feature;
+  matchFeatureFromProjectLocationFeatureGroupFeaturesName(projectLocationFeatureGroupFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeatureGroupFeaturesPathTemplate.match(projectLocationFeatureGroupFeaturesName).feature;
   }
 
   /**
-   * Return a fully-qualified projectLocationFeaturestoreEntityTypeFeature resource name string.
+   * Return a fully-qualified projectLocationFeaturestoreEntityTypeFeatures resource name string.
    *
    * @param {string} project
    * @param {string} location
@@ -7396,8 +7519,8 @@ export class MetadataServiceClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  projectLocationFeaturestoreEntityTypeFeaturePath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.render({
+  projectLocationFeaturestoreEntityTypeFeaturesPath(project:string,location:string,featurestore:string,entityType:string,feature:string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.render({
       project: project,
       location: location,
       featurestore: featurestore,
@@ -7407,58 +7530,58 @@ export class MetadataServiceClient {
   }
 
   /**
-   * Parse the project from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the project from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).project;
+  matchProjectFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).project;
   }
 
   /**
-   * Parse the location from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the location from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).location;
+  matchLocationFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).location;
   }
 
   /**
-   * Parse the featurestore from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the featurestore from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the featurestore.
    */
-  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).featurestore;
+  matchFeaturestoreFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).featurestore;
   }
 
   /**
-   * Parse the entity_type from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the entity_type from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).entity_type;
+  matchEntityTypeFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).entity_type;
   }
 
   /**
-   * Parse the feature from ProjectLocationFeaturestoreEntityTypeFeature resource.
+   * Parse the feature from ProjectLocationFeaturestoreEntityTypeFeatures resource.
    *
-   * @param {string} projectLocationFeaturestoreEntityTypeFeatureName
-   *   A fully-qualified path representing project_location_featurestore_entity_type_feature resource.
+   * @param {string} projectLocationFeaturestoreEntityTypeFeaturesName
+   *   A fully-qualified path representing project_location_featurestore_entity_type_features resource.
    * @returns {string} A string representing the feature.
    */
-  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeatureName(projectLocationFeaturestoreEntityTypeFeatureName: string) {
-    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturePathTemplate.match(projectLocationFeaturestoreEntityTypeFeatureName).feature;
+  matchFeatureFromProjectLocationFeaturestoreEntityTypeFeaturesName(projectLocationFeaturestoreEntityTypeFeaturesName: string) {
+    return this.pathTemplates.projectLocationFeaturestoreEntityTypeFeaturesPathTemplate.match(projectLocationFeaturestoreEntityTypeFeaturesName).feature;
   }
 
   /**
@@ -7606,6 +7729,42 @@ export class MetadataServiceClient {
    */
   matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
     return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName).rag_corpus;
+  }
+
+  /**
+   * Return a fully-qualified ragEngineConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  ragEngineConfigPath(project:string,location:string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from RagEngineConfig resource.
+   *
+   * @param {string} ragEngineConfigName
+   *   A fully-qualified path representing RagEngineConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagEngineConfigName(ragEngineConfigName: string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.match(ragEngineConfigName).project;
+  }
+
+  /**
+   * Parse the location from RagEngineConfig resource.
+   *
+   * @param {string} ragEngineConfigName
+   *   A fully-qualified path representing RagEngineConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagEngineConfigName(ragEngineConfigName: string) {
+    return this.pathTemplates.ragEngineConfigPathTemplate.match(ragEngineConfigName).location;
   }
 
   /**
@@ -7828,6 +7987,143 @@ export class MetadataServiceClient {
    */
   matchScheduleFromScheduleName(scheduleName: string) {
     return this.pathTemplates.schedulePathTemplate.match(scheduleName).schedule;
+  }
+
+  /**
+   * Return a fully-qualified session resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  sessionPath(project:string,location:string,reasoningEngine:string,session:string) {
+    return this.pathTemplates.sessionPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).project;
+  }
+
+  /**
+   * Parse the location from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified sessionEvent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} session
+   * @param {string} event
+   * @returns {string} Resource name string.
+   */
+  sessionEventPath(project:string,location:string,reasoningEngine:string,session:string,event:string) {
+    return this.pathTemplates.sessionEventPathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+      session: session,
+      event: event,
+    });
+  }
+
+  /**
+   * Parse the project from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).project;
+  }
+
+  /**
+   * Parse the location from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).reasoning_engine;
+  }
+
+  /**
+   * Parse the session from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).session;
+  }
+
+  /**
+   * Parse the event from SessionEvent resource.
+   *
+   * @param {string} sessionEventName
+   *   A fully-qualified path representing SessionEvent resource.
+   * @returns {string} A string representing the event.
+   */
+  matchEventFromSessionEventName(sessionEventName: string) {
+    return this.pathTemplates.sessionEventPathTemplate.match(sessionEventName).event;
   }
 
   /**

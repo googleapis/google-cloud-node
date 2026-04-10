@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,18 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  LookupServiceClient,
-  RegistrationServiceClient,
-} from '@google-cloud/service-directory';
+import {LookupServiceClient, RegistrationServiceClient} from '@google-cloud/service-directory';
 
 // check that the client class type name can be used
 function doStuffWithLookupServiceClient(client: LookupServiceClient) {
   client.close();
 }
-function doStuffWithRegistrationServiceClient(
-  client: RegistrationServiceClient
-) {
+function doStuffWithRegistrationServiceClient(client: RegistrationServiceClient) {
   client.close();
 }
 

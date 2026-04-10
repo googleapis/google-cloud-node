@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3731,34 +3731,6 @@ export namespace google {
                     public deleteChannelGroup(request: google.analytics.admin.v1alpha.IDeleteChannelGroupRequest): Promise<google.protobuf.Empty>;
 
                     /**
-                     * Calls SetAutomatedGa4ConfigurationOptOut.
-                     * @param request SetAutomatedGa4ConfigurationOptOutRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and SetAutomatedGa4ConfigurationOptOutResponse
-                     */
-                    public setAutomatedGa4ConfigurationOptOut(request: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.SetAutomatedGa4ConfigurationOptOutCallback): void;
-
-                    /**
-                     * Calls SetAutomatedGa4ConfigurationOptOut.
-                     * @param request SetAutomatedGa4ConfigurationOptOutRequest message or plain object
-                     * @returns Promise
-                     */
-                    public setAutomatedGa4ConfigurationOptOut(request: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest): Promise<google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse>;
-
-                    /**
-                     * Calls FetchAutomatedGa4ConfigurationOptOut.
-                     * @param request FetchAutomatedGa4ConfigurationOptOutRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and FetchAutomatedGa4ConfigurationOptOutResponse
-                     */
-                    public fetchAutomatedGa4ConfigurationOptOut(request: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.FetchAutomatedGa4ConfigurationOptOutCallback): void;
-
-                    /**
-                     * Calls FetchAutomatedGa4ConfigurationOptOut.
-                     * @param request FetchAutomatedGa4ConfigurationOptOutRequest message or plain object
-                     * @returns Promise
-                     */
-                    public fetchAutomatedGa4ConfigurationOptOut(request: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest): Promise<google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse>;
-
-                    /**
                      * Calls CreateBigQueryLink.
                      * @param request CreateBigQueryLinkRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and BigQueryLink
@@ -3855,62 +3827,6 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateEnhancedMeasurementSettings(request: google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest): Promise<google.analytics.admin.v1alpha.EnhancedMeasurementSettings>;
-
-                    /**
-                     * Calls CreateConnectedSiteTag.
-                     * @param request CreateConnectedSiteTagRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and CreateConnectedSiteTagResponse
-                     */
-                    public createConnectedSiteTag(request: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConnectedSiteTagCallback): void;
-
-                    /**
-                     * Calls CreateConnectedSiteTag.
-                     * @param request CreateConnectedSiteTagRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createConnectedSiteTag(request: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest): Promise<google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse>;
-
-                    /**
-                     * Calls DeleteConnectedSiteTag.
-                     * @param request DeleteConnectedSiteTagRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteConnectedSiteTag(request: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConnectedSiteTagCallback): void;
-
-                    /**
-                     * Calls DeleteConnectedSiteTag.
-                     * @param request DeleteConnectedSiteTagRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteConnectedSiteTag(request: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls ListConnectedSiteTags.
-                     * @param request ListConnectedSiteTagsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListConnectedSiteTagsResponse
-                     */
-                    public listConnectedSiteTags(request: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTagsCallback): void;
-
-                    /**
-                     * Calls ListConnectedSiteTags.
-                     * @param request ListConnectedSiteTagsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listConnectedSiteTags(request: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest): Promise<google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse>;
-
-                    /**
-                     * Calls FetchConnectedGa4Property.
-                     * @param request FetchConnectedGa4PropertyRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and FetchConnectedGa4PropertyResponse
-                     */
-                    public fetchConnectedGa4Property(request: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.FetchConnectedGa4PropertyCallback): void;
-
-                    /**
-                     * Calls FetchConnectedGa4Property.
-                     * @param request FetchConnectedGa4PropertyRequest message or plain object
-                     * @returns Promise
-                     */
-                    public fetchConnectedGa4Property(request: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest): Promise<google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse>;
 
                     /**
                      * Calls GetAdSenseLink.
@@ -4457,6 +4373,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public submitUserDeletion(request: google.analytics.admin.v1alpha.ISubmitUserDeletionRequest): Promise<google.analytics.admin.v1alpha.SubmitUserDeletionResponse>;
+
+                    /**
+                     * Calls ListSubpropertySyncConfigs.
+                     * @param request ListSubpropertySyncConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSubpropertySyncConfigsResponse
+                     */
+                    public listSubpropertySyncConfigs(request: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListSubpropertySyncConfigsCallback): void;
+
+                    /**
+                     * Calls ListSubpropertySyncConfigs.
+                     * @param request ListSubpropertySyncConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSubpropertySyncConfigs(request: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest): Promise<google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse>;
+
+                    /**
+                     * Calls UpdateSubpropertySyncConfig.
+                     * @param request UpdateSubpropertySyncConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubpropertySyncConfig
+                     */
+                    public updateSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSubpropertySyncConfigCallback): void;
+
+                    /**
+                     * Calls UpdateSubpropertySyncConfig.
+                     * @param request UpdateSubpropertySyncConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest): Promise<google.analytics.admin.v1alpha.SubpropertySyncConfig>;
+
+                    /**
+                     * Calls GetSubpropertySyncConfig.
+                     * @param request GetSubpropertySyncConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubpropertySyncConfig
+                     */
+                    public getSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetSubpropertySyncConfigCallback): void;
+
+                    /**
+                     * Calls GetSubpropertySyncConfig.
+                     * @param request GetSubpropertySyncConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSubpropertySyncConfig(request: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest): Promise<google.analytics.admin.v1alpha.SubpropertySyncConfig>;
+
+                    /**
+                     * Calls GetReportingIdentitySettings.
+                     * @param request GetReportingIdentitySettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReportingIdentitySettings
+                     */
+                    public getReportingIdentitySettings(request: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingIdentitySettingsCallback): void;
+
+                    /**
+                     * Calls GetReportingIdentitySettings.
+                     * @param request GetReportingIdentitySettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getReportingIdentitySettings(request: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest): Promise<google.analytics.admin.v1alpha.ReportingIdentitySettings>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -5190,20 +5162,6 @@ export namespace google {
                     type DeleteChannelGroupCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|setAutomatedGa4ConfigurationOptOut}.
-                     * @param error Error, if any
-                     * @param [response] SetAutomatedGa4ConfigurationOptOutResponse
-                     */
-                    type SetAutomatedGa4ConfigurationOptOutCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|fetchAutomatedGa4ConfigurationOptOut}.
-                     * @param error Error, if any
-                     * @param [response] FetchAutomatedGa4ConfigurationOptOutResponse
-                     */
-                    type FetchAutomatedGa4ConfigurationOptOutCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse) => void;
-
-                    /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createBigQueryLink}.
                      * @param error Error, if any
                      * @param [response] BigQueryLink
@@ -5251,34 +5209,6 @@ export namespace google {
                      * @param [response] EnhancedMeasurementSettings
                      */
                     type UpdateEnhancedMeasurementSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.EnhancedMeasurementSettings) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createConnectedSiteTag}.
-                     * @param error Error, if any
-                     * @param [response] CreateConnectedSiteTagResponse
-                     */
-                    type CreateConnectedSiteTagCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteConnectedSiteTag}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteConnectedSiteTagCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listConnectedSiteTags}.
-                     * @param error Error, if any
-                     * @param [response] ListConnectedSiteTagsResponse
-                     */
-                    type ListConnectedSiteTagsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|fetchConnectedGa4Property}.
-                     * @param error Error, if any
-                     * @param [response] FetchConnectedGa4PropertyResponse
-                     */
-                    type FetchConnectedGa4PropertyCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getAdSenseLink}.
@@ -5552,6 +5482,34 @@ export namespace google {
                      * @param [response] SubmitUserDeletionResponse
                      */
                     type SubmitUserDeletionCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubmitUserDeletionResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listSubpropertySyncConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListSubpropertySyncConfigsResponse
+                     */
+                    type ListSubpropertySyncConfigsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateSubpropertySyncConfig}.
+                     * @param error Error, if any
+                     * @param [response] SubpropertySyncConfig
+                     */
+                    type UpdateSubpropertySyncConfigCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubpropertySyncConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getSubpropertySyncConfig}.
+                     * @param error Error, if any
+                     * @param [response] SubpropertySyncConfig
+                     */
+                    type GetSubpropertySyncConfigCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubpropertySyncConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getReportingIdentitySettings}.
+                     * @param error Error, if any
+                     * @param [response] ReportingIdentitySettings
+                     */
+                    type GetReportingIdentitySettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ReportingIdentitySettings) => void;
                 }
 
                 /** Properties of a RunAccessReportRequest. */
@@ -19605,394 +19563,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a SetAutomatedGa4ConfigurationOptOutRequest. */
-                interface ISetAutomatedGa4ConfigurationOptOutRequest {
-
-                    /** SetAutomatedGa4ConfigurationOptOutRequest property */
-                    property?: (string|null);
-
-                    /** SetAutomatedGa4ConfigurationOptOutRequest optOut */
-                    optOut?: (boolean|null);
-                }
-
-                /** Represents a SetAutomatedGa4ConfigurationOptOutRequest. */
-                class SetAutomatedGa4ConfigurationOptOutRequest implements ISetAutomatedGa4ConfigurationOptOutRequest {
-
-                    /**
-                     * Constructs a new SetAutomatedGa4ConfigurationOptOutRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest);
-
-                    /** SetAutomatedGa4ConfigurationOptOutRequest property. */
-                    public property: string;
-
-                    /** SetAutomatedGa4ConfigurationOptOutRequest optOut. */
-                    public optOut: boolean;
-
-                    /**
-                     * Creates a new SetAutomatedGa4ConfigurationOptOutRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SetAutomatedGa4ConfigurationOptOutRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Encodes the specified SetAutomatedGa4ConfigurationOptOutRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                     * @param message SetAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SetAutomatedGa4ConfigurationOptOutRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                     * @param message SetAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SetAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SetAutomatedGa4ConfigurationOptOutRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Decodes a SetAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SetAutomatedGa4ConfigurationOptOutRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Verifies a SetAutomatedGa4ConfigurationOptOutRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SetAutomatedGa4ConfigurationOptOutRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SetAutomatedGa4ConfigurationOptOutRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Creates a plain object from a SetAutomatedGa4ConfigurationOptOutRequest message. Also converts values to other types if specified.
-                     * @param message SetAutomatedGa4ConfigurationOptOutRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SetAutomatedGa4ConfigurationOptOutRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SetAutomatedGa4ConfigurationOptOutRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a SetAutomatedGa4ConfigurationOptOutResponse. */
-                interface ISetAutomatedGa4ConfigurationOptOutResponse {
-                }
-
-                /** Represents a SetAutomatedGa4ConfigurationOptOutResponse. */
-                class SetAutomatedGa4ConfigurationOptOutResponse implements ISetAutomatedGa4ConfigurationOptOutResponse {
-
-                    /**
-                     * Constructs a new SetAutomatedGa4ConfigurationOptOutResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse);
-
-                    /**
-                     * Creates a new SetAutomatedGa4ConfigurationOptOutResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SetAutomatedGa4ConfigurationOptOutResponse instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Encodes the specified SetAutomatedGa4ConfigurationOptOutResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                     * @param message SetAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SetAutomatedGa4ConfigurationOptOutResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                     * @param message SetAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISetAutomatedGa4ConfigurationOptOutResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SetAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SetAutomatedGa4ConfigurationOptOutResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Decodes a SetAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SetAutomatedGa4ConfigurationOptOutResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Verifies a SetAutomatedGa4ConfigurationOptOutResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SetAutomatedGa4ConfigurationOptOutResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SetAutomatedGa4ConfigurationOptOutResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Creates a plain object from a SetAutomatedGa4ConfigurationOptOutResponse message. Also converts values to other types if specified.
-                     * @param message SetAutomatedGa4ConfigurationOptOutResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SetAutomatedGa4ConfigurationOptOutResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SetAutomatedGa4ConfigurationOptOutResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a FetchAutomatedGa4ConfigurationOptOutRequest. */
-                interface IFetchAutomatedGa4ConfigurationOptOutRequest {
-
-                    /** FetchAutomatedGa4ConfigurationOptOutRequest property */
-                    property?: (string|null);
-                }
-
-                /** Represents a FetchAutomatedGa4ConfigurationOptOutRequest. */
-                class FetchAutomatedGa4ConfigurationOptOutRequest implements IFetchAutomatedGa4ConfigurationOptOutRequest {
-
-                    /**
-                     * Constructs a new FetchAutomatedGa4ConfigurationOptOutRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest);
-
-                    /** FetchAutomatedGa4ConfigurationOptOutRequest property. */
-                    public property: string;
-
-                    /**
-                     * Creates a new FetchAutomatedGa4ConfigurationOptOutRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FetchAutomatedGa4ConfigurationOptOutRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Encodes the specified FetchAutomatedGa4ConfigurationOptOutRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                     * @param message FetchAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FetchAutomatedGa4ConfigurationOptOutRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest.verify|verify} messages.
-                     * @param message FetchAutomatedGa4ConfigurationOptOutRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FetchAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FetchAutomatedGa4ConfigurationOptOutRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Decodes a FetchAutomatedGa4ConfigurationOptOutRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FetchAutomatedGa4ConfigurationOptOutRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Verifies a FetchAutomatedGa4ConfigurationOptOutRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FetchAutomatedGa4ConfigurationOptOutRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FetchAutomatedGa4ConfigurationOptOutRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest;
-
-                    /**
-                     * Creates a plain object from a FetchAutomatedGa4ConfigurationOptOutRequest message. Also converts values to other types if specified.
-                     * @param message FetchAutomatedGa4ConfigurationOptOutRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FetchAutomatedGa4ConfigurationOptOutRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FetchAutomatedGa4ConfigurationOptOutRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a FetchAutomatedGa4ConfigurationOptOutResponse. */
-                interface IFetchAutomatedGa4ConfigurationOptOutResponse {
-
-                    /** FetchAutomatedGa4ConfigurationOptOutResponse optOut */
-                    optOut?: (boolean|null);
-                }
-
-                /** Represents a FetchAutomatedGa4ConfigurationOptOutResponse. */
-                class FetchAutomatedGa4ConfigurationOptOutResponse implements IFetchAutomatedGa4ConfigurationOptOutResponse {
-
-                    /**
-                     * Constructs a new FetchAutomatedGa4ConfigurationOptOutResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse);
-
-                    /** FetchAutomatedGa4ConfigurationOptOutResponse optOut. */
-                    public optOut: boolean;
-
-                    /**
-                     * Creates a new FetchAutomatedGa4ConfigurationOptOutResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FetchAutomatedGa4ConfigurationOptOutResponse instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Encodes the specified FetchAutomatedGa4ConfigurationOptOutResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                     * @param message FetchAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FetchAutomatedGa4ConfigurationOptOutResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse.verify|verify} messages.
-                     * @param message FetchAutomatedGa4ConfigurationOptOutResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IFetchAutomatedGa4ConfigurationOptOutResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FetchAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FetchAutomatedGa4ConfigurationOptOutResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Decodes a FetchAutomatedGa4ConfigurationOptOutResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FetchAutomatedGa4ConfigurationOptOutResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Verifies a FetchAutomatedGa4ConfigurationOptOutResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FetchAutomatedGa4ConfigurationOptOutResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FetchAutomatedGa4ConfigurationOptOutResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse;
-
-                    /**
-                     * Creates a plain object from a FetchAutomatedGa4ConfigurationOptOutResponse message. Also converts values to other types if specified.
-                     * @param message FetchAutomatedGa4ConfigurationOptOutResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FetchAutomatedGa4ConfigurationOptOutResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FetchAutomatedGa4ConfigurationOptOutResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a CreateBigQueryLinkRequest. */
                 interface ICreateBigQueryLinkRequest {
 
@@ -21005,497 +20575,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a CreateConnectedSiteTagRequest. */
-                interface ICreateConnectedSiteTagRequest {
-
-                    /** CreateConnectedSiteTagRequest property */
-                    property?: (string|null);
-
-                    /** CreateConnectedSiteTagRequest connectedSiteTag */
-                    connectedSiteTag?: (google.analytics.admin.v1alpha.IConnectedSiteTag|null);
-                }
-
-                /** Represents a CreateConnectedSiteTagRequest. */
-                class CreateConnectedSiteTagRequest implements ICreateConnectedSiteTagRequest {
-
-                    /**
-                     * Constructs a new CreateConnectedSiteTagRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest);
-
-                    /** CreateConnectedSiteTagRequest property. */
-                    public property: string;
-
-                    /** CreateConnectedSiteTagRequest connectedSiteTag. */
-                    public connectedSiteTag?: (google.analytics.admin.v1alpha.IConnectedSiteTag|null);
-
-                    /**
-                     * Creates a new CreateConnectedSiteTagRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateConnectedSiteTagRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
-
-                    /**
-                     * Encodes the specified CreateConnectedSiteTagRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest.verify|verify} messages.
-                     * @param message CreateConnectedSiteTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateConnectedSiteTagRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest.verify|verify} messages.
-                     * @param message CreateConnectedSiteTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateConnectedSiteTagRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateConnectedSiteTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
-
-                    /**
-                     * Decodes a CreateConnectedSiteTagRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateConnectedSiteTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
-
-                    /**
-                     * Verifies a CreateConnectedSiteTagRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateConnectedSiteTagRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateConnectedSiteTagRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest;
-
-                    /**
-                     * Creates a plain object from a CreateConnectedSiteTagRequest message. Also converts values to other types if specified.
-                     * @param message CreateConnectedSiteTagRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateConnectedSiteTagRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CreateConnectedSiteTagRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CreateConnectedSiteTagResponse. */
-                interface ICreateConnectedSiteTagResponse {
-                }
-
-                /** Represents a CreateConnectedSiteTagResponse. */
-                class CreateConnectedSiteTagResponse implements ICreateConnectedSiteTagResponse {
-
-                    /**
-                     * Constructs a new CreateConnectedSiteTagResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse);
-
-                    /**
-                     * Creates a new CreateConnectedSiteTagResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateConnectedSiteTagResponse instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
-
-                    /**
-                     * Encodes the specified CreateConnectedSiteTagResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse.verify|verify} messages.
-                     * @param message CreateConnectedSiteTagResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateConnectedSiteTagResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse.verify|verify} messages.
-                     * @param message CreateConnectedSiteTagResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateConnectedSiteTagResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateConnectedSiteTagResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateConnectedSiteTagResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
-
-                    /**
-                     * Decodes a CreateConnectedSiteTagResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateConnectedSiteTagResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
-
-                    /**
-                     * Verifies a CreateConnectedSiteTagResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateConnectedSiteTagResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateConnectedSiteTagResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse;
-
-                    /**
-                     * Creates a plain object from a CreateConnectedSiteTagResponse message. Also converts values to other types if specified.
-                     * @param message CreateConnectedSiteTagResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateConnectedSiteTagResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CreateConnectedSiteTagResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DeleteConnectedSiteTagRequest. */
-                interface IDeleteConnectedSiteTagRequest {
-
-                    /** DeleteConnectedSiteTagRequest property */
-                    property?: (string|null);
-
-                    /** DeleteConnectedSiteTagRequest tagId */
-                    tagId?: (string|null);
-                }
-
-                /** Represents a DeleteConnectedSiteTagRequest. */
-                class DeleteConnectedSiteTagRequest implements IDeleteConnectedSiteTagRequest {
-
-                    /**
-                     * Constructs a new DeleteConnectedSiteTagRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest);
-
-                    /** DeleteConnectedSiteTagRequest property. */
-                    public property: string;
-
-                    /** DeleteConnectedSiteTagRequest tagId. */
-                    public tagId: string;
-
-                    /**
-                     * Creates a new DeleteConnectedSiteTagRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteConnectedSiteTagRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
-
-                    /**
-                     * Encodes the specified DeleteConnectedSiteTagRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest.verify|verify} messages.
-                     * @param message DeleteConnectedSiteTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteConnectedSiteTagRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest.verify|verify} messages.
-                     * @param message DeleteConnectedSiteTagRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteConnectedSiteTagRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteConnectedSiteTagRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteConnectedSiteTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
-
-                    /**
-                     * Decodes a DeleteConnectedSiteTagRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteConnectedSiteTagRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
-
-                    /**
-                     * Verifies a DeleteConnectedSiteTagRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteConnectedSiteTagRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteConnectedSiteTagRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteConnectedSiteTagRequest message. Also converts values to other types if specified.
-                     * @param message DeleteConnectedSiteTagRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteConnectedSiteTagRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DeleteConnectedSiteTagRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ListConnectedSiteTagsRequest. */
-                interface IListConnectedSiteTagsRequest {
-
-                    /** ListConnectedSiteTagsRequest property */
-                    property?: (string|null);
-                }
-
-                /** Represents a ListConnectedSiteTagsRequest. */
-                class ListConnectedSiteTagsRequest implements IListConnectedSiteTagsRequest {
-
-                    /**
-                     * Constructs a new ListConnectedSiteTagsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest);
-
-                    /** ListConnectedSiteTagsRequest property. */
-                    public property: string;
-
-                    /**
-                     * Creates a new ListConnectedSiteTagsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListConnectedSiteTagsRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
-
-                    /**
-                     * Encodes the specified ListConnectedSiteTagsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest.verify|verify} messages.
-                     * @param message ListConnectedSiteTagsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListConnectedSiteTagsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest.verify|verify} messages.
-                     * @param message ListConnectedSiteTagsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListConnectedSiteTagsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListConnectedSiteTagsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
-
-                    /**
-                     * Decodes a ListConnectedSiteTagsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListConnectedSiteTagsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
-
-                    /**
-                     * Verifies a ListConnectedSiteTagsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListConnectedSiteTagsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListConnectedSiteTagsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest;
-
-                    /**
-                     * Creates a plain object from a ListConnectedSiteTagsRequest message. Also converts values to other types if specified.
-                     * @param message ListConnectedSiteTagsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListConnectedSiteTagsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ListConnectedSiteTagsRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ListConnectedSiteTagsResponse. */
-                interface IListConnectedSiteTagsResponse {
-
-                    /** ListConnectedSiteTagsResponse connectedSiteTags */
-                    connectedSiteTags?: (google.analytics.admin.v1alpha.IConnectedSiteTag[]|null);
-                }
-
-                /** Represents a ListConnectedSiteTagsResponse. */
-                class ListConnectedSiteTagsResponse implements IListConnectedSiteTagsResponse {
-
-                    /**
-                     * Constructs a new ListConnectedSiteTagsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse);
-
-                    /** ListConnectedSiteTagsResponse connectedSiteTags. */
-                    public connectedSiteTags: google.analytics.admin.v1alpha.IConnectedSiteTag[];
-
-                    /**
-                     * Creates a new ListConnectedSiteTagsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListConnectedSiteTagsResponse instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
-
-                    /**
-                     * Encodes the specified ListConnectedSiteTagsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.verify|verify} messages.
-                     * @param message ListConnectedSiteTagsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListConnectedSiteTagsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse.verify|verify} messages.
-                     * @param message ListConnectedSiteTagsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListConnectedSiteTagsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListConnectedSiteTagsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListConnectedSiteTagsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
-
-                    /**
-                     * Decodes a ListConnectedSiteTagsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListConnectedSiteTagsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
-
-                    /**
-                     * Verifies a ListConnectedSiteTagsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListConnectedSiteTagsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListConnectedSiteTagsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse;
-
-                    /**
-                     * Creates a plain object from a ListConnectedSiteTagsResponse message. Also converts values to other types if specified.
-                     * @param message ListConnectedSiteTagsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListConnectedSiteTagsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ListConnectedSiteTagsResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a CreateAdSenseLinkRequest. */
                 interface ICreateAdSenseLinkRequest {
 
@@ -21999,200 +21078,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListAdSenseLinksResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a FetchConnectedGa4PropertyRequest. */
-                interface IFetchConnectedGa4PropertyRequest {
-
-                    /** FetchConnectedGa4PropertyRequest property */
-                    property?: (string|null);
-                }
-
-                /** Represents a FetchConnectedGa4PropertyRequest. */
-                class FetchConnectedGa4PropertyRequest implements IFetchConnectedGa4PropertyRequest {
-
-                    /**
-                     * Constructs a new FetchConnectedGa4PropertyRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest);
-
-                    /** FetchConnectedGa4PropertyRequest property. */
-                    public property: string;
-
-                    /**
-                     * Creates a new FetchConnectedGa4PropertyRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FetchConnectedGa4PropertyRequest instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest;
-
-                    /**
-                     * Encodes the specified FetchConnectedGa4PropertyRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest.verify|verify} messages.
-                     * @param message FetchConnectedGa4PropertyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FetchConnectedGa4PropertyRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest.verify|verify} messages.
-                     * @param message FetchConnectedGa4PropertyRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FetchConnectedGa4PropertyRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FetchConnectedGa4PropertyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest;
-
-                    /**
-                     * Decodes a FetchConnectedGa4PropertyRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FetchConnectedGa4PropertyRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest;
-
-                    /**
-                     * Verifies a FetchConnectedGa4PropertyRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FetchConnectedGa4PropertyRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FetchConnectedGa4PropertyRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest;
-
-                    /**
-                     * Creates a plain object from a FetchConnectedGa4PropertyRequest message. Also converts values to other types if specified.
-                     * @param message FetchConnectedGa4PropertyRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FetchConnectedGa4PropertyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FetchConnectedGa4PropertyRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a FetchConnectedGa4PropertyResponse. */
-                interface IFetchConnectedGa4PropertyResponse {
-
-                    /** FetchConnectedGa4PropertyResponse property */
-                    property?: (string|null);
-                }
-
-                /** Represents a FetchConnectedGa4PropertyResponse. */
-                class FetchConnectedGa4PropertyResponse implements IFetchConnectedGa4PropertyResponse {
-
-                    /**
-                     * Constructs a new FetchConnectedGa4PropertyResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse);
-
-                    /** FetchConnectedGa4PropertyResponse property. */
-                    public property: string;
-
-                    /**
-                     * Creates a new FetchConnectedGa4PropertyResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns FetchConnectedGa4PropertyResponse instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse;
-
-                    /**
-                     * Encodes the specified FetchConnectedGa4PropertyResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse.verify|verify} messages.
-                     * @param message FetchConnectedGa4PropertyResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified FetchConnectedGa4PropertyResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse.verify|verify} messages.
-                     * @param message FetchConnectedGa4PropertyResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IFetchConnectedGa4PropertyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a FetchConnectedGa4PropertyResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns FetchConnectedGa4PropertyResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse;
-
-                    /**
-                     * Decodes a FetchConnectedGa4PropertyResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns FetchConnectedGa4PropertyResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse;
-
-                    /**
-                     * Verifies a FetchConnectedGa4PropertyResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a FetchConnectedGa4PropertyResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns FetchConnectedGa4PropertyResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse;
-
-                    /**
-                     * Creates a plain object from a FetchConnectedGa4PropertyResponse message. Also converts values to other types if specified.
-                     * @param message FetchConnectedGa4PropertyResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this FetchConnectedGa4PropertyResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for FetchConnectedGa4PropertyResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -24249,6 +23134,9 @@ export namespace google {
 
                     /** ProvisionSubpropertyRequest subpropertyEventFilter */
                     subpropertyEventFilter?: (google.analytics.admin.v1alpha.ISubpropertyEventFilter|null);
+
+                    /** ProvisionSubpropertyRequest customDimensionAndMetricSynchronizationMode */
+                    customDimensionAndMetricSynchronizationMode?: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|null);
                 }
 
                 /** Represents a ProvisionSubpropertyRequest. */
@@ -24265,6 +23153,9 @@ export namespace google {
 
                     /** ProvisionSubpropertyRequest subpropertyEventFilter. */
                     public subpropertyEventFilter?: (google.analytics.admin.v1alpha.ISubpropertyEventFilter|null);
+
+                    /** ProvisionSubpropertyRequest customDimensionAndMetricSynchronizationMode. */
+                    public customDimensionAndMetricSynchronizationMode: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode);
 
                     /**
                      * Creates a new ProvisionSubpropertyRequest instance using the specified properties.
@@ -25892,6 +24783,515 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SubmitUserDeletionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSubpropertySyncConfigRequest. */
+                interface IGetSubpropertySyncConfigRequest {
+
+                    /** GetSubpropertySyncConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSubpropertySyncConfigRequest. */
+                class GetSubpropertySyncConfigRequest implements IGetSubpropertySyncConfigRequest {
+
+                    /**
+                     * Constructs a new GetSubpropertySyncConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest);
+
+                    /** GetSubpropertySyncConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSubpropertySyncConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSubpropertySyncConfigRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Encodes the specified GetSubpropertySyncConfigRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message GetSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSubpropertySyncConfigRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message GetSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSubpropertySyncConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Decodes a GetSubpropertySyncConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Verifies a GetSubpropertySyncConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSubpropertySyncConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSubpropertySyncConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetSubpropertySyncConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetSubpropertySyncConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetSubpropertySyncConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSubpropertySyncConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSubpropertySyncConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubpropertySyncConfigsRequest. */
+                interface IListSubpropertySyncConfigsRequest {
+
+                    /** ListSubpropertySyncConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSubpropertySyncConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSubpropertySyncConfigsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSubpropertySyncConfigsRequest. */
+                class ListSubpropertySyncConfigsRequest implements IListSubpropertySyncConfigsRequest {
+
+                    /**
+                     * Constructs a new ListSubpropertySyncConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest);
+
+                    /** ListSubpropertySyncConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListSubpropertySyncConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSubpropertySyncConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSubpropertySyncConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubpropertySyncConfigsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubpropertySyncConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubpropertySyncConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Verifies a ListSubpropertySyncConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubpropertySyncConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubpropertySyncConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSubpropertySyncConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListSubpropertySyncConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListSubpropertySyncConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubpropertySyncConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubpropertySyncConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubpropertySyncConfigsResponse. */
+                interface IListSubpropertySyncConfigsResponse {
+
+                    /** ListSubpropertySyncConfigsResponse subpropertySyncConfigs */
+                    subpropertySyncConfigs?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig[]|null);
+
+                    /** ListSubpropertySyncConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSubpropertySyncConfigsResponse. */
+                class ListSubpropertySyncConfigsResponse implements IListSubpropertySyncConfigsResponse {
+
+                    /**
+                     * Constructs a new ListSubpropertySyncConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse);
+
+                    /** ListSubpropertySyncConfigsResponse subpropertySyncConfigs. */
+                    public subpropertySyncConfigs: google.analytics.admin.v1alpha.ISubpropertySyncConfig[];
+
+                    /** ListSubpropertySyncConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSubpropertySyncConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubpropertySyncConfigsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubpropertySyncConfigsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse.verify|verify} messages.
+                     * @param message ListSubpropertySyncConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListSubpropertySyncConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubpropertySyncConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Decodes a ListSubpropertySyncConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubpropertySyncConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Verifies a ListSubpropertySyncConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubpropertySyncConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubpropertySyncConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSubpropertySyncConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListSubpropertySyncConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListSubpropertySyncConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubpropertySyncConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubpropertySyncConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSubpropertySyncConfigRequest. */
+                interface IUpdateSubpropertySyncConfigRequest {
+
+                    /** UpdateSubpropertySyncConfigRequest subpropertySyncConfig */
+                    subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
+
+                    /** UpdateSubpropertySyncConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSubpropertySyncConfigRequest. */
+                class UpdateSubpropertySyncConfigRequest implements IUpdateSubpropertySyncConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateSubpropertySyncConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest);
+
+                    /** UpdateSubpropertySyncConfigRequest subpropertySyncConfig. */
+                    public subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
+
+                    /** UpdateSubpropertySyncConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSubpropertySyncConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSubpropertySyncConfigRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateSubpropertySyncConfigRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message UpdateSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSubpropertySyncConfigRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest.verify|verify} messages.
+                     * @param message UpdateSubpropertySyncConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateSubpropertySyncConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSubpropertySyncConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Decodes an UpdateSubpropertySyncConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSubpropertySyncConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Verifies an UpdateSubpropertySyncConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSubpropertySyncConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSubpropertySyncConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSubpropertySyncConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSubpropertySyncConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateSubpropertySyncConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSubpropertySyncConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSubpropertySyncConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetReportingIdentitySettingsRequest. */
+                interface IGetReportingIdentitySettingsRequest {
+
+                    /** GetReportingIdentitySettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetReportingIdentitySettingsRequest. */
+                class GetReportingIdentitySettingsRequest implements IGetReportingIdentitySettingsRequest {
+
+                    /**
+                     * Constructs a new GetReportingIdentitySettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest);
+
+                    /** GetReportingIdentitySettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetReportingIdentitySettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetReportingIdentitySettingsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest): google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest;
+
+                    /**
+                     * Encodes the specified GetReportingIdentitySettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest.verify|verify} messages.
+                     * @param message GetReportingIdentitySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetReportingIdentitySettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest.verify|verify} messages.
+                     * @param message GetReportingIdentitySettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetReportingIdentitySettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetReportingIdentitySettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetReportingIdentitySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest;
+
+                    /**
+                     * Decodes a GetReportingIdentitySettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetReportingIdentitySettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest;
+
+                    /**
+                     * Verifies a GetReportingIdentitySettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetReportingIdentitySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetReportingIdentitySettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetReportingIdentitySettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetReportingIdentitySettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetReportingIdentitySettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetReportingIdentitySettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetReportingIdentitySettingsRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -29655,7 +29055,9 @@ export namespace google {
                     EVENT_CREATE_RULE = 29,
                     KEY_EVENT = 30,
                     CALCULATED_METRIC = 31,
-                    REPORTING_DATA_ANNOTATION = 32
+                    REPORTING_DATA_ANNOTATION = 32,
+                    SUBPROPERTY_SYNC_CONFIG = 33,
+                    REPORTING_IDENTITY_SETTINGS = 34
                 }
 
                 /** GoogleSignalsState enum. */
@@ -31554,9 +30956,6 @@ export namespace google {
                     /** ConversionValues lockEnabled. */
                     public lockEnabled: boolean;
 
-                    /** ConversionValues _fineValue. */
-                    public _fineValue?: "fineValue";
-
                     /**
                      * Creates a new ConversionValues instance using the specified properties.
                      * @param [properties] Properties to set
@@ -31677,18 +31076,6 @@ export namespace google {
 
                     /** EventMapping maxEventValue. */
                     public maxEventValue?: (number|null);
-
-                    /** EventMapping _minEventCount. */
-                    public _minEventCount?: "minEventCount";
-
-                    /** EventMapping _maxEventCount. */
-                    public _maxEventCount?: "maxEventCount";
-
-                    /** EventMapping _minEventValue. */
-                    public _minEventValue?: "minEventValue";
-
-                    /** EventMapping _maxEventValue. */
-                    public _maxEventValue?: "maxEventValue";
 
                     /**
                      * Creates a new EventMapping instance using the specified properties.
@@ -32095,6 +31482,12 @@ export namespace google {
 
                         /** ChangeHistoryResource reportingDataAnnotation */
                         reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
+
+                        /** ChangeHistoryResource subpropertySyncConfig */
+                        subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
+
+                        /** ChangeHistoryResource reportingIdentitySettings */
+                        reportingIdentitySettings?: (google.analytics.admin.v1alpha.IReportingIdentitySettings|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -32187,8 +31580,14 @@ export namespace google {
                         /** ChangeHistoryResource reportingDataAnnotation. */
                         public reportingDataAnnotation?: (google.analytics.admin.v1alpha.IReportingDataAnnotation|null);
 
+                        /** ChangeHistoryResource subpropertySyncConfig. */
+                        public subpropertySyncConfig?: (google.analytics.admin.v1alpha.ISubpropertySyncConfig|null);
+
+                        /** ChangeHistoryResource reportingIdentitySettings. */
+                        public reportingIdentitySettings?: (google.analytics.admin.v1alpha.IReportingIdentitySettings|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"keyEvent"|"calculatedMetric"|"reportingDataAnnotation"|"subpropertySyncConfig"|"reportingIdentitySettings");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -32832,9 +32231,6 @@ export namespace google {
                     /** ConversionEvent defaultConversionValue. */
                     public defaultConversionValue?: (google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue|null);
 
-                    /** ConversionEvent _defaultConversionValue. */
-                    public _defaultConversionValue?: "defaultConversionValue";
-
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
                      * @param [properties] Properties to set
@@ -32939,12 +32335,6 @@ export namespace google {
 
                         /** DefaultConversionValue currencyCode. */
                         public currencyCode?: (string|null);
-
-                        /** DefaultConversionValue _value. */
-                        public _value?: "value";
-
-                        /** DefaultConversionValue _currencyCode. */
-                        public _currencyCode?: "currencyCode";
 
                         /**
                          * Creates a new DefaultConversionValue instance using the specified properties.
@@ -34556,109 +33946,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a ConnectedSiteTag. */
-                interface IConnectedSiteTag {
-
-                    /** ConnectedSiteTag displayName */
-                    displayName?: (string|null);
-
-                    /** ConnectedSiteTag tagId */
-                    tagId?: (string|null);
-                }
-
-                /** Represents a ConnectedSiteTag. */
-                class ConnectedSiteTag implements IConnectedSiteTag {
-
-                    /**
-                     * Constructs a new ConnectedSiteTag.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.analytics.admin.v1alpha.IConnectedSiteTag);
-
-                    /** ConnectedSiteTag displayName. */
-                    public displayName: string;
-
-                    /** ConnectedSiteTag tagId. */
-                    public tagId: string;
-
-                    /**
-                     * Creates a new ConnectedSiteTag instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ConnectedSiteTag instance
-                     */
-                    public static create(properties?: google.analytics.admin.v1alpha.IConnectedSiteTag): google.analytics.admin.v1alpha.ConnectedSiteTag;
-
-                    /**
-                     * Encodes the specified ConnectedSiteTag message. Does not implicitly {@link google.analytics.admin.v1alpha.ConnectedSiteTag.verify|verify} messages.
-                     * @param message ConnectedSiteTag message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.analytics.admin.v1alpha.IConnectedSiteTag, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ConnectedSiteTag message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ConnectedSiteTag.verify|verify} messages.
-                     * @param message ConnectedSiteTag message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IConnectedSiteTag, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ConnectedSiteTag message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ConnectedSiteTag
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ConnectedSiteTag;
-
-                    /**
-                     * Decodes a ConnectedSiteTag message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ConnectedSiteTag
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ConnectedSiteTag;
-
-                    /**
-                     * Verifies a ConnectedSiteTag message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ConnectedSiteTag message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ConnectedSiteTag
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ConnectedSiteTag;
-
-                    /**
-                     * Creates a plain object from a ConnectedSiteTag message. Also converts values to other types if specified.
-                     * @param message ConnectedSiteTag
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.analytics.admin.v1alpha.ConnectedSiteTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ConnectedSiteTag to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ConnectedSiteTag
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a DataRedactionSettings. */
                 interface IDataRedactionSettings {
 
@@ -35231,6 +34518,239 @@ export namespace google {
                         RED = 5,
                         CYAN = 6,
                         ORANGE = 7
+                    }
+                }
+
+                /** Properties of a SubpropertySyncConfig. */
+                interface ISubpropertySyncConfig {
+
+                    /** SubpropertySyncConfig name */
+                    name?: (string|null);
+
+                    /** SubpropertySyncConfig applyToProperty */
+                    applyToProperty?: (string|null);
+
+                    /** SubpropertySyncConfig customDimensionAndMetricSyncMode */
+                    customDimensionAndMetricSyncMode?: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|null);
+                }
+
+                /** Represents a SubpropertySyncConfig. */
+                class SubpropertySyncConfig implements ISubpropertySyncConfig {
+
+                    /**
+                     * Constructs a new SubpropertySyncConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ISubpropertySyncConfig);
+
+                    /** SubpropertySyncConfig name. */
+                    public name: string;
+
+                    /** SubpropertySyncConfig applyToProperty. */
+                    public applyToProperty: string;
+
+                    /** SubpropertySyncConfig customDimensionAndMetricSyncMode. */
+                    public customDimensionAndMetricSyncMode: (google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode|keyof typeof google.analytics.admin.v1alpha.SubpropertySyncConfig.SynchronizationMode);
+
+                    /**
+                     * Creates a new SubpropertySyncConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubpropertySyncConfig instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ISubpropertySyncConfig): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Encodes the specified SubpropertySyncConfig message. Does not implicitly {@link google.analytics.admin.v1alpha.SubpropertySyncConfig.verify|verify} messages.
+                     * @param message SubpropertySyncConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ISubpropertySyncConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubpropertySyncConfig message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SubpropertySyncConfig.verify|verify} messages.
+                     * @param message SubpropertySyncConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISubpropertySyncConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubpropertySyncConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubpropertySyncConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Decodes a SubpropertySyncConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubpropertySyncConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Verifies a SubpropertySyncConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubpropertySyncConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubpropertySyncConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SubpropertySyncConfig;
+
+                    /**
+                     * Creates a plain object from a SubpropertySyncConfig message. Also converts values to other types if specified.
+                     * @param message SubpropertySyncConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.SubpropertySyncConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubpropertySyncConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubpropertySyncConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SubpropertySyncConfig {
+
+                    /** SynchronizationMode enum. */
+                    enum SynchronizationMode {
+                        SYNCHRONIZATION_MODE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        ALL = 2
+                    }
+                }
+
+                /** Properties of a ReportingIdentitySettings. */
+                interface IReportingIdentitySettings {
+
+                    /** ReportingIdentitySettings name */
+                    name?: (string|null);
+
+                    /** ReportingIdentitySettings reportingIdentity */
+                    reportingIdentity?: (google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity|keyof typeof google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity|null);
+                }
+
+                /** Represents a ReportingIdentitySettings. */
+                class ReportingIdentitySettings implements IReportingIdentitySettings {
+
+                    /**
+                     * Constructs a new ReportingIdentitySettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IReportingIdentitySettings);
+
+                    /** ReportingIdentitySettings name. */
+                    public name: string;
+
+                    /** ReportingIdentitySettings reportingIdentity. */
+                    public reportingIdentity: (google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity|keyof typeof google.analytics.admin.v1alpha.ReportingIdentitySettings.ReportingIdentity);
+
+                    /**
+                     * Creates a new ReportingIdentitySettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportingIdentitySettings instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IReportingIdentitySettings): google.analytics.admin.v1alpha.ReportingIdentitySettings;
+
+                    /**
+                     * Encodes the specified ReportingIdentitySettings message. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingIdentitySettings.verify|verify} messages.
+                     * @param message ReportingIdentitySettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IReportingIdentitySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportingIdentitySettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ReportingIdentitySettings.verify|verify} messages.
+                     * @param message ReportingIdentitySettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IReportingIdentitySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportingIdentitySettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportingIdentitySettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ReportingIdentitySettings;
+
+                    /**
+                     * Decodes a ReportingIdentitySettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportingIdentitySettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ReportingIdentitySettings;
+
+                    /**
+                     * Verifies a ReportingIdentitySettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportingIdentitySettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportingIdentitySettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ReportingIdentitySettings;
+
+                    /**
+                     * Creates a plain object from a ReportingIdentitySettings message. Also converts values to other types if specified.
+                     * @param message ReportingIdentitySettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ReportingIdentitySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportingIdentitySettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportingIdentitySettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReportingIdentitySettings {
+
+                    /** ReportingIdentity enum. */
+                    enum ReportingIdentity {
+                        IDENTITY_BLENDING_STRATEGY_UNSPECIFIED = 0,
+                        BLENDED = 1,
+                        OBSERVED = 2,
+                        DEVICE_BASED = 3
                     }
                 }
 
@@ -35824,9 +35344,6 @@ export namespace google {
 
                     /** SubpropertyEventFilter filterClauses. */
                     public filterClauses: google.analytics.admin.v1alpha.ISubpropertyEventFilterClause[];
-
-                    /** SubpropertyEventFilter _applyToProperty. */
-                    public _applyToProperty?: "applyToProperty";
 
                     /**
                      * Creates a new SubpropertyEventFilter instance using the specified properties.
@@ -48452,9 +47969,6 @@ export namespace google {
                     /** ConversionEvent defaultConversionValue. */
                     public defaultConversionValue?: (google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue|null);
 
-                    /** ConversionEvent _defaultConversionValue. */
-                    public _defaultConversionValue?: "defaultConversionValue";
-
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
                      * @param [properties] Properties to set
@@ -48559,12 +48073,6 @@ export namespace google {
 
                         /** DefaultConversionValue currencyCode. */
                         public currencyCode?: (string|null);
-
-                        /** DefaultConversionValue _value. */
-                        public _value?: "value";
-
-                        /** DefaultConversionValue _currencyCode. */
-                        public _currencyCode?: "currencyCode";
 
                         /**
                          * Creates a new DefaultConversionValue instance using the specified properties.

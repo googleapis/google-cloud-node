@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const kms = require('@google-cloud/kms');
 
@@ -23,6 +24,7 @@ function main() {
   const autokeyClient = new kms.AutokeyClient();
   const autokeyAdminClient = new kms.AutokeyAdminClient();
   const ekmServiceClient = new kms.EkmServiceClient();
+  const hsmManagementClient = new kms.HsmManagementClient();
   const keyManagementServiceClient = new kms.KeyManagementServiceClient();
 }
 

@@ -127,6 +127,34 @@
           "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "GetIamPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SetIamPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "TestIamPermissions": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateReservationGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetReservationGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteReservationGroup": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListReservationGroups": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

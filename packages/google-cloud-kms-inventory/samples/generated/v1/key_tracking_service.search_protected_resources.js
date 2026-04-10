@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,12 @@ function main(scope, cryptoKey) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the organization.
-   *  Example: organizations/123
+   *  Required. A scope can be an organization or a project. Resources protected
+   *  by the crypto key in provided scope will be returned.
+   *  The following values are allowed:
+   *  * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/12345678")
+   *  * projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+   *  * projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
    */
   // const scope = 'abc123'
   /**

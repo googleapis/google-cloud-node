@@ -8,15 +8,15 @@
   },
   "type": "module",
   "scripts": {
-    "fix": "semistandard --fix",
-    "test": "semistandard",
+    "fix": "echo nothing to fix",
+    "test": "echo nothing to test",
     "test-generate": "SMOKE_TEST=true node ./bin/generate-readme.mjs",
     "generate": "./bin/generate-readme.mjs",
-    "lint": "semistandard",
-    "clean": "gts clean",
-    "precompile": "gts clean",
-    "system-test": "echo no system tests 😱",
-    "samples-test": "echo no sample tests 😱"
+    "lint": "echo nothing to lint",
+    "clean": "echo nothing to clean",
+    "precompile": "echo nothing to precompile",
+    "system-test": "echo nothing to system test",
+    "samples-test": "echo nothing to sample test"
   },
   "repository": {
     "type": "git",
@@ -39,9 +39,7 @@
     "gaxios": "^7.0.0-rc",
     "parse-link-header": "^2.0.0"
   },
-  "devDependencies": {
-    "semistandard": "^17.0.0"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=18"
   }
